@@ -203,7 +203,7 @@
             50% { transform: scale(1.05); }
         }
 
-        .problem {
+        .assessment {
             padding: 6rem 5%;
             background: #f8f9fa;
         }
@@ -215,6 +215,218 @@
             color: #333;
         }
 
+        .assessment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .assessment-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .result-panel {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .risk-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .risk-level {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-percentage {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .risk-low {
+            color: #10b981;
+        }
+
+        .risk-medium {
+            color: #f59e0b;
+        }
+
+        .risk-high {
+            color: #ef4444;
+        }
+
+        .risk-factors {
+            margin-top: 2rem;
+        }
+
+        .risk-factor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .factor-name {
+            font-weight: 600;
+        }
+
+        .factor-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .recommendations h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .recommendations li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .problem {
+            padding: 6rem 5%;
+            background: white;
+        }
+
         .problem-grid {
             max-width: 1200px;
             margin: 0 auto;
@@ -224,10 +436,10 @@
         }
 
         .problem-card {
-            background: white;
+            background: #f8f9fa;
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s;
         }
 
@@ -244,100 +456,6 @@
             font-size: 1.3rem;
             margin-bottom: 1rem;
             color: #667eea;
-        }
-
-        .solution {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .solution-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .solution-features {
-            list-style: none;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .feature-item:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: translateX(10px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            min-width: 50px;
-        }
-
-        .feature-text h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .impact {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .impact-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .impact-card {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .impact-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #ffd700;
-            display: block;
-            margin-bottom: 1rem;
-        }
-
-        .cta-section {
-            padding: 6rem 5%;
-            background: #1a1a2e;
-            color: white;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
         }
 
         footer {
@@ -377,7 +495,7 @@
 
         @media (max-width: 768px) {
             .hero-content,
-            .solution-content {
+            .assessment-container {
                 grid-template-columns: 1fr;
             }
 
@@ -392,6 +510,10 @@
             .nav-links {
                 display: none;
             }
+
+            .result-panel {
+                position: static;
+            }
         }
     </style>
 </head>
@@ -400,9 +522,8 @@
         <div class="logo">🧠 NeuroGuard AI</div>
         <ul class="nav-links">
             <li><a href="#home">Bosh sahifa</a></li>
+            <li><a href="#assessment">Tekshirish</a></li>
             <li><a href="#problem">Muammo</a></li>
-            <li><a href="#solution">Yechim</a></li>
-            <li><a href="#impact">Ta'sir</a></li>
             <li><a href="#contact">Aloqa</a></li>
         </ul>
     </nav>
@@ -425,8 +546,8 @@
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">Demo ko'rish</a>
-                    <a href="#solution" class="btn btn-secondary">Ko'proq o'rganish</a>
+                    <a href="#assessment" class="btn btn-primary">Bepul Tekshirish</a>
+                    <a href="#problem" class="btn btn-secondary">Ko'proq o'rganish</a>
                 </div>
             </div>
 
@@ -436,8 +557,101 @@
         </div>
     </section>
 
+    <section class="assessment" id="assessment">
+        <h2 class="section-title">🤖 AI Yordamida Insult Xavfini Aniqlang</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">
+            Tibbiy ma'lumotlaringizni kiriting va sun'iy intellekt bir necha soniyada xavf darajasini aniqlaydi
+        </p>
+        <div class="assessment-container">
+            <div class="assessment-form">
+                <div class="ai-badge">
+                    🤖 AI Tahlilchi faol
+                </div>
+
+                <div class="form-group">
+                    <label>🩺 Qon bosimi (mmHg)</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200">
+                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>💓 Yurak urishi (bir daqiqada)</label>
+                    <input type="number" id="heartrate" placeholder="Masalan: 72" min="40" max="150">
+                </div>
+
+                <div class="form-group">
+                    <label>🍬 Qand miqdori (mmol/L)</label>
+                    <input type="number" id="glucose" placeholder="Masalan: 5.5" step="0.1" min="3" max="20">
+                </div>
+
+                <div class="form-group">
+                    <label>📏 Bo'y (sm)</label>
+                    <input type="number" id="height" placeholder="Masalan: 170" min="120" max="220">
+                </div>
+
+                <div class="form-group">
+                    <label>⚖️ Vazn (kg)</label>
+                    <input type="number" id="weight" placeholder="Masalan: 70" min="30" max="200">
+                </div>
+
+                <div class="form-group">
+                    <label>👤 Yosh</label>
+                    <input type="number" id="age" placeholder="Masalan: 45" min="18" max="100">
+                </div>
+
+                <div class="form-group">
+                    <label>🚬 Chekasizmi?</label>
+                    <select id="smoking">
+                        <option value="no">Yo'q</option>
+                        <option value="yes">Ha</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏃 Jismoniy faollik (haftasiga)</label>
+                    <select id="exercise">
+                        <option value="none">Yo'q</option>
+                        <option value="light">1-2 kun</option>
+                        <option value="moderate">3-4 kun</option>
+                        <option value="active">5+ kun</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🧠 Nevrologik shikoyatlar</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="headache"> Tez-tez bosh og'rig'i</label>
+                        <label><input type="checkbox" id="dizziness"> Bosh aylanishi</label>
+                        <label><input type="checkbox" id="numbness"> Qo'l-oyoq uyqusizligi</label>
+                        <label><input type="checkbox" id="vision"> Ko'rish muammolari</label>
+                        <label><input type="checkbox" id="speech"> Nutq qiyinligi</label>
+                    </div>
+                </div>
+
+                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    🤖 AI Tahlil Qilsin
+                </button>
+            </div>
+
+            <div class="result-panel" id="resultPanel" style="display: none;">
+                <div class="result-header">
+                    <div class="risk-icon" id="riskIcon">🧠</div>
+                    <div class="risk-level" id="riskLevel">Tahlil Natijasi</div>
+                    <div class="risk-percentage" id="riskPercentage">--</div>
+                    <p id="riskDescription">Ma'lumotlar yuklanmoqda...</p>
+                </div>
+
+                <div class="risk-factors" id="riskFactors"></div>
+
+                <div class="recommendations" id="recommendations"></div>
+            </div>
+        </div>
+    </section>
+
     <section class="problem" id="problem">
-        <h2 class="section-title">Muammo: Insult Global Inqiroz</h2>
+        <h2 class="section-title">Nima uchun NeuroGuard AI?</h2>
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="problem-icon">💔</div>
@@ -447,94 +661,22 @@
             <div class="problem-card">
                 <div class="problem-icon">⏰</div>
                 <h3>Har 5 Soniyada</h3>
-                <p>Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi yoki nogironlikka duchor bo'ladi</p>
+                <p>Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
             </div>
             <div class="problem-card">
-                <div class="problem-icon">🏥</div>
-                <h3>Kech Aniqlash</h3>
-                <p>Aksariyat holatlar juda kech aniqlanadi, davolash imkoniyati cheklangan</p>
+                <div class="problem-icon">✅</div>
+                <h3>85% Oldini Olish Mumkin</h3>
+                <p>Erta aniqlash orqali insultning oldini olish mumkin</p>
             </div>
             <div class="problem-card">
-                <div class="problem-icon">🌍</div>
-                <h3>Qishloq Hududlar</h3>
-                <p>Kam ta'minlangan hududlarda profilaktika tizimi umuman yo'q</p>
+                <div class="problem-icon">🤖</div>
+                <h3>AI Texnologiyasi</h3>
+                <p>Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
             </div>
         </div>
     </section>
 
-    <section class="solution" id="solution">
-        <h2 class="section-title">Yechim: NeuroGuard AI Platformasi</h2>
-        <div class="solution-content">
-            <div>
-                <ul class="solution-features">
-                    <li class="feature-item">
-                        <div class="feature-icon">📱</div>
-                        <div class="feature-text">
-                            <h4>Mobil Ilova</h4>
-                            <p>Har qanday smartfonda ishlaydi, qimmat apparat kerak emas</p>
-                        </div>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">🤖</div>
-                        <div class="feature-text">
-                            <h4>AI Bashorat</h4>
-                            <p>Sun'iy intellekt qon bosimi, yurak urishi, qand va boshqalarni tahlil qiladi</p>
-                        </div>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">⚡</div>
-                        <div class="feature-text">
-                            <h4>Tezkor Ogohlantirish</h4>
-                            <p>Xavf aniqlanganda darhol foydalanuvchi va shifokorga signal</p>
-                        </div>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <div class="feature-text">
-                            <h4>Shaxsiy Reja</h4>
-                            <p>Har bir foydalanuvchi uchun individual profilaktika dasturi</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" alt="Medical AI" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-            </div>
-        </div>
-    </section>
-
-    <section class="impact" id="impact">
-        <h2 class="section-title">Ijtimoiy Ta'sir va SDG Moslashuvi</h2>
-        <div class="impact-grid">
-            <div class="impact-card">
-                <span class="impact-number">50%</span>
-                <p>Insult xavfini kamaytirish</p>
-            </div>
-            <div class="impact-card">
-                <span class="impact-number">1M+</span>
-                <p>Saqlanadigan hayotlar</p>
-            </div>
-            <div class="impact-card">
-                <span class="impact-number">$5B</span>
-                <p>Tejaladiagn tibbiy xarajatlar</p>
-            </div>
-            <div class="impact-card">
-                <span class="impact-number">SDG 3</span>
-                <p>Sog'liq va farovonlik</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section" id="contact">
-        <h2>Erta Kirish Uchun Ro'yxatdan O'ting</h2>
-        <p>Platformamizning beta versiyasini birinchilardan bo'lib sinab ko'ring</p>
-        <div class="cta-buttons" style="justify-content: center;">
-            <a href="#" class="btn btn-primary">Hozir Qo'shilish</a>
-            <a href="#" class="btn btn-secondary">Investorlar uchun</a>
-        </div>
-    </section>
-
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-section">
                 <h4>NeuroGuard AI</h4>
@@ -575,26 +717,214 @@
             });
         });
 
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        async function analyzeRisk() {
+            const systolic = parseFloat(document.getElementById('systolic').value);
+            const diastolic = parseFloat(document.getElementById('diastolic').value);
+            const heartrate = parseFloat(document.getElementById('heartrate').value);
+            const glucose = parseFloat(document.getElementById('glucose').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseFloat(document.getElementById('age').value);
+            const smoking = document.getElementById('smoking').value;
+            const exercise = document.getElementById('exercise').value;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+            if (!systolic || !diastolic || !heartrate || !glucose || !height || !weight || !age) {
+                alert('Iltimos, barcha maydonlarni to\'ldiring!');
+                return;
+            }
+
+            const resultPanel = document.getElementById('resultPanel');
+            resultPanel.style.display = 'block';
+            resultPanel.innerHTML = '<div class="loading"><div class="spinner"></div><p>AI tahlil qilmoqda...</p></div>';
+
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            setTimeout(() => {
+                const bmi = weight / ((height / 100) ** 2);
+                
+                let riskScore = 0;
+                const factors = [];
+
+                if (systolic > 140 || diastolic > 90) {
+                    riskScore += 25;
+                    factors.push({ name: 'Qon bosimi', status: 'danger', text: 'Yuqori (Xavfli)' });
+                } else if (systolic > 130 || diastolic > 85) {
+                    riskScore += 15;
+                    factors.push({ name: 'Qon bosimi', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qon bosimi', status: 'good', text: 'Normal' });
                 }
-            });
-        }, observerOptions);
 
-        document.querySelectorAll('.problem-card, .feature-item, .impact-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
+                if (heartrate > 100 || heartrate < 60) {
+                    riskScore += 15;
+                    factors.push({ name: 'Yurak urishi', status: 'warning', text: 'Beqaror' });
+                } else {
+                    factors.push({ name: 'Yurak urishi', status: 'good', text: 'Normal' });
+                }
+
+                if (glucose > 7.0) {
+                    riskScore += 20;
+                    factors.push({ name: 'Qand miqdori', status: 'danger', text: 'Yuqori' });
+                } else if (glucose > 6.0) {
+                    riskScore += 10;
+                    factors.push({ name: 'Qand miqdori', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qand miqdori', status: 'good', text: 'Normal' });
+                }
+
+                if (bmi > 30) {
+                    riskScore += 15;
+                    factors.push({ name: 'BMI', status: 'danger', text: `${bmi.toFixed(1)} - Ortiqcha vazn` });
+                } else if (bmi > 25) {
+                    riskScore += 8;
+                    factors.push({ name: 'BMI', status: 'warning', text: `${bmi.toFixed(1)} - Me\'yordan yuqori` });
+                } else {
+                    factors.push({ name: 'BMI', status: 'good', text: `${bmi.toFixed(1)} - Normal` });
+                }
+
+                if (age > 65) {
+                    riskScore += 15;
+                } else if (age > 55) {
+                    riskScore += 10;
+                } else if (age > 45) {
+                    riskScore += 5;
+                }
+
+                if (smoking === 'yes') {
+                    riskScore += 20;
+                    factors.push({ name: 'Chekish', status: 'danger', text: 'Ha (Katta xavf)' });
+                } else {
+                    factors.push({ name: 'Chekish', status: 'good', text: 'Yo\'q' });
+                }
+
+                const exercisePoints = {
+                    'none': 10,
+                    'light': 5,
+                    'moderate': 2,
+                    'active': 0
+                };
+                riskScore += exercisePoints[exercise];
+
+                if (exercise === 'none') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'danger', text: 'Yo\'q' });
+                } else if (exercise === 'light') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'warning', text: 'Kam' });
+                } else {
+                    factors.push({ name: 'Jismoniy faollik', status: 'good', text: 'Yetarli' });
+                }
+
+                const neuroSymptoms = [];
+                if (document.getElementById('headache').checked) {
+                    neuroSymptoms.push('Bosh og\'rig\'i');
+                    riskScore += 5;
+                }
+                if (document.getElementById('dizziness').checked) {
+                    neuroSymptoms.push('Bosh aylanishi');
+                    riskScore += 7;
+                }
+                if (document.getElementById('numbness').checked) {
+                    neuroSymptoms.push('Uyqusizlik');
+                    riskScore += 10;
+                }
+                if (document.getElementById('vision').checked) {
+                    neuroSymptoms.push('Ko\'rish muammosi');
+                    riskScore += 8;
+                }
+                if (document.getElementById('speech').checked) {
+                    neuroSymptoms.push('Nutq qiyinligi');
+                    riskScore += 10;
+                }
+
+                if (neuroSymptoms.length > 0) {
+                    factors.push({ 
+                        name: 'Nevrologik alomatlar', 
+                        status: neuroSymptoms.length > 2 ? 'danger' : 'warning', 
+                        text: neuroSymptoms.join(', ') 
+                    });
+                }
+
+                riskScore = Math.min(riskScore, 100);
+
+                let riskLevel, riskClass, riskIcon, riskDescription;
+                if (riskScore < 30) {
+                    riskLevel = 'Past Xavf';
+                    riskClass = 'risk-low';
+                    riskIcon = '✅';
+                    riskDescription = 'Sizning insult xavfingiz past. Sog\'lom turmush tarzini davom ettiring!';
+                } else if (riskScore < 60) {
+                    riskLevel = 'O\'rtacha Xavf';
+                    riskClass = 'risk-medium';
+                    riskIcon = '⚠️';
+                    riskDescription = 'Ehtiyot bo\'ling! Ba\'zi omillar tuzatishni talab qiladi.';
+                } else {
+                    riskLevel = 'Yuqori Xavf';
+                    riskClass = 'risk-high';
+                    riskIcon = '🚨';
+                    riskDescription = 'Zudlik bilan shifokorga murojaat qiling! Insult xavfi yuqori.';
+                }
+
+                const recommendations = [];
+                if (systolic > 140 || diastolic > 90) {
+                    recommendations.push('Qon bosimini doimiy nazorat qiling va shifokor bilan maslahatlashing');
+                }
+                if (glucose > 6.0) {
+                    recommendations.push('Qandli ovqatlarni kamaytiring, shirinliklardan voz keching');
+                }
+                if (bmi > 25) {
+                    recommendations.push('Vazningizni kamaytirish uchun sog\'lom ovqatlanish rejimiga o\'ting');
+                }
+                if (smoking === 'yes') {
+                    recommendations.push('Chekishni tark eting - bu eng muhim qadam!');
+                }
+                if (exercise === 'none' || exercise === 'light') {
+                    recommendations.push('Kuniga kamida 30 daqiqa jismoniy mashqlar qiling');
+                }
+                if (neuroSymptoms.length > 0) {
+                    recommendations.push('Nevrologga murojaat qiling va batafsil tekshiruvdan o\'ting');
+                }
+                if (recommendations.length === 0) {
+                    recommendations.push('Sog\'lom turmush tarzini davom ettiring');
+                    recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
+                }
+
+                let factorsHTML = '';
+                factors.forEach(factor => {
+                    factorsHTML += `
+                        <div class="risk-factor">
+                            <span class="factor-name">${factor.name}</span>
+                            <span class="factor-status status-${factor.status}">${factor.text}</span>
+                        </div>
+                    `;
+                });
+
+                let recsHTML = '<h4>🎯 Tavsiyalar:</h4><ul>';
+                recommendations.forEach(rec => {
+                    recsHTML += `<li>${rec}</li>`;
+                });
+                recsHTML += '</ul>';
+
+                resultPanel.innerHTML = `
+                    <div class="result-header">
+                        <div class="risk-icon">${riskIcon}</div>
+                        <div class="risk-level ${riskClass}">${riskLevel}</div>
+                        <div class="risk-percentage ${riskClass}">${riskScore}%</div>
+                        <p>${riskDescription}</p>
+                    </div>
+                    <div class="risk-factors">
+                        <h3 style="margin-bottom: 1rem; color: #333;">📊 Tahlil Natijalari:</h3>
+                        ${factorsHTML}
+                    </div>
+                    <div class="recommendations">
+                        ${recsHTML}
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 10px; border-left: 4px solid #ffc107;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #856404;">
+                            ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
+                        </p>
+                    </div>
+                `;
+            }, 2000);
+        }
     </script>
 </body>
 </html>
