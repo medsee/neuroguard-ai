@@ -6,8 +6,6 @@
     <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -15,309 +13,11 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
-            width: 100%;
-            max-width: 100vw;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            overflow-x: hidden;
-        }
-
-        .language-switcher {
-            display: flex;
-            gap: 0.5rem;
-            margin-left: auto;
-            margin-right: 2rem;
-        }
-
-        .lang-btn {
-            padding: 0.4rem 0.8rem;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .lang-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .lang-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .gamification-panel {
-            position: fixed;
-            left: 30px;
-            top: 100px;
-            background: white;
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            width: 280px;
-            z-index: 1000;
-        }
-
-        .points-display {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .points-number {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .level-bar {
-            width: 100%;
-            height: 30px;
-            background: #e5e7eb;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        .level-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .medals-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .medal-item {
-            text-align: center;
-            padding: 0.8rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .medal-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .medal-item.unlocked {
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-        }
-
-        .medal-icon {
-            font-size: 2rem;
-            filter: grayscale(100%);
-        }
-
-        .medal-item.unlocked .medal-icon {
-            filter: grayscale(0%);
-        }
-
-        .calendar-widget {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-        }
-
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.5rem;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: #f8f9fa;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .calendar-day:hover {
-            background: #e5e7eb;
-        }
-
-        .calendar-day.today {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 700;
-        }
-
-        .calendar-day.has-event::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            width: 6px;
-            height: 6px;
-            background: #ef4444;
-            border-radius: 50%;
-        }
-
-        .event-form {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 1rem;
-        }
-
-        .event-input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .event-list {
-            margin-top: 1rem;
-        }
-
-        .event-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            margin-bottom: 0.5rem;
-            border-left: 4px solid #667eea;
-        }
-
-        .brain-3d-container {
-            width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            margin: 2rem 0;
-        }
-
-        .brain-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-            z-index: 10;
-        }
-
-        .brain-btn {
-            padding: 0.8rem 1.5rem;
-            background: rgba(255,255,255,0.9);
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .brain-btn:hover {
-            background: white;
-            transform: translateY(-2px);
-        }
-
-        .info-panel {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.95);
-            padding: 1.5rem;
-            border-radius: 15px;
-            max-width: 300px;
-        }
-
-        .leaderboard {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-        }
-
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            transition: all 0.3s;
-        }
-
-        .leaderboard-item:hover {
-            transform: translateX(5px);
-            background: #e5e7eb;
-        }
-
-        .leaderboard-rank {
-            font-size: 1.5rem;
-            font-weight: 700;
-            width: 40px;
-        }
-
-        .rank-1 { color: #ffd700; }
-        .rank-2 { color: #c0c0c0; }
-        .rank-3 { color: #cd7f32; }
-
-        .leaderboard-user {
-            flex: 1;
-            margin-left: 1rem;
-        }
-
-        .leaderboard-points {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #667eea;
         }
 
         nav {
@@ -339,42 +39,6 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .history-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .history-btn:hover {
-            transform: translateY(-2px);
         }
 
         .hero {
@@ -384,85 +48,19 @@
             align-items: center;
             justify-content: center;
             padding: 8rem 5% 4rem;
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero-text .highlight {
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
-        }
-
-        .hero-text p {
-            font-size: 1.3rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 2rem;
-        }
-
-        .stats {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .stat-item {
-            background: rgba(255,255,255,0.2);
-            padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
             text-align: center;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffd700;
-            display: block;
-        }
-
-        .stat-label {
+        .hero h1 {
+            font-size: 3.5rem;
             color: white;
-            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
         }
 
         .btn {
@@ -472,55 +70,10 @@
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            background: white;
+            color: #667eea;
             text-decoration: none;
             display: inline-block;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        .hero-visual {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .brain-icon {
-            width: 400px;
-            height: 400px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 200px;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
 
         .assessment {
@@ -535,40 +88,48 @@
             color: #333;
         }
 
-        .assessment-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
         .assessment-form {
+            max-width: 600px;
+            margin: 0 auto;
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .form-group {
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
             color: #333;
+            font-size: 1.1rem;
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
+            padding: 1rem;
             border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             transition: border 0.3s;
         }
 
@@ -581,27 +142,34 @@
         .checkbox-group {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1rem;
         }
 
         .checkbox-group label {
-            font-weight: 400;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            font-size: 1rem;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
 
         .checkbox-group input[type="checkbox"] {
-            width: auto;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
         }
 
         .result-panel {
+            max-width: 600px;
+            margin: 2rem auto;
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 100px;
+            display: none;
         }
 
         .result-header {
@@ -614,113 +182,15 @@
             margin-bottom: 1rem;
         }
 
-        .risk-level {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
         .risk-percentage {
             font-size: 3.5rem;
             font-weight: 700;
             margin: 1rem 0;
         }
 
-        .risk-low {
-            color: #10b981;
-        }
-
-        .risk-medium {
-            color: #f59e0b;
-        }
-
-        .risk-high {
-            color: #ef4444;
-        }
-
-        .risk-factors {
-            margin-top: 2rem;
-        }
-
-        .risk-factor {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-        }
-
-        .factor-name {
-            font-weight: 600;
-        }
-
-        .factor-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .status-good {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-warning {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .status-danger {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .recommendations {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: #eff6ff;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .recommendations h4 {
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .recommendations ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .recommendations li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .recommendations li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: 700;
-        }
-
-        .ai-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
+        .risk-low { color: #10b981; }
+        .risk-medium { color: #f59e0b; }
+        .risk-high { color: #ef4444; }
 
         .loading {
             text-align: center;
@@ -742,159 +212,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        .chart-container {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-download {
-            flex: 1;
-            background: #10b981;
-            color: white;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-download:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-save {
-            flex: 1;
-            background: #3b82f6;
-            color: white;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-save:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        .history-section {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .history-grid {
-            max-width: 1200px;
-            margin: 2rem auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .history-card {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        .history-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .history-date {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .history-risk {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .problem {
-            padding: 6rem 5%;
-            background: #f8f9fa;
-        }
-
-        .problem-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .problem-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .problem-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .problem-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
         footer {
             background: #0f0f1e;
             color: white;
@@ -902,920 +219,132 @@
             text-align: center;
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1500;
-        }
-
-        .chat-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            transition: transform 0.3s;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-window {
-            display: none;
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 380px;
-            height: 550px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-window.active {
-            display: flex;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header h3 {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .chat-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        .chat-message {
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 0.5rem;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message-bubble {
-            max-width: 70%;
-            padding: 0.8rem 1.2rem;
-            border-radius: 15px;
-            word-wrap: break-word;
-        }
-
-        .bot-message .message-bubble {
-            background: white;
-            border: 1px solid #e0e0e0;
-        }
-
-        .user-message {
-            justify-content: flex-end;
-        }
-
-        .user-message .message-bubble {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .chat-input-area {
-            padding: 1rem;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            outline: none;
-            font-size: 0.9rem;
-        }
-
-        .chat-input:focus {
-            border-color: #667eea;
-        }
-
-        .chat-send {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .quick-questions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .quick-btn {
-            background: white;
-            border: 1px solid #667eea;
-            color: #667eea;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-
-        .quick-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .notification-panel {
-            position: fixed;
-            top: 80px;
-            right: 30px;
-            width: 350px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            padding: 1.5rem;
-            z-index: 1500;
-            display: none;
-        }
-
-        .notification-panel.active {
-            display: block;
-            animation: slideInRight 0.3s ease;
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
-        }
-
-        .notification-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .notification-item {
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            border-left: 4px solid #667eea;
-        }
-
-        .notification-time {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.5rem;
-        }
-
-        .email-form {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin-top: 1rem;
-        }
-
-        .email-input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
-
-        .subscribe-btn {
-            width: 100%;
-            padding: 0.8rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .subscribe-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .social-share {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .share-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .share-btn:hover {
-            transform: translateY(-3px);
-        }
-
-        .share-facebook { background: #1877f2; }
-        .share-twitter { background: #1da1f2; }
-        .share-telegram { background: #0088cc; }
-        .share-whatsapp { background: #25d366; }
-
-        .achievement-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-weight: 600;
-            margin: 0.5rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .bell-icon {
-            position: fixed;
-            top: 90px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-            z-index: 1400;
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ef4444;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
-
         @media (max-width: 768px) {
-            .chat-window {
-                width: 100%;
-                height: 100%;
-                bottom: 0;
-                right: 0;
-                border-radius: 0;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .notification-panel {
-                width: calc(100% - 20px);
-                right: 10px;
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .assessment-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .ai-badge {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 1.2rem;
+                min-height: 50px;
+            }
+
+            .btn {
+                padding: 1.2rem 2rem;
+                min-height: 55px;
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- AI Chatbot Widget -->
-    <div class="chat-widget">
-        <button class="chat-button" onclick="toggleChat()">💬</button>
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <h3>🤖 AI Maslahatchi</h3>
-                <button class="chat-close" onclick="toggleChat()">×</button>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="chat-message bot-message">
-                    <div class="message-bubble">
-                        Salom! Men NeuroGuard AI yordamchisiman. Sizga qanday yordam bera olaman? 🧠
-                        <div class="quick-questions">
-                            <button class="quick-btn" onclick="askQuestion('Insult belgilari')">Insult belgilari?</button>
-                            <button class="quick-btn" onclick="askQuestion('Profilaktika')">Profilaktika?</button>
-                            <button class="quick-btn" onclick="askQuestion('Qon bosimi')">Qon bosimi?</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatKeypress(event)">
-                <button class="chat-send" onclick="sendMessage()">➤</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification Bell -->
-    <div class="bell-icon" onclick="toggleNotifications()">
-        🔔
-        <span class="notification-badge" id="notifBadge">3</span>
-    </div>
-
-    <!-- Notification Panel -->
-    <div class="notification-panel" id="notificationPanel">
-        <div class="notification-header">
-            <h3>📬 Eslatmalar</h3>
-            <button style="border: none; background: none; cursor: pointer; font-size: 20px;" onclick="toggleNotifications()">×</button>
-        </div>
-        <div class="notification-item">
-            <strong>⏰ Keyingi Tekshiruv</strong>
-            <p>Yangi test o'tkazish vaqti keldi! Sog'ligingizni nazorat qiling.</p>
-            <div class="notification-time">1 soat oldin</div>
-        </div>
-        <div class="notification-item">
-            <strong>💡 Kunlik Maslahat</strong>
-            <p>Kuniga 30 daqiqa yurish yurak-qon tomir kasalliklarini 35% ga kamaytiradi!</p>
-            <div class="notification-time">Bugun</div>
-        </div>
-        <div class="notification-item">
-            <strong>📊 Statistika</strong>
-            <p>Siz allaqachon 5 ta test o'tkazdingiz. Ajoyib natija!</p>
-            <div class="notification-time">Kecha</div>
-        </div>
-        
-        <div class="email-form">
-            <h4 style="margin-bottom: 1rem;">📧 Eslatmalarni Olish</h4>
-            <input type="email" class="email-input" id="emailInput" placeholder="Email manzilingiz">
-            <input type="tel" class="email-input" id="phoneInput" placeholder="+998 90 123 45 67">
-            <button class="subscribe-btn" onclick="subscribeNotifications()">Obuna Bo'lish</button>
-        </div>
-    </div>
-
     <nav>
-        <div class="logo">🧠 <span data-lang="siteName">NeuroGuard AI</span></div>
-        <div class="language-switcher">
-            <button class="lang-btn active" onclick="changeLanguage('uz')">UZ</button>
-            <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
-            <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home" data-lang="navHome">Bosh sahifa</a></li>
-            <li><a href="#assessment" data-lang="navAssessment">Tekshirish</a></li>
-            <li><a href="#brain3d" data-lang="navBrain">3D Miya</a></li>
-            <li><a href="#problem" data-lang="navProblem">Muammo</a></li>
-            <li><button class="history-btn" onclick="showHistory()" data-lang="navHistory">📊 Tarix</button></li>
-        </ul>
+        <div class="logo">🧠 NeuroGuard AI</div>
     </nav>
 
-
-
     <section class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Insultni <span class="highlight">Davolamasdan</span> Oldini Oling</h1>
-                <p>Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang va hayotingizni saqlang</p>
-                
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">12M+</span>
-                        <span class="stat-label">Yillik insult holatlari</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">85%</span>
-                        <span class="stat-label">Oldini olish mumkin</span>
-                    </div>
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="#assessment" class="btn btn-primary">Bepul Tekshirish</a>
-                    <a href="#problem" class="btn btn-secondary">Ko'proq o'rganish</a>
-                </div>
-            </div>
-
-            <div class="hero-visual">
-                <div class="brain-icon">🧠</div>
-            </div>
+        <div>
+            <h1>Insultni <span style="color: #ffd700;">Davolamasdan</span> Oldini Oling</h1>
+            <p>Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang</p>
+            <a href="#assessment" class="btn">Bepul Tekshirish</a>
         </div>
     </section>
 
     <section class="assessment" id="assessment">
         <h2 class="section-title">🤖 AI Yordamida Insult Xavfini Aniqlang</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">
-            Tibbiy ma'lumotlaringizni kiriting va sun'iy intellekt bir necha soniyada xavf darajasini aniqlaydi
-        </p>
-        <div class="assessment-container">
-            <div class="assessment-form">
-                <div class="ai-badge">
-                    🤖 AI Tahlilchi faol
-                </div>
-
-                <div class="form-group">
-                    <label>🩺 Qon bosimi (mmHg)</label>
-                    <div style="display: flex; gap: 1rem;">
-                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200">
-                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>💓 Yurak urishi (bir daqiqada)</label>
-                    <input type="number" id="heartrate" placeholder="Masalan: 72" min="40" max="150">
-                </div>
-
-                <div class="form-group">
-                    <label>🍬 Qand miqdori (mmol/L)</label>
-                    <input type="number" id="glucose" placeholder="Masalan: 5.5" step="0.1" min="3" max="20">
-                </div>
-
-                <div class="form-group">
-                    <label>📏 Bo'y (sm)</label>
-                    <input type="number" id="height" placeholder="Masalan: 170" min="120" max="220">
-                </div>
-
-                <div class="form-group">
-                    <label>⚖️ Vazn (kg)</label>
-                    <input type="number" id="weight" placeholder="Masalan: 70" min="30" max="200">
-                </div>
-
-                <div class="form-group">
-                    <label>👤 Yosh</label>
-                    <input type="number" id="age" placeholder="Masalan: 45" min="18" max="100">
-                </div>
-
-                <div class="form-group">
-                    <label>🚬 Chekasizmi?</label>
-                    <select id="smoking">
-                        <option value="no">Yo'q</option>
-                        <option value="yes">Ha</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>🏃 Jismoniy faollik (haftasiga)</label>
-                    <select id="exercise">
-                        <option value="none">Yo'q</option>
-                        <option value="light">1-2 kun</option>
-                        <option value="moderate">3-4 kun</option>
-                        <option value="active">5+ kun</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>🧠 Nevrologik shikoyatlar</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" id="headache"> Tez-tez bosh og'rig'i</label>
-                        <label><input type="checkbox" id="dizziness"> Bosh aylanishi</label>
-                        <label><input type="checkbox" id="numbness"> Qo'l-oyoq kuchsizlanishi</label>
-                        <label><input type="checkbox" id="vision"> Ko'rish muammolari</label>
-                        <label><input type="checkbox" id="speech"> Nutq qiyinligi</label>
-                    </div>
-                </div>
-
-                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                    🤖 AI Tahlil Qilsin
-                </button>
+        
+        <div class="assessment-form">
+            <div class="ai-badge">
+                🤖 AI Tahlilchi faol
             </div>
 
-            <div class="result-panel" id="resultPanel" style="display: none;">
-                <div id="resultContent"></div>
+            <div class="form-group">
+                <label>🩺 Qon bosimi (mmHg)</label>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="number" id="systolic" placeholder="Sistolik (120)">
+                    <input type="number" id="diastolic" placeholder="Diastolik (80)">
+                </div>
             </div>
+
+            <div class="form-group">
+                <label>💓 Yurak urishi</label>
+                <input type="number" id="heartrate" placeholder="Masalan: 72">
+            </div>
+
+            <div class="form-group">
+                <label>🍬 Qand miqdori (mmol/L)</label>
+                <input type="number" id="glucose" placeholder="Masalan: 5.5">
+            </div>
+
+            <div class="form-group">
+                <label>📏 Bo'y (sm)</label>
+                <input type="number" id="height" placeholder="Masalan: 170">
+            </div>
+
+            <div class="form-group">
+                <label>⚖️ Vazn (kg)</label>
+                <input type="number" id="weight" placeholder="Masalan: 70">
+            </div>
+
+            <div class="form-group">
+                <label>👤 Yosh</label>
+                <input type="number" id="age" placeholder="Masalan: 45">
+            </div>
+
+            <div class="form-group">
+                <label>🚬 Chekasizmi?</label>
+                <select id="smoking">
+                    <option value="no">Yo'q</option>
+                    <option value="yes">Ha</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>🧠 Nevrologik shikoyatlar</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="headache"> Tez-tez bosh og'rig'i</label>
+                    <label><input type="checkbox" id="dizziness"> Bosh aylanishi</label>
+                    <label><input type="checkbox" id="numbness"> Qo'l-oyoq kuchsizlanishi</label>
+                    <label><input type="checkbox" id="vision"> Ko'rish muammolari</label>
+                    <label><input type="checkbox" id="speech"> Nutq qiyinligi</label>
+                </div>
+            </div>
+
+            <button onclick="analyzeRisk()" class="btn">
+                🤖 AI Tahlil Qilsin
+            </button>
+        </div>
+
+        <div class="result-panel" id="resultPanel">
+            <div id="resultContent"></div>
         </div>
     </section>
 
-    <section class="problem" id="problem">
-        <h2 class="section-title" data-lang="whyNeuroguard">Nima uchun NeuroGuard AI?</h2>
-        <div class="problem-grid">
-            <div class="problem-card">
-                <div class="problem-icon">💔</div>
-                <h3 data-lang="deathCause">O'lim Sababi #2</h3>
-                <p data-lang="deathCauseDesc">Insult dunyoda ikkinchi eng katta o'lim sababi hisoblanadi</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">⏰</div>
-                <h3 data-lang="everyFive">Har 5 Soniyada</h3>
-                <p data-lang="everyFiveDesc">Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">✅</div>
-                <h3 data-lang="preventable">85% Oldini Olish Mumkin</h3>
-                <p data-lang="preventableDesc">Erta aniqlash orqali insultning oldini olish mumkin</p>
-            </div>
-            <div class="problem-card">
-                <div class="problem-icon">🤖</div>
-                <h3 data-lang="aiTech">AI Texnologiyasi</h3>
-                <p data-lang="aiTechDesc">Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
-            </div>
-        </div>
-
-        <!-- 3D Brain Model Section -->
-        <div style="max-width: 1200px; margin: 4rem auto 0;">
-            <h2 class="section-title" id="brain3d" data-lang="brain3dTitle">🧠 Interaktiv 3D Miya Modeli</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-lang="brain3dDesc">
-                Miyani aylantirib, insult qaysi qismga ta'sir qilishini o'rganing
-            </p>
-            
-            <div class="brain-3d-container" id="brain3dContainer">
-                <div class="info-panel" id="brainInfo">
-                    <h3 style="margin-bottom: 0.5rem; color: #667eea;">Miya Haqida</h3>
-                    <p style="font-size: 0.9rem; color: #666;">
-                        Inson miyasi 86 milliard neyrondan iborat. Insult qon oqimini to'xtatib, miyaning ma'lum qismlarini shikastlaydi.
-                    </p>
-                </div>
-                
-                <div class="brain-controls">
-                    <button class="brain-btn" onclick="rotateBrain()" data-lang="rotate">🔄 Aylantirish</button>
-                    <button class="brain-btn" onclick="showStrokeArea()" data-lang="showStroke">⚠️ Insult Zonasi</button>
-                    <button class="brain-btn" onclick="resetBrain()" data-lang="reset">↺ Qayta Tiklash</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calendar Integration -->
-        <div style="max-width: 1200px; margin: 4rem auto 0;">
-            <h2 class="section-title" data-lang="calendarTitle">📅 Sog'liq Kalendari</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                <div class="calendar-widget">
-                    <div class="calendar-header">
-                        <button onclick="changeMonth(-1)" style="border: none; background: none; font-size: 1.5rem; cursor: pointer;">◀</button>
-                        <h3 id="calendarMonth">Yanvar 2026</h3>
-                        <button onclick="changeMonth(1)" style="border: none; background: none; font-size: 1.5rem; cursor: pointer;">▶</button>
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem; font-weight: 600; text-align: center;">
-                        <div>Du</div><div>Se</div><div>Cho</div><div>Pa</div><div>Ju</div><div>Sha</div><div>Ya</div>
-                    </div>
-                    
-                    <div class="calendar-grid" id="calendarGrid"></div>
-                </div>
-
-                <div class="calendar-widget">
-                    <h3 style="margin-bottom: 1rem;" data-lang="addEvent">➕ Eslatma Qo'shish</h3>
-                    <div class="event-form">
-                        <select class="event-input" id="eventType">
-                            <option value="doctor" data-lang="doctor">Shifokor uchrashuvim</option>
-                            <option value="medicine" data-lang="medicine">Dori ichish</option>
-                            <option value="exercise" data-lang="exercise">Jismoniy mashq</option>
-                            <option value="checkup" data-lang="checkup">Tekshiruv</option>
-                        </select>
-                        <input type="date" class="event-input" id="eventDate">
-                        <input type="time" class="event-input" id="eventTime">
-                        <input type="text" class="event-input" id="eventNote" placeholder="Izoh...">
-                        <button class="subscribe-btn" onclick="addEvent()" data-lang="addBtn">Qo'shish</button>
-                    </div>
-
-                    <div class="event-list" id="eventList"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Leaderboard -->
-        <div style="max-width: 800px; margin: 4rem auto 0;">
-            <h2 class="section-title" data-lang="leaderboardTitle">🏆 Eng Faol Foydalanuvchilar</h2>
-            <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-lang="leaderboardDesc">
-                Anonim reytingda o'z o'rningizni oling! (Ism ko'rsatilmaydi)
-            </p>
-            
-            <div class="leaderboard">
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank rank-1">🥇</div>
-                    <div class="leaderboard-user">
-                        <div style="font-weight: 600;">User_****8521</div>
-                        <div style="font-size: 0.85rem; color: #666;">Daraja 12 • 15 ta test</div>
-                    </div>
-                    <div class="leaderboard-points">2450</div>
-                </div>
-
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank rank-2">🥈</div>
-                    <div class="leaderboard-user">
-                        <div style="font-weight: 600;">User_****3742</div>
-                        <div style="font-size: 0.85rem; color: #666;">Daraja 10 • 12 ta test</div>
-                    </div>
-                    <div class="leaderboard-points">1980</div>
-                </div>
-
-                <div class="leaderboard-item">
-                    <div class="leaderboard-rank rank-3">🥉</div>
-                    <div class="leaderboard-user">
-                        <div style="font-weight: 600;">User_****9156</div>
-                        <div style="font-size: 0.85rem; color: #666;">Daraja 9 • 10 ta test</div>
-                    </div>
-                    <div class="leaderboard-points">1750</div>
-                </div>
-
-                <div class="leaderboard-item" id="userRank">
-                    <div class="leaderboard-rank">...</div>
-                    <div class="leaderboard-user">
-                        <div style="font-weight: 600;">Siz (User_****<span id="userCode">0000</span>)</div>
-                        <div style="font-size: 0.85rem; color: #666;">Daraja <span id="userLevel">1</span> • <span id="userTests">0</span> ta test</div>
-                    </div>
-                    <div class="leaderboard-points" id="leaderboardPoints">0</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Social Share Section -->
-        <div class="social-share">
-            <h3>🎯 Do'stlaringiz bilan Ulashing!</h3>
-            <p>Sog'ligingiz haqida qayg'uring va yaqinlaringizni ham tekshirishga undang</p>
-            
-            <div style="margin: 2rem 0;">
-                <div class="achievement-badge">🏆 5 kishiga ulashildi</div>
-                <div class="achievement-badge">⭐ Sog'liq Elchisi</div>
-            </div>
-
-            <div class="share-buttons">
-                <button class="share-btn share-facebook" onclick="shareOn('facebook')" title="Facebook">f</button>
-                <button class="share-btn share-twitter" onclick="shareOn('twitter')" title="Twitter">𝕏</button>
-                <button class="share-btn share-telegram" onclick="shareOn('telegram')" title="Telegram">✈</button>
-                <button class="share-btn share-whatsapp" onclick="shareOn('whatsapp')" title="WhatsApp">📱</button>
-            </div>
-
-            <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 15px;">
-                <h4 style="color: #667eea; margin-bottom: 0.5rem;">📊 Ulashish Statistikasi</h4>
-                <p style="color: #666; font-size: 0.9rem;">Siz bu platformani 12 kishi bilan ulashdingiz. Ajoyib!</p>
-            </div>
-        </div>
-    </section>
-
-    <div id="historyModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeHistory()">&times;</span>
-            <h2 class="section-title">📊 Sizning Tarixingiz</h2>
-            <div class="chart-container">
-                <canvas id="historyChart"></canvas>
-            </div>
-            <div id="historyList" class="history-grid"></div>
-        </div>
-    </div>
-
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>NeuroGuard AI</h4>
-                <p>Insultni oldini olish uchun sun'iy intellekt platformasi</p>
-            </div>
-            <div class="footer-section">
-                <h4>Havolalar</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Biz haqimizda</a></li>
-                    <li><a href="#">Platforma</a></li>
-                    <li><a href="#">Hamkorlik</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Aloqa</h4>
-                <ul class="footer-links">
-                    <li><a href="mailto:info@neuroguard.ai">anusher.office@gmail.com</a></li>
-                    <li><a href="#">+998 93 482 55 77</a></li>
-                    <li><a href="#">Samarkand, O'zbekiston</a></li>
-                </ul>
-            </div>
-        </div>
-        <p style="opacity: 0.7; margin-top: 2rem;">© 2026 NeuroGuard AI. Barcha huquqlar himoyalangan.</p>
+    <footer>
+        <p>© 2026 NeuroGuard AI. Barcha huquqlar himoyalangan.</p>
+        <p style="margin-top: 1rem;">anusher.office@gmail.com | +998 93 482 55 77</p>
     </footer>
 
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        let currentResult = null;
-
-        function saveResult(result) {
-            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
-            history.push({
-                ...result,
-                date: new Date().toISOString()
-            });
-            localStorage.setItem('neuroguard_history', JSON.stringify(history));
-        }
-
-        function getHistory() {
-            return JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
-        }
-
-        function showHistory() {
-            const modal = document.getElementById('historyModal');
-            const history = getHistory();
-            
-            if (history.length === 0) {
-                alert('Hali hech qanday test o\'tkazilmagan!');
-                return;
-            }
-
-            modal.style.display = 'flex';
-            
-            const ctx = document.getElementById('historyChart').getContext('2d');
-            const dates = history.map(h => new Date(h.date).toLocaleDateString('uz-UZ'));
-            const scores = history.map(h => h.riskScore);
-            
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dates,
-                    datasets: [{
-                        label: 'Xavf Darajasi (%)',
-                        data: scores,
-                        borderColor: '#667eea',
-                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = history.reverse().map(h => `
-                <div class="history-card">
-                    <div class="history-date">📅 ${new Date(h.date).toLocaleString('uz-UZ')}</div>
-                    <div class="history-risk ${h.riskClass}">${h.riskScore}%</div>
-                    <div style="font-weight: 600; color: #666;">${h.riskLevel}</div>
-                </div>
-            `).join('');
-        }
-
-        function closeHistory() {
-            document.getElementById('historyModal').style.display = 'none';
-        }
-
-        async function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-            
-            // Logo va sarlavha
-            pdf.setFontSize(24);
-            pdf.setTextColor(102, 126, 234);
-            pdf.text('NeuroGuard AI', 105, 20, { align: 'center' });
-            
-            pdf.setFontSize(16);
-            pdf.setTextColor(0, 0, 0);
-            pdf.text('Insult Xavfi Baholash Hisoboti', 105, 30, { align: 'center' });
-            
-            // Sana
-            pdf.setFontSize(10);
-            pdf.setTextColor(100, 100, 100);
-            pdf.text('Sana: ' + new Date().toLocaleString('uz-UZ'), 105, 38, { align: 'center' });
-            
-            // Asosiy natija
-            pdf.setFontSize(14);
-            pdf.setTextColor(0, 0, 0);
-            pdf.text('Xavf Darajasi:', 20, 55);
-            
-            pdf.setFontSize(32);
-            const color = currentResult.riskScore < 30 ? [16, 185, 129] : 
-                         currentResult.riskScore < 60 ? [245, 158, 11] : [239, 68, 68];
-            pdf.setTextColor(color[0], color[1], color[2]);
-            pdf.text(currentResult.riskScore + '%', 105, 75, { align: 'center' });
-            
-            pdf.setFontSize(16);
-            pdf.text(currentResult.riskLevel, 105, 85, { align: 'center' });
-            
-            // Tahlil natijalari
-            pdf.setFontSize(14);
-            pdf.setTextColor(0, 0, 0);
-            pdf.text('Tahlil Natijalari:', 20, 100);
-            
-            let yPos = 110;
-            pdf.setFontSize(10);
-            currentResult.factors.forEach(factor => {
-                pdf.text('• ' + factor.name + ': ' + factor.text, 25, yPos);
-                yPos += 7;
-            });
-            
-            // Tavsiyalar
-            yPos += 10;
-            pdf.setFontSize(14);
-            pdf.text('Tavsiyalar:', 20, yPos);
-            yPos += 10;
-            
-            pdf.setFontSize(10);
-            currentResult.recommendations.forEach(rec => {
-                const lines = pdf.splitTextToSize('✓ ' + rec, 170);
-                lines.forEach(line => {
-                    if (yPos > 270) {
-                        pdf.addPage();
-                        yPos = 20;
-                    }
-                    pdf.text(line, 25, yPos);
-                    yPos += 7;
-                });
-            });
-            
-            // Footer
-            pdf.setFontSize(8);
-            pdf.setTextColor(150, 150, 150);
-            pdf.text('Bu hisobot faqat ma\'lumot uchun. Aniq diagnoz shifokordan oling.', 105, 285, { align: 'center' });
-            pdf.text('© 2026 NeuroGuard AI', 105, 290, { align: 'center' });
-            
-            // Yuklab olish
-            pdf.save('NeuroGuard-Hisobot-' + new Date().getTime() + '.pdf');
-        }
-
-        async function analyzeRisk() {
+        function analyzeRisk() {
             const systolic = parseFloat(document.getElementById('systolic').value);
             const diastolic = parseFloat(document.getElementById('diastolic').value);
             const heartrate = parseFloat(document.getElementById('heartrate').value);
@@ -1824,7 +353,6 @@
             const weight = parseFloat(document.getElementById('weight').value);
             const age = parseFloat(document.getElementById('age').value);
             const smoking = document.getElementById('smoking').value;
-            const exercise = document.getElementById('exercise').value;
 
             if (!systolic || !diastolic || !heartrate || !glucose || !height || !weight || !age) {
                 alert('Iltimos, barcha maydonlarni to\'ldiring!');
@@ -1835,506 +363,86 @@
             resultPanel.style.display = 'block';
             resultPanel.innerHTML = '<div class="loading"><div class="spinner"></div><p>AI tahlil qilmoqda...</p></div>';
 
-            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            resultPanel.scrollIntoView({ behavior: 'smooth' });
 
             setTimeout(() => {
                 const bmi = weight / ((height / 100) ** 2);
-                
                 let riskScore = 0;
-                const factors = [];
 
-                if (systolic > 140 || diastolic > 90) {
-                    riskScore += 25;
-                    factors.push({ name: 'Qon bosimi', status: 'danger', text: 'Yuqori (Xavfli)' });
-                } else if (systolic > 130 || diastolic > 85) {
-                    riskScore += 15;
-                    factors.push({ name: 'Qon bosimi', status: 'warning', text: 'Me\'yordan yuqori' });
-                } else {
-                    factors.push({ name: 'Qon bosimi', status: 'good', text: 'Normal' });
-                }
+                if (systolic > 140 || diastolic > 90) riskScore += 25;
+                else if (systolic > 130 || diastolic > 85) riskScore += 15;
 
-                if (heartrate > 100 || heartrate < 60) {
-                    riskScore += 15;
-                    factors.push({ name: 'Yurak urishi', status: 'warning', text: 'Beqaror' });
-                } else {
-                    factors.push({ name: 'Yurak urishi', status: 'good', text: 'Normal' });
-                }
+                if (heartrate > 100 || heartrate < 60) riskScore += 15;
+                if (glucose > 7.0) riskScore += 20;
+                else if (glucose > 6.0) riskScore += 10;
 
-                if (glucose > 7.0) {
-                    riskScore += 20;
-                    factors.push({ name: 'Qand miqdori', status: 'danger', text: 'Yuqori' });
-                } else if (glucose > 6.0) {
-                    riskScore += 10;
-                    factors.push({ name: 'Qand miqdori', status: 'warning', text: 'Me\'yordan yuqori' });
-                } else {
-                    factors.push({ name: 'Qand miqdori', status: 'good', text: 'Normal' });
-                }
+                if (bmi > 30) riskScore += 15;
+                else if (bmi > 25) riskScore += 8;
 
-                if (bmi > 30) {
-                    riskScore += 15;
-                    factors.push({ name: 'BMI', status: 'danger', text: `${bmi.toFixed(1)} - Ortiqcha vazn` });
-                } else if (bmi > 25) {
-                    riskScore += 8;
-                    factors.push({ name: 'BMI', status: 'warning', text: `${bmi.toFixed(1)} - Me\'yordan yuqori` });
-                } else {
-                    factors.push({ name: 'BMI', status: 'good', text: `${bmi.toFixed(1)} - Normal` });
-                }
+                if (age > 65) riskScore += 15;
+                else if (age > 55) riskScore += 10;
+                else if (age > 45) riskScore += 5;
 
-                if (age > 65) {
-                    riskScore += 15;
-                } else if (age > 55) {
-                    riskScore += 10;
-                } else if (age > 45) {
-                    riskScore += 5;
-                }
+                if (smoking === 'yes') riskScore += 20;
 
-                if (smoking === 'yes') {
-                    riskScore += 20;
-                    factors.push({ name: 'Chekish', status: 'danger', text: 'Ha (Katta xavf)' });
-                } else {
-                    factors.push({ name: 'Chekish', status: 'good', text: 'Yo\'q' });
-                }
-
-                const exercisePoints = {
-                    'none': 10,
-                    'light': 5,
-                    'moderate': 2,
-                    'active': 0
-                };
-                riskScore += exercisePoints[exercise];
-
-                if (exercise === 'none') {
-                    factors.push({ name: 'Jismoniy faollik', status: 'danger', text: 'Yo\'q' });
-                } else if (exercise === 'light') {
-                    factors.push({ name: 'Jismoniy faollik', status: 'warning', text: 'Kam' });
-                } else {
-                    factors.push({ name: 'Jismoniy faollik', status: 'good', text: 'Yetarli' });
-                }
-
-                const neuroSymptoms = [];
-                if (document.getElementById('headache').checked) {
-                    neuroSymptoms.push('Bosh og\'rig\'i');
-                    riskScore += 5;
-                }
-                if (document.getElementById('dizziness').checked) {
-                    neuroSymptoms.push('Bosh aylanishi');
-                    riskScore += 7;
-                }
-                if (document.getElementById('numbness').checked) {
-                    neuroSymptoms.push('Kuchsizlanish');
-                    riskScore += 10;
-                }
-                if (document.getElementById('vision').checked) {
-                    neuroSymptoms.push('Ko\'rish muammosi');
-                    riskScore += 8;
-                }
-                if (document.getElementById('speech').checked) {
-                    neuroSymptoms.push('Nutq qiyinligi');
-                    riskScore += 10;
-                }
-
-                if (neuroSymptoms.length > 0) {
-                    factors.push({ 
-                        name: 'Nevrologik alomatlar', 
-                        status: neuroSymptoms.length > 2 ? 'danger' : 'warning', 
-                        text: neuroSymptoms.join(', ') 
-                    });
-                }
+                if (document.getElementById('headache').checked) riskScore += 5;
+                if (document.getElementById('dizziness').checked) riskScore += 7;
+                if (document.getElementById('numbness').checked) riskScore += 10;
+                if (document.getElementById('vision').checked) riskScore += 8;
+                if (document.getElementById('speech').checked) riskScore += 10;
 
                 riskScore = Math.min(riskScore, 100);
 
-                let riskLevel, riskClass, riskIcon, riskDescription;
+                let riskLevel, riskClass, riskIcon;
                 if (riskScore < 30) {
                     riskLevel = 'Past Xavf';
                     riskClass = 'risk-low';
                     riskIcon = '✅';
-                    riskDescription = 'Sizning insult xavfingiz past. Sog\'lom turmush tarzini davom ettiring!';
                 } else if (riskScore < 60) {
                     riskLevel = 'O\'rtacha Xavf';
                     riskClass = 'risk-medium';
                     riskIcon = '⚠️';
-                    riskDescription = 'Ehtiyot bo\'ling! Ba\'zi omillar tuzatishni talab qiladi.';
                 } else {
                     riskLevel = 'Yuqori Xavf';
                     riskClass = 'risk-high';
                     riskIcon = '🚨';
-                    riskDescription = 'Zudlik bilan shifokorga murojaat qiling! Insult xavfi yuqori.';
                 }
-
-                const recommendations = [];
-                if (systolic > 140 || diastolic > 90) {
-                    recommendations.push('Qon bosimini doimiy nazorat qiling va shifokor bilan maslahatlashing');
-                }
-                if (glucose > 6.0) {
-                    recommendations.push('Qandli ovqatlarni kamaytiring, shirinliklardan voz keching');
-                }
-                if (bmi > 25) {
-                    recommendations.push('Vazningizni kamaytirish uchun sog\'lom ovqatlanish rejimiga o\'ting');
-                }
-                if (smoking === 'yes') {
-                    recommendations.push('Chekishni tark eting - bu eng muhim qadam!');
-                }
-                if (exercise === 'none' || exercise === 'light') {
-                    recommendations.push('Kuniga kamida 30 daqiqa jismoniy mashqlar qiling');
-                }
-                if (neuroSymptoms.length > 0) {
-                    recommendations.push('Nevrologga murojaat qiling va batafsil tekshiruvdan o\'ting');
-                }
-                if (recommendations.length === 0) {
-                    recommendations.push('Sog\'lom turmush tarzini davom ettiring');
-                    recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
-                }
-
-                currentResult = {
-                    riskScore,
-                    riskLevel,
-                    riskClass,
-                    factors,
-                    recommendations
-                };
-
-                let factorsHTML = '';
-                factors.forEach(factor => {
-                    factorsHTML += `
-                        <div class="risk-factor">
-                            <span class="factor-name">${factor.name}</span>
-                            <span class="factor-status status-${factor.status}">${factor.text}</span>
-                        </div>
-                    `;
-                });
-
-                let recsHTML = '<h4>🎯 Tavsiyalar:</h4><ul>';
-                recommendations.forEach(rec => {
-                    recsHTML += `<li>${rec}</li>`;
-                });
-                recsHTML += '</ul>';
-
-                const chartHTML = `
-                    <div class="chart-container">
-                        <canvas id="riskChart"></canvas>
-                    </div>
-                `;
 
                 resultPanel.innerHTML = `
                     <div class="result-header">
                         <div class="risk-icon">${riskIcon}</div>
-                        <div class="risk-level ${riskClass}">${riskLevel}</div>
+                        <h3>${riskLevel}</h3>
                         <div class="risk-percentage ${riskClass}">${riskScore}%</div>
-                        <p>${riskDescription}</p>
+                        <p>BMI: ${bmi.toFixed(1)}</p>
                     </div>
-                    
-                    ${chartHTML}
-                    
-                    <div class="risk-factors">
-                        <h3 style="margin-bottom: 1rem; color: #333;">📊 Tahlil Natijalari:</h3>
-                        ${factorsHTML}
+                    <div style="padding: 1rem; background: #eff6ff; border-radius: 10px; border-left: 4px solid #667eea; margin-top: 2rem;">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;">📋 Tavsiyalar:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            ${riskScore > 30 ? '<li style="padding: 0.3rem 0;">• Shifokorga murojaat qiling</li>' : ''}
+                            ${systolic > 140 ? '<li style="padding: 0.3rem 0;">• Qon bosimini nazorat qiling</li>' : ''}
+                            ${glucose > 6.0 ? '<li style="padding: 0.3rem 0;">• Qandni kamaytiring</li>' : ''}
+                            ${smoking === 'yes' ? '<li style="padding: 0.3rem 0;">• Chekishni tark eting</li>' : ''}
+                            ${bmi > 25 ? '<li style="padding: 0.3rem 0;">• Vazningizni kamaytiring</li>' : ''}
+                            <li style="padding: 0.3rem 0;">• Sog'lom turmush tarzi</li>
+                        </ul>
                     </div>
-                    <div class="recommendations">
-                        ${recsHTML}
-                    </div>
-                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 10px; border-left: 4px solid #ffc107;">
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 10px;">
                         <p style="margin: 0; font-size: 0.9rem; color: #856404;">
                             ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
                         </p>
                     </div>
-                    <div class="action-buttons">
-                        <button class="btn-download" onclick="downloadPDF()">📄 PDF Yuklab Olish</button>
-                        <button class="btn-save" onclick="saveCurrentResult()">💾 Natijani Saqlash</button>
-                    </div>
                 `;
-
-                // Grafik yasash
-                const ctx = document.getElementById('riskChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Xavf Darajasi', 'Xavfsiz Zona'],
-                        datasets: [{
-                            data: [riskScore, 100 - riskScore],
-                            backgroundColor: [
-                                riskScore < 30 ? '#10b981' : riskScore < 60 ? '#f59e0b' : '#ef4444',
-                                '#e5e7eb'
-                            ],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.label + ': ' + context.parsed + '%';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-
             }, 2000);
         }
 
-        function saveCurrentResult() {
-            if (currentResult) {
-                saveResult(currentResult);
-                alert('✅ Natija muvaffaqiyatli saqlandi! Tarixni ko\'rish uchun "Tarix" tugmasini bosing.');
-            }
-        }
-
-        // AI Chatbot Functions
-        function toggleChat() {
-            const chatWindow = document.getElementById('chatWindow');
-            chatWindow.classList.toggle('active');
-        }
-
-        function handleChatKeypress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if (!message) return;
-
-            // Add user message
-            addChatMessage(message, 'user');
-            input.value = '';
-
-            // Simulate AI response
-            setTimeout(() => {
-                const response = getAIResponse(message);
-                addChatMessage(response, 'bot');
-            }, 1000);
-        }
-
-        function addChatMessage(text, sender) {
-            const messagesContainer = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${sender}-message`;
-            
-            const bubble = document.createElement('div');
-            bubble.className = 'message-bubble';
-            bubble.innerHTML = text;
-            
-            messageDiv.appendChild(bubble);
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function askQuestion(question) {
-            addChatMessage(question, 'user');
-            setTimeout(() => {
-                const response = getAIResponse(question);
-                addChatMessage(response, 'bot');
-            }, 1000);
-        }
-
-        function getAIResponse(message) {
-            const responses = {
-                'Insult belgilari': `
-                    <strong>Insultning asosiy belgilari:</strong><br><br>
-                    🔴 <strong>Yuzning bir tomoni osilishi</strong><br>
-                    🔴 <strong>Qo'l-oyoqda kuchsizlik</strong><br>
-                    🔴 <strong>Nutq buzilishi</strong><br>
-                    🔴 <strong>Ko'rishda muammo</strong><br>
-                    🔴 <strong>Kuchli bosh og'rig'i</strong><br>
-                    🔴 <strong>Muvozanat yo'qolishi</strong><br><br>
-                    ⚠️ Agar bu belgilardan birortasini sezdingiz, zudlik bilan 103 ga qo'ng'iroq qiling!
-                `,
-                'Profilaktika': `
-                    <strong>Insultning oldini olish uchun:</strong><br><br>
-                    ✅ Qon bosimini nazorat qiling<br>
-                    ✅ Sog'lom ovqatlaning<br>
-                    ✅ Muntazam jismoniy mashqlar qiling<br>
-                    ✅ Chekishni tark eting<br>
-                    ✅ Stressdan saqlaning<br>
-                    ✅ Yiliga kamida 1 marta tekshiruvdan o'ting<br><br>
-                    💡 Bizning AI platformamiz sizga individual tavsiyalar beradi!
-                `,
-                'Qon bosimi': `
-                    <strong>Qon bosimi haqida:</strong><br><br>
-                    📊 <strong>Normal:</strong> 120/80 mmHg<br>
-                    ⚠️ <strong>Yuqori:</strong> 140/90 va undan yuqori<br><br>
-                    <strong>Qon bosimini pasaytirish:</strong><br>
-                    • Tuzni kamaytiring<br>
-                    • Vazningizni nazorat qiling<br>
-                    • Jismoniy faol bo'ling<br>
-                    • Stressni kamaytiring<br>
-                    • Shifokor maslahatini oling<br><br>
-                    🎯 Har kuni o'lchan qon bosimingizni yozib boring!
-                `
-            };
-
-            // Check for specific keywords
-            const lowerMessage = message.toLowerCase();
-            
-            if (lowerMessage.includes('insult') || lowerMessage.includes('belgila')) {
-                return responses['Insult belgilari'];
-            } else if (lowerMessage.includes('profilak') || lowerMessage.includes('oldini')) {
-                return responses['Profilaktika'];
-            } else if (lowerMessage.includes('qon bosimi') || lowerMessage.includes('bosim')) {
-                return responses['Qon bosimi'];
-            } else if (lowerMessage.includes('test') || lowerMessage.includes('tekshir')) {
-                return `
-                    Albatta! Yuqoridagi formani to'ldiring va "AI Tahlil Qilsin" tugmasini bosing. 
-                    Men sizning ma'lumotlaringizni tahlil qilib, insult xavfi darajasini aniqlayman. 
-                    <br><br>Natijalar bir necha soniyada tayyor bo'ladi! 🚀
-                `;
-            } else if (lowerMessage.includes('salom') || lowerMessage.includes('hello')) {
-                return `
-                    Salom! 👋 Men sizga yordam berish uchun tayyorman. 
-                    Insult, sog'liq, profilaktika haqida savollaringiz bo'lsa, bemalol so'rang!
-                `;
-            } else {
-                return `
-                    Savolingiz uchun rahmat! 🤔<br><br>
-                    Men quyidagi mavzular bo'yicha yordam bera olaman:<br>
-                    • Insult belgilari va xavfi<br>
-                    • Profilaktika usullari<br>
-                    • Qon bosimi nazorati<br>
-                    • Sog'lom turmush tarzi<br><br>
-                    Qaysi mavzuda ma'lumot kerak?
-                `;
-            }
-        }
-
-        // Notification Functions
-        function toggleNotifications() {
-            const panel = document.getElementById('notificationPanel');
-            panel.classList.toggle('active');
-            
-            // Reset badge
-            const badge = document.getElementById('notifBadge');
-            badge.style.display = 'none';
-        }
-
-        function subscribeNotifications() {
-            const email = document.getElementById('emailInput').value;
-            const phone = document.getElementById('phoneInput').value;
-            
-            if (!email && !phone) {
-                alert('Iltimos, email yoki telefon raqamingizni kiriting!');
-                return;
-            }
-
-            // Simulate subscription
-            const notifications = JSON.parse(localStorage.getItem('neuroguard_notifications') || '[]');
-            notifications.push({
-                email: email,
-                phone: phone,
-                date: new Date().toISOString()
-            });
-            localStorage.setItem('neuroguard_notifications', JSON.stringify(notifications));
-
-            alert('✅ Obuna muvaffaqiyatli! Endi siz kunlik eslatmalar va tibbiy maslahatlar olasiz.');
-            
-            // Schedule reminder
-            scheduleReminder();
-        }
-
-        function scheduleReminder() {
-            // Simulate scheduling (in real app, this would be server-side)
-            const reminderDate = new Date();
-            reminderDate.setDate(reminderDate.getDate() + 30); // 30 days later
-            
-            localStorage.setItem('next_checkup', reminderDate.toISOString());
-            
-            console.log('Keyingi tekshiruv: ' + reminderDate.toLocaleDateString('uz-UZ'));
-        }
-
-        // Social Share Functions
-        function shareOn(platform) {
-            const url = window.location.href;
-            const text = 'Men NeuroGuard AI da insult xavfini tekshirdim! Siz ham tekshiring va sog\'ligingizni saqlang! 🧠';
-            
-            let shareUrl;
-            
-            switch(platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
-                    break;
-            }
-            
-            // Track share
-            trackShare(platform);
-            
-            // Open share window
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-
-        function trackShare(platform) {
-            const shares = JSON.parse(localStorage.getItem('neuroguard_shares') || '{}');
-            shares[platform] = (shares[platform] || 0) + 1;
-            shares.total = (shares.total || 0) + 1;
-            localStorage.setItem('neuroguard_shares', JSON.stringify(shares));
-            
-            // Show achievement if milestone reached
-            if (shares.total === 5) {
-                showAchievement('🏆 Sog\'liq Elchisi!', 'Siz 5 kishiga ulashdingiz!');
-            } else if (shares.total === 10) {
-                showAchievement('⭐ Super Elchi!', 'Siz 10 kishiga ulashdingiz!');
-            }
-        }
-
-        function showAchievement(title, message) {
-            const achievement = document.createElement('div');
-            achievement.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: -400px;
-                background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-                padding: 1.5rem;
-                border-radius: 15px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                z-index: 2000;
-                transition: right 0.5s ease;
-            `;
-            achievement.innerHTML = `
-                <h3 style="margin: 0 0 0.5rem 0; color: #333;">${title}</h3>
-                <p style="margin: 0; color: #666;">${message}</p>
-            `;
-            document.body.appendChild(achievement);
-            
-            setTimeout(() => {
-                achievement.style.right = '30px';
-            }, 100);
-            
-            setTimeout(() => {
-                achievement.style.right = '-400px';
-                setTimeout(() => achievement.remove(), 500);
-            }, 3000);
-        }
-
-        // Initialize notifications on page load
-        window.addEventListener('load', () => {
-            const nextCheckup = localStorage.getItem('next_checkup');
-            if (nextCheckup) {
-                const checkupDate = new Date(nextCheckup);
-                const now = new Date();
-                
-                if (checkupDate <= now) {
-                    // Show reminder notification
-                    setTimeout(() => {
-                        showAchievement('⏰ Eslatma', 'Yangi test o\'tkazish vaqti keldi!');
-                    }, 2000);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
-            }
+            });
         });
     </script>
 </body>
