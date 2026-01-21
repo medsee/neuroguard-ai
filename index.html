@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -46,6 +49,7 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -57,6 +61,21 @@
 
         .nav-links a:hover {
             color: #667eea;
+        }
+
+        .history-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .history-btn:hover {
+            transform: translateY(-2px);
         }
 
         .hero {
@@ -216,7 +235,7 @@
         }
 
         .assessment-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -422,9 +441,126 @@
             100% { transform: rotate(360deg); }
         }
 
-        .problem {
+        .chart-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-download {
+            flex: 1;
+            background: #10b981;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-save {
+            flex: 1;
+            background: #3b82f6;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .history-section {
             padding: 6rem 5%;
             background: white;
+        }
+
+        .history-grid {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .history-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-risk {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .problem {
+            padding: 6rem 5%;
+            background: #f8f9fa;
         }
 
         .problem-grid {
@@ -436,7 +572,7 @@
         }
 
         .problem-card {
-            background: #f8f9fa;
+            background: white;
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -514,6 +650,10 @@
             .result-panel {
                 position: static;
             }
+
+            .action-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -524,7 +664,7 @@
             <li><a href="#home">Bosh sahifa</a></li>
             <li><a href="#assessment">Tekshirish</a></li>
             <li><a href="#problem">Muammo</a></li>
-            <li><a href="#contact">Aloqa</a></li>
+            <li><button class="history-btn" onclick="showHistory()">📊 Tarix</button></li>
         </ul>
     </nav>
 
@@ -636,16 +776,7 @@
             </div>
 
             <div class="result-panel" id="resultPanel" style="display: none;">
-                <div class="result-header">
-                    <div class="risk-icon" id="riskIcon">🧠</div>
-                    <div class="risk-level" id="riskLevel">Tahlil Natijasi</div>
-                    <div class="risk-percentage" id="riskPercentage">--</div>
-                    <p id="riskDescription">Ma'lumotlar yuklanmoqda...</p>
-                </div>
-
-                <div class="risk-factors" id="riskFactors"></div>
-
-                <div class="recommendations" id="recommendations"></div>
+                <div id="resultContent"></div>
             </div>
         </div>
     </section>
@@ -675,6 +806,17 @@
             </div>
         </div>
     </section>
+
+    <div id="historyModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeHistory()">&times;</span>
+            <h2 class="section-title">📊 Sizning Tarixingiz</h2>
+            <div class="chart-container">
+                <canvas id="historyChart"></canvas>
+            </div>
+            <div id="historyList" class="history-grid"></div>
+        </div>
+    </div>
 
     <footer id="contact">
         <div class="footer-content">
@@ -716,6 +858,153 @@
                 }
             });
         });
+
+        let currentResult = null;
+
+        function saveResult(result) {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.push({
+                ...result,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+        }
+
+        function getHistory() {
+            return JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+        }
+
+        function showHistory() {
+            const modal = document.getElementById('historyModal');
+            const history = getHistory();
+            
+            if (history.length === 0) {
+                alert('Hali hech qanday test o\'tkazilmagan!');
+                return;
+            }
+
+            modal.style.display = 'flex';
+            
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            const dates = history.map(h => new Date(h.date).toLocaleDateString('uz-UZ'));
+            const scores = history.map(h => h.riskScore);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Xavf Darajasi (%)',
+                        data: scores,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = history.reverse().map(h => `
+                <div class="history-card">
+                    <div class="history-date">📅 ${new Date(h.date).toLocaleString('uz-UZ')}</div>
+                    <div class="history-risk ${h.riskClass}">${h.riskScore}%</div>
+                    <div style="font-weight: 600; color: #666;">${h.riskLevel}</div>
+                </div>
+            `).join('');
+        }
+
+        function closeHistory() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        async function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            
+            // Logo va sarlavha
+            pdf.setFontSize(24);
+            pdf.setTextColor(102, 126, 234);
+            pdf.text('NeuroGuard AI', 105, 20, { align: 'center' });
+            
+            pdf.setFontSize(16);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Insult Xavfi Baholash Hisoboti', 105, 30, { align: 'center' });
+            
+            // Sana
+            pdf.setFontSize(10);
+            pdf.setTextColor(100, 100, 100);
+            pdf.text('Sana: ' + new Date().toLocaleString('uz-UZ'), 105, 38, { align: 'center' });
+            
+            // Asosiy natija
+            pdf.setFontSize(14);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Xavf Darajasi:', 20, 55);
+            
+            pdf.setFontSize(32);
+            const color = currentResult.riskScore < 30 ? [16, 185, 129] : 
+                         currentResult.riskScore < 60 ? [245, 158, 11] : [239, 68, 68];
+            pdf.setTextColor(color[0], color[1], color[2]);
+            pdf.text(currentResult.riskScore + '%', 105, 75, { align: 'center' });
+            
+            pdf.setFontSize(16);
+            pdf.text(currentResult.riskLevel, 105, 85, { align: 'center' });
+            
+            // Tahlil natijalari
+            pdf.setFontSize(14);
+            pdf.setTextColor(0, 0, 0);
+            pdf.text('Tahlil Natijalari:', 20, 100);
+            
+            let yPos = 110;
+            pdf.setFontSize(10);
+            currentResult.factors.forEach(factor => {
+                pdf.text('• ' + factor.name + ': ' + factor.text, 25, yPos);
+                yPos += 7;
+            });
+            
+            // Tavsiyalar
+            yPos += 10;
+            pdf.setFontSize(14);
+            pdf.text('Tavsiyalar:', 20, yPos);
+            yPos += 10;
+            
+            pdf.setFontSize(10);
+            currentResult.recommendations.forEach(rec => {
+                const lines = pdf.splitTextToSize('✓ ' + rec, 170);
+                lines.forEach(line => {
+                    if (yPos > 270) {
+                        pdf.addPage();
+                        yPos = 20;
+                    }
+                    pdf.text(line, 25, yPos);
+                    yPos += 7;
+                });
+            });
+            
+            // Footer
+            pdf.setFontSize(8);
+            pdf.setTextColor(150, 150, 150);
+            pdf.text('Bu hisobot faqat ma\'lumot uchun. Aniq diagnoz shifokordan oling.', 105, 285, { align: 'center' });
+            pdf.text('© 2026 NeuroGuard AI', 105, 290, { align: 'center' });
+            
+            // Yuklab olish
+            pdf.save('NeuroGuard-Hisobot-' + new Date().getTime() + '.pdf');
+        }
 
         async function analyzeRisk() {
             const systolic = parseFloat(document.getElementById('systolic').value);
@@ -823,7 +1112,7 @@
                     riskScore += 7;
                 }
                 if (document.getElementById('numbness').checked) {
-                    neuroSymptoms.push('Uyqusizlik');
+                    neuroSymptoms.push('Kuchsizlanish');
                     riskScore += 10;
                 }
                 if (document.getElementById('vision').checked) {
@@ -887,6 +1176,14 @@
                     recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
                 }
 
+                currentResult = {
+                    riskScore,
+                    riskLevel,
+                    riskClass,
+                    factors,
+                    recommendations
+                };
+
                 let factorsHTML = '';
                 factors.forEach(factor => {
                     factorsHTML += `
@@ -903,6 +1200,12 @@
                 });
                 recsHTML += '</ul>';
 
+                const chartHTML = `
+                    <div class="chart-container">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                `;
+
                 resultPanel.innerHTML = `
                     <div class="result-header">
                         <div class="risk-icon">${riskIcon}</div>
@@ -910,6 +1213,9 @@
                         <div class="risk-percentage ${riskClass}">${riskScore}%</div>
                         <p>${riskDescription}</p>
                     </div>
+                    
+                    ${chartHTML}
+                    
                     <div class="risk-factors">
                         <h3 style="margin-bottom: 1rem; color: #333;">📊 Tahlil Natijalari:</h3>
                         ${factorsHTML}
@@ -922,8 +1228,52 @@
                             ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
                         </p>
                     </div>
+                    <div class="action-buttons">
+                        <button class="btn-download" onclick="downloadPDF()">📄 PDF Yuklab Olish</button>
+                        <button class="btn-save" onclick="saveCurrentResult()">💾 Natijani Saqlash</button>
+                    </div>
                 `;
+
+                // Grafik yasash
+                const ctx = document.getElementById('riskChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Xavf Darajasi', 'Xavfsiz Zona'],
+                        datasets: [{
+                            data: [riskScore, 100 - riskScore],
+                            backgroundColor: [
+                                riskScore < 30 ? '#10b981' : riskScore < 60 ? '#f59e0b' : '#ef4444',
+                                '#e5e7eb'
+                            ],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
             }, 2000);
+        }
+
+        function saveCurrentResult() {
+            if (currentResult) {
+                saveResult(currentResult);
+                alert('✅ Natija muvaffaqiyatli saqlandi! Tarixni ko\'rish uchun "Tarix" tugmasini bosing.');
+            }
         }
     </script>
 </body>
