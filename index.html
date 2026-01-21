@@ -629,35 +629,405 @@
             color: white;
         }
 
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1500;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+
+        .bot-message .message-bubble {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .user-message .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quick-btn {
+            background: white;
+            border: 1px solid #667eea;
+            color: #667eea;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .quick-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .notification-panel {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            z-index: 1500;
+            display: none;
+        }
+
+        .notification-panel.active {
+            display: block;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .notification-time {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+
+        .email-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-share {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .share-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-facebook { background: #1877f2; }
+        .share-twitter { background: #1da1f2; }
+        .share-telegram { background: #0088cc; }
+        .share-whatsapp { background: #25d366; }
+
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 0.5rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .bell-icon {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            z-index: 1400;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
-            .hero-content,
-            .assessment-container {
-                grid-template-columns: 1fr;
+            .chat-window {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
             }
 
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .stats {
-                flex-direction: column;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .result-panel {
-                position: static;
-            }
-
-            .action-buttons {
-                flex-direction: column;
+            .notification-panel {
+                width: calc(100% - 20px);
+                right: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- AI Chatbot Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" onclick="toggleChat()">💬</button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3>🤖 AI Maslahatchi</h3>
+                <button class="chat-close" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot-message">
+                    <div class="message-bubble">
+                        Salom! Men NeuroGuard AI yordamchisiman. Sizga qanday yordam bera olaman? 🧠
+                        <div class="quick-questions">
+                            <button class="quick-btn" onclick="askQuestion('Insult belgilari')">Insult belgilari?</button>
+                            <button class="quick-btn" onclick="askQuestion('Profilaktika')">Profilaktika?</button>
+                            <button class="quick-btn" onclick="askQuestion('Qon bosimi')">Qon bosimi?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatKeypress(event)">
+                <button class="chat-send" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Bell -->
+    <div class="bell-icon" onclick="toggleNotifications()">
+        🔔
+        <span class="notification-badge" id="notifBadge">3</span>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>📬 Eslatmalar</h3>
+            <button style="border: none; background: none; cursor: pointer; font-size: 20px;" onclick="toggleNotifications()">×</button>
+        </div>
+        <div class="notification-item">
+            <strong>⏰ Keyingi Tekshiruv</strong>
+            <p>Yangi test o'tkazish vaqti keldi! Sog'ligingizni nazorat qiling.</p>
+            <div class="notification-time">1 soat oldin</div>
+        </div>
+        <div class="notification-item">
+            <strong>💡 Kunlik Maslahat</strong>
+            <p>Kuniga 30 daqiqa yurish yurak-qon tomir kasalliklarini 35% ga kamaytiradi!</p>
+            <div class="notification-time">Bugun</div>
+        </div>
+        <div class="notification-item">
+            <strong>📊 Statistika</strong>
+            <p>Siz allaqachon 5 ta test o'tkazdingiz. Ajoyib natija!</p>
+            <div class="notification-time">Kecha</div>
+        </div>
+        
+        <div class="email-form">
+            <h4 style="margin-bottom: 1rem;">📧 Eslatmalarni Olish</h4>
+            <input type="email" class="email-input" id="emailInput" placeholder="Email manzilingiz">
+            <input type="tel" class="email-input" id="phoneInput" placeholder="+998 90 123 45 67">
+            <button class="subscribe-btn" onclick="subscribeNotifications()">Obuna Bo'lish</button>
+        </div>
+    </div>
+
     <nav>
         <div class="logo">🧠 NeuroGuard AI</div>
         <ul class="nav-links">
@@ -803,6 +1173,29 @@
                 <div class="problem-icon">🤖</div>
                 <h3>AI Texnologiyasi</h3>
                 <p>Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
+            </div>
+        </div>
+
+        <!-- Social Share Section -->
+        <div class="social-share">
+            <h3>🎯 Do'stlaringiz bilan Ulashing!</h3>
+            <p>Sog'ligingiz haqida qayg'uring va yaqinlaringizni ham tekshirishga undang</p>
+            
+            <div style="margin: 2rem 0;">
+                <div class="achievement-badge">🏆 5 kishiga ulashildi</div>
+                <div class="achievement-badge">⭐ Sog'liq Elchisi</div>
+            </div>
+
+            <div class="share-buttons">
+                <button class="share-btn share-facebook" onclick="shareOn('facebook')" title="Facebook">f</button>
+                <button class="share-btn share-twitter" onclick="shareOn('twitter')" title="Twitter">𝕏</button>
+                <button class="share-btn share-telegram" onclick="shareOn('telegram')" title="Telegram">✈</button>
+                <button class="share-btn share-whatsapp" onclick="shareOn('whatsapp')" title="WhatsApp">📱</button>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f9ff; border-radius: 15px;">
+                <h4 style="color: #667eea; margin-bottom: 0.5rem;">📊 Ulashish Statistikasi</h4>
+                <p style="color: #666; font-size: 0.9rem;">Siz bu platformani 12 kishi bilan ulashdingiz. Ajoyib!</p>
             </div>
         </div>
     </section>
@@ -1275,6 +1668,258 @@
                 alert('✅ Natija muvaffaqiyatli saqlandi! Tarixni ko\'rish uchun "Tarix" tugmasini bosing.');
             }
         }
+
+        // AI Chatbot Functions
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            addChatMessage(message, 'user');
+            input.value = '';
+
+            // Simulate AI response
+            setTimeout(() => {
+                const response = getAIResponse(message);
+                addChatMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function addChatMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}-message`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.innerHTML = text;
+            
+            messageDiv.appendChild(bubble);
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function askQuestion(question) {
+            addChatMessage(question, 'user');
+            setTimeout(() => {
+                const response = getAIResponse(question);
+                addChatMessage(response, 'bot');
+            }, 1000);
+        }
+
+        function getAIResponse(message) {
+            const responses = {
+                'Insult belgilari': `
+                    <strong>Insultning asosiy belgilari:</strong><br><br>
+                    🔴 <strong>Yuzning bir tomoni osilishi</strong><br>
+                    🔴 <strong>Qo'l-oyoqda kuchsizlik</strong><br>
+                    🔴 <strong>Nutq buzilishi</strong><br>
+                    🔴 <strong>Ko'rishda muammo</strong><br>
+                    🔴 <strong>Kuchli bosh og'rig'i</strong><br>
+                    🔴 <strong>Muvozanat yo'qolishi</strong><br><br>
+                    ⚠️ Agar bu belgilardan birortasini sezdingiz, zudlik bilan 103 ga qo'ng'iroq qiling!
+                `,
+                'Profilaktika': `
+                    <strong>Insultning oldini olish uchun:</strong><br><br>
+                    ✅ Qon bosimini nazorat qiling<br>
+                    ✅ Sog'lom ovqatlaning<br>
+                    ✅ Muntazam jismoniy mashqlar qiling<br>
+                    ✅ Chekishni tark eting<br>
+                    ✅ Stressdan saqlaning<br>
+                    ✅ Yiliga kamida 1 marta tekshiruvdan o'ting<br><br>
+                    💡 Bizning AI platformamiz sizga individual tavsiyalar beradi!
+                `,
+                'Qon bosimi': `
+                    <strong>Qon bosimi haqida:</strong><br><br>
+                    📊 <strong>Normal:</strong> 120/80 mmHg<br>
+                    ⚠️ <strong>Yuqori:</strong> 140/90 va undan yuqori<br><br>
+                    <strong>Qon bosimini pasaytirish:</strong><br>
+                    • Tuzni kamaytiring<br>
+                    • Vazningizni nazorat qiling<br>
+                    • Jismoniy faol bo'ling<br>
+                    • Stressni kamaytiring<br>
+                    • Shifokor maslahatini oling<br><br>
+                    🎯 Har kuni o'lchan qon bosimingizni yozib boring!
+                `
+            };
+
+            // Check for specific keywords
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('insult') || lowerMessage.includes('belgila')) {
+                return responses['Insult belgilari'];
+            } else if (lowerMessage.includes('profilak') || lowerMessage.includes('oldini')) {
+                return responses['Profilaktika'];
+            } else if (lowerMessage.includes('qon bosimi') || lowerMessage.includes('bosim')) {
+                return responses['Qon bosimi'];
+            } else if (lowerMessage.includes('test') || lowerMessage.includes('tekshir')) {
+                return `
+                    Albatta! Yuqoridagi formani to'ldiring va "AI Tahlil Qilsin" tugmasini bosing. 
+                    Men sizning ma'lumotlaringizni tahlil qilib, insult xavfi darajasini aniqlayman. 
+                    <br><br>Natijalar bir necha soniyada tayyor bo'ladi! 🚀
+                `;
+            } else if (lowerMessage.includes('salom') || lowerMessage.includes('hello')) {
+                return `
+                    Salom! 👋 Men sizga yordam berish uchun tayyorman. 
+                    Insult, sog'liq, profilaktika haqida savollaringiz bo'lsa, bemalol so'rang!
+                `;
+            } else {
+                return `
+                    Savolingiz uchun rahmat! 🤔<br><br>
+                    Men quyidagi mavzular bo'yicha yordam bera olaman:<br>
+                    • Insult belgilari va xavfi<br>
+                    • Profilaktika usullari<br>
+                    • Qon bosimi nazorati<br>
+                    • Sog'lom turmush tarzi<br><br>
+                    Qaysi mavzuda ma'lumot kerak?
+                `;
+            }
+        }
+
+        // Notification Functions
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('active');
+            
+            // Reset badge
+            const badge = document.getElementById('notifBadge');
+            badge.style.display = 'none';
+        }
+
+        function subscribeNotifications() {
+            const email = document.getElementById('emailInput').value;
+            const phone = document.getElementById('phoneInput').value;
+            
+            if (!email && !phone) {
+                alert('Iltimos, email yoki telefon raqamingizni kiriting!');
+                return;
+            }
+
+            // Simulate subscription
+            const notifications = JSON.parse(localStorage.getItem('neuroguard_notifications') || '[]');
+            notifications.push({
+                email: email,
+                phone: phone,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('neuroguard_notifications', JSON.stringify(notifications));
+
+            alert('✅ Obuna muvaffaqiyatli! Endi siz kunlik eslatmalar va tibbiy maslahatlar olasiz.');
+            
+            // Schedule reminder
+            scheduleReminder();
+        }
+
+        function scheduleReminder() {
+            // Simulate scheduling (in real app, this would be server-side)
+            const reminderDate = new Date();
+            reminderDate.setDate(reminderDate.getDate() + 30); // 30 days later
+            
+            localStorage.setItem('next_checkup', reminderDate.toISOString());
+            
+            console.log('Keyingi tekshiruv: ' + reminderDate.toLocaleDateString('uz-UZ'));
+        }
+
+        // Social Share Functions
+        function shareOn(platform) {
+            const url = window.location.href;
+            const text = 'Men NeuroGuard AI da insult xavfini tekshirdim! Siz ham tekshiring va sog\'ligingizni saqlang! 🧠';
+            
+            let shareUrl;
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+                    break;
+            }
+            
+            // Track share
+            trackShare(platform);
+            
+            // Open share window
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function trackShare(platform) {
+            const shares = JSON.parse(localStorage.getItem('neuroguard_shares') || '{}');
+            shares[platform] = (shares[platform] || 0) + 1;
+            shares.total = (shares.total || 0) + 1;
+            localStorage.setItem('neuroguard_shares', JSON.stringify(shares));
+            
+            // Show achievement if milestone reached
+            if (shares.total === 5) {
+                showAchievement('🏆 Sog\'liq Elchisi!', 'Siz 5 kishiga ulashdingiz!');
+            } else if (shares.total === 10) {
+                showAchievement('⭐ Super Elchi!', 'Siz 10 kishiga ulashdingiz!');
+            }
+        }
+
+        function showAchievement(title, message) {
+            const achievement = document.createElement('div');
+            achievement.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: -400px;
+                background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+                padding: 1.5rem;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                z-index: 2000;
+                transition: right 0.5s ease;
+            `;
+            achievement.innerHTML = `
+                <h3 style="margin: 0 0 0.5rem 0; color: #333;">${title}</h3>
+                <p style="margin: 0; color: #666;">${message}</p>
+            `;
+            document.body.appendChild(achievement);
+            
+            setTimeout(() => {
+                achievement.style.right = '30px';
+            }, 100);
+            
+            setTimeout(() => {
+                achievement.style.right = '-400px';
+                setTimeout(() => achievement.remove(), 500);
+            }, 3000);
+        }
+
+        // Initialize notifications on page load
+        window.addEventListener('load', () => {
+            const nextCheckup = localStorage.getItem('next_checkup');
+            if (nextCheckup) {
+                const checkupDate = new Date(nextCheckup);
+                const now = new Date();
+                
+                if (checkupDate <= now) {
+                    // Show reminder notification
+                    setTimeout(() => {
+                        showAchievement('⏰ Eslatma', 'Yangi test o\'tkazish vaqti keldi!');
+                    }, 2000);
+                }
+            }
+        });
     </script>
 </body>
 </html>
