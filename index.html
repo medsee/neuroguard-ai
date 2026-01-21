@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -14,11 +15,299 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.8rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .gamification-panel {
+            position: fixed;
+            left: 30px;
+            top: 100px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 280px;
+            z-index: 1000;
+        }
+
+        .points-display {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .points-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .level-bar {
+            width: 100%;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .medals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .medal-item {
+            text-align: center;
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .medal-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .medal-item.unlocked {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        }
+
+        .medal-icon {
+            font-size: 2rem;
+            filter: grayscale(100%);
+        }
+
+        .medal-item.unlocked .medal-icon {
+            filter: grayscale(0%);
+        }
+
+        .calendar-widget {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #f8f9fa;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .calendar-day:hover {
+            background: #e5e7eb;
+        }
+
+        .calendar-day.today {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 6px;
+            height: 6px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .event-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .event-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .event-list {
+            margin-top: 1rem;
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .brain-3d-container {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .brain-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .brain-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .brain-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            max-width: 300px;
+        }
+
+        .leaderboard {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            background: #e5e7eb;
+        }
+
+        .leaderboard-rank {
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 40px;
+        }
+
+        .rank-1 { color: #ffd700; }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .leaderboard-user {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .leaderboard-points {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
         }
 
         nav {
@@ -1029,14 +1318,63 @@
     </div>
 
     <nav>
-        <div class="logo">🧠 NeuroGuard AI</div>
+        <div class="logo">🧠 <span data-lang="siteName">NeuroGuard AI</span></div>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="changeLanguage('uz')">UZ</button>
+            <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+            <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+        </div>
         <ul class="nav-links">
-            <li><a href="#home">Bosh sahifa</a></li>
-            <li><a href="#assessment">Tekshirish</a></li>
-            <li><a href="#problem">Muammo</a></li>
-            <li><button class="history-btn" onclick="showHistory()">📊 Tarix</button></li>
+            <li><a href="#home" data-lang="navHome">Bosh sahifa</a></li>
+            <li><a href="#assessment" data-lang="navAssessment">Tekshirish</a></li>
+            <li><a href="#brain3d" data-lang="navBrain">3D Miya</a></li>
+            <li><a href="#problem" data-lang="navProblem">Muammo</a></li>
+            <li><button class="history-btn" onclick="showHistory()" data-lang="navHistory">📊 Tarix</button></li>
         </ul>
     </nav>
+
+    <!-- Gamification Panel -->
+    <div class="gamification-panel">
+        <div class="points-display">
+            <div class="points-number" id="userPoints">0</div>
+            <div data-lang="points">Ballar</div>
+        </div>
+        
+        <div class="level-bar">
+            <div class="level-progress" id="levelProgress" style="width: 30%;">
+                <span data-lang="level">Daraja</span> 1
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 0.85rem; color: #666;" data-lang="nextLevel">Keyingi daraja: 150 ball</p>
+
+        <h4 style="margin: 1.5rem 0 1rem 0;" data-lang="achievements">🏆 Yutuqlar</h4>
+        <div class="medals-grid">
+            <div class="medal-item" id="medal1" title="Birinchi Test">
+                <div class="medal-icon">🎯</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Test</div>
+            </div>
+            <div class="medal-item" id="medal2" title="5 Kun Ketma-ket">
+                <div class="medal-icon">🔥</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">5 kun</div>
+            </div>
+            <div class="medal-item" id="medal3" title="Sog'lom Turmush">
+                <div class="medal-icon">💪</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Sog'lom</div>
+            </div>
+            <div class="medal-item" id="medal4" title="Ulashish">
+                <div class="medal-icon">🤝</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Elchi</div>
+            </div>
+            <div class="medal-item" id="medal5" title="Muntazam">
+                <div class="medal-icon">📅</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Muntazam</div>
+            </div>
+            <div class="medal-item" id="medal6" title="Chempion">
+                <div class="medal-icon">👑</div>
+                <div style="font-size: 0.7rem; margin-top: 0.3rem;">Chempion</div>
+            </div>
+        </div>
+    </div>
 
     <section class="hero" id="home">
         <div class="hero-content">
@@ -1152,27 +1490,134 @@
     </section>
 
     <section class="problem" id="problem">
-        <h2 class="section-title">Nima uchun NeuroGuard AI?</h2>
+        <h2 class="section-title" data-lang="whyNeuroguard">Nima uchun NeuroGuard AI?</h2>
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="problem-icon">💔</div>
-                <h3>O'lim Sababi #2</h3>
-                <p>Insult dunyoda ikkinchi eng katta o'lim sababi hisoblanadi</p>
+                <h3 data-lang="deathCause">O'lim Sababi #2</h3>
+                <p data-lang="deathCauseDesc">Insult dunyoda ikkinchi eng katta o'lim sababi hisoblanadi</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">⏰</div>
-                <h3>Har 5 Soniyada</h3>
-                <p>Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
+                <h3 data-lang="everyFive">Har 5 Soniyada</h3>
+                <p data-lang="everyFiveDesc">Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">✅</div>
-                <h3>85% Oldini Olish Mumkin</h3>
-                <p>Erta aniqlash orqali insultning oldini olish mumkin</p>
+                <h3 data-lang="preventable">85% Oldini Olish Mumkin</h3>
+                <p data-lang="preventableDesc">Erta aniqlash orqali insultning oldini olish mumkin</p>
             </div>
             <div class="problem-card">
                 <div class="problem-icon">🤖</div>
-                <h3>AI Texnologiyasi</h3>
-                <p>Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
+                <h3 data-lang="aiTech">AI Texnologiyasi</h3>
+                <p data-lang="aiTechDesc">Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
+            </div>
+        </div>
+
+        <!-- 3D Brain Model Section -->
+        <div style="max-width: 1200px; margin: 4rem auto 0;">
+            <h2 class="section-title" id="brain3d" data-lang="brain3dTitle">🧠 Interaktiv 3D Miya Modeli</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-lang="brain3dDesc">
+                Miyani aylantirib, insult qaysi qismga ta'sir qilishini o'rganing
+            </p>
+            
+            <div class="brain-3d-container" id="brain3dContainer">
+                <div class="info-panel" id="brainInfo">
+                    <h3 style="margin-bottom: 0.5rem; color: #667eea;">Miya Haqida</h3>
+                    <p style="font-size: 0.9rem; color: #666;">
+                        Inson miyasi 86 milliard neyrondan iborat. Insult qon oqimini to'xtatib, miyaning ma'lum qismlarini shikastlaydi.
+                    </p>
+                </div>
+                
+                <div class="brain-controls">
+                    <button class="brain-btn" onclick="rotateBrain()" data-lang="rotate">🔄 Aylantirish</button>
+                    <button class="brain-btn" onclick="showStrokeArea()" data-lang="showStroke">⚠️ Insult Zonasi</button>
+                    <button class="brain-btn" onclick="resetBrain()" data-lang="reset">↺ Qayta Tiklash</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Integration -->
+        <div style="max-width: 1200px; margin: 4rem auto 0;">
+            <h2 class="section-title" data-lang="calendarTitle">📅 Sog'liq Kalendari</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="calendar-widget">
+                    <div class="calendar-header">
+                        <button onclick="changeMonth(-1)" style="border: none; background: none; font-size: 1.5rem; cursor: pointer;">◀</button>
+                        <h3 id="calendarMonth">Yanvar 2026</h3>
+                        <button onclick="changeMonth(1)" style="border: none; background: none; font-size: 1.5rem; cursor: pointer;">▶</button>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem; font-weight: 600; text-align: center;">
+                        <div>Du</div><div>Se</div><div>Cho</div><div>Pa</div><div>Ju</div><div>Sha</div><div>Ya</div>
+                    </div>
+                    
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                </div>
+
+                <div class="calendar-widget">
+                    <h3 style="margin-bottom: 1rem;" data-lang="addEvent">➕ Eslatma Qo'shish</h3>
+                    <div class="event-form">
+                        <select class="event-input" id="eventType">
+                            <option value="doctor" data-lang="doctor">Shifokor uchrashuvim</option>
+                            <option value="medicine" data-lang="medicine">Dori ichish</option>
+                            <option value="exercise" data-lang="exercise">Jismoniy mashq</option>
+                            <option value="checkup" data-lang="checkup">Tekshiruv</option>
+                        </select>
+                        <input type="date" class="event-input" id="eventDate">
+                        <input type="time" class="event-input" id="eventTime">
+                        <input type="text" class="event-input" id="eventNote" placeholder="Izoh...">
+                        <button class="subscribe-btn" onclick="addEvent()" data-lang="addBtn">Qo'shish</button>
+                    </div>
+
+                    <div class="event-list" id="eventList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div style="max-width: 800px; margin: 4rem auto 0;">
+            <h2 class="section-title" data-lang="leaderboardTitle">🏆 Eng Faol Foydalanuvchilar</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666;" data-lang="leaderboardDesc">
+                Anonim reytingda o'z o'rningizni oling! (Ism ko'rsatilmaydi)
+            </p>
+            
+            <div class="leaderboard">
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank rank-1">🥇</div>
+                    <div class="leaderboard-user">
+                        <div style="font-weight: 600;">User_****8521</div>
+                        <div style="font-size: 0.85rem; color: #666;">Daraja 12 • 15 ta test</div>
+                    </div>
+                    <div class="leaderboard-points">2450</div>
+                </div>
+
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank rank-2">🥈</div>
+                    <div class="leaderboard-user">
+                        <div style="font-weight: 600;">User_****3742</div>
+                        <div style="font-size: 0.85rem; color: #666;">Daraja 10 • 12 ta test</div>
+                    </div>
+                    <div class="leaderboard-points">1980</div>
+                </div>
+
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank rank-3">🥉</div>
+                    <div class="leaderboard-user">
+                        <div style="font-weight: 600;">User_****9156</div>
+                        <div style="font-size: 0.85rem; color: #666;">Daraja 9 • 10 ta test</div>
+                    </div>
+                    <div class="leaderboard-points">1750</div>
+                </div>
+
+                <div class="leaderboard-item" id="userRank">
+                    <div class="leaderboard-rank">...</div>
+                    <div class="leaderboard-user">
+                        <div style="font-weight: 600;">Siz (User_****<span id="userCode">0000</span>)</div>
+                        <div style="font-size: 0.85rem; color: #666;">Daraja <span id="userLevel">1</span> • <span id="userTests">0</span> ta test</div>
+                    </div>
+                    <div class="leaderboard-points" id="leaderboardPoints">0</div>
+                </div>
             </div>
         </div>
 
