@@ -2161,3 +2161,604 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; overflow-x: hidden; }
+        
+        /* Navigation */
+        nav { position: fixed; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 1rem 5%; box-shadow: 0 2px 20px rgba(0,0,0,0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { color: #333; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #667eea; }
+        
+        /* Language & Theme Toggle */
+        .lang-btn { padding: 0.4rem 1rem; border: 2px solid #667eea; background: transparent; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-weight: 600; color: #667eea; font-size: 0.9rem; }
+        .lang-btn.active, .lang-btn:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .theme-toggle { background: linear-gradient(135deg, #667eea, #764ba2); border: none; width: 45px; height: 45px; border-radius: 50%; color: white; font-size: 1.2rem; cursor: pointer; transition: transform 0.3s; display: flex; align-items: center; justify-content: center; }
+        .theme-toggle:hover { transform: rotate(180deg) scale(1.1); }
+        
+        /* Hero Section */
+        .hero { min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden; }
+        .hero-content { max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; z-index: 1; }
+        .hero-text h1 { font-size: 3.5rem; color: white; margin-bottom: 1.5rem; line-height: 1.2; }
+        .hero-text .highlight { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+        .hero-text p { font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; }
+        
+        /* Stats */
+        .stats { display: flex; gap: 2rem; margin: 2rem 0; }
+        .stat-item { background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 15px; backdrop-filter: blur(10px); text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: 700; color: #ffd700; display: block; }
+        .stat-label { color: white; font-size: 0.9rem; }
+        
+        /* Buttons */
+        .btn { padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary { background: white; color: #667eea; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn-secondary:hover { background: white; color: #667eea; }
+        .btn-small { padding: 0.6rem 1.5rem; font-size: 0.9rem; }
+        
+        /* Assessment */
+        .assessment { padding: 6rem 5%; background: #f8f9fa; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333; }
+        .assessment-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .assessment-form { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #333; }
+        .form-group input, .form-group select { width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; transition: border 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; }
+        
+        /* Result Panel */
+        .result-panel { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); position: sticky; top: 100px; }
+        .risk-icon { font-size: 5rem; margin-bottom: 1rem; }
+        .risk-percentage { font-size: 3.5rem; font-weight: 700; margin: 1rem 0; }
+        .risk-low { color: #10b981; }
+        .risk-medium { color: #f59e0b; }
+        .risk-high { color: #ef4444; }
+        
+        /* Chatbot - FIXED */
+        .chatbot { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
+        .chatbot-toggle { width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .chatbot-toggle:hover { transform: scale(1.15) rotate(10deg); box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6); }
+        .chatbot-window { position: absolute; bottom: 85px; right: 0; width: 380px; height: 550px; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); display: none; flex-direction: column; overflow: hidden; }
+        .chatbot-window.active { display: flex; animation: slideInUp 0.3s; }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .chatbot-header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .chatbot-messages { flex: 1; padding: 1.2rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #f8f9fa; }
+        .message { padding: 0.9rem 1.2rem; border-radius: 15px; max-width: 80%; animation: messageSlide 0.3s; }
+        .message.bot { background: white; align-self: flex-start; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .message.user { background: linear-gradient(135deg, #667eea, #764ba2); color: white; align-self: flex-end; }
+        .chatbot-input { display: flex; padding: 1rem; border-top: 1px solid #e0e0e0; background: white; }
+        .chatbot-input input { flex: 1; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 25px; outline: none; }
+        .chatbot-input button { margin-left: 0.5rem; padding: 0.8rem 1.5rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; cursor: pointer; }
+        
+        /* Notification */
+        .notification-container { position: fixed; top: 100px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 1rem; }
+        .notification { background: white; padding: 1.2rem 1.8rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); display: flex; align-items: center; gap: 1rem; min-width: 320px; animation: slideInRight 0.3s; }
+        .notification.success { border-left: 4px solid #10b981; }
+        @keyframes slideInRight { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        /* Dark Mode */
+        body.dark-mode { background: #1a1a2e; color: #e0e0e0; }
+        body.dark-mode nav { background: rgba(26, 26, 46, 0.95); }
+        body.dark-mode .nav-links a { color: #e0e0e0; }
+        body.dark-mode .assessment { background: #16213e; }
+        body.dark-mode .assessment-form, body.dark-mode .result-panel { background: #1a1a2e; color: #e0e0e0; }
+        body.dark-mode .chatbot-messages { background: #16213e; }
+        body.dark-mode .message.bot { background: #1a1a2e; color: #e0e0e0; }
+        
+        /* Progress Bar */
+        .progress-bar { width: 100%; height: 10px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); width: 0%; transition: width 0.5s; }
+        .progress-text { text-align: center; margin-top: 0.8rem; font-size: 1rem; color: #667eea; font-weight: 600; }
+        
+        @media (max-width: 768px) {
+            .hero-content, .assessment-container { grid-template-columns: 1fr; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">🧠 <span data-lang="appName">NeuroGuard AI</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" data-lang="navHome">Bosh sahifa</a></li>
+            <li><a href="#assessment" data-lang="navAssessment">Tekshirish</a></li>
+            <li>
+                <button class="lang-btn active" onclick="changeLang('uz')">UZ</button>
+                <button class="lang-btn" onclick="changeLang('ru')">RU</button>
+                <button class="lang-btn" onclick="changeLang('en')">EN</button>
+            </li>
+            <li>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1><span data-lang="heroTitle1">Insultni</span> <span class="highlight" data-lang="heroTitle2">Davolamasdan</span> <span data-lang="heroTitle3">Oldini Oling</span></h1>
+                <p data-lang="heroSubtitle">Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">12M+</span>
+                        <span class="stat-label" data-lang="statCases">Yillik insult holatlari</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label" data-lang="statPrevent">Oldini olish mumkin</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#assessment" class="btn btn-primary" data-lang="btnFreeTest">Bepul Tekshirish</a>
+                    <a href="#assessment" class="btn btn-secondary" data-lang="btnLearnMore">Ko'proq</a>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;"><div style="font-size: 200px;">🧠</div></div>
+        </div>
+    </section>
+
+    <section class="assessment" id="assessment">
+        <h2 class="section-title">🤖 <span data-lang="assessTitle">AI Yordamida Insult Xavfini Aniqlang</span></h2>
+        
+        <div style="max-width: 800px; margin: 0 auto 3rem;">
+            <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
+            <div class="progress-text" id="progressText">0% <span data-lang="progressDone">to'ldirildi</span></div>
+        </div>
+        
+        <div class="assessment-container">
+            <div class="assessment-form">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">
+                    🤖 <span data-lang="aiActive">AI Faol</span>
+                </div>
+
+                <div class="form-group">
+                    <label>🩺 <span data-lang="lblBP">Qon bosimi (mmHg)</span></label>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="systolic" placeholder="120" min="80" max="200" onchange="updateProg()">
+                        <input type="number" id="diastolic" placeholder="80" min="50" max="130" onchange="updateProg()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>💓 <span data-lang="lblHR">Yurak urishi</span></label>
+                    <input type="number" id="heartrate" placeholder="72" min="40" max="150" onchange="updateProg()">
+                </div>
+
+                <div class="form-group">
+                    <label>🍬 <span data-lang="lblGluc">Qand (mmol/L)</span></label>
+                    <input type="number" id="glucose" placeholder="5.5" step="0.1" min="3" max="20" onchange="updateProg()">
+                </div>
+
+                <div class="form-group">
+                    <label>📏 <span data-lang="lblHeight">Bo'y (sm)</span></label>
+                    <input type="number" id="height" placeholder="170" min="120" max="220" onchange="updateProg()">
+                </div>
+
+                <div class="form-group">
+                    <label>⚖️ <span data-lang="lblWeight">Vazn (kg)</span></label>
+                    <input type="number" id="weight" placeholder="70" min="30" max="200" onchange="updateProg()">
+                </div>
+
+                <div class="form-group">
+                    <label>👤 <span data-lang="lblAge">Yosh</span></label>
+                    <input type="number" id="age" placeholder="45" min="18" max="100" onchange="updateProg()">
+                </div>
+
+                <div class="form-group">
+                    <label>🚬 <span data-lang="lblSmoke">Chekasizmi?</span></label>
+                    <select id="smoking">
+                        <option value="no" data-lang="optNo">Yo'q</option>
+                        <option value="yes" data-lang="optYes">Ha</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏃 <span data-lang="lblExercise">Jismoniy faollik</span></label>
+                    <select id="exercise">
+                        <option value="none" data-lang="exNone">Yo'q</option>
+                        <option value="light" data-lang="exLight">1-2 kun</option>
+                        <option value="moderate" data-lang="exMod">3-4 kun</option>
+                        <option value="active" data-lang="exActive">5+ kun</option>
+                    </select>
+                </div>
+
+                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    🤖 <span data-lang="btnAnalyze">AI Tahlil</span>
+                </button>
+            </div>
+
+            <div class="result-panel" id="resultPanel" style="display: none;">
+                <div style="text-align: center;">
+                    <div class="risk-icon" id="riskIcon">🧠</div>
+                    <div id="riskPercentage" class="risk-percentage">--</div>
+                    <p id="riskDesc">Loading...</p>
+                </div>
+                <div id="riskFactors"></div>
+                <div id="recommendations"></div>
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button onclick="saveResult()" class="btn btn-primary btn-small">💾 <span data-lang="btnSave">Saqlash</span></button>
+                    <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF</button>
+                    <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 <span data-lang="btnShare">Ulashish</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chatbot-header">
+                <div><i class="fas fa-robot"></i> <strong data-lang="chatTitle">AI Yordamchi</strong></div>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot" data-lang="chatWelcome">Salom! Men sizga insult xavfi haqida yordam bera olaman! 🤖</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" data-lang-placeholder="chatPlaceholder" placeholder="Savolingizni yozing..." onkeypress="if(event.key==='Enter') sendChat()">
+                <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-container" id="notifications"></div>
+
+    <script>
+        // === TRANSLATIONS ===
+        const LANG = {
+            uz: {
+                appName: "NeuroGuard AI",
+                navHome: "Bosh sahifa",
+                navAssessment: "Tekshirish",
+                heroTitle1: "Insultni",
+                heroTitle2: "Davolamasdan",
+                heroTitle3: "Oldini Oling",
+                heroSubtitle: "Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang",
+                statCases: "Yillik insult holatlari",
+                statPrevent: "Oldini olish mumkin",
+                btnFreeTest: "Bepul Tekshirish",
+                btnLearnMore: "Ko'proq",
+                assessTitle: "AI Yordamida Insult Xavfini Aniqlang",
+                progressDone: "to'ldirildi",
+                aiActive: "AI Faol",
+                lblBP: "Qon bosimi (mmHg)",
+                lblHR: "Yurak urishi",
+                lblGluc: "Qand (mmol/L)",
+                lblHeight: "Bo'y (sm)",
+                lblWeight: "Vazn (kg)",
+                lblAge: "Yosh",
+                lblSmoke: "Chekasizmi?",
+                lblExercise: "Jismoniy faollik",
+                optNo: "Yo'q",
+                optYes: "Ha",
+                exNone: "Yo'q",
+                exLight: "1-2 kun",
+                exMod: "3-4 kun",
+                exActive: "5+ kun",
+                btnAnalyze: "AI Tahlil",
+                btnSave: "Saqlash",
+                btnShare: "Ulashish",
+                chatTitle: "AI Yordamchi",
+                chatWelcome: "Salom! Men sizga insult xavfi haqida yordam bera olaman! 🤖",
+                chatPlaceholder: "Savolingizni yozing..."
+            },
+            ru: {
+                appName: "NeuroGuard AI",
+                navHome: "Главная",
+                navAssessment: "Тест",
+                heroTitle1: "Предотвратите",
+                heroTitle2: "Инсульт",
+                heroTitle3: "Без Лечения",
+                heroSubtitle: "Определите риск инсульта за месяцы вперёд с помощью ИИ",
+                statCases: "Случаев в год",
+                statPrevent: "Можно предотвратить",
+                btnFreeTest: "Бесплатный Тест",
+                btnLearnMore: "Подробнее",
+                assessTitle: "Определите Риск с Помощью AI",
+                progressDone: "завершено",
+                aiActive: "AI Активен",
+                lblBP: "Давление (mmHg)",
+                lblHR: "Пульс",
+                lblGluc: "Глюкоза (ммоль/л)",
+                lblHeight: "Рост (см)",
+                lblWeight: "Вес (кг)",
+                lblAge: "Возраст",
+                lblSmoke: "Курите?",
+                lblExercise: "Физ. активность",
+                optNo: "Нет",
+                optYes: "Да",
+                exNone: "Нет",
+                exLight: "1-2 дня",
+                exMod: "3-4 дня",
+                exActive: "5+ дней",
+                btnAnalyze: "Анализ AI",
+                btnSave: "Сохранить",
+                btnShare: "Поделиться",
+                chatTitle: "AI Помощник",
+                chatWelcome: "Здравствуйте! Я могу помочь вам с риском инсульта! 🤖",
+                chatPlaceholder: "Напишите вопрос..."
+            },
+            en: {
+                appName: "NeuroGuard AI",
+                navHome: "Home",
+                navAssessment: "Assessment",
+                heroTitle1: "Prevent",
+                heroTitle2: "Stroke",
+                heroTitle3: "Without Treatment",
+                heroSubtitle: "Detect stroke risk months in advance using AI",
+                statCases: "Annual cases",
+                statPrevent: "Preventable",
+                btnFreeTest: "Free Test",
+                btnLearnMore: "Learn More",
+                assessTitle: "Detect Risk with AI",
+                progressDone: "completed",
+                aiActive: "AI Active",
+                lblBP: "Blood Pressure (mmHg)",
+                lblHR: "Heart Rate",
+                lblGluc: "Glucose (mmol/L)",
+                lblHeight: "Height (cm)",
+                lblWeight: "Weight (kg)",
+                lblAge: "Age",
+                lblSmoke: "Do you smoke?",
+                lblExercise: "Physical Activity",
+                optNo: "No",
+                optYes: "Yes",
+                exNone: "None",
+                exLight: "1-2 days",
+                exMod: "3-4 days",
+                exActive: "5+ days",
+                btnAnalyze: "AI Analyze",
+                btnSave: "Save",
+                btnShare: "Share",
+                chatTitle: "AI Assistant",
+                chatWelcome: "Hello! I can help you with stroke risk! 🤖",
+                chatPlaceholder: "Type your question..."
+            }
+        };
+
+        let currentLang = 'uz';
+        let currentResult = null;
+
+        // === LANGUAGE CHANGE ===
+        function changeLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (LANG[lang][key]) el.textContent = LANG[lang][key];
+            });
+            
+            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-lang-placeholder');
+                if (LANG[lang][key]) el.placeholder = LANG[lang][key];
+            });
+            
+            localStorage.setItem('lang', lang);
+            showNotif('✅ ' + lang.toUpperCase(), 'success');
+        }
+
+        // === THEME TOGGLE ===
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('themeIcon');
+            icon.className = document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        // === PROGRESS BAR ===
+        function updateProg() {
+            const fields = ['systolic', 'diastolic', 'heartrate', 'glucose', 'height', 'weight', 'age'];
+            let filled = fields.filter(id => document.getElementById(id).value).length;
+            const pct = Math.round((filled / fields.length) * 100);
+            document.getElementById('progressBar').style.width = pct + '%';
+            document.getElementById('progressText').innerHTML = pct + '% <span data-lang="progressDone">' + LANG[currentLang].progressDone + '</span>';
+        }
+
+        // === ANALYSIS ===
+        function analyzeRisk() {
+            const sys = +document.getElementById('systolic').value;
+            const dia = +document.getElementById('diastolic').value;
+            const hr = +document.getElementById('heartrate').value;
+            const gluc = +document.getElementById('glucose').value;
+            const height = +document.getElementById('height').value;
+            const weight = +document.getElementById('weight').value;
+            const age = +document.getElementById('age').value;
+
+            if (!sys || !dia || !hr || !gluc || !height || !weight || !age) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            const panel = document.getElementById('resultPanel');
+            panel.style.display = 'block';
+            panel.innerHTML = '<div style="text-align:center;padding:3rem;"><div style="border:4px solid #f3f3f3;border-top:4px solid #667eea;border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;margin:0 auto 1rem;"></div><p>AI analyzing...</p></div>';
+
+            setTimeout(() => {
+                const bmi = weight / ((height / 100) ** 2);
+                let risk = 0;
+
+                if (sys > 140 || dia > 90) risk += 25;
+                else if (sys > 130 || dia > 85) risk += 15;
+                
+                if (hr > 100 || hr < 60) risk += 15;
+                
+                if (gluc > 7.0) risk += 20;
+                else if (gluc > 6.0) risk += 10;
+                
+                if (bmi > 30) risk += 15;
+                else if (bmi > 25) risk += 8;
+                
+                if (age > 65) risk += 15;
+                else if (age > 55) risk += 10;
+                else if (age > 45) risk += 5;
+                
+                if (document.getElementById('smoking').value === 'yes') risk += 20;
+                
+                const ex = document.getElementById('exercise').value;
+                risk += { 'none': 10, 'light': 5, 'moderate': 2, 'active': 0 }[ex];
+
+                risk = Math.min(risk, 100);
+
+                let lvl, cls, icon;
+                if (risk < 30) { lvl = 'Low Risk'; cls = 'risk-low'; icon = '✅'; }
+                else if (risk < 60) { lvl = 'Medium Risk'; cls = 'risk-medium'; icon = '⚠️'; }
+                else { lvl = 'High Risk'; cls = 'risk-high'; icon = '🚨'; }
+
+                currentResult = { date: new Date().toISOString(), risk, lvl, cls, data: { sys, dia, hr, gluc, height, weight, age, bmi } };
+
+                panel.innerHTML = `
+                    <div style="text-align:center;">
+                        <div class="risk-icon">${icon}</div>
+                        <div id="riskPercentage" class="risk-percentage ${cls}">${risk}%</div>
+                        <h3>${lvl}</h3>
+                        <p>BMI: ${bmi.toFixed(1)}</p>
+                    </div>
+                    <div style="margin-top:2rem;padding:1.5rem;background:#eff6ff;border-radius:10px;">
+                        <h4>🎯 Recommendations:</h4>
+                        <ul style="margin-top:1rem;padding-left:1.5rem;">
+                            ${sys > 140 ? '<li>Monitor blood pressure</li>' : ''}
+                            ${gluc > 6 ? '<li>Reduce sugar intake</li>' : ''}
+                            ${bmi > 25 ? '<li>Adopt healthy diet</li>' : ''}
+                            ${document.getElementById('smoking').value === 'yes' ? '<li>Quit smoking!</li>' : ''}
+                            ${ex === 'none' || ex === 'light' ? '<li>Exercise 30min daily</li>' : ''}
+                            <li>Annual checkup</li>
+                        </ul>
+                    </div>
+                    <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                        <button onclick="saveResult()" class="btn btn-primary btn-small">💾 ${LANG[currentLang].btnSave}</button>
+                        <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF</button>
+                        <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 ${LANG[currentLang].btnShare}</button>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // === SAVE RESULT ===
+        function saveResult() {
+            if (!currentResult) return;
+            let hist = JSON.parse(localStorage.getItem('neuro_hist') || '[]');
+            hist.unshift(currentResult);
+            if (hist.length > 20) hist = hist.slice(0, 20);
+            localStorage.setItem('neuro_hist', JSON.stringify(hist));
+            showNotif('✅ Result saved!', 'success');
+        }
+
+        // === DOWNLOAD PDF ===
+        function downloadPDF() {
+            if (!currentResult) return;
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.setFontSize(20);
+            doc.text('NeuroGuard AI - Test Result', 20, 20);
+            doc.setFontSize(12);
+            doc.text(`Date: ${new Date(currentResult.date).toLocaleString()}`, 20, 35);
+            doc.text(`Risk: ${currentResult.risk}%`, 20, 50);
+            doc.text(`Level: ${currentResult.lvl}`, 20, 60);
+            doc.text(`BMI: ${currentResult.data.bmi.toFixed(1)}`, 20, 70);
+            doc.save('NeuroGuard-Result.pdf');
+            showNotif('✅ PDF downloaded!', 'success');
+        }
+
+        // === SHARE RESULT ===
+        function shareResult() {
+            if (!currentResult) return;
+            const text = `NeuroGuard AI: ${currentResult.risk}% - ${currentResult.lvl}`;
+            if (navigator.share) {
+                navigator.share({ title: 'NeuroGuard AI', text, url: window.location.href });
+            } else {
+                navigator.clipboard.writeText(text);
+                showNotif('✅ Copied to clipboard!', 'success');
+            }
+        }
+
+        // === CHATBOT ===
+        let chatOpen = false;
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            document.getElementById('chatWindow').classList.toggle('active', chatOpen);
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            
+            const cont = document.getElementById('chatMessages');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = msg;
+            cont.appendChild(userMsg);
+            input.value = '';
+            
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getBotResp(msg);
+                cont.appendChild(botMsg);
+                cont.scrollTop = cont.scrollHeight;
+            }, 800);
+        }
+
+        function getBotResp(msg) {
+            msg = msg.toLowerCase();
+            if (msg.includes('salom') || msg.includes('hello')) return 'Hello! How can I help you?';
+            if (msg.includes('insult') || msg.includes('stroke')) return 'Stroke occurs when blood flow to brain is interrupted. Use our AI test above!';
+            if (msg.includes('xavf') || msg.includes('risk')) return 'Risk factors: high BP, diabetes, smoking. Check your risk now!';
+            if (msg.includes('bepul') || msg.includes('free')) return 'Yes, 100% free! Take the test above.';
+            return 'Interesting question! Take the AI test above to assess your stroke risk.';
+        }
+
+        // === NOTIFICATION ===
+        function showNotif(text, type = 'success') {
+            const cont = document.getElementById('notifications');
+            const notif = document.createElement('div');
+            notif.className = 'notification ' + type;
+            notif.innerHTML = `
+                <div style="font-size:1.5rem;">${type === 'success' ? '✅' : '⚠️'}</div>
+                <div style="flex:1;">${text}</div>
+                <button onclick="this.parentElement.remove()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;opacity:0.5;">&times;</button>
+            `;
+            cont.appendChild(notif);
+            setTimeout(() => notif.remove(), 5000);
+        }
+
+        // === INIT ===
+        window.addEventListener('load', () => {
+            const savedLang = localStorage.getItem('lang') || 'uz';
+            const savedTheme = localStorage.getItem('theme');
+            if (savedLang !== 'uz') document.querySelector(`[onclick="changeLang('${savedLang}')"]`).click();
+            if (savedTheme === 'dark') toggleTheme();
+            showNotif('👋 Welcome to NeuroGuard AI!', 'success');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
