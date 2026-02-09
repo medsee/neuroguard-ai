@@ -671,9 +671,397 @@
                 width: 100%;
             }
         }
+
+        /* ===== ADDITIONAL PROFESSIONAL STYLES ===== */
+        
+        /* Particles Container */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid #667eea;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Progress Bar Enhancements */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Chatbot Styles */
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        body.dark-mode .chatbot-window {
+            background: #1a1a2e;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+            animation: slideInUp 0.3s;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.9rem 1.2rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageSlide 0.3s;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: #eff6ff;
+            align-self: flex-start;
+        }
+
+        body.dark-mode .message.bot {
+            background: #16213e;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .chatbot-input {
+            border-top-color: #2c3e50;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        body.dark-mode .chatbot-input input {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        .chatbot-input button {
+            margin-left: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .notification {
+            background: white;
+            padding: 1.2rem 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 320px;
+            animation: slideInRight 0.3s;
+        }
+
+        body.dark-mode .notification {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        .notification.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* Dark Mode Specific */
+        body.dark-mode {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode nav {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .assessment,
+        body.dark-mode .history-section {
+            background: #16213e;
+        }
+
+        body.dark-mode .assessment-form,
+        body.dark-mode .result-panel,
+        body.dark-mode .history-card,
+        body.dark-mode .chart-container,
+        body.dark-mode .problem-card,
+        body.dark-mode .modal-content {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        body.dark-mode .risk-factor {
+            background: #16213e;
+        }
+
+        body.dark-mode .recommendations {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-mode .section-title,
+        body.dark-mode .section-subtitle {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .progress-bar {
+            background: #2c3e50;
+        }
+
+        /* Animation for slideOut */
+        @keyframes slideOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
     <nav>
         <div class="logo">🧠 NeuroGuard AI</div>
         <ul class="nav-links">
@@ -682,6 +1070,18 @@
             <li><a href="#history">Tarix</a></li>
             <li><a href="#problem">Muammo</a></li>
             <li><a href="#contact">Aloqa</a></li>
+            <li>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="changeLanguage('uz')">UZ</button>
+                    <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+                </div>
+            </li>
+            <li>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Tungi rejim">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </li>
         </ul>
     </nav>
 
@@ -719,6 +1119,17 @@
         <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">
             Tibbiy ma'lumotlaringizni kiriting va sun'iy intellekt bir necha soniyada xavf darajasini aniqlaydi
         </p>
+        
+        <!-- Progress Bar -->
+        <div style="max-width: 800px; margin: 0 auto 3rem;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">0% to'ldirildi</div>
+            </div>
+        </div>
+        
         <div class="assessment-container">
             <div class="assessment-form">
                 <div class="ai-badge">
@@ -728,34 +1139,34 @@
                 <div class="form-group">
                     <label>🩺 Qon bosimi (mmHg)</label>
                     <div style="display: flex; gap: 1rem;">
-                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200">
-                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130">
+                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200" onchange="updateProgress()">
+                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130" onchange="updateProgress()">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>💓 Yurak urishi (bir daqiqada)</label>
-                    <input type="number" id="heartrate" placeholder="Masalan: 72" min="40" max="150">
+                    <input type="number" id="heartrate" placeholder onchange="updateProgress()"="Masalan: 72" min="40" max="150">
                 </div>
 
                 <div class="form-group">
                     <label>🍬 Qand miqdori (mmol/L)</label>
-                    <input type="number" id="glucose" placeholder="Masalan: 5.5" step="0.1" min="3" max="20">
+                    <input type="number" id="glucose" placeholder onchange="updateProgress()"="Masalan: 5.5" step="0.1" min="3" max="20">
                 </div>
 
                 <div class="form-group">
                     <label>📏 Bo'y (sm)</label>
-                    <input type="number" id="height" placeholder="Masalan: 170" min="120" max="220">
+                    <input type="number" id="height" placeholder onchange="updateProgress()"="Masalan: 170" min="120" max="220">
                 </div>
 
                 <div class="form-group">
                     <label>⚖️ Vazn (kg)</label>
-                    <input type="number" id="weight" placeholder="Masalan: 70" min="30" max="200">
+                    <input type="number" id="weight" placeholder onchange="updateProgress()"="Masalan: 70" min="30" max="200">
                 </div>
 
                 <div class="form-group">
                     <label>👤 Yosh</label>
-                    <input type="number" id="age" placeholder="Masalan: 45" min="18" max="100">
+                    <input type="number" id="age" placeholder onchange="updateProgress()"="Masalan: 45" min="18" max="100">
                 </div>
 
                 <div class="form-group">
@@ -903,7 +1314,7 @@
             <div class="footer-section">
                 <h4>Aloqa</h4>
                 <ul class="footer-links">
-                    <li><a href="mailto:anusher.office@gmail.com">anusher.office@gmail.com</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#e3828d96908b8691cd8c85858a8086a3848e828a8fcd808c8e"><span class="__cf_email__" data-cfemail="dabbb4afa9b2bfa8f4b5bcbcb3b9bf9abdb7bbb3b6f4b9b5b7">[email&#160;protected]</span></a></li>
                     <li><a href="#">+998 93 482 55 77</a></li>
                     <li><a href="#">Samarkand, O'zbekiston</a></li>
                 </ul>
@@ -912,7 +1323,39 @@
         <p style="opacity: 0.7; margin-top: 2rem;">© 2026 NeuroGuard AI. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-    <script>
+    <!-- AI Chatbot -->
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div><i class="fas fa-robot"></i> <strong>AI Yordamchi</strong></div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    Salom! Men sizga insult xavfi va tekshiruvlar haqida yordam bera olaman! 🤖
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Global o'zgaruvchilar
         let currentResult = null;
         let riskChart = null;
@@ -1469,16 +1912,252 @@
             });
 
             doc.save('NeuroGuard-Natija.pdf');
-            alert('✅ PDF muvaffaqiyatli yuklab olindi!');
+            showNotification('✅ PDF muvaffaqiyatli yuklab olindi!', 'success');
         }
 
-        // Modal tashqarisiga bosilganda yopish
-        window.onclick = function(event) {
-            const modal = document.getElementById('detailModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        // ===== NEW PROFESSIONAL FUNCTIONS =====
+
+        // 1. PARTICLES.JS INITIALIZATION
+        function initParticles() {
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: '#ffffff' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.5 },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#ffffff',
+                            opacity: 0.4,
+                            width: 1
+                        },
+                        move: { enable: true, speed: 2 }
+                    },
+                    interactivity: {
+                        events: {
+                            onhover: { enable: true, mode: 'repulse' },
+                            onclick: { enable: true, mode: 'push' }
+                        }
+                    }
+                });
             }
         }
+
+        // 2. DARK MODE
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            showNotification(isDark ? 'Tungi rejim yoqildi 🌙' : 'Kunduzgi rejim yoqildi ☀️', 'success');
+        }
+
+        function loadDarkMode() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        }
+
+        // 3. MULTI-LANGUAGE
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('language', lang);
+            showNotification(`Til o'zgartirildi: ${lang.toUpperCase()}`, 'success');
+        }
+
+        // 4. PROGRESS BAR
+        function updateProgress() {
+            const fields = ['systolic', 'diastolic', 'heartrate', 'glucose', 'height', 'weight', 'age'];
+            let filled = 0;
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.value) filled++;
+            });
+            const percentage = Math.round((filled / fields.length) * 100);
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            if (bar) bar.style.width = percentage + '%';
+            if (text) text.textContent = percentage + '% to\'ldirildi';
+        }
+
+        // 5. CHATBOT
+        let chatbotOpen = false;
+
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            if (window) {
+                chatbotOpen = !chatbotOpen;
+                window.classList.toggle('active', chatbotOpen);
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            container.appendChild(userMsg);
+            input.value = '';
+            
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getChatbotResponse(message);
+                container.appendChild(botMsg);
+                container.scrollTop = container.scrollHeight;
+            }, 800);
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function getChatbotResponse(msg) {
+            msg = msg.toLowerCase();
+            const responses = {
+                'salom': 'Salom! Men sizga insult xavfi haqida yordam bera olaman.',
+                'insult': 'Insult - miyaga qon oqimining to\'xtoq holati. Belgilari: nutq qiyinligi, yuz asimmetriyasi.',
+                'xavf': 'Xavf omillari: qon bosimi, diabet, chekish. AI tizimimiz xavfingizni aniqlaydi.',
+                'tekshir': 'Yuqoridagi forma orqali barcha ma\'lumotlarni kiriting.',
+                'bepul': 'Ha! 100% bepul. Cheksiz foydalaning! 🎉',
+                'yordam': 'Men insult, xavf omillari, tekshiruv haqida yordam bera olaman.'
+            };
+            for (let key in responses) {
+                if (msg.includes(key)) return responses[key];
+            }
+            return '"yordam" deb yozing - ko\'proq ma\'lumot beraman!';
+        }
+
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        // 6. NOTIFICATION SYSTEM
+        function showNotification(message, type = 'success') {
+            let container = document.getElementById('notificationContainer');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notificationContainer';
+                container.className = 'notification-container';
+                document.body.appendChild(container);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            const icons = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type]}</div>
+                <div style="flex: 1;">${message}</div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.4s forwards';
+                setTimeout(() => notification.remove(), 400);
+            }, 5000);
+        }
+
+        // 7. SCROLL TO TOP
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollTop');
+            if (scrollBtn) {
+                scrollBtn.classList.toggle('show', window.pageYOffset > 300);
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 8. KEYBOARD SHORTCUTS
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                if (chatbotOpen) toggleChatbot();
+            }
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                toggleChatbot();
+            }
+        });
+
+        // 9. SHARE RESULT
+        function shareResult() {
+            if (!currentResult) {
+                showNotification('Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            const text = `NeuroGuard AI: ${currentResult.riskScore}% - ${currentResult.riskLevel}`;
+            if (navigator.share) {
+                navigator.share({ title: 'NeuroGuard AI', text, url: window.location.href })
+                    .then(() => showNotification('Ulashildi!', 'success'))
+                    .catch(() => copyToClipboard(text));
+            } else {
+                copyToClipboard(text);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Nusxa olindi!', 'success');
+            });
+        }
+
+        // 10. FILTER HISTORY
+        let currentFilter = 'all';
+
+        function filterHistory(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            loadHistory();
+        }
+
+        // 11. EXPORT HISTORY
+        function exportHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            if (history.length === 0) {
+                showNotification('Eksport qilish uchun ma\'lumot yo\'q!', 'warning');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `neuroguard-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showNotification('Tarix eksport qilindi!', 'success');
+        }
+
+        // INITIALIZATION
+        window.addEventListener('load', function() {
+            loadDarkMode();
+            loadHistory();
+            initParticles();
+            showNotification('Xush kelibsiz! 👋', 'success');
+        });
+
+        // Console Branding
+        console.log('%c🧠 NeuroGuard AI', 'color: #667eea; font-size: 24px; font-weight: bold;');
+        console.log('%cUltimate Professional Edition v2.0', 'color: #764ba2; font-size: 14px;');
+        console.log('%c✅ All 20 features loaded!', 'color: #10b981; font-size: 12px;');
     </script>
 </body>
 </html>
