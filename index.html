@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -177,6 +179,11 @@
         .btn-secondary:hover {
             background: white;
             color: #667eea;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
         }
 
         .hero-visual {
@@ -458,6 +465,143 @@
             color: #667eea;
         }
 
+        /* YANGI: Tarix bo'limi */
+        .history-section {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+        }
+
+        .history-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .history-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .history-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .history-risk {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .empty-history-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
         footer {
             background: #0f0f1e;
             color: white;
@@ -514,6 +658,18 @@
             .result-panel {
                 position: static;
             }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -523,6 +679,7 @@
         <ul class="nav-links">
             <li><a href="#home">Bosh sahifa</a></li>
             <li><a href="#assessment">Tekshirish</a></li>
+            <li><a href="#history">Tarix</a></li>
             <li><a href="#problem">Muammo</a></li>
             <li><a href="#contact">Aloqa</a></li>
         </ul>
@@ -646,9 +803,61 @@
                 <div class="risk-factors" id="riskFactors"></div>
 
                 <div class="recommendations" id="recommendations"></div>
+
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                    <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- YANGI: Tarix bo'limi -->
+    <section class="history-section" id="history">
+        <h2 class="section-title">📊 Tekshiruvlar Tarixi va Statistika</h2>
+        
+        <div class="history-container">
+            <div class="history-controls">
+                <h3>Sizning tekshiruvlaringiz</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="clearHistory()" class="btn btn-secondary btn-small">🗑️ Tarixni Tozalash</button>
+                </div>
+            </div>
+
+            <div id="chartSection" style="display: none;">
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📈 Xavf Darajasi Dinamikasi</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📊 Parametrlar Taqqoslash</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="parametersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="historyList" class="history-grid"></div>
+
+            <div id="emptyHistory" class="empty-history" style="display: none;">
+                <div class="empty-history-icon">📋</div>
+                <h3>Hali tekshiruvlar yo'q</h3>
+                <p>Birinchi tekshiruvingizni o'tkazing va natijalar bu yerda saqlanadi</p>
+                <a href="#assessment" class="btn btn-primary" style="margin-top: 1rem;">Tekshirish Boshlash</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal oyna -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
     <section class="problem" id="problem">
         <h2 class="section-title">Nima uchun NeuroGuard AI?</h2>
@@ -694,7 +903,7 @@
             <div class="footer-section">
                 <h4>Aloqa</h4>
                 <ul class="footer-links">
-                    <li><a href="mailto:info@neuroguard.ai">anusher.office@gmail.com</a></li>
+                    <li><a href="mailto:anusher.office@gmail.com">anusher.office@gmail.com</a></li>
                     <li><a href="#">+998 93 482 55 77</a></li>
                     <li><a href="#">Samarkand, O'zbekiston</a></li>
                 </ul>
@@ -704,6 +913,12 @@
     </footer>
 
     <script>
+        // Global o'zgaruvchilar
+        let currentResult = null;
+        let riskChart = null;
+        let parametersChart = null;
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -717,6 +932,12 @@
             });
         });
 
+        // Sahifa yuklanganda tarixni ko'rsatish
+        window.addEventListener('load', function() {
+            loadHistory();
+        });
+
+        // Asosiy tahlil funksiyasi
         async function analyzeRisk() {
             const systolic = parseFloat(document.getElementById('systolic').value);
             const diastolic = parseFloat(document.getElementById('diastolic').value);
@@ -745,6 +966,7 @@
                 let riskScore = 0;
                 const factors = [];
 
+                // Qon bosimi tahlili
                 if (systolic > 140 || diastolic > 90) {
                     riskScore += 25;
                     factors.push({ name: 'Qon bosimi', status: 'danger', text: 'Yuqori (Xavfli)' });
@@ -755,6 +977,7 @@
                     factors.push({ name: 'Qon bosimi', status: 'good', text: 'Normal' });
                 }
 
+                // Yurak urishi
                 if (heartrate > 100 || heartrate < 60) {
                     riskScore += 15;
                     factors.push({ name: 'Yurak urishi', status: 'warning', text: 'Beqaror' });
@@ -762,6 +985,7 @@
                     factors.push({ name: 'Yurak urishi', status: 'good', text: 'Normal' });
                 }
 
+                // Qand miqdori
                 if (glucose > 7.0) {
                     riskScore += 20;
                     factors.push({ name: 'Qand miqdori', status: 'danger', text: 'Yuqori' });
@@ -772,6 +996,7 @@
                     factors.push({ name: 'Qand miqdori', status: 'good', text: 'Normal' });
                 }
 
+                // BMI
                 if (bmi > 30) {
                     riskScore += 15;
                     factors.push({ name: 'BMI', status: 'danger', text: `${bmi.toFixed(1)} - Ortiqcha vazn` });
@@ -782,6 +1007,7 @@
                     factors.push({ name: 'BMI', status: 'good', text: `${bmi.toFixed(1)} - Normal` });
                 }
 
+                // Yosh
                 if (age > 65) {
                     riskScore += 15;
                 } else if (age > 55) {
@@ -790,6 +1016,7 @@
                     riskScore += 5;
                 }
 
+                // Chekish
                 if (smoking === 'yes') {
                     riskScore += 20;
                     factors.push({ name: 'Chekish', status: 'danger', text: 'Ha (Katta xavf)' });
@@ -797,6 +1024,7 @@
                     factors.push({ name: 'Chekish', status: 'good', text: 'Yo\'q' });
                 }
 
+                // Jismoniy faollik
                 const exercisePoints = {
                     'none': 10,
                     'light': 5,
@@ -813,6 +1041,7 @@
                     factors.push({ name: 'Jismoniy faollik', status: 'good', text: 'Yetarli' });
                 }
 
+                // Nevrologik shikoyatlar
                 const neuroSymptoms = [];
                 if (document.getElementById('headache').checked) {
                     neuroSymptoms.push('Bosh og\'rig\'i');
@@ -887,6 +1116,22 @@
                     recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
                 }
 
+                // Natijani saqlash uchun
+                currentResult = {
+                    date: new Date().toISOString(),
+                    riskScore: riskScore,
+                    riskLevel: riskLevel,
+                    riskClass: riskClass,
+                    data: {
+                        systolic, diastolic, heartrate, glucose, 
+                        height, weight, age, smoking, exercise, bmi
+                    },
+                    factors: factors,
+                    recommendations: recommendations,
+                    neuroSymptoms: neuroSymptoms
+                };
+
+                // HTML yaratish
                 let factorsHTML = '';
                 factors.forEach(factor => {
                     factorsHTML += `
@@ -922,8 +1167,317 @@
                             ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
                         </p>
                     </div>
+                    <div class="action-buttons">
+                        <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                        <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                    </div>
                 `;
             }, 2000);
+        }
+
+        // Natijani saqlash
+        function saveResult() {
+            if (!currentResult) return;
+
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.unshift(currentResult);
+            
+            // Faqat oxirgi 20 ta natijani saqlash
+            if (history.length > 20) {
+                history = history.slice(0, 20);
+            }
+
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            
+            alert('✅ Natija muvaffaqiyatli saqlandi!');
+            loadHistory();
+            
+            // Tarix bo'limiga scroll
+            document.getElementById('history').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Tarixni yuklash
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const historyList = document.getElementById('historyList');
+            const emptyHistory = document.getElementById('emptyHistory');
+            const chartSection = document.getElementById('chartSection');
+
+            if (history.length === 0) {
+                emptyHistory.style.display = 'block';
+                historyList.style.display = 'none';
+                chartSection.style.display = 'none';
+                return;
+            }
+
+            emptyHistory.style.display = 'none';
+            historyList.style.display = 'grid';
+            chartSection.style.display = 'block';
+
+            // Kartalarni yaratish
+            historyList.innerHTML = history.map((item, index) => {
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('uz-UZ', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="history-card" onclick="showDetail(${index})">
+                        <div class="history-date">📅 ${formattedDate}</div>
+                        <div class="history-risk ${item.riskClass}">${item.riskScore}%</div>
+                        <div style="font-weight: 600; color: #666;">${item.riskLevel}</div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+                            <small style="color: #999;">Batafsil ko'rish uchun bosing</small>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Diagrammalarni yangilash
+            updateCharts(history);
+        }
+
+        // Diagrammalarni yangilash
+        function updateCharts(history) {
+            const ctx1 = document.getElementById('riskChart');
+            const ctx2 = document.getElementById('parametersChart');
+
+            // Sanalarni formatlash
+            const labels = history.slice(0, 10).reverse().map(item => {
+                const date = new Date(item.date);
+                return date.toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric' });
+            });
+
+            const riskData = history.slice(0, 10).reverse().map(item => item.riskScore);
+
+            // Xavf darajasi diagrammasi
+            if (riskChart) riskChart.destroy();
+            riskChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Xavf Darajasi (%)',
+                        data: riskData,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Parametrlar diagrammasi (oxirgi natija)
+            if (history.length > 0) {
+                const latest = history[0].data;
+                
+                if (parametersChart) parametersChart.destroy();
+                parametersChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Sistolik', 'Diastolik', 'Yurak', 'Qand', 'BMI'],
+                        datasets: [{
+                            label: 'Hozirgi Qiymatlar',
+                            data: [
+                                latest.systolic,
+                                latest.diastolic,
+                                latest.heartrate,
+                                latest.glucose * 10, // Ko'rsatish uchun
+                                latest.bmi * 5 // Ko'rsatish uchun
+                            ],
+                            backgroundColor: [
+                                latest.systolic > 140 ? '#ef4444' : latest.systolic > 130 ? '#f59e0b' : '#10b981',
+                                latest.diastolic > 90 ? '#ef4444' : latest.diastolic > 85 ? '#f59e0b' : '#10b981',
+                                latest.heartrate > 100 || latest.heartrate < 60 ? '#f59e0b' : '#10b981',
+                                latest.glucose > 7 ? '#ef4444' : latest.glucose > 6 ? '#f59e0b' : '#10b981',
+                                latest.bmi > 30 ? '#ef4444' : latest.bmi > 25 ? '#f59e0b' : '#10b981'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Batafsil ko'rsatish
+        function showDetail(index) {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const item = history[index];
+
+            const date = new Date(item.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            let factorsHTML = '';
+            item.factors.forEach(factor => {
+                factorsHTML += `
+                    <div class="risk-factor">
+                        <span class="factor-name">${factor.name}</span>
+                        <span class="factor-status status-${factor.status}">${factor.text}</span>
+                    </div>
+                `;
+            });
+
+            let recsHTML = '<ul style="list-style: none; padding: 0;">';
+            item.recommendations.forEach(rec => {
+                recsHTML += `<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                    ${rec}
+                </li>`;
+            });
+            recsHTML += '</ul>';
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2 style="margin-bottom: 1rem;">Tekshiruv Natijalari</h2>
+                <p style="color: #666; margin-bottom: 2rem;">📅 ${formattedDate}</p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">${item.riskClass === 'risk-low' ? '✅' : item.riskClass === 'risk-medium' ? '⚠️' : '🚨'}</div>
+                    <div class="${item.riskClass}" style="font-size: 3rem; font-weight: 700;">${item.riskScore}%</div>
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.5rem;">${item.riskLevel}</div>
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem; color: #333;">📊 Parametrlar:</h3>
+                ${factorsHTML}
+
+                <h3 style="margin: 2rem 0 1rem; color: #667eea;">🎯 Tavsiyalar:</h3>
+                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #667eea;">
+                    ${recsHTML}
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="deleteResult(${index})" class="btn btn-secondary btn-small">🗑️ O'chirish</button>
+                    <button onclick="closeModal()" class="btn btn-primary btn-small">Yopish</button>
+                </div>
+            `;
+
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        // Modalni yopish
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        // Natijani o'chirish
+        function deleteResult(index) {
+            if (!confirm('Ushbu natijani o\'chirmoqchimisiz?')) return;
+
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.splice(index, 1);
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            
+            closeModal();
+            loadHistory();
+        }
+
+        // Tarixni tozalash
+        function clearHistory() {
+            if (!confirm('Barcha tarixni o\'chirmoqchimisiz? Bu amalni bekor qilib bo\'lmaydi!')) return;
+
+            localStorage.removeItem('neuroguard_history');
+            loadHistory();
+            alert('✅ Tarix tozalandi!');
+        }
+
+        // PDF yuklab olish
+        function downloadPDF() {
+            if (!currentResult) {
+                alert('Avval tekshiruv o\'tkazing!');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const date = new Date(currentResult.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // PDF mazmuni
+            doc.setFontSize(20);
+            doc.text('NeuroGuard AI - Tekshiruv Natijasi', 20, 20);
+
+            doc.setFontSize(12);
+            doc.text(`Sana: ${formattedDate}`, 20, 35);
+            
+            doc.setFontSize(16);
+            doc.text(`Xavf darajasi: ${currentResult.riskScore}%`, 20, 50);
+            doc.text(`Holat: ${currentResult.riskLevel}`, 20, 60);
+
+            doc.setFontSize(14);
+            doc.text('Parametrlar:', 20, 75);
+
+            let yPos = 85;
+            doc.setFontSize(11);
+            currentResult.factors.forEach(factor => {
+                doc.text(`${factor.name}: ${factor.text}`, 25, yPos);
+                yPos += 8;
+            });
+
+            yPos += 10;
+            doc.setFontSize(14);
+            doc.text('Tavsiyalar:', 20, yPos);
+            yPos += 10;
+
+            doc.setFontSize(11);
+            currentResult.recommendations.forEach(rec => {
+                const lines = doc.splitTextToSize(rec, 170);
+                lines.forEach(line => {
+                    doc.text(`- ${line}`, 25, yPos);
+                    yPos += 7;
+                });
+            });
+
+            doc.save('NeuroGuard-Natija.pdf');
+            alert('✅ PDF muvaffaqiyatli yuklab olindi!');
+        }
+
+        // Modal tashqarisiga bosilganda yopish
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
     </script>
 </body>
