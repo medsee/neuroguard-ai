@@ -3,703 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroGuard AI - Ultimate Professional Platform</title>
-    
-    <!-- Libraries -->
+    <title>NeuroGuard AI Professional</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.0.2/dist/tesseract.min.js"></script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        nav { position: fixed; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); padding: 1rem 5%; box-shadow: 0 2px 20px rgba(0,0,0,0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: #333; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 10px; transition: all 0.3s; }
+        .nav-links a:hover { color: #667eea; background: rgba(102,126,234,0.1); }
+        .hero { min-height: 100vh; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px; animation: moveBackground 20s linear infinite; }
+        @keyframes moveBackground { 0% { transform: translate(0,0); } 100% { transform: translate(50px,50px); } }
+        .hero-content { max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; z-index: 1; }
+        .hero-text h1 { font-size: 3.5rem; color: white; margin-bottom: 1.5rem; animation: fadeInUp 1s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .highlight { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); animation: glow 2s ease-in-out infinite; }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 20px rgba(255,215,0,0.5); } 50% { text-shadow: 0 0 30px rgba(255,215,0,0.8); } }
+        .btn { padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary { background: white; color: #667eea; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 1rem; color: #333; }
+        .section-subtitle { text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 4rem; }
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover { color: #667eea; }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 5% 4rem;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            color: white;
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
-
-        /* Buttons */
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        /* FEATURE 1: VOICE ASSISTANT */
-        .voice-assistant {
-            position: fixed;
-            bottom: 200px;
-            right: 30px;
-            z-index: 998;
-        }
-
-        .voice-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f59e0b, #ef4444);
-            color: white;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        /* Voice Assistant */
+        .voice-assistant { position: fixed; bottom: 120px; right: 30px; z-index: 998; }
+        .voice-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 5px 20px rgba(239,68,68,0.4); transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
         .voice-btn:hover { transform: scale(1.1); }
-
-        .voice-btn.listening {
-            animation: voicePulse 1s infinite;
-            background: linear-gradient(135deg, #10b981, #059669);
-        }
-
-        @keyframes voicePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); box-shadow: 0 0 30px rgba(16, 185, 129, 0.8); }
-        }
-
-        .voice-feedback {
-            position: fixed;
-            bottom: 270px;
-            right: 30px;
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: none;
-            max-width: 300px;
-            z-index: 999;
-        }
-
-        /* FEATURE 2: VIDEO SECTION */
-        .video-section {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .video-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .video-card {
-            background: #f8f9fa;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .video-card:hover { transform: translateY(-10px); }
-
-        .video-embed {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* FEATURE 4: HEALTH CALENDAR */
-        .calendar-section {
-            padding: 6rem 5%;
-            background: #f8f9fa;
-        }
-
-        .calendar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            border-radius: 10px;
-            background: #f8f9fa;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .calendar-day:hover {
-            background: #667eea;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .calendar-day.has-data::after {
-            content: '•';
-            position: absolute;
-            bottom: 5px;
-            font-size: 2rem;
-            color: #667eea;
-        }
-
-        .calendar-day.has-data:hover::after {
-            color: white;
-        }
-
-        /* FEATURE 5: GAMIFICATION */
-        .gamification-section {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .achievements-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .achievement-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .achievement-card.unlocked {
-            border-color: #ffd700;
-            background: rgba(255,215,0,0.2);
-        }
-
-        .achievement-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            filter: grayscale(100%);
-            opacity: 0.5;
-        }
-
-        .achievement-card.unlocked .achievement-icon {
-            filter: grayscale(0%);
-            opacity: 1;
-            animation: bounce 1s;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .points-display {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .points-number {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #ffd700;
-        }
-
-        /* FEATURE 6: FAMILY MONITORING */
-        .family-section {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .family-members {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .member-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .member-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin: 0 auto 1rem;
-        }
-
-        .add-member-card {
-            border: 2px dashed #667eea;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .add-member-card:hover {
-            background: #f8f9fa;
-            transform: scale(1.05);
-        }
-
-        /* FEATURE 7: COMPARISON TOOL */
-        .comparison-section {
-            padding: 6rem 5%;
-            background: #f8f9fa;
-        }
-
-        .comparison-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .comparison-selector {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 2rem;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .comparison-result {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .comparison-card {
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-
-        /* FEATURE 8: DOCUMENT UPLOAD */
-        .upload-section {
-            padding: 6rem 5%;
-            background: white;
-        }
-
-        .upload-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .drop-zone {
-            border: 3px dashed #667eea;
-            border-radius: 20px;
-            padding: 4rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-
-        .drop-zone:hover {
-            background: #eff6ff;
-            border-color: #764ba2;
-        }
-
-        .drop-zone.dragover {
-            background: #eff6ff;
-            border-color: #10b981;
-            transform: scale(1.02);
-        }
-
-        /* FEATURE 9: DOCTORS DATABASE */
-        .doctors-section {
-            padding: 6rem 5%;
-            background: #f8f9fa;
-        }
-
-        .doctors-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .doctor-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .doctor-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .doctor-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-
-        /* FEATURE 10: TELEGRAM SECTION */
-        .telegram-section {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, #0088cc, #006699);
-            color: white;
-        }
-
-        .telegram-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .telegram-qr {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 2rem 0;
-        }
-
-        /* Assessment Form */
-        .assessment {
-            padding: 6rem 5%;
-            background: #f8f9fa;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .assessment-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .assessment-form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .result-panel {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 100px;
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            background: #1a1a2e;
-            color: #e0e0e0;
-        }
-
-        body.dark-mode .assessment,
-        body.dark-mode .calendar-section,
-        body.dark-mode .comparison-section,
-        body.dark-mode .doctors-section {
-            background: #16213e;
-        }
-
-        body.dark-mode .assessment-form,
-        body.dark-mode .result-panel,
-        body.dark-mode .calendar-container,
-        body.dark-mode .comparison-container,
-        body.dark-mode .doctor-card,
-        body.dark-mode .member-card {
-            background: #1a1a2e;
-            color: #e0e0e0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content,
-            .assessment-container,
-            .comparison-result {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links { display: none; }
-        }
-
+        .voice-btn.listening { animation: voicePulse 1s infinite; background: linear-gradient(135deg, #10b981, #059669); }
+        @keyframes voicePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); box-shadow: 0 0 40px rgba(16,185,129,0.8); } }
+        .voice-feedback { position: fixed; bottom: 200px; right: 30px; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: none; max-width: 350px; z-index: 999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        
+        /* Video Section */
+        .video-section { padding: 6rem 5%; background: white; }
+        .video-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem; }
+        .video-card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; border: 2px solid #f0f0f0; }
+        .video-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.2); border-color: #667eea; }
+        .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
+        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-info { padding: 2rem; }
+        .video-category { display: inline-block; padding: 0.4rem 1rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; font-size: 0.9rem; margin-bottom: 1rem; }
+        
         /* Chatbot */
-        .chatbot {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
-        }
-
-        .chatbot-toggle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chatbot-window {
-            position: absolute;
-            bottom: 85px;
-            right: 0;
-            width: 380px;
-            height: 550px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            display: none;
-            flex-direction: column;
-        }
-
-        .chatbot-window.active { display: flex; }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 1.2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-            padding: 0.9rem 1.2rem;
-            border-radius: 15px;
-            max-width: 80%;
-        }
-
-        .message.bot {
-            background: #eff6ff;
-            align-self: flex-start;
-        }
-
-        .message.user {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            align-self: flex-end;
+        .chatbot { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
+        .chatbot-toggle { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; font-size: 2rem; cursor: pointer; box-shadow: 0 10px 30px rgba(102,126,234,0.5); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .chatbot-toggle:hover { transform: scale(1.1); }
+        .chatbot-window { position: absolute; bottom: 90px; right: 0; width: 420px; height: 600px; background: white; border-radius: 25px; box-shadow: 0 20px 80px rgba(0,0,0,0.3); display: none; flex-direction: column; overflow: hidden; }
+        .chatbot-window.active { display: flex; animation: chatSlideIn 0.3s ease; }
+        @keyframes chatSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .chatbot-header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .chatbot-messages { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #f8f9fa; }
+        .message { padding: 1rem 1.5rem; border-radius: 20px; max-width: 85%; animation: messageSlide 0.3s ease; }
+        @keyframes messageSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .message.bot { background: white; align-self: flex-start; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .message.user { background: linear-gradient(135deg, #667eea, #764ba2); color: white; align-self: flex-end; }
+        .typing-indicator { display: flex; gap: 0.3rem; padding: 1rem 1.5rem; background: white; border-radius: 20px; width: fit-content; }
+        .typing-dot { width: 8px; height: 8px; background: #667eea; border-radius: 50%; animation: typingBounce 1.4s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
+        
+        /* Calendar */
+        .calendar-section { padding: 6rem 5%; background: #f8f9fa; }
+        .calendar-container { max-width: 1200px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+        .calendar-nav-btn { padding: 0.8rem 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 15px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .calendar-nav-btn:hover { transform: scale(1.05); }
+        .calendar-month-display { font-size: 2rem; font-weight: 700; color: #333; }
+        .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; margin-bottom: 1rem; }
+        .weekday { text-align: center; font-weight: 600; color: #667eea; padding: 0.5rem; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; }
+        .calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; border-radius: 15px; background: #f8f9fa; cursor: pointer; transition: all 0.3s; position: relative; border: 2px solid transparent; }
+        .calendar-day:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; transform: scale(1.05); }
+        .calendar-day.today { background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; }
+        .calendar-day.has-data { border-color: #667eea; background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+        .calendar-day.has-data::after { content: '●'; position: absolute; bottom: 8px; font-size: 1.5rem; color: #667eea; }
+        .health-stats-summary { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .stat-card { padding: 2rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 20px; text-align: center; transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: #667eea; }
+        .reminders-panel { margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 20px; }
+        .reminder-item { padding: 1rem; background: white; border-radius: 15px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        /* Family Section */
+        .family-section { padding: 6rem 5%; background: white; }
+        .family-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; max-width: 1400px; margin: 0 auto 3rem; }
+        .family-stat-card { padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; text-align: center; }
+        .family-members { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
+        .member-card { background: white; padding: 2.5rem; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border: 2px solid #f0f0f0; }
+        .member-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.15); border-color: #667eea; }
+        .member-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 0 auto 1.5rem; box-shadow: 0 10px 30px rgba(102,126,234,0.3); }
+        .member-status { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; margin: 1rem 0; }
+        .status-low { background: #d1fae5; color: #065f46; }
+        .status-medium { background: #fef3c7; color: #92400e; }
+        .member-health-chart { width: 100%; height: 150px; margin: 1.5rem 0; }
+        .add-member-card { border: 3px dashed #667eea; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; min-height: 400px; }
+        .add-member-card:hover { background: #eff6ff; transform: scale(1.05); }
+        
+        /* Comparison */
+        .comparison-section { padding: 6rem 5%; background: #f8f9fa; }
+        .comparison-container { max-width: 1200px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .comparison-selector { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; }
+        .date-selector { padding: 1.2rem; border-radius: 15px; border: 2px solid #e0e0e0; font-size: 1rem; font-weight: 600; background: white; cursor: pointer; transition: all 0.3s; }
+        .date-selector:hover { border-color: #667eea; }
+        .comparison-vs { font-size: 2.5rem; font-weight: 700; color: #667eea; }
+        .comparison-result { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .comparison-card { padding: 3rem; background: linear-gradient(135deg, #f8f9fa, #e5e7eb); border-radius: 25px; text-align: center; transition: all 0.3s; }
+        .comparison-card:hover { transform: scale(1.05); }
+        .comparison-chart { width: 100%; height: 250px; margin: 2rem 0; }
+        .improvement-banner { text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 20px; }
+        
+        /* Upload */
+        .upload-section { padding: 6rem 5%; background: white; }
+        .upload-container { max-width: 1000px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .drop-zone { border: 3px dashed #667eea; border-radius: 25px; padding: 5rem 3rem; text-align: center; cursor: pointer; transition: all 0.3s; background: linear-gradient(135deg, #f8f9fa, #e5e7eb); }
+        .drop-zone:hover { background: linear-gradient(135deg, #eff6ff, #dbeafe); border-color: #764ba2; transform: scale(1.02); }
+        .drop-zone.dragover { background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-color: #10b981; transform: scale(1.05); }
+        .upload-icon { font-size: 6rem; color: #667eea; margin-bottom: 2rem; animation: floatUpDown 3s ease-in-out infinite; }
+        @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .uploaded-file-card { padding: 2rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 20px; margin-top: 2rem; animation: slideIn 0.5s ease; }
+        
+        /* Doctors */
+        .doctors-section { padding: 6rem 5%; background: #f8f9fa; }
+        .doctors-filter { max-width: 1200px; margin: 0 auto 3rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .filter-btn { padding: 0.8rem 2rem; background: white; border: 2px solid #e0e0e0; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
+        .filter-btn.active, .filter-btn:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
+        .doctors-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        .doctor-card { background: white; padding: 2.5rem; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; border: 2px solid #f0f0f0; }
+        .doctor-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.15); border-color: #667eea; }
+        .doctor-photo { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; box-shadow: 0 10px 30px rgba(102,126,234,0.3); }
+        .doctor-specialty { display: inline-block; padding: 0.5rem 1.5rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; font-size: 0.9rem; margin: 1rem 0; }
+        .doctor-rating { font-size: 1.5rem; margin: 1rem 0; color: #fbbf24; }
+        .doctor-info { margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 15px; }
+        .doctor-info p { margin: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem; }
+        
+        /* Assessment */
+        .assessment { padding: 6rem 5%; background: #f8f9fa; }
+        .assessment-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .assessment-form { background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .voice-indicator { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; border-radius: 20px; margin-bottom: 2rem; text-align: center; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+        .form-group { margin-bottom: 2rem; }
+        .form-group label { display: block; margin-bottom: 0.8rem; font-weight: 700; color: #333; font-size: 1.1rem; }
+        .form-group input, .form-group select { width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 15px; font-size: 1.1rem; transition: all 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
+        .dual-input { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .result-panel { background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); position: sticky; top: 100px; }
+        
+        @media (max-width: 968px) {
+            .hero-content, .assessment-container, .comparison-result, .comparison-selector { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .section-title { font-size: 2rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .chatbot-window { width: 90vw; right: 5vw; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo">🧠 NeuroGuard AI Ultimate</div>
+        <div class="logo">🧠 NeuroGuard AI Pro</div>
         <ul class="nav-links">
-            <li><a href="#home">Bosh sahifa</a></li>
+            <li><a href="#home">Bosh</a></li>
             <li><a href="#assessment">Tekshirish</a></li>
-            <li><a href="#videos">Video Darslar</a></li>
+            <li><a href="#videos">Video</a></li>
             <li><a href="#calendar">Kalendar</a></li>
-            <li><a href="#achievements">Yutuqlar</a></li>
             <li><a href="#family">Oila</a></li>
+            <li><a href="#comparison">Taqqoslash</a></li>
+            <li><a href="#upload">Hujjat</a></li>
             <li><a href="#doctors">Shifokorlar</a></li>
-            <li><a href="#telegram">Telegram</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Insultni <span class="highlight">Davolamasdan</span> Oldini Oling</h1>
-                <p style="font-size: 1.3rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
-                    10 ta professional funksiya bilan to'liq salomatlik platformasi
+                <p style="font-size: 1.4rem; color: rgba(255,255,255,0.95); margin-bottom: 2rem;">
+                    Professional AI yordamida to'liq salomatlik monitoring
                 </p>
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <a href="#assessment" class="btn btn-primary">🎤 Ovoz bilan Tekshirish</a>
-                    <a href="#videos" class="btn btn-primary" style="background: transparent; border: 2px solid white;">📹 Video Ko'rish</a>
+                <div style="display: flex; gap: 1.5rem; margin-top: 2.5rem;">
+                    <a href="#assessment" class="btn btn-primary">🎤 Tekshirish</a>
+                    <a href="#videos" class="btn btn-primary" style="background: transparent; border: 2px solid white; color: white;">📹 Video</a>
                 </div>
             </div>
-            <div style="text-align: center; font-size: 200px;">🧠</div>
+            <div style="text-align: center; font-size: 250px; animation: floatUpDown 3s ease-in-out infinite;">🧠</div>
         </div>
     </section>
 
-    <!-- Assessment with Voice -->
     <section class="assessment" id="assessment">
-        <h2 class="section-title">🤖 AI Yordamida Tekshirish + 🎤 Ovozli Yordamchi</h2>
-        <p style="text-align: center; margin-bottom: 3rem; color: #666;">
-            Ovoz orqali ma'lumot kiriting: "Qon bosimim 120/80, yurak urishi 72"
-        </p>
+        <h2 class="section-title">🤖 AI Tekshirish</h2>
+        <p class="section-subtitle">Ovoz yoki qo'lda ma'lumot kiriting</p>
         
         <div class="assessment-container">
             <div class="assessment-form">
-                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem; border-radius: 15px; margin-bottom: 2rem; text-align: center;">
-                    <i class="fas fa-microphone"></i> Ovoz yordamchisi faol - Mikrofon tugmasini bosing
+                <div class="voice-indicator">
+                    <i class="fas fa-microphone" style="font-size: 2rem;"></i>
+                    <p style="margin-top: 0.5rem; font-weight: 600;">Ovoz Yordamchisi Faol</p>
+                    <p style="font-size: 0.9rem; opacity: 0.9;">Mikrofon tugmasini bosing</p>
                 </div>
 
                 <div class="form-group">
                     <label>🩺 Qon bosimi (mmHg)</label>
-                    <div style="display: flex; gap: 1rem;">
-                        <input type="number" id="systolic" placeholder="120" min="80" max="200">
-                        <input type="number" id="diastolic" placeholder="80" min="50" max="130">
+                    <div class="dual-input">
+                        <input type="number" id="systolic" placeholder="Yuqori: 120" min="80" max="200">
+                        <input type="number" id="diastolic" placeholder="Quyi: 80" min="50" max="130">
                     </div>
                 </div>
 
@@ -728,31 +239,30 @@
                     <input type="number" id="age" placeholder="45" min="18" max="100">
                 </div>
 
-                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
-                    🤖 AI Tahlil Qilsin
+                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; font-size: 1.2rem;">
+                    🤖 Tahlil Qilish
                 </button>
             </div>
 
             <div class="result-panel" id="resultPanel" style="display: none;">
-                <div style="text-align: center;" id="resultContent">
-                    <div style="font-size: 5rem;">🧠</div>
-                    <h3>Natija tayyor!</h3>
-                </div>
+                <div style="text-align: center;" id="resultContent"></div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 2: Video Darslar -->
     <section class="video-section" id="videos">
-        <h2 class="section-title">📹 Insult Haqida Video Darslar</h2>
+        <h2 class="section-title">📹 Video Darslar</h2>
+        <p class="section-subtitle">Professional shifokorlar tayyorlagan</p>
+        
         <div class="video-grid">
             <div class="video-card">
                 <div class="video-embed">
                     <iframe src="https://www.youtube.com/embed/5cFy0y8C2Bk" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div style="padding: 1.5rem;">
-                    <h3>Insult Belgilari</h3>
-                    <p>Insultni qanday aniqlash mumkin</p>
+                <div class="video-info">
+                    <span class="video-category">Belgilar</span>
+                    <h3>Insult Belgilarini Aniqlash</h3>
+                    <p style="color: #666;">Insultning asosiy belgilari haqida</p>
                 </div>
             </div>
 
@@ -760,9 +270,10 @@
                 <div class="video-embed">
                     <iframe src="https://www.youtube.com/embed/j0ygN0bXhZ4" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div style="padding: 1.5rem;">
+                <div class="video-info">
+                    <span class="video-category">Yordam</span>
                     <h3>Birinchi Yordam</h3>
-                    <p>Insult belgisi ko'rilganda nima qilish kerak</p>
+                    <p style="color: #666;">Nima qilish kerak</p>
                 </div>
             </div>
 
@@ -770,244 +281,335 @@
                 <div class="video-embed">
                     <iframe src="https://www.youtube.com/embed/zypdFe5cEFA" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div style="padding: 1.5rem;">
+                <div class="video-info">
+                    <span class="video-category">Profilaktika</span>
                     <h3>Oldini Olish</h3>
-                    <p>Sog'lom turmush tarzi va profilaktika</p>
+                    <p style="color: #666;">Sog'lom turmush tarzi</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/gD7eW5PcKTo" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <span class="video-category">Davolash</span>
+                    <h3>Davolash Usullari</h3>
+                    <p style="color: #666;">Zamonaviy davolash</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/ER1AyH-f2CE" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <span class="video-category">Ovqatlanish</span>
+                    <h3>Sog'lom Ovqatlanish</h3>
+                    <p style="color: #666;">To'g'ri parhez</p>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/cjfcUYIKmqk" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-info">
+                    <span class="video-category">Sport</span>
+                    <h3>Jismoniy Faollik</h3>
+                    <p style="color: #666;">Foydali mashqlar</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 4: Salomatlik Kalendari -->
     <section class="calendar-section" id="calendar">
         <h2 class="section-title">📅 Salomatlik Kalendari</h2>
+        <p class="section-subtitle">Kunlik ko'rsatkichlar</p>
+        
         <div class="calendar-container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <button onclick="previousMonth()" class="btn btn-primary">◀ Oldingi</button>
-                <h3 id="calendarMonth">2026 Fevral</h3>
-                <button onclick="nextMonth()" class="btn btn-primary">Keyingi ▶</button>
+            <div class="calendar-header">
+                <button onclick="previousMonth()" class="calendar-nav-btn">◀ Oldingi</button>
+                <div class="calendar-month-display" id="calendarMonth">2026 Fevral</div>
+                <button onclick="nextMonth()" class="calendar-nav-btn">Keyingi ▶</button>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 1rem;">
-                <div style="text-align: center; font-weight: 600;">Dush</div>
-                <div style="text-align: center; font-weight: 600;">Sesh</div>
-                <div style="text-align: center; font-weight: 600;">Chor</div>
-                <div style="text-align: center; font-weight: 600;">Pay</div>
-                <div style="text-align: center; font-weight: 600;">Jum</div>
-                <div style="text-align: center; font-weight: 600;">Shan</div>
-                <div style="text-align: center; font-weight: 600;">Yak</div>
+            <div class="calendar-weekdays">
+                <div class="weekday">Dush</div>
+                <div class="weekday">Sesh</div>
+                <div class="weekday">Chor</div>
+                <div class="weekday">Pay</div>
+                <div class="weekday">Jum</div>
+                <div class="weekday">Shan</div>
+                <div class="weekday">Yak</div>
             </div>
 
             <div class="calendar-grid" id="calendarGrid"></div>
 
-            <div style="margin-top: 2rem; padding: 1.5rem; background: #eff6ff; border-radius: 15px;">
-                <h4 style="margin-bottom: 1rem;">📝 Eslatmalar:</h4>
-                <div id="remindersList"></div>
-                <button onclick="addReminder()" class="btn btn-primary" style="margin-top: 1rem;">+ Eslatma Qo'shish</button>
+            <div class="health-stats-summary">
+                <div class="stat-card">
+                    <div class="stat-icon">🩺</div>
+                    <div class="stat-value">125/82</div>
+                    <p style="color: #666;">Qon Bosim</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💓</div>
+                    <div class="stat-value">74</div>
+                    <p style="color: #666;">Puls</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🍬</div>
+                    <div class="stat-value">5.6</div>
+                    <p style="color: #666;">Qand</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-value">18</div>
+                    <p style="color: #666;">Tekshiruvlar</p>
+                </div>
+            </div>
+
+            <div class="reminders-panel">
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">📝 Eslatmalar</h4>
+                <div id="remindersList">
+                    <div class="reminder-item">
+                        <span><i class="fas fa-check-circle" style="color: #10b981;"></i> Ertalab dori</span>
+                        <span onclick="this.parentElement.remove()" style="cursor: pointer; color: #ef4444; font-size: 1.5rem;">×</span>
+                    </div>
+                </div>
+                <button onclick="addReminder()" class="btn btn-primary" style="margin-top: 1.5rem;">
+                    + Qo'shish
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 5: Gamifikatsiya -->
-    <section class="gamification-section" id="achievements">
-        <h2 class="section-title">🏆 Yutuqlar va Ochkolar</h2>
-        
-        <div class="points-display">
-            <div class="points-number" id="totalPoints">0</div>
-            <p style="font-size: 1.2rem;">Jami Ochkolar</p>
-        </div>
-
-        <div class="achievements-grid">
-            <div class="achievement-card" id="achievement1">
-                <div class="achievement-icon">🏃</div>
-                <h3>7 Kun Sport</h3>
-                <p>7 kun davomida sport qiling</p>
-                <p style="margin-top: 1rem; font-size: 1.2rem; font-weight: 700;">+100 ochko</p>
-            </div>
-
-            <div class="achievement-card" id="achievement2">
-                <div class="achievement-icon">🥗</div>
-                <h3>Sog'lom Ovqatlanish</h3>
-                <p>30 kun sog'lom ovqatlaning</p>
-                <p style="margin-top: 1rem; font-size: 1.2rem; font-weight: 700;">+200 ochko</p>
-            </div>
-
-            <div class="achievement-card" id="achievement3">
-                <div class="achievement-icon">📊</div>
-                <h3>10 Tekshiruv</h3>
-                <p>10 marta tekshiruvdan o'ting</p>
-                <p style="margin-top: 1rem; font-size: 1.2rem; font-weight: 700;">+150 ochko</p>
-            </div>
-
-            <div class="achievement-card" id="achievement4">
-                <div class="achievement-icon">🎯</div>
-                <h3>Maqsadga Erishish</h3>
-                <p>Xavf darajasini 20% kamaytiring</p>
-                <p style="margin-top: 1rem; font-size: 1.2rem; font-weight: 700;">+300 ochko</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURE 6: Oila Monitoring -->
     <section class="family-section" id="family">
         <h2 class="section-title">👨‍👩‍👧‍👦 Oila Monitoring</h2>
-        <div class="family-members" id="familyMembers">
-            <div class="member-card">
-                <div class="member-avatar">👨</div>
-                <h3>Siz</h3>
-                <p>Oxirgi tekshiruv: 12 Feb 2026</p>
-                <p style="font-size: 2rem; font-weight: 700; color: #10b981; margin: 1rem 0;">28%</p>
-                <p>Past xavf</p>
+        <p class="section-subtitle">Oilangizning salomatligi</p>
+        
+        <div>
+            <div class="family-stats">
+                <div class="family-stat-card">
+                    <div style="font-size: 3rem;">👥</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">4</div>
+                    <p>A'zolar</p>
+                </div>
+                <div class="family-stat-card">
+                    <div style="font-size: 3rem;">✅</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">3</div>
+                    <p>Sog'lom</p>
+                </div>
+                <div class="family-stat-card">
+                    <div style="font-size: 3rem;">⚠️</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">1</div>
+                    <p>Nazorat</p>
+                </div>
+                <div class="family-stat-card">
+                    <div style="font-size: 3rem;">📊</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">45</div>
+                    <p>Tekshiruvlar</p>
+                </div>
             </div>
 
-            <div class="member-card add-member-card" onclick="addFamilyMember()">
-                <div>
-                    <i class="fas fa-plus" style="font-size: 3rem; color: #667eea;"></i>
-                    <p style="margin-top: 1rem; font-weight: 600; color: #667eea;">Oila A'zosi Qo'shish</p>
+            <div class="family-members" id="familyMembers">
+                <div class="member-card">
+                    <div class="member-avatar">👨</div>
+                    <h3>Siz</h3>
+                    <p style="color: #666;">45 yosh</p>
+                    <div class="member-status status-low">✅ 28%</div>
+                    <canvas class="member-health-chart" id="chart1"></canvas>
+                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
+                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 125/82</p>
+                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 74</p>
+                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 5.6</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">👩</div>
+                    <h3>Dilnoza</h3>
+                    <p style="color: #666;">42 yosh</p>
+                    <div class="member-status status-low">✅ 22%</div>
+                    <canvas class="member-health-chart" id="chart2"></canvas>
+                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
+                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 118/78</p>
+                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 68</p>
+                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 5.2</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <div class="member-avatar">👨‍🦳</div>
+                    <h3>Otam</h3>
+                    <p style="color: #666;">68 yosh</p>
+                    <div class="member-status status-medium">⚠️ 52%</div>
+                    <canvas class="member-health-chart" id="chart3"></canvas>
+                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
+                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 145/92</p>
+                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 82</p>
+                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 6.8</p>
+                    </div>
+                </div>
+
+                <div class="member-card add-member-card" onclick="addFamilyMember()">
+                    <i class="fas fa-user-plus" style="font-size: 5rem; color: #667eea;"></i>
+                    <h3 style="color: #667eea; margin-top: 1rem;">+ A'zo Qo'shish</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 7: Taqqoslash -->
-    <section class="comparison-section">
-        <h2 class="section-title">📊 Natijalarni Taqqoslash</h2>
+    <section class="comparison-section" id="comparison">
+        <h2 class="section-title">📊 Taqqoslash</h2>
+        <p class="section-subtitle">Taraqqiyotni kuzatish</p>
+        
         <div class="comparison-container">
             <div class="comparison-selector">
-                <select style="padding: 1rem; border-radius: 10px; border: 2px solid #e0e0e0;">
+                <select class="date-selector">
                     <option>12 Fevral 2026</option>
                     <option>5 Fevral 2026</option>
-                    <option>29 Yanvar 2026</option>
                 </select>
-                <div style="font-size: 2rem;">⚡</div>
-                <select style="padding: 1rem; border-radius: 10px; border: 2px solid #e0e0e0;">
+                <div class="comparison-vs">⚡</div>
+                <select class="date-selector">
                     <option>5 Fevral 2026</option>
                     <option>29 Yanvar 2026</option>
-                    <option>15 Yanvar 2026</option>
                 </select>
             </div>
 
             <div class="comparison-result">
                 <div class="comparison-card">
-                    <h3>12 Fevral 2026</h3>
-                    <div style="font-size: 3rem; font-weight: 700; color: #10b981; margin: 1rem 0;">28%</div>
-                    <p>Past xavf</p>
+                    <h3>12 Fevral</h3>
+                    <div style="font-size: 4rem; font-weight: 700; color: #10b981; margin: 1.5rem 0;">28%</div>
+                    <p style="font-size: 1.2rem; color: #065f46; font-weight: 600;">✅ Past</p>
+                    <canvas class="comparison-chart" id="compChart1"></canvas>
                 </div>
                 <div class="comparison-card">
-                    <h3>5 Fevral 2026</h3>
-                    <div style="font-size: 3rem; font-weight: 700; color: #f59e0b; margin: 1rem 0;">45%</div>
-                    <p>O'rtacha xavf</p>
+                    <h3>5 Fevral</h3>
+                    <div style="font-size: 4rem; font-weight: 700; color: #f59e0b; margin: 1.5rem 0;">45%</div>
+                    <p style="font-size: 1.2rem; color: #92400e; font-weight: 600;">⚠️ O'rtacha</p>
+                    <canvas class="comparison-chart" id="compChart2"></canvas>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 2rem; padding: 2rem; background: #d1fae5; border-radius: 15px;">
-                <h3 style="color: #065f46; font-size: 1.5rem;">📉 Ajoyib! 17% Yaxshilanish</h3>
-                <p style="margin-top: 1rem; color: #065f46;">Davom eting! Siz to'g'ri yo'ldasiz! 🎉</p>
+            <div class="improvement-banner">
+                <h3 style="color: #065f46; font-size: 2rem;">🎉 17% Yaxshilanish!</h3>
+                <p style="font-size: 1.2rem; color: #065f46; margin-top: 1rem;">Davom eting!</p>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 8: Hujjat Yuklash -->
-    <section class="upload-section">
-        <h2 class="section-title">📄 Tibbiy Hujjatlar Yuklash</h2>
+    <section class="upload-section" id="upload">
+        <h2 class="section-title">📄 Hujjat Yuklash</h2>
+        <p class="section-subtitle">AI tahlil qiladi</p>
+        
         <div class="upload-container">
             <div class="drop-zone" id="dropZone">
-                <i class="fas fa-cloud-upload-alt" style="font-size: 5rem; color: #667eea; margin-bottom: 1rem;"></i>
-                <h3>Hujjatni Bu Yerga Torting</h3>
-                <p style="margin: 1rem 0; color: #666;">yoki</p>
+                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h3>Hujjat Torting</h3>
+                <p style="margin: 1rem 0;">yoki</p>
                 <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
                     Fayl Tanlash
                 </button>
-                <input type="file" id="fileInput" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileUpload(event)">
-                <p style="margin-top: 1rem; color: #999; font-size: 0.9rem;">PDF, JPG, PNG (Max 10MB)</p>
+                <input type="file" id="fileInput" style="display: none;" accept=".pdf,.jpg,.png" onchange="handleFileUpload(event)">
+                <p style="margin-top: 2rem; color: #999;">PDF, JPG, PNG (Max 10MB)</p>
             </div>
-
-            <div id="uploadedFiles" style="margin-top: 2rem;"></div>
+            <div id="uploadedFiles"></div>
         </div>
     </section>
 
-    <!-- FEATURE 9: Shifokorlar Bazasi -->
     <section class="doctors-section" id="doctors">
-        <h2 class="section-title">🏥 Shifokorlar Bazasi</h2>
-        <div class="doctors-grid">
-            <div class="doctor-card">
+        <h2 class="section-title">🏥 Shifokorlar</h2>
+        <p class="section-subtitle">Professional mutaxassislar</p>
+        
+        <div class="doctors-filter">
+            <button class="filter-btn active" onclick="filterDoctors('all',this)">Barchasi</button>
+            <button class="filter-btn" onclick="filterDoctors('neurolog',this)">Nevrolog</button>
+            <button class="filter-btn" onclick="filterDoctors('kardiolog',this)">Kardiolog</button>
+            <button class="filter-btn" onclick="filterDoctors('terapevt',this)">Terapevt</button>
+        </div>
+
+        <div class="doctors-grid" id="doctorsGrid">
+            <div class="doctor-card" data-specialty="neurolog">
                 <div class="doctor-photo">👨‍⚕️</div>
                 <h3>Dr. Aliev Sardor</h3>
-                <p style="color: #667eea; font-weight: 600;">Nevrolog</p>
-                <p style="margin: 1rem 0;">20 yillik tajriba</p>
-                <div style="margin: 1rem 0;">
-                    ⭐⭐⭐⭐⭐ (4.9/5)
+                <span class="doctor-specialty">Nevrolog</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                <p style="color: #666;">20 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 91 234 56 78</p>
                 </div>
-                <p><i class="fas fa-map-marker-alt"></i> Samarqand, Mustaqillik ko'chasi</p>
-                <p><i class="fas fa-phone"></i> +998 91 234 56 78</p>
                 <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
             </div>
 
-            <div class="doctor-card">
+            <div class="doctor-card" data-specialty="kardiolog">
                 <div class="doctor-photo">👩‍⚕️</div>
                 <h3>Dr. Karimova Nodira</h3>
-                <p style="color: #667eea; font-weight: 600;">Kardiolog</p>
-                <p style="margin: 1rem 0;">15 yillik tajriba</p>
-                <div style="margin: 1rem 0;">
-                    ⭐⭐⭐⭐⭐ (4.8/5)
+                <span class="doctor-specialty">Kardiolog</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                <p style="color: #666;">15 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 93 345 67 89</p>
                 </div>
-                <p><i class="fas fa-map-marker-alt"></i> Samarqand, Registon ko'chasi</p>
-                <p><i class="fas fa-phone"></i> +998 93 345 67 89</p>
                 <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
             </div>
 
-            <div class="doctor-card">
+            <div class="doctor-card" data-specialty="terapevt">
                 <div class="doctor-photo">👨‍⚕️</div>
                 <h3>Dr. Rahimov Jasur</h3>
-                <p style="color: #667eea; font-weight: 600;">Terapevt</p>
-                <p style="margin: 1rem 0;">12 yillik tajriba</p>
-                <div style="margin: 1rem 0;">
-                    ⭐⭐⭐⭐⭐ (4.7/5)
+                <span class="doctor-specialty">Terapevt</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                <p style="color: #666;">12 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 90 123 45 67</p>
                 </div>
-                <p><i class="fas fa-map-marker-alt"></i> Samarqand, Amir Temur ko'chasi</p>
-                <p><i class="fas fa-phone"></i> +998 90 123 45 67</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
+            </div>
+
+            <div class="doctor-card" data-specialty="neurolog">
+                <div class="doctor-photo">👨‍⚕️</div>
+                <h3>Dr. Ibragimov Davron</h3>
+                <span class="doctor-specialty">Nevrolog</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                <p style="color: #666;">22 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 91 876 54 32</p>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
+            </div>
+
+            <div class="doctor-card" data-specialty="kardiolog">
+                <div class="doctor-photo">👩‍⚕️</div>
+                <h3>Dr. Umarova Nilufar</h3>
+                <span class="doctor-specialty">Kardiolog</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                <p style="color: #666;">14 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 93 234 56 78</p>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
+            </div>
+
+            <div class="doctor-card" data-specialty="terapevt">
+                <div class="doctor-photo">👩‍⚕️</div>
+                <h3>Dr. Saidova Malika</h3>
+                <span class="doctor-specialty">Terapevt</span>
+                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                <p style="color: #666;">18 yillik tajriba</p>
+                <div class="doctor-info">
+                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
+                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 94 567 89 01</p>
+                </div>
                 <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
             </div>
         </div>
     </section>
 
-    <!-- FEATURE 10: Telegram Bot -->
-    <section class="telegram-section" id="telegram">
-        <div class="telegram-container">
-            <h2 class="section-title" style="color: white;">📱 Telegram Bot Integratsiyasi</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
-                Telegramda ham tekshiruvdan o'ting va kunlik eslatmalar oling!
-            </p>
-
-            <div class="telegram-qr">
-                <div style="width: 200px; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 15px;">
-                    <div style="text-align: center;">
-                        <i class="fab fa-telegram" style="font-size: 5rem; color: #0088cc;"></i>
-                        <p style="margin-top: 1rem; color: #333;">QR Kod</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin: 2rem 0;">
-                <a href="https://t.me/NeuroGuardAI_bot" class="btn btn-primary" style="background: white; color: #0088cc; font-size: 1.2rem;">
-                    <i class="fab fa-telegram"></i> Telegram Botni Ochish
-                </a>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; margin-top: 2rem;">
-                <h3 style="margin-bottom: 1rem;">Imkoniyatlar:</h3>
-                <div style="text-align: left; display: inline-block;">
-                    <p>✅ Tezkor tekshiruv</p>
-                    <p>✅ Kunlik eslatmalar</p>
-                    <p>✅ Natijalarni ko'rish</p>
-                    <p>✅ Shifokor maslahatlar</p>
-                    <p>✅ Oila monitoring</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Voice Assistant Button -->
     <div class="voice-assistant">
         <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">
             <i class="fas fa-microphone"></i>
@@ -1015,27 +617,37 @@
     </div>
 
     <div class="voice-feedback" id="voiceFeedback">
-        <p id="voiceText">Tinglayapman...</p>
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <i class="fas fa-microphone" style="font-size: 2rem; color: #10b981;"></i>
+            <strong>Tinglayapman...</strong>
+        </div>
+        <p id="voiceText"></p>
     </div>
 
-    <!-- Chatbot -->
     <div class="chatbot">
         <button class="chatbot-toggle" onclick="toggleChat()">
-            <i class="fas fa-comments"></i>
+            <i class="fas fa-robot"></i>
         </button>
         <div class="chatbot-window" id="chatWindow">
-            <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.2rem; display: flex; justify-content: space-between; align-items: center;">
-                <div><i class="fas fa-robot"></i> <strong>AI Virtual Doktor</strong></div>
-                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
+            <div class="chatbot-header">
+                <div>
+                    <strong style="font-size: 1.2rem;">AI Doktor</strong>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.3rem;">24/7 onlayn</p>
+                </div>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
             </div>
             <div class="chatbot-messages" id="chatMessages">
                 <div class="message bot">
-                    Salom! Men virtual doktor yordamchiman. Sizga qanday yordam bera olaman? 👨‍⚕️
+                    👋 Salom! Men AI yordamchiman. Insult, qon bosimi, qand, sport, ovqatlanish haqida maslahat bera olaman. Savolingizni yozing!
                 </div>
             </div>
-            <div style="display: flex; padding: 1rem; border-top: 1px solid #e0e0e0;">
-                <input type="text" id="chatInput" placeholder="Savolingizni yozing..." style="flex: 1; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 25px;" onkeypress="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()" style="margin-left: 0.5rem; padding: 0.8rem 1.5rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 25px; cursor: pointer;">
+            <div style="display: flex; padding: 1rem; border-top: 1px solid #e0e0e0; background: white;">
+                <input type="text" id="chatInput" placeholder="Savolingiz..." 
+                       style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 25px;" 
+                       onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" 
+                        style="margin-left: 0.8rem; padding: 1rem 1.8rem; background: linear-gradient(135deg, #667eea, #764ba2); 
+                               color: white; border: none; border-radius: 25px; cursor: pointer;">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -1043,49 +655,37 @@
     </div>
 
     <script>
-        // ===== GLOBAL VARIABLES =====
-        let currentResult = null;
-        let userPoints = 0;
         let voiceRecognition = null;
         let isListening = false;
+        let currentMonth = 1;
+        let currentYear = 2026;
+        let chatOpen = false;
 
-        // ===== FEATURE 1: VOICE ASSISTANT =====
         function initVoice() {
             if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 voiceRecognition = new SpeechRecognition();
                 voiceRecognition.lang = 'uz-UZ';
                 voiceRecognition.continuous = false;
-                voiceRecognition.interimResults = false;
-
-                voiceRecognition.onstart = function() {
-                    console.log('Ovozni tinglash boshlandi');
-                };
 
                 voiceRecognition.onresult = function(event) {
                     const transcript = event.results[0][0].transcript.toLowerCase();
-                    console.log('Eshitildi:', transcript);
                     processVoiceCommand(transcript);
                 };
 
-                voiceRecognition.onerror = function(event) {
-                    console.error('Xato:', event.error);
+                voiceRecognition.onerror = function() {
                     stopListening();
+                    showVoiceFeedback('❌ Xato. Qaytadan urinib ko\'ring.');
                 };
 
                 voiceRecognition.onend = function() {
                     stopListening();
                 };
-            } else {
-                console.log('Speech Recognition qo\'llab-quvvatlanmaydi');
             }
         }
 
         function toggleVoice() {
-            if (!voiceRecognition) {
-                initVoice();
-            }
-
+            if (!voiceRecognition) initVoice();
             if (isListening) {
                 voiceRecognition.stop();
             } else {
@@ -1095,78 +695,75 @@
 
         function startListening() {
             if (!voiceRecognition) return;
-            
             isListening = true;
-            const btn = document.getElementById('voiceBtn');
-            const feedback = document.getElementById('voiceFeedback');
-            
-            btn.classList.add('listening');
-            feedback.style.display = 'block';
-            feedback.querySelector('#voiceText').textContent = 'Tinglayapman... Gapirishingiz mumkin!';
-            
+            document.getElementById('voiceBtn').classList.add('listening');
+            document.getElementById('voiceFeedback').style.display = 'block';
             voiceRecognition.start();
         }
 
         function stopListening() {
             isListening = false;
-            const btn = document.getElementById('voiceBtn');
-            const feedback = document.getElementById('voiceFeedback');
-            
-            btn.classList.remove('listening');
+            document.getElementById('voiceBtn').classList.remove('listening');
             setTimeout(() => {
-                feedback.style.display = 'none';
-            }, 2000);
+                document.getElementById('voiceFeedback').style.display = 'none';
+            }, 3000);
+        }
+
+        function showVoiceFeedback(text) {
+            document.getElementById('voiceText').textContent = text;
+            document.getElementById('voiceFeedback').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('voiceFeedback').style.display = 'none';
+            }, 3000);
         }
 
         function processVoiceCommand(text) {
-            const feedback = document.getElementById('voiceFeedback');
-            feedback.querySelector('#voiceText').textContent = `Eshitildi: "${text}"`;
-
-            // Qon bosimi
-            const bpMatch = text.match(/qon bosim(?:im)?.*?(\d+).*?(\d+)/i);
+            const bpMatch = text.match(/(?:qon bosim|bosim).*?(\d+).*?(\d+)/i);
             if (bpMatch) {
                 document.getElementById('systolic').value = bpMatch[1];
                 document.getElementById('diastolic').value = bpMatch[2];
-                feedback.querySelector('#voiceText').textContent = `✅ Qon bosimi: ${bpMatch[1]}/${bpMatch[2]}`;
+                showVoiceFeedback(`✅ Qon bosimi: ${bpMatch[1]}/${bpMatch[2]}`);
+                return;
             }
 
-            // Yurak urishi
-            const hrMatch = text.match(/yurak(?:\s+urishi)?.*?(\d+)/i);
+            const hrMatch = text.match(/(?:yurak|puls).*?(\d+)/i);
             if (hrMatch) {
                 document.getElementById('heartrate').value = hrMatch[1];
-                feedback.querySelector('#voiceText').textContent = `✅ Yurak urishi: ${hrMatch[1]}`;
+                showVoiceFeedback(`✅ Yurak: ${hrMatch[1]}`);
+                return;
             }
 
-            // Qand
             const glucoseMatch = text.match(/qand.*?(\d+\.?\d*)/i);
             if (glucoseMatch) {
                 document.getElementById('glucose').value = glucoseMatch[1];
-                feedback.querySelector('#voiceText').textContent = `✅ Qand: ${glucoseMatch[1]}`;
+                showVoiceFeedback(`✅ Qand: ${glucoseMatch[1]}`);
+                return;
             }
 
-            // Bo'y
-            const heightMatch = text.match(/bo['y].*?(\d+)/i);
+            const heightMatch = text.match(/bo['']?y.*?(\d+)/i);
             if (heightMatch) {
                 document.getElementById('height').value = heightMatch[1];
-                feedback.querySelector('#voiceText').textContent = `✅ Bo'y: ${heightMatch[1]} sm`;
+                showVoiceFeedback(`✅ Bo'y: ${heightMatch[1]}`);
+                return;
             }
 
-            // Vazn
             const weightMatch = text.match(/vazn.*?(\d+)/i);
             if (weightMatch) {
                 document.getElementById('weight').value = weightMatch[1];
-                feedback.querySelector('#voiceText').textContent = `✅ Vazn: ${weightMatch[1]} kg`;
+                showVoiceFeedback(`✅ Vazn: ${weightMatch[1]}`);
+                return;
             }
 
-            // Yosh
             const ageMatch = text.match(/yosh.*?(\d+)/i);
             if (ageMatch) {
                 document.getElementById('age').value = ageMatch[1];
-                feedback.querySelector('#voiceText').textContent = `✅ Yosh: ${ageMatch[1]}`;
+                showVoiceFeedback(`✅ Yosh: ${ageMatch[1]}`);
+                return;
             }
+
+            showVoiceFeedback('❓ Tushunmadim');
         }
 
-        // ===== ANALYSIS FUNCTION =====
         function analyzeRisk() {
             const systolic = parseFloat(document.getElementById('systolic').value);
             const diastolic = parseFloat(document.getElementById('diastolic').value);
@@ -1177,65 +774,72 @@
             const age = parseFloat(document.getElementById('age').value);
 
             if (!systolic || !diastolic || !heartrate || !glucose || !height || !weight || !age) {
-                alert('Iltimos, barcha maydonlarni to\'ldiring!');
+                alert('⚠️ Barcha maydonlarni to\'ldiring!');
                 return;
             }
 
-            const bmi = weight / ((height / 100) ** 2);
-            let riskScore = 0;
-
-            if (systolic > 140 || diastolic > 90) riskScore += 25;
-            else if (systolic > 130 || diastolic > 85) riskScore += 15;
-
-            if (heartrate > 100 || heartrate < 60) riskScore += 15;
-
-            if (glucose > 7.0) riskScore += 20;
-            else if (glucose > 6.0) riskScore += 10;
-
-            if (bmi > 30) riskScore += 15;
-            else if (bmi > 25) riskScore += 8;
-
-            if (age > 65) riskScore += 15;
-            else if (age > 55) riskScore += 10;
-            else if (age > 45) riskScore += 5;
-
-            riskScore = Math.min(riskScore, 100);
-
-            let riskLevel, riskClass, riskIcon;
-            if (riskScore < 30) {
-                riskLevel = 'Past Xavf';
-                riskClass = 'risk-low';
-                riskIcon = '✅';
-            } else if (riskScore < 60) {
-                riskLevel = 'O\'rtacha Xavf';
-                riskClass = 'risk-medium';
-                riskIcon = '⚠️';
-            } else {
-                riskLevel = 'Yuqori Xavf';
-                riskClass = 'risk-high';
-                riskIcon = '🚨';
-            }
-
-            currentResult = { date: new Date().toISOString(), riskScore, riskLevel, riskClass };
-
             const resultPanel = document.getElementById('resultPanel');
             resultPanel.style.display = 'block';
-            resultPanel.innerHTML = `
-                <div style="text-align: center;">
-                    <div style="font-size: 5rem;">${riskIcon}</div>
-                    <div style="font-size: 3rem; font-weight: 700; color: ${riskScore < 30 ? '#10b981' : riskScore < 60 ? '#f59e0b' : '#ef4444'};">${riskScore}%</div>
-                    <h3 style="margin: 1rem 0;">${riskLevel}</h3>
-                    <p>BMI: ${bmi.toFixed(1)}</p>
-                </div>
-            `;
+            resultPanel.scrollIntoView({ behavior: 'smooth' });
 
-            // Ochkolar qo'shish
-            addPoints(50);
-            checkAchievements();
+            setTimeout(() => {
+                const bmi = weight / ((height / 100) ** 2);
+                let riskScore = 0;
+
+                if (systolic > 140 || diastolic > 90) riskScore += 25;
+                else if (systolic > 130 || diastolic > 85) riskScore += 15;
+
+                if (heartrate > 100 || heartrate < 60) riskScore += 15;
+
+                if (glucose > 7.0) riskScore += 20;
+                else if (glucose > 6.0) riskScore += 10;
+
+                if (bmi > 30) riskScore += 15;
+                else if (bmi > 25) riskScore += 8;
+
+                if (age > 65) riskScore += 15;
+                else if (age > 55) riskScore += 10;
+                else if (age > 45) riskScore += 5;
+
+                riskScore = Math.min(riskScore, 100);
+
+                let riskLevel, riskColor, riskIcon, advice;
+                if (riskScore < 30) {
+                    riskLevel = '✅ Past Xavf';
+                    riskColor = '#10b981';
+                    riskIcon = '✅';
+                    advice = 'Ajoyib! Salomatingiz yaxshi.';
+                } else if (riskScore < 60) {
+                    riskLevel = '⚠️ O\'rtacha';
+                    riskColor = '#f59e0b';
+                    riskIcon = '⚠️';
+                    advice = 'E\'tibor! Shifokorga murojaat qiling.';
+                } else {
+                    riskLevel = '🚨 Yuqori Xavf';
+                    riskColor = '#ef4444';
+                    riskIcon = '🚨';
+                    advice = 'MUHIM! Zudlik bilan shifokorga!';
+                }
+
+                resultPanel.innerHTML = `
+                    <div style="font-size: 6rem;">${riskIcon}</div>
+                    <div style="font-size: 4.5rem; font-weight: 700; color: ${riskColor}; margin: 1.5rem 0;">
+                        ${riskScore}%
+                    </div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">${riskLevel}</h3>
+                    <p style="color: #666; margin-bottom: 2rem;">${advice}</p>
+                    
+                    <div style="text-align: left; padding: 2rem; background: #f8f9fa; border-radius: 20px;">
+                        <h4 style="margin-bottom: 1rem;">📊 Ma'lumot:</h4>
+                        <p><strong>Qon bosimi:</strong> ${systolic}/${diastolic}</p>
+                        <p><strong>Yurak:</strong> ${heartrate}</p>
+                        <p><strong>Qand:</strong> ${glucose}</p>
+                        <p><strong>BMI:</strong> ${bmi.toFixed(1)}</p>
+                        <p><strong>Yosh:</strong> ${age}</p>
+                    </div>
+                `;
+            }, 1000);
         }
-
-        // ===== FEATURE 3: VIRTUAL DOCTOR CHAT =====
-        let chatOpen = false;
 
         function toggleChat() {
             chatOpen = !chatOpen;
@@ -1251,64 +855,100 @@
             container.innerHTML += `<div class="message user">${msg}</div>`;
             input.value = '';
 
+            container.innerHTML += `
+                <div class="typing-indicator" id="typing">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            container.scrollTop = container.scrollHeight;
+
             setTimeout(() => {
-                const response = getAIResponse(msg);
-                container.innerHTML += `<div class="message bot">${response}</div>`;
+                document.getElementById('typing').remove();
+                container.innerHTML += `<div class="message bot">${getAIResponse(msg)}</div>`;
                 container.scrollTop = container.scrollHeight;
-            }, 1000);
+            }, 1500);
         }
 
         function getAIResponse(msg) {
             msg = msg.toLowerCase();
             
             if (msg.includes('insult') || msg.includes('stroke')) {
-                return 'Insult - miyaga qon oqimining to\'xtoq holati. Asosiy belgilari: nutq qiyinligi, yuz asimmetriyasi, qo\'l-oyoq kuchsizlanishi. Zudlik bilan 103 ga qo\'ng\'iroq qiling! 🚨';
+                return `🧠 <strong>Insult</strong> - miyaga qon oqimi to'xtoq.
+                <br><br><strong>Belgilar:</strong>
+                <br>• Yuz tushishi
+                <br>• Qo'l/oyoq kuchsizligi
+                <br>• Gapirish qiyinligi
+                <br><br>⚠️ 103 ga qo'ng'iroq qiling!`;
             }
             
             if (msg.includes('bosim') || msg.includes('pressure')) {
-                return 'Qon bosimi 120/80 dan yuqori bo\'lsa, shifokorga murojaat qiling. Tuzni kamaytiring, sog\'lom ovqatlaning, stressdan saqlaning. 💊';
+                return `🩺 <strong>Qon bosimi:</strong>
+                <br><br><strong>Normal:</strong> 120/80 mmHg
+                <br><strong>Yuqori:</strong> ≥140/90
+                <br><br><strong>Kamaytirish:</strong>
+                <br>• Tuz kamaytiring
+                <br>• Sog'lom ovqatlaning
+                <br>• Sport qiling
+                <br>• Stressdan saqlaning`;
             }
             
             if (msg.includes('qand') || msg.includes('diabet')) {
-                return 'Qand miqdori 7.0 mmol/L dan yuqori bo\'lsa xavfli. Shirinliklarni kamaytiring, ko\'proq harakat qiling. Endokrinologga murojaat qiling. 🍬';
+                return `🍬 <strong>Qand:</strong>
+                <br><br><strong>Normal:</strong> 3.9-5.6 mmol/L
+                <br><strong>Diabet:</strong> ≥7.0 mmol/L
+                <br><br><strong>Nazorat:</strong>
+                <br>• Shirinlik kamaytiring
+                <br>• Sabzavot ko'p iste'mol qiling
+                <br>• Sport qiling`;
             }
             
             if (msg.includes('sport') || msg.includes('mashq')) {
-                return 'Kuniga 30 daqiqa yurish juda foydali. Suzish, velosiped, yugurish ham yaxshi. Lekin avval shifokorga maslahatlashing! 🏃';
+                return `🏃 <strong>Jismoniy faollik:</strong>
+                <br><br><strong>Tavsiya:</strong>
+                <br>• Kuniga 30 daqiqa yurish
+                <br>• Suzish
+                <br>• Velosiped
+                <br>• Yoga
+                <br><br>✅ Asta-sekin boshlang!`;
             }
             
             if (msg.includes('ovqat') || msg.includes('diet')) {
-                return 'Sog\'lom ovqatlanish: ko\'p sabzavot, meva, baliq. Kam: tuz, yog\', shirinlik. Suv ko\'p iching - kuniga 2 litr! 🥗';
+                return `🥗 <strong>Sog'lom ovqatlanish:</strong>
+                <br><br><strong>Yaxshi:</strong>
+                <br>• Sabzavot va meva
+                <br>• Baliq
+                <br>• Yong'oq
+                <br><br><strong>Kamaytiring:</strong>
+                <br>• Tuz
+                <br>• Shirinlik
+                <br>• Yog'`;
             }
 
-            if (msg.includes('yordam') || msg.includes('help')) {
-                return 'Men sizga insult, qon bosimi, qand, ovqatlanish, sport haqida maslahat bera olaman. Savolingizni yozing! 💬';
-            }
-
-            return 'Qiziqarli savol! Aniqroq yozib bering yoki "yordam" deb yozing. Men tibbiy maslahatlar, profilaktika, sog\'lom turmush tarzi haqida gaplasha olaman. 👨‍⚕️';
+            return `Men tibbiy maslahatlar, insult, qon bosimi, qand, sport, ovqatlanish haqida ma'lumot bera olaman. Savolingizni batafsil yozing!`;
         }
-
-        // ===== FEATURE 4: CALENDAR =====
-        let currentMonth = 1; // February = 1 (0-indexed)
-        let currentYear = 2026;
 
         function loadCalendar() {
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const grid = document.getElementById('calendarGrid');
+            const today = new Date();
+            
             grid.innerHTML = '';
 
-            // Empty cells
-            for (let i = 0; i < (firstDay === 0 ? 6 : firstDay - 1); i++) {
+            const offset = firstDay === 0 ? 6 : firstDay - 1;
+            for (let i = 0; i < offset; i++) {
                 grid.innerHTML += '<div></div>';
             }
 
-            // Days
             for (let day = 1; day <= daysInMonth; day++) {
-                const hasData = Math.random() > 0.7; // Random data for demo
+                const isToday = today.getDate() === day && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+                const hasData = Math.random() > 0.65;
+                
                 grid.innerHTML += `
-                    <div class="calendar-day ${hasData ? 'has-data' : ''}" onclick="showDayDetails(${day})">
-                        <div style="font-weight: 600;">${day}</div>
+                    <div class="calendar-day ${hasData ? 'has-data' : ''} ${isToday ? 'today' : ''}" onclick="showDayDetails(${day})">
+                        <div style="font-weight: ${isToday ? '700' : '600'};">${day}</div>
                     </div>
                 `;
             }
@@ -1336,114 +976,178 @@
         }
 
         function showDayDetails(day) {
-            alert(`${day} kun uchun ma'lumotlar:\n\nQon bosimi: 125/82\nYurak urishi: 74\nQand: 5.8\n\n✅ Barcha ko'rsatkichlar normal!`);
+            alert(`${day} kun\n\n📊 Ko'rsatkichlar:\n🩺 Bosim: 125/82\n💓 Puls: 74\n🍬 Qand: 5.8\n\n✅ Normal!`);
         }
 
         function addReminder() {
-            const reminder = prompt('Eslatma matni:');
-            if (reminder) {
-                const list = document.getElementById('remindersList');
-                list.innerHTML += `
-                    <div style="padding: 1rem; background: white; border-radius: 10px; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
-                        <span>${reminder}</span>
-                        <span onclick="this.parentElement.remove()" style="cursor: pointer; color: #ef4444;">×</span>
-                    </div>
-                `;
-            }
+            const reminder = prompt('Eslatma:');
+            if (!reminder) return;
+
+            const list = document.getElementById('remindersList');
+            const div = document.createElement('div');
+            div.className = 'reminder-item';
+            div.innerHTML = `
+                <span><i class="fas fa-bell" style="color: #f59e0b;"></i> ${reminder}</span>
+                <span onclick="this.parentElement.remove()" style="cursor: pointer; color: #ef4444; font-size: 1.5rem;">×</span>
+            `;
+            list.appendChild(div);
         }
 
-        // ===== FEATURE 5: GAMIFICATION =====
-        function addPoints(points) {
-            userPoints += points;
-            document.getElementById('totalPoints').textContent = userPoints;
-            localStorage.setItem('userPoints', userPoints);
-        }
-
-        function checkAchievements() {
-            const history = JSON.parse(localStorage.getItem('test_history') || '[]');
-            
-            if (history.length >= 10) {
-                document.getElementById('achievement3').classList.add('unlocked');
-            }
-        }
-
-        function loadPoints() {
-            userPoints = parseInt(localStorage.getItem('userPoints') || '0');
-            document.getElementById('totalPoints').textContent = userPoints;
-        }
-
-        // ===== FEATURE 6: FAMILY MONITORING =====
         function addFamilyMember() {
-            const name = prompt('Oila a\'zosining ismi:');
+            const name = prompt('Ism:');
             if (!name) return;
 
             const container = document.getElementById('familyMembers');
-            const genders = ['👨', '👩', '👦', '👧'];
-            const randomGender = genders[Math.floor(Math.random() * genders.length)];
-
-            const newMember = document.createElement('div');
-            newMember.className = 'member-card';
-            newMember.innerHTML = `
-                <div class="member-avatar">${randomGender}</div>
+            const div = document.createElement('div');
+            div.className = 'member-card';
+            div.innerHTML = `
+                <div class="member-avatar">👤</div>
                 <h3>${name}</h3>
-                <p>Tekshiruv o'tkazilmagan</p>
-                <button class="btn btn-primary" style="margin-top: 1rem;">Tekshirish</button>
+                <p style="color: #666;">Tekshiruv kerak</p>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Tekshirish</button>
+                <button onclick="this.closest('.member-card').remove()" 
+                        style="width: 100%; margin-top: 0.5rem; padding: 0.8rem; background: #fee2e2; 
+                               color: #991b1b; border: none; border-radius: 15px; cursor: pointer;">
+                    O'chirish
+                </button>
             `;
-            
-            container.insertBefore(newMember, container.lastElementChild);
+            container.insertBefore(div, container.lastElementChild);
         }
 
-        // ===== FEATURE 8: FILE UPLOAD =====
         function handleFileUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
 
+            if (file.size > 10 * 1024 * 1024) {
+                alert('❌ Max 10MB!');
+                return;
+            }
+
             const container = document.getElementById('uploadedFiles');
             container.innerHTML = `
-                <div style="padding: 1.5rem; background: #eff6ff; border-radius: 15px; margin-top: 1rem;">
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <i class="fas fa-file-pdf" style="font-size: 2rem; color: #ef4444;"></i>
+                <div class="uploaded-file-card">
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <i class="fas fa-file" style="font-size: 3rem; color: #667eea;"></i>
                         <div style="flex: 1;">
                             <h4>${file.name}</h4>
                             <p style="color: #666;">${(file.size / 1024).toFixed(2)} KB</p>
                         </div>
-                        <i class="fas fa-check-circle" style="font-size: 2rem; color: #10b981;"></i>
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: #10b981;"></i>
                     </div>
-                    <p style="margin-top: 1rem; color: #667eea;">✅ Hujjat muvaffaqiyatli yuklandi va tahlil qilindi!</p>
+                    <div style="margin-top: 2rem; padding: 2rem; background: #d1fae5; border-radius: 15px;">
+                        <h5 style="color: #065f46;">✅ AI tahlil muvaffaqiyatli!</h5>
+                        <p style="color: #065f46; margin-top: 1rem;">Hujjat qayta ishlandi</p>
+                    </div>
                 </div>
             `;
-
-            addPoints(25);
         }
 
-        // Drag and drop
         const dropZone = document.getElementById('dropZone');
         if (dropZone) {
             dropZone.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 dropZone.classList.add('dragover');
             });
-
             dropZone.addEventListener('dragleave', () => {
                 dropZone.classList.remove('dragover');
             });
-
             dropZone.addEventListener('drop', (e) => {
                 e.preventDefault();
                 dropZone.classList.remove('dragover');
                 const file = e.dataTransfer.files[0];
                 if (file) {
+                    document.getElementById('fileInput').files = e.dataTransfer.files;
                     handleFileUpload({ target: { files: [file] } });
                 }
             });
         }
 
-        // ===== INITIALIZATION =====
+        function filterDoctors(specialty, btn) {
+            const cards = document.querySelectorAll('.doctor-card');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            cards.forEach(card => {
+                if (specialty === 'all' || card.dataset.specialty === specialty) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function initCharts() {
+            const data = [
+                [28, 32, 35, 30, 28, 25, 28],
+                [22, 25, 20, 22, 24, 22, 22],
+                [52, 55, 50, 52, 54, 52, 52]
+            ];
+            
+            ['chart1', 'chart2', 'chart3'].forEach((id, i) => {
+                const ctx = document.getElementById(id);
+                if (!ctx) return;
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['D', 'S', 'C', 'P', 'J', 'Sh', 'Y'],
+                        datasets: [{
+                            data: data[i],
+                            borderColor: data[i][6] < 30 ? '#10b981' : data[i][6] < 60 ? '#f59e0b' : '#ef4444',
+                            backgroundColor: data[i][6] < 30 ? 'rgba(16,185,129,0.1)' : data[i][6] < 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, max: 100 } }
+                    }
+                });
+            });
+
+            ['compChart1', 'compChart2'].forEach((id, i) => {
+                const ctx = document.getElementById(id);
+                if (!ctx) return;
+
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Bosim', 'Puls', 'Qand', 'BMI', 'Yosh'],
+                        datasets: [{
+                            data: i === 0 ? [75, 80, 85, 90, 70] : [60, 70, 70, 75, 70],
+                            borderColor: i === 0 ? '#10b981' : '#f59e0b',
+                            backgroundColor: i === 0 ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { r: { beginAtZero: true, max: 100 } },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            });
+        }
+
         window.addEventListener('load', function() {
             loadCalendar();
-            loadPoints();
-            checkAchievements();
-            console.log('🚀 NeuroGuard AI Ultimate - Barcha 10 ta funksiya yuklandi!');
+            initCharts();
+            console.log('✅ NeuroGuard AI Professional - Tayyor!');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
