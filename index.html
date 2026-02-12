@@ -3,178 +3,1096 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroGuard AI Professional</title>
+    <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- YANGI: Font Awesome - Chatbot ikonkasi uchun -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
-        nav { position: fixed; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); padding: 1rem 5%; box-shadow: 0 2px 20px rgba(0,0,0,0.1); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { color: #333; text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 10px; transition: all 0.3s; }
-        .nav-links a:hover { color: #667eea; background: rgba(102,126,234,0.1); }
-        .hero { min-height: 100vh; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; padding: 8rem 5% 4rem; position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px; animation: moveBackground 20s linear infinite; }
-        @keyframes moveBackground { 0% { transform: translate(0,0); } 100% { transform: translate(50px,50px); } }
-        .hero-content { max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; z-index: 1; }
-        .hero-text h1 { font-size: 3.5rem; color: white; margin-bottom: 1.5rem; animation: fadeInUp 1s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .highlight { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); animation: glow 2s ease-in-out infinite; }
-        @keyframes glow { 0%, 100% { text-shadow: 0 0 20px rgba(255,215,0,0.5); } 50% { text-shadow: 0 0 30px rgba(255,215,0,0.8); } }
-        .btn { padding: 1rem 2.5rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
-        .btn-primary { background: white; color: #667eea; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-        .section-title { text-align: center; font-size: 3rem; margin-bottom: 1rem; color: #333; }
-        .section-subtitle { text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 4rem; }
-        
-        /* Voice Assistant */
-        .voice-assistant { position: fixed; bottom: 120px; right: 30px; z-index: 998; }
-        .voice-btn { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; border: none; font-size: 1.8rem; cursor: pointer; box-shadow: 0 5px 20px rgba(239,68,68,0.4); transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-        .voice-btn:hover { transform: scale(1.1); }
-        .voice-btn.listening { animation: voicePulse 1s infinite; background: linear-gradient(135deg, #10b981, #059669); }
-        @keyframes voicePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); box-shadow: 0 0 40px rgba(16,185,129,0.8); } }
-        .voice-feedback { position: fixed; bottom: 200px; right: 30px; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: none; max-width: 350px; z-index: 999; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-        
-        /* Video Section */
-        .video-section { padding: 6rem 5%; background: white; }
-        .video-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem; }
-        .video-card { background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; border: 2px solid #f0f0f0; }
-        .video-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.2); border-color: #667eea; }
-        .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
-        .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .video-info { padding: 2rem; }
-        .video-category { display: inline-block; padding: 0.4rem 1rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; font-size: 0.9rem; margin-bottom: 1rem; }
-        
-        /* Chatbot */
-        .chatbot { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
-        .chatbot-toggle { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; font-size: 2rem; cursor: pointer; box-shadow: 0 10px 30px rgba(102,126,234,0.5); display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-        .chatbot-toggle:hover { transform: scale(1.1); }
-        .chatbot-window { position: absolute; bottom: 90px; right: 0; width: 420px; height: 600px; background: white; border-radius: 25px; box-shadow: 0 20px 80px rgba(0,0,0,0.3); display: none; flex-direction: column; overflow: hidden; }
-        .chatbot-window.active { display: flex; animation: chatSlideIn 0.3s ease; }
-        @keyframes chatSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        .chatbot-header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .chatbot-messages { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; background: #f8f9fa; }
-        .message { padding: 1rem 1.5rem; border-radius: 20px; max-width: 85%; animation: messageSlide 0.3s ease; }
-        @keyframes messageSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .message.bot { background: white; align-self: flex-start; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .message.user { background: linear-gradient(135deg, #667eea, #764ba2); color: white; align-self: flex-end; }
-        .typing-indicator { display: flex; gap: 0.3rem; padding: 1rem 1.5rem; background: white; border-radius: 20px; width: fit-content; }
-        .typing-dot { width: 8px; height: 8px; background: #667eea; border-radius: 50%; animation: typingBounce 1.4s infinite; }
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-10px); } }
-        
-        /* Calendar */
-        .calendar-section { padding: 6rem 5%; background: #f8f9fa; }
-        .calendar-container { max-width: 1200px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-        .calendar-nav-btn { padding: 0.8rem 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 15px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
-        .calendar-nav-btn:hover { transform: scale(1.05); }
-        .calendar-month-display { font-size: 2rem; font-weight: 700; color: #333; }
-        .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; margin-bottom: 1rem; }
-        .weekday { text-align: center; font-weight: 600; color: #667eea; padding: 0.5rem; }
-        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; }
-        .calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; border-radius: 15px; background: #f8f9fa; cursor: pointer; transition: all 0.3s; position: relative; border: 2px solid transparent; }
-        .calendar-day:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; transform: scale(1.05); }
-        .calendar-day.today { background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; }
-        .calendar-day.has-data { border-color: #667eea; background: linear-gradient(135deg, #eff6ff, #dbeafe); }
-        .calendar-day.has-data::after { content: '●'; position: absolute; bottom: 8px; font-size: 1.5rem; color: #667eea; }
-        .health-stats-summary { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .stat-card { padding: 2rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 20px; text-align: center; transition: all 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .stat-value { font-size: 2.5rem; font-weight: 700; color: #667eea; }
-        .reminders-panel { margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 20px; }
-        .reminder-item { padding: 1rem; background: white; border-radius: 15px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        
-        /* Family Section */
-        .family-section { padding: 6rem 5%; background: white; }
-        .family-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; max-width: 1400px; margin: 0 auto 3rem; }
-        .family-stat-card { padding: 2rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; text-align: center; }
-        .family-members { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
-        .member-card { background: white; padding: 2.5rem; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); text-align: center; transition: all 0.3s; border: 2px solid #f0f0f0; }
-        .member-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.15); border-color: #667eea; }
-        .member-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: white; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 0 auto 1.5rem; box-shadow: 0 10px 30px rgba(102,126,234,0.3); }
-        .member-status { display: inline-block; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; margin: 1rem 0; }
-        .status-low { background: #d1fae5; color: #065f46; }
-        .status-medium { background: #fef3c7; color: #92400e; }
-        .member-health-chart { width: 100%; height: 150px; margin: 1.5rem 0; }
-        .add-member-card { border: 3px dashed #667eea; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; min-height: 400px; }
-        .add-member-card:hover { background: #eff6ff; transform: scale(1.05); }
-        
-        /* Comparison */
-        .comparison-section { padding: 6rem 5%; background: #f8f9fa; }
-        .comparison-container { max-width: 1200px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-        .comparison-selector { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; margin-bottom: 3rem; }
-        .date-selector { padding: 1.2rem; border-radius: 15px; border: 2px solid #e0e0e0; font-size: 1rem; font-weight: 600; background: white; cursor: pointer; transition: all 0.3s; }
-        .date-selector:hover { border-color: #667eea; }
-        .comparison-vs { font-size: 2.5rem; font-weight: 700; color: #667eea; }
-        .comparison-result { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .comparison-card { padding: 3rem; background: linear-gradient(135deg, #f8f9fa, #e5e7eb); border-radius: 25px; text-align: center; transition: all 0.3s; }
-        .comparison-card:hover { transform: scale(1.05); }
-        .comparison-chart { width: 100%; height: 250px; margin: 2rem 0; }
-        .improvement-banner { text-align: center; margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-radius: 20px; }
-        
-        /* Upload */
-        .upload-section { padding: 6rem 5%; background: white; }
-        .upload-container { max-width: 1000px; margin: 0 auto; background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-        .drop-zone { border: 3px dashed #667eea; border-radius: 25px; padding: 5rem 3rem; text-align: center; cursor: pointer; transition: all 0.3s; background: linear-gradient(135deg, #f8f9fa, #e5e7eb); }
-        .drop-zone:hover { background: linear-gradient(135deg, #eff6ff, #dbeafe); border-color: #764ba2; transform: scale(1.02); }
-        .drop-zone.dragover { background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-color: #10b981; transform: scale(1.05); }
-        .upload-icon { font-size: 6rem; color: #667eea; margin-bottom: 2rem; animation: floatUpDown 3s ease-in-out infinite; }
-        @keyframes floatUpDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .uploaded-file-card { padding: 2rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 20px; margin-top: 2rem; animation: slideIn 0.5s ease; }
-        
-        /* Doctors */
-        .doctors-section { padding: 6rem 5%; background: #f8f9fa; }
-        .doctors-filter { max-width: 1200px; margin: 0 auto 3rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
-        .filter-btn { padding: 0.8rem 2rem; background: white; border: 2px solid #e0e0e0; border-radius: 25px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
-        .filter-btn.active, .filter-btn:hover { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-color: transparent; }
-        .doctors-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-        .doctor-card { background: white; padding: 2.5rem; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); transition: all 0.3s; border: 2px solid #f0f0f0; }
-        .doctor-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(102,126,234,0.15); border-color: #667eea; }
-        .doctor-photo { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: white; box-shadow: 0 10px 30px rgba(102,126,234,0.3); }
-        .doctor-specialty { display: inline-block; padding: 0.5rem 1.5rem; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; font-size: 0.9rem; margin: 1rem 0; }
-        .doctor-rating { font-size: 1.5rem; margin: 1rem 0; color: #fbbf24; }
-        .doctor-info { margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 15px; }
-        .doctor-info p { margin: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem; }
-        
-        /* Assessment */
-        .assessment { padding: 6rem 5%; background: #f8f9fa; }
-        .assessment-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .assessment-form { background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
-        .voice-indicator { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; border-radius: 20px; margin-bottom: 2rem; text-align: center; animation: pulse 2s ease-in-out infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
-        .form-group { margin-bottom: 2rem; }
-        .form-group label { display: block; margin-bottom: 0.8rem; font-weight: 700; color: #333; font-size: 1.1rem; }
-        .form-group input, .form-group select { width: 100%; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 15px; font-size: 1.1rem; transition: all 0.3s; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,0.1); }
-        .dual-input { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .result-panel { background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); position: sticky; top: 100px; }
-        
-        @media (max-width: 968px) {
-            .hero-content, .assessment-container, .comparison-result, .comparison-selector { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .section-title { font-size: 2rem; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .chatbot-window { width: 90vw; right: 5vw; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            display: block;
+        }
+
+        .stat-label {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brain-icon {
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 200px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .assessment {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .assessment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .assessment-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .result-panel {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .risk-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .risk-level {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-percentage {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .risk-low {
+            color: #10b981;
+        }
+
+        .risk-medium {
+            color: #f59e0b;
+        }
+
+        .risk-high {
+            color: #ef4444;
+        }
+
+        .risk-factors {
+            margin-top: 2rem;
+        }
+
+        .risk-factor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .factor-name {
+            font-weight: 600;
+        }
+
+        .factor-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .recommendations h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .recommendations li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .problem {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .problem-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .history-section {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+        }
+
+        .history-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .history-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .history-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .history-risk {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .empty-history-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            background: #0f0f1e;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid #667eea;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* CHATBOT - TUZATILGAN */
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            /* YANGI: Markazlash */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        body.dark-mode .chatbot-window {
+            background: #1a1a2e;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+            animation: slideInUp 0.3s;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.9rem 1.2rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageSlide 0.3s;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: #eff6ff;
+            align-self: flex-start;
+        }
+
+        body.dark-mode .message.bot {
+            background: #16213e;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .chatbot-input {
+            border-top-color: #2c3e50;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        body.dark-mode .chatbot-input input {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        .chatbot-input button {
+            margin-left: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .notification {
+            background: white;
+            padding: 1.2rem 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 320px;
+            animation: slideInRight 0.3s;
+        }
+
+        body.dark-mode .notification {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        .notification.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode nav {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .assessment,
+        body.dark-mode .history-section {
+            background: #16213e;
+        }
+
+        body.dark-mode .assessment-form,
+        body.dark-mode .result-panel,
+        body.dark-mode .history-card,
+        body.dark-mode .chart-container,
+        body.dark-mode .problem-card,
+        body.dark-mode .modal-content {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        body.dark-mode .risk-factor {
+            background: #16213e;
+        }
+
+        body.dark-mode .recommendations {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-mode .section-title {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .progress-bar {
+            background: #2c3e50;
+        }
+
+        /* YANGI: Print qilish uchun stil */
+        @media print {
+            nav, .chatbot, .scroll-top, .action-buttons {
+                display: none !important;
+            }
+        }
+
+        /* YANGI: Animatsiyalar */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content,
+            .assessment-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .result-panel {
+                position: static;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .chatbot-window {
+                width: calc(100vw - 40px);
+            }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo">🧠 NeuroGuard AI Pro</div>
+        <div class="logo">🧠 NeuroGuard AI</div>
         <ul class="nav-links">
-            <li><a href="#home">Bosh</a></li>
+            <li><a href="#home">Bosh sahifa</a></li>
             <li><a href="#assessment">Tekshirish</a></li>
-            <li><a href="#videos">Video</a></li>
-            <li><a href="#calendar">Kalendar</a></li>
-            <li><a href="#family">Oila</a></li>
-            <li><a href="#comparison">Taqqoslash</a></li>
-            <li><a href="#upload">Hujjat</a></li>
-            <li><a href="#doctors">Shifokorlar</a></li>
+            <li><a href="#history">Tarix</a></li>
+            <li><a href="#problem">Muammo</a></li>
+            <li><a href="#contact">Aloqa</a></li>
+            <li>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="changeLanguage('uz')">UZ</button>
+                    <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
+                </div>
+            </li>
+            <li>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Tungi rejim">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </li>
         </ul>
     </nav>
 
@@ -182,589 +1100,312 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>Insultni <span class="highlight">Davolamasdan</span> Oldini Oling</h1>
-                <p style="font-size: 1.4rem; color: rgba(255,255,255,0.95); margin-bottom: 2rem;">
-                    Professional AI yordamida to'liq salomatlik monitoring
-                </p>
-                <div style="display: flex; gap: 1.5rem; margin-top: 2.5rem;">
-                    <a href="#assessment" class="btn btn-primary">🎤 Tekshirish</a>
-                    <a href="#videos" class="btn btn-primary" style="background: transparent; border: 2px solid white; color: white;">📹 Video</a>
+                <p>Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang va hayotingizni saqlang</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">12M+</span>
+                        <span class="stat-label">Yillik insult holatlari</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Oldini olish mumkin</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#assessment" class="btn btn-primary">Bepul Tekshirish</a>
+                    <a href="#problem" class="btn btn-secondary">Ko'proq o'rganish</a>
                 </div>
             </div>
-            <div style="text-align: center; font-size: 250px; animation: floatUpDown 3s ease-in-out infinite;">🧠</div>
+
+            <div class="hero-visual">
+                <div class="brain-icon">🧠</div>
+            </div>
         </div>
     </section>
 
     <section class="assessment" id="assessment">
-        <h2 class="section-title">🤖 AI Tekshirish</h2>
-        <p class="section-subtitle">Ovoz yoki qo'lda ma'lumot kiriting</p>
+        <h2 class="section-title">🤖 AI Yordamida Insult Xavfini Aniqlang</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">
+            Tibbiy ma'lumotlaringizni kiriting va sun'iy intellekt bir necha soniyada xavf darajasini aniqlaydi
+        </p>
+        
+        <div style="max-width: 800px; margin: 0 auto 3rem;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">0% to'ldirildi</div>
+            </div>
+        </div>
         
         <div class="assessment-container">
             <div class="assessment-form">
-                <div class="voice-indicator">
-                    <i class="fas fa-microphone" style="font-size: 2rem;"></i>
-                    <p style="margin-top: 0.5rem; font-weight: 600;">Ovoz Yordamchisi Faol</p>
-                    <p style="font-size: 0.9rem; opacity: 0.9;">Mikrofon tugmasini bosing</p>
+                <div class="ai-badge">
+                    🤖 AI Tahlilchi faol
                 </div>
 
                 <div class="form-group">
                     <label>🩺 Qon bosimi (mmHg)</label>
-                    <div class="dual-input">
-                        <input type="number" id="systolic" placeholder="Yuqori: 120" min="80" max="200">
-                        <input type="number" id="diastolic" placeholder="Quyi: 80" min="50" max="130">
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200" onchange="updateProgress()">
+                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130" onchange="updateProgress()">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>💓 Yurak urishi</label>
-                    <input type="number" id="heartrate" placeholder="72" min="40" max="150">
+                    <label>💓 Yurak urishi (bir daqiqada)</label>
+                    <input type="number" id="heartrate" placeholder="Masalan: 72" min="40" max="150" onchange="updateProgress()">
                 </div>
 
                 <div class="form-group">
-                    <label>🍬 Qand (mmol/L)</label>
-                    <input type="number" id="glucose" placeholder="5.5" step="0.1" min="3" max="20">
+                    <label>🍬 Qand miqdori (mmol/L)</label>
+                    <input type="number" id="glucose" placeholder="Masalan: 5.5" step="0.1" min="3" max="20" onchange="updateProgress()">
                 </div>
 
                 <div class="form-group">
                     <label>📏 Bo'y (sm)</label>
-                    <input type="number" id="height" placeholder="170" min="120" max="220">
+                    <input type="number" id="height" placeholder="Masalan: 170" min="120" max="220" onchange="updateProgress()">
                 </div>
 
                 <div class="form-group">
                     <label>⚖️ Vazn (kg)</label>
-                    <input type="number" id="weight" placeholder="70" min="30" max="200">
+                    <input type="number" id="weight" placeholder="Masalan: 70" min="30" max="200" onchange="updateProgress()">
                 </div>
 
                 <div class="form-group">
                     <label>👤 Yosh</label>
-                    <input type="number" id="age" placeholder="45" min="18" max="100">
+                    <input type="number" id="age" placeholder="Masalan: 45" min="18" max="100" onchange="updateProgress()">
                 </div>
 
-                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; font-size: 1.2rem;">
-                    🤖 Tahlil Qilish
+                <div class="form-group">
+                    <label>🚬 Chekasizmi?</label>
+                    <select id="smoking">
+                        <option value="no">Yo'q</option>
+                        <option value="yes">Ha</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏃 Jismoniy faollik (haftasiga)</label>
+                    <select id="exercise">
+                        <option value="none">Yo'q</option>
+                        <option value="light">1-2 kun</option>
+                        <option value="moderate">3-4 kun</option>
+                        <option value="active">5+ kun</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🧠 Nevrologik shikoyatlar</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="headache"> Tez-tez bosh og'rig'i</label>
+                        <label><input type="checkbox" id="dizziness"> Bosh aylanishi</label>
+                        <label><input type="checkbox" id="numbness"> Qo'l-oyoq kuchsizlanishi</label>
+                        <label><input type="checkbox" id="vision"> Ko'rish muammolari</label>
+                        <label><input type="checkbox" id="speech"> Nutq qiyinligi</label>
+                    </div>
+                </div>
+
+                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    🤖 AI Tahlil Qilsin
                 </button>
             </div>
 
             <div class="result-panel" id="resultPanel" style="display: none;">
-                <div style="text-align: center;" id="resultContent"></div>
-            </div>
-        </div>
-    </section>
+                <div class="result-header">
+                    <div class="risk-icon" id="riskIcon">🧠</div>
+                    <div class="risk-level" id="riskLevel">Tahlil Natijasi</div>
+                    <div class="risk-percentage" id="riskPercentage">--</div>
+                    <p id="riskDescription">Ma'lumotlar yuklanmoqda...</p>
+                </div>
 
-    <section class="video-section" id="videos">
-        <h2 class="section-title">📹 Video Darslar</h2>
-        <p class="section-subtitle">Professional shifokorlar tayyorlagan</p>
-        
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/5cFy0y8C2Bk" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Belgilar</span>
-                    <h3>Insult Belgilarini Aniqlash</h3>
-                    <p style="color: #666;">Insultning asosiy belgilari haqida</p>
-                </div>
-            </div>
+                <div class="risk-factors" id="riskFactors"></div>
 
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/j0ygN0bXhZ4" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Yordam</span>
-                    <h3>Birinchi Yordam</h3>
-                    <p style="color: #666;">Nima qilish kerak</p>
-                </div>
-            </div>
+                <div class="recommendations" id="recommendations"></div>
 
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/zypdFe5cEFA" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Profilaktika</span>
-                    <h3>Oldini Olish</h3>
-                    <p style="color: #666;">Sog'lom turmush tarzi</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/gD7eW5PcKTo" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Davolash</span>
-                    <h3>Davolash Usullari</h3>
-                    <p style="color: #666;">Zamonaviy davolash</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/ER1AyH-f2CE" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Ovqatlanish</span>
-                    <h3>Sog'lom Ovqatlanish</h3>
-                    <p style="color: #666;">To'g'ri parhez</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/cjfcUYIKmqk" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <span class="video-category">Sport</span>
-                    <h3>Jismoniy Faollik</h3>
-                    <p style="color: #666;">Foydali mashqlar</p>
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                    <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                    <!-- YANGI: Ulashish tugmasi -->
+                    <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 Ulashish</button>
+                    <!-- YANGI: Print tugmasi -->
+                    <button onclick="printResult()" class="btn btn-secondary btn-small">🖨️ Print</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="calendar-section" id="calendar">
-        <h2 class="section-title">📅 Salomatlik Kalendari</h2>
-        <p class="section-subtitle">Kunlik ko'rsatkichlar</p>
+    <section class="history-section" id="history">
+        <h2 class="section-title">📊 Tekshiruvlar Tarixi va Statistika</h2>
         
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <button onclick="previousMonth()" class="calendar-nav-btn">◀ Oldingi</button>
-                <div class="calendar-month-display" id="calendarMonth">2026 Fevral</div>
-                <button onclick="nextMonth()" class="calendar-nav-btn">Keyingi ▶</button>
-            </div>
-
-            <div class="calendar-weekdays">
-                <div class="weekday">Dush</div>
-                <div class="weekday">Sesh</div>
-                <div class="weekday">Chor</div>
-                <div class="weekday">Pay</div>
-                <div class="weekday">Jum</div>
-                <div class="weekday">Shan</div>
-                <div class="weekday">Yak</div>
-            </div>
-
-            <div class="calendar-grid" id="calendarGrid"></div>
-
-            <div class="health-stats-summary">
-                <div class="stat-card">
-                    <div class="stat-icon">🩺</div>
-                    <div class="stat-value">125/82</div>
-                    <p style="color: #666;">Qon Bosim</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">💓</div>
-                    <div class="stat-value">74</div>
-                    <p style="color: #666;">Puls</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🍬</div>
-                    <div class="stat-value">5.6</div>
-                    <p style="color: #666;">Qand</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📊</div>
-                    <div class="stat-value">18</div>
-                    <p style="color: #666;">Tekshiruvlar</p>
+        <div class="history-container">
+            <div class="history-controls">
+                <h3>Sizning tekshiruvlaringiz</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <!-- YANGI: Eksport tugmasi -->
+                    <button onclick="exportHistory()" class="btn btn-secondary btn-small">📥 Eksport (JSON)</button>
+                    <button onclick="clearHistory()" class="btn btn-secondary btn-small">🗑️ Tarixni Tozalash</button>
                 </div>
             </div>
 
-            <div class="reminders-panel">
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.5rem;">📝 Eslatmalar</h4>
-                <div id="remindersList">
-                    <div class="reminder-item">
-                        <span><i class="fas fa-check-circle" style="color: #10b981;"></i> Ertalab dori</span>
-                        <span onclick="this.parentElement.remove()" style="cursor: pointer; color: #ef4444; font-size: 1.5rem;">×</span>
-                    </div>
-                </div>
-                <button onclick="addReminder()" class="btn btn-primary" style="margin-top: 1.5rem;">
-                    + Qo'shish
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section class="family-section" id="family">
-        <h2 class="section-title">👨‍👩‍👧‍👦 Oila Monitoring</h2>
-        <p class="section-subtitle">Oilangizning salomatligi</p>
-        
-        <div>
-            <div class="family-stats">
-                <div class="family-stat-card">
-                    <div style="font-size: 3rem;">👥</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">4</div>
-                    <p>A'zolar</p>
-                </div>
-                <div class="family-stat-card">
-                    <div style="font-size: 3rem;">✅</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">3</div>
-                    <p>Sog'lom</p>
-                </div>
-                <div class="family-stat-card">
-                    <div style="font-size: 3rem;">⚠️</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">1</div>
-                    <p>Nazorat</p>
-                </div>
-                <div class="family-stat-card">
-                    <div style="font-size: 3rem;">📊</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;">45</div>
-                    <p>Tekshiruvlar</p>
-                </div>
-            </div>
-
-            <div class="family-members" id="familyMembers">
-                <div class="member-card">
-                    <div class="member-avatar">👨</div>
-                    <h3>Siz</h3>
-                    <p style="color: #666;">45 yosh</p>
-                    <div class="member-status status-low">✅ 28%</div>
-                    <canvas class="member-health-chart" id="chart1"></canvas>
-                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
-                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 125/82</p>
-                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 74</p>
-                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 5.6</p>
+            <div id="chartSection" style="display: none;">
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📈 Xavf Darajasi Dinamikasi</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="riskChart"></canvas>
                     </div>
                 </div>
 
-                <div class="member-card">
-                    <div class="member-avatar">👩</div>
-                    <h3>Dilnoza</h3>
-                    <p style="color: #666;">42 yosh</p>
-                    <div class="member-status status-low">✅ 22%</div>
-                    <canvas class="member-health-chart" id="chart2"></canvas>
-                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
-                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 118/78</p>
-                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 68</p>
-                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 5.2</p>
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📊 Parametrlar Taqqoslash</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="parametersChart"></canvas>
                     </div>
                 </div>
+            </div>
 
-                <div class="member-card">
-                    <div class="member-avatar">👨‍🦳</div>
-                    <h3>Otam</h3>
-                    <p style="color: #666;">68 yosh</p>
-                    <div class="member-status status-medium">⚠️ 52%</div>
-                    <canvas class="member-health-chart" id="chart3"></canvas>
-                    <div style="padding: 1rem; background: #f8f9fa; border-radius: 15px; text-align: left; margin-top: 1rem;">
-                        <p style="margin: 0.3rem 0;"><strong>Bosim:</strong> 145/92</p>
-                        <p style="margin: 0.3rem 0;"><strong>Puls:</strong> 82</p>
-                        <p style="margin: 0.3rem 0;"><strong>Qand:</strong> 6.8</p>
-                    </div>
-                </div>
+            <div id="historyList" class="history-grid"></div>
 
-                <div class="member-card add-member-card" onclick="addFamilyMember()">
-                    <i class="fas fa-user-plus" style="font-size: 5rem; color: #667eea;"></i>
-                    <h3 style="color: #667eea; margin-top: 1rem;">+ A'zo Qo'shish</h3>
-                </div>
+            <div id="emptyHistory" class="empty-history" style="display: none;">
+                <div class="empty-history-icon">📋</div>
+                <h3>Hali tekshiruvlar yo'q</h3>
+                <p>Birinchi tekshiruvingizni o'tkazing va natijalar bu yerda saqlanadi</p>
+                <a href="#assessment" class="btn btn-primary" style="margin-top: 1rem;">Tekshirish Boshlash</a>
             </div>
         </div>
     </section>
 
-    <section class="comparison-section" id="comparison">
-        <h2 class="section-title">📊 Taqqoslash</h2>
-        <p class="section-subtitle">Taraqqiyotni kuzatish</p>
-        
-        <div class="comparison-container">
-            <div class="comparison-selector">
-                <select class="date-selector">
-                    <option>12 Fevral 2026</option>
-                    <option>5 Fevral 2026</option>
-                </select>
-                <div class="comparison-vs">⚡</div>
-                <select class="date-selector">
-                    <option>5 Fevral 2026</option>
-                    <option>29 Yanvar 2026</option>
-                </select>
-            </div>
-
-            <div class="comparison-result">
-                <div class="comparison-card">
-                    <h3>12 Fevral</h3>
-                    <div style="font-size: 4rem; font-weight: 700; color: #10b981; margin: 1.5rem 0;">28%</div>
-                    <p style="font-size: 1.2rem; color: #065f46; font-weight: 600;">✅ Past</p>
-                    <canvas class="comparison-chart" id="compChart1"></canvas>
-                </div>
-                <div class="comparison-card">
-                    <h3>5 Fevral</h3>
-                    <div style="font-size: 4rem; font-weight: 700; color: #f59e0b; margin: 1.5rem 0;">45%</div>
-                    <p style="font-size: 1.2rem; color: #92400e; font-weight: 600;">⚠️ O'rtacha</p>
-                    <canvas class="comparison-chart" id="compChart2"></canvas>
-                </div>
-            </div>
-
-            <div class="improvement-banner">
-                <h3 style="color: #065f46; font-size: 2rem;">🎉 17% Yaxshilanish!</h3>
-                <p style="font-size: 1.2rem; color: #065f46; margin-top: 1rem;">Davom eting!</p>
-            </div>
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
         </div>
-    </section>
-
-    <section class="upload-section" id="upload">
-        <h2 class="section-title">📄 Hujjat Yuklash</h2>
-        <p class="section-subtitle">AI tahlil qiladi</p>
-        
-        <div class="upload-container">
-            <div class="drop-zone" id="dropZone">
-                <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                <h3>Hujjat Torting</h3>
-                <p style="margin: 1rem 0;">yoki</p>
-                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
-                    Fayl Tanlash
-                </button>
-                <input type="file" id="fileInput" style="display: none;" accept=".pdf,.jpg,.png" onchange="handleFileUpload(event)">
-                <p style="margin-top: 2rem; color: #999;">PDF, JPG, PNG (Max 10MB)</p>
-            </div>
-            <div id="uploadedFiles"></div>
-        </div>
-    </section>
-
-    <section class="doctors-section" id="doctors">
-        <h2 class="section-title">🏥 Shifokorlar</h2>
-        <p class="section-subtitle">Professional mutaxassislar</p>
-        
-        <div class="doctors-filter">
-            <button class="filter-btn active" onclick="filterDoctors('all',this)">Barchasi</button>
-            <button class="filter-btn" onclick="filterDoctors('neurolog',this)">Nevrolog</button>
-            <button class="filter-btn" onclick="filterDoctors('kardiolog',this)">Kardiolog</button>
-            <button class="filter-btn" onclick="filterDoctors('terapevt',this)">Terapevt</button>
-        </div>
-
-        <div class="doctors-grid" id="doctorsGrid">
-            <div class="doctor-card" data-specialty="neurolog">
-                <div class="doctor-photo">👨‍⚕️</div>
-                <h3>Dr. Aliev Sardor</h3>
-                <span class="doctor-specialty">Nevrolog</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
-                <p style="color: #666;">20 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 91 234 56 78</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-
-            <div class="doctor-card" data-specialty="kardiolog">
-                <div class="doctor-photo">👩‍⚕️</div>
-                <h3>Dr. Karimova Nodira</h3>
-                <span class="doctor-specialty">Kardiolog</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.8)</div>
-                <p style="color: #666;">15 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 93 345 67 89</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-
-            <div class="doctor-card" data-specialty="terapevt">
-                <div class="doctor-photo">👨‍⚕️</div>
-                <h3>Dr. Rahimov Jasur</h3>
-                <span class="doctor-specialty">Terapevt</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.7)</div>
-                <p style="color: #666;">12 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 90 123 45 67</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-
-            <div class="doctor-card" data-specialty="neurolog">
-                <div class="doctor-photo">👨‍⚕️</div>
-                <h3>Dr. Ibragimov Davron</h3>
-                <span class="doctor-specialty">Nevrolog</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.8)</div>
-                <p style="color: #666;">22 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 91 876 54 32</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-
-            <div class="doctor-card" data-specialty="kardiolog">
-                <div class="doctor-photo">👩‍⚕️</div>
-                <h3>Dr. Umarova Nilufar</h3>
-                <span class="doctor-specialty">Kardiolog</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
-                <p style="color: #666;">14 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 93 234 56 78</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-
-            <div class="doctor-card" data-specialty="terapevt">
-                <div class="doctor-photo">👩‍⚕️</div>
-                <h3>Dr. Saidova Malika</h3>
-                <span class="doctor-specialty">Terapevt</span>
-                <div class="doctor-rating">⭐⭐⭐⭐⭐ (4.9)</div>
-                <p style="color: #666;">18 yillik tajriba</p>
-                <div class="doctor-info">
-                    <p><i class="fas fa-map-marker-alt" style="color: #667eea;"></i> Samarqand</p>
-                    <p><i class="fas fa-phone" style="color: #667eea;"></i> +998 94 567 89 01</p>
-                </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">📅 Uchrashuv</button>
-            </div>
-        </div>
-    </section>
-
-    <div class="voice-assistant">
-        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">
-            <i class="fas fa-microphone"></i>
-        </button>
     </div>
 
-    <div class="voice-feedback" id="voiceFeedback">
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <i class="fas fa-microphone" style="font-size: 2rem; color: #10b981;"></i>
-            <strong>Tinglayapman...</strong>
+    <section class="problem" id="problem">
+        <h2 class="section-title">Nima uchun NeuroGuard AI?</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">💔</div>
+                <h3>O'lim Sababi #2</h3>
+                <p>Insult dunyoda ikkinchi eng katta o'lim sababi hisoblanadi</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">⏰</div>
+                <h3>Har 5 Soniyada</h3>
+                <p>Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">✅</div>
+                <h3>85% Oldini Olish Mumkin</h3>
+                <p>Erta aniqlash orqali insultning oldini olish mumkin</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🤖</div>
+                <h3>AI Texnologiyasi</h3>
+                <p>Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
+            </div>
         </div>
-        <p id="voiceText"></p>
-    </div>
+    </section>
 
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>NeuroGuard AI</h4>
+                <p>Insultni oldini olish uchun sun'iy intellekt platformasi</p>
+            </div>
+            <div class="footer-section">
+                <h4>Havolalar</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Biz haqimizda</a></li>
+                    <li><a href="#">Platforma</a></li>
+                    <li><a href="#">Hamkorlik</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Aloqa</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@neuroguard.ai">info@neuroguard.ai</a></li>
+                    <li><a href="#">+998 93 482 55 77</a></li>
+                    <li><a href="#">Samarkand, O'zbekiston</a></li>
+                </ul>
+            </div>
+        </div>
+        <p style="opacity: 0.7; margin-top: 2rem;">© 2026 NeuroGuard AI. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <!-- AI Chatbot - TUZATILGAN IKONKA BILAN -->
     <div class="chatbot">
-        <button class="chatbot-toggle" onclick="toggleChat()">
-            <i class="fas fa-robot"></i>
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i>
         </button>
-        <div class="chatbot-window" id="chatWindow">
+        <div class="chatbot-window" id="chatbotWindow">
             <div class="chatbot-header">
-                <div>
-                    <strong style="font-size: 1.2rem;">AI Doktor</strong>
-                    <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 0.3rem;">24/7 onlayn</p>
-                </div>
-                <button onclick="toggleChat()" style="background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
+                <div><i class="fas fa-robot"></i> <strong>AI Yordamchi</strong></div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <div class="chatbot-messages" id="chatMessages">
                 <div class="message bot">
-                    👋 Salom! Men AI yordamchiman. Insult, qon bosimi, qand, sport, ovqatlanish haqida maslahat bera olaman. Savolingizni yozing!
+                    Salom! Men sizga insult xavfi va tekshiruvlar haqida yordam bera olaman! 🤖
                 </div>
             </div>
-            <div style="display: flex; padding: 1rem; border-top: 1px solid #e0e0e0; background: white;">
-                <input type="text" id="chatInput" placeholder="Savolingiz..." 
-                       style="flex: 1; padding: 1rem; border: 2px solid #e0e0e0; border-radius: 25px;" 
-                       onkeypress="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()" 
-                        style="margin-left: 0.8rem; padding: 1rem 1.8rem; background: linear-gradient(135deg, #667eea, #764ba2); 
-                               color: white; border: none; border-radius: 25px; cursor: pointer;">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        let voiceRecognition = null;
-        let isListening = false;
-        let currentMonth = 1;
-        let currentYear = 2026;
-        let chatOpen = false;
+        let currentResult = null;
+        let riskChart = null;
+        let parametersChart = null;
 
-        function initVoice() {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                voiceRecognition = new SpeechRecognition();
-                voiceRecognition.lang = 'uz-UZ';
-                voiceRecognition.continuous = false;
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
-                voiceRecognition.onresult = function(event) {
-                    const transcript = event.results[0][0].transcript.toLowerCase();
-                    processVoiceCommand(transcript);
-                };
+        window.addEventListener('load', function() {
+            loadDarkMode();
+            loadHistory();
+            showNotification('👋 Xush kelibsiz! NeuroGuard AI platformasiga!', 'success');
+        });
 
-                voiceRecognition.onerror = function() {
-                    stopListening();
-                    showVoiceFeedback('❌ Xato. Qaytadan urinib ko\'ring.');
-                };
-
-                voiceRecognition.onend = function() {
-                    stopListening();
-                };
-            }
+        // Progress Bar
+        function updateProgress() {
+            const fields = ['systolic', 'diastolic', 'heartrate', 'glucose', 'height', 'weight', 'age'];
+            let filled = 0;
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.value) filled++;
+            });
+            const percentage = Math.round((filled / fields.length) * 100);
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            if (bar) bar.style.width = percentage + '%';
+            if (text) text.textContent = percentage + '% to\'ldirildi';
         }
 
-        function toggleVoice() {
-            if (!voiceRecognition) initVoice();
-            if (isListening) {
-                voiceRecognition.stop();
-            } else {
-                startListening();
-            }
-        }
-
-        function startListening() {
-            if (!voiceRecognition) return;
-            isListening = true;
-            document.getElementById('voiceBtn').classList.add('listening');
-            document.getElementById('voiceFeedback').style.display = 'block';
-            voiceRecognition.start();
-        }
-
-        function stopListening() {
-            isListening = false;
-            document.getElementById('voiceBtn').classList.remove('listening');
-            setTimeout(() => {
-                document.getElementById('voiceFeedback').style.display = 'none';
-            }, 3000);
-        }
-
-        function showVoiceFeedback(text) {
-            document.getElementById('voiceText').textContent = text;
-            document.getElementById('voiceFeedback').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('voiceFeedback').style.display = 'none';
-            }, 3000);
-        }
-
-        function processVoiceCommand(text) {
-            const bpMatch = text.match(/(?:qon bosim|bosim).*?(\d+).*?(\d+)/i);
-            if (bpMatch) {
-                document.getElementById('systolic').value = bpMatch[1];
-                document.getElementById('diastolic').value = bpMatch[2];
-                showVoiceFeedback(`✅ Qon bosimi: ${bpMatch[1]}/${bpMatch[2]}`);
-                return;
-            }
-
-            const hrMatch = text.match(/(?:yurak|puls).*?(\d+)/i);
-            if (hrMatch) {
-                document.getElementById('heartrate').value = hrMatch[1];
-                showVoiceFeedback(`✅ Yurak: ${hrMatch[1]}`);
-                return;
-            }
-
-            const glucoseMatch = text.match(/qand.*?(\d+\.?\d*)/i);
-            if (glucoseMatch) {
-                document.getElementById('glucose').value = glucoseMatch[1];
-                showVoiceFeedback(`✅ Qand: ${glucoseMatch[1]}`);
-                return;
-            }
-
-            const heightMatch = text.match(/bo['']?y.*?(\d+)/i);
-            if (heightMatch) {
-                document.getElementById('height').value = heightMatch[1];
-                showVoiceFeedback(`✅ Bo'y: ${heightMatch[1]}`);
-                return;
-            }
-
-            const weightMatch = text.match(/vazn.*?(\d+)/i);
-            if (weightMatch) {
-                document.getElementById('weight').value = weightMatch[1];
-                showVoiceFeedback(`✅ Vazn: ${weightMatch[1]}`);
-                return;
-            }
-
-            const ageMatch = text.match(/yosh.*?(\d+)/i);
-            if (ageMatch) {
-                document.getElementById('age').value = ageMatch[1];
-                showVoiceFeedback(`✅ Yosh: ${ageMatch[1]}`);
-                return;
-            }
-
-            showVoiceFeedback('❓ Tushunmadim');
-        }
-
-        function analyzeRisk() {
+        // Tahlil funksiyasi
+        async function analyzeRisk() {
             const systolic = parseFloat(document.getElementById('systolic').value);
             const diastolic = parseFloat(document.getElementById('diastolic').value);
             const heartrate = parseFloat(document.getElementById('heartrate').value);
@@ -772,383 +1413,660 @@
             const height = parseFloat(document.getElementById('height').value);
             const weight = parseFloat(document.getElementById('weight').value);
             const age = parseFloat(document.getElementById('age').value);
+            const smoking = document.getElementById('smoking').value;
+            const exercise = document.getElementById('exercise').value;
 
             if (!systolic || !diastolic || !heartrate || !glucose || !height || !weight || !age) {
-                alert('⚠️ Barcha maydonlarni to\'ldiring!');
+                alert('Iltimos, barcha maydonlarni to\'ldiring!');
                 return;
             }
 
             const resultPanel = document.getElementById('resultPanel');
             resultPanel.style.display = 'block';
-            resultPanel.scrollIntoView({ behavior: 'smooth' });
+            resultPanel.innerHTML = '<div class="loading"><div class="spinner"></div><p>AI tahlil qilmoqda...</p></div>';
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             setTimeout(() => {
                 const bmi = weight / ((height / 100) ** 2);
                 let riskScore = 0;
+                const factors = [];
 
-                if (systolic > 140 || diastolic > 90) riskScore += 25;
-                else if (systolic > 130 || diastolic > 85) riskScore += 15;
+                if (systolic > 140 || diastolic > 90) {
+                    riskScore += 25;
+                    factors.push({ name: 'Qon bosimi', status: 'danger', text: 'Yuqori (Xavfli)' });
+                } else if (systolic > 130 || diastolic > 85) {
+                    riskScore += 15;
+                    factors.push({ name: 'Qon bosimi', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qon bosimi', status: 'good', text: 'Normal' });
+                }
 
-                if (heartrate > 100 || heartrate < 60) riskScore += 15;
+                if (heartrate > 100 || heartrate < 60) {
+                    riskScore += 15;
+                    factors.push({ name: 'Yurak urishi', status: 'warning', text: 'Beqaror' });
+                } else {
+                    factors.push({ name: 'Yurak urishi', status: 'good', text: 'Normal' });
+                }
 
-                if (glucose > 7.0) riskScore += 20;
-                else if (glucose > 6.0) riskScore += 10;
+                if (glucose > 7.0) {
+                    riskScore += 20;
+                    factors.push({ name: 'Qand miqdori', status: 'danger', text: 'Yuqori' });
+                } else if (glucose > 6.0) {
+                    riskScore += 10;
+                    factors.push({ name: 'Qand miqdori', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qand miqdori', status: 'good', text: 'Normal' });
+                }
 
-                if (bmi > 30) riskScore += 15;
-                else if (bmi > 25) riskScore += 8;
+                if (bmi > 30) {
+                    riskScore += 15;
+                    factors.push({ name: 'BMI', status: 'danger', text: `${bmi.toFixed(1)} - Ortiqcha vazn` });
+                } else if (bmi > 25) {
+                    riskScore += 8;
+                    factors.push({ name: 'BMI', status: 'warning', text: `${bmi.toFixed(1)} - Me\'yordan yuqori` });
+                } else {
+                    factors.push({ name: 'BMI', status: 'good', text: `${bmi.toFixed(1)} - Normal` });
+                }
 
                 if (age > 65) riskScore += 15;
                 else if (age > 55) riskScore += 10;
                 else if (age > 45) riskScore += 5;
 
-                riskScore = Math.min(riskScore, 100);
-
-                let riskLevel, riskColor, riskIcon, advice;
-                if (riskScore < 30) {
-                    riskLevel = '✅ Past Xavf';
-                    riskColor = '#10b981';
-                    riskIcon = '✅';
-                    advice = 'Ajoyib! Salomatingiz yaxshi.';
-                } else if (riskScore < 60) {
-                    riskLevel = '⚠️ O\'rtacha';
-                    riskColor = '#f59e0b';
-                    riskIcon = '⚠️';
-                    advice = 'E\'tibor! Shifokorga murojaat qiling.';
+                if (smoking === 'yes') {
+                    riskScore += 20;
+                    factors.push({ name: 'Chekish', status: 'danger', text: 'Ha (Katta xavf)' });
                 } else {
-                    riskLevel = '🚨 Yuqori Xavf';
-                    riskColor = '#ef4444';
-                    riskIcon = '🚨';
-                    advice = 'MUHIM! Zudlik bilan shifokorga!';
+                    factors.push({ name: 'Chekish', status: 'good', text: 'Yo\'q' });
                 }
 
+                const exercisePoints = { 'none': 10, 'light': 5, 'moderate': 2, 'active': 0 };
+                riskScore += exercisePoints[exercise];
+
+                if (exercise === 'none') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'danger', text: 'Yo\'q' });
+                } else if (exercise === 'light') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'warning', text: 'Kam' });
+                } else {
+                    factors.push({ name: 'Jismoniy faollik', status: 'good', text: 'Yetarli' });
+                }
+
+                const neuroSymptoms = [];
+                if (document.getElementById('headache').checked) {
+                    neuroSymptoms.push('Bosh og\'rig\'i');
+                    riskScore += 5;
+                }
+                if (document.getElementById('dizziness').checked) {
+                    neuroSymptoms.push('Bosh aylanishi');
+                    riskScore += 7;
+                }
+                if (document.getElementById('numbness').checked) {
+                    neuroSymptoms.push('Uyqusizlik');
+                    riskScore += 10;
+                }
+                if (document.getElementById('vision').checked) {
+                    neuroSymptoms.push('Ko\'rish muammosi');
+                    riskScore += 8;
+                }
+                if (document.getElementById('speech').checked) {
+                    neuroSymptoms.push('Nutq qiyinligi');
+                    riskScore += 10;
+                }
+
+                if (neuroSymptoms.length > 0) {
+                    factors.push({ 
+                        name: 'Nevrologik alomatlar', 
+                        status: neuroSymptoms.length > 2 ? 'danger' : 'warning', 
+                        text: neuroSymptoms.join(', ') 
+                    });
+                }
+
+                riskScore = Math.min(riskScore, 100);
+
+                let riskLevel, riskClass, riskIcon, riskDescription;
+                if (riskScore < 30) {
+                    riskLevel = 'Past Xavf';
+                    riskClass = 'risk-low';
+                    riskIcon = '✅';
+                    riskDescription = 'Sizning insult xavfingiz past. Sog\'lom turmush tarzini davom ettiring!';
+                } else if (riskScore < 60) {
+                    riskLevel = 'O\'rtacha Xavf';
+                    riskClass = 'risk-medium';
+                    riskIcon = '⚠️';
+                    riskDescription = 'Ehtiyot bo\'ling! Ba\'zi omillar tuzatishni talab qiladi.';
+                } else {
+                    riskLevel = 'Yuqori Xavf';
+                    riskClass = 'risk-high';
+                    riskIcon = '🚨';
+                    riskDescription = 'Zudlik bilan shifokorga murojaat qiling! Insult xavfi yuqori.';
+                }
+
+                const recommendations = [];
+                if (systolic > 140 || diastolic > 90) {
+                    recommendations.push('Qon bosimini doimiy nazorat qiling va shifokor bilan maslahatlashing');
+                }
+                if (glucose > 6.0) {
+                    recommendations.push('Qandli ovqatlarni kamaytiring, shirinliklardan voz keching');
+                }
+                if (bmi > 25) {
+                    recommendations.push('Vazningizni kamaytirish uchun sog\'lom ovqatlanish rejimiga o\'ting');
+                }
+                if (smoking === 'yes') {
+                    recommendations.push('Chekishni tark eting - bu eng muhim qadam!');
+                }
+                if (exercise === 'none' || exercise === 'light') {
+                    recommendations.push('Kuniga kamida 30 daqiqa jismoniy mashqlar qiling');
+                }
+                if (neuroSymptoms.length > 0) {
+                    recommendations.push('Nevrologga murojaat qiling va batafsil tekshiruvdan o\'ting');
+                }
+                if (recommendations.length === 0) {
+                    recommendations.push('Sog\'lom turmush tarzini davom ettiring');
+                    recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
+                }
+
+                currentResult = {
+                    date: new Date().toISOString(),
+                    riskScore: riskScore,
+                    riskLevel: riskLevel,
+                    riskClass: riskClass,
+                    data: { systolic, diastolic, heartrate, glucose, height, weight, age, smoking, exercise, bmi },
+                    factors: factors,
+                    recommendations: recommendations,
+                    neuroSymptoms: neuroSymptoms
+                };
+
+                let factorsHTML = '';
+                factors.forEach(factor => {
+                    factorsHTML += `
+                        <div class="risk-factor">
+                            <span class="factor-name">${factor.name}</span>
+                            <span class="factor-status status-${factor.status}">${factor.text}</span>
+                        </div>
+                    `;
+                });
+
+                let recsHTML = '<h4>🎯 Tavsiyalar:</h4><ul>';
+                recommendations.forEach(rec => {
+                    recsHTML += `<li>${rec}</li>`;
+                });
+                recsHTML += '</ul>';
+
                 resultPanel.innerHTML = `
-                    <div style="font-size: 6rem;">${riskIcon}</div>
-                    <div style="font-size: 4.5rem; font-weight: 700; color: ${riskColor}; margin: 1.5rem 0;">
-                        ${riskScore}%
+                    <div class="result-header">
+                        <div class="risk-icon">${riskIcon}</div>
+                        <div class="risk-level ${riskClass}">${riskLevel}</div>
+                        <div class="risk-percentage ${riskClass}">${riskScore}%</div>
+                        <p>${riskDescription}</p>
                     </div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">${riskLevel}</h3>
-                    <p style="color: #666; margin-bottom: 2rem;">${advice}</p>
-                    
-                    <div style="text-align: left; padding: 2rem; background: #f8f9fa; border-radius: 20px;">
-                        <h4 style="margin-bottom: 1rem;">📊 Ma'lumot:</h4>
-                        <p><strong>Qon bosimi:</strong> ${systolic}/${diastolic}</p>
-                        <p><strong>Yurak:</strong> ${heartrate}</p>
-                        <p><strong>Qand:</strong> ${glucose}</p>
-                        <p><strong>BMI:</strong> ${bmi.toFixed(1)}</p>
-                        <p><strong>Yosh:</strong> ${age}</p>
+                    <div class="risk-factors">
+                        <h3 style="margin-bottom: 1rem; color: #333;">📊 Tahlil Natijalari:</h3>
+                        ${factorsHTML}
                     </div>
-                `;
-            }, 1000);
-        }
-
-        function toggleChat() {
-            chatOpen = !chatOpen;
-            document.getElementById('chatWindow').classList.toggle('active', chatOpen);
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const msg = input.value.trim();
-            if (!msg) return;
-
-            const container = document.getElementById('chatMessages');
-            container.innerHTML += `<div class="message user">${msg}</div>`;
-            input.value = '';
-
-            container.innerHTML += `
-                <div class="typing-indicator" id="typing">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            `;
-            container.scrollTop = container.scrollHeight;
-
-            setTimeout(() => {
-                document.getElementById('typing').remove();
-                container.innerHTML += `<div class="message bot">${getAIResponse(msg)}</div>`;
-                container.scrollTop = container.scrollHeight;
-            }, 1500);
-        }
-
-        function getAIResponse(msg) {
-            msg = msg.toLowerCase();
-            
-            if (msg.includes('insult') || msg.includes('stroke')) {
-                return `🧠 <strong>Insult</strong> - miyaga qon oqimi to'xtoq.
-                <br><br><strong>Belgilar:</strong>
-                <br>• Yuz tushishi
-                <br>• Qo'l/oyoq kuchsizligi
-                <br>• Gapirish qiyinligi
-                <br><br>⚠️ 103 ga qo'ng'iroq qiling!`;
-            }
-            
-            if (msg.includes('bosim') || msg.includes('pressure')) {
-                return `🩺 <strong>Qon bosimi:</strong>
-                <br><br><strong>Normal:</strong> 120/80 mmHg
-                <br><strong>Yuqori:</strong> ≥140/90
-                <br><br><strong>Kamaytirish:</strong>
-                <br>• Tuz kamaytiring
-                <br>• Sog'lom ovqatlaning
-                <br>• Sport qiling
-                <br>• Stressdan saqlaning`;
-            }
-            
-            if (msg.includes('qand') || msg.includes('diabet')) {
-                return `🍬 <strong>Qand:</strong>
-                <br><br><strong>Normal:</strong> 3.9-5.6 mmol/L
-                <br><strong>Diabet:</strong> ≥7.0 mmol/L
-                <br><br><strong>Nazorat:</strong>
-                <br>• Shirinlik kamaytiring
-                <br>• Sabzavot ko'p iste'mol qiling
-                <br>• Sport qiling`;
-            }
-            
-            if (msg.includes('sport') || msg.includes('mashq')) {
-                return `🏃 <strong>Jismoniy faollik:</strong>
-                <br><br><strong>Tavsiya:</strong>
-                <br>• Kuniga 30 daqiqa yurish
-                <br>• Suzish
-                <br>• Velosiped
-                <br>• Yoga
-                <br><br>✅ Asta-sekin boshlang!`;
-            }
-            
-            if (msg.includes('ovqat') || msg.includes('diet')) {
-                return `🥗 <strong>Sog'lom ovqatlanish:</strong>
-                <br><br><strong>Yaxshi:</strong>
-                <br>• Sabzavot va meva
-                <br>• Baliq
-                <br>• Yong'oq
-                <br><br><strong>Kamaytiring:</strong>
-                <br>• Tuz
-                <br>• Shirinlik
-                <br>• Yog'`;
-            }
-
-            return `Men tibbiy maslahatlar, insult, qon bosimi, qand, sport, ovqatlanish haqida ma'lumot bera olaman. Savolingizni batafsil yozing!`;
-        }
-
-        function loadCalendar() {
-            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-            const grid = document.getElementById('calendarGrid');
-            const today = new Date();
-            
-            grid.innerHTML = '';
-
-            const offset = firstDay === 0 ? 6 : firstDay - 1;
-            for (let i = 0; i < offset; i++) {
-                grid.innerHTML += '<div></div>';
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const isToday = today.getDate() === day && today.getMonth() === currentMonth && today.getFullYear() === currentYear;
-                const hasData = Math.random() > 0.65;
-                
-                grid.innerHTML += `
-                    <div class="calendar-day ${hasData ? 'has-data' : ''} ${isToday ? 'today' : ''}" onclick="showDayDetails(${day})">
-                        <div style="font-weight: ${isToday ? '700' : '600'};">${day}</div>
+                    <div class="recommendations">
+                        ${recsHTML}
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 10px; border-left: 4px solid #ffc107;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #856404;">
+                            ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
+                        </p>
+                    </div>
+                    <div class="action-buttons">
+                        <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                        <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                        <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 Ulashish</button>
+                        <button onclick="printResult()" class="btn btn-secondary btn-small">🖨️ Print</button>
                     </div>
                 `;
-            }
-
-            const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
-            document.getElementById('calendarMonth').textContent = `${currentYear} ${months[currentMonth]}`;
+            }, 2000);
         }
 
-        function previousMonth() {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            loadCalendar();
+        function saveResult() {
+            if (!currentResult) return;
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.unshift(currentResult);
+            if (history.length > 20) history = history.slice(0, 20);
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            showNotification('✅ Natija muvaffaqiyatli saqlandi!', 'success');
+            loadHistory();
+            document.getElementById('history').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function nextMonth() {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            loadCalendar();
-        }
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const historyList = document.getElementById('historyList');
+            const emptyHistory = document.getElementById('emptyHistory');
+            const chartSection = document.getElementById('chartSection');
 
-        function showDayDetails(day) {
-            alert(`${day} kun\n\n📊 Ko'rsatkichlar:\n🩺 Bosim: 125/82\n💓 Puls: 74\n🍬 Qand: 5.8\n\n✅ Normal!`);
-        }
-
-        function addReminder() {
-            const reminder = prompt('Eslatma:');
-            if (!reminder) return;
-
-            const list = document.getElementById('remindersList');
-            const div = document.createElement('div');
-            div.className = 'reminder-item';
-            div.innerHTML = `
-                <span><i class="fas fa-bell" style="color: #f59e0b;"></i> ${reminder}</span>
-                <span onclick="this.parentElement.remove()" style="cursor: pointer; color: #ef4444; font-size: 1.5rem;">×</span>
-            `;
-            list.appendChild(div);
-        }
-
-        function addFamilyMember() {
-            const name = prompt('Ism:');
-            if (!name) return;
-
-            const container = document.getElementById('familyMembers');
-            const div = document.createElement('div');
-            div.className = 'member-card';
-            div.innerHTML = `
-                <div class="member-avatar">👤</div>
-                <h3>${name}</h3>
-                <p style="color: #666;">Tekshiruv kerak</p>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;">Tekshirish</button>
-                <button onclick="this.closest('.member-card').remove()" 
-                        style="width: 100%; margin-top: 0.5rem; padding: 0.8rem; background: #fee2e2; 
-                               color: #991b1b; border: none; border-radius: 15px; cursor: pointer;">
-                    O'chirish
-                </button>
-            `;
-            container.insertBefore(div, container.lastElementChild);
-        }
-
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            if (file.size > 10 * 1024 * 1024) {
-                alert('❌ Max 10MB!');
+            if (history.length === 0) {
+                emptyHistory.style.display = 'block';
+                historyList.style.display = 'none';
+                chartSection.style.display = 'none';
                 return;
             }
 
-            const container = document.getElementById('uploadedFiles');
-            container.innerHTML = `
-                <div class="uploaded-file-card">
-                    <div style="display: flex; align-items: center; gap: 1.5rem;">
-                        <i class="fas fa-file" style="font-size: 3rem; color: #667eea;"></i>
-                        <div style="flex: 1;">
-                            <h4>${file.name}</h4>
-                            <p style="color: #666;">${(file.size / 1024).toFixed(2)} KB</p>
-                        </div>
-                        <i class="fas fa-check-circle" style="font-size: 3rem; color: #10b981;"></i>
-                    </div>
-                    <div style="margin-top: 2rem; padding: 2rem; background: #d1fae5; border-radius: 15px;">
-                        <h5 style="color: #065f46;">✅ AI tahlil muvaffaqiyatli!</h5>
-                        <p style="color: #065f46; margin-top: 1rem;">Hujjat qayta ishlandi</p>
-                    </div>
-                </div>
-            `;
-        }
+            emptyHistory.style.display = 'none';
+            historyList.style.display = 'grid';
+            chartSection.style.display = 'block';
 
-        const dropZone = document.getElementById('dropZone');
-        if (dropZone) {
-            dropZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dropZone.classList.add('dragover');
-            });
-            dropZone.addEventListener('dragleave', () => {
-                dropZone.classList.remove('dragover');
-            });
-            dropZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dropZone.classList.remove('dragover');
-                const file = e.dataTransfer.files[0];
-                if (file) {
-                    document.getElementById('fileInput').files = e.dataTransfer.files;
-                    handleFileUpload({ target: { files: [file] } });
-                }
-            });
-        }
-
-        function filterDoctors(specialty, btn) {
-            const cards = document.querySelectorAll('.doctor-card');
-            const btns = document.querySelectorAll('.filter-btn');
-            
-            btns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            cards.forEach(card => {
-                if (specialty === 'all' || card.dataset.specialty === specialty) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function initCharts() {
-            const data = [
-                [28, 32, 35, 30, 28, 25, 28],
-                [22, 25, 20, 22, 24, 22, 22],
-                [52, 55, 50, 52, 54, 52, 52]
-            ];
-            
-            ['chart1', 'chart2', 'chart3'].forEach((id, i) => {
-                const ctx = document.getElementById(id);
-                if (!ctx) return;
-
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['D', 'S', 'C', 'P', 'J', 'Sh', 'Y'],
-                        datasets: [{
-                            data: data[i],
-                            borderColor: data[i][6] < 30 ? '#10b981' : data[i][6] < 60 ? '#f59e0b' : '#ef4444',
-                            backgroundColor: data[i][6] < 30 ? 'rgba(16,185,129,0.1)' : data[i][6] < 60 ? 'rgba(245,158,11,0.1)' : 'rgba(239,68,68,0.1)',
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true, max: 100 } }
-                    }
+            historyList.innerHTML = history.map((item, index) => {
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('uz-UZ', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
                 });
+
+                return `
+                    <div class="history-card" onclick="showDetail(${index})">
+                        <div class="history-date">📅 ${formattedDate}</div>
+                        <div class="history-risk ${item.riskClass}">${item.riskScore}%</div>
+                        <div style="font-weight: 600; color: #666;">${item.riskLevel}</div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+                            <small style="color: #999;">Batafsil ko'rish uchun bosing</small>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateCharts(history);
+        }
+
+        function updateCharts(history) {
+            const ctx1 = document.getElementById('riskChart');
+            const ctx2 = document.getElementById('parametersChart');
+
+            const labels = history.slice(0, 10).reverse().map(item => {
+                const date = new Date(item.date);
+                return date.toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric' });
             });
 
-            ['compChart1', 'compChart2'].forEach((id, i) => {
-                const ctx = document.getElementById(id);
-                if (!ctx) return;
+            const riskData = history.slice(0, 10).reverse().map(item => item.riskScore);
 
-                new Chart(ctx, {
-                    type: 'radar',
+            if (riskChart) riskChart.destroy();
+            riskChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Xavf Darajasi (%)',
+                        data: riskData,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true, position: 'top' } },
+                    scales: { y: { beginAtZero: true, max: 100 } }
+                }
+            });
+
+            if (history.length > 0) {
+                const latest = history[0].data;
+                
+                if (parametersChart) parametersChart.destroy();
+                parametersChart = new Chart(ctx2, {
+                    type: 'bar',
                     data: {
-                        labels: ['Bosim', 'Puls', 'Qand', 'BMI', 'Yosh'],
+                        labels: ['Sistolik', 'Diastolik', 'Yurak', 'Qand', 'BMI'],
                         datasets: [{
-                            data: i === 0 ? [75, 80, 85, 90, 70] : [60, 70, 70, 75, 70],
-                            borderColor: i === 0 ? '#10b981' : '#f59e0b',
-                            backgroundColor: i === 0 ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.2)'
+                            label: 'Hozirgi Qiymatlar',
+                            data: [
+                                latest.systolic,
+                                latest.diastolic,
+                                latest.heartrate,
+                                latest.glucose * 10,
+                                latest.bmi * 5
+                            ],
+                            backgroundColor: [
+                                latest.systolic > 140 ? '#ef4444' : latest.systolic > 130 ? '#f59e0b' : '#10b981',
+                                latest.diastolic > 90 ? '#ef4444' : latest.diastolic > 85 ? '#f59e0b' : '#10b981',
+                                latest.heartrate > 100 || latest.heartrate < 60 ? '#f59e0b' : '#10b981',
+                                latest.glucose > 7 ? '#ef4444' : latest.glucose > 6 ? '#f59e0b' : '#10b981',
+                                latest.bmi > 30 ? '#ef4444' : latest.bmi > 25 ? '#f59e0b' : '#10b981'
+                            ]
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        scales: { r: { beginAtZero: true, max: 100 } },
                         plugins: { legend: { display: false } }
                     }
                 });
+            }
+        }
+
+        function showDetail(index) {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const item = history[index];
+
+            const date = new Date(item.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            let factorsHTML = '';
+            item.factors.forEach(factor => {
+                factorsHTML += `
+                    <div class="risk-factor">
+                        <span class="factor-name">${factor.name}</span>
+                        <span class="factor-status status-${factor.status}">${factor.text}</span>
+                    </div>
+                `;
+            });
+
+            let recsHTML = '<ul style="list-style: none; padding: 0;">';
+            item.recommendations.forEach(rec => {
+                recsHTML += `<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                    ${rec}
+                </li>`;
+            });
+            recsHTML += '</ul>';
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2 style="margin-bottom: 1rem;">Tekshiruv Natijalari</h2>
+                <p style="color: #666; margin-bottom: 2rem;">📅 ${formattedDate}</p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">${item.riskClass === 'risk-low' ? '✅' : item.riskClass === 'risk-medium' ? '⚠️' : '🚨'}</div>
+                    <div class="${item.riskClass}" style="font-size: 3rem; font-weight: 700;">${item.riskScore}%</div>
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.5rem;">${item.riskLevel}</div>
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem; color: #333;">📊 Parametrlar:</h3>
+                ${factorsHTML}
+
+                <h3 style="margin: 2rem 0 1rem; color: #667eea;">🎯 Tavsiyalar:</h3>
+                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #667eea;">
+                    ${recsHTML}
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="deleteResult(${index})" class="btn btn-secondary btn-small">🗑️ O'chirish</button>
+                    <button onclick="closeModal()" class="btn btn-primary btn-small">Yopish</button>
+                </div>
+            `;
+
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        function deleteResult(index) {
+            if (!confirm('Ushbu natijani o\'chirmoqchimisiz?')) return;
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.splice(index, 1);
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            closeModal();
+            loadHistory();
+        }
+
+        function clearHistory() {
+            if (!confirm('Barcha tarixni o\'chirmoqchimisiz? Bu amalni bekor qilib bo\'lmaydi!')) return;
+            localStorage.removeItem('neuroguard_history');
+            loadHistory();
+            showNotification('✅ Tarix tozalandi!', 'success');
+        }
+
+        function downloadPDF() {
+            if (!currentResult) {
+                alert('Avval tekshiruv o\'tkazing!');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const date = new Date(currentResult.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            doc.setFontSize(20);
+            doc.text('NeuroGuard AI - Tekshiruv Natijasi', 20, 20);
+
+            doc.setFontSize(12);
+            doc.text(`Sana: ${formattedDate}`, 20, 35);
+            
+            doc.setFontSize(16);
+            doc.text(`Xavf darajasi: ${currentResult.riskScore}%`, 20, 50);
+            doc.text(`Holat: ${currentResult.riskLevel}`, 20, 60);
+
+            doc.setFontSize(14);
+            doc.text('Parametrlar:', 20, 75);
+
+            let yPos = 85;
+            doc.setFontSize(11);
+            currentResult.factors.forEach(factor => {
+                doc.text(`${factor.name}: ${factor.text}`, 25, yPos);
+                yPos += 8;
+            });
+
+            yPos += 10;
+            doc.setFontSize(14);
+            doc.text('Tavsiyalar:', 20, yPos);
+            yPos += 10;
+
+            doc.setFontSize(11);
+            currentResult.recommendations.forEach(rec => {
+                const lines = doc.splitTextToSize(rec, 170);
+                lines.forEach(line => {
+                    doc.text(`- ${line}`, 25, yPos);
+                    yPos += 7;
+                });
+            });
+
+            doc.save('NeuroGuard-Natija.pdf');
+            showNotification('✅ PDF muvaffaqiyatli yuklab olindi!', 'success');
+        }
+
+        // YANGI FUNKSIYALAR
+
+        // 1. Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            showNotification(isDark ? '🌙 Tungi rejim yoqildi' : '☀️ Kunduzgi rejim yoqildi', 'success');
+        }
+
+        function loadDarkMode() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        }
+
+        // 2. Til o'zgartirish
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('language', lang);
+            showNotification(`✅ Til o'zgartirildi: ${lang.toUpperCase()}`, 'success');
+        }
+
+        // 3. Chatbot
+        let chatbotOpen = false;
+
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            if (window) {
+                chatbotOpen = !chatbotOpen;
+                window.classList.toggle('active', chatbotOpen);
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            container.appendChild(userMsg);
+            input.value = '';
+            
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getChatbotResponse(message);
+                container.appendChild(botMsg);
+                container.scrollTop = container.scrollHeight;
+            }, 800);
+            
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function getChatbotResponse(msg) {
+            msg = msg.toLowerCase();
+            const responses = {
+                'salom': 'Salom! Men sizga insult xavfi haqida yordam bera olaman.',
+                'insult': 'Insult - miyaga qon oqimining to\'xtoq holati. Belgilari: nutq qiyinligi, yuz asimmetriyasi.',
+                'xavf': 'Xavf omillari: qon bosimi, diabet, chekish. AI tizimimiz xavfingizni aniqlaydi.',
+                'tekshir': 'Yuqoridagi forma orqali barcha ma\'lumotlarni kiriting.',
+                'bepul': 'Ha! 100% bepul. Cheksiz foydalaning! 🎉',
+                'yordam': 'Men insult, xavf omillari, tekshiruv haqida yordam bera olaman.'
+            };
+            for (let key in responses) {
+                if (msg.includes(key)) return responses[key];
+            }
+            return '"yordam" deb yozing - ko\'proq ma\'lumot beraman!';
+        }
+
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        // 4. Notification
+        function showNotification(message, type = 'success') {
+            let container = document.getElementById('notificationContainer');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notificationContainer';
+                container.className = 'notification-container';
+                document.body.appendChild(container);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            const icons = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type]}</div>
+                <div style="flex: 1;">${message}</div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.4s forwards';
+                setTimeout(() => notification.remove(), 400);
+            }, 5000);
+        }
+
+        // 5. Scroll to Top
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollTop');
+            if (scrollBtn) {
+                scrollBtn.classList.toggle('show', window.pageYOffset > 300);
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 6. Ulashish funksiyasi - YANGI
+        function shareResult() {
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            const text = `NeuroGuard AI: ${currentResult.riskScore}% - ${currentResult.riskLevel}`;
+            if (navigator.share) {
+                navigator.share({ title: 'NeuroGuard AI', text, url: window.location.href })
+                    .then(() => showNotification('✅ Ulashildi!', 'success'))
+                    .catch(() => copyToClipboard(text));
+            } else {
+                copyToClipboard(text);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('✅ Nusxa olindi!', 'success');
             });
         }
 
-        window.addEventListener('load', function() {
-            loadCalendar();
-            initCharts();
-            console.log('✅ NeuroGuard AI Professional - Tayyor!');
+        // 7. Print funksiyasi - YANGI
+        function printResult() {
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            window.print();
+        }
+
+        // 8. Tarixni eksport qilish - YANGI
+        function exportHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            if (history.length === 0) {
+                showNotification('⚠️ Eksport qilish uchun ma\'lumot yo\'q!', 'warning');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `neuroguard-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showNotification('✅ Tarix eksport qilindi!', 'success');
+        }
+
+        // 9. Keyboard Shortcuts - YANGI
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                if (chatbotOpen) toggleChatbot();
+            }
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                toggleChatbot();
+            }
         });
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        // Console Branding
+        console.log('%c🧠 NeuroGuard AI', 'color: #667eea; font-size: 24px; font-weight: bold;');
+        console.log('%c✨ Enhanced Professional Edition v3.0', 'color: #764ba2; font-size: 14px;');
+        console.log('%c✅ Barcha funksiyalar yuklandi!', 'color: #10b981; font-size: 12px;');
     </script>
 </body>
 </html>
