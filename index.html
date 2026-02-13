@@ -4083,3 +4083,1615 @@
             showNotification('👋 Xush kelibsiz! NeuroGuard AI Pro!', 'success');
         });
     </script>
+<!-- EXISTING CODE CONTINUES... -->
+
+<!-- Add these new sections to your HTML -->
+
+<!-- ===== SECTION: AI CHATBOT ENHANCEMENT (NLP) ===== -->
+<style>
+    /* Enhanced Chatbot Styles */
+    .chatbot-window {
+        width: 420px;
+        height: 650px;
+    }
+
+    .chat-typing-indicator {
+        display: flex;
+        gap: 0.3rem;
+        padding: 0.9rem 1.2rem;
+        background: #eff6ff;
+        border-radius: 15px;
+        max-width: 80px;
+        align-self: flex-start;
+    }
+
+    .typing-dot {
+        width: 8px;
+        height: 8px;
+        background: #667eea;
+        border-radius: 50%;
+        animation: typingDot 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typingDot {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-10px); }
+    }
+
+    .chat-quick-replies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .quick-reply-btn {
+        background: white;
+        border: 2px solid #667eea;
+        color: #667eea;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .quick-reply-btn:hover {
+        background: #667eea;
+        color: white;
+    }
+
+    .message-time {
+        font-size: 0.75rem;
+        color: #999;
+        margin-top: 0.3rem;
+    }
+
+    /* ===== NUTRITION SCANNER STYLES ===== */
+    .nutrition-scanner-section {
+        padding: 4rem 5%;
+        background: white;
+    }
+
+    .scanner-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .camera-view {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+    }
+
+    .camera-view video {
+        width: 100%;
+        display: block;
+    }
+
+    .camera-view canvas {
+        display: none;
+    }
+
+    .scan-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 60%;
+        border: 3px dashed #fff;
+        border-radius: 20px;
+        pointer-events: none;
+    }
+
+    .scan-controls {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .nutrition-result {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        margin-top: 2rem;
+    }
+
+    .nutrition-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .nutrition-item {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .nutrition-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 0.5rem;
+    }
+
+    .nutrition-label {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    /* ===== TELEMEDICINE STYLES ===== */
+    .telemedicine-section {
+        padding: 4rem 5%;
+        background: #f8f9fa;
+    }
+
+    .doctors-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .doctor-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .doctor-image {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+    }
+
+    .doctor-info {
+        padding: 1.5rem;
+    }
+
+    .doctor-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+    }
+
+    .doctor-specialty {
+        color: #667eea;
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .doctor-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .stars {
+        color: #ffd700;
+    }
+
+    .doctor-stats {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-weight: 700;
+        color: #667eea;
+        font-size: 1.1rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    .video-call-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-call-modal.active {
+        display: flex;
+    }
+
+    .video-container {
+        width: 90%;
+        max-width: 1200px;
+        background: #000;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .main-video {
+        width: 100%;
+        height: 70vh;
+        background: #1a1a1a;
+    }
+
+    .self-video {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 200px;
+        height: 150px;
+        background: #2a2a2a;
+        border-radius: 10px;
+        border: 2px solid #667eea;
+    }
+
+    .video-controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .video-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .video-btn.end-call {
+        background: #ef4444;
+        color: white;
+    }
+
+    .video-btn:not(.end-call) {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+
+    .video-btn:hover {
+        transform: scale(1.1);
+    }
+
+    /* ===== EMERGENCY SOS STYLES ===== */
+    .emergency-fab {
+        position: fixed;
+        bottom: 280px;
+        right: 30px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #ef4444;
+        color: white;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        box-shadow: 0 10px 40px rgba(239, 68, 68, 0.5);
+        z-index: 997;
+        animation: emergencyPulse 2s infinite;
+    }
+
+    @keyframes emergencyPulse {
+        0%, 100% { box-shadow: 0 10px 40px rgba(239, 68, 68, 0.5); }
+        50% { box-shadow: 0 10px 60px rgba(239, 68, 68, 0.9), 0 0 0 20px rgba(239, 68, 68, 0.1); }
+    }
+
+    .emergency-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        z-index: 10001;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .emergency-modal.active {
+        display: flex;
+    }
+
+    .emergency-content {
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .stroke-symptoms {
+        text-align: left;
+        margin: 2rem 0;
+    }
+
+    .symptom-check {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+    }
+
+    .symptom-check input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+    }
+
+    .emergency-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    /* ===== MENTAL HEALTH TRACKER STYLES ===== */
+    .mental-health-section {
+        padding: 4rem 5%;
+        background: white;
+    }
+
+    .mood-tracker {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .mood-selector {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .mood-option {
+        background: white;
+        border: 3px solid #e0e0e0;
+        border-radius: 20px;
+        padding: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .mood-option:hover {
+        transform: scale(1.05);
+        border-color: #667eea;
+    }
+
+    .mood-option.selected {
+        border-color: #667eea;
+        background: #eff6ff;
+    }
+
+    .mood-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .mood-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .mood-chart-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        margin: 2rem 0;
+    }
+
+    .journal-entry {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-top: 2rem;
+    }
+
+    .journal-entry textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+    }
+
+    .mental-health-score {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .mental-score-value {
+        font-size: 4rem;
+        font-weight: 700;
+        margin: 1rem 0;
+    }
+
+    .cbt-exercises {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .cbt-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .cbt-card h4 {
+        color: #667eea;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<!-- ===== HTML SECTIONS ===== -->
+
+<!-- Enhanced Chatbot Window (Replace existing chatbot) -->
+<div class="chatbot">
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-comments"></i>
+    </button>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div>
+                <i class="fas fa-robot"></i> 
+                <strong>AI Tibbiy Maslahatchi</strong>
+                <div style="font-size: 0.8rem; opacity: 0.9; margin-top: 0.2rem;">
+                    <span class="online-dot" style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 5px;"></span>
+                    Online
+                </div>
+            </div>
+            <button class="chatbot-close" onclick="toggleChatbot()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot">
+                <div>Salom! Men AI Tibbiy Maslahatchi. Sizga qanday yordam bera olaman?</div>
+                <div class="message-time">Hozir</div>
+                <div class="chat-quick-replies">
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Insult belgilari')">Insult belgilari</button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Qon bosimi')">Qon bosimi</button>
+                    <button class="quick-reply-btn" onclick="sendQuickReply('Profilaktika')">Profilaktika</button>
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatEnter(event)">
+            <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- Nutrition Scanner Section -->
+<section class="nutrition-scanner-section" id="nutritionScanner">
+    <h2 class="section-title">📸 AI Ovqat Skaneri</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+        Ovqatingiz rasmini oling, AI avtomatik kaloriya va ozuqa moddalarini aniqlaydi
+    </p>
+    
+    <div class="scanner-container">
+        <div class="scan-controls">
+            <button class="btn btn-primary" onclick="startCamera()">
+                <i class="fas fa-camera"></i> Kamera Ochish
+            </button>
+            <button class="btn btn-secondary" onclick="uploadFoodImage()">
+                <i class="fas fa-upload"></i> Rasm Yuklash
+            </button>
+            <input type="file" id="foodImageUpload" accept="image/*" style="display: none;" onchange="analyzeFoodImage(event)">
+        </div>
+
+        <div class="camera-view" id="cameraView" style="display: none;">
+            <video id="cameraStream" autoplay playsinline></video>
+            <canvas id="photoCanvas"></canvas>
+            <div class="scan-overlay"></div>
+            <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10;">
+                <button class="btn btn-primary" onclick="captureFood()">
+                    <i class="fas fa-circle" style="font-size: 2rem;"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="nutrition-result" id="nutritionResult" style="display: none;">
+            <h3 style="margin-bottom: 1rem;">Tahlil Natijasi</h3>
+            <div id="foodName" style="font-size: 1.5rem; font-weight: 700; color: #667eea; margin-bottom: 1.5rem;"></div>
+            <div class="nutrition-grid" id="nutritionGrid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="saveFoodScan()">
+                <i class="fas fa-save"></i> Ovqatlanish Jurnaliga Saqlash
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Telemedicine Section -->
+<section class="telemedicine-section" id="telemedicine">
+    <h2 class="section-title">🩺 Onlayn Shifokor Konsultatsiyasi</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+        Malakali shifokorlar bilan video orqali bog'laning
+    </p>
+
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <div class="doctors-grid" id="doctorsGrid">
+            <!-- Doctors will be generated by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Video Call Modal -->
+<div class="video-call-modal" id="videoCallModal">
+    <div class="video-container">
+        <div class="main-video" id="doctorVideo">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: white; font-size: 1.5rem;">
+                <div style="text-align: center;">
+                    <i class="fas fa-user-md" style="font-size: 5rem; margin-bottom: 1rem;"></i>
+                    <div>Shifokor kutilmoqda...</div>
+                </div>
+            </div>
+        </div>
+        <div class="self-video" id="selfVideo">
+            <video id="localStream" autoplay muted style="width: 100%; height: 100%; object-fit: cover;"></video>
+        </div>
+        <div class="video-controls">
+            <button class="video-btn" onclick="toggleMicrophone()" id="micBtn">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="video-btn" onclick="toggleCamera()" id="cameraBtn">
+                <i class="fas fa-video"></i>
+            </button>
+            <button class="video-btn end-call" onclick="endCall()">
+                <i class="fas fa-phone-slash"></i>
+            </button>
+            <button class="video-btn" onclick="toggleChat()">
+                <i class="fas fa-comment"></i>
+            </button>
+            <button class="video-btn" onclick="shareScreen()">
+                <i class="fas fa-desktop"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Emergency SOS Button -->
+<button class="emergency-fab" onclick="openEmergencyModal()">
+    <i class="fas fa-exclamation-triangle"></i>
+</button>
+
+<!-- Emergency Modal -->
+<div class="emergency-modal" id="emergencyModal">
+    <div class="emergency-content">
+        <h2 style="color: #ef4444; margin-bottom: 1rem;">
+            <i class="fas fa-ambulance"></i> Favqulodda Yordam
+        </h2>
+        <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+            Insult belgilarini tekshiring va zudlik bilan yordam chaqiring
+        </p>
+
+        <div class="stroke-symptoms">
+            <h3 style="margin-bottom: 1rem;">FAST Testi (Insult Belgilari):</h3>
+            <div class="symptom-check">
+                <input type="checkbox" id="symptom1">
+                <label for="symptom1"><strong>F</strong>ace - Yuz bir tomonlama og'adi</label>
+            </div>
+            <div class="symptom-check">
+                <input type="checkbox" id="symptom2">
+                <label for="symptom2"><strong>A</strong>rms - Qo'llarni ko'tarib bo'lmaydi</label>
+            </div>
+            <div class="symptom-check">
+                <input type="checkbox" id="symptom3">
+                <label for="symptom3"><strong>S</strong>peech - Nutq buzilgan, noaniq</label>
+            </div>
+            <div class="symptom-check">
+                <input type="checkbox" id="symptom4">
+                <label for="symptom4"><strong>T</strong>ime - Vaqt muhim! Zudlik bilan harakat qiling</label>
+            </div>
+        </div>
+
+        <div id="emergencyWarning" style="display: none; background: #fee2e2; padding: 1rem; border-radius: 10px; margin: 1rem 0; color: #991b1b;">
+            <strong>⚠️ DIQQAT:</strong> Siz insult belgilariga ega bo'lishingiz mumkin! Zudlik bilan tez yordam chaqiring!
+        </div>
+
+        <div class="emergency-actions">
+            <button class="btn btn-primary" style="flex: 1; background: #ef4444;" onclick="callAmbulance()">
+                <i class="fas fa-phone"></i> 103 - Tez Yordam
+            </button>
+            <button class="btn btn-secondary" onclick="sendEmergencySMS()">
+                <i class="fas fa-sms"></i> SMS Yuborish
+            </button>
+            <button class="btn btn-secondary" onclick="shareLocation()">
+                <i class="fas fa-map-marker-alt"></i> Manzil
+            </button>
+        </div>
+
+        <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="closeEmergencyModal()">
+            Yopish
+        </button>
+    </div>
+</div>
+
+<!-- Mental Health Tracker Section -->
+<section class="mental-health-section" id="mentalHealth">
+    <h2 class="section-title">🧠 Ruhiy Salomatlik Monitoringi</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+        Kayfiyatingizni kuzatib boring va ruhiy sog'ligingizni yaxshilang
+    </p>
+
+    <div class="mood-tracker">
+        <h3 style="text-align: center; margin-bottom: 1.5rem;">Bugun kayfiyatingiz qanday?</h3>
+        
+        <div class="mood-selector">
+            <div class="mood-option" onclick="selectMood('amazing', '😁', 5)">
+                <div class="mood-icon">😁</div>
+                <div class="mood-label">Ajoyib</div>
+            </div>
+            <div class="mood-option" onclick="selectMood('good', '😊', 4)">
+                <div class="mood-icon">😊</div>
+                <div class="mood-label">Yaxshi</div>
+            </div>
+            <div class="mood-option" onclick="selectMood('okay', '😐', 3)">
+                <div class="mood-icon">😐</div>
+                <div class="mood-label">O'rtacha</div>
+            </div>
+            <div class="mood-option" onclick="selectMood('sad', '😔', 2)">
+                <div class="mood-icon">😔</div>
+                <div class="mood-label">Qayg'uli</div>
+            </div>
+            <div class="mood-option" onclick="selectMood('terrible', '😢', 1)">
+                <div class="mood-icon">😢</div>
+                <div class="mood-label">Juda yomon</div>
+            </div>
+        </div>
+
+        <div class="mental-health-score">
+            <div style="font-size: 1.2rem; opacity: 0.9;">Ruhiy Salomatlik Darajasi</div>
+            <div class="mental-score-value" id="mentalScore">75</div>
+            <div style="font-size: 1.1rem;">100 dan</div>
+            <div style="margin-top: 1rem; opacity: 0.9;" id="mentalScoreMessage">
+                Yaxshi natija! Davom eting.
+            </div>
+        </div>
+
+        <div class="mood-chart-container">
+            <h3 style="margin-bottom: 1.5rem;">Kayfiyat Dinamikasi (So'nggi 7 kun)</h3>
+            <canvas id="moodChart"></canvas>
+        </div>
+
+        <div class="journal-entry">
+            <h3 style="margin-bottom: 1rem;">
+                <i class="fas fa-book"></i> Kundalik
+            </h3>
+            <p style="color: #666; margin-bottom: 1rem;">
+                Bugungi fikr va his-tuyg'ularingizni yozing
+            </p>
+            <textarea id="journalText" placeholder="Bugun nimalar bo'ldi? Qanday his qildingiz?"></textarea>
+            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="saveJournalEntry()">
+                <i class="fas fa-save"></i> Saqlash
+            </button>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="margin-bottom: 1.5rem; text-align: center;">CBT Mashqlari</h3>
+            <div class="cbt-exercises">
+                <div class="cbt-card">
+                    <h4><i class="fas fa-brain"></i> Fikrlarni Qayta Baholash</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        Salbiy fikrlarni aniqlab, ijobiy tomondan qarang
+                    </p>
+                    <button class="btn btn-secondary btn-small" onclick="startCBTExercise('reframe')">
+                        Boshlash
+                    </button>
+                </div>
+                <div class="cbt-card">
+                    <h4><i class="fas fa-heart"></i> Minnatdorchilik Jurnali</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        Kunlik 3 ta minnatdorchilik yozing
+                    </p>
+                    <button class="btn btn-secondary btn-small" onclick="startCBTExercise('gratitude')">
+                        Boshlash
+                    </button>
+                </div>
+                <div class="cbt-card">
+                    <h4><i class="fas fa-wind"></i> Nafas Mashqi</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        4-7-8 nafas texnikasi bilan tinchlanish
+                    </p>
+                    <button class="btn btn-secondary btn-small" onclick="startCBTExercise('breathing')">
+                        Boshlash
+                    </button>
+                </div>
+                <div class="cbt-card">
+                    <h4><i class="fas fa-smile"></i> Ijobiy Tasdiqlar</h4>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        Kunlik ijobiy tasdiqlar o'qish
+                    </p>
+                    <button class="btn btn-secondary btn-small" onclick="startCBTExercise('affirmations')">
+                        Boshlash
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // ===== 1. ENHANCED AI CHATBOT WITH NLP =====
+    
+    const medicalKnowledgeBase = {
+        'insult': {
+            keywords: ['insult', 'stroke', 'infarkt', 'miya'],
+            response: `Insult - bu miyaga qon etkazib berishning to'satdan to'xtashi. 
+
+ASOSIY BELGILARI (FAST):
+- Face (Yuz) - bir tomonlama og'ishi
+- Arms (Qo'llar) - ko'tarib bo'lmaydi
+- Speech (Nutq) - noaniq, buzilgan
+- Time (Vaqt) - zudlik bilan yordam!
+
+OLDINI OLISH:
+✓ Qon bosimini nazorat qiling
+✓ Sog'lom ovqatlaning
+✓ Jismoniy faol bo'ling
+✓ Chekishni tashlang
+
+Agar belgilar paydo bo'lsa, ZUDLIK bilan 103 ga qo'ng'iroq qiling!`
+        },
+        'qon bosimi': {
+            keywords: ['qon bosimi', 'gipertoniya', 'bosim', 'pressure'],
+            response: `Qon bosimi me'yorlari:
+
+NORMAL: 120/80 mmHg
+YUQORI-NORMAL: 130-139/85-89
+GIPERTONIYA:
+- 1-daraja: 140-159/90-99
+- 2-daraja: 160-179/100-109
+- 3-daraja: 180+/110+
+
+BOSIMNI KAMAYTIRISH:
+✓ Tuzni cheklang (5g/kun)
+✓ Vazn yo'qoting
+✓ Muntazam sport
+✓ Stressni kamaytiring
+✓ Shifokor tayinlagan dorilarni qabul qiling
+
+Qon bosimingizni kuniga 2 marta o'lchang!`
+        },
+        'ovqatlanish': {
+            keywords: ['ovqat', 'diet', 'taom', 'parhez'],
+            response: `Insult profilaktikasi uchun ovqatlanish:
+
+ISTE'MOL QILING:
+✓ Ko'k sabzavotlar (500g/kun)
+✓ Baliq (haftada 2-3 marta)
+✓ To'liq donli mahsulotlar
+✓ Yong'oqlar va urug'lar
+✓ Zeytun moyi
+
+KAMAYTIRIG:
+✗ Tuz (5g/kundan kam)
+✗ Qizil go'sht
+✗ Qovurilgan taomlar
+✗ Shakar va shirinliklar
+✗ Alkogol
+
+MEDITERRANEAN DIET - eng yaxshi tanlov!`
+        },
+        'sport': {
+            keywords: ['sport', 'mashq', 'jismoniy', 'exercise'],
+            response: `Insult oldini olish uchun jismoniy faollik:
+
+AEROB MASHQLAR (haftada 150 daqiqa):
+- Tez yurish
+- Suzish
+- Velosiped
+- Raqsga tushish
+
+KUCH MASHQLARI (haftada 2 kun):
+- Og'irlik bilan ishlash
+- Yoga
+- Pilates
+
+BOSHLASH UCHUN:
+1. Shifokordan ruxsat oling
+2. Asta-sekin boshlang
+3. Muntazam bo'ling
+4. O'z holatiflaringizni tinglang
+
+Har kuni kamida 30 daqiqa harakat qiling!`
+        },
+        'stress': {
+            keywords: ['stress', 'tashvish', 'asab', 'anxiety'],
+            response: `Stress - insult xavfini oshiradi!
+
+STRESS BOSHQARUVI:
+✓ Meditatsiya (10 daq/kun)
+✓ Chuqur nafas mashqlari
+✓ Yoga yoki tai chi
+✓ Yetarli uyqu (7-8 soat)
+✓ Sevimli mashg'ulotlar
+
+FAVOL TEXNIKALAR:
+- 4-7-8 nafas texnikasi
+- Progressiv mushak bo'shashishi
+- Mindfulness meditatsiya
+- Tabiatda sayr qilish
+
+Agar stress doimiy bo'lsa, psixologga murojaat qiling!`
+        }
+    };
+
+    function sendQuickReply(text) {
+        document.getElementById('chatInput').value = text;
+        sendChatMessage();
+    }
+
+    let chatHistory = [];
+
+    async function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (!message) return;
+
+        const container = document.getElementById('chatMessages');
+        
+        // Add user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'message user';
+        userMsg.innerHTML = `
+            <div>${message}</div>
+            <div class="message-time">${new Date().toLocaleTimeString('uz-UZ', {hour: '2-digit', minute: '2-digit'})}</div>
+        `;
+        container.appendChild(userMsg);
+        
+        input.value = '';
+        container.scrollTop = container.scrollHeight;
+
+        // Add typing indicator
+        const typingIndicator = document.createElement('div');
+        typingIndicator.className = 'chat-typing-indicator';
+        typingIndicator.id = 'typingIndicator';
+        typingIndicator.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        `;
+        container.appendChild(typingIndicator);
+        container.scrollTop = container.scrollHeight;
+
+        // Simulate AI thinking delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Remove typing indicator
+        typingIndicator.remove();
+
+        // Get AI response
+        const response = getAIResponse(message);
+        
+        const botMsg = document.createElement('div');
+        botMsg.className = 'message bot';
+        botMsg.innerHTML = `
+            <div style="white-space: pre-line;">${response}</div>
+            <div class="message-time">${new Date().toLocaleTimeString('uz-UZ', {hour: '2-digit', minute: '2-digit'})}</div>
+        `;
+        container.appendChild(botMsg);
+        container.scrollTop = container.scrollHeight;
+
+        // Save to history
+        chatHistory.push({ user: message, bot: response, time: new Date() });
+        localStorage.setItem('neuroguard_chat_history', JSON.stringify(chatHistory));
+    }
+
+    function getAIResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Check knowledge base
+        for (const [topic, data] of Object.entries(medicalKnowledgeBase)) {
+            if (data.keywords.some(keyword => lowerMessage.includes(keyword))) {
+                return data.response;
+            }
+        }
+
+        // Context-aware responses
+        if (lowerMessage.includes('qanday') || lowerMessage.includes('qachon')) {
+            return `Sizning savolingiz: "${message}"
+
+Men tibbiy ma'lumotlar bo'yicha yordam bera olaman. Quyidagi mavzular bo'yicha so'rang:
+
+- Insult belgilari va profilaktikasi
+- Qon bosimi nazorati
+- Sog'lom ovqatlanish
+- Jismoniy faollik
+- Stress boshqaruvi
+
+Aniq savol bering, yordam beraman!`;
+        }
+
+        // Default response
+        return `Sizning xabaringiz qabul qilindi. Men quyidagi mavzular bo'yicha yordam bera olaman:
+
+🧠 Insult va profilaktika
+❤️ Qon bosimi
+🥗 Ovqatlanish
+💪 Sport va jismoniy faollik
+🧘 Stress boshqaruvi
+
+Kerakli mavzu bo'yicha savol bering!`;
+    }
+
+    function handleChatEnter(e) {
+        if (e.key === 'Enter') {
+            sendChatMessage();
+        }
+    }
+
+    // ===== 2. NUTRITION AI SCANNER =====
+    
+    let cameraStream = null;
+    let currentFoodData = null;
+
+    function startCamera() {
+        const cameraView = document.getElementById('cameraView');
+        const video = document.getElementById('cameraStream');
+
+        navigator.mediaDevices.getUserMedia({ 
+            video: { facingMode: 'environment' },
+            audio: false 
+        })
+        .then(stream => {
+            cameraStream = stream;
+            video.srcObject = stream;
+            cameraView.style.display = 'block';
+            showNotification('📸 Kamera faollashdi! Ovqat rasmini oling', 'success');
+        })
+        .catch(err => {
+            console.error('Camera error:', err);
+            showNotification('❌ Kameraga kirish rad etildi', 'error');
+        });
+    }
+
+    function uploadFoodImage() {
+        document.getElementById('foodImageUpload').click();
+    }
+
+    function captureFood() {
+        const video = document.getElementById('cameraStream');
+        const canvas = document.getElementById('photoCanvas');
+        const context = canvas.getContext('2d');
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0);
+
+        // Stop camera
+        if (cameraStream) {
+            cameraStream.getTracks().forEach(track => track.stop());
+            document.getElementById('cameraView').style.display = 'none';
+        }
+
+        // Convert to blob and analyze
+        canvas.toBlob(blob => {
+            analyzeFoodFromBlob(blob);
+        }, 'image/jpeg');
+    }
+
+    function analyzeFoodImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            analyzeFoodFromBlob(file);
+        }
+    }
+
+    async function analyzeFoodFromBlob(blob) {
+        showNotification('🤖 AI tahlil qilmoqda...', 'info');
+        
+        // Simulate AI analysis (in real app, use TensorFlow.js or API)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Mock food recognition data
+        const foods = [
+            { name: 'Osh', calories: 350, protein: 12, carbs: 58, fat: 8, fiber: 4 },
+            { name: 'Lag\'mon', calories: 420, protein: 15, carbs: 65, fat: 12, fiber: 5 },
+            { name: 'Somsa', calories: 280, protein: 8, carbs: 35, fat: 12, fiber: 2 },
+            { name: 'Manti', calories: 320, protein: 14, carbs: 42, fat: 10, fiber: 3 },
+            { name: 'Salat', calories: 85, protein: 3, carbs: 12, fat: 3, fiber: 4 },
+            { name: 'Non', calories: 250, protein: 8, carbs: 50, fat: 2, fiber: 3 }
+        ];
+
+        const randomFood = foods[Math.floor(Math.random() * foods.length)];
+        currentFoodData = {
+            ...randomFood,
+            timestamp: new Date().toISOString(),
+            image: URL.createObjectURL(blob)
+        };
+
+        displayNutritionResult(currentFoodData);
+    }
+
+    function displayNutritionResult(data) {
+        document.getElementById('foodName').textContent = `Aniqlandi: ${data.name}`;
+        
+        const nutritionGrid = document.getElementById('nutritionGrid');
+        nutritionGrid.innerHTML = `
+            <div class="nutrition-item">
+                <div class="nutrition-value">${data.calories}</div>
+                <div class="nutrition-label">Kaloriya</div>
+            </div>
+            <div class="nutrition-item">
+                <div class="nutrition-value">${data.protein}g</div>
+                <div class="nutrition-label">Oqsil</div>
+            </div>
+            <div class="nutrition-item">
+                <div class="nutrition-value">${data.carbs}g</div>
+                <div class="nutrition-label">Uglevod</div>
+            </div>
+            <div class="nutrition-item">
+                <div class="nutrition-value">${data.fat}g</div>
+                <div class="nutrition-label">Yog'</div>
+            </div>
+            <div class="nutrition-item">
+                <div class="nutrition-value">${data.fiber}g</div>
+                <div class="nutrition-label">Tola</div>
+            </div>
+            <div class="nutrition-item">
+                <div class="nutrition-value" style="color: ${data.calories > 300 ? '#ef4444' : '#10b981'}">
+                    ${data.calories > 300 ? 'Yuqori' : 'Normal'}
+                </div>
+                <div class="nutrition-label">Baho</div>
+            </div>
+        `;
+
+        document.getElementById('nutritionResult').style.display = 'block';
+        document.getElementById('nutritionResult').scrollIntoView({ behavior: 'smooth' });
+        
+        showNotification(`✅ ${data.name} aniqlandi! ${data.calories} kaloriya`, 'success');
+    }
+
+    function saveFoodScan() {
+        if (!currentFoodData) return;
+
+        const foodEntries = JSON.parse(localStorage.getItem('neuroguard_food') || '[]');
+        foodEntries.push({
+            id: Date.now(),
+            date: currentFoodData.timestamp,
+            meal: 'scan',
+            items: [currentFoodData.name],
+            calories: currentFoodData.calories,
+            nutrition: {
+                protein: currentFoodData.protein,
+                carbs: currentFoodData.carbs,
+                fat: currentFoodData.fat,
+                fiber: currentFoodData.fiber
+            }
+        });
+
+        localStorage.setItem('neuroguard_food', JSON.stringify(foodEntries));
+        renderFoodEntries();
+        
+        showNotification('✅ Ovqatlanish jurnaliga saqlandi!', 'success');
+        userPoints += 10;
+        updatePointsDisplay();
+        updateChallengeProgress('healthy_meal', 1);
+    }
+
+    // ===== 3. TELEMEDICINE =====
+    
+    const doctors = [
+        {
+            id: 1,
+            name: 'Dr. Aziz Karimov',
+            specialty: 'Nevrolog',
+            emoji: '👨‍⚕️',
+            rating: 4.9,
+            reviews: 248,
+            patients: 1200,
+            experience: 15,
+            price: 150000,
+            available: true
+        },
+        {
+            id: 2,
+            name: 'Dr. Dilnoza Rahimova',
+            specialty: 'Kardiolog',
+            emoji: '👩‍⚕️',
+            rating: 4.8,
+            reviews: 312,
+            patients: 1500,
+            experience: 12,
+            price: 180000,
+            available: true
+        },
+        {
+            id: 3,
+            name: 'Dr. Rustam Toshmatov',
+            specialty: 'Endokrinolog',
+            emoji: '👨‍⚕️',
+            rating: 4.7,
+            reviews: 189,
+            patients: 900,
+            experience: 10,
+            price: 120000,
+            available: false
+        }
+    ];
+
+    function loadDoctors() {
+        const grid = document.getElementById('doctorsGrid');
+        if (!grid) return;
+
+        grid.innerHTML = doctors.map(doctor => `
+            <div class="doctor-card" onclick="bookDoctor(${doctor.id})">
+                <div class="doctor-image">
+                    <div style="font-size: 5rem;">${doctor.emoji}</div>
+                </div>
+                <div class="doctor-info">
+                    <div class="doctor-name">${doctor.name}</div>
+                    <div class="doctor-specialty">
+                        <i class="fas fa-stethoscope"></i> ${doctor.specialty}
+                    </div>
+                    <div class="doctor-rating">
+                        <span class="stars">⭐ ${doctor.rating}</span>
+                        <span style="color: #666; font-size: 0.9rem;">(${doctor.reviews} baho)</span>
+                    </div>
+                    <div class="doctor-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">${doctor.experience}</div>
+                            <div class="stat-label">Yil tajriba</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">${doctor.patients}+</div>
+                            <div class="stat-label">Bemorlar</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #667eea; margin-bottom: 0.5rem;">
+                            ${doctor.price.toLocaleString()} so'm
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;" ${!doctor.available ? 'disabled' : ''}>
+                            <i class="fas fa-video"></i> ${doctor.available ? 'Konsultatsiya' : 'Band'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    let currentDoctor = null;
+
+    function bookDoctor(doctorId) {
+        const doctor = doctors.find(d => d.id === doctorId);
+        if (!doctor || !doctor.available) return;
+
+        if (confirm(`${doctor.name} bilan video konsultatsiya boshlaysizmi?\nNarx: ${doctor.price.toLocaleString()} so'm`)) {
+            currentDoctor = doctor;
+            startVideoCall();
+        }
+    }
+
+    let localStream = null;
+    let micEnabled = true;
+    let cameraEnabled = true;
+
+    async function startVideoCall() {
+        const modal = document.getElementById('videoCallModal');
+        modal.classList.add('active');
+
+        try {
+            localStream = await navigator.mediaDevices.getUserMedia({ 
+                video: true, 
+                audio: true 
+            });
+            
+            document.getElementById('localStream').srcObject = localStream;
+            showNotification('📞 Shifokor bilan bog\'lanmoqda...', 'info');
+
+            // Simulate doctor joining (in real app, use WebRTC)
+            setTimeout(() => {
+                showNotification('✅ Shifokor qo\'shildi!', 'success');
+            }, 3000);
+
+        } catch (err) {
+            console.error('Media error:', err);
+            showNotification('❌ Kamera/mikrofonga kirish rad etildi', 'error');
+            endCall();
+        }
+    }
+
+    function toggleMicrophone() {
+        if (!localStream) return;
+        
+        micEnabled = !micEnabled;
+        localStream.getAudioTracks()[0].enabled = micEnabled;
+        
+        const btn = document.getElementById('micBtn');
+        btn.innerHTML = micEnabled ? '<i class="fas fa-microphone"></i>' : '<i class="fas fa-microphone-slash"></i>';
+        btn.style.background = micEnabled ? 'rgba(255,255,255,0.2)' : '#ef4444';
+    }
+
+    function toggleCamera() {
+        if (!localStream) return;
+        
+        cameraEnabled = !cameraEnabled;
+        localStream.getVideoTracks()[0].enabled = cameraEnabled;
+        
+        const btn = document.getElementById('cameraBtn');
+        btn.innerHTML = cameraEnabled ? '<i class="fas fa-video"></i>' : '<i class="fas fa-video-slash"></i>';
+        btn.style.background = cameraEnabled ? 'rgba(255,255,255,0.2)' : '#ef4444';
+    }
+
+    function endCall() {
+        if (localStream) {
+            localStream.getTracks().forEach(track => track.stop());
+        }
+        
+        document.getElementById('videoCallModal').classList.remove('active');
+        showNotification('📞 Qo\'ng\'iroq tugadi', 'info');
+        
+        // Save consultation to history
+        if (currentDoctor) {
+            userPoints += 50;
+            updatePointsDisplay();
+            showNotification(`+50 ball! ${currentDoctor.name} bilan konsultatsiya`, 'success');
+        }
+    }
+
+    function toggleChat() {
+        showNotification('💬 Chat funksiyasi tez orada...', 'info');
+    }
+
+    async function shareScreen() {
+        try {
+            const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+            showNotification('🖥️ Ekran ulashilmoqda...', 'success');
+            
+            // In real app, share this stream via WebRTC
+            screenStream.getVideoTracks()[0].onended = () => {
+                showNotification('🖥️ Ekran ulashish to\'xtatildi', 'info');
+            };
+        } catch (err) {
+            showNotification('❌ Ekran ulashish bekor qilindi', 'error');
+        }
+    }
+
+    // ===== 4. EMERGENCY SOS SYSTEM =====
+    
+    function openEmergencyModal() {
+        document.getElementById('emergencyModal').classList.add('active');
+        
+        // Check symptoms
+        const checkboxes = document.querySelectorAll('.symptom-check input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', checkEmergencySymptoms);
+        });
+    }
+
+    function closeEmergencyModal() {
+        document.getElementById('emergencyModal').classList.remove('active');
+    }
+
+    function checkEmergencySymptoms() {
+        const checkboxes = document.querySelectorAll('.symptom-check input[type="checkbox"]');
+        const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+        
+        const warning = document.getElementById('emergencyWarning');
+        if (checkedCount >= 2) {
+            warning.style.display = 'block';
+        } else {
+            warning.style.display = 'none';
+        }
+    }
+
+    function callAmbulance() {
+        // In real app, this would actually call emergency services
+        if (confirm('103 - Tez yordam xizmatiga qo\'ng\'iroq qilasizmi?')) {
+            window.location.href = 'tel:103';
+            
+            // Log emergency event
+            const emergencyLog = JSON.parse(localStorage.getItem('neuroguard_emergency_log') || '[]');
+            emergencyLog.push({
+                timestamp: new Date().toISOString(),
+                action: 'ambulance_called',
+                symptoms: Array.from(document.querySelectorAll('.symptom-check input:checked')).map(cb => cb.nextElementSibling.textContent)
+            });
+            localStorage.setItem('neuroguard_emergency_log', JSON.stringify(emergencyLog));
+        }
+    }
+
+    function sendEmergencySMS() {
+        const emergencyContacts = JSON.parse(localStorage.getItem('neuroguard_emergency_contacts') || '[]');
+        
+        if (emergencyContacts.length === 0) {
+            const phone = prompt('Favqulodda aloqa raqamini kiriting:');
+            if (phone) {
+                emergencyContacts.push(phone);
+                localStorage.setItem('neuroguard_emergency_contacts', JSON.stringify(emergencyContacts));
+            }
+        }
+
+        if (emergencyContacts.length > 0) {
+            const message = `FAVQULODDA: Men insult belgilariga duch kelgan bo'lishim mumkin. Zudlik bilan yordam kerak!`;
+            
+            emergencyContacts.forEach(contact => {
+                window.location.href = `sms:${contact}?body=${encodeURIComponent(message)}`;
+            });
+            
+            showNotification('📱 SMS yuborildi!', 'success');
+        }
+    }
+
+    function shareLocation() {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+                    
+                    if (confirm(`Manzilni ulashish:\n${mapsUrl}\n\nNusxa olishni xohlaysizmi?`)) {
+                        navigator.clipboard.writeText(mapsUrl);
+                        showNotification('📍 Manzil nusxa olindi!', 'success');
+                    }
+                },
+                error => {
+                    showNotification('❌ Manzilni aniqlab bo\'lmadi', 'error');
+                }
+            );
+        } else {
+            showNotification('❌ Geolokatsiya qo\'llab-quvvatlanmaydi', 'error');
+        }
+    }
+
+    // ===== 5. MENTAL HEALTH TRACKER =====
+    
+    let currentMood = null;
+    let moodChart = null;
+
+    function selectMood(mood, emoji, value) {
+        currentMood = { mood, emoji, value, timestamp: new Date().toISOString() };
+        
+        // Visual feedback
+        document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        
+        // Save mood
+        saveMood();
+        
+        showNotification(`${emoji} Kayfiyatingiz saqlandi!`, 'success');
+        userPoints += 5;
+        updatePointsDisplay();
+    }
+
+    function saveMood() {
+        if (!currentMood) return;
+        
+        const moods = JSON.parse(localStorage.getItem('neuroguard_moods') || '[]');
+        moods.push(currentMood);
+        localStorage.setItem('neuroguard_moods', JSON.stringify(moods));
+        
+        updateMentalHealthScore();
+        updateMoodChart();
+    }
+
+    function updateMentalHealthScore() {
+        const moods = JSON.parse(localStorage.getItem('neuroguard_moods') || '[]');
+        const last7Days = moods.slice(-7);
+        
+        if (last7Days.length > 0) {
+            const avgMood = last7Days.reduce((sum, m) => sum + m.value, 0) / last7Days.length;
+            const score = Math.round((avgMood / 5) * 100);
+            
+            document.getElementById('mentalScore').textContent = score;
+            
+            let message = '';
+            if (score >= 80) message = 'Ajoyib! Ruhiy holatiflaringiz juda yaxshi! 😊';
+            else if (score >= 60) message = 'Yaxshi! Ijobiy yo\'ldasiz. Davom eting! 👍';
+            else if (score >= 40) message = 'O\'rtacha. Ba\'zi yaxshilanishlar kerak. 🤔';
+            else message = 'Tashvishli. Psixolog bilan maslahatlashishni tavsiya qilamiz. 😔';
+            
+            document.getElementById('mentalScoreMessage').textContent = message;
+        }
+    }
+
+    function updateMoodChart() {
+        const moods = JSON.parse(localStorage.getItem('neuroguard_moods') || '[]');
+        const last7Days = moods.slice(-7);
+        
+        const ctx = document.getElementById('moodChart');
+        if (!ctx) return;
+        
+        if (moodChart) moodChart.destroy();
+        
+        const labels = last7Days.map(m => new Date(m.timestamp).toLocaleDateString('uz-UZ', { weekday: 'short' }));
+        const data = last7Days.map(m => m.value);
+        
+        moodChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels.length > 0 ? labels : ['Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan', 'Yak'],
+                datasets: [{
+                    label: 'Kayfiyat',
+                    data: data.length > 0 ? data : [3, 4, 3, 4, 5, 4, 3],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5,
+                        ticks: {
+                            stepSize: 1,
+                            callback: value => {
+                                const emojis = ['', '😢', '😔', '😐', '😊', '😁'];
+                                return emojis[value];
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
+
+    function saveJournalEntry() {
+        const text = document.getElementById('journalText').value.trim();
+        if (!text) {
+            showNotification('❌ Iltimos, biror narsa yozing', 'warning');
+            return;
+        }
+        
+        const journals = JSON.parse(localStorage.getItem('neuroguard_journals') || '[]');
+        journals.push({
+            text,
+            timestamp: new Date().toISOString(),
+            mood: currentMood
+        });
+        localStorage.setItem('neuroguard_journals', JSON.stringify(journals));
+        
+        document.getElementById('journalText').value = '';
+        showNotification('✅ Kundalik saqlandi!', 'success');
+        userPoints += 10;
+        updatePointsDisplay();
+    }
+
+    function startCBTExercise(type) {
+        const exercises = {
+            reframe: `FIKRLARNI QAYTA BAHOLASH
+
+1. Salbiy fikrni yozing
+2. Dalillarni toping
+3. Muqobil fikrni yarating
+4. Natijani baholang
+
+Misol:
+Salbiy: "Men hech narsaga yaramayman"
+Dalil: Oxirgi proyektim muvaffaqiyatli bo'ldi
+Muqobil: "Ba'zi narsalarda qiyinchilik bo'lishi mumkin, lekin men o'rganaman"`,
+            
+            gratitude: `MINNATDORCHILIK JURNALI
+
+Har kuni 3 ta narsani yozing:
+
+1. Bugun nima uchun minnatdorman?
+2. Kim menga yordam berdi?
+3. Qanday yaxshi narsa bo'ldi?
+
+Tadqiqotlar shuni ko'rsatadiki, minnatdorchilik depressiya va tashvishni kamaytirada!`,
+            
+            breathing: `4-7-8 NAFAS TEXNIKASI
+
+1. To'liq nafas chiqaring
+2. 4 soniyada burun orqali nafas oling
+3. 7 soniya ushlab turing
+4. 8 soniyada og'iz orqali chiqaring
+5. 4 marta takrorlang
+
+Bu texnika tez tinchlanishga yordam beradi!`,
+            
+            affirmations: `IJOBIY TASDIQLAR
+
+Har kuni ovoz chiqarib o'qing:
+
+✓ Men kuchli va qobiliyatli insonman
+✓ Men o'zgarishga qodirman
+✓ Mening sog'ligim menga muhim
+✓ Men sevgi va hurmatga loyiqman
+✓ Men har kuni yaxshilanmoqdaman
+
+Oynada o'zingizga qarab aytishni sinab ko'ring!`
+        };
+
+        alert(exercises[type]);
+        userPoints += 15;
+        updatePointsDisplay();
+        showNotification('✅ Mashq boshlandi! +15 ball', 'success');
+    }
+
+    // ===== INITIALIZATION =====
+    window.addEventListener('load', function() {
+        // Previous inits...
+        loadDarkMode();
+        loadHistory();
+        initGamification();
+        
+        // NEW FEATURE INITS
+        loadDoctors();
+        updateMoodChart();
+        updateMentalHealthScore();
+        
+        console.log('%c🚀 5 Advanced Features Loaded!', 'color: #10b981; font-size: 16px; font-weight: bold;');
+        console.log('%c✅ AI Chatbot | Nutrition Scanner | Telemedicine | Emergency SOS | Mental Health', 'color: #667eea; font-size: 12px;');
+    });
+</script>
