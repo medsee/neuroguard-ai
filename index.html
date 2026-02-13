@@ -2070,3 +2070,3016 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroGuard AI Pro - Professional Health Platform</title>
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/regression@2.0.1/dist/regression.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-bg: #1a1a2e;
+            --dark-card: #16213e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Sizning eski stillaringiz shu yerda qoladi - men faqat yangi qo'shmoqchiman */
+        
+        /* YANGI: Gamification Styles */
+        .achievements-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card.unlocked {
+            background: var(--primary-gradient);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .achievement-card.locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .achievement-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .achievement-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .achievement-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: gold;
+            color: #333;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Points Display */
+        .points-display {
+            position: fixed;
+            top: 80px;
+            right: 30px;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pointsPulse 2s infinite;
+        }
+
+        @keyframes pointsPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .streak-indicator {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        /* Daily Challenges */
+        .challenges-section {
+            padding: 4rem 5%;
+            background: #f8f9fa;
+        }
+
+        .challenge-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .challenge-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .challenge-info {
+            flex: 1;
+        }
+
+        .challenge-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+
+        .challenge-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .challenge-progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .challenge-progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: width 0.5s;
+        }
+
+        .challenge-reward {
+            background: gold;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Health Tracking Tabs */
+        .health-tracking {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .tabs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Medication Tracker */
+        .medication-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .medication-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .med-info h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .med-time {
+            color: #667eea;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .med-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-take {
+            background: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-take:hover {
+            transform: scale(1.05);
+        }
+
+        /* Food Journal */
+        .food-entry {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+
+        .food-entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .meal-type {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .meal-breakfast { background: #fff3cd; color: #856404; }
+        .meal-lunch { background: #d1ecf1; color: #0c5460; }
+        .meal-dinner { background: #f8d7da; color: #721c24; }
+        .meal-snack { background: #d4edda; color: #155724; }
+
+        .calories-badge {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .food-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .food-tag {
+            background: #e9ecef;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Sleep Tracker */
+        .sleep-chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .sleep-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sleep-stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .sleep-stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Water Intake */
+        .water-tracker {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .water-glasses {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .water-glass {
+            width: 80px;
+            height: 100px;
+            background: #e9ecef;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .water-glass.filled {
+            background: linear-gradient(to top, #4fc3f7 0%, #29b6f6 100%);
+            animation: fillWater 0.5s;
+        }
+
+        @keyframes fillWater {
+            from { background-position: 0 100%; }
+            to { background-position: 0 0; }
+        }
+
+        .water-glass:hover {
+            transform: scale(1.1);
+        }
+
+        /* Forecast Section */
+        .forecast-section {
+            padding: 4rem 5%;
+            background: #f8f9fa;
+        }
+
+        .forecast-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .forecast-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .forecast-month {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .forecast-prediction {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .forecast-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .trend-up { color: var(--danger-color); }
+        .trend-down { color: var(--success-color); }
+        .trend-stable { color: var(--warning-color); }
+
+        /* 3D Brain Visualization */
+        .brain-3d-container {
+            width: 100%;
+            height: 500px;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brain-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem;
+            border-radius: 15px;
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        /* Heatmap Calendar */
+        .heatmap-calendar {
+            margin: 2rem 0;
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(53, 1fr);
+            gap: 3px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .heatmap-cell {
+            width: 15px;
+            height: 15px;
+            background: #eee;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.5);
+            z-index: 10;
+        }
+
+        .heatmap-level-0 { background: #ebedf0; }
+        .heatmap-level-1 { background: #c6e48b; }
+        .heatmap-level-2 { background: #7bc96f; }
+        .heatmap-level-3 { background: #239a3b; }
+        .heatmap-level-4 { background: #196127; }
+
+        /* Radar Chart */
+        .radar-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        /* Family Profiles */
+        .profiles-section {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .profile-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .profile-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .add-profile-card {
+            background: #f8f9fa;
+            color: #667eea;
+            border: 3px dashed #667eea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .add-profile-card:hover {
+            background: #e9ecef;
+        }
+
+        /* Leaderboard */
+        .leaderboard-section {
+            padding: 4rem 5%;
+            background: #f8f9fa;
+        }
+
+        .leaderboard-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .leaderboard-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 150px 150px;
+            padding: 1.5rem;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .leaderboard-row:hover {
+            background: #f8f9fa;
+        }
+
+        .leaderboard-rank {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .rank-1 { color: #ffd700; }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+
+        .leaderboard-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* QR Code Modal */
+        .qr-modal {
+            text-align: center;
+        }
+
+        .qr-code-container {
+            display: inline-block;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        /* Exercise Plans */
+        .exercise-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .exercise-plan-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .plan-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .plan-body {
+            padding: 2rem;
+        }
+
+        .exercise-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Meditation Timer */
+        .meditation-section {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .meditation-timer {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .meditation-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .breathing-circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: breathe 8s infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        /* Voice Input */
+        .voice-btn {
+            position: fixed;
+            bottom: 200px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .voice-btn.listening {
+            animation: voicePulse 1s infinite;
+        }
+
+        @keyframes voicePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4); }
+            50% { transform: scale(1.2); box-shadow: 0 15px 40px rgba(239, 68, 68, 0.8); }
+        }
+
+        /* Community Forum */
+        .forum-section {
+            padding: 4rem 5%;
+            background: white;
+        }
+
+        .forum-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .forum-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .forum-category:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .forum-posts {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .forum-post {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        /* Success Stories */
+        .success-stories {
+            padding: 4rem 5%;
+            background: #f8f9fa;
+        }
+
+        .story-slider {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .story-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            overflow: hidden;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #666;
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+
+        .story-author {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dot.active {
+            background: #667eea;
+            width: 40px;
+            border-radius: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .leaderboard-row {
+                grid-template-columns: 60px 1fr 100px;
+                font-size: 0.9rem;
+            }
+
+            .points-display {
+                top: 70px;
+                right: 10px;
+                padding: 0.7rem 1rem;
+                font-size: 1rem;
+            }
+
+            .profile-cards,
+            .achievement-grid,
+            .exercise-plans {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs-header {
+                overflow-x: auto;
+            }
+
+            .tab-btn {
+                white-space: nowrap;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .water-glasses {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .meditation-timer {
+                font-size: 3rem;
+            }
+
+            .breathing-circle {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Dark Mode Updates */
+        body.dark-mode .achievements-panel,
+        body.dark-mode .challenge-card,
+        body.dark-mode .forecast-card,
+        body.dark-mode .radar-container,
+        body.dark-mode .leaderboard-table,
+        body.dark-mode .exercise-plan-card,
+        body.dark-mode .forum-post,
+        body.dark-mode .story-card,
+        body.dark-mode .food-entry,
+        body.dark-mode .sleep-chart-container {
+            background: var(--dark-card);
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .medication-item,
+        body.dark-mode .forum-category,
+        body.dark-mode .food-tag {
+            background: var(--dark-bg);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sizning eski HTML strukturangiz qoladi -->
+    
+    <!-- YANGI QISM BOSHLANADI -->
+    
+    <!-- Points Display -->
+    <div class="points-display" id="pointsDisplay">
+        <i class="fas fa-star"></i>
+        <span id="totalPoints">0</span> ball
+        <div class="streak-indicator">
+            <i class="fas fa-fire"></i>
+            <span id="streakDays">0</span> kun
+        </div>
+    </div>
+
+    <!-- Voice Input Button -->
+    <button class="voice-btn" id="voiceBtn" onclick="toggleVoiceInput()">
+        <i class="fas fa-microphone"></i>
+    </button>
+
+    <!-- SECTION 1: GAMIFICATION -->
+    <section class="achievements-panel" id="achievements">
+        <h2 class="section-title">🏆 Yutuqlar va O'yinlashtirish</h2>
+        
+        <div class="achievement-grid" id="achievementGrid">
+            <!-- Achievements will be generated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- SECTION 2: DAILY CHALLENGES -->
+    <section class="challenges-section" id="challenges">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 class="section-title">🎯 Kunlik Vazifalar</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                Har kuni vazifalarni bajaring va ballar to'plang!
+            </p>
+            
+            <div id="challengesList">
+                <!-- Challenges will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: HEALTH TRACKING -->
+    <section class="health-tracking" id="tracking">
+        <h2 class="section-title">📊 Sog'liqni Kuzatish</h2>
+        
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="switchTab('medications')">
+                    <i class="fas fa-pills"></i> Dorilar
+                </button>
+                <button class="tab-btn" onclick="switchTab('food')">
+                    <i class="fas fa-utensils"></i> Ovqatlanish
+                </button>
+                <button class="tab-btn" onclick="switchTab('sleep')">
+                    <i class="fas fa-bed"></i> Uyqu
+                </button>
+                <button class="tab-btn" onclick="switchTab('water')">
+                    <i class="fas fa-tint"></i> Suv
+                </button>
+            </div>
+
+            <!-- Medications Tab -->
+            <div id="medicationsTab" class="tab-content active">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Dorilar Jadvali</h3>
+                    <button class="btn btn-primary btn-small" onclick="addMedication()">
+                        <i class="fas fa-plus"></i> Dori Qo'shish
+                    </button>
+                </div>
+                <div class="medication-list" id="medicationList">
+                    <!-- Medications will be added here -->
+                </div>
+            </div>
+
+            <!-- Food Journal Tab -->
+            <div id="foodTab" class="tab-content">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
+                    <h3>Ovqatlanish Jurnali</h3>
+                    <button class="btn btn-primary btn-small" onclick="addFoodEntry()">
+                        <i class="fas fa-plus"></i> Ovqat Qo'shish
+                    </button>
+                </div>
+                
+                <div style="background: white; padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                    <h4 style="margin-bottom: 1rem;">Bugungi Kaloriyalar</h4>
+                    <div style="display: flex; justify-content: space-around; text-align: center;">
+                        <div>
+                            <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;" id="caloriesConsumed">0</div>
+                            <div style="color: #666;">Iste'mol qilingan</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; font-weight: 700; color: #10b981;">2000</div>
+                            <div style="color: #666;">Kunlik maqsad</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; font-weight: 700; color: #f59e0b;" id="caloriesRemaining">2000</div>
+                            <div style="color: #666;">Qolgan</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="foodEntries">
+                    <!-- Food entries will be added here -->
+                </div>
+            </div>
+
+            <!-- Sleep Tracker Tab -->
+            <div id="sleepTab" class="tab-content">
+                <h3 style="margin-bottom: 2rem;">Uyqu Monitoringi</h3>
+                
+                <div class="sleep-chart-container">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+
+                <div class="sleep-stats">
+                    <div class="sleep-stat-card">
+                        <div class="sleep-stat-value" id="avgSleep">7.5h</div>
+                        <div>O'rtacha Uyqu</div>
+                    </div>
+                    <div class="sleep-stat-card">
+                        <div class="sleep-stat-value" id="sleepQuality">85%</div>
+                        <div>Uyqu Sifati</div>
+                    </div>
+                    <div class="sleep-stat-card">
+                        <div class="sleep-stat-value" id="deepSleep">2.5h</div>
+                        <div>Chuqur Uyqu</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%; margin-top: 2rem;" onclick="logSleep()">
+                    <i class="fas fa-moon"></i> Bugungi Uyquni Yozish
+                </button>
+            </div>
+
+            <!-- Water Tracker Tab -->
+            <div id="waterTab" class="tab-content">
+                <div class="water-tracker">
+                    <h3>Suv Iste'moli</h3>
+                    <p style="color: #666; margin: 1rem 0;">Kunlik maqsad: 2 litr (8 stakan)</p>
+                    
+                    <div style="font-size: 3rem; font-weight: 700; color: #29b6f6; margin: 2rem 0;">
+                        <span id="waterCount">0</span> / 8
+                    </div>
+
+                    <div class="water-glasses" id="waterGlasses">
+                        <!-- Water glasses will be generated -->
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="resetWater()">
+                        <i class="fas fa-redo"></i> Qayta Boshlash
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: FORECAST & PREDICTION -->
+    <section class="forecast-section" id="forecast">
+        <h2 class="section-title">🔮 Kelajak Prognozi va Trend Tahlili</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+            AI tahlili asosida keyingi 3 oylik xavf darajangizni ko'ring
+        </p>
+
+        <div class="forecast-cards" id="forecastCards">
+            <!-- Forecast cards will be generated -->
+        </div>
+
+        <div style="max-width: 1200px; margin: 3rem auto;">
+            <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                <h3 style="margin-bottom: 2rem; text-align: center;">📈 Parametrlar Tendensiyasi</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: 3D BRAIN VISUALIZATION -->
+    <section style="padding: 4rem 5%; background: white;">
+        <h2 class="section-title">🧠 3D Miya Vizualizatsiyasi</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+            Insultning miyaga ta'sirini 3D modelda ko'ring
+        </p>
+        
+        <div class="brain-3d-container" id="brain3D">
+            <div class="brain-controls">
+                <button class="btn btn-small btn-primary" onclick="rotateBrain()">
+                    <i class="fas fa-sync"></i> Aylantirish
+                </button>
+                <button class="btn btn-small btn-secondary" onclick="showStrokeArea()">
+                    <i class="fas fa-exclamation-triangle"></i> Xavfli Zona
+                </button>
+                <button class="btn btn-small btn-secondary" onclick="resetBrain()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: HEATMAP CALENDAR -->
+    <section style="padding: 4rem 5%; background: #f8f9fa;">
+        <h2 class="section-title">📅 Faollik Kalendari</h2>
+        <p style="text-align: center; margin-bottom: 3rem; color: #666;">
+            Yillik faolligingizni ko'ring
+        </p>
+        
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="heatmap-calendar">
+                <div class="heatmap-grid" id="heatmapGrid">
+                    <!-- Heatmap cells will be generated -->
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="color: #666; margin-right: 1rem;">Kam</span>
+                    <div class="heatmap-cell heatmap-level-0"></div>
+                    <div class="heatmap-cell heatmap-level-1"></div>
+                    <div class="heatmap-cell heatmap-level-2"></div>
+                    <div class="heatmap-cell heatmap-level-3"></div>
+                    <div class="heatmap-cell heatmap-level-4"></div>
+                    <span style="color: #666; margin-left: 1rem;">Ko'p</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: RADAR CHART -->
+    <section style="padding: 4rem 5%; background: white;">
+        <h2 class="section-title">📊 Sog'liq Parametrlari Radar</h2>
+        
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="radar-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: FAMILY PROFILES -->
+    <section class="profiles-section" id="profiles">
+        <h2 class="section-title">👨‍👩‍👧‍👦 Oilaviy Monitoring</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+            Oila a'zolaringiz uchun alohida profillar yarating
+        </p>
+
+        <div class="profile-cards" id="profileCards">
+            <div class="profile-card add-profile-card" onclick="addFamilyProfile()">
+                <i class="fas fa-plus" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                <h3>Profil Qo'shish</h3>
+                <p style="opacity: 0.7; margin-top: 0.5rem;">Oila a'zosi qo'shish</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: LEADERBOARD -->
+    <section class="leaderboard-section" id="leaderboard">
+        <h2 class="section-title">🏅 Sog'lomlik Reyting</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666;">
+            Eng sog'lom turmush tarzi yuritayotganlar (anonim)
+        </p>
+
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="leaderboard-table" id="leaderboardTable">
+                <!-- Leaderboard rows will be generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: AI EXERCISE PLANS -->
+    <section style="padding: 4rem 5%; background: #f8f9fa;">
+        <h2 class="section-title">💪 Personallashtirilgan Mashq Rejalari</h2>
+        
+        <div class="exercise-plans" id="exercisePlans">
+            <!-- Exercise plans will be generated based on user data -->
+        </div>
+    </section>
+
+    <!-- SECTION 11: MEDITATION & STRESS MANAGEMENT -->
+    <section class="meditation-section" id="meditation">
+        <h2 class="section-title" style="color: white;">🧘‍♂️ Meditatsiya va Stress Boshqaruvi</h2>
+        
+        <div class="breathing-circle">
+            <div style="text-align: center;">
+                <div style="font-size: 1.5rem; margin-bottom: 1rem;">Nafas oling...</div>
+                <div id="breathingPhase" style="font-size: 2rem; font-weight: 700;">Kiriting</div>
+            </div>
+        </div>
+
+        <div class="meditation-timer" id="meditationTimer">05:00</div>
+
+        <div class="meditation-controls">
+            <button class="btn btn-primary" onclick="startMeditation()">
+                <i class="fas fa-play"></i> Boshlash
+            </button>
+            <button class="btn btn-secondary" onclick="pauseMeditation()">
+                <i class="fas fa-pause"></i> To'xtatish
+            </button>
+            <button class="btn btn-secondary" onclick="resetMeditation()">
+                <i class="fas fa-redo"></i> Qayta Boshlash
+            </button>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <h3 style="color: white; margin-bottom: 1rem;">Guided Audio Sessions</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; max-width: 900px; margin: 0 auto;">
+                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                    <i class="fas fa-play-circle" style="font-size: 3rem; margin-bottom: 0.5rem;"></i>
+                    <h4>5 Daqiqalik Tinchlanish</h4>
+                    <button class="btn btn-secondary btn-small" style="margin-top: 1rem;">Tinglash</button>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                    <i class="fas fa-play-circle" style="font-size: 3rem; margin-bottom: 0.5rem;"></i>
+                    <h4>Chuqur Nafas</h4>
+                    <button class="btn btn-secondary btn-small" style="margin-top: 1rem;">Tinglash</button>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; text-align: center;">
+                    <i class="fas fa-play-circle" style="font-size: 3rem; margin-bottom: 0.5rem;"></i>
+                    <h4>Uyqu Meditatsiyasi</h4>
+                    <button class="btn btn-secondary btn-small" style="margin-top: 1rem;">Tinglash</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 12: COMMUNITY FORUM -->
+    <section class="forum-section" id="forum">
+        <h2 class="section-title">💬 Hamjamiyat Forumi</h2>
+        
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="forum-categories">
+                <div class="forum-category" onclick="filterForum('all')">
+                    <h4><i class="fas fa-home"></i> Barcha Mavzular</h4>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">328 post</p>
+                </div>
+                <div class="forum-category" onclick="filterForum('success')">
+                    <h4><i class="fas fa-trophy"></i> Muvaffaqiyat Hikoyalari</h4>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">89 post</p>
+                </div>
+                <div class="forum-category" onclick="filterForum('questions')">
+                    <h4><i class="fas fa-question-circle"></i> Savollar</h4>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">156 post</p>
+                </div>
+                <div class="forum-category" onclick="filterForum('tips')">
+                    <h4><i class="fas fa-lightbulb"></i> Maslahatlar</h4>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">83 post</p>
+                </div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <button class="btn btn-primary" onclick="createForumPost()">
+                    <i class="fas fa-plus"></i> Yangi Post Yaratish
+                </button>
+            </div>
+
+            <div class="forum-posts" id="forumPosts">
+                <!-- Forum posts will be generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: SUCCESS STORIES SLIDER -->
+    <section class="success-stories" id="stories">
+        <h2 class="section-title">⭐ Muvaffaqiyat Hikoyalari</h2>
+        
+        <div class="story-slider">
+            <div class="story-card" id="storyCard">
+                <!-- Story content will be generated -->
+            </div>
+            
+            <div class="slider-controls" id="storyControls">
+                <!-- Slider dots will be generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content qr-modal">
+            <span class="close" onclick="closeQRModal()">&times;</span>
+            <h2>Shifokorga Ko'rsatish Uchun QR Kod</h2>
+            <p style="color: #666; margin: 1rem 0;">Shifokor bu kodni skanerlashi mumkin</p>
+            <div class="qr-code-container" id="qrCodeContainer"></div>
+            <p style="margin-top: 1rem; color: #666;">Yoki havola orqali ulashing:</p>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-top: 1rem; word-break: break-all;">
+                <code id="shareLink"></code>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 1rem;" onclick="copyShareLink()">
+                <i class="fas fa-copy"></i> Nusxa Olish
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // ESKI KODLARINGIZ SHU YERDA DAVOM ETADI
+        
+        // YANGI JAVASCRIPT FUNKSIYALAR
+        
+        // ===== GAMIFICATION SYSTEM =====
+        const achievements = [
+            { id: 'first_check', icon: '🎯', title: 'Birinchi Qadam', desc: 'Birinchi tekshiruvni o\'tkazing', points: 10, unlocked: false },
+            { id: 'week_streak', icon: '🔥', title: '7 Kunlik Seriya', desc: '7 kun ketma-ket tekshiring', points: 50, unlocked: false },
+            { id: 'month_streak', icon: '💎', title: 'Oylik Champion', desc: '30 kun faollik', points: 200, unlocked: false },
+            { id: 'bmi_improved', icon: '⚖️', title: 'BMI Yaxshilandi', desc: 'BMI normal darajaga tushdi', points: 100, unlocked: false },
+            { id: 'bp_normal', icon: '❤️', title: 'Bosim Normalda', desc: 'Qon bosimi me\'yorga keldi', points: 100, unlocked: false },
+            { id: 'no_smoking', icon: '🚭', title: 'Chekishni Tashladim', desc: '30 kun chekmaslik', points: 300, unlocked: false },
+            { id: 'exercise_master', icon: '💪', title: 'Sport Masteri', desc: '20 marta mashq qilish', points: 150, unlocked: false },
+            { id: 'water_champion', icon: '💧', title: 'Suv Chempioni', desc: '7 kun ketma-ket 2L suv ichish', points: 75, unlocked: false },
+            { id: 'meditation_guru', icon: '🧘', title: 'Meditatsiya Guru', desc: '10 marta meditatsiya', points: 100, unlocked: false },
+            { id: 'community_helper', icon: '🤝', title: 'Hamjamiyat Yordamchisi', desc: '5 ta foydali post', points: 80, unlocked: false },
+            { id: 'perfect_week', icon: '⭐', title: 'Mukammal Hafta', desc: 'Barcha kunlik vazifalar', points: 250, unlocked: false },
+            { id: 'risk_reducer', icon: '📉', title: 'Xavf Kamaydi', desc: 'Xavf 20% kamaydi', points: 500, unlocked: false }
+        ];
+
+        let userPoints = parseInt(localStorage.getItem('neuroguard_points') || '0');
+        let streakDays = parseInt(localStorage.getItem('neuroguard_streak') || '0');
+        let unlockedAchievements = JSON.parse(localStorage.getItem('neuroguard_achievements') || '[]');
+
+        function initGamification() {
+            updatePointsDisplay();
+            renderAchievements();
+            checkDailyStreak();
+            generateDailyChallenges();
+        }
+
+        function updatePointsDisplay() {
+            document.getElementById('totalPoints').textContent = userPoints;
+            document.getElementById('streakDays').textContent = streakDays;
+        }
+
+        function renderAchievements() {
+            const grid = document.getElementById('achievementGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = achievements.map(ach => {
+                const isUnlocked = unlockedAchievements.includes(ach.id);
+                return `
+                    <div class="achievement-card ${isUnlocked ? 'unlocked' : 'locked'}">
+                        ${isUnlocked ? '<div class="achievement-badge">✓</div>' : ''}
+                        <span class="achievement-icon">${ach.icon}</span>
+                        <div class="achievement-title">${ach.title}</div>
+                        <div class="achievement-desc">${ach.desc}</div>
+                        <div style="margin-top: 0.5rem; font-weight: 700; color: gold;">
+                            ${isUnlocked ? `+${ach.points} ball` : `${ach.points} ball`}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function unlockAchievement(achievementId) {
+            if (unlockedAchievements.includes(achievementId)) return;
+            
+            const achievement = achievements.find(a => a.id === achievementId);
+            if (!achievement) return;
+            
+            unlockedAchievements.push(achievementId);
+            userPoints += achievement.points;
+            
+            localStorage.setItem('neuroguard_achievements', JSON.stringify(unlockedAchievements));
+            localStorage.setItem('neuroguard_points', userPoints.toString());
+            
+            updatePointsDisplay();
+            renderAchievements();
+            
+            showNotification(`🎉 Yangi Yutuq: ${achievement.title} (+${achievement.points} ball)`, 'success');
+            
+            // Confetti animation would go here
+            celebrateAchievement();
+        }
+
+        function celebrateAchievement() {
+            // Simple celebration animation
+            const points = document.getElementById('pointsDisplay');
+            points.style.animation = 'none';
+            setTimeout(() => {
+                points.style.animation = 'pointsPulse 2s infinite';
+            }, 10);
+        }
+
+        function checkDailyStreak() {
+            const today = new Date().toDateString();
+            const lastCheckDate = localStorage.getItem('neuroguard_last_check');
+            
+            if (lastCheckDate !== today) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                
+                if (lastCheckDate === yesterday.toDateString()) {
+                    streakDays++;
+                    if (streakDays >= 7) unlockAchievement('week_streak');
+                    if (streakDays >= 30) unlockAchievement('month_streak');
+                } else if (lastCheckDate) {
+                    streakDays = 1;
+                }
+                
+                localStorage.setItem('neuroguard_streak', streakDays.toString());
+                localStorage.setItem('neuroguard_last_check', today);
+                updatePointsDisplay();
+            }
+        }
+
+        // ===== DAILY CHALLENGES =====
+        const challengeTemplates = [
+            { id: 'walk_steps', icon: '🚶', title: '6000 Qadam Yuring', target: 6000, unit: 'qadam', points: 20 },
+            { id: 'drink_water', icon: '💧', title: '8 Stakan Suv Iching', target: 8, unit: 'stakan', points: 15 },
+            { id: 'exercise_30', icon: '💪', title: '30 Daqiqa Sport', target: 30, unit: 'daqiqa', points: 25 },
+            { id: 'meditation', icon: '🧘', title: '10 Daqiqa Meditatsiya', target: 10, unit: 'daqiqa', points: 20 },
+            { id: 'healthy_meal', icon: '🥗', title: 'Sog\'lom Taom Yeng', target: 3, unit: 'taom', points: 15 },
+            { id: 'sleep_hours', icon: '😴', title: '7-8 Soat Uxlang', target: 7, unit: 'soat', points: 20 }
+        ];
+
+        function generateDailyChallenges() {
+            const today = new Date().toDateString();
+            const savedChallenges = localStorage.getItem('neuroguard_daily_challenges');
+            const savedDate = localStorage.getItem('neuroguard_challenges_date');
+            
+            let dailyChallenges;
+            
+            if (savedDate === today && savedChallenges) {
+                dailyChallenges = JSON.parse(savedChallenges);
+            } else {
+                // Generate new random 4 challenges
+                const shuffled = [...challengeTemplates].sort(() => 0.5 - Math.random());
+                dailyChallenges = shuffled.slice(0, 4).map(ch => ({
+                    ...ch,
+                    progress: 0,
+                    completed: false
+                }));
+                
+                localStorage.setItem('neuroguard_daily_challenges', JSON.stringify(dailyChallenges));
+                localStorage.setItem('neuroguard_challenges_date', today);
+            }
+            
+            renderChallenges(dailyChallenges);
+        }
+
+        function renderChallenges(challenges) {
+            const container = document.getElementById('challengesList');
+            if (!container) return;
+            
+            container.innerHTML = challenges.map((ch, index) => `
+                <div class="challenge-card ${ch.completed ? 'completed' : ''}">
+                    <div class="challenge-info">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">${ch.icon}</div>
+                        <div class="challenge-title">${ch.title}</div>
+                        <div class="challenge-progress">
+                            <div class="challenge-progress-bar">
+                                <div class="challenge-progress-fill" style="width: ${(ch.progress / ch.target) * 100}%"></div>
+                            </div>
+                            <span style="font-weight: 600; color: #667eea;">
+                                ${ch.progress} / ${ch.target} ${ch.unit}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="challenge-reward">
+                        ${ch.completed ? '✅' : `🎁 ${ch.points} ball`}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateChallengeProgress(challengeId, amount) {
+            const savedChallenges = JSON.parse(localStorage.getItem('neuroguard_daily_challenges') || '[]');
+            const challenge = savedChallenges.find(ch => ch.id === challengeId);
+            
+            if (!challenge || challenge.completed) return;
+            
+            challenge.progress = Math.min(challenge.progress + amount, challenge.target);
+            
+            if (challenge.progress >= challenge.target && !challenge.completed) {
+                challenge.completed = true;
+                userPoints += challenge.points;
+                localStorage.setItem('neuroguard_points', userPoints.toString());
+                updatePointsDisplay();
+                showNotification(`✅ Vazifa bajarildi! +${challenge.points} ball`, 'success');
+                
+                // Check if all challenges completed
+                if (savedChallenges.every(ch => ch.completed)) {
+                    unlockAchievement('perfect_week');
+                }
+            }
+            
+            localStorage.setItem('neuroguard_daily_challenges', JSON.stringify(savedChallenges));
+            renderChallenges(savedChallenges);
+        }
+
+        // ===== HEALTH TRACKING =====
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Medication Management
+        function addMedication() {
+            const name = prompt('Dori nomi:');
+            if (!name) return;
+            
+            const dosage = prompt('Dozasi (masalan: 1 tabletka):');
+            const time = prompt('Vaqti (masalan: 08:00):');
+            
+            const medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
+            medications.push({ 
+                id: Date.now(), 
+                name, 
+                dosage, 
+                time, 
+                taken: false,
+                lastTaken: null
+            });
+            
+            localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
+            renderMedications();
+            setupMedicationReminders();
+        }
+
+        function renderMedications() {
+            const medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
+            const container = document.getElementById('medicationList');
+            if (!container) return;
+            
+            if (medications.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Hozircha dorilar qo\'shilmagan</p>';
+                return;
+            }
+            
+            container.innerHTML = medications.map(med => `
+                <div class="medication-item">
+                    <div class="med-info">
+                        <h4>${med.name}</h4>
+                        <p style="color: #666;">${med.dosage}</p>
+                        <div class="med-time">
+                            <i class="fas fa-clock"></i> ${med.time}
+                            ${med.taken ? '<span style="color: #10b981; margin-left: 0.5rem;">✓ Qabul qilindi</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="med-actions">
+                        <button class="btn-take" onclick="takeMedication(${med.id})" ${med.taken ? 'disabled' : ''}>
+                            <i class="fas fa-check"></i> Ichildi
+                        </button>
+                        <button class="btn btn-secondary btn-small" onclick="deleteMedication(${med.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function takeMedication(id) {
+            const medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
+            const med = medications.find(m => m.id === id);
+            if (med) {
+                med.taken = true;
+                med.lastTaken = new Date().toISOString();
+                localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
+                renderMedications();
+                updateChallengeProgress('healthy_meal', 1);
+                userPoints += 5;
+                updatePointsDisplay();
+                showNotification('✅ Dori qabul qilindi!', 'success');
+            }
+        }
+
+        function deleteMedication(id) {
+            if (!confirm('Ushbu dorini o\'chirmoqchimisiz?')) return;
+            let medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
+            medications = medications.filter(m => m.id !== id);
+            localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
+            renderMedications();
+        }
+
+        function setupMedicationReminders() {
+            const medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
+            
+            medications.forEach(med => {
+                if (!med.taken) {
+                    const [hours, minutes] = med.time.split(':');
+                    const now = new Date();
+                    const reminderTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+                    
+                    const timeUntilReminder = reminderTime - now;
+                    if (timeUntilReminder > 0) {
+                        setTimeout(() => {
+                            showNotification(`💊 ${med.name} ichish vaqti keldi! (${med.dosage})`, 'warning');
+                        }, timeUntilReminder);
+                    }
+                }
+            });
+        }
+
+        // Food Journal
+        function addFoodEntry() {
+            const meal = prompt('Taom turi (nonushta/tushlik/kechki ovqat/snack):');
+            const items = prompt('Nima yedingiz (vergul bilan ajrating):');
+            const calories = parseInt(prompt('Kaloriyalar (taxminan):'));
+            
+            if (!meal || !items || !calories) return;
+            
+            const foodEntries = JSON.parse(localStorage.getItem('neuroguard_food') || '[]');
+            foodEntries.push({
+                id: Date.now(),
+                date: new Date().toISOString(),
+                meal: meal.toLowerCase(),
+                items: items.split(',').map(i => i.trim()),
+                calories
+            });
+            
+            localStorage.setItem('neuroguard_food', JSON.stringify(foodEntries));
+            renderFoodEntries();
+            updateChallengeProgress('healthy_meal', 1);
+        }
+
+        function renderFoodEntries() {
+            const entries = JSON.parse(localStorage.getItem('neuroguard_food') || '[]');
+            const today = new Date().toDateString();
+            const todayEntries = entries.filter(e => new Date(e.date).toDateString() === today);
+            
+            const totalCalories = todayEntries.reduce((sum, e) => sum + e.calories, 0);
+            document.getElementById('caloriesConsumed').textContent = totalCalories;
+            document.getElementById('caloriesRemaining').textContent = Math.max(0, 2000 - totalCalories);
+            
+            const container = document.getElementById('foodEntries');
+            if (!container) return;
+            
+            const mealTypes = {
+                'nonushta': 'meal-breakfast',
+                'tushlik': 'meal-lunch',
+                'kechki ovqat': 'meal-dinner',
+                'snack': 'meal-snack'
+            };
+            
+            container.innerHTML = todayEntries.reverse().map(entry => `
+                <div class="food-entry">
+                    <div class="food-entry-header">
+                        <span class="meal-type ${mealTypes[entry.meal] || 'meal-snack'}">
+                            ${entry.meal.toUpperCase()}
+                        </span>
+                        <span class="calories-badge">${entry.calories} kcal</span>
+                    </div>
+                    <div class="food-items">
+                        ${entry.items.map(item => `<span class="food-tag">${item}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Water Tracker
+        function initWaterTracker() {
+            const container = document.getElementById('waterGlasses');
+            if (!container) return;
+            
+            const waterCount = parseInt(localStorage.getItem('neuroguard_water_today') || '0');
+            const today = new Date().toDateString();
+            const lastWaterDate = localStorage.getItem('neuroguard_water_date');
+            
+            if (lastWaterDate !== today) {
+                localStorage.setItem('neuroguard_water_today', '0');
+                localStorage.setItem('neuroguard_water_date', today);
+            }
+            
+            container.innerHTML = Array.from({length: 8}, (_, i) => `
+                <div class="water-glass ${i < waterCount ? 'filled' : ''}" onclick="toggleWaterGlass(${i})">
+                    ${i < waterCount ? '<i class="fas fa-check" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 2rem;"></i>' : ''}
+                </div>
+            `).join('');
+            
+            document.getElementById('waterCount').textContent = waterCount;
+        }
+
+        function toggleWaterGlass(index) {
+            let waterCount = parseInt(localStorage.getItem('neuroguard_water_today') || '0');
+            
+            if (index < waterCount) {
+                waterCount = index;
+            } else {
+                waterCount = index + 1;
+            }
+            
+            localStorage.setItem('neuroguard_water_today', waterCount.toString());
+            initWaterTracker();
+            updateChallengeProgress('drink_water', 1);
+            
+            if (waterCount >= 8) {
+                unlockAchievement('water_champion');
+            }
+        }
+
+        function resetWater() {
+            localStorage.setItem('neuroguard_water_today', '0');
+            initWaterTracker();
+        }
+
+        // Sleep Tracker
+        function logSleep() {
+            const hours = parseFloat(prompt('Necha soat uxladingiz?'));
+            const quality = parseInt(prompt('Uyqu sifati (1-10):'));
+            
+            if (!hours || !quality) return;
+            
+            const sleepData = JSON.parse(localStorage.getItem('neuroguard_sleep') || '[]');
+            sleepData.push({
+                date: new Date().toISOString(),
+                hours,
+                quality: quality * 10
+            });
+            
+            localStorage.setItem('neuroguard_sleep', JSON.stringify(sleepData));
+            updateSleepChart();
+            updateChallengeProgress('sleep_hours', hours);
+            
+            if (hours >= 7 && hours <= 8) {
+                userPoints += 10;
+                updatePointsDisplay();
+                showNotification('✅ Yaxshi uxladingiz! +10 ball', 'success');
+            }
+        }
+
+        function updateSleepChart() {
+            const sleepData = JSON.parse(localStorage.getItem('neuroguard_sleep') || '[]');
+            const last7Days = sleepData.slice(-7);
+            
+            const ctx = document.getElementById('sleepChart');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: last7Days.map(d => new Date(d.date).toLocaleDateString('uz-UZ', { weekday: 'short' })),
+                    datasets: [{
+                        label: 'Uyqu (soat)',
+                        data: last7Days.map(d => d.hours),
+                        backgroundColor: 'rgba(102, 126, 234, 0.5)',
+                        borderColor: '#667eea',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                callback: value => value + 'h'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Update stats
+            if (last7Days.length > 0) {
+                const avgSleep = (last7Days.reduce((sum, d) => sum + d.hours, 0) / last7Days.length).toFixed(1);
+                const avgQuality = Math.round(last7Days.reduce((sum, d) => sum + d.quality, 0) / last7Days.length);
+                
+                document.getElementById('avgSleep').textContent = avgSleep + 'h';
+                document.getElementById('sleepQuality').textContent = avgQuality + '%';
+            }
+        }
+
+        // ===== FORECAST & PREDICTION =====
+        function generateForecast() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            if (history.length < 3) {
+                document.getElementById('forecastCards').innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #666;">
+                        <i class="fas fa-chart-line" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p>Prognoz uchun kamida 3 ta tekshiruv kerak</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Simple linear regression for prediction
+            const scores = history.slice(0, 10).reverse().map(h => h.riskScore);
+            const trend = scores[scores.length - 1] - scores[0];
+            const avgChange = trend / scores.length;
+            
+            const months = ['1-oy', '2-oy', '3-oy'];
+            const forecasts = months.map((month, i) => {
+                const predicted = Math.max(0, Math.min(100, scores[scores.length - 1] + avgChange * (i + 1) * 30));
+                return { month, predicted: Math.round(predicted) };
+            });
+            
+            const container = document.getElementById('forecastCards');
+            container.innerHTML = forecasts.map(f => {
+                const trendClass = f.predicted < scores[scores.length - 1] ? 'trend-down' : 
+                                   f.predicted > scores[scores.length - 1] ? 'trend-up' : 'trend-stable';
+                const trendIcon = f.predicted < scores[scores.length - 1] ? '📉' : 
+                                 f.predicted > scores[scores.length - 1] ? '📈' : '➡️';
+                const riskClass = f.predicted < 30 ? 'risk-low' : f.predicted < 60 ? 'risk-medium' : 'risk-high';
+                
+                return `
+                    <div class="forecast-card">
+                        <div class="forecast-month">${f.month} Prognoz</div>
+                        <div class="forecast-prediction ${riskClass}">${f.predicted}%</div>
+                        <div class="forecast-trend ${trendClass}">
+                            ${trendIcon} ${Math.abs(f.predicted - scores[scores.length - 1])}% o'zgarish
+                        </div>
+                        <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">
+                            ${f.predicted < 30 ? 'Yaxshi yo\'ldasiz!' : 
+                              f.predicted < 60 ? 'Ehtiyot bo\'ling' : 
+                              'Shifokorga murojaat qiling'}
+                        </p>
+                    </div>
+                `;
+            }).join('');
+            
+            // Create trend chart
+            createTrendChart(scores, forecasts);
+        }
+
+        function createTrendChart(historical, forecasts) {
+            const ctx = document.getElementById('trendChart');
+            if (!ctx) return;
+            
+            const labels = [
+                ...Array.from({length: historical.length}, (_, i) => `-${historical.length - i} kun`),
+                ...forecasts.map(f => f.month)
+            ];
+            
+            const data = [
+                ...historical,
+                ...forecasts.map(f => f.predicted)
+            ];
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Xavf Darajasi',
+                        data,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        segment: {
+                            borderDash: ctx => {
+                                return ctx.p0DataIndex >= historical.length - 1 ? [5, 5] : [];
+                            }
+                        }
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: true },
+                        annotation: {
+                            annotations: {
+                                line1: {
+                                    type: 'line',
+                                    xMin: historical.length - 0.5,
+                                    xMax: historical.length - 0.5,
+                                    borderColor: '#f59e0b',
+                                    borderWidth: 2,
+                                    borderDash: [5, 5],
+                                    label: {
+                                        content: 'Prognoz',
+                                        enabled: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Kodni davom ettirish kerak bo'lganligi uchun 2-qismda davom ettiramiz...
+        
+        // INIT on page load
+        window.addEventListener('load', function() {
+            // Eski init funksiyangiz
+            loadDarkMode();
+            loadHistory();
+            
+            // YANGI init funksiyalar
+            initGamification();
+            renderMedications();
+            renderFoodEntries();
+            initWaterTracker();
+            updateSleepChart();
+            generateForecast();
+            init3DBrain();
+            initHeatmap();
+            createRadarChart();
+            loadFamilyProfiles();
+            loadLeaderboard();
+            generateExercisePlans();
+            initMeditationTimer();
+            loadForumPosts();
+            loadSuccessStories();
+            setupMedicationReminders();
+            
+            showNotification('👋 Xush kelibsiz! NeuroGuard AI Pro!', 'success');
+        });
+    </script>
+
+<!-- DAVOMI KEYINGI COMMENT DA -->
+// ===== 3D BRAIN VISUALIZATION =====
+        let brain3DScene, brain3DCamera, brain3DRenderer, brainMesh;
+        let brain3DAnimating = false;
+
+        function init3DBrain() {
+            const container = document.getElementById('brain3D');
+            if (!container) return;
+
+            // Scene setup
+            brain3DScene = new THREE.Scene();
+            brain3DScene.background = new THREE.Color(0x000000);
+
+            // Camera
+            brain3DCamera = new THREE.PerspectiveCamera(
+                75,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                1000
+            );
+            brain3DCamera.position.z = 5;
+
+            // Renderer
+            brain3DRenderer = new THREE.WebGLRenderer({ antialias: true });
+            brain3DRenderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(brain3DRenderer.domElement);
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            brain3DScene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 5, 5);
+            brain3DScene.add(directionalLight);
+
+            // Create brain mesh (simplified sphere with bumps)
+            const geometry = new THREE.SphereGeometry(2, 32, 32);
+            
+            // Create custom material with brain-like texture
+            const material = new THREE.MeshPhongMaterial({
+                color: 0xff9999,
+                emissive: 0x441111,
+                shininess: 30,
+                specular: 0x111111
+            });
+
+            brainMesh = new THREE.Mesh(geometry, material);
+            brain3DScene.add(brainMesh);
+
+            // Add stroke risk area (red sphere)
+            const riskGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+            const riskMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff0000,
+                transparent: true,
+                opacity: 0.7
+            });
+            const riskMesh = new THREE.Mesh(riskGeometry, riskMaterial);
+            riskMesh.position.set(1.2, 1, 0.5);
+            riskMesh.visible = false;
+            riskMesh.name = 'strokeArea';
+            brain3DScene.add(riskMesh);
+
+            // Animation loop
+            animate3DBrain();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (!container) return;
+                brain3DCamera.aspect = container.clientWidth / container.clientHeight;
+                brain3DCamera.updateProjectionMatrix();
+                brain3DRenderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+
+        function animate3DBrain() {
+            requestAnimationFrame(animate3DBrain);
+            
+            if (brainMesh) {
+                brainMesh.rotation.x += 0.001;
+                brainMesh.rotation.y += 0.003;
+            }
+            
+            brain3DRenderer.render(brain3DScene, brain3DCamera);
+        }
+
+        function rotateBrain() {
+            brain3DAnimating = !brain3DAnimating;
+            if (brain3DAnimating) {
+                const rotateAnimation = () => {
+                    if (!brain3DAnimating) return;
+                    brainMesh.rotation.y += 0.05;
+                    requestAnimationFrame(rotateAnimation);
+                };
+                rotateAnimation();
+            }
+        }
+
+        function showStrokeArea() {
+            const strokeArea = brain3DScene.getObjectByName('strokeArea');
+            if (strokeArea) {
+                strokeArea.visible = !strokeArea.visible;
+                
+                if (strokeArea.visible) {
+                    // Pulse animation
+                    let scale = 1;
+                    let growing = true;
+                    const pulseInterval = setInterval(() => {
+                        if (!strokeArea.visible) {
+                            clearInterval(pulseInterval);
+                            return;
+                        }
+                        
+                        if (growing) {
+                            scale += 0.02;
+                            if (scale >= 1.3) growing = false;
+                        } else {
+                            scale -= 0.02;
+                            if (scale <= 1) growing = true;
+                        }
+                        
+                        strokeArea.scale.set(scale, scale, scale);
+                    }, 50);
+                }
+            }
+        }
+
+        function resetBrain() {
+            if (brainMesh) {
+                brainMesh.rotation.set(0, 0, 0);
+                brain3DAnimating = false;
+                
+                const strokeArea = brain3DScene.getObjectByName('strokeArea');
+                if (strokeArea) strokeArea.visible = false;
+            }
+        }
+
+        // ===== HEATMAP CALENDAR =====
+        function initHeatmap() {
+            const grid = document.getElementById('heatmapGrid');
+            if (!grid) return;
+
+            const today = new Date();
+            const oneYearAgo = new Date(today);
+            oneYearAgo.setFullYear(today.getFullYear() - 1);
+
+            const activityData = JSON.parse(localStorage.getItem('neuroguard_activity') || '{}');
+
+            // Generate 365 days
+            const days = [];
+            for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
+                days.push(new Date(d));
+            }
+
+            grid.innerHTML = days.map(date => {
+                const dateStr = date.toISOString().split('T')[0];
+                const activity = activityData[dateStr] || 0;
+                const level = Math.min(4, Math.floor(activity / 25));
+                
+                return `
+                    <div class="heatmap-cell heatmap-level-${level}" 
+                         title="${dateStr}: ${activity} faollik"
+                         data-date="${dateStr}">
+                    </div>
+                `;
+            }).join('');
+
+            // Log today's activity
+            logActivityForToday();
+        }
+
+        function logActivityForToday() {
+            const today = new Date().toISOString().split('T')[0];
+            const activityData = JSON.parse(localStorage.getItem('neuroguard_activity') || '{}');
+            
+            // Calculate today's activity based on completed challenges, assessments, etc.
+            const challenges = JSON.parse(localStorage.getItem('neuroguard_daily_challenges') || '[]');
+            const completedCount = challenges.filter(ch => ch.completed).length;
+            
+            activityData[today] = (activityData[today] || 0) + (completedCount * 25);
+            localStorage.setItem('neuroguard_activity', JSON.stringify(activityData));
+        }
+
+        // ===== RADAR CHART =====
+        function createRadarChart() {
+            const ctx = document.getElementById('radarChart');
+            if (!ctx) return;
+
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            if (history.length === 0) return;
+
+            const latest = history[0].data;
+
+            // Normalize values to 0-100 scale
+            const data = {
+                labels: ['Qon Bosimi', 'Yurak Urishi', 'BMI', 'Qand', 'Jismoniy Faollik', 'Umumiy Sog\'liq'],
+                datasets: [{
+                    label: 'Sizning Ko\'rsatkichlaringiz',
+                    data: [
+                        100 - Math.min(100, ((latest.systolic - 120) / 80) * 100),
+                        100 - Math.abs(latest.heartrate - 70),
+                        100 - Math.min(100, ((latest.bmi - 22) / 18) * 100),
+                        100 - Math.min(100, ((latest.glucose - 5) / 10) * 100),
+                        { none: 20, light: 50, moderate: 75, active: 100 }[history[0].data.exercise] || 50,
+                        100 - history[0].riskScore
+                    ],
+                    backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                    borderColor: '#667eea',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#667eea'
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'radar',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+        }
+
+        // ===== FAMILY PROFILES =====
+        function loadFamilyProfiles() {
+            const profiles = JSON.parse(localStorage.getItem('neuroguard_profiles') || '[]');
+            const container = document.getElementById('profileCards');
+            if (!container) return;
+
+            const profilesHTML = profiles.map(profile => `
+                <div class="profile-card" onclick="switchProfile('${profile.id}')">
+                    <div class="profile-avatar">${profile.emoji}</div>
+                    <h3>${profile.name}</h3>
+                    <p style="opacity: 0.9; margin: 0.5rem 0;">${profile.age} yosh</p>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">
+                        Oxirgi xavf: ${profile.lastRisk || 'N/A'}%
+                    </p>
+                    <button class="btn btn-secondary btn-small" style="margin-top: 1rem;" onclick="event.stopPropagation(); deleteProfile('${profile.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            // Keep the add button and prepend profiles
+            const addButton = container.querySelector('.add-profile-card');
+            container.innerHTML = profilesHTML;
+            container.appendChild(addButton);
+        }
+
+        function addFamilyProfile() {
+            const name = prompt('Ism:');
+            if (!name) return;
+            
+            const age = parseInt(prompt('Yosh:'));
+            const emoji = prompt('Emoji tanlang (masalan: 👨, 👩, 👦, 👧):') || '👤';
+            
+            const profiles = JSON.parse(localStorage.getItem('neuroguard_profiles') || '[]');
+            profiles.push({
+                id: 'profile_' + Date.now(),
+                name,
+                age,
+                emoji,
+                createdAt: new Date().toISOString(),
+                lastRisk: null
+            });
+            
+            localStorage.setItem('neuroguard_profiles', JSON.stringify(profiles));
+            loadFamilyProfiles();
+            showNotification(`✅ ${name} profili qo'shildi!`, 'success');
+        }
+
+        function switchProfile(profileId) {
+            const currentProfile = localStorage.getItem('neuroguard_current_profile');
+            if (currentProfile === profileId) {
+                showNotification('ℹ️ Bu profil allaqachon faol', 'info');
+                return;
+            }
+            
+            localStorage.setItem('neuroguard_current_profile', profileId);
+            showNotification('✅ Profil almashtirildi!', 'success');
+            
+            // Reload data for this profile
+            loadHistory();
+        }
+
+        function deleteProfile(profileId) {
+            if (!confirm('Ushbu profilni o\'chirmoqchimisiz?')) return;
+            
+            let profiles = JSON.parse(localStorage.getItem('neuroguard_profiles') || '[]');
+            profiles = profiles.filter(p => p.id !== profileId);
+            localStorage.setItem('neuroguard_profiles', JSON.stringify(profiles));
+            loadFamilyProfiles();
+            showNotification('✅ Profil o\'chirildi', 'success');
+        }
+
+        // ===== LEADERBOARD =====
+        function loadLeaderboard() {
+            const container = document.getElementById('leaderboardTable');
+            if (!container) return;
+
+            // Generate mock leaderboard data (in real app, this would come from server)
+            const leaderboardData = [
+                { rank: 1, name: 'A***', points: 2450, streak: 45, avatar: '🏆' },
+                { rank: 2, name: 'S***', points: 2280, streak: 38, avatar: '🥈' },
+                { rank: 3, name: 'M***', points: 2100, streak: 32, avatar: '🥉' },
+                { rank: 4, name: 'D***', points: 1950, streak: 28, avatar: '⭐' },
+                { rank: 5, name: 'K***', points: 1820, streak: 25, avatar: '⭐' },
+                { rank: 6, name: 'N***', points: 1650, streak: 21, avatar: '⭐' },
+                { rank: 7, name: 'R***', points: 1480, streak: 18, avatar: '⭐' },
+                { rank: 8, name: 'Z***', points: 1320, streak: 15, avatar: '⭐' },
+                { rank: 9, name: 'O***', points: 1180, streak: 12, avatar: '⭐' },
+                { rank: 10, name: 'Siz', points: userPoints, streak: streakDays, avatar: '👤', highlight: true }
+            ];
+
+            // Sort by points
+            leaderboardData.sort((a, b) => b.points - a.points);
+            
+            // Update ranks
+            leaderboardData.forEach((item, index) => {
+                item.rank = index + 1;
+            });
+
+            container.innerHTML = leaderboardData.map(item => `
+                <div class="leaderboard-row" style="${item.highlight ? 'background: #eff6ff; border-left: 4px solid #667eea;' : ''}">
+                    <div class="leaderboard-rank rank-${item.rank}">${item.rank}</div>
+                    <div class="leaderboard-user">
+                        <div class="user-avatar-small">${item.avatar}</div>
+                        <div>
+                            <div style="font-weight: 700;">${item.name}</div>
+                            <div style="font-size: 0.9rem; color: #666;">
+                                <i class="fas fa-fire"></i> ${item.streak} kun
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: #667eea;">
+                        <i class="fas fa-star"></i> ${item.points}
+                    </div>
+                    <div style="display: none;">
+                        <button class="btn btn-secondary btn-small">Ko'rish</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== EXERCISE PLANS =====
+        function generateExercisePlans() {
+            const container = document.getElementById('exercisePlans');
+            if (!container) return;
+
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            let userAge = 45;
+            let riskLevel = 'medium';
+
+            if (history.length > 0) {
+                userAge = history[0].data.age;
+                riskLevel = history[0].riskClass.replace('risk-', '');
+            }
+
+            const plans = {
+                low: {
+                    title: 'Faol Turmush Tarzi',
+                    exercises: [
+                        { name: 'Tez yurish', duration: '45 daqiqa', frequency: '5-6 kun/hafta' },
+                        { name: 'Yugurish', duration: '30 daqiqa', frequency: '3-4 kun/hafta' },
+                        { name: 'Suzish', duration: '45 daqiqa', frequency: '2-3 kun/hafta' },
+                        { name: 'Velosiped', duration: '60 daqiqa', frequency: '2-3 kun/hafta' },
+                        { name: 'Yoga', duration: '30 daqiqa', frequency: 'Har kuni' }
+                    ]
+                },
+                medium: {
+                    title: 'Boshlang\'ich Daraja',
+                    exercises: [
+                        { name: 'Sekin yurish', duration: '30 daqiqa', frequency: 'Har kuni' },
+                        { name: 'Cho\'zilish mashqlari', duration: '15 daqiqa', frequency: 'Har kuni' },
+                        { name: 'Yengil aerobika', duration: '20 daqiqa', frequency: '3 kun/hafta' },
+                        { name: 'Qo\'l-oyoq kuchi', duration: '15 daqiqa', frequency: '3 kun/hafta' },
+                        { name: 'Nafas mashqlari', duration: '10 daqiqa', frequency: 'Har kuni' }
+                    ]
+                },
+                high: {
+                    title: 'Terapevtik Mashqlar',
+                    exercises: [
+                        { name: 'Yengil yurish', duration: '15-20 daqiqa', frequency: 'Kuniga 2-3 marta' },
+                        { name: 'O\'tirgan holda mashqlar', duration: '10 daqiqa', frequency: 'Har kuni' },
+                        { name: 'Nafas gymnastikasi', duration: '10 daqiqa', frequency: 'Kuniga 3 marta' },
+                        { name: 'Balans mashqlari', duration: '10 daqiqa', frequency: 'Har kuni' },
+                        { name: 'Fisioterapiya', duration: '30 daqiqa', frequency: '2-3 kun/hafta' }
+                    ]
+                }
+            };
+
+            const userPlan = plans[riskLevel] || plans.medium;
+
+            container.innerHTML = `
+                <div class="exercise-plan-card">
+                    <div class="plan-header">
+                        <h3>${userPlan.title}</h3>
+                        <p style="margin-top: 0.5rem; opacity: 0.9;">Sizning yoshingiz va sog'ligingizga moslashtirilgan</p>
+                    </div>
+                    <div class="plan-body">
+                        ${userPlan.exercises.map(ex => `
+                            <div class="exercise-item">
+                                <div>
+                                    <div style="font-weight: 700; margin-bottom: 0.3rem;">${ex.name}</div>
+                                    <div style="font-size: 0.9rem; color: #666;">
+                                        ⏱️ ${ex.duration} • 📅 ${ex.frequency}
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-small" onclick="trackExercise('${ex.name}')">
+                                    ✓ Bajarildi
+                                </button>
+                            </div>
+                        `).join('')}
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: #eff6ff; border-radius: 10px;">
+                            <h4 style="color: #667eea; margin-bottom: 0.5rem;">⚠️ Eslatma:</h4>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Yangi mashq dasturiga kirishishdan oldin shifokorga murojaat qiling.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function trackExercise(exerciseName) {
+            const exercises = JSON.parse(localStorage.getItem('neuroguard_exercises') || '[]');
+            exercises.push({
+                name: exerciseName,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('neuroguard_exercises', JSON.stringify(exercises));
+            
+            updateChallengeProgress('exercise_30', 30);
+            userPoints += 15;
+            updatePointsDisplay();
+            
+            showNotification(`✅ ${exerciseName} bajarildi! +15 ball`, 'success');
+            
+            // Check for achievement
+            if (exercises.length >= 20) {
+                unlockAchievement('exercise_master');
+            }
+        }
+
+        // ===== MEDITATION TIMER =====
+        let meditationInterval = null;
+        let meditationSeconds = 300; // 5 minutes
+        let meditationRunning = false;
+
+        function initMeditationTimer() {
+            updateMeditationDisplay();
+            startBreathingAnimation();
+        }
+
+        function startMeditation() {
+            if (meditationRunning) return;
+            
+            meditationRunning = true;
+            meditationInterval = setInterval(() => {
+                meditationSeconds--;
+                updateMeditationDisplay();
+                
+                if (meditationSeconds <= 0) {
+                    pauseMeditation();
+                    showNotification('🧘 Meditatsiya tugadi! +20 ball', 'success');
+                    userPoints += 20;
+                    updatePointsDisplay();
+                    updateChallengeProgress('meditation', 10);
+                    
+                    // Check achievement
+                    const meditationCount = parseInt(localStorage.getItem('neuroguard_meditation_count') || '0') + 1;
+                    localStorage.setItem('neuroguard_meditation_count', meditationCount.toString());
+                    if (meditationCount >= 10) {
+                        unlockAchievement('meditation_guru');
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseMeditation() {
+            meditationRunning = false;
+            if (meditationInterval) {
+                clearInterval(meditationInterval);
+                meditationInterval = null;
+            }
+        }
+
+        function resetMeditation() {
+            pauseMeditation();
+            meditationSeconds = 300;
+            updateMeditationDisplay();
+        }
+
+        function updateMeditationDisplay() {
+            const minutes = Math.floor(meditationSeconds / 60);
+            const seconds = meditationSeconds % 60;
+            const display = document.getElementById('meditationTimer');
+            if (display) {
+                display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function startBreathingAnimation() {
+            const phases = ['Nafas kiriting...', 'Ushlab turing...', 'Nafas chiqaring...', 'Tinchlanish...'];
+            let currentPhase = 0;
+            
+            setInterval(() => {
+                const phaseDisplay = document.getElementById('breathingPhase');
+                if (phaseDisplay) {
+                    phaseDisplay.textContent = phases[currentPhase];
+                    currentPhase = (currentPhase + 1) % phases.length;
+                }
+            }, 4000);
+        }
+
+        // ===== VOICE INPUT =====
+        let recognition = null;
+        let voiceListening = false;
+
+        function initVoiceRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'uz-UZ';
+                
+                recognition.onresult = function(event) {
+                    const transcript = event.results[0][0].transcript.toLowerCase();
+                    handleVoiceCommand(transcript);
+                };
+                
+                recognition.onerror = function(event) {
+                    console.error('Voice recognition error:', event.error);
+                    voiceListening = false;
+                    updateVoiceButton();
+                };
+                
+                recognition.onend = function() {
+                    voiceListening = false;
+                    updateVoiceButton();
+                };
+            }
+        }
+
+        function toggleVoiceInput() {
+            if (!recognition) {
+                initVoiceRecognition();
+            }
+            
+            if (!recognition) {
+                showNotification('❌ Ovozli kirish qo\'llab-quvvatlanmaydi', 'error');
+                return;
+            }
+            
+            if (voiceListening) {
+                recognition.stop();
+                voiceListening = false;
+            } else {
+                recognition.start();
+                voiceListening = true;
+                showNotification('🎤 Tinglayapman...', 'info');
+            }
+            
+            updateVoiceButton();
+        }
+
+        function updateVoiceButton() {
+            const btn = document.getElementById('voiceBtn');
+            if (btn) {
+                btn.classList.toggle('listening', voiceListening);
+            }
+        }
+
+        function handleVoiceCommand(command) {
+            showNotification(`Buyruq: "${command}"`, 'info');
+            
+            if (command.includes('tekshir') || command.includes('test')) {
+                document.getElementById('assessment').scrollIntoView({ behavior: 'smooth' });
+            } else if (command.includes('tarix')) {
+                document.getElementById('history').scrollIntoView({ behavior: 'smooth' });
+            } else if (command.includes('profil')) {
+                document.getElementById('profiles').scrollIntoView({ behavior: 'smooth' });
+            } else if (command.includes('meditatsiya')) {
+                document.getElementById('meditation').scrollIntoView({ behavior: 'smooth' });
+            } else if (command.includes('yordam')) {
+                toggleChatbot();
+            } else {
+                showNotification('❓ Buyruq tushunilmadi. "Tekshir", "Tarix", "Profil" buyruqlarini ishlatishingiz mumkin.', 'warning');
+            }
+        }
+
+        // ===== FORUM =====
+        function loadForumPosts() {
+            const posts = [
+                {
+                    id: 1,
+                    author: 'Abbos M.',
+                    avatar: '👨',
+                    category: 'success',
+                    title: '3 oyda 15kg yo\'qotdim!',
+                    content: 'NeuroGuard AI yordamida turmush tarzimni butunlay o\'zgartirdim. Qon bosimim normalga tushdi...',
+                    likes: 45,
+                    comments: 12,
+                    time: '2 soat oldin'
+                },
+                {
+                    id: 2,
+                    author: 'Sitora K.',
+                    avatar: '👩',
+                    category: 'tips',
+                    title: 'Saharni kamaytirish bo\'yicha maslahatlar',
+                    content: 'Qandni kamaytirish juda qiyin edi, lekin bu usullar yordam berdi...',
+                    likes: 32,
+                    comments: 8,
+                    time: '5 soat oldin'
+                },
+                {
+                    id: 3,
+                    author: 'Javohir T.',
+                    avatar: '👨',
+                    category: 'questions',
+                    title: 'Qon bosimi doimiy sakraydi, nima qilish kerak?',
+                    content: 'Bugungi kunda qon bosimim 160/95. Shifokor aytgan dorilarni ichyapman lekin...',
+                    likes: 18,
+                    comments: 24,
+                    time: '1 kun oldin'
+                }
+            ];
+            
+            const container = document.getElementById('forumPosts');
+            if (!container) return;
+            
+            container.innerHTML = posts.map(post => `
+                <div class="forum-post">
+                    <div class="post-header">
+                        <div class="post-author">
+                            <div class="user-avatar-small">${post.avatar}</div>
+                            <div>
+                                <div style="font-weight: 700;">${post.author}</div>
+                                <div style="font-size: 0.9rem; color: #666;">${post.time}</div>
+                            </div>
+                        </div>
+                        <span style="background: #eff6ff; color: #667eea; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">
+                            ${post.category === 'success' ? '🏆 Muvaffaqiyat' : 
+                              post.category === 'tips' ? '💡 Maslahat' : 
+                              '❓ Savol'}
+                        </span>
+                    </div>
+                    <h3 style="margin: 1rem 0;">${post.title}</h3>
+                    <p style="color: #666; line-height: 1.6;">${post.content}</p>
+                    <div class="post-stats">
+                        <div class="post-stat">
+                            <i class="fas fa-heart"></i> ${post.likes} yoqdi
+                        </div>
+                        <div class="post-stat">
+                            <i class="fas fa-comment"></i> ${post.comments} izoh
+                        </div>
+                        <div class="post-stat" style="margin-left: auto; cursor: pointer; color: #667eea;">
+                            <i class="fas fa-share"></i> Ulashish
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterForum(category) {
+            showNotification(`${category} kategoriyasi tanlaнdi`, 'info');
+            // In a real app, this would filter posts
+        }
+
+        function createForumPost() {
+            const title = prompt('Post sarlavhasi:');
+            if (!title) return;
+            
+            const content = prompt('Mazmuni:');
+            if (!content) return;
+            
+            showNotification('✅ Post yaratildi! Moderatsiyadan o\'tgandan so\'ng ko\'rinadi.', 'success');
+            userPoints += 10;
+            updatePointsDisplay();
+        }
+
+        // ===== SUCCESS STORIES =====
+        function loadSuccessStories() {
+            const stories = [
+                {
+                    name: 'Abdulla Karimov',
+                    age: 52,
+                    image: '👨‍⚕️',
+                    quote: 'NeuroGuard AI hayotimni saqlab qoldi. Insult xavfini 75%dan 25%ga tushirdim!',
+                    details: '6 oy ichida 20kg yo\'qotdi, qon bosimi normalga tushdi.'
+                },
+                {
+                    name: 'Malika Rahimova',
+                    age: 48,
+                    image: '👩',
+                    quote: 'Erta ogohlantirish tizimi tufayli o\'z vaqtida shifokorga bordim. Hozir butunlay sog\'lomman!',
+                    details: 'Platformaning AI tavsiyalari yordamida turmush tarzini o\'zgartirdi.'
+                },
+                {
+                    name: 'Rustam Toshmatov',
+                    age: 55,
+                    image: '👨',
+                    quote: 'Chekishni tashladim, har kuni sport qilyapman. Bu ilova menga yo\'l ko\'rsatdi.',
+                    details: '3 oyda barcha parametrlar yaxshilandi, endi nazorat ostida.'
+                }
+            ];
+            
+            let currentStory = 0;
+            
+            function showStory(index) {
+                const story = stories[index];
+                const card = document.getElementById('storyCard');
+                if (!card) return;
+                
+                card.innerHTML = `
+                    <div class="story-image">
+                        <div style="font-size: 5rem;">${story.image}</div>
+                    </div>
+                    <p class="story-quote">"${story.quote}"</p>
+                    <div class="story-author">${story.name}, ${story.age} yosh</div>
+                    <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">${story.details}</p>
+                `;
+                
+                // Update dots
+                const controls = document.getElementById('storyControls');
+                if (controls) {
+                    controls.innerHTML = stories.map((_, i) => `
+                        <span class="slider-dot ${i === index ? 'active' : ''}" 
+                              onclick="showStory(${i})"></span>
+                    `).join('');
+                }
+            }
+            
+            // Auto-rotate stories
+            setInterval(() => {
+                currentStory = (currentStory + 1) % stories.length;
+                showStory(currentStory);
+            }, 8000);
+            
+            // Initial display
+            showStory(0);
+            
+            // Make showStory globally available
+            window.showStory = showStory;
+        }
+
+        // ===== QR CODE GENERATION =====
+        function generateQRCode() {
+            const modal = document.getElementById('qrModal');
+            if (!modal) return;
+            
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            
+            const shareData = {
+                date: new Date(currentResult.date).toLocaleDateString('uz-UZ'),
+                risk: currentResult.riskScore,
+                level: currentResult.riskLevel,
+                factors: currentResult.factors
+            };
+            
+            const shareURL = `https://neuroguard.ai/share/${btoa(JSON.stringify(shareData))}`;
+            
+            // Clear previous QR code
+            const container = document.getElementById('qrCodeContainer');
+            container.innerHTML = '';
+            
+            // Generate QR code
+            new QRCode(container, {
+                text: shareURL,
+                width: 250,
+                height: 250,
+                colorDark: '#667eea',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            document.getElementById('shareLink').textContent = shareURL;
+            modal.style.display = 'block';
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        function copyShareLink() {
+            const link = document.getElementById('shareLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('✅ Havola nusxa olindi!', 'success');
+            });
+        }
+
+        // ===== EMAIL SHARING =====
+        function shareViaEmail() {
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            
+            const email = prompt('Shifokorning email manzili:');
+            if (!email) return;
+            
+            const subject = encodeURIComponent('NeuroGuard AI - Insult Xavfi Tekshiruvi');
+            const body = encodeURIComponent(`
+Salom,
+
+Men NeuroGuard AI platformasida insult xavfi tekshiruvidan o'tdim.
+
+Natijalar:
+- Xavf darajasi: ${currentResult.riskScore}%
+- Holat: ${currentResult.riskLevel}
+- Sana: ${new Date(currentResult.date).toLocaleDateString('uz-UZ')}
+
+Batafsil ma'lumot: [PDF ilova qilingan]
+
+Hurmat bilan,
+NeuroGuard AI foydalanuvchisi
+            `);
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+            showNotification('✉️ Email yuborilmoqda...', 'info');
+        }
+
+        // ===== PWA SUPPORT =====
+        function initPWA() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker registered'))
+                    .catch(err => console.error('Service Worker registration failed', err));
+            }
+            
+            // Install prompt
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                // Show install button
+                showNotification('📱 Ilovani o\'rnatishingiz mumkin!', 'info');
+            });
+        }
+
+        // ===== ENHANCED ANALYZERISK (ORIGINAL FUNCTION UPDATE) =====
+        // O'sha analyzeRisk funksiyangizning oxiriga qo'shing:
+        function enhancedAnalyzeRiskCallback() {
+            // After successful risk analysis
+            unlockAchievement('first_check');
+            checkDailyStreak();
+            logActivityForToday();
+            generateForecast();
+            createRadarChart();
+            loadLeaderboard();
+            
+            // Update challenges
+            updateChallengeProgress('walk_steps', 0); // This would come from actual step counter
+        }
+
+        // ===== NOTIFICATION IMPROVEMENTS =====
+        function showNotification(message, type = 'success') {
+            let container = document.getElementById('notificationContainer');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notificationContainer';
+                container.className = 'notification-container';
+                document.body.appendChild(container);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            const icons = { 
+                success: '✅', 
+                warning: '⚠️', 
+                error: '❌', 
+                info: 'ℹ️' 
+            };
+            
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type]}</div>
+                <div style="flex: 1;">${message}</div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.4s forwards';
+                setTimeout(() => notification.remove(), 400);
+            }, 5000);
+            
+            // Play sound (optional)
+            if (type === 'success') {
+                playNotificationSound();
+            }
+        }
+
+        function playNotificationSound() {
+            // Simple beep using Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.2);
+        }
+
+        // ===== MASTER INITIALIZATION =====
+        window.addEventListener('load', function() {
+            // Original inits
+            loadDarkMode();
+            loadHistory();
+            
+            // NEW inits
+            initGamification();
+            renderMedications();
+            renderFoodEntries();
+            initWaterTracker();
+            updateSleepChart();
+            generateForecast();
+            init3DBrain();
+            initHeatmap();
+            createRadarChart();
+            loadFamilyProfiles();
+            loadLeaderboard();
+            generateExercisePlans();
+            initMeditationTimer();
+            loadForumPosts();
+            loadSuccessStories();
+            setupMedicationReminders();
+            initPWA();
+            
+            console.log('%c🧠 NeuroGuard AI Pro', 'color: #667eea; font-size: 24px; font-weight: bold;');
+            console.log('%c✨ All 9 Advanced Features Loaded!', 'color: #764ba2; font-size: 14px;');
+            console.log('%c✅ Gamification ✅ Health Tracking ✅ AI Predictions', 'color: #10b981; font-size: 12px;');
+            console.log('%c✅ 3D Visualization ✅ Family Profiles ✅ Community', 'color: #10b981; font-size: 12px;');
+            
+            showNotification('👋 Xush kelibsiz! NeuroGuard AI Pro platformasiga!', 'success');
+        });
+
+        // ===== SERVICE WORKER (manifest.json va sw.js yaratish kerak) =====
+        // manifest.json fayl:
+        const manifestJSON = {
+            "name": "NeuroGuard AI Pro",
+            "short_name": "NeuroGuard",
+            "description": "Professional Stroke Prevention Platform",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#667eea",
+            "theme_color": "#667eea",
+            "icons": [
+                {
+                    "src": "icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "icon-512.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
+
+        console.log('NeuroGuard AI Pro - Fully Loaded! 🚀');
+    </script>
+</body>
+</html>    
