@@ -3,2020 +3,2070 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroGuard AI Pro - Ultimate Medical Platform</title>
-    
-    <!-- PWA Support -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#c41e3a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="/icons/icon-192.png">
-    
-    <!-- Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <title>NeuroGuard AI - Insultni Oldini Oluvchi Sun'iy Intellekt</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <!-- YANGI: Font Awesome - Chatbot ikonkasi uchun -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* ============================================
-           CORE STYLES - Medical Theme
-           ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-red: #c41e3a;
-            --primary-gradient: linear-gradient(135deg, #c41e3a 0%, #7c0a18 100%);
-            --heart-gradient: linear-gradient(135deg, #ff4757 0%, #c23616 100%);
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --dark-bg: #1a0a0e;
-            --dark-card: #2d1319;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #fff 0%, #ffe5e9 100%);
         }
 
-        /* ============================================
-           VOICE ASSISTANT UI
-           ============================================ */
-        .voice-assistant {
+        nav {
             position: fixed;
-            bottom: 200px;
-            right: 30px;
-            z-index: 998;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .voice-btn {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .voice-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .voice-btn.listening {
-            background: linear-gradient(135deg, #ff4757 0%, #c23616 100%);
-            animation: voicePulse 1.5s infinite;
-        }
-
-        @keyframes voicePulse {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 10px 30px rgba(255, 71, 87, 0.4);
-            }
-            50% { 
-                transform: scale(1.15);
-                box-shadow: 0 15px 50px rgba(255, 71, 87, 0.8), 0 0 0 20px rgba(255, 71, 87, 0.2);
-            }
-        }
-
-        .voice-popup {
+        .hero::before {
+            content: '';
             position: absolute;
-            bottom: 85px;
-            right: 0;
-            width: 350px;
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            display: none;
-            border: 3px solid #667eea;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
         }
 
-        .voice-popup.active {
-            display: block;
-            animation: slideInUp 0.3s;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        .voice-wave {
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        .stats {
             display: flex;
-            justify-content: center;
-            gap: 5px;
+            gap: 2rem;
             margin: 2rem 0;
         }
 
-        .wave-bar {
-            width: 8px;
-            height: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 4px;
-            animation: waveAnimation 1s infinite ease-in-out;
-        }
-
-        .wave-bar:nth-child(1) { animation-delay: 0s; }
-        .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-        .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-        .wave-bar:nth-child(4) { animation-delay: 0.3s; }
-        .wave-bar:nth-child(5) { animation-delay: 0.4s; }
-
-        @keyframes waveAnimation {
-            0%, 100% { height: 20px; }
-            50% { height: 60px; }
-        }
-
-        /* ============================================
-           MEDICATION REMINDER
-           ============================================ */
-        .medication-section {
-            padding: 4rem 5%;
-            background: white;
-        }
-
-        .medication-card {
-            background: white;
-            border-radius: 15px;
+        .stat-item {
+            background: rgba(255,255,255,0.2);
             padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
         }
 
-        .medication-card:hover {
-            transform: translateX(5px);
-            border-color: var(--primary-red);
-            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.2);
-        }
-
-        .med-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .med-name {
-            font-size: 1.3rem;
+        .stat-number {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--primary-red);
+            color: #ffd700;
+            display: block;
         }
 
-        .med-time-badge {
-            background: var(--primary-gradient);
+        .stat-label {
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .med-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .med-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #666;
-        }
-
-        .med-actions {
+        .cta-buttons {
             display: flex;
             gap: 1rem;
-            margin-top: 1rem;
         }
 
-        .btn-take-med {
-            flex: 1;
-            padding: 0.8rem;
-            background: var(--success-color);
-            color: white;
+        .btn {
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-        }
-
-        .btn-take-med:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-take-med:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* ============================================
-           LAB TEST INTEGRATION
-           ============================================ */
-        .lab-section {
-            padding: 4rem 5%;
-            background: #f8f9fa;
-        }
-
-        .lab-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--primary-red);
-        }
-
-        .test-result {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            gap: 2rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            align-items: center;
-        }
-
-        .test-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .test-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .test-status {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .status-normal { background: #d1fae5; color: #065f46; }
-        .status-abnormal { background: #fee2e2; color: #991b1b; }
-        .status-critical { background: #7f1d1d; color: white; }
-
-        .test-trend {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .trend-up { color: #ef4444; }
-        .trend-down { color: #10b981; }
-        .trend-stable { color: #f59e0b; }
-
-        /* ============================================
-           APPOINTMENT BOOKING
-           ============================================ */
-        .appointment-section {
-            padding: 4rem 5%;
-            background: white;
-        }
-
-        .doctor-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .doctor-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .doctor-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.2);
-            border-color: var(--primary-red);
-        }
-
-        .doctor-header {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .doctor-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: white;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .doctor-info {
-            padding: 1.5rem;
-        }
-
-        .availability-slots {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .time-slot {
-            padding: 0.5rem;
-            text-align: center;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .time-slot:hover {
-            border-color: var(--primary-red);
-            background: #ffe5e9;
-        }
-
-        .time-slot.booked {
-            background: #f3f4f6;
-            color: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        .time-slot.selected {
-            background: var(--primary-gradient);
-            color: white;
-            border-color: var(--primary-red);
-        }
-
-        /* ============================================
-           WEARABLE DEVICE SYNC
-           ============================================ */
-        .wearable-section {
-            padding: 4rem 5%;
-            background: #f8f9fa;
-        }
-
-        .device-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .device-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s;
-        }
-
-        .device-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
-        }
-
-        .device-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .device-status {
+            text-decoration: none;
             display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
             font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 1rem;
         }
 
-        .status-connected {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .status-disconnected {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .sync-data {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .data-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-        }
-
-        .data-value {
-            font-weight: 700;
-            color: var(--primary-red);
-        }
-
-        /* ============================================
-           EXERCISE VIDEO LIBRARY
-           ============================================ */
-        .exercise-library {
-            padding: 4rem 5%;
-            background: white;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .video-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .hero-visual {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .play-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.9);
+        .brain-icon {
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary-red);
+            font-size: 200px;
+            animation: pulse 3s ease-in-out infinite;
         }
 
-        .video-info {
-            padding: 1.5rem;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .video-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .assessment {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             color: #333;
         }
 
-        .video-meta {
-            display: flex;
-            gap: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .difficulty-easy { background: #d1fae5; color: #065f46; }
-        .difficulty-medium { background: #fef3c7; color: #92400e; }
-        .difficulty-hard { background: #fee2e2; color: #991b1b; }
-
-        /* ============================================
-           OFFLINE MODE INDICATOR
-           ============================================ */
-        .offline-indicator {
-            position: fixed;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #fbbf24;
-            color: #78350f;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 600;
-        }
-
-        .offline-indicator.show {
-            display: flex;
-            animation: slideDown 0.5s;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        /* ============================================
-           PREMIUM FEATURES MODAL
-           ============================================ */
-        .premium-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .premium-modal.active {
-            display: flex;
-        }
-
-        .premium-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 30px;
-            max-width: 900px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .pricing-grid {
+        .assessment-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
         }
 
-        .pricing-card {
+        .assessment-form {
             background: white;
-            border: 3px solid #e0e0e0;
+            padding: 2.5rem;
             border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-red);
-            box-shadow: 0 20px 60px rgba(196, 30, 58, 0.2);
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .pricing-card.popular {
-            border-color: var(--primary-red);
-            background: linear-gradient(135deg, #fff 0%, #ffe5e9 100%);
-            transform: scale(1.05);
-        }
-
-        .plan-badge {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            display: inline-block;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .result-panel {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .risk-icon {
+            font-size: 5rem;
             margin-bottom: 1rem;
         }
 
-        .plan-price {
-            font-size: 3rem;
+        .risk-level {
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-percentage {
+            font-size: 3.5rem;
+            font-weight: 700;
             margin: 1rem 0;
         }
 
-        .plan-features {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            text-align: left;
+        .risk-low {
+            color: #10b981;
         }
 
-        .plan-features li {
+        .risk-medium {
+            color: #f59e0b;
+        }
+
+        .risk-high {
+            color: #ef4444;
+        }
+
+        .risk-factors {
+            margin-top: 2rem;
+        }
+
+        .risk-factor {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .factor-name {
+            font-weight: 600;
+        }
+
+        .factor-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-good {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .recommendations {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #eff6ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .recommendations h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
             padding: 0.5rem 0;
             padding-left: 1.5rem;
             position: relative;
         }
 
-        .plan-features li:before {
+        .recommendations li:before {
             content: "✓";
             position: absolute;
             left: 0;
-            color: var(--success-color);
+            color: #667eea;
             font-weight: 700;
         }
 
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .problem {
+            padding: 6rem 5%;
+            background: white;
+        }
+
+        .problem-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .history-section {
+            padding: 6rem 5%;
+            background: #f8f9fa;
+        }
+
+        .history-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .history-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .history-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .history-risk {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .empty-history-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            background: #0f0f1e;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid #667eea;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* CHATBOT - TUZATILGAN */
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            /* YANGI: Markazlash */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        body.dark-mode .chatbot-window {
+            background: #1a1a2e;
+        }
+
+        .chatbot-window.active {
+            display: flex;
+            animation: slideInUp 0.3s;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.9rem 1.2rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: messageSlide 0.3s;
+        }
+
+        @keyframes messageSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            background: #eff6ff;
+            align-self: flex-start;
+        }
+
+        body.dark-mode .message.bot {
+            background: #16213e;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .chatbot-input {
+            border-top-color: #2c3e50;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        body.dark-mode .chatbot-input input {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        .chatbot-input button {
+            margin-left: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .chatbot-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .notification {
+            background: white;
+            padding: 1.2rem 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 320px;
+            animation: slideInRight 0.3s;
+        }
+
+        body.dark-mode .notification {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        .notification.success {
+            border-left: 4px solid #10b981;
+        }
+
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+
+        .notification-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode nav {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        body.dark-mode .nav-links a {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .assessment,
+        body.dark-mode .history-section {
+            background: #16213e;
+        }
+
+        body.dark-mode .assessment-form,
+        body.dark-mode .result-panel,
+        body.dark-mode .history-card,
+        body.dark-mode .chart-container,
+        body.dark-mode .problem-card,
+        body.dark-mode .modal-content {
+            background: #1a1a2e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select {
+            background: #16213e;
+            color: #e0e0e0;
+            border-color: #2c3e50;
+        }
+
+        body.dark-mode .risk-factor {
+            background: #16213e;
+        }
+
+        body.dark-mode .recommendations {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-mode .section-title {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .progress-bar {
+            background: #2c3e50;
+        }
+
+        /* YANGI: Print qilish uchun stil */
+        @media print {
+            nav, .chatbot, .scroll-top, .action-buttons {
+                display: none !important;
+            }
+        }
+
+        /* YANGI: Animatsiyalar */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) {
-            .doctor-grid,
-            .device-grid,
-            .video-grid {
+            .hero-content,
+            .assessment-container {
                 grid-template-columns: 1fr;
             }
 
-            .voice-popup {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .result-panel {
+                position: static;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .chatbot-window {
                 width: calc(100vw - 40px);
             }
-
-            .premium-content {
-                padding: 2rem 1.5rem;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ============================================
-           LOADING & ANIMATIONS
-           ============================================ */
-        .shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .skeleton-card {
-            height: 200px;
-            border-radius: 15px;
-            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <!-- OFFLINE INDICATOR -->
-    <div class="offline-indicator" id="offlineIndicator">
-        <i class="fas fa-wifi-slash"></i>
-        <span>Offline rejimda ishlayapman</span>
-    </div>
-
-    <!-- VOICE ASSISTANT -->
-    <div class="voice-assistant">
-        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">
-            <i class="fas fa-microphone" id="voiceIcon"></i>
-        </button>
-        <div class="voice-popup" id="voicePopup">
-            <h3 style="text-align: center; color: #667eea; margin-bottom: 1rem;">
-                <i class="fas fa-robot"></i> Ovozli Yordamchi
-            </h3>
-            <div class="voice-wave" id="voiceWave" style="display: none;">
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-                <div class="wave-bar"></div>
-            </div>
-            <p id="voiceText" style="text-align: center; color: #666; margin: 1rem 0;">
-                Mikrofonni bosing va gapiring...
-            </p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <small style="color: #999;">
-                    Masalan: "Mening qon bosimim qanday?", "Bugungi dorilarimni ko'rsat"
-                </small>
-            </div>
-        </div>
-    </div>
-
-    <!-- MEDICATION REMINDER SECTION -->
-    <section class="medication-section" id="medications">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <h2 style="color: var(--primary-red);">
-                    <i class="fas fa-pills"></i> Dorilar va Eslatmalar
-                </h2>
-                <button class="btn btn-primary" onclick="showAddMedicationModal()">
-                    <i class="fas fa-plus"></i> Dori Qo'shish
-                </button>
-            </div>
-            
-            <div id="medicationList">
-                <!-- Medications will be populated here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- LAB TEST SECTION -->
-    <section class="lab-section" id="labTests">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: var(--primary-red); margin-bottom: 2rem;">
-                <i class="fas fa-flask"></i> Laboratoriya Tahlillari
-            </h2>
-            
-            <div class="lab-card">
-                <h3 style="margin-bottom: 1.5rem;">
-                    <i class="fas fa-file-medical"></i> Oxirgi Tahlillar
-                </h3>
-                <div id="labResultsList">
-                    <!-- Lab results will be populated here -->
+    <nav>
+        <div class="logo">🧠 NeuroGuard AI</div>
+        <ul class="nav-links">
+            <li><a href="#home">Bosh sahifa</a></li>
+            <li><a href="#assessment">Tekshirish</a></li>
+            <li><a href="#history">Tarix</a></li>
+            <li><a href="#problem">Muammo</a></li>
+            <li><a href="#contact">Aloqa</a></li>
+            <li>
+                <div class="lang-selector">
+                    <button class="lang-btn active" onclick="changeLanguage('uz')">UZ</button>
+                    <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')">EN</button>
                 </div>
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="showBookLabTest()">
-                    <i class="fas fa-calendar-plus"></i> Yangi Tahlil Band Qilish
+            </li>
+            <li>
+                <button class="theme-toggle" onclick="toggleDarkMode()" title="Tungi rejim">
+                    <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Insultni <span class="highlight">Davolamasdan</span> Oldini Oling</h1>
+                <p>Sun'iy intellekt yordamida insult xavfini oylar oldin aniqlang va hayotingizni saqlang</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">12M+</span>
+                        <span class="stat-label">Yillik insult holatlari</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Oldini olish mumkin</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#assessment" class="btn btn-primary">Bepul Tekshirish</a>
+                    <a href="#problem" class="btn btn-secondary">Ko'proq o'rganish</a>
+                </div>
             </div>
 
-            <div class="lab-card" style="margin-top: 2rem;">
-                <h3 style="margin-bottom: 1.5rem;">
-                    <i class="fas fa-chart-line"></i> Tahlillar Dinamikasi
-                </h3>
-                <canvas id="labTrendChart" style="max-height: 300px;"></canvas>
+            <div class="hero-visual">
+                <div class="brain-icon">🧠</div>
             </div>
         </div>
     </section>
 
-    <!-- APPOINTMENT BOOKING SECTION -->
-    <section class="appointment-section" id="appointments">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: var(--primary-red); margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-calendar-check"></i> Shifokor Konsultatsiyasi
-            </h2>
-            
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
-                <button class="btn btn-secondary btn-small" onclick="filterDoctors('all')">
-                    <i class="fas fa-th"></i> Barchasi
-                </button>
-                <button class="btn btn-secondary btn-small" onclick="filterDoctors('nevrolog')">
-                    <i class="fas fa-brain"></i> Nevrolog
-                </button>
-                <button class="btn btn-secondary btn-small" onclick="filterDoctors('kardiolog')">
-                    <i class="fas fa-heartbeat"></i> Kardiolog
-                </button>
-                <button class="btn btn-secondary btn-small" onclick="filterDoctors('endokrinolog')">
-                    <i class="fas fa-syringe"></i> Endokrinolog
+    <section class="assessment" id="assessment">
+        <h2 class="section-title">🤖 AI Yordamida Insult Xavfini Aniqlang</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; font-size: 1.1rem; color: #666;">
+            Tibbiy ma'lumotlaringizni kiriting va sun'iy intellekt bir necha soniyada xavf darajasini aniqlaydi
+        </p>
+        
+        <div style="max-width: 800px; margin: 0 auto 3rem;">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText">0% to'ldirildi</div>
+            </div>
+        </div>
+        
+        <div class="assessment-container">
+            <div class="assessment-form">
+                <div class="ai-badge">
+                    🤖 AI Tahlilchi faol
+                </div>
+
+                <div class="form-group">
+                    <label>🩺 Qon bosimi (mmHg)</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <input type="number" id="systolic" placeholder="Sistolik (120)" min="80" max="200" onchange="updateProgress()">
+                        <input type="number" id="diastolic" placeholder="Diastolik (80)" min="50" max="130" onchange="updateProgress()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>💓 Yurak urishi (bir daqiqada)</label>
+                    <input type="number" id="heartrate" placeholder="Masalan: 72" min="40" max="150" onchange="updateProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>🍬 Qand miqdori (mmol/L)</label>
+                    <input type="number" id="glucose" placeholder="Masalan: 5.5" step="0.1" min="3" max="20" onchange="updateProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>📏 Bo'y (sm)</label>
+                    <input type="number" id="height" placeholder="Masalan: 170" min="120" max="220" onchange="updateProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>⚖️ Vazn (kg)</label>
+                    <input type="number" id="weight" placeholder="Masalan: 70" min="30" max="200" onchange="updateProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>👤 Yosh</label>
+                    <input type="number" id="age" placeholder="Masalan: 45" min="18" max="100" onchange="updateProgress()">
+                </div>
+
+                <div class="form-group">
+                    <label>🚬 Chekasizmi?</label>
+                    <select id="smoking">
+                        <option value="no">Yo'q</option>
+                        <option value="yes">Ha</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🏃 Jismoniy faollik (haftasiga)</label>
+                    <select id="exercise">
+                        <option value="none">Yo'q</option>
+                        <option value="light">1-2 kun</option>
+                        <option value="moderate">3-4 kun</option>
+                        <option value="active">5+ kun</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>🧠 Nevrologik shikoyatlar</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="headache"> Tez-tez bosh og'rig'i</label>
+                        <label><input type="checkbox" id="dizziness"> Bosh aylanishi</label>
+                        <label><input type="checkbox" id="numbness"> Qo'l-oyoq kuchsizlanishi</label>
+                        <label><input type="checkbox" id="vision"> Ko'rish muammolari</label>
+                        <label><input type="checkbox" id="speech"> Nutq qiyinligi</label>
+                    </div>
+                </div>
+
+                <button onclick="analyzeRisk()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    🤖 AI Tahlil Qilsin
                 </button>
             </div>
 
-            <div class="doctor-grid" id="doctorGrid">
-                <!-- Doctors will be populated here -->
+            <div class="result-panel" id="resultPanel" style="display: none;">
+                <div class="result-header">
+                    <div class="risk-icon" id="riskIcon">🧠</div>
+                    <div class="risk-level" id="riskLevel">Tahlil Natijasi</div>
+                    <div class="risk-percentage" id="riskPercentage">--</div>
+                    <p id="riskDescription">Ma'lumotlar yuklanmoqda...</p>
+                </div>
+
+                <div class="risk-factors" id="riskFactors"></div>
+
+                <div class="recommendations" id="recommendations"></div>
+
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                    <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                    <!-- YANGI: Ulashish tugmasi -->
+                    <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 Ulashish</button>
+                    <!-- YANGI: Print tugmasi -->
+                    <button onclick="printResult()" class="btn btn-secondary btn-small">🖨️ Print</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- WEARABLE DEVICES SECTION -->
-    <section class="wearable-section" id="wearables">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: var(--primary-red); margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-watch"></i> Qurilmalar Sinxronizatsiyasi
-            </h2>
+    <section class="history-section" id="history">
+        <h2 class="section-title">📊 Tekshiruvlar Tarixi va Statistika</h2>
+        
+        <div class="history-container">
+            <div class="history-controls">
+                <h3>Sizning tekshiruvlaringiz</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <!-- YANGI: Eksport tugmasi -->
+                    <button onclick="exportHistory()" class="btn btn-secondary btn-small">📥 Eksport (JSON)</button>
+                    <button onclick="clearHistory()" class="btn btn-secondary btn-small">🗑️ Tarixni Tozalash</button>
+                </div>
+            </div>
 
-            <div class="device-grid" id="deviceGrid">
-                <!-- Devices will be populated here -->
+            <div id="chartSection" style="display: none;">
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📈 Xavf Darajasi Dinamikasi</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">📊 Parametrlar Taqqoslash</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="parametersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div id="historyList" class="history-grid"></div>
+
+            <div id="emptyHistory" class="empty-history" style="display: none;">
+                <div class="empty-history-icon">📋</div>
+                <h3>Hali tekshiruvlar yo'q</h3>
+                <p>Birinchi tekshiruvingizni o'tkazing va natijalar bu yerda saqlanadi</p>
+                <a href="#assessment" class="btn btn-primary" style="margin-top: 1rem;">Tekshirish Boshlash</a>
             </div>
         </div>
     </section>
 
-    <!-- EXERCISE VIDEO LIBRARY -->
-    <section class="exercise-library" id="exercises">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: var(--primary-red); margin-bottom: 2rem; text-align: center;">
-                <i class="fas fa-dumbbell"></i> Mashqlar Videotekasi
-            </h2>
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
 
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
-                <button class="btn btn-secondary btn-small" onclick="filterVideos('all')">Barchasi</button>
-                <button class="btn btn-secondary btn-small" onclick="filterVideos('stroke-prevention')">Insult Profilaktikasi</button>
-                <button class="btn btn-secondary btn-small" onclick="filterVideos('cardio')">Kardiyo</button>
-                <button class="btn btn-secondary btn-small" onclick="filterVideos('yoga')">Yoga</button>
-                <button class="btn btn-secondary btn-small" onclick="filterVideos('strength')">Kuch</button>
+    <section class="problem" id="problem">
+        <h2 class="section-title">Nima uchun NeuroGuard AI?</h2>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">💔</div>
+                <h3>O'lim Sababi #2</h3>
+                <p>Insult dunyoda ikkinchi eng katta o'lim sababi hisoblanadi</p>
             </div>
-
-            <div class="video-grid" id="videoGrid">
-                <!-- Videos will be populated here -->
+            <div class="problem-card">
+                <div class="problem-icon">⏰</div>
+                <h3>Har 5 Soniyada</h3>
+                <p>Dunyoda har 5 soniyada bir kishi insult tufayli vafot etadi</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">✅</div>
+                <h3>85% Oldini Olish Mumkin</h3>
+                <p>Erta aniqlash orqali insultning oldini olish mumkin</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">🤖</div>
+                <h3>AI Texnologiyasi</h3>
+                <p>Zamonaviy sun'iy intellekt orqali aniq prognoz</p>
             </div>
         </div>
     </section>
 
-    <!-- PREMIUM MODAL -->
-    <div class="premium-modal" id="premiumModal">
-        <div class="premium-content">
-            <div style="text-align: right; margin-bottom: 1rem;">
-                <button onclick="closePremiumModal()" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: #999;">
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>NeuroGuard AI</h4>
+                <p>Insultni oldini olish uchun sun'iy intellekt platformasi</p>
+            </div>
+            <div class="footer-section">
+                <h4>Havolalar</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Biz haqimizda</a></li>
+                    <li><a href="#">Platforma</a></li>
+                    <li><a href="#">Hamkorlik</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Aloqa</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:info@neuroguard.ai">info@neuroguard.ai</a></li>
+                    <li><a href="#">+998 93 482 55 77</a></li>
+                    <li><a href="#">Samarkand, O'zbekiston</a></li>
+                </ul>
+            </div>
+        </div>
+        <p style="opacity: 0.7; margin-top: 2rem;">© 2026 NeuroGuard AI. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <!-- AI Chatbot - TUZATILGAN IKONKA BILAN -->
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div><i class="fas fa-robot"></i> <strong>AI Yordamchi</strong></div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
-            <h2 style="text-align: center; color: var(--primary-red); margin-bottom: 1rem;">
-                <i class="fas fa-crown"></i> Premium Rejalar
-            </h2>
-            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
-                Barcha imkoniyatlardan foydalaning va sog'ligingizni professional darajada boshqaring
-            </p>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-badge" style="background: #6c757d;">BASIC</div>
-                    <div class="plan-price">FREE</div>
-                    <ul class="plan-features">
-                        <li>5 tekshiruv/oy</li>
-                        <li>Asosiy AI tahlil</li>
-                        <li>1 profil</li>
-                        <li>Asosiy grafiklar</li>
-                    </ul>
-                    <button class="btn btn-secondary" style="width: 100%;">Joriy Reja</button>
-                </div>
-
-                <div class="pricing-card popular">
-                    <div class="plan-badge">PREMIUM</div>
-                    <div class="plan-price">$9.99<span style="font-size: 1rem;">/oy</span></div>
-                    <ul class="plan-features">
-                        <li>Cheksiz tekshiruvlar</li>
-                        <li>Kengaytirilgan AI tahlil</li>
-                        <li>5 profil</li>
-                        <li>Lab test integratsiyasi</li>
-                        <li>Shifokor konsultatsiyasi</li>
-                        <li>Wearable sinxronizatsiya</li>
-                        <li>Reklamsiz</li>
-                        <li>24/7 Qo'llab-quvvatlash</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%;">
-                        <i class="fas fa-rocket"></i> Upgrade Qilish
-                    </button>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="plan-badge" style="background: linear-gradient(135deg, #ffd700, #ffa500);">FAMILY</div>
-                    <div class="plan-price">$19.99<span style="font-size: 1rem;">/oy</span></div>
-                    <ul class="plan-features">
-                        <li>Barcha Premium imkoniyatlar</li>
-                        <li>10 profil</li>
-                        <li>Oilaviy sog'liq dashboard</li>
-                        <li>Genetik risk tahlili</li>
-                        <li>Prioritet yordam</li>
-                        <li>Maxsus chegirmalar</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, #ffd700, #ffa500);">
-                        <i class="fas fa-users"></i> Family Plan
-                    </button>
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    Salom! Men sizga insult xavfi va tekshiruvlar haqida yordam bera olaman! 🤖
                 </div>
             </div>
-
-            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: #f8f9fa; border-radius: 15px;">
-                <p style="margin: 0; color: #666;">
-                    <i class="fas fa-shield-check"></i> 30 kunlik pul qaytarish kafolati • 
-                    <i class="fas fa-lock"></i> Xavfsiz to'lov • 
-                    <i class="fas fa-times-circle"></i> Istalgan vaqt bekor qilish
-                </p>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Savolingizni yozing..." onkeypress="handleChatEnter(event)">
+                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
 
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        /* ============================================
-           GLOBAL VARIABLES
-           ============================================ */
-        let isOnline = navigator.onLine;
-        let voiceRecognition = null;
-        let isListening = false;
-        let medications = JSON.parse(localStorage.getItem('neuroguard_medications') || '[]');
-        let labResults = JSON.parse(localStorage.getItem('neuroguard_lab_results') || '[]');
-        let appointments = JSON.parse(localStorage.getItem('neuroguard_appointments') || '[]');
-        let connectedDevices = JSON.parse(localStorage.getItem('neuroguard_devices') || '[]');
+        let currentResult = null;
+        let riskChart = null;
+        let parametersChart = null;
 
-        /* ============================================
-           OFFLINE/ONLINE DETECTION
-           ============================================ */
-        window.addEventListener('online', () => {
-            isOnline = true;
-            document.getElementById('offlineIndicator').classList.remove('show');
-            showNotification('✅ Internet tiklandi!', 'success');
-            syncOfflineData();
-        });
-
-        window.addEventListener('offline', () => {
-            isOnline = false;
-            document.getElementById('offlineIndicator').classList.add('show');
-            showNotification('⚠️ Offline rejimda', 'warning');
-        });
-
-        /* ============================================
-           SERVICE WORKER - PWA
-           ============================================ */
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('✅ Service Worker registered'))
-                    .catch(err => console.error('❌ SW registration failed:', err));
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
+        });
+
+        window.addEventListener('load', function() {
+            loadDarkMode();
+            loadHistory();
+            showNotification('👋 Xush kelibsiz! NeuroGuard AI platformasiga!', 'success');
+        });
+
+        // Progress Bar
+        function updateProgress() {
+            const fields = ['systolic', 'diastolic', 'heartrate', 'glucose', 'height', 'weight', 'age'];
+            let filled = 0;
+            fields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.value) filled++;
+            });
+            const percentage = Math.round((filled / fields.length) * 100);
+            const bar = document.getElementById('progressBar');
+            const text = document.getElementById('progressText');
+            if (bar) bar.style.width = percentage + '%';
+            if (text) text.textContent = percentage + '% to\'ldirildi';
         }
 
-        function syncOfflineData() {
-            // Sync medications
-            if (medications.length > 0) {
-                console.log('🔄 Syncing medications...');
-                // In real app, send to server
-            }
-            // Sync lab results
-            // Sync appointments
-            // etc.
-        }
+        // Tahlil funksiyasi
+        async function analyzeRisk() {
+            const systolic = parseFloat(document.getElementById('systolic').value);
+            const diastolic = parseFloat(document.getElementById('diastolic').value);
+            const heartrate = parseFloat(document.getElementById('heartrate').value);
+            const glucose = parseFloat(document.getElementById('glucose').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const age = parseFloat(document.getElementById('age').value);
+            const smoking = document.getElementById('smoking').value;
+            const exercise = document.getElementById('exercise').value;
 
-        /* ============================================
-           VOICE ASSISTANT
-           ============================================ */
-        function initVoiceRecognition() {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                voiceRecognition = new SpeechRecognition();
-                voiceRecognition.lang = 'uz-UZ';
-                voiceRecognition.continuous = false;
-                voiceRecognition.interimResults = false;
-
-                voiceRecognition.onstart = () => {
-                    console.log('🎤 Voice recognition started');
-                    document.getElementById('voiceWave').style.display = 'flex';
-                    document.getElementById('voiceText').textContent = 'Tinglayapman...';
-                };
-
-                voiceRecognition.onresult = (event) => {
-                    const transcript = event.results[0][0].transcript;
-                    console.log('📝 Heard:', transcript);
-                    document.getElementById('voiceText').textContent = `Siz: "${transcript}"`;
-                    processVoiceCommand(transcript);
-                };
-
-                voiceRecognition.onerror = (event) => {
-                    console.error('❌ Voice error:', event.error);
-                    document.getElementById('voiceWave').style.display = 'none';
-                    document.getElementById('voiceText').textContent = 'Xatolik yuz berdi. Qayta urinib ko\'ring.';
-                    stopVoice();
-                };
-
-                voiceRecognition.onend = () => {
-                    console.log('🛑 Voice recognition ended');
-                    stopVoice();
-                };
-            } else {
-                console.warn('⚠️ Speech recognition not supported');
-            }
-        }
-
-        function toggleVoice() {
-            if (!voiceRecognition) {
-                initVoiceRecognition();
-            }
-
-            if (!voiceRecognition) {
-                showNotification('❌ Ovozli qidiruv qo\'llab-quvvatlanmaydi', 'error');
+            if (!systolic || !diastolic || !heartrate || !glucose || !height || !weight || !age) {
+                alert('Iltimos, barcha maydonlarni to\'ldiring!');
                 return;
             }
 
-            if (isListening) {
-                stopVoice();
-            } else {
-                startVoice();
-            }
-        }
-
-        function startVoice() {
-            isListening = true;
-            document.getElementById('voiceBtn').classList.add('listening');
-            document.getElementById('voiceIcon').className = 'fas fa-microphone-slash';
-            document.getElementById('voicePopup').classList.add('active');
-            
-            try {
-                voiceRecognition.start();
-            } catch (e) {
-                console.error('Start error:', e);
-            }
-        }
-
-        function stopVoice() {
-            isListening = false;
-            document.getElementById('voiceBtn').classList.remove('listening');
-            document.getElementById('voiceIcon').className = 'fas fa-microphone';
-            document.getElementById('voiceWave').style.display = 'none';
-            
-            if (voiceRecognition) {
-                try {
-                    voiceRecognition.stop();
-                } catch (e) {
-                    console.error('Stop error:', e);
-                }
-            }
-        }
-
-        function processVoiceCommand(command) {
-            const cmd = command.toLowerCase();
-            
-            // Dori eslatmalari
-            if (cmd.includes('dori') || cmd.includes('davo')) {
-                document.getElementById('medications').scrollIntoView({ behavior: 'smooth' });
-                speak('Dorilar bo\'limiga o\'tdim');
-            }
-            // Tahlillar
-            else if (cmd.includes('tahlil') || cmd.includes('test')) {
-                document.getElementById('labTests').scrollIntoView({ behavior: 'smooth' });
-                speak('Tahlillar bo\'limiga o\'tdim');
-            }
-            // Shifokor
-            else if (cmd.includes('shifokor') || cmd.includes('doktor')) {
-                document.getElementById('appointments').scrollIntoView({ behavior: 'smooth' });
-                speak('Shifokor konsultatsiyasi bo\'limiga o\'tdim');
-            }
-            // Mashqlar
-            else if (cmd.includes('mashq') || cmd.includes('sport')) {
-                document.getElementById('exercises').scrollIntoView({ behavior: 'smooth' });
-                speak('Mashqlar bo\'limiga o\'tdim');
-            }
-            // Qon bosimi
-            else if (cmd.includes('bosim') || cmd.includes('pressure')) {
-                document.getElementById('assessment').scrollIntoView({ behavior: 'smooth' });
-                speak('Qon bosimini tekshirish bo\'limiga o\'tdim');
-            }
-            // Premium
-            else if (cmd.includes('premium') || cmd.includes('obuna')) {
-                showPremiumModal();
-                speak('Premium rejalar oynasi ochildi');
-            }
-            else {
-                speak('Kechirasiz, tushunmadim. Qayta urinib ko\'ring.');
-            }
+            const resultPanel = document.getElementById('resultPanel');
+            resultPanel.style.display = 'block';
+            resultPanel.innerHTML = '<div class="loading"><div class="spinner"></div><p>AI tahlil qilmoqda...</p></div>';
+            resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             setTimeout(() => {
-                document.getElementById('voicePopup').classList.remove('active');
-            }, 3000);
-        }
+                const bmi = weight / ((height / 100) ** 2);
+                let riskScore = 0;
+                const factors = [];
 
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'uz-UZ';
-                utterance.rate = 1;
-                utterance.pitch = 1;
-                window.speechSynthesis.speak(utterance);
-            }
-        }
+                if (systolic > 140 || diastolic > 90) {
+                    riskScore += 25;
+                    factors.push({ name: 'Qon bosimi', status: 'danger', text: 'Yuqori (Xavfli)' });
+                } else if (systolic > 130 || diastolic > 85) {
+                    riskScore += 15;
+                    factors.push({ name: 'Qon bosimi', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qon bosimi', status: 'good', text: 'Normal' });
+                }
 
-        /* ============================================
-           MEDICATIONS
-           ============================================ */
-        function renderMedications() {
-            const container = document.getElementById('medicationList');
-            if (medications.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: #999;">
-                        <i class="fas fa-pills" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-                        <p>Hozircha dorilar qo'shilmagan</p>
-                        <button class="btn btn-primary" onclick="showAddMedicationModal()" style="margin-top: 1rem;">
-                            <i class="fas fa-plus"></i> Birinchi Dorini Qo'shish
-                        </button>
+                if (heartrate > 100 || heartrate < 60) {
+                    riskScore += 15;
+                    factors.push({ name: 'Yurak urishi', status: 'warning', text: 'Beqaror' });
+                } else {
+                    factors.push({ name: 'Yurak urishi', status: 'good', text: 'Normal' });
+                }
+
+                if (glucose > 7.0) {
+                    riskScore += 20;
+                    factors.push({ name: 'Qand miqdori', status: 'danger', text: 'Yuqori' });
+                } else if (glucose > 6.0) {
+                    riskScore += 10;
+                    factors.push({ name: 'Qand miqdori', status: 'warning', text: 'Me\'yordan yuqori' });
+                } else {
+                    factors.push({ name: 'Qand miqdori', status: 'good', text: 'Normal' });
+                }
+
+                if (bmi > 30) {
+                    riskScore += 15;
+                    factors.push({ name: 'BMI', status: 'danger', text: `${bmi.toFixed(1)} - Ortiqcha vazn` });
+                } else if (bmi > 25) {
+                    riskScore += 8;
+                    factors.push({ name: 'BMI', status: 'warning', text: `${bmi.toFixed(1)} - Me\'yordan yuqori` });
+                } else {
+                    factors.push({ name: 'BMI', status: 'good', text: `${bmi.toFixed(1)} - Normal` });
+                }
+
+                if (age > 65) riskScore += 15;
+                else if (age > 55) riskScore += 10;
+                else if (age > 45) riskScore += 5;
+
+                if (smoking === 'yes') {
+                    riskScore += 20;
+                    factors.push({ name: 'Chekish', status: 'danger', text: 'Ha (Katta xavf)' });
+                } else {
+                    factors.push({ name: 'Chekish', status: 'good', text: 'Yo\'q' });
+                }
+
+                const exercisePoints = { 'none': 10, 'light': 5, 'moderate': 2, 'active': 0 };
+                riskScore += exercisePoints[exercise];
+
+                if (exercise === 'none') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'danger', text: 'Yo\'q' });
+                } else if (exercise === 'light') {
+                    factors.push({ name: 'Jismoniy faollik', status: 'warning', text: 'Kam' });
+                } else {
+                    factors.push({ name: 'Jismoniy faollik', status: 'good', text: 'Yetarli' });
+                }
+
+                const neuroSymptoms = [];
+                if (document.getElementById('headache').checked) {
+                    neuroSymptoms.push('Bosh og\'rig\'i');
+                    riskScore += 5;
+                }
+                if (document.getElementById('dizziness').checked) {
+                    neuroSymptoms.push('Bosh aylanishi');
+                    riskScore += 7;
+                }
+                if (document.getElementById('numbness').checked) {
+                    neuroSymptoms.push('Uyqusizlik');
+                    riskScore += 10;
+                }
+                if (document.getElementById('vision').checked) {
+                    neuroSymptoms.push('Ko\'rish muammosi');
+                    riskScore += 8;
+                }
+                if (document.getElementById('speech').checked) {
+                    neuroSymptoms.push('Nutq qiyinligi');
+                    riskScore += 10;
+                }
+
+                if (neuroSymptoms.length > 0) {
+                    factors.push({ 
+                        name: 'Nevrologik alomatlar', 
+                        status: neuroSymptoms.length > 2 ? 'danger' : 'warning', 
+                        text: neuroSymptoms.join(', ') 
+                    });
+                }
+
+                riskScore = Math.min(riskScore, 100);
+
+                let riskLevel, riskClass, riskIcon, riskDescription;
+                if (riskScore < 30) {
+                    riskLevel = 'Past Xavf';
+                    riskClass = 'risk-low';
+                    riskIcon = '✅';
+                    riskDescription = 'Sizning insult xavfingiz past. Sog\'lom turmush tarzini davom ettiring!';
+                } else if (riskScore < 60) {
+                    riskLevel = 'O\'rtacha Xavf';
+                    riskClass = 'risk-medium';
+                    riskIcon = '⚠️';
+                    riskDescription = 'Ehtiyot bo\'ling! Ba\'zi omillar tuzatishni talab qiladi.';
+                } else {
+                    riskLevel = 'Yuqori Xavf';
+                    riskClass = 'risk-high';
+                    riskIcon = '🚨';
+                    riskDescription = 'Zudlik bilan shifokorga murojaat qiling! Insult xavfi yuqori.';
+                }
+
+                const recommendations = [];
+                if (systolic > 140 || diastolic > 90) {
+                    recommendations.push('Qon bosimini doimiy nazorat qiling va shifokor bilan maslahatlashing');
+                }
+                if (glucose > 6.0) {
+                    recommendations.push('Qandli ovqatlarni kamaytiring, shirinliklardan voz keching');
+                }
+                if (bmi > 25) {
+                    recommendations.push('Vazningizni kamaytirish uchun sog\'lom ovqatlanish rejimiga o\'ting');
+                }
+                if (smoking === 'yes') {
+                    recommendations.push('Chekishni tark eting - bu eng muhim qadam!');
+                }
+                if (exercise === 'none' || exercise === 'light') {
+                    recommendations.push('Kuniga kamida 30 daqiqa jismoniy mashqlar qiling');
+                }
+                if (neuroSymptoms.length > 0) {
+                    recommendations.push('Nevrologga murojaat qiling va batafsil tekshiruvdan o\'ting');
+                }
+                if (recommendations.length === 0) {
+                    recommendations.push('Sog\'lom turmush tarzini davom ettiring');
+                    recommendations.push('Yiliga bir marta profilaktik tekshiruvdan o\'ting');
+                }
+
+                currentResult = {
+                    date: new Date().toISOString(),
+                    riskScore: riskScore,
+                    riskLevel: riskLevel,
+                    riskClass: riskClass,
+                    data: { systolic, diastolic, heartrate, glucose, height, weight, age, smoking, exercise, bmi },
+                    factors: factors,
+                    recommendations: recommendations,
+                    neuroSymptoms: neuroSymptoms
+                };
+
+                let factorsHTML = '';
+                factors.forEach(factor => {
+                    factorsHTML += `
+                        <div class="risk-factor">
+                            <span class="factor-name">${factor.name}</span>
+                            <span class="factor-status status-${factor.status}">${factor.text}</span>
+                        </div>
+                    `;
+                });
+
+                let recsHTML = '<h4>🎯 Tavsiyalar:</h4><ul>';
+                recommendations.forEach(rec => {
+                    recsHTML += `<li>${rec}</li>`;
+                });
+                recsHTML += '</ul>';
+
+                resultPanel.innerHTML = `
+                    <div class="result-header">
+                        <div class="risk-icon">${riskIcon}</div>
+                        <div class="risk-level ${riskClass}">${riskLevel}</div>
+                        <div class="risk-percentage ${riskClass}">${riskScore}%</div>
+                        <p>${riskDescription}</p>
+                    </div>
+                    <div class="risk-factors">
+                        <h3 style="margin-bottom: 1rem; color: #333;">📊 Tahlil Natijalari:</h3>
+                        ${factorsHTML}
+                    </div>
+                    <div class="recommendations">
+                        ${recsHTML}
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 10px; border-left: 4px solid #ffc107;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #856404;">
+                            ⚠️ <strong>Diqqat:</strong> Bu test faqat umumiy ma'lumot beradi. Aniq diagnoz uchun shifokorga murojaat qiling.
+                        </p>
+                    </div>
+                    <div class="action-buttons">
+                        <button onclick="saveResult()" class="btn btn-primary btn-small">💾 Natijani Saqlash</button>
+                        <button onclick="downloadPDF()" class="btn btn-secondary btn-small">📄 PDF Yuklab Olish</button>
+                        <button onclick="shareResult()" class="btn btn-secondary btn-small">📤 Ulashish</button>
+                        <button onclick="printResult()" class="btn btn-secondary btn-small">🖨️ Print</button>
                     </div>
                 `;
+            }, 2000);
+        }
+
+        function saveResult() {
+            if (!currentResult) return;
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.unshift(currentResult);
+            if (history.length > 20) history = history.slice(0, 20);
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            showNotification('✅ Natija muvaffaqiyatli saqlandi!', 'success');
+            loadHistory();
+            document.getElementById('history').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const historyList = document.getElementById('historyList');
+            const emptyHistory = document.getElementById('emptyHistory');
+            const chartSection = document.getElementById('chartSection');
+
+            if (history.length === 0) {
+                emptyHistory.style.display = 'block';
+                historyList.style.display = 'none';
+                chartSection.style.display = 'none';
                 return;
             }
 
-            container.innerHTML = medications.map(med => {
-                const now = new Date();
-                const [hours, minutes] = med.time.split(':');
-                const medTime = new Date();
-                medTime.setHours(hours, minutes, 0);
-                const isPast = now > medTime;
-                
+            emptyHistory.style.display = 'none';
+            historyList.style.display = 'grid';
+            chartSection.style.display = 'block';
+
+            historyList.innerHTML = history.map((item, index) => {
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('uz-UZ', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
                 return `
-                    <div class="medication-card">
-                        <div class="med-header">
-                            <div class="med-name">
-                                <i class="fas fa-capsules"></i> ${med.name}
-                            </div>
-                            <div class="med-time-badge">
-                                <i class="fas fa-clock"></i> ${med.time}
-                            </div>
-                        </div>
-                        <div class="med-details">
-                            <div class="med-detail-item">
-                                <i class="fas fa-prescription"></i>
-                                <span>${med.dosage}</span>
-                            </div>
-                            <div class="med-detail-item">
-                                <i class="fas fa-repeat"></i>
-                                <span>${med.frequency}</span>
-                            </div>
-                            <div class="med-detail-item">
-                                <i class="fas fa-notes-medical"></i>
-                                <span>${med.type || 'Tabletkalar'}</span>
-                            </div>
-                        </div>
-                        ${med.notes ? `<p style="color: #666; margin: 0.5rem 0;"><i class="fas fa-info-circle"></i> ${med.notes}</p>` : ''}
-                        <div class="med-actions">
-                            <button class="btn-take-med" onclick="takeMedication(${med.id})" ${med.taken ? 'disabled' : ''}>
-                                <i class="fas fa-check"></i> ${med.taken ? 'Qabul Qilindi' : 'Qabul Qildim'}
-                            </button>
-                            <button class="btn btn-secondary btn-small" onclick="editMedication(${med.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-secondary btn-small" onclick="deleteMedication(${med.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
+                    <div class="history-card" onclick="showDetail(${index})">
+                        <div class="history-date">📅 ${formattedDate}</div>
+                        <div class="history-risk ${item.riskClass}">${item.riskScore}%</div>
+                        <div style="font-weight: 600; color: #666;">${item.riskLevel}</div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
+                            <small style="color: #999;">Batafsil ko'rish uchun bosing</small>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            // Set up notifications for upcoming medications
-            setupMedicationNotifications();
+            updateCharts(history);
         }
 
-        function showAddMedicationModal() {
-            const name = prompt('Dori nomi:');
-            if (!name) return;
-            
-            const dosage = prompt('Dozasi (masalan: 1 tabletka, 5ml):');
-            if (!dosage) return;
-            
-            const time = prompt('Qabul qilish vaqti (masalan: 08:00):');
-            if (!time) return;
-            
-            const frequency = prompt('Qabul qilish chastotasi (masalan: Kuniga 2 marta):');
-            const notes = prompt('Qo\'shimcha ma\'lumot (ixtiyoriy):');
+        function updateCharts(history) {
+            const ctx1 = document.getElementById('riskChart');
+            const ctx2 = document.getElementById('parametersChart');
 
-            const newMed = {
-                id: Date.now(),
-                name,
-                dosage,
-                time,
-                frequency: frequency || 'Kuniga 1 marta',
-                notes: notes || '',
-                taken: false,
-                createdAt: new Date().toISOString()
-            };
+            const labels = history.slice(0, 10).reverse().map(item => {
+                const date = new Date(item.date);
+                return date.toLocaleDateString('uz-UZ', { month: 'short', day: 'numeric' });
+            });
 
-            medications.push(newMed);
-            localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
-            renderMedications();
-            showNotification('✅ Dori qo\'shildi!', 'success');
-        }
+            const riskData = history.slice(0, 10).reverse().map(item => item.riskScore);
 
-        function takeMedication(id) {
-            const med = medications.find(m => m.id === id);
-            if (med) {
-                med.taken = true;
-                med.takenAt = new Date().toISOString();
-                localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
-                renderMedications();
-                showNotification(`✅ ${med.name} qabul qilindi!`, 'success');
-            }
-        }
+            if (riskChart) riskChart.destroy();
+            riskChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Xavf Darajasi (%)',
+                        data: riskData,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true, position: 'top' } },
+                    scales: { y: { beginAtZero: true, max: 100 } }
+                }
+            });
 
-        function deleteMedication(id) {
-            if (confirm('Bu dorini o\'chirmoqchimisiz?')) {
-                medications = medications.filter(m => m.id !== id);
-                localStorage.setItem('neuroguard_medications', JSON.stringify(medications));
-                renderMedications();
-                showNotification('🗑️ Dori o\'chirildi', 'success');
-            }
-        }
-
-        function setupMedicationNotifications() {
-            if ('Notification' in window && Notification.permission === 'granted') {
-                medications.forEach(med => {
-                    if (!med.taken) {
-                        const [hours, minutes] = med.time.split(':');
-                        const now = new Date();
-                        const medTime = new Date();
-                        medTime.setHours(hours, minutes, 0);
-                        
-                        const timeUntil = medTime - now;
-                        if (timeUntil > 0 && timeUntil < 3600000) { // 1 hour
-                            setTimeout(() => {
-                                new Notification('💊 Dori Eslatmasi', {
-                                    body: `${med.name} - ${med.dosage} qabul qilish vaqti!`,
-                                    icon: '/icons/icon-192.png',
-                                    badge: '/icons/badge-72.png'
-                                });
-                            }, timeUntil);
-                        }
+            if (history.length > 0) {
+                const latest = history[0].data;
+                
+                if (parametersChart) parametersChart.destroy();
+                parametersChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Sistolik', 'Diastolik', 'Yurak', 'Qand', 'BMI'],
+                        datasets: [{
+                            label: 'Hozirgi Qiymatlar',
+                            data: [
+                                latest.systolic,
+                                latest.diastolic,
+                                latest.heartrate,
+                                latest.glucose * 10,
+                                latest.bmi * 5
+                            ],
+                            backgroundColor: [
+                                latest.systolic > 140 ? '#ef4444' : latest.systolic > 130 ? '#f59e0b' : '#10b981',
+                                latest.diastolic > 90 ? '#ef4444' : latest.diastolic > 85 ? '#f59e0b' : '#10b981',
+                                latest.heartrate > 100 || latest.heartrate < 60 ? '#f59e0b' : '#10b981',
+                                latest.glucose > 7 ? '#ef4444' : latest.glucose > 6 ? '#f59e0b' : '#10b981',
+                                latest.bmi > 30 ? '#ef4444' : latest.bmi > 25 ? '#f59e0b' : '#10b981'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } }
                     }
                 });
             }
         }
 
-        // Request notification permission
-        if ('Notification' in window && Notification.permission === 'default') {
-            Notification.requestPermission();
+        function showDetail(index) {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            const item = history[index];
+
+            const date = new Date(item.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            let factorsHTML = '';
+            item.factors.forEach(factor => {
+                factorsHTML += `
+                    <div class="risk-factor">
+                        <span class="factor-name">${factor.name}</span>
+                        <span class="factor-status status-${factor.status}">${factor.text}</span>
+                    </div>
+                `;
+            });
+
+            let recsHTML = '<ul style="list-style: none; padding: 0;">';
+            item.recommendations.forEach(rec => {
+                recsHTML += `<li style="padding: 0.5rem 0; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: #667eea; font-weight: 700;">✓</span>
+                    ${rec}
+                </li>`;
+            });
+            recsHTML += '</ul>';
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <h2 style="margin-bottom: 1rem;">Tekshiruv Natijalari</h2>
+                <p style="color: #666; margin-bottom: 2rem;">📅 ${formattedDate}</p>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">${item.riskClass === 'risk-low' ? '✅' : item.riskClass === 'risk-medium' ? '⚠️' : '🚨'}</div>
+                    <div class="${item.riskClass}" style="font-size: 3rem; font-weight: 700;">${item.riskScore}%</div>
+                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.5rem;">${item.riskLevel}</div>
+                </div>
+
+                <h3 style="margin: 2rem 0 1rem; color: #333;">📊 Parametrlar:</h3>
+                ${factorsHTML}
+
+                <h3 style="margin: 2rem 0 1rem; color: #667eea;">🎯 Tavsiyalar:</h3>
+                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #667eea;">
+                    ${recsHTML}
+                </div>
+
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button onclick="deleteResult(${index})" class="btn btn-secondary btn-small">🗑️ O'chirish</button>
+                    <button onclick="closeModal()" class="btn btn-primary btn-small">Yopish</button>
+                </div>
+            `;
+
+            document.getElementById('detailModal').style.display = 'block';
         }
 
-        /* ============================================
-           CONTINUE IN NEXT PART...
-           ============================================ */
-    </script>
-    /* ============================================
-   LAB TESTS & RESULTS
-   ============================================ */
-const labTestTemplates = [
-    { id: 1, name: 'Umumiy qon tahlili', category: 'Qon', price: 50000, duration: '2 soat' },
-    { id: 2, name: 'Biokimyoviy qon tahlili', category: 'Qon', price: 80000, duration: '4 soat' },
-    { id: 3, name: 'Lipid profili', category: 'Qon', price: 60000, duration: '3 soat' },
-    { id: 4, name: 'Qand tahlili', category: 'Qon', price: 30000, duration: '1 soat' },
-    { id: 5, name: 'Gemoglobin A1C', category: 'Qon', price: 70000, duration: '3 soat' },
-    { id: 6, name: 'Siydik tahlili', category: 'Siydik', price: 25000, duration: '2 soat' },
-    { id: 7, name: 'EKG', category: 'Yurak', price: 40000, duration: '30 daqiqa' },
-    { id: 8, name: 'MRI', category: 'Tasviriy', price: 500000, duration: '1 kun' }
-];
-
-function renderLabResults() {
-    const container = document.getElementById('labResultsList');
-    
-    if (labResults.length === 0) {
-        container.innerHTML = `
-            <div style="text-align: center; padding: 2rem; color: #999;">
-                <i class="fas fa-flask" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-                <p>Tahlillar natijalari yo'q</p>
-            </div>
-        `;
-        return;
-    }
-
-    // Sort by date (newest first)
-    labResults.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    container.innerHTML = labResults.slice(0, 10).map(result => {
-        const isNormal = result.value >= result.normalMin && result.value <= result.normalMax;
-        const isCritical = result.value < result.criticalMin || result.value > result.criticalMax;
-        const status = isCritical ? 'critical' : isNormal ? 'normal' : 'abnormal';
-        
-        // Calculate trend
-        const previousResults = labResults.filter(r => r.testName === result.testName && r.date < result.date);
-        let trend = 'stable';
-        if (previousResults.length > 0) {
-            const prev = previousResults[0];
-            if (result.value > prev.value * 1.1) trend = 'up';
-            else if (result.value < prev.value * 0.9) trend = 'down';
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
         }
 
-        return `
-            <div class="test-result">
-                <div>
-                    <div class="test-name">${result.testName}</div>
-                    <div style="color: #999; font-size: 0.9rem;">
-                        <i class="fas fa-calendar"></i> ${new Date(result.date).toLocaleDateString('uz-UZ')}
-                    </div>
-                    ${result.lab ? `<div style="color: #999; font-size: 0.85rem; margin-top: 0.3rem;">
-                        <i class="fas fa-hospital"></i> ${result.lab}
-                    </div>` : ''}
-                </div>
-                <div style="text-align: center;">
-                    <div class="test-value" style="color: ${status === 'critical' ? '#7f1d1d' : status === 'normal' ? '#065f46' : '#991b1b'}">
-                        ${result.value} ${result.unit}
-                    </div>
-                    <div style="color: #999; font-size: 0.85rem;">
-                        Normal: ${result.normalMin}-${result.normalMax}
-                    </div>
-                </div>
-                <div>
-                    <div class="test-status status-${status}">
-                        ${status === 'critical' ? '🚨 Jiddiy' : status === 'normal' ? '✅ Normal' : '⚠️ Og\'ish'}
-                    </div>
-                    <div class="test-trend trend-${trend}">
-                        <i class="fas fa-${trend === 'up' ? 'arrow-up' : trend === 'down' ? 'arrow-down' : 'minus'}"></i>
-                        ${trend === 'up' ? 'Oshgan' : trend === 'down' ? 'Kamaygan' : 'Barqaror'}
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
+        function deleteResult(index) {
+            if (!confirm('Ushbu natijani o\'chirmoqchimisiz?')) return;
+            let history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            history.splice(index, 1);
+            localStorage.setItem('neuroguard_history', JSON.stringify(history));
+            closeModal();
+            loadHistory();
+        }
 
-    renderLabTrendChart();
-}
+        function clearHistory() {
+            if (!confirm('Barcha tarixni o\'chirmoqchimisiz? Bu amalni bekor qilib bo\'lmaydi!')) return;
+            localStorage.removeItem('neuroguard_history');
+            loadHistory();
+            showNotification('✅ Tarix tozalandi!', 'success');
+        }
 
-function renderLabTrendChart() {
-    const ctx = document.getElementById('labTrendChart');
-    if (!ctx) return;
+        function downloadPDF() {
+            if (!currentResult) {
+                alert('Avval tekshiruv o\'tkazing!');
+                return;
+            }
 
-    // Group by test name
-    const testTypes = [...new Set(labResults.map(r => r.testName))];
-    const datasets = testTypes.slice(0, 5).map((testName, index) => {
-        const testData = labResults.filter(r => r.testName === testName).sort((a, b) => new Date(a.date) - new Date(b.date));
-        const colors = ['#c41e3a', '#667eea', '#10b981', '#f59e0b', '#8b5cf6'];
-        
-        return {
-            label: testName,
-            data: testData.map(r => ({ x: new Date(r.date), y: r.value })),
-            borderColor: colors[index],
-            backgroundColor: colors[index] + '20',
-            tension: 0.4,
-            fill: false
-        };
-    });
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
 
-    new Chart(ctx, {
-        type: 'line',
-        data: { datasets },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day',
-                        displayFormats: { day: 'MMM DD' }
-                    }
-                },
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                }
+            const date = new Date(currentResult.date);
+            const formattedDate = date.toLocaleDateString('uz-UZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            doc.setFontSize(20);
+            doc.text('NeuroGuard AI - Tekshiruv Natijasi', 20, 20);
+
+            doc.setFontSize(12);
+            doc.text(`Sana: ${formattedDate}`, 20, 35);
+            
+            doc.setFontSize(16);
+            doc.text(`Xavf darajasi: ${currentResult.riskScore}%`, 20, 50);
+            doc.text(`Holat: ${currentResult.riskLevel}`, 20, 60);
+
+            doc.setFontSize(14);
+            doc.text('Parametrlar:', 20, 75);
+
+            let yPos = 85;
+            doc.setFontSize(11);
+            currentResult.factors.forEach(factor => {
+                doc.text(`${factor.name}: ${factor.text}`, 25, yPos);
+                yPos += 8;
+            });
+
+            yPos += 10;
+            doc.setFontSize(14);
+            doc.text('Tavsiyalar:', 20, yPos);
+            yPos += 10;
+
+            doc.setFontSize(11);
+            currentResult.recommendations.forEach(rec => {
+                const lines = doc.splitTextToSize(rec, 170);
+                lines.forEach(line => {
+                    doc.text(`- ${line}`, 25, yPos);
+                    yPos += 7;
+                });
+            });
+
+            doc.save('NeuroGuard-Natija.pdf');
+            showNotification('✅ PDF muvaffaqiyatli yuklab olindi!', 'success');
+        }
+
+        // YANGI FUNKSIYALAR
+
+        // 1. Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            showNotification(isDark ? '🌙 Tungi rejim yoqildi' : '☀️ Kunduzgi rejim yoqildi', 'success');
+        }
+
+        function loadDarkMode() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
             }
         }
-    });
-}
 
-function showBookLabTest() {
-    const testOptions = labTestTemplates.map(t => `${t.id}. ${t.name} - ${t.price.toLocaleString()} so'm (${t.duration})`).join('\n');
-    const testId = parseInt(prompt(`Tahlilni tanlang:\n\n${testOptions}\n\nRaqamni kiriting:`));
-    
-    const test = labTestTemplates.find(t => t.id === testId);
-    if (!test) {
-        showNotification('❌ Tahlil topilmadi', 'error');
-        return;
-    }
-
-    const date = prompt('Qachon kerak? (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
-    const time = prompt('Soat nechada? (HH:MM):', '09:00');
-    
-    const booking = {
-        id: Date.now(),
-        testId: test.id,
-        testName: test.name,
-        date: date,
-        time: time,
-        price: test.price,
-        status: 'booked',
-        createdAt: new Date().toISOString()
-    };
-
-    const bookings = JSON.parse(localStorage.getItem('neuroguard_lab_bookings') || '[]');
-    bookings.push(booking);
-    localStorage.setItem('neuroguard_lab_bookings', JSON.stringify(bookings));
-    
-    showNotification(`✅ ${test.name} band qilindi! ${date} ${time}`, 'success');
-    
-    // Add sample result after "test completed" (for demo)
-    setTimeout(() => {
-        addSampleLabResult(test);
-    }, 3000);
-}
-
-function addSampleLabResult(test) {
-    const sampleData = {
-        'Umumiy qon tahlili': { value: 140, unit: 'g/L', normalMin: 120, normalMax: 160, criticalMin: 90, criticalMax: 180 },
-        'Qand tahlili': { value: 5.2, unit: 'mmol/L', normalMin: 4.0, normalMax: 6.0, criticalMin: 3.0, criticalMax: 7.8 },
-        'Lipid profili': { value: 4.8, unit: 'mmol/L', normalMin: 3.0, normalMax: 5.2, criticalMin: 2.0, criticalMax: 7.0 }
-    };
-
-    const data = sampleData[test.name] || { value: 100, unit: 'mg/dL', normalMin: 80, normalMax: 120, criticalMin: 60, criticalMax: 150 };
-    
-    const result = {
-        id: Date.now(),
-        testName: test.name,
-        date: new Date().toISOString(),
-        lab: 'Tibbiyot Markaziy Laboratoriyasi',
-        ...data
-    };
-
-    labResults.push(result);
-    localStorage.setItem('neuroguard_lab_results', JSON.stringify(labResults));
-    renderLabResults();
-    
-    showNotification(`📋 ${test.name} natijasi tayyor!`, 'success');
-}
-
-/* ============================================
-   APPOINTMENT BOOKING SYSTEM
-   ============================================ */
-const doctors = [
-    {
-        id: 1,
-        name: 'Dr. Nodira Karimova',
-        specialty: 'nevrolog',
-        emoji: '👩‍⚕️',
-        rating: 4.9,
-        reviews: 248,
-        experience: 15,
-        price: 200000,
-        available: true,
-        education: 'Toshkent Tibbiyot Akademiyasi',
-        languages: ['O\'zbekcha', 'Ruscha', 'Inglizcha'],
-        bio: 'Insult va nevrologik kasalliklar bo\'yicha 15 yillik tajriba'
-    },
-    {
-        id: 2,
-        name: 'Dr. Zulfiya Rahimova',
-        specialty: 'kardiolog',
-        emoji: '👩‍⚕️',
-        rating: 4.8,
-        reviews: 312,
-        experience: 12,
-        price: 250000,
-        available: true,
-        education: 'Rossiya Kardiologiya Instituti',
-        languages: ['O\'zbekcha', 'Ruscha'],
-        bio: 'Yurak-qon tomir kasalliklari mutaxassisi'
-    },
-    {
-        id: 3,
-        name: 'Dr. Malika Toshmatova',
-        specialty: 'endokrinolog',
-        emoji: '👩‍⚕️',
-        rating: 4.7,
-        reviews: 189,
-        experience: 10,
-        price: 180000,
-        available: true,
-        education: 'Toshkent Tibbiyot Akademiyasi',
-        languages: ['O\'zbekcha'],
-        bio: 'Diabet va endokrin kasalliklar bo\'yicha mutaxassis'
-    },
-    {
-        id: 4,
-        name: 'Dr. Dilnoza Usmanova',
-        specialty: 'nevrolog',
-        emoji: '👩‍⚕️',
-        rating: 4.9,
-        reviews: 421,
-        experience: 18,
-        price: 300000,
-        available: false,
-        education: 'Germaniya Nevrologija Markazi',
-        languages: ['O\'zbekcha', 'Ruscha', 'Nemischa'],
-        bio: 'Migrain va insult profilaktikasi bo\'yicha ekspert'
-    }
-];
-
-let selectedDoctor = null;
-let selectedTimeSlot = null;
-
-function renderDoctors(filter = 'all') {
-    const container = document.getElementById('doctorGrid');
-    let filteredDoctors = doctors;
-    
-    if (filter !== 'all') {
-        filteredDoctors = doctors.filter(d => d.specialty === filter);
-    }
-
-    container.innerHTML = filteredDoctors.map(doctor => {
-        const slots = generateTimeSlots(doctor);
-        
-        return `
-            <div class="doctor-card" onclick="selectDoctor(${doctor.id})">
-                <div class="doctor-header">
-                    <div class="doctor-avatar">
-                        ${doctor.emoji}
-                    </div>
-                    <h3 style="margin-bottom: 0.5rem;">${doctor.name}</h3>
-                    <p style="opacity: 0.9; font-size: 0.95rem;">${capitalizeFirst(doctor.specialty)}</p>
-                    <div style="margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <span style="color: #ffd700;">⭐ ${doctor.rating}</span>
-                        <span style="opacity: 0.8;">(${doctor.reviews} baho)</span>
-                    </div>
-                </div>
-                <div class="doctor-info">
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span style="color: #666;"><i class="fas fa-graduation-cap"></i> Tajriba:</span>
-                            <strong>${doctor.experience} yil</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span style="color: #666;"><i class="fas fa-university"></i> Ta'lim:</span>
-                            <strong style="font-size: 0.85rem; text-align: right;">${doctor.education}</strong>
-                        </div>
-                        <div style="margin-top: 0.5rem;">
-                            <span style="color: #666;"><i class="fas fa-language"></i> Tillar:</span>
-                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
-                                ${doctor.languages.map(lang => `
-                                    <span style="background: #e0e0e0; padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">${lang}</span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p style="color: #666; font-size: 0.9rem; margin: 1rem 0; border-top: 1px solid #e0e0e0; padding-top: 1rem;">
-                        ${doctor.bio}
-                    </p>
-
-                    <div style="margin: 1rem 0; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Bo'sh vaqtlar:</div>
-                        <div class="availability-slots">
-                            ${slots.slice(0, 6).map(slot => `
-                                <div class="time-slot ${slot.available ? '' : 'booked'}" 
-                                     onclick="event.stopPropagation(); selectSlot(${doctor.id}, '${slot.time}', ${slot.available})">
-                                    ${slot.time}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-red); text-align: center; margin: 1rem 0;">
-                        ${doctor.price.toLocaleString()} so'm
-                    </div>
-
-                    <button class="btn btn-primary" style="width: 100%;" ${!doctor.available ? 'disabled' : ''} 
-                            onclick="event.stopPropagation(); bookAppointment(${doctor.id})">
-                        <i class="fas fa-calendar-check"></i> ${doctor.available ? 'Band qilish' : 'Band'}
-                    </button>
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
-function generateTimeSlots(doctor) {
-    const slots = [];
-    const startHour = 9;
-    const endHour = 18;
-    
-    for (let hour = startHour; hour < endHour; hour++) {
-        for (let minute of ['00', '30']) {
-            const time = `${hour.toString().padStart(2, '0')}:${minute}`;
-            const isBooked = Math.random() > 0.7; // Random for demo
-            slots.push({ time, available: !isBooked });
+        // 2. Til o'zgartirish
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('language', lang);
+            showNotification(`✅ Til o'zgartirildi: ${lang.toUpperCase()}`, 'success');
         }
-    }
-    
-    return slots;
-}
 
-function selectSlot(doctorId, time, available) {
-    if (!available) {
-        showNotification('⚠️ Bu vaqt band', 'warning');
-        return;
-    }
-    
-    selectedDoctor = doctorId;
-    selectedTimeSlot = time;
-    
-    // Visual feedback
-    document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('selected'));
-    event.target.classList.add('selected');
-}
+        // 3. Chatbot
+        let chatbotOpen = false;
 
-function bookAppointment(doctorId) {
-    const doctor = doctors.find(d => d.id === doctorId);
-    if (!doctor) return;
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            if (window) {
+                chatbotOpen = !chatbotOpen;
+                window.classList.toggle('active', chatbotOpen);
+            }
+        }
 
-    if (!selectedTimeSlot) {
-        showNotification('⚠️ Iltimos, vaqtni tanlang', 'warning');
-        return;
-    }
-
-    const date = prompt('Qaysi sanada? (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
-    if (!date) return;
-
-    const reason = prompt('Murojaat sababi (ixtiyoriy):');
-
-    const appointment = {
-        id: Date.now(),
-        doctorId: doctor.id,
-        doctorName: doctor.name,
-        specialty: doctor.specialty,
-        date: date,
-        time: selectedTimeSlot,
-        price: doctor.price,
-        reason: reason || '',
-        status: 'confirmed',
-        createdAt: new Date().toISOString()
-    };
-
-    appointments.push(appointment);
-    localStorage.setItem('neuroguard_appointments', JSON.stringify(appointments));
-    
-    showNotification(`✅ Qabulga yozildingiz!\n${doctor.name}\n${date} ${selectedTimeSlot}`, 'success');
-    
-    // Send confirmation notification
-    if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('📅 Qabul Tasdiqlandi', {
-            body: `${doctor.name} - ${date} ${selectedTimeSlot}`,
-            icon: '/icons/icon-192.png'
-        });
-    }
-
-    selectedTimeSlot = null;
-}
-
-function filterDoctors(filter) {
-    renderDoctors(filter);
-}
-
-function capitalizeFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-/* ============================================
-   WEARABLE DEVICES INTEGRATION
-   ============================================ */
-const availableDevices = [
-    { id: 'fitbit', name: 'Fitbit', icon: '⌚', type: 'fitness', color: '#00B0B9' },
-    { id: 'applewatch', name: 'Apple Watch', icon: '⌚', type: 'smartwatch', color: '#000000' },
-    { id: 'miband', name: 'Mi Band', icon: '⌚', type: 'fitness', color: '#FF6700' },
-    { id: 'garmin', name: 'Garmin', icon: '⌚', type: 'fitness', color: '#007CC3' },
-    { id: 'samsung', name: 'Samsung Galaxy Watch', icon: '⌚', type: 'smartwatch', color: '#1428A0' },
-    { id: 'withings', name: 'Withings', icon: '⚖️', type: 'scale', color: '#00B2A9' }
-];
-
-function renderWearableDevices() {
-    const container = document.getElementById('deviceGrid');
-    
-    container.innerHTML = availableDevices.map(device => {
-        const isConnected = connectedDevices.some(d => d.id === device.id);
-        const deviceData = connectedDevices.find(d => d.id === device.id);
-        
-        return `
-            <div class="device-card">
-                <div class="device-icon" style="color: ${device.color};">
-                    ${device.icon}
-                </div>
-                <h3 style="margin: 1rem 0;">${device.name}</h3>
-                <div class="device-status status-${isConnected ? 'connected' : 'disconnected'}">
-                    <i class="fas fa-${isConnected ? 'check-circle' : 'times-circle'}"></i>
-                    ${isConnected ? 'Ulangan' : 'Ulanmagan'}
-                </div>
-                
-                ${isConnected && deviceData ? `
-                    <div class="sync-data">
-                        <div style="font-weight: 600; margin-bottom: 0.5rem; color: #666;">
-                            <i class="fas fa-sync"></i> So'nggi ma'lumot:
-                        </div>
-                        ${deviceData.heartRate ? `
-                            <div class="data-item">
-                                <span><i class="fas fa-heartbeat"></i> Yurak urishi:</span>
-                                <span class="data-value">${deviceData.heartRate} BPM</span>
-                            </div>
-                        ` : ''}
-                        ${deviceData.steps ? `
-                            <div class="data-item">
-                                <span><i class="fas fa-walking"></i> Qadamlar:</span>
-                                <span class="data-value">${deviceData.steps.toLocaleString()}</span>
-                            </div>
-                        ` : ''}
-                        ${deviceData.calories ? `
-                            <div class="data-item">
-                                <span><i class="fas fa-fire"></i> Kaloriya:</span>
-                                <span class="data-value">${deviceData.calories}</span>
-                            </div>
-                        ` : ''}
-                        ${deviceData.sleep ? `
-                            <div class="data-item">
-                                <span><i class="fas fa-moon"></i> Uyqu:</span>
-                                <span class="data-value">${deviceData.sleep}h</span>
-                            </div>
-                        ` : ''}
-                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e0e0e0;">
-                            <small style="color: #999;">
-                                <i class="fas fa-clock"></i> Yangilandi: ${new Date(deviceData.lastSync).toLocaleTimeString('uz-UZ')}
-                            </small>
-                        </div>
-                    </div>
-                ` : ''}
-
-                <button class="btn ${isConnected ? 'btn-secondary' : 'btn-primary'}" 
-                        style="width: 100%; margin-top: 1rem;" 
-                        onclick="${isConnected ? `disconnectDevice('${device.id}')` : `connectDevice('${device.id}')`}">
-                    <i class="fas fa-${isConnected ? 'unlink' : 'link'}"></i>
-                    ${isConnected ? 'Uzish' : 'Ulash'}
-                </button>
-            </div>
-        `;
-    }).join('');
-}
-
-function connectDevice(deviceId) {
-    const device = availableDevices.find(d => d.id === deviceId);
-    if (!device) return;
-
-    showNotification(`🔄 ${device.name} ulanmoqda...`, 'info');
-
-    // Simulate connection delay
-    setTimeout(() => {
-        // Simulate device data
-        const mockData = {
-            id: device.id,
-            name: device.name,
-            heartRate: 72 + Math.floor(Math.random() * 20),
-            steps: 5000 + Math.floor(Math.random() * 5000),
-            calories: 1500 + Math.floor(Math.random() * 500),
-            sleep: 7 + Math.random() * 2,
-            lastSync: new Date().toISOString()
-        };
-
-        connectedDevices.push(mockData);
-        localStorage.setItem('neuroguard_devices', JSON.stringify(connectedDevices));
-        renderWearableDevices();
-        
-        showNotification(`✅ ${device.name} ulandi!`, 'success');
-
-        // Start periodic sync (every 5 minutes)
-        startDeviceSync(device.id);
-    }, 2000);
-}
-
-function disconnectDevice(deviceId) {
-    const device = availableDevices.find(d => d.id === deviceId);
-    if (confirm(`${device.name} ni uzmoqchimisiz?`)) {
-        connectedDevices = connectedDevices.filter(d => d.id !== deviceId);
-        localStorage.setItem('neuroguard_devices', JSON.stringify(connectedDevices));
-        renderWearableDevices();
-        showNotification(`🔌 ${device.name} uzildi`, 'info');
-    }
-}
-
-function startDeviceSync(deviceId) {
-    setInterval(() => {
-        const device = connectedDevices.find(d => d.id === deviceId);
-        if (device) {
-            // Update with new mock data
-            device.heartRate = 72 + Math.floor(Math.random() * 20);
-            device.steps += Math.floor(Math.random() * 100);
-            device.calories += Math.floor(Math.random() * 50);
-            device.lastSync = new Date().toISOString();
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (!input) return;
+            const message = input.value.trim();
+            if (!message) return;
             
-            localStorage.setItem('neuroguard_devices', JSON.stringify(connectedDevices));
-            renderWearableDevices();
+            const container = document.getElementById('chatMessages');
+            if (!container) return;
+            
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = message;
+            container.appendChild(userMsg);
+            input.value = '';
+            
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.textContent = getChatbotResponse(message);
+                container.appendChild(botMsg);
+                container.scrollTop = container.scrollHeight;
+            }, 800);
+            
+            container.scrollTop = container.scrollHeight;
         }
-    }, 300000); // 5 minutes
-}
 
-/* ============================================
-   EXERCISE VIDEO LIBRARY
-   ============================================ */
-const exerciseVideos = [
-    {
-        id: 1,
-        title: 'Insult Oldini Olish - Asosiy Mashqlar',
-        category: 'stroke-prevention',
-        duration: '15:30',
-        difficulty: 'easy',
-        instructor: 'Dr. Aziza Rahimova',
-        views: 12500,
-        thumbnail: '🧘‍♀️',
-        description: 'Qon aylanishini yaxshilovchi 15 daqiqalik mashqlar majmuasi'
-    },
-    {
-        id: 2,
-        title: 'Yurak Uchun Kardiyo Mashqlar',
-        category: 'cardio',
-        duration: '20:00',
-        difficulty: 'medium',
-        instructor: 'Jasur Karimov',
-        views: 8900,
-        thumbnail: '🏃‍♂️',
-        description: 'Yurak-qon tomir tizimini mustahkamlovchi mashqlar'
-    },
-    {
-        id: 3,
-        title: 'Tonggi Yoga - Energiya Olish',
-        category: 'yoga',
-        duration: '25:00',
-        difficulty: 'easy',
-        instructor: 'Nilufar Toshmatova',
-        views: 15600,
-        thumbnail: '🧘',
-        description: 'Moslashuvchan va tinch boshlash uchun yoga'
-    },
-    {
-        id: 4,
-        title: 'Kuchli Tanlov - Kuch Mashqlari',
-        category: 'strength',
-        duration: '30:00',
-        difficulty: 'hard',
-        instructor: 'Otabek Usmanov',
-        views: 6200,
-        thumbnail: '💪',
-        description: 'Muskullarni kuchaytirish va chidamlilikni oshirish'
-    },
-    {
-        id: 5,
-        title: 'Bo\'yin va Yelka Mashqlari',
-        category: 'stroke-prevention',
-        duration: '10:00',
-        difficulty: 'easy',
-        instructor: 'Dr. Malika Karimova',
-        views: 9800,
-        thumbnail: '🤸‍♀️',
-        description: 'Qon aylanishini yaxshilash uchun bo\'yin mashqlari'
-    },
-    {
-        id: 6,
-        title: 'Yurak Salomatligi - Intervalli Trening',
-        category: 'cardio',
-        duration: '18:00',
-        difficulty: 'medium',
-        instructor: 'Sardor Alimov',
-        views: 7400,
-        thumbnail: '⚡',
-        description: 'HIIT mashqlari yurak uchun'
-    },
-    {
-        id: 7,
-        title: 'Kechki Yoga - Tinchlanish',
-        category: 'yoga',
-        duration: '20:00',
-        difficulty: 'easy',
-        instructor: 'Nilufar Toshmatova',
-        views: 11200,
-        thumbnail: '🌙',
-        description: 'Yaxshi uyqu uchun tinchlovchi yoga'
-    },
-    {
-        id: 8,
-        title: 'To\'liq Tana Kuchayishi',
-        category: 'strength',
-        duration: '35:00',
-        difficulty: 'hard',
-        instructor: 'Otabek Usmanov',
-        views: 5800,
-        thumbnail: '🏋️',
-        description: 'Barcha mushak guruhlarini ishlatish'
-    }
-];
+        function getChatbotResponse(msg) {
+            msg = msg.toLowerCase();
+            const responses = {
+                'salom': 'Salom! Men sizga insult xavfi haqida yordam bera olaman.',
+                'insult': 'Insult - miyaga qon oqimining to\'xtoq holati. Belgilari: nutq qiyinligi, yuz asimmetriyasi.',
+                'xavf': 'Xavf omillari: qon bosimi, diabet, chekish. AI tizimimiz xavfingizni aniqlaydi.',
+                'tekshir': 'Yuqoridagi forma orqali barcha ma\'lumotlarni kiriting.',
+                'bepul': 'Ha! 100% bepul. Cheksiz foydalaning! 🎉',
+                'yordam': 'Men insult, xavf omillari, tekshiruv haqida yordam bera olaman.'
+            };
+            for (let key in responses) {
+                if (msg.includes(key)) return responses[key];
+            }
+            return '"yordam" deb yozing - ko\'proq ma\'lumot beraman!';
+        }
 
-function renderExerciseVideos(filter = 'all') {
-    const container = document.getElementById('videoGrid');
-    let filteredVideos = exerciseVideos;
-    
-    if (filter !== 'all') {
-        filteredVideos = exerciseVideos.filter(v => v.category === filter);
-    }
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
 
-    container.innerHTML = filteredVideos.map(video => `
-        <div class="video-card" onclick="playExerciseVideo(${video.id})">
-            <div class="video-thumbnail">
-                <div style="font-size: 5rem;">${video.thumbnail}</div>
-                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.9rem;">
-                    <i class="fas fa-clock"></i> ${video.duration}
-                </div>
-                <div class="play-icon">
-                    <i class="fas fa-play"></i>
-                </div>
-            </div>
-            <div class="video-info">
-                <div class="video-title">${video.title}</div>
-                <div style="margin: 0.5rem 0;">
-                    <span class="difficulty-badge difficulty-${video.difficulty}">
-                        ${video.difficulty === 'easy' ? '🟢 Oson' : video.difficulty === 'medium' ? '🟡 O\'rtacha' : '🔴 Qiyin'}
-                    </span>
-                </div>
-                <p style="color: #666; font-size: 0.9rem; margin: 0.5rem 0;">
-                    ${video.description}
-                </p>
-                <div class="video-meta">
-                    <span><i class="fas fa-user"></i> ${video.instructor}</span>
-                    <span><i class="fas fa-eye"></i> ${video.views.toLocaleString()}</span>
-                </div>
-            </div>
-        </div>
-    `).join('');
-}
+        // 4. Notification
+        function showNotification(message, type = 'success') {
+            let container = document.getElementById('notificationContainer');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'notificationContainer';
+                container.className = 'notification-container';
+                document.body.appendChild(container);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            const icons = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+            notification.innerHTML = `
+                <div style="font-size: 1.5rem;">${icons[type]}</div>
+                <div style="flex: 1;">${message}</div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(notification);
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.4s forwards';
+                setTimeout(() => notification.remove(), 400);
+            }, 5000);
+        }
 
-function filterVideos(category) {
-    renderExerciseVideos(category);
-}
+        // 5. Scroll to Top
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.getElementById('scrollTop');
+            if (scrollBtn) {
+                scrollBtn.classList.toggle('show', window.pageYOffset > 300);
+            }
+        });
 
-function playExerciseVideo(videoId) {
-    const video = exerciseVideos.find(v => v.id === videoId);
-    if (!video) return;
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-    // In real app, open video player modal
-    alert(`🎬 Video Player\n\n${video.title}\n\nMuddati: ${video.duration}\nInstruktor: ${video.instructor}\n\n(Real versiyada video player ochiladi)`);
+        // 6. Ulashish funksiyasi - YANGI
+        function shareResult() {
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            const text = `NeuroGuard AI: ${currentResult.riskScore}% - ${currentResult.riskLevel}`;
+            if (navigator.share) {
+                navigator.share({ title: 'NeuroGuard AI', text, url: window.location.href })
+                    .then(() => showNotification('✅ Ulashildi!', 'success'))
+                    .catch(() => copyToClipboard(text));
+            } else {
+                copyToClipboard(text);
+            }
+        }
 
-    // Track view
-    video.views++;
-    
-    // Award points
-    userPoints += 20;
-    updatePointsDisplay();
-    showNotification('✅ Mashq boshlandi! +20 ball', 'success');
-}
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('✅ Nusxa olindi!', 'success');
+            });
+        }
 
-/* ============================================
-   PREMIUM MODAL
-   ============================================ */
-function showPremiumModal() {
-    document.getElementById('premiumModal').classList.add('active');
-}
+        // 7. Print funksiyasi - YANGI
+        function printResult() {
+            if (!currentResult) {
+                showNotification('❌ Avval tekshiruv o\'tkazing!', 'warning');
+                return;
+            }
+            window.print();
+        }
 
-function closePremiumModal() {
-    document.getElementById('premiumModal').classList.remove('active');
-}
+        // 8. Tarixni eksport qilish - YANGI
+        function exportHistory() {
+            const history = JSON.parse(localStorage.getItem('neuroguard_history') || '[]');
+            if (history.length === 0) {
+                showNotification('⚠️ Eksport qilish uchun ma\'lumot yo\'q!', 'warning');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(history, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `neuroguard-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showNotification('✅ Tarix eksport qilindi!', 'success');
+        }
 
-/* ============================================
-   NOTIFICATION HELPER
-   ============================================ */
-function showNotification(message, type = 'success') {
-    let container = document.getElementById('notificationContainer');
-    if (!container) {
-        container = document.createElement('div');
-        container.id = 'notificationContainer';
-        container.className = 'notification-container';
-        container.style.cssText = 'position: fixed; top: 100px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 1rem;';
-        document.body.appendChild(container);
-    }
-    
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    const icons = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
-    notification.style.cssText = `
-        background: white;
-        padding: 1.2rem 1.8rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        min-width: 320px;
-        animation: slideInRight 0.3s;
-        border-left: 4px solid ${type === 'success' ? '#10b981' : type === 'warning' ? '#f59e0b' : type === 'error' ? '#ef4444' : '#3b82f6'};
-    `;
-    
-    notification.innerHTML = `
-        <div style="font-size: 1.5rem;">${icons[type] || icons.info}</div>
-        <div style="flex: 1;">${message}</div>
-        <button onclick="this.parentElement.remove()" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; opacity: 0.5;">
-            <i class="fas fa-times"></i>
-        </button>
-    `;
-    
-    container.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}
+        // 9. Keyboard Shortcuts - YANGI
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+                if (chatbotOpen) toggleChatbot();
+            }
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                toggleChatbot();
+            }
+        });
 
-/* ============================================
-   INITIALIZATION
-   ============================================ */
-window.addEventListener('load', function() {
-    console.log('🚀 Initializing NeuroGuard AI Pro...');
-    
-    renderMedications();
-    renderLabResults();
-    renderDoctors();
-    renderWearableDevices();
-    renderExerciseVideos();
-    
-    console.log('✅ All features loaded successfully!');
-});
+        // Console Branding
+        console.log('%c🧠 NeuroGuard AI', 'color: #667eea; font-size: 24px; font-weight: bold;');
+        console.log('%c✨ Enhanced Professional Edition v3.0', 'color: #764ba2; font-size: 14px;');
+        console.log('%c✅ Barcha funksiyalar yuklandi!', 'color: #10b981; font-size: 12px;');
+    </script>
+</body>
+</html>
