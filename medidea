@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN (compatible with html2canvas) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify Icons -->
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+  <!-- No pre-cached icons -->
+
+  <script>
+    // Tailwind v3 configuration with custom theme colors
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'rgb(var(--background) / <alpha-value>)',
+            foreground: 'rgb(var(--foreground) / <alpha-value>)',
+            card: {
+              DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+              foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+            },
+            popover: {
+              DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+              foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+            },
+            primary: {
+              DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+              foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+            },
+            secondary: {
+              DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+              foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+            },
+            muted: {
+              DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+              foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+            },
+            accent: {
+              DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+              foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+            },
+            destructive: {
+              DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+              foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+            },
+            border: 'rgb(var(--border) / <alpha-value>)',
+            input: 'rgb(var(--input) / <alpha-value>)',
+            ring: 'rgb(var(--ring) / <alpha-value>)',
+            chart: {
+              1: 'var(--chart-1)',
+              2: 'var(--chart-2)',
+              3: 'var(--chart-3)',
+              4: 'var(--chart-4)',
+              5: 'var(--chart-5)',
+            },
+          },
+          fontFamily: {
+            sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+            heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+            serif: ['var(--font-serif)', 'Georgia', 'serif'],
+            mono: ['var(--font-mono)', 'monospace'],
+          },
+          borderRadius: {
+            sm: 'calc(var(--radius) - 4px)',
+            md: 'calc(var(--radius) - 2px)',
+            lg: 'var(--radius)',
+            xl: 'calc(var(--radius) + 4px)',
+            '2xl': 'calc(var(--radius) + 8px)',
+            '3xl': 'calc(var(--radius) + 12px)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* CSS Custom Properties - Theme Values */
+    :root {
+      --background: 248 250 252;
+      --foreground: 15 23 42;
+
+      --card: 255 255 255;
+      --card-foreground: 30 41 59;
+
+      --popover: 255 255 255;
+      --popover-foreground: 30 41 59;
+
+      --primary: 13 148 136;
+      --primary-foreground: 255 255 255;
+
+      --secondary: 224 242 241;
+      --secondary-foreground: 0 105 92;
+
+      --muted: 241 245 249;
+      --muted-foreground: 100 116 139;
+
+      --accent: 14 165 233;
+      --accent-foreground: 255 255 255;
+
+      --destructive: 239 68 68;
+      --destructive-foreground: 255 255 255;
+
+      --border: 226 232 240;
+      --input: 226 232 240;
+      --ring: 13 148 136;
+
+      --radius: 1rem;
+
+      --chart-1: #0D9488;
+      --chart-2: #0EA5E9;
+      --chart-3: #F59E0B;
+      --chart-4: #8B5CF6;
+      --chart-5: #10B981;
+
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    /* Apply base font */
+    body {
+      font-family: var(--font-sans);
+      background-color: rgb(var(--background));
+      color: rgb(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbars globally (both vertical and horizontal) */
+    * {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    /* Safe area utilities for mobile */
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    .pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+    .pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+
+    /* Hide scrollbar but allow scrolling */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Smooth transitions for interactive elements */
+    button, a, [role="button"] {
+      transition: all 0.15s ease;
+    }
+
+    /* Better image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-primary/20">
+
+    <!-- Scrollable Content Area -->
+    <div class="flex-1 overflow-y-auto no-scrollbar pb-24">
+        
+        <!-- Top Header & Greeting -->
+        <header class="pt-12 pb-2 px-6 flex items-center justify-between bg-background sticky top-0 z-10 backdrop-blur-xl bg-background/80">
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <img src="https://i.pravatar.cc/150?u=dr_azizov" alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-primary/20">
+                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background"></span>
+                </div>
+                <div>
+                    <p class="text-sm text-muted-foreground font-medium">Xush kelibsiz</p>
+                    <h1 class="text-xl font-heading font-bold text-foreground tracking-tight">Dr. Azizov</h1>
+                </div>
+            </div>
+            
+            <!-- Shift Toggle -->
+            <button class="active:scale-95 transition-transform bg-secondary/50 p-1 rounded-full flex items-center border border-border">
+                <div class="bg-white rounded-full p-1.5 shadow-sm text-primary">
+                    <iconify-icon icon="lucide:sun" width="18" height="18"></iconify-icon>
+                </div>
+                <div class="p-1.5 text-muted-foreground/50">
+                    <iconify-icon icon="lucide:moon" width="18" height="18"></iconify-icon>
+                </div>
+            </button>
+        </header>
+
+        <!-- Horizontal Calendar Strip (Hero Section) -->
+        <div class="mt-6">
+            <div class="flex items-center justify-between px-6 mb-4">
+                <h2 class="text-lg font-heading font-semibold">Navbatchilik Jadvali</h2>
+                <button class="text-primary text-sm font-medium hover:opacity-80">To'liq</button>
+            </div>
+            
+            <div class="flex gap-3 overflow-x-auto no-scrollbar px-6 pb-2">
+                <!-- Past Day -->
+                <div class="flex flex-col items-center justify-center min-w-[64px] h-[84px] rounded-2xl bg-card border border-border/60 text-muted-foreground active:scale-95 transition-transform">
+                    <span class="text-xs font-medium">Dush</span>
+                    <span class="text-lg font-bold mt-1">12</span>
+                </div>
+                
+                <!-- Today (Active/Green) -->
+                <div class="flex flex-col items-center justify-center min-w-[64px] h-[84px] rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/25 ring-2 ring-primary/20 active:scale-95 transition-transform relative overflow-hidden">
+                    <div class="absolute inset-0 bg-white/10 blur-xl"></div>
+                    <span class="text-xs font-medium relative z-10">Ses</span>
+                    <span class="text-xl font-bold mt-1 relative z-10">13</span>
+                    <span class="w-1.5 h-1.5 bg-white rounded-full mt-1.5 relative z-10"></span>
+                </div>
+                
+                <!-- Future Days -->
+                <div class="flex flex-col items-center justify-center min-w-[64px] h-[84px] rounded-2xl bg-card border border-border/60 text-foreground active:scale-95 transition-transform">
+                    <span class="text-xs font-medium text-muted-foreground">Chor</span>
+                    <span class="text-lg font-bold mt-1">14</span>
+                </div>
+                <div class="flex flex-col items-center justify-center min-w-[64px] h-[84px] rounded-2xl bg-card border border-border/60 text-foreground active:scale-95 transition-transform">
+                    <span class="text-xs font-medium text-muted-foreground">Pay</span>
+                    <span class="text-lg font-bold mt-1">15</span>
+                </div>
+                <div class="flex flex-col items-center justify-center min-w-[64px] h-[84px] rounded-2xl bg-card border border-border/60 text-foreground active:scale-95 transition-transform">
+                    <span class="text-xs font-medium text-muted-foreground">Juma</span>
+                    <span class="text-lg font-bold mt-1">16</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Status Card -->
+        <div class="px-6 mt-6">
+            <div class="w-full bg-gradient-to-br from-primary to-[#00796B] rounded-3xl p-6 relative overflow-hidden text-primary-foreground shadow-xl shadow-primary/10">
+                <!-- Decorative circles -->
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                <div class="absolute bottom-0 right-10 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+                
+                <div class="relative z-10 flex flex-col h-full justify-between gap-4">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium border border-white/10 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse"></span>
+                            Faol Smena
+                        </div>
+                        <iconify-icon icon="lucide:activity" width="24" height="24" class="text-white/80"></iconify-icon>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-heading font-bold mb-1">Travmatologiya</h3>
+                        <p class="text-white/80 text-sm">Blok B, 3-qavat • 08:00 - 20:00</p>
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                        <div class="flex -space-x-2">
+                            <img src="https://i.pravatar.cc/150?u=nurse1" class="w-8 h-8 rounded-full border-2 border-primary object-cover" alt="Team">
+                            <img src="https://i.pravatar.cc/150?u=nurse2" class="w-8 h-8 rounded-full border-2 border-primary object-cover" alt="Team">
+                            <div class="w-8 h-8 rounded-full border-2 border-primary bg-white/20 flex items-center justify-center text-xs font-bold">+3</div>
+                        </div>
+                        <button class="bg-white text-primary px-4 py-2 rounded-xl text-sm font-semibold active:scale-95 transition-transform shadow-sm">
+                            Jamoa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats (Tezkor Statistika) -->
+        <div class="mt-8 px-6">
+            <h2 class="text-lg font-heading font-semibold mb-4 text-foreground">Tezkor Statistika</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Stat Card 1 -->
+                <button class="bg-card p-4 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                        <iconify-icon icon="lucide:users" width="20" height="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <span class="text-3xl font-bold text-foreground block tracking-tight">12</span>
+                        <span class="text-xs text-muted-foreground font-medium">Bugungi Bemorlar</span>
+                    </div>
+                </button>
+
+                <!-- Stat Card 2 -->
+                <button class="bg-card p-4 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                        <iconify-icon icon="lucide:scalpel" width="20" height="20"></iconify-icon>
+                    </div>
+                    <div>
+                        <span class="text-3xl font-bold text-foreground block tracking-tight">2</span>
+                        <span class="text-xs text-muted-foreground font-medium">Amaliyotlar</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tasks List (Navbatdagi Vazifalar) -->
+        <div class="mt-8 px-6 pb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-heading font-semibold text-foreground">Navbatdagi Vazifalar</h2>
+                <div class="w-6 h-6 rounded-full bg-destructive text-white text-xs font-bold flex items-center justify-center">3</div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <!-- Task 1 (Urgent) -->
+                <div class="bg-card p-4 rounded-2xl border-l-4 border-l-destructive border-t border-r border-b border-border/40 shadow-sm active:scale-[0.98] transition-all flex items-start gap-3">
+                    <div class="mt-0.5">
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/20 cursor-pointer">
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-foreground leading-snug">Bemor A.O. - Tahlil natijalarini olish</p>
+                        <p class="text-xs text-destructive mt-1 font-medium">O'ta muhim • Kardiologiya</p>
+                    </div>
+                    <span class="bg-red-50 text-destructive text-[10px] font-bold px-2 py-1 rounded-lg">14:30</span>
+                </div>
+
+                <!-- Task 2 -->
+                <div class="bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex items-start gap-3">
+                    <div class="mt-0.5">
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/20 cursor-pointer">
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-foreground leading-snug">Konsilium yig'ilishi</p>
+                        <p class="text-xs text-muted-foreground mt-1">Konferens zali, 2-qavat</p>
+                    </div>
+                    <span class="bg-secondary text-secondary-foreground text-[10px] font-bold px-2 py-1 rounded-lg">16:00</span>
+                </div>
+
+                <!-- Task 3 -->
+                <div class="bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex items-start gap-3 opacity-60">
+                    <div class="mt-0.5">
+                        <input type="checkbox" checked class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/20 cursor-pointer">
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-foreground/ line-through leading-snug">Ertalabki ko'rik</p>
+                        <p class="text-xs text-muted-foreground mt-1">Bajarildi</p>
+                    </div>
+                    <span class="bg-muted text-muted-foreground text-[10px] font-bold px-2 py-1 rounded-lg">09:00</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 h-[80px] bg-card/90 backdrop-blur-xl border-t border-border flex items-start justify-around pt-3 pb-safe z-50 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.05)]">
+        
+        <!-- Tab 0: Kabinet (Active) -->
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl bg-primary/10 text-primary">
+                <iconify-icon icon="lucide:layout-dashboard" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-semibold text-primary">Kabinet</span>
+        </button>
+
+        <!-- Tab 1: Jurnal -->
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:book-open-check" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Jurnal</span>
+        </button>
+
+        <!-- Tab 2: Asboblar -->
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:briefcase-medical" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Asboblar</span>
+        </button>
+
+        <!-- Tab 3: Hujjatlar -->
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:folder-kanban" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Hujjatlar</span>
+        </button>
+
+        <!-- Tab 4: Tarmoq -->
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:network" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Tarmoq</span>
+        </button>
+
+    </nav>
+
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN (compatible with html2canvas) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify Icons -->
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+  <!-- No pre-cached icons -->
+
+  <script>
+    // Tailwind v3 configuration with custom theme colors
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'rgb(var(--background) / <alpha-value>)',
+            foreground: 'rgb(var(--foreground) / <alpha-value>)',
+            card: {
+              DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+              foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+            },
+            popover: {
+              DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+              foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+            },
+            primary: {
+              DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+              foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+            },
+            secondary: {
+              DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+              foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+            },
+            muted: {
+              DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+              foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+            },
+            accent: {
+              DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+              foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+            },
+            destructive: {
+              DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+              foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+            },
+            border: 'rgb(var(--border) / <alpha-value>)',
+            input: 'rgb(var(--input) / <alpha-value>)',
+            ring: 'rgb(var(--ring) / <alpha-value>)',
+            chart: {
+              1: 'var(--chart-1)',
+              2: 'var(--chart-2)',
+              3: 'var(--chart-3)',
+              4: 'var(--chart-4)',
+              5: 'var(--chart-5)',
+            },
+          },
+          fontFamily: {
+            sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+            heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+            serif: ['var(--font-serif)', 'Georgia', 'serif'],
+            mono: ['var(--font-mono)', 'monospace'],
+          },
+          borderRadius: {
+            sm: 'calc(var(--radius) - 4px)',
+            md: 'calc(var(--radius) - 2px)',
+            lg: 'var(--radius)',
+            xl: 'calc(var(--radius) + 4px)',
+            '2xl': 'calc(var(--radius) + 8px)',
+            '3xl': 'calc(var(--radius) + 12px)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* CSS Custom Properties - Theme Values */
+    :root {
+      --background: 248 250 252;
+      --foreground: 15 23 42;
+
+      --card: 255 255 255;
+      --card-foreground: 30 41 59;
+
+      --popover: 255 255 255;
+      --popover-foreground: 30 41 59;
+
+      --primary: 13 148 136;
+      --primary-foreground: 255 255 255;
+
+      --secondary: 224 242 241;
+      --secondary-foreground: 0 105 92;
+
+      --muted: 241 245 249;
+      --muted-foreground: 100 116 139;
+
+      --accent: 14 165 233;
+      --accent-foreground: 255 255 255;
+
+      --destructive: 239 68 68;
+      --destructive-foreground: 255 255 255;
+
+      --border: 226 232 240;
+      --input: 226 232 240;
+      --ring: 13 148 136;
+
+      --radius: 1rem;
+
+      --chart-1: #0D9488;
+      --chart-2: #0EA5E9;
+      --chart-3: #F59E0B;
+      --chart-4: #8B5CF6;
+      --chart-5: #10B981;
+
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    /* Apply base font */
+    body {
+      font-family: var(--font-sans);
+      background-color: rgb(var(--background));
+      color: rgb(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbars globally (both vertical and horizontal) */
+    * {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    /* Safe area utilities for mobile */
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    .pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+    .pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+
+    /* Hide scrollbar but allow scrolling */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Smooth transitions for interactive elements */
+    button, a, [role="button"] {
+      transition: all 0.15s ease;
+    }
+
+    /* Better image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-primary/20">
+
+    <!-- Scrollable Content Area -->
+    <div class="flex-1 overflow-y-auto no-scrollbar pb-24">
+        
+        <!-- Top Header & Greeting -->
+        <header class="pt-12 pb-2 px-6 flex items-center justify-between bg-background sticky top-0 z-20 backdrop-blur-xl bg-background/80">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <iconify-icon icon="lucide:book-open-check" width="24" height="24"></iconify-icon>
+                </div>
+                <div>
+                    <p class="text-sm text-muted-foreground font-medium">Klinik tajriba</p>
+                    <h1 class="text-xl font-heading font-bold text-foreground tracking-tight">Mening Tajribam</h1>
+                </div>
+            </div>
+            
+            <button class="active:scale-95 transition-transform bg-primary text-white p-2.5 rounded-full shadow-lg shadow-primary/20">
+                <iconify-icon icon="lucide:plus" width="20" height="20"></iconify-icon>
+            </button>
+        </header>
+
+        <!-- Segmented Control (Tabs) -->
+        <div class="px-6 mt-6">
+            <div class="flex p-1 bg-muted rounded-2xl border border-border/50">
+                <button class="flex-1 py-2.5 text-sm font-semibold rounded-xl bg-card text-foreground shadow-sm transition-all active:scale-95">
+                    Ro'yxat
+                </button>
+                <button class="flex-1 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-all active:scale-95">
+                    Statistika
+                </button>
+            </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex gap-2 overflow-x-auto no-scrollbar px-6 mt-6">
+            <button class="px-4 py-2 rounded-full bg-primary text-primary-foreground text-xs font-bold whitespace-nowrap active:scale-95 transition-transform shadow-md shadow-primary/10">Barchasi</button>
+            <button class="px-4 py-2 rounded-full bg-card border border-border/60 text-muted-foreground text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">Xirurgiya</button>
+            <button class="px-4 py-2 rounded-full bg-card border border-border/60 text-muted-foreground text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">Terapiya</button>
+            <button class="px-4 py-2 rounded-full bg-card border border-border/60 text-muted-foreground text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">Pediatriya</button>
+        </div>
+
+        <!-- Career Progress Card (Tezkor Statistika Style) -->
+        <div class="px-6 mt-8">
+            <div class="w-full bg-gradient-to-br from-[#0D9488] to-[#086b62] rounded-3xl p-6 relative overflow-hidden text-primary-foreground shadow-xl shadow-primary/10">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-xs font-bold uppercase tracking-wider opacity-80">Oylik Ko'rsatkich</span>
+                        <div class="bg-white/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold border border-white/10 uppercase italic">Pro</div>
+                    </div>
+                    <div class="flex items-end gap-2">
+                        <h3 class="text-4xl font-heading font-bold">42</h3>
+                        <p class="text-white/70 text-sm mb-1.5 font-medium">muvaffaqiyatli amaliyot</p>
+                    </div>
+                    <div class="mt-6">
+                        <div class="flex justify-between text-xs mb-2 opacity-90">
+                            <span>Maqsad: 50</span>
+                            <span>84%</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
+                            <div class="w-[84%] h-full bg-white rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Entry List -->
+        <div class="mt-8 px-6 pb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-heading font-semibold text-foreground">Oxirgi amaliyotlar</h2>
+                <div class="text-xs text-primary font-bold">Hammasini ko'rish</div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <!-- Entry 1 -->
+                <div class="group bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex flex-col gap-3">
+                    <div class="flex justify-between items-start">
+                        <div class="flex flex-col">
+                            <h4 class="text-sm font-bold text-foreground">Appendektomiya</h4>
+                            <p class="text-xs text-muted-foreground mt-0.5">Erkak, 45 yosh • Blok A</p>
+                        </div>
+                        <span class="bg-accent/10 text-accent text-[10px] font-bold px-2 py-1 rounded-lg">Muvaffaqiyatli</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-border/40">
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:calendar" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">12.05.2024</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:clock" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">1h 20m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entry 2 (Urgent/Complex) -->
+                <div class="group bg-card p-4 rounded-2xl border-l-4 border-l-destructive border-t border-r border-b border-border/40 shadow-sm active:scale-[0.98] transition-all flex flex-col gap-3">
+                    <div class="flex justify-between items-start">
+                        <div class="flex flex-col">
+                            <h4 class="text-sm font-bold text-foreground">Xolesistektomiya</h4>
+                            <p class="text-xs text-muted-foreground mt-0.5">Ayol, 52 yosh • Reanimatsiya</p>
+                        </div>
+                        <span class="bg-destructive/10 text-destructive text-[10px] font-bold px-2 py-1 rounded-lg">Murakkab</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-border/40">
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:calendar" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">11.05.2024</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:clock" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">2h 45m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entry 3 -->
+                <div class="group bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex flex-col gap-3">
+                    <div class="flex justify-between items-start">
+                        <div class="flex flex-col">
+                            <h4 class="text-sm font-bold text-foreground">Gryajakesish amaliyoti</h4>
+                            <p class="text-xs text-muted-foreground mt-0.5">Erkak, 28 yosh • Blok B</p>
+                        </div>
+                        <span class="bg-accent/10 text-accent text-[10px] font-bold px-2 py-1 rounded-lg">Muvaffaqiyatli</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-border/40">
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:calendar" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">09.05.2024</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="lucide:clock" width="14" height="14" class="text-muted-foreground"></iconify-icon>
+                            <span class="text-xs text-muted-foreground">45m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Insight Section -->
+                <div class="mt-4 p-4 rounded-2xl bg-secondary/30 border border-primary/10 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm border border-border/50">
+                        <iconify-icon icon="lucide:lightbulb" width="24" height="24"></iconify-icon>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-[13px] font-semibold text-primary">Aqlli Tavsiya</p>
+                        <p class="text-[11px] text-secondary-foreground leading-relaxed mt-0.5">Laparoskopik amaliyotlar sonini oshirsangiz, mutaxassislik reytingi 15% ga oshadi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 h-[80px] bg-card/90 backdrop-blur-xl border-t border-border flex items-start justify-around pt-3 pb-safe z-50 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.05)]">
+        
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:layout-dashboard" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Kabinet</span>
+        </button>
+
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl bg-primary/10 text-primary">
+                <iconify-icon icon="lucide:book-open-check" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-semibold text-primary">Jurnal</span>
+        </button>
+
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:briefcase-medical" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Asboblar</span>
+        </button>
+
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:folder-kanban" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Hujjatlar</span>
+        </button>
+
+        <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+            <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                <iconify-icon icon="lucide:network" width="24" height="24"></iconify-icon>
+            </div>
+            <span class="text-[10px] font-medium text-muted-foreground">Tarmoq</span>
+        </button>
+
+    </nav>
+
+</div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Screen</title>
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS v3 CDN (compatible with html2canvas) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Iconify Icons -->
+  <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+  <!-- No pre-cached icons -->
+
+  <script>
+    // Tailwind v3 configuration with custom theme colors
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'rgb(var(--background) / <alpha-value>)',
+            foreground: 'rgb(var(--foreground) / <alpha-value>)',
+            card: {
+              DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+              foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
+            },
+            popover: {
+              DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+              foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+            },
+            primary: {
+              DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+              foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+            },
+            secondary: {
+              DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+              foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+            },
+            muted: {
+              DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+              foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+            },
+            accent: {
+              DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+              foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+            },
+            destructive: {
+              DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+              foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+            },
+            border: 'rgb(var(--border) / <alpha-value>)',
+            input: 'rgb(var(--input) / <alpha-value>)',
+            ring: 'rgb(var(--ring) / <alpha-value>)',
+            chart: {
+              1: 'var(--chart-1)',
+              2: 'var(--chart-2)',
+              3: 'var(--chart-3)',
+              4: 'var(--chart-4)',
+              5: 'var(--chart-5)',
+            },
+          },
+          fontFamily: {
+            sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+            heading: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+            serif: ['var(--font-serif)', 'Georgia', 'serif'],
+            mono: ['var(--font-mono)', 'monospace'],
+          },
+          borderRadius: {
+            sm: 'calc(var(--radius) - 4px)',
+            md: 'calc(var(--radius) - 2px)',
+            lg: 'var(--radius)',
+            xl: 'calc(var(--radius) + 4px)',
+            '2xl': 'calc(var(--radius) + 8px)',
+            '3xl': 'calc(var(--radius) + 12px)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* CSS Custom Properties - Theme Values */
+    :root {
+      --background: 248 250 252;
+      --foreground: 15 23 42;
+
+      --card: 255 255 255;
+      --card-foreground: 30 41 59;
+
+      --popover: 255 255 255;
+      --popover-foreground: 30 41 59;
+
+      --primary: 13 148 136;
+      --primary-foreground: 255 255 255;
+
+      --secondary: 224 242 241;
+      --secondary-foreground: 0 105 92;
+
+      --muted: 241 245 249;
+      --muted-foreground: 100 116 139;
+
+      --accent: 14 165 233;
+      --accent-foreground: 255 255 255;
+
+      --destructive: 239 68 68;
+      --destructive-foreground: 255 255 255;
+
+      --border: 226 232 240;
+      --input: 226 232 240;
+      --ring: 13 148 136;
+
+      --radius: 1rem;
+
+      --chart-1: #0D9488;
+      --chart-2: #0EA5E9;
+      --chart-3: #F59E0B;
+      --chart-4: #8B5CF6;
+      --chart-5: #10B981;
+
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+    }
+
+    /* Apply base font */
+    body {
+      font-family: var(--font-sans);
+      background-color: rgb(var(--background));
+      color: rgb(var(--foreground));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbars globally (both vertical and horizontal) */
+    * {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    *::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    /* Safe area utilities for mobile */
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+    .pl-safe { padding-left: env(safe-area-inset-left, 0px); }
+    .pr-safe { padding-right: env(safe-area-inset-right, 0px); }
+
+    /* Hide scrollbar but allow scrolling */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Smooth transitions for interactive elements */
+    button, a, [role="button"] {
+      transition: all 0.15s ease;
+    }
+
+    /* Better image rendering */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="flex flex-col h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-primary/20">
+
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 overflow-y-auto no-scrollbar pb-24">
+            
+            <!-- Top Header & Profile -->
+            <header class="pt-12 pb-2 px-6 flex items-center justify-between bg-background sticky top-0 z-10 backdrop-blur-xl bg-background/80">
+                <div class="flex items-center gap-3">
+                    <div class="relative flex-shrink-0">
+                        <img src="https://i.pravatar.cc/150?u=dr_azizov" alt="Profile" class="w-12 h-12 rounded-full object-cover border-2 border-primary/20">
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background"></span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-muted-foreground font-medium">Tibbiy</p>
+                        <h1 class="text-xl font-heading font-bold text-foreground tracking-tight">Asboblar</h1>
+                    </div>
+                </div>
+                
+                <button class="active:scale-95 transition-transform bg-secondary/50 p-2.5 rounded-full flex items-center border border-border text-primary">
+                    <iconify-icon icon="lucide:settings-2" width="20" height="20"></iconify-icon>
+                </button>
+            </header>
+
+            <!-- Search Bar Section -->
+            <div class="px-6 mt-6">
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground group-focus-within:text-primary transition-colors">
+                        <iconify-icon icon="lucide:search" width="20" height="20"></iconify-icon>
+                    </div>
+                    <input type="text" 
+                           placeholder="MKX-10 yoki Dori qidirish..." 
+                           class="w-full h-14 pl-12 pr-4 bg-card border border-border/60 rounded-2xl text-sm focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all outline-none shadow-sm">
+                </div>
+            </div>
+
+            <!-- Featured Tool (Hero style from reference) -->
+            <div class="px-6 mt-8">
+                <div class="w-full bg-gradient-to-br from-primary to-[#00796B] rounded-3xl p-6 relative overflow-hidden text-primary-foreground shadow-xl shadow-primary/10">
+                    <!-- Decorative circles -->
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                    <div class="absolute bottom-0 right-10 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full justify-between gap-4">
+                        <div class="flex justify-between items-start">
+                            <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium border border-white/10 flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 bg-accent rounded-full animate-pulse"></span>
+                                Yangilangan
+                            </div>
+                            <iconify-icon icon="lucide:sparkles" width="24" height="24" class="text-white/80"></iconify-icon>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-heading font-bold mb-1">Dori Dozasi</h3>
+                            <p class="text-white/80 text-sm">Pediatriya va kattalar uchun tahliliy hisoblagich</p>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-medium text-white/70">Oxirgi yangilanish: Bugun</span>
+                            <button class="bg-white text-primary px-5 py-2.5 rounded-xl text-sm font-semibold active:scale-95 transition-transform shadow-sm">
+                                Ishlatish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Layout of Tools -->
+            <div class="mt-8 px-6">
+                <h2 class="text-lg font-heading font-semibold mb-4 text-foreground">Asosiy Asboblar</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- BMI Kalkulyator -->
+                    <button class="bg-card p-5 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-4 group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                            <iconify-icon icon="lucide:scale" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div>
+                            <span class="text-base font-bold text-foreground block tracking-tight">BMI Kalkulyator</span>
+                            <span class="text-xs text-muted-foreground font-medium">Vazn indeksini o'lchash</span>
+                        </div>
+                    </button>
+
+                    <!-- MKX-11 Search -->
+                    <button class="bg-card p-5 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-4 group">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                            <iconify-icon icon="lucide:stethoscope" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div>
+                            <span class="text-base font-bold text-foreground block tracking-tight">MKX-11</span>
+                            <span class="text-xs text-muted-foreground font-medium">Kasalliklar klassifikatsiyasi</span>
+                        </div>
+                    </button>
+
+                    <!-- Dorilar Mosligi -->
+                    <button class="bg-card p-5 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-4 group">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-purple-100 transition-colors">
+                            <iconify-icon icon="lucide:shuffle" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div>
+                            <span class="text-base font-bold text-foreground block tracking-tight">Mosligi</span>
+                            <span class="text-xs text-muted-foreground font-medium">Farmakologik tahlil</span>
+                        </div>
+                    </button>
+
+                    <!-- Lab Tahlillar -->
+                    <button class="bg-card p-5 rounded-2xl border border-border/50 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.05)] active:scale-95 transition-all text-left flex flex-col gap-4 group">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
+                            <iconify-icon icon="lucide:test-tube-2" width="24" height="24"></iconify-icon>
+                        </div>
+                        <div>
+                            <span class="text-base font-bold text-foreground block tracking-tight">Laboratoriya</span>
+                            <span class="text-xs text-muted-foreground font-medium">Normativ ko'rsatkichlar</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Searches Section (Reference Task List Style) -->
+            <div class="mt-8 px-6 pb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-heading font-semibold text-foreground">Oxirgi Qidiruvlar</h2>
+                    <button class="text-xs font-semibold text-muted-foreground px-2 py-1 bg-muted rounded-md active:scale-95">Tozalash</button>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <!-- History Item 1 -->
+                    <div class="bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center text-muted-foreground">
+                                <iconify-icon icon="lucide:pill" width="20" height="20"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-foreground leading-snug">Paratsetamol dozasi</p>
+                                <p class="text-xs text-muted-foreground">Oshqozon-ichak trakti</p>
+                            </div>
+                        </div>
+                        <iconify-icon icon="lucide:chevron-right" width="18" height="18" class="text-muted-foreground/40"></iconify-icon>
+                    </div>
+
+                    <!-- History Item 2 -->
+                    <div class="bg-card p-4 rounded-2xl border border-border/50 shadow-sm active:scale-[0.98] transition-all flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center text-muted-foreground">
+                                <iconify-icon icon="lucide:search" width="20" height="20"></iconify-icon>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-foreground leading-snug">MKX-10: I10-I15</p>
+                                <p class="text-xs text-muted-foreground">Gipertonik kasalliklar</p>
+                            </div>
+                        </div>
+                        <iconify-icon icon="lucide:chevron-right" width="18" height="18" class="text-muted-foreground/40"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation (Reference Style) -->
+        <nav class="fixed bottom-0 left-0 right-0 h-[80px] bg-card/90 backdrop-blur-xl border-t border-border flex items-start justify-around pt-3 pb-safe z-50 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.05)]">
+            
+            <!-- Tab 0: Kabinet -->
+            <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+                <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                    <iconify-icon icon="lucide:layout-dashboard" width="24" height="24"></iconify-icon>
+                </div>
+                <span class="text-[10px] font-medium text-muted-foreground">Kabinet</span>
+            </button>
+
+            <!-- Tab 1: Jurnal -->
+            <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+                <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                    <iconify-icon icon="lucide:book-open-check" width="24" height="24"></iconify-icon>
+                </div>
+                <span class="text-[10px] font-medium text-muted-foreground">Jurnal</span>
+            </button>
+
+            <!-- Tab 2: Asboblar (Active) -->
+            <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+                <div class="relative p-1.5 rounded-xl bg-primary/10 text-primary">
+                    <iconify-icon icon="lucide:briefcase-medical" width="24" height="24"></iconify-icon>
+                </div>
+                <span class="text-[10px] font-semibold text-primary">Asboblar</span>
+            </button>
+
+            <!-- Tab 3: Hujjatlar -->
+            <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+                <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                    <iconify-icon icon="lucide:folder-kanban" width="24" height="24"></iconify-icon>
+                </div>
+                <span class="text-[10px] font-medium text-muted-foreground">Hujjatlar</span>
+            </button>
+
+            <!-- Tab 4: Tarmoq -->
+            <button class="flex flex-col items-center gap-1 w-16 group active:scale-90 transition-transform">
+                <div class="relative p-1.5 rounded-xl text-muted-foreground group-hover:bg-muted transition-colors">
+                    <iconify-icon icon="lucide:network" width="24" height="24"></iconify-icon>
+                </div>
+                <span class="text-[10px] font-medium text-muted-foreground">Tarmoq</span>
+            </button>
+
+        </nav>
+
+    </div>
+</div>
+</body>
+</html>
