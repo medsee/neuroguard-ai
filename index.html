@@ -130,6 +130,8 @@ body {
   font-size: 0.9rem; font-weight: 500;
   color: var(--text2);
   margin-bottom: 2px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .nav-item:hover { background: var(--border); color: var(--text); }
@@ -395,6 +397,8 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   border: none; outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .btn-accent {
@@ -681,13 +685,175 @@ body {
 }
 
 @media (max-width: 900px) {
-  .sidebar { transform: translateX(-260px); transition: transform 0.3s; }
+  /* Sidebar overlay mode */
+  .sidebar {
+    transform: translateX(-260px);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 200;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.5);
+  }
   .sidebar.open { transform: translateX(0); }
+
+  /* Overlay backdrop */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 199;
+    backdrop-filter: blur(4px);
+  }
+  .sidebar-backdrop.show { display: block; }
+
   .main { margin-left: 0; }
-  .page { padding: 20px 16px; }
+  .page { padding: 16px 12px 90px; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
-  .topbar { padding: 0 16px; }
+
+  .topbar {
+    padding: 0 12px;
+    height: 56px;
+    gap: 8px;
+  }
+  .topbar-title { font-size: 1rem; }
+  .topbar-sub { display: none; }
+
+  /* Hide desktop SOS in topbar, show in bottom bar instead */
+  .sos-btn { display: none; }
+  .icon-btn { width: 34px; height: 34px; font-size: 0.85rem; }
+
+  /* Bottom navigation bar */
+  .bottom-nav {
+    display: flex !important;
+  }
+
+  /* Hamburger button */
+  .hamburger-btn { display: flex !important; }
+
+  /* Stats compact */
+  .stat-value { font-size: 1.5rem; }
+  .stat-icon { width: 36px; height: 36px; font-size: 1rem; margin-bottom: 10px; }
+
+  /* Doctor cards */
+  .doctor-card { margin-bottom: 0; }
+
+  /* Modal full screen on mobile */
+  .modal-box {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-height: 92vh;
+    padding: 24px 20px;
+    animation: slideUpModal 0.3s ease;
+  }
+  @keyframes slideUpModal {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .modal-overlay { align-items: flex-end; }
+
+  /* Profile header on mobile */
+  .profile-header-bg { padding: 20px; }
+  .profile-avatar-lg { width: 64px; height: 64px; font-size: 1.6rem; }
+  .profile-name-lg { font-size: 1.3rem; }
+  .profile-meta { gap: 8px; }
+
+  /* Time slots 2 col on mobile */
+  .time-slots { grid-template-columns: repeat(3, 1fr); }
+
+  /* Vitals compact */
+  .vital-value { font-size: 1.8rem; }
+
+  /* Toast bottom offset */
+  .toast-container { bottom: 80px; right: 12px; left: 12px; }
+  .toast { min-width: unset; }
+
+  /* Achievement grid */
+  .achievement-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Section header mobile */
+  .section-header { flex-direction: column; gap: 12px; }
+
+  /* Lab rows wrap */
+  .lab-row { flex-wrap: wrap; gap: 8px; }
+  .lab-row .lab-name { flex: 100%; }
+
+  /* med card actions */
+  .med-actions-row { flex-wrap: wrap; }
+}
+
+@media (max-width: 400px) {
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .achievement-grid { grid-template-columns: repeat(2, 1fr); }
+  .page { padding: 12px 10px 90px; }
+}
+
+/* ── BOTTOM NAVIGATION (mobile only) ── */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: var(--card);
+  border-top: 1px solid var(--border2);
+  z-index: 150;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+}
+
+.bn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text3);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  min-width: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bn-item i { font-size: 1.15rem; transition: all 0.2s; }
+.bn-item:active { transform: scale(0.92); }
+.bn-item.active { color: var(--accent); }
+.bn-item.active i { color: var(--accent); text-shadow: 0 0 12px var(--accent-glow); }
+
+.bn-sos {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: #ef4444;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 20px rgba(239,68,68,0.6);
+  animation: sosPulse 2s infinite;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── HAMBURGER ── */
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 /* ── ECG Animation ── */
@@ -785,9 +951,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 <div class="main" id="mainContent">
   <!-- TOPBAR -->
   <div class="topbar">
-    <div>
-      <div class="topbar-title" id="topbarTitle">Dashboard</div>
-      <div class="topbar-sub" id="topbarSub">Umumiy holat ko'rinishi</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-sub" id="topbarSub">Umumiy holat ko'rinishi</div>
+      </div>
     </div>
     <div class="topbar-right">
       <button class="sos-btn" onclick="openSOS()">
@@ -1054,7 +1225,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 
   <!-- MEDICATIONS PAGE -->
   <div class="page" id="page-medications">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
         <div class="section-title"><i class="fas fa-pills" style="color:var(--accent);"></i> Dorilar</div>
         <div class="section-desc">Kundalik dori jadvalingiz</div>
@@ -1096,7 +1267,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 
   <!-- NOTES PAGE -->
   <div class="page" id="page-notes">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
         <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> Tibbiy Zametkalar</div>
         <div class="section-desc">O'z-o'zingiz haqingizda eslatmalar yozing</div>
@@ -1173,7 +1344,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent);"></i> Mening Profilim</div>
     </div>
 
-    <div class="profile-header-bg" style="display:flex;gap:24px;align-items:center;">
+    <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
       <div class="profile-avatar-lg" id="profileAvatar">A</div>
       <div class="profile-info">
         <div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div>
@@ -1222,6 +1393,32 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- SIDEBAR BACKDROP (mobile) -->
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+
+<!-- BOTTOM NAVIGATION (mobile) -->
+<div class="bottom-nav" id="bottomNav">
+  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')">
+    <i class="fas fa-th-large"></i>
+    <span>Bosh</span>
+  </div>
+  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')">
+    <i class="fas fa-stethoscope"></i>
+    <span>Tekshiruv</span>
+  </div>
+  <div class="bn-sos" onclick="openSOS()">
+    <i class="fas fa-ambulance"></i>
+  </div>
+  <div class="bn-item" id="bn-medications" onclick="navGo('medications')">
+    <i class="fas fa-pills"></i>
+    <span>Dorilar</span>
+  </div>
+  <div class="bn-item" id="bn-more" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+    <span>Menu</span>
   </div>
 </div>
 
@@ -1491,9 +1688,33 @@ const pages = {
   profile:      { title: 'Mening Profilim',        sub: 'Shaxsiy ma\'lumotlar' }
 };
 
+/* ====================== SIDEBAR MOBILE ====================== */
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebarBackdrop');
+  const isOpen = sb.classList.contains('open');
+  if (isOpen) {
+    sb.classList.remove('open');
+    bd.classList.remove('show');
+  } else {
+    sb.classList.add('open');
+    bd.classList.add('show');
+  }
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarBackdrop').classList.remove('show');
+}
+
 /* navGo — sidebar tugmalari shu funksiyani chaqiradi */
 function navGo(id) {
+  closeSidebar();
   showPage(id);
+  // sync bottom nav
+  document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+  const bnEl = document.getElementById('bn-' + id);
+  if (bnEl) bnEl.classList.add('active');
 }
 
 function showPage(id) {
@@ -2293,6 +2514,9 @@ window.addEventListener('load', () => {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const navDash = document.getElementById('nav-dashboard');
   if (navDash) navDash.classList.add('active');
+  // bottom nav
+  const bnDash = document.getElementById('bn-dashboard');
+  if (bnDash) bnDash.classList.add('active');
   toast('Xush kelibsiz! NeuroGuard AI Pro', 'info');
 });
 
