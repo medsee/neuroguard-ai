@@ -34,6 +34,157 @@
   --radius-lg: 24px;
 }
 
+/* ── LIGHT MODE ── */
+body.light-mode {
+  --bg: #f0f4f8;
+  --bg2: #e8eef5;
+  --bg3: #dce5ef;
+  --card: #ffffff;
+  --card2: #f5f8fb;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --accent: #c41e38;
+  --accent2: #e63950;
+  --accent-glow: rgba(196,30,56,0.2);
+  --blue: #2563eb;
+  --blue-glow: rgba(37,99,235,0.2);
+  --cyan: #0891b2;
+  --green: #059669;
+  --yellow: #d97706;
+  --text: #111827;
+  --text2: #4b5a6e;
+  --text3: #8a9ab0;
+}
+
+body.light-mode .bg-grid {
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+}
+
+body.light-mode .orb1 { background: rgba(196,30,56,0.07); }
+body.light-mode .orb2 { background: rgba(37,99,235,0.06); }
+body.light-mode .orb3 { background: rgba(8,145,178,0.05); }
+
+body.light-mode .topbar {
+  background: rgba(240,244,248,0.95);
+  border-bottom-color: rgba(0,0,0,0.08);
+}
+
+body.light-mode .sidebar {
+  background: var(--card);
+  border-right-color: var(--border);
+  box-shadow: 2px 0 20px rgba(0,0,0,0.06);
+}
+
+body.light-mode ::-webkit-scrollbar-track { background: var(--bg); }
+body.light-mode ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+body.light-mode .nav-item { color: var(--text2); }
+body.light-mode .nav-item:hover { background: rgba(0,0,0,0.04); color: var(--text); }
+body.light-mode .nav-item.active { background: rgba(196,30,56,0.09); color: var(--accent); border-color: rgba(196,30,56,0.2); }
+
+body.light-mode .profile-card { background: var(--bg3); border-color: var(--border); }
+body.light-mode .logo-sub { color: var(--text3); }
+body.light-mode .nav-label { color: var(--text3); }
+
+body.light-mode .stat-card { background: var(--card); border-color: var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+body.light-mode .card { background: var(--card); border-color: var(--border); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+body.light-mode .card:hover { border-color: var(--border2); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+body.light-mode .form-input,
+body.light-mode .form-select { background: var(--bg3); border-color: var(--border); color: var(--text); }
+body.light-mode .form-input::placeholder { color: var(--text3); }
+body.light-mode .form-input:focus,
+body.light-mode .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(196,30,56,0.1); }
+
+body.light-mode .vital-monitor { background: var(--bg3); border-color: var(--border); }
+body.light-mode .factor-row { background: var(--bg3); border-color: var(--border); }
+body.light-mode .med-card { background: var(--bg3); border-color: var(--border); }
+body.light-mode .note-card { background: var(--bg3); border-color: var(--border); }
+body.light-mode .lab-row { background: var(--bg3); border-color: var(--border); }
+body.light-mode .doctor-card { background: var(--card); border-color: var(--border); }
+body.light-mode .doctor-top { background: var(--bg3); }
+body.light-mode .time-slot { border-color: var(--border); color: var(--text); }
+
+body.light-mode .modal-box { background: var(--card); border-color: var(--border2); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+body.light-mode .modal-close { background: var(--bg3); border-color: var(--border); color: var(--text2); }
+
+body.light-mode .toast { background: #ffffff; border-color: var(--border2); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+
+body.light-mode .bottom-nav { background: #ffffff; border-top-color: var(--border2); box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
+body.light-mode .bn-item { color: #9aabb8; }
+body.light-mode .bn-item.active { color: var(--accent); }
+
+body.light-mode .sidebar-backdrop { background: rgba(0,0,0,0.4); }
+
+body.light-mode .hamburger-btn { background: var(--card); border-color: var(--border); color: var(--text); }
+
+body.light-mode .achievement { background: var(--bg3); border-color: var(--border); }
+body.light-mode .progress-track { background: var(--bg3); }
+
+body.light-mode .history-table th { border-bottom-color: var(--border); }
+body.light-mode .history-table td { border-bottom-color: var(--border); }
+body.light-mode .history-table tr:hover td { background: rgba(0,0,0,0.02); }
+
+body.light-mode .profile-header-bg { background: var(--card); border-color: var(--border); }
+body.light-mode .profile-header-bg::before { background: radial-gradient(ellipse at right center, rgba(196,30,56,0.08), transparent); }
+
+body.light-mode .icon-btn { background: var(--card); border-color: var(--border); color: var(--text2); }
+body.light-mode .icon-btn:hover { background: var(--bg3); color: var(--text); }
+
+body.light-mode .btn-ghost { color: var(--text2); border-color: var(--border); }
+body.light-mode .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
+
+body.light-mode .rec-item { background: rgba(37,99,235,0.06); }
+
+body.light-mode .doctor-alert { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.25); }
+
+body.light-mode .tag-red { background: rgba(196,30,56,0.1); color: var(--accent); border-color: rgba(196,30,56,0.25); }
+body.light-mode .tag-blue { background: rgba(37,99,235,0.1); color: var(--blue); border-color: rgba(37,99,235,0.25); }
+body.light-mode .tag-green { background: rgba(5,150,105,0.1); color: var(--green); border-color: rgba(5,150,105,0.25); }
+body.light-mode .tag-yellow { background: rgba(217,119,6,0.1); color: var(--yellow); border-color: rgba(217,119,6,0.25); }
+
+body.light-mode .logo-icon { box-shadow: 0 0 16px rgba(196,30,56,0.25); }
+
+/* ── THEME TOGGLE BUTTON STYLES ── */
+.theme-toggle-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  border-radius: 50px;
+  background: var(--bg3);
+  border: 1.5px solid var(--border2);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-toggle-btn:hover { border-color: var(--accent); color: var(--text); }
+
+.theme-toggle-track {
+  width: 36px; height: 20px;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  position: relative;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+body.light-mode .theme-toggle-track { background: var(--accent); border-color: var(--accent); }
+
+.theme-toggle-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--text3);
+  position: absolute;
+  top: 1px; left: 2px;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+body.light-mode .theme-toggle-thumb { transform: translateX(16px); background: white; }
+
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -964,7 +1115,13 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <button class="sos-btn" onclick="openSOS()">
         <i class="fas fa-ambulance"></i> SOS
       </button>
-      <div class="icon-btn" onclick="toggleDark()" title="Rang rejimi"><i class="fas fa-circle-half-stroke"></i></div>
+      <button class="theme-toggle-btn" onclick="toggleDark()" id="themeToggleBtn" title="Kunduzgi/Kechki rejim">
+        <span id="themeIcon">🌙</span>
+        <div class="theme-toggle-track">
+          <div class="theme-toggle-thumb"></div>
+        </div>
+        <span id="themeLabel" style="display:none;" class="topbar-sub">Kechki</span>
+      </button>
       <div class="icon-btn" onclick="navGo('notes')" title="Zametka"><i class="fas fa-sticky-note"></i></div>
     </div>
   </div>
@@ -1753,10 +1910,30 @@ function showPage(id) {
   window.scrollTo(0, 0);
 }
 
-/* ====================== DARK MODE ====================== */
+/* ====================== DARK / LIGHT MODE ====================== */
+function applyTheme(mode) {
+  const body = document.body;
+  const icon = document.getElementById('themeIcon');
+
+  if (mode === 'light') {
+    body.classList.add('light-mode');
+    if (icon) icon.textContent = '☀️';
+  } else {
+    body.classList.remove('light-mode');
+    if (icon) icon.textContent = '🌙';
+  }
+  localStorage.setItem('ng_theme', mode);
+}
+
 function toggleDark() {
-  document.documentElement.classList.toggle('light');
-  toast('Rang rejimi o\'zgartirildi', 'info');
+  const isLight = document.body.classList.contains('light-mode');
+  if (isLight) {
+    applyTheme('dark');
+    toast('🌙 Kechki rejim yoqildi', 'info');
+  } else {
+    applyTheme('light');
+    toast('☀️ Kunduzgi rejim yoqildi', 'info');
+  }
 }
 
 /* ====================== PROGRESS BAR ====================== */
@@ -2508,6 +2685,10 @@ function closeSOS() { document.getElementById('sosModal').classList.remove('acti
 
 /* ====================== INIT ====================== */
 window.addEventListener('load', () => {
+  // Load saved theme — default is dark
+  const savedTheme = localStorage.getItem('ng_theme') || 'dark';
+  applyTheme(savedTheme);
+
   updateSidebarProfile();
   renderDashboard();
   // Make sure dashboard nav item is active on load
