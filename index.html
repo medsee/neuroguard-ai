@@ -1017,6 +1017,12 @@ body {
 }
 @keyframes ecgScroll { to { background-position: 200px 0; } }
 
+@keyframes wave {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(20deg); }
+  75% { transform: rotate(-10deg); }
+}
+
 /* ── Input type=number arrows hide ── */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -1066,7 +1072,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <i class="fas fa-flask"></i> Tahlillar
     </div>
     <div class="nav-item" id="nav-notes" onclick="navGo('notes')">
-      <i class="fas fa-notes-medical"></i> Zametka
+      <i class="fas fa-notes-medical"></i> Qaydnoma
     </div>
   </div>
 
@@ -1122,15 +1128,15 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
         <span id="themeLabel" style="display:none;" class="topbar-sub">Kechki</span>
       </button>
-      <div class="icon-btn" onclick="navGo('notes')" title="Zametka"><i class="fas fa-sticky-note"></i></div>
+      <div class="icon-btn" onclick="navGo('notes')" title="Qaydnoma"><i class="fas fa-sticky-note"></i></div>
     </div>
   </div>
 
   <!-- DASHBOARD PAGE -->
   <div class="page active" id="page-dashboard">
     <div class="section-header">
-      <div class="section-title">Xush kelibsiz! 👋</div>
-      <div class="section-desc">Sog'lig'ingizning bugungi ko'rsatkichlari</div>
+      <div class="section-title" style="font-size:2.6rem;letter-spacing:-0.02em;line-height:1.1;">Xush kelibsiz! <span style="display:inline-block;animation:wave 1.5s infinite;">👋</span></div>
+      <div class="section-desc" style="font-size:1rem;margin-top:6px;">Sog'lig'ingizning bugungi ko'rsatkichlari</div>
     </div>
 
     <!-- Stat Row -->
@@ -1206,13 +1212,13 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       </div>
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <div class="section-title" style="font-size:1rem;">So'ngi Zametkalar</div>
+          <div class="section-title" style="font-size:1rem;">So'ngi Qaydnomalar</div>
           <button class="btn btn-ghost" onclick="navGo('notes')" style="padding:6px 12px;font-size:0.8rem;">Hammasi <i class="fas fa-arrow-right"></i></button>
         </div>
         <div id="dashNotes">
           <div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;">
             <i class="fas fa-sticky-note" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>
-            Zametkalar yo'q
+            Qaydnomalar yo'q
           </div>
         </div>
       </div>
@@ -1301,14 +1307,19 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
 
         <div class="form-group">
-          <label class="form-label"><i class="fas fa-brain" style="color:var(--accent);"></i> Nevrologik shikoyatlar</label>
+          <label class="form-label"><i class="fas fa-brain" style="color:var(--accent);"></i> Shikoyatlar va xavf omillari</label>
           <div class="checkbox-list">
             <label class="checkbox-item"><input type="checkbox" id="headache"><span>Tez-tez bosh og'rig'i</span></label>
             <label class="checkbox-item"><input type="checkbox" id="dizziness"><span>Bosh aylanishi</span></label>
-            <label class="checkbox-item"><input type="checkbox" id="numbness"><span>Qo'l-oyoq kuchsizlanishi/uvishishi</span></label>
-            <label class="checkbox-item"><input type="checkbox" id="vision"><span>Ko'rish muammolari</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="numbness"><span>Qo'l-oyoq kuchsizlanishi / uvishishi</span></label>
             <label class="checkbox-item"><input type="checkbox" id="speech"><span>Nutq qiyinligi</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="bloodThick"><span>Qon quyuqligi (trombofiliya)</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="movement"><span>Harakat o'zgarishi (muvozanat, koordinatsiya)</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="rheumatism"><span>Revmatizm / bo'g'im kasalliklari</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="familyVascular"><span>Oilada qon tomir kasalliklari bo'lgan</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="ownVascular"><span>O'zida qon tomir kasalliklari bor</span></label>
             <label class="checkbox-item"><input type="checkbox" id="familyHistory"><span>Oilada insult bo'lgan</span></label>
+            <label class="checkbox-item"><input type="checkbox" id="alcohol"><span>Alkogol iste'mol qiladi</span></label>
           </div>
         </div>
 
@@ -1426,15 +1437,15 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
   <div class="page" id="page-notes">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
-        <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> Tibbiy Zametkalar</div>
-        <div class="section-desc">O'z-o'zingiz haqingizda eslatmalar yozing</div>
+        <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> Tibbiy Qaydnomalar</div>
+        <div class="section-desc">O'z salomatligigingiz haqida qaydnomalar yozing</div>
       </div>
-      <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Zametka Qo'shish</button>
+      <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Qaydnoma Qo'shish</button>
     </div>
     <div id="notesList">
       <div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;">
         <i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>
-        Hali zametka yo'q. Birinchi zametkangizni yozing!
+        Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!
       </div>
     </div>
   </div>
@@ -1542,7 +1553,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
         <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
           <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Zametkalar</div>
+          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Qaydnomalar</div>
         </div>
         <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
           <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div>
@@ -1665,7 +1676,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
 <div class="modal-overlay" id="addNoteModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button>
-    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> Zametka Qo'shish</div>
+    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> Qaydnoma Qo'shish</div>
     <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">O'z-o'zingiz haqingizda eslatma yozing</div>
 
     <div class="form-group">
@@ -1839,7 +1850,7 @@ const pages = {
   vitals:       { title: 'Vital Ko\'rsatkichlar',  sub: 'Real vaqt monitoringi' },
   medications:  { title: 'Dorilar',                sub: 'Kundalik dori jadvalingiz' },
   labTests:     { title: 'Laboratoriya',           sub: 'Tahlil natijalari' },
-  notes:        { title: 'Zametkalar',             sub: 'Tibbiy eslatmalar' },
+  notes:        { title: 'Qaydnomalar',             sub: 'Tibbiy qaydnomalar' },
   appointments: { title: 'Konsultatsiya',          sub: 'Shifokor bilan uchrashish' },
   history:      { title: 'Tarix & Diagrammalar',   sub: 'Barcha tekshiruvlar' },
   profile:      { title: 'Mening Profilim',        sub: 'Shaxsiy ma\'lumotlar' }
@@ -2005,11 +2016,24 @@ function analyzeRisk() {
     const exMap = { none:12, light:6, moderate:2, active:0 };
     score += exMap[exercise];
 
-    // Neurological symptoms
-    const neuro = ['headache','dizziness','numbness','vision','speech','familyHistory'];
+    // Neurological symptoms & risk factors
+    const neuro = ['headache','dizziness','numbness','speech','bloodThick','movement','rheumatism','familyVascular','ownVascular','familyHistory','alcohol'];
     const neuroCount = neuro.filter(n => document.getElementById(n)?.checked).length;
-    score += neuroCount * 5;
-    if (neuroCount > 0) factors.push({n:'Nevrologik belgilar', s: neuroCount>2?'bad':'warn', t: neuroCount+' ta belgi'});
+
+    // Weighted scoring for new factors
+    if (document.getElementById('bloodThick')?.checked)    score += 8;
+    if (document.getElementById('movement')?.checked)      score += 7;
+    if (document.getElementById('rheumatism')?.checked)    score += 5;
+    if (document.getElementById('familyVascular')?.checked) score += 8;
+    if (document.getElementById('ownVascular')?.checked)   score += 12;
+    if (document.getElementById('alcohol')?.checked)       score += 10;
+    if (document.getElementById('familyHistory')?.checked) score += 7;
+    if (document.getElementById('headache')?.checked)      score += 5;
+    if (document.getElementById('dizziness')?.checked)     score += 5;
+    if (document.getElementById('numbness')?.checked)      score += 6;
+    if (document.getElementById('speech')?.checked)        score += 8;
+
+    if (neuroCount > 0) factors.push({n:'Shikoyatlar va xavf omillari', s: neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t: neuroCount+' ta belgi/omil aniqlandi'});
 
     score = Math.min(Math.round(score), 100);
 
@@ -2384,7 +2408,7 @@ const catLabels = {general:'Umumiy', symptom:'Belgi', medication:'Dori', appoint
 function renderNotes() {
   const el = document.getElementById('notesList');
   if (!state.notes.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali zametka yo'q</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q</div>`;
     return;
   }
   el.innerHTML = `<div class="grid-2">${state.notes.map((n,i) => `
@@ -2418,14 +2442,14 @@ function saveNote() {
   save('points');
   updateSidebarProfile();
   renderNotes();
-  toast('Zametka saqlandi! +3 ball', 'success');
+  toast('Qaydnoma saqlandi! +3 ball', 'success');
 }
 
 function deleteNote(i) {
   state.notes.splice(i,1);
   save('notes');
   renderNotes();
-  toast('Zametka o\'chirildi', 'warn');
+  toast('Qaydnoma o\'chirildi', 'warn');
 }
 
 /* ====================== APPOINTMENTS / DOCTORS ====================== */
@@ -2573,7 +2597,7 @@ const achievements = [
   {id:'first_analysis', icon:'🔬', name:'Birinchi tahlil', cond: () => state.history.length >= 1},
   {id:'regular', icon:'📅', name:'Muntazam (5 tahlil)', cond: () => state.history.length >= 5},
   {id:'med_taker', icon:'💊', name:'Dori qabul qildi', cond: () => state.medications.some(m => m.taken)},
-  {id:'note_keeper', icon:'📝', name:'Zametka yozdi', cond: () => state.notes.length >= 1},
+  {id:'note_keeper', icon:'📝', name:'Qaydnoma yozdi', cond: () => state.notes.length >= 1},
   {id:'doctor_visit', icon:'👨‍⚕️', name:'Shifokor oldi', cond: () => state.notes.some(n => n.category==='appointment')},
   {id:'low_risk', icon:'✅', name:'Past xavf', cond: () => state.history.some(h => h.score < 25)},
   {id:'pro', icon:'🏆', name:'Pro (10 tahlil)', cond: () => state.history.length >= 10},
@@ -2582,7 +2606,9 @@ const achievements = [
 
 function renderProfile() {
   const p = state.profile;
-  const initials = ((p.name||'U')[0] + (p.surname||'')[0]).toUpperCase() || 'U';
+  const firstName = (p.name || '').trim();
+  const lastName  = (p.surname || '').trim();
+  const initials  = ((firstName ? firstName[0] : 'U') + (lastName ? lastName[0] : '')).toUpperCase() || 'U';
 
   document.getElementById('profileAvatar').textContent = initials;
   document.getElementById('sidebarAvatar').textContent = initials;
@@ -2675,8 +2701,10 @@ function saveProfile() {
 function updateSidebarProfile() {
   document.getElementById('sidebarPoints').textContent = state.points;
   document.getElementById('sidebarName').textContent = state.profile.name || 'Profil';
-  const initials = ((state.profile.name||'U')[0] + (state.profile.surname||'')[0]).toUpperCase();
-  document.getElementById('sidebarAvatar').textContent = initials || 'U';
+  const firstName = (state.profile.name || '').trim();
+  const lastName  = (state.profile.surname || '').trim();
+  const initials  = (firstName ? firstName[0] : 'U') + (lastName ? lastName[0] : '');
+  document.getElementById('sidebarAvatar').textContent = initials.toUpperCase() || 'U';
 }
 
 /* ====================== SOS ====================== */
