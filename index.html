@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>NeuroGuard AI Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -55,977 +55,447 @@ body.light-mode {
   --text2: #4b5a6e;
   --text3: #8a9ab0;
 }
+body.light-mode .bg-grid { background-image: linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px); }
+body.light-mode .orb1 { background:rgba(196,30,56,0.07); }
+body.light-mode .orb2 { background:rgba(37,99,235,0.06); }
+body.light-mode .orb3 { background:rgba(8,145,178,0.05); }
+body.light-mode .topbar { background:rgba(240,244,248,0.95); border-bottom-color:rgba(0,0,0,0.08); }
+body.light-mode .sidebar { background:var(--card); border-right-color:var(--border); box-shadow:2px 0 20px rgba(0,0,0,0.06); }
+body.light-mode ::-webkit-scrollbar-track { background:var(--bg); }
+body.light-mode ::-webkit-scrollbar-thumb { background:var(--accent); }
+body.light-mode .nav-item { color:var(--text2); }
+body.light-mode .nav-item:hover { background:rgba(0,0,0,0.04); color:var(--text); }
+body.light-mode .nav-item.active { background:rgba(196,30,56,0.09); color:var(--accent); border-color:rgba(196,30,56,0.2); }
+body.light-mode .profile-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .logo-sub { color:var(--text3); }
+body.light-mode .nav-label { color:var(--text3); }
+body.light-mode .stat-card { background:var(--card); border-color:var(--border); box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+body.light-mode .card { background:var(--card); border-color:var(--border); box-shadow:0 2px 16px rgba(0,0,0,0.05); }
+body.light-mode .card:hover { border-color:var(--border2); box-shadow:0 4px 24px rgba(0,0,0,0.08); }
+body.light-mode .form-input { background:var(--bg3); border-color:var(--border); color:var(--text); }
+body.light-mode .form-select { background-color:var(--bg3); border-color:var(--border); color:var(--text); }
+body.light-mode .form-input::placeholder { color:var(--text3); }
+body.light-mode .form-input:focus,body.light-mode .form-select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(196,30,56,0.1); }
+body.light-mode .vital-monitor { background:var(--bg3); border-color:var(--border); }
+body.light-mode .factor-row { background:var(--bg3); border-color:var(--border); }
+body.light-mode .med-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .note-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .lab-row { background:var(--bg3); border-color:var(--border); }
+body.light-mode .doctor-card { background:var(--card); border-color:var(--border); }
+body.light-mode .doctor-top { background:var(--bg3); }
+body.light-mode .time-slot { border-color:var(--border); color:var(--text); }
+body.light-mode .modal-box { background:var(--card); border-color:var(--border2); box-shadow:0 20px 60px rgba(0,0,0,0.15); }
+body.light-mode .modal-close { background:var(--bg3); border-color:var(--border); color:var(--text2); }
+body.light-mode .toast { background:#ffffff; border-color:var(--border2); box-shadow:0 4px 20px rgba(0,0,0,0.12); }
+body.light-mode .bottom-nav { background:#ffffff; border-top-color:var(--border2); box-shadow:0 -4px 20px rgba(0,0,0,0.08); }
+body.light-mode .bn-item { color:#9aabb8; }
+body.light-mode .bn-item.active { color:var(--accent); }
+body.light-mode .sidebar-backdrop { background:rgba(0,0,0,0.4); }
+body.light-mode .hamburger-btn { background:var(--card); border-color:var(--border); color:var(--text); }
+body.light-mode .achievement { background:var(--bg3); border-color:var(--border); }
+body.light-mode .progress-track { background:var(--bg3); }
+body.light-mode .history-table th { border-bottom-color:var(--border); }
+body.light-mode .history-table td { border-bottom-color:var(--border); }
+body.light-mode .history-table tr:hover td { background:rgba(0,0,0,0.02); }
+body.light-mode .profile-header-bg { background:var(--card); border-color:var(--border); }
+body.light-mode .profile-header-bg::before { background:radial-gradient(ellipse at right center,rgba(196,30,56,0.08),transparent); }
+body.light-mode .icon-btn { background:var(--card); border-color:var(--border); color:var(--text2); }
+body.light-mode .icon-btn:hover { background:var(--bg3); color:var(--text); }
+body.light-mode .btn-ghost { color:var(--text2); border-color:var(--border); }
+body.light-mode .btn-ghost:hover { background:var(--bg3); color:var(--text); border-color:var(--border2); }
+body.light-mode .rec-item { background:rgba(37,99,235,0.06); }
+body.light-mode .doctor-alert { background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.25); }
+body.light-mode .tag-red { background:rgba(196,30,56,0.1); color:var(--accent); border-color:rgba(196,30,56,0.25); }
+body.light-mode .tag-blue { background:rgba(37,99,235,0.1); color:var(--blue); border-color:rgba(37,99,235,0.25); }
+body.light-mode .tag-green { background:rgba(5,150,105,0.1); color:var(--green); border-color:rgba(5,150,105,0.25); }
+body.light-mode .tag-yellow { background:rgba(217,119,6,0.1); color:var(--yellow); border-color:rgba(217,119,6,0.25); }
+body.light-mode .logo-icon { box-shadow:0 0 16px rgba(196,30,56,0.25); }
+body.light-mode .alcohol-card { background:var(--bg3); border-color:var(--border); }
 
-body.light-mode .bg-grid {
-  background-image:
-    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
-}
-
-body.light-mode .orb1 { background: rgba(196,30,56,0.07); }
-body.light-mode .orb2 { background: rgba(37,99,235,0.06); }
-body.light-mode .orb3 { background: rgba(8,145,178,0.05); }
-
-body.light-mode .topbar {
-  background: rgba(240,244,248,0.95);
-  border-bottom-color: rgba(0,0,0,0.08);
-}
-
-body.light-mode .sidebar {
-  background: var(--card);
-  border-right-color: var(--border);
-  box-shadow: 2px 0 20px rgba(0,0,0,0.06);
-}
-
-body.light-mode ::-webkit-scrollbar-track { background: var(--bg); }
-body.light-mode ::-webkit-scrollbar-thumb { background: var(--accent); }
-
-body.light-mode .nav-item { color: var(--text2); }
-body.light-mode .nav-item:hover { background: rgba(0,0,0,0.04); color: var(--text); }
-body.light-mode .nav-item.active { background: rgba(196,30,56,0.09); color: var(--accent); border-color: rgba(196,30,56,0.2); }
-
-body.light-mode .profile-card { background: var(--bg3); border-color: var(--border); }
-body.light-mode .logo-sub { color: var(--text3); }
-body.light-mode .nav-label { color: var(--text3); }
-
-body.light-mode .stat-card { background: var(--card); border-color: var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-body.light-mode .card { background: var(--card); border-color: var(--border); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
-body.light-mode .card:hover { border-color: var(--border2); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
-
-body.light-mode .form-input,
-body.light-mode .form-select { background: var(--bg3); border-color: var(--border); color: var(--text); }
-body.light-mode .form-input::placeholder { color: var(--text3); }
-body.light-mode .form-input:focus,
-body.light-mode .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(196,30,56,0.1); }
-
-body.light-mode .vital-monitor { background: var(--bg3); border-color: var(--border); }
-body.light-mode .factor-row { background: var(--bg3); border-color: var(--border); }
-body.light-mode .med-card { background: var(--bg3); border-color: var(--border); }
-body.light-mode .note-card { background: var(--bg3); border-color: var(--border); }
-body.light-mode .lab-row { background: var(--bg3); border-color: var(--border); }
-body.light-mode .doctor-card { background: var(--card); border-color: var(--border); }
-body.light-mode .doctor-top { background: var(--bg3); }
-body.light-mode .time-slot { border-color: var(--border); color: var(--text); }
-
-body.light-mode .modal-box { background: var(--card); border-color: var(--border2); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
-body.light-mode .modal-close { background: var(--bg3); border-color: var(--border); color: var(--text2); }
-
-body.light-mode .toast { background: #ffffff; border-color: var(--border2); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-
-body.light-mode .bottom-nav { background: #ffffff; border-top-color: var(--border2); box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
-body.light-mode .bn-item { color: #9aabb8; }
-body.light-mode .bn-item.active { color: var(--accent); }
-
-body.light-mode .sidebar-backdrop { background: rgba(0,0,0,0.4); }
-
-body.light-mode .hamburger-btn { background: var(--card); border-color: var(--border); color: var(--text); }
-
-body.light-mode .achievement { background: var(--bg3); border-color: var(--border); }
-body.light-mode .progress-track { background: var(--bg3); }
-
-body.light-mode .history-table th { border-bottom-color: var(--border); }
-body.light-mode .history-table td { border-bottom-color: var(--border); }
-body.light-mode .history-table tr:hover td { background: rgba(0,0,0,0.02); }
-
-body.light-mode .profile-header-bg { background: var(--card); border-color: var(--border); }
-body.light-mode .profile-header-bg::before { background: radial-gradient(ellipse at right center, rgba(196,30,56,0.08), transparent); }
-
-body.light-mode .icon-btn { background: var(--card); border-color: var(--border); color: var(--text2); }
-body.light-mode .icon-btn:hover { background: var(--bg3); color: var(--text); }
-
-body.light-mode .btn-ghost { color: var(--text2); border-color: var(--border); }
-body.light-mode .btn-ghost:hover { background: var(--bg3); color: var(--text); border-color: var(--border2); }
-
-body.light-mode .rec-item { background: rgba(37,99,235,0.06); }
-
-body.light-mode .doctor-alert { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.25); }
-
-body.light-mode .tag-red { background: rgba(196,30,56,0.1); color: var(--accent); border-color: rgba(196,30,56,0.25); }
-body.light-mode .tag-blue { background: rgba(37,99,235,0.1); color: var(--blue); border-color: rgba(37,99,235,0.25); }
-body.light-mode .tag-green { background: rgba(5,150,105,0.1); color: var(--green); border-color: rgba(5,150,105,0.25); }
-body.light-mode .tag-yellow { background: rgba(217,119,6,0.1); color: var(--yellow); border-color: rgba(217,119,6,0.25); }
-
-body.light-mode .logo-icon { box-shadow: 0 0 16px rgba(196,30,56,0.25); }
-
-/* ── THEME TOGGLE BUTTON STYLES ── */
+/* ── THEME TOGGLE ── */
 .theme-toggle-btn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 8px 14px;
-  border-radius: 50px;
-  background: var(--bg3);
-  border: 1.5px solid var(--border2);
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.82rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  -webkit-tap-highlight-color: transparent;
+  display:flex; align-items:center; gap:8px;
+  padding:8px 14px; border-radius:50px;
+  background:var(--bg3); border:1.5px solid var(--border2);
+  color:var(--text2); cursor:pointer; transition:all 0.3s;
+  font-size:0.82rem; font-weight:600; font-family:var(--font-body);
+  -webkit-tap-highlight-color:transparent;
 }
-.theme-toggle-btn:hover { border-color: var(--accent); color: var(--text); }
-
-.theme-toggle-track {
-  width: 36px; height: 20px;
-  border-radius: 10px;
-  background: var(--bg);
-  border: 1.5px solid var(--border2);
-  position: relative;
-  transition: all 0.3s;
-  flex-shrink: 0;
-}
-body.light-mode .theme-toggle-track { background: var(--accent); border-color: var(--accent); }
-
-.theme-toggle-thumb {
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: var(--text3);
-  position: absolute;
-  top: 1px; left: 2px;
-  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-body.light-mode .theme-toggle-thumb { transform: translateX(16px); background: white; }
+.theme-toggle-btn:hover { border-color:var(--accent); color:var(--text); }
+.theme-toggle-track { width:36px; height:20px; border-radius:10px; background:var(--bg); border:1.5px solid var(--border2); position:relative; transition:all 0.3s; flex-shrink:0; }
+body.light-mode .theme-toggle-track { background:var(--accent); border-color:var(--accent); }
+.theme-toggle-thumb { width:14px; height:14px; border-radius:50%; background:var(--text3); position:absolute; top:1px; left:2px; transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+body.light-mode .theme-toggle-thumb { transform:translateX(16px); background:white; }
 
 * { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); overflow-x:hidden; min-height:100vh; }
 
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-/* ── BACKGROUND ── */
-.bg-grid {
-  position: fixed; inset: 0; z-index: 0;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-.bg-orbs {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-}
-
-.orb {
-  position: absolute; border-radius: 50%; filter: blur(120px);
-  animation: orbFloat 20s infinite ease-in-out;
-}
+.bg-grid { position:fixed; inset:0; z-index:0; background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+.bg-orbs { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.orb { position:absolute; border-radius:50%; filter:blur(120px); animation:orbFloat 20s infinite ease-in-out; }
 .orb1 { width:600px; height:600px; background:rgba(230,57,80,0.08); top:-200px; right:-100px; }
 .orb2 { width:500px; height:500px; background:rgba(59,130,246,0.07); bottom:-200px; left:-100px; animation-delay:-10s; }
 .orb3 { width:300px; height:300px; background:rgba(6,182,212,0.05); top:50%; left:50%; animation-delay:-5s; }
+@keyframes orbFloat { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(30px,-20px) scale(1.05);} 66%{transform:translate(-20px,30px) scale(0.95);} }
 
-@keyframes orbFloat {
-  0%,100% { transform: translate(0,0) scale(1); }
-  33% { transform: translate(30px,-20px) scale(1.05); }
-  66% { transform: translate(-20px,30px) scale(0.95); }
-}
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:3px; }
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
-
-/* ── LAYOUT ── */
-.app {
-  display: flex;
-  min-height: 100vh;
-  position: relative;
-  z-index: 1;
-}
+.app { display:flex; min-height:100vh; position:relative; z-index:1; }
 
 /* ── SIDEBAR ── */
-.sidebar {
-  width: 260px;
-  background: var(--card);
-  border-right: 1px solid var(--border);
-  position: fixed;
-  height: 100vh;
-  left: 0; top: 0;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  overflow-y: auto;
-}
+.sidebar { width:260px; background:var(--card); border-right:1px solid var(--border); position:fixed; height:100vh; left:0; top:0; display:flex; flex-direction:column; z-index:100; overflow-y:auto; }
+.sidebar-logo { padding:28px 24px 20px; border-bottom:1px solid var(--border); }
+.logo-mark { display:flex; align-items:center; gap:12px; }
+.logo-icon { width:42px; height:42px; background:var(--accent); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; box-shadow:0 0 20px var(--accent-glow); }
+.logo-text { font-family:var(--font-display); font-size:1.1rem; font-weight:800; }
+.logo-sub { font-size:0.72rem; color:var(--text2); font-family:var(--font-mono); letter-spacing:0.1em; margin-top:2px; }
+.nav-section { padding:16px 12px 8px; }
+.nav-label { font-size:0.65rem; letter-spacing:0.12em; color:var(--text3); text-transform:uppercase; font-family:var(--font-mono); padding:0 12px; margin-bottom:6px; }
+.nav-item { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:10px; cursor:pointer; transition:all 0.2s; font-size:0.9rem; font-weight:500; color:var(--text2); margin-bottom:2px; -webkit-tap-highlight-color:transparent; user-select:none; }
+.nav-item:hover { background:var(--border); color:var(--text); }
+.nav-item.active { background:rgba(230,57,80,0.15); color:var(--accent); border:1px solid rgba(230,57,80,0.25); }
+.nav-item i { width:18px; text-align:center; font-size:0.95rem; }
+.nav-badge { margin-left:auto; background:var(--accent); color:white; font-size:0.7rem; padding:2px 7px; border-radius:20px; font-weight:700; }
+.sidebar-profile { margin-top:auto; padding:16px; border-top:1px solid var(--border); }
+.profile-card { background:var(--bg3); border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:all 0.2s; border:1px solid var(--border); }
+.profile-card:hover { border-color:var(--accent); }
+.avatar { width:40px; height:40px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:700; font-family:var(--font-display); }
+.profile-name { font-weight:600; font-size:0.9rem; }
+.profile-points { font-size:0.75rem; color:var(--yellow); display:flex; align-items:center; gap:4px; margin-top:2px; }
 
-.sidebar-logo {
-  padding: 28px 24px 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo-mark {
-  display: flex; align-items: center; gap: 12px;
-}
-
-.logo-icon {
-  width: 42px; height: 42px;
-  background: var(--accent);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-.logo-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; }
-.logo-sub { font-size: 0.72rem; color: var(--text2); font-family: var(--font-mono); letter-spacing: 0.1em; margin-top: 2px; }
-
-.nav-section { padding: 16px 12px 8px; }
-.nav-label { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--text3); text-transform: uppercase; font-family: var(--font-mono); padding: 0 12px; margin-bottom: 6px; }
-
-.nav-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 12px; border-radius: 10px;
-  cursor: pointer; transition: all 0.2s;
-  font-size: 0.9rem; font-weight: 500;
-  color: var(--text2);
-  margin-bottom: 2px;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-
-.nav-item:hover { background: var(--border); color: var(--text); }
-.nav-item.active { background: rgba(230,57,80,0.15); color: var(--accent); border: 1px solid rgba(230,57,80,0.25); }
-.nav-item i { width: 18px; text-align: center; font-size: 0.95rem; }
-
-.nav-badge {
-  margin-left: auto; background: var(--accent);
-  color: white; font-size: 0.7rem; padding: 2px 7px;
-  border-radius: 20px; font-weight: 700;
-}
-
-.sidebar-profile {
-  margin-top: auto;
-  padding: 16px;
-  border-top: 1px solid var(--border);
-}
-
-.profile-card {
-  background: var(--bg3);
-  border-radius: 12px;
-  padding: 14px;
-  display: flex; align-items: center; gap: 12px;
-  cursor: pointer; transition: all 0.2s;
-  border: 1px solid var(--border);
-}
-
-.profile-card:hover { border-color: var(--accent); }
-
-.avatar {
-  width: 40px; height: 40px;
-  border-radius: 50%; background: var(--accent);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; font-weight: 700;
-  font-family: var(--font-display);
-}
-
-.profile-name { font-weight: 600; font-size: 0.9rem; }
-.profile-points { font-size: 0.75rem; color: var(--yellow); display: flex; align-items: center; gap: 4px; margin-top: 2px; }
-
-/* ── MAIN ── */
-.main {
-  margin-left: 260px;
-  flex: 1;
-  min-height: 100vh;
-}
+.main { margin-left:260px; flex:1; min-height:100vh; }
 
 /* ── TOPBAR ── */
-.topbar {
-  position: sticky; top: 0; z-index: 90;
-  background: rgba(8,12,20,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 32px;
-  height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
+.topbar { position:sticky; top:0; z-index:90; background:rgba(8,12,20,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+.topbar-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; }
+.topbar-sub { font-size:0.8rem; color:var(--text2); margin-top:2px; }
+.topbar-right { display:flex; align-items:center; gap:12px; }
+
+.sos-btn { display:flex; align-items:center; gap:8px; padding:9px 18px; background:rgba(239,68,68,0.15); border:1.5px solid rgba(239,68,68,0.5); border-radius:50px; color:#ef4444; font-weight:600; font-size:0.85rem; cursor:pointer; transition:all 0.2s; animation:sosPulse 2s infinite; }
+.sos-btn:hover { background:rgba(239,68,68,0.25); transform:scale(1.03); }
+@keyframes sosPulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4);} 50%{box-shadow:0 0 0 6px rgba(239,68,68,0);} }
+
+.icon-btn { width:38px; height:38px; border-radius:10px; background:var(--card); border:1px solid var(--border); color:var(--text2); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; font-size:0.9rem; }
+.icon-btn:hover { color:var(--text); border-color:var(--border2); background:var(--card2); }
+
+.page { padding:32px; display:none; }
+.page.active { display:block; }
+
+.section-header { margin-bottom:24px; }
+.section-title { font-family:var(--font-display); font-size:1.6rem; font-weight:800; margin-bottom:4px; }
+.section-desc { color:var(--text2); font-size:0.9rem; }
+.tag { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; font-family:var(--font-mono); }
+.tag-red { background:rgba(230,57,80,0.15); color:var(--accent); border:1px solid rgba(230,57,80,0.3); }
+.tag-blue { background:rgba(59,130,246,0.15); color:var(--blue); border:1px solid rgba(59,130,246,0.3); }
+.tag-green { background:rgba(16,185,129,0.15); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+.tag-yellow { background:rgba(245,158,11,0.15); color:var(--yellow); border:1px solid rgba(245,158,11,0.3); }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; transition:border-color 0.2s; }
+.card:hover { border-color:var(--border2); }
+.card-sm { padding:18px; border-radius:var(--radius); }
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; position:relative; overflow:hidden; transition:all 0.3s; }
+.stat-card:hover { transform:translateY(-2px); border-color:var(--border2); }
+.stat-glow { position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; filter:blur(40px); opacity:0.4; }
+.stat-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; margin-bottom:16px; }
+.stat-value { font-family:var(--font-display); font-size:2rem; font-weight:800; line-height:1; }
+.stat-label { color:var(--text2); font-size:0.82rem; margin-top:6px; }
+.stat-change { font-size:0.78rem; margin-top:8px; display:flex; align-items:center; gap:4px; }
+.stat-up { color:var(--green); }
+.stat-down { color:var(--accent); }
+
+.risk-gauge-wrap { display:flex; flex-direction:column; align-items:center; padding:32px 24px; }
+
+.progress-track { height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+.progress-fill-bar { height:100%; border-radius:3px; transition:width 1s ease; }
+
+/* ── FORM ── */
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.form-group { margin-bottom:16px; }
+.form-label { font-size:0.82rem; font-weight:600; color:var(--text2); margin-bottom:8px; display:flex; align-items:center; gap:6px; letter-spacing:0.03em; }
+.form-input { width:100%; background:var(--bg3); border:1.5px solid var(--border); border-radius:10px; padding:11px 14px; color:var(--text); font-family:var(--font-body); font-size:0.9rem; transition:all 0.2s; outline:none; }
+.form-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
+.form-input::placeholder { color:var(--text3); }
+.form-select {
+  width:100%;
+  background-color:var(--bg3);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238899bb' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:16px 16px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:11px 38px 11px 14px;
+  color:var(--text);
+  font-size:0.9rem;
+  font-family:var(--font-body);
+  cursor:pointer;
+  outline:none;
+  transition:all 0.2s;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
+.form-select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
+body.light-mode .form-select {
+  background-color:var(--bg3);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b5a6e' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  background-size:16px 16px;
 }
 
-.topbar-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; }
-.topbar-sub { font-size: 0.8rem; color: var(--text2); margin-top: 2px; }
+.checkbox-list { display:flex; flex-direction:column; gap:10px; }
+.checkbox-item { display:flex; align-items:center; gap:10px; cursor:pointer; padding:8px 10px; border-radius:8px; transition:background 0.15s; }
+.checkbox-item:hover { background:var(--bg3); }
+.checkbox-item input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+.checkbox-item span { font-size:0.88rem; color:var(--text2); }
 
-.topbar-right { display: flex; align-items: center; gap: 16px; }
-
-.sos-btn {
-  display: flex; align-items: center; gap: 8px;
-  padding: 9px 18px;
-  background: rgba(239,68,68,0.15);
-  border: 1.5px solid rgba(239,68,68,0.5);
-  border-radius: 50px;
-  color: #ef4444;
-  font-weight: 600; font-size: 0.85rem;
-  cursor: pointer; transition: all 0.2s;
-  animation: sosPulse 2s infinite;
-}
-
-.sos-btn:hover { background: rgba(239,68,68,0.25); transform: scale(1.03); }
-
-@keyframes sosPulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
-  50% { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
-}
-
-.icon-btn {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: var(--text2);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: all 0.2s; font-size: 0.9rem;
-}
-
-.icon-btn:hover { color: var(--text); border-color: var(--border2); background: var(--card2); }
-
-/* ── PAGE CONTENT ── */
-.page { padding: 32px; display: none; }
-.page.active { display: block; }
-
-/* ── SECTION TITLE ── */
-.section-header { margin-bottom: 24px; }
-.section-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
-.section-desc { color: var(--text2); font-size: 0.9rem; }
-.tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; font-family: var(--font-mono); }
-.tag-red { background: rgba(230,57,80,0.15); color: var(--accent); border: 1px solid rgba(230,57,80,0.3); }
-.tag-blue { background: rgba(59,130,246,0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
-.tag-green { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
-.tag-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
-
-/* ── CARDS ── */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 24px;
+/* ── ALCOHOL CARD (new) ── */
+.alcohol-card {
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
   transition: border-color 0.2s;
 }
-
-.card:hover { border-color: var(--border2); }
-.card-sm { padding: 18px; border-radius: var(--radius); }
-
-/* ── GRID ── */
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-
-/* ── STAT CARDS ── */
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s;
+.alcohol-card::before {
+  content: '';
+  position: absolute; left:0; top:0; bottom:0; width:4px;
+  background: linear-gradient(to bottom, #f59e0b, #e63950);
+  border-radius: 4px 0 0 4px;
 }
+.alcohol-card:focus-within { border-color: var(--accent); }
+.alcohol-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.alcohol-icon { width:36px; height:36px; border-radius:10px; background:rgba(245,158,11,0.15); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+.alcohol-title { font-weight:700; font-size:0.92rem; }
+.alcohol-sub { font-size:0.75rem; color:var(--text3); margin-top:2px; }
 
-.stat-card:hover { transform: translateY(-2px); border-color: var(--border2); }
-
-.stat-glow {
-  position: absolute; top: -30px; right: -30px;
-  width: 120px; height: 120px;
-  border-radius: 50%; filter: blur(40px);
-  opacity: 0.4;
+.alcohol-options { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+.alcohol-opt {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 14px; border-radius:10px;
+  border:1.5px solid var(--border);
+  cursor:pointer; transition:all 0.2s;
+  background:var(--bg);
+  -webkit-tap-highlight-color:transparent;
 }
-
-.stat-icon {
-  width: 42px; height: 42px;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; margin-bottom: 16px;
-}
-
-.stat-value { font-family: var(--font-display); font-size: 2rem; font-weight: 800; line-height: 1; }
-.stat-label { color: var(--text2); font-size: 0.82rem; margin-top: 6px; }
-.stat-change { font-size: 0.78rem; margin-top: 8px; display: flex; align-items: center; gap: 4px; }
-.stat-up { color: var(--green); }
-.stat-down { color: var(--accent); }
-
-/* ── RISK GAUGE ── */
-.risk-gauge-wrap {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 32px 24px;
-}
-
-.gauge-ring {
-  width: 200px; height: 100px;
-  position: relative; overflow: hidden;
-}
-
-.gauge-arc {
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  border: 18px solid var(--bg3);
-  position: absolute;
-  clip-path: inset(0 0 50% 0);
-  transition: all 1s ease;
-}
-
-.gauge-fill {
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  border: 18px solid transparent;
-  position: absolute;
-  clip-path: inset(0 0 50% 0);
-  transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-origin: 50% 100%;
-}
-
-.gauge-center {
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-}
-
-.gauge-percent {
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.gauge-sublabel { font-size: 0.78rem; color: var(--text2); }
-
-/* ── PROGRESS ── */
-.progress-track {
-  height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden;
-}
-.progress-fill-bar {
-  height: 100%; border-radius: 3px;
-  transition: width 1s ease;
-}
-
-/* ── FORM ELEMENTS ── */
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.form-group { margin-bottom: 16px; }
-.form-label { font-size: 0.82rem; font-weight: 600; color: var(--text2); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; letter-spacing: 0.03em; }
-
-.form-input {
-  width: 100%;
-  background: var(--bg3);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 11px 14px;
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  transition: all 0.2s;
-  outline: none;
-}
-
-.form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(230,57,80,0.15); }
-.form-input::placeholder { color: var(--text3); }
-
-.form-select {
-  width: 100%;
-  background: var(--bg3);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 11px 14px;
-  color: var(--text);
-  font-size: 0.9rem;
-  cursor: pointer; outline: none;
-  transition: all 0.2s;
-  appearance: none;
-}
-
-.form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(230,57,80,0.15); }
-
-.checkbox-list { display: flex; flex-direction: column; gap: 10px; }
-.checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-.checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
-.checkbox-item span { font-size: 0.88rem; color: var(--text2); }
+.alcohol-opt:hover { border-color:var(--border2); background:var(--card); }
+.alcohol-opt.selected { border-color:var(--accent); background:rgba(230,57,80,0.08); }
+.alcohol-opt.selected .ao-dot { background:var(--accent); box-shadow:0 0 8px var(--accent-glow); }
+.alcohol-opt.selected .ao-label { color:var(--text); font-weight:600; }
+.ao-dot { width:16px; height:16px; border-radius:50%; border:2px solid var(--text3); flex-shrink:0; transition:all 0.2s; }
+.ao-label { font-size:0.85rem; color:var(--text2); }
+.ao-sublabel { font-size:0.72rem; color:var(--text3); margin-top:1px; }
 
 /* ── BUTTON ── */
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 11px 22px;
-  border-radius: 10px;
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: none; outline: none;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
+.btn { display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:10px; font-family:var(--font-body); font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; border:none; outline:none; -webkit-tap-highlight-color:transparent; user-select:none; }
+.btn-accent { background:var(--accent); color:white; box-shadow:0 4px 20px rgba(230,57,80,0.35); }
+.btn-accent:hover { background:var(--accent2); transform:translateY(-1px); box-shadow:0 6px 28px rgba(230,57,80,0.5); }
+.btn-ghost { background:transparent; color:var(--text2); border:1.5px solid var(--border); }
+.btn-ghost:hover { color:var(--text); border-color:var(--border2); background:var(--card); }
+.btn-blue { background:var(--blue); color:white; box-shadow:0 4px 20px var(--blue-glow); }
+.btn-blue:hover { opacity:0.9; transform:translateY(-1px); }
+.btn-danger { background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid rgba(239,68,68,0.3); }
+.btn-danger:hover { background:rgba(239,68,68,0.3); }
+.btn-success { background:rgba(16,185,129,0.15); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+.btn-success:hover { background:rgba(16,185,129,0.25); }
+.btn-full { width:100%; justify-content:center; }
+.btn-lg { padding:14px 28px; font-size:0.95rem; border-radius:12px; }
 
-.btn-accent {
-  background: var(--accent);
-  color: white;
-  box-shadow: 0 4px 20px rgba(230,57,80,0.35);
-}
-.btn-accent:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(230,57,80,0.5); }
+.factor-row { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:var(--bg3); border-radius:10px; margin-bottom:8px; border:1px solid var(--border); }
+.factor-name { font-size:0.88rem; font-weight:500; display:flex; align-items:center; gap:8px; }
+.factor-badge { padding:4px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; font-family:var(--font-mono); }
+.fb-good { background:rgba(16,185,129,0.15); color:var(--green); }
+.fb-warn { background:rgba(245,158,11,0.15); color:var(--yellow); }
+.fb-bad { background:rgba(230,57,80,0.15); color:var(--accent); }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--text2);
-  border: 1.5px solid var(--border);
-}
-.btn-ghost:hover { color: var(--text); border-color: var(--border2); background: var(--card); }
+.rec-item { display:flex; align-items:flex-start; gap:12px; padding:12px 16px; background:rgba(59,130,246,0.07); border-left:3px solid var(--blue); border-radius:0 10px 10px 0; margin-bottom:8px; font-size:0.88rem; }
+.rec-item .rec-icon { color:var(--blue); margin-top:2px; flex-shrink:0; }
 
-.btn-blue {
-  background: var(--blue);
-  color: white;
-  box-shadow: 0 4px 20px var(--blue-glow);
-}
-.btn-blue:hover { opacity: 0.9; transform: translateY(-1px); }
+.doctor-alert { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.4); border-radius:12px; padding:18px 20px; display:flex; gap:14px; align-items:flex-start; margin-top:16px; }
+.alert-icon { font-size:2rem; flex-shrink:0; }
+.alert-title { font-weight:700; font-size:1rem; color:#ef4444; margin-bottom:4px; }
+.alert-desc { font-size:0.85rem; color:var(--text2); margin-bottom:10px; }
 
-.btn-danger { background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
-.btn-danger:hover { background: rgba(239,68,68,0.3); }
+.note-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:12px; transition:all 0.2s; position:relative; }
+.note-card:hover { border-color:var(--accent); }
+.note-date { font-size:0.75rem; color:var(--text3); font-family:var(--font-mono); margin-bottom:6px; }
+.note-content { font-size:0.88rem; line-height:1.6; color:var(--text); }
+.note-tag-row { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
 
-.btn-success { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
-.btn-success:hover { background: rgba(16,185,129,0.25); }
+.med-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:10px; transition:all 0.2s; }
+.med-card:hover { border-color:var(--border2); }
+.med-card.taken { opacity:0.55; }
+.med-header-row { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.med-name { font-weight:700; font-size:1rem; }
+.med-time { font-family:var(--font-mono); font-size:0.82rem; color:var(--accent); background:rgba(230,57,80,0.12); padding:3px 10px; border-radius:6px; }
+.med-meta { display:flex; gap:16px; font-size:0.82rem; color:var(--text2); margin-bottom:12px; flex-wrap:wrap; }
+.med-meta span { display:flex; align-items:center; gap:5px; }
+.med-actions-row { display:flex; gap:8px; }
 
-.btn-full { width: 100%; justify-content: center; }
-.btn-lg { padding: 14px 28px; font-size: 0.95rem; border-radius: 12px; }
+.lab-row { display:flex; align-items:center; padding:14px 16px; background:var(--bg3); border-radius:10px; margin-bottom:8px; border:1px solid var(--border); gap:16px; }
+.lab-name { flex:1; font-weight:500; font-size:0.9rem; }
+.lab-value { font-family:var(--font-mono); font-size:1.1rem; font-weight:700; }
+.lab-normal { color:var(--text3); font-size:0.78rem; }
 
-/* ── FACTOR ROWS ── */
-.factor-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 16px;
-  background: var(--bg3);
-  border-radius: 10px;
-  margin-bottom: 8px;
-  border: 1px solid var(--border);
-}
+.doctor-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.3s; cursor:pointer; }
+.doctor-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+.doctor-top { background:var(--bg3); padding:24px; text-align:center; }
+.doctor-avatar { width:80px; height:80px; border-radius:50%; background:var(--accent); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:2rem; border:3px solid rgba(230,57,80,0.4); }
+.doctor-name { font-family:var(--font-display); font-weight:700; font-size:1.05rem; }
+.doctor-spec { font-size:0.82rem; color:var(--accent); margin-top:4px; }
+.doctor-rating { display:flex; align-items:center; gap:4px; justify-content:center; margin-top:8px; color:var(--yellow); font-size:0.85rem; }
+.doctor-body { padding:18px; }
+.time-slots { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:12px 0; }
+.time-slot { padding:7px; text-align:center; border-radius:8px; font-size:0.78rem; border:1px solid var(--border); cursor:pointer; transition:all 0.2s; font-family:var(--font-mono); }
+.time-slot:hover:not(.slot-taken) { border-color:var(--accent); color:var(--accent); background:rgba(230,57,80,0.08); }
+.time-slot.slot-taken { opacity:0.35; cursor:not-allowed; text-decoration:line-through; }
+.time-slot.slot-selected { background:var(--accent); color:white; border-color:var(--accent); }
 
-.factor-name { font-size: 0.88rem; font-weight: 500; display: flex; align-items: center; gap: 8px; }
-.factor-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; font-family: var(--font-mono); }
-.fb-good { background: rgba(16,185,129,0.15); color: var(--green); }
-.fb-warn { background: rgba(245,158,11,0.15); color: var(--yellow); }
-.fb-bad { background: rgba(230,57,80,0.15); color: var(--accent); }
+.profile-header-bg { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; margin-bottom:24px; position:relative; overflow:hidden; }
+.profile-header-bg::before { content:''; position:absolute; top:0; right:0; width:300px; height:100%; background:radial-gradient(ellipse at right center,rgba(230,57,80,0.12),transparent); }
+.profile-avatar-lg { width:90px; height:90px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:2.2rem; font-weight:800; border:3px solid rgba(230,57,80,0.5); box-shadow:0 0 30px rgba(230,57,80,0.3); position:relative; z-index:1; }
+.profile-info { position:relative; z-index:1; }
+.profile-name-lg { font-family:var(--font-display); font-size:1.8rem; font-weight:800; margin-bottom:4px; }
+.profile-meta { display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; }
+.profile-meta-item { display:flex; align-items:center; gap:6px; font-size:0.85rem; color:var(--text2); }
 
-/* ── RECOMMENDATIONS ── */
-.rec-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 12px 16px;
-  background: rgba(59,130,246,0.07);
-  border-left: 3px solid var(--blue);
-  border-radius: 0 10px 10px 0;
-  margin-bottom: 8px;
-  font-size: 0.88rem;
-}
-.rec-item .rec-icon { color: var(--blue); margin-top: 2px; flex-shrink: 0; }
+.achievement-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin-top:16px; }
+.achievement { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; transition:all 0.2s; }
+.achievement:hover { border-color:var(--yellow); }
+.achievement-icon { font-size:2rem; margin-bottom:6px; }
+.achievement-name { font-size:0.75rem; font-weight:600; color:var(--text2); }
+.achievement.unlocked { border-color:rgba(245,158,11,0.4); background:rgba(245,158,11,0.05); }
+.achievement.locked { opacity:0.35; filter:grayscale(1); }
 
-/* ── DOCTOR ALERT ── */
-.doctor-alert {
-  background: rgba(239,68,68,0.1);
-  border: 1px solid rgba(239,68,68,0.4);
-  border-radius: 12px;
-  padding: 18px 20px;
-  display: flex; gap: 14px; align-items: flex-start;
-  margin-top: 16px;
-}
+.history-table { width:100%; border-collapse:collapse; }
+.history-table th { text-align:left; padding:12px 16px; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); font-family:var(--font-mono); border-bottom:1px solid var(--border); }
+.history-table td { padding:14px 16px; border-bottom:1px solid var(--border); font-size:0.88rem; vertical-align:middle; }
+.history-table tr:last-child td { border-bottom:none; }
+.history-table tr:hover td { background:rgba(255,255,255,0.02); }
 
-.alert-icon { font-size: 2rem; flex-shrink: 0; }
-.alert-title { font-weight: 700; font-size: 1rem; color: #ef4444; margin-bottom: 4px; }
-.alert-desc { font-size: 0.85rem; color: var(--text2); margin-bottom: 10px; }
+.chart-wrap { position:relative; height:220px; }
+.chart-wrap-sm { position:relative; height:160px; }
 
-/* ── NOTE CARD ── */
-.note-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 12px;
-  transition: all 0.2s;
-  position: relative;
-}
+.modal-overlay { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:var(--card); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:32px; max-width:560px; width:90%; max-height:90vh; overflow-y:auto; animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); position:relative; }
+@keyframes modalIn { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
+.modal-title { font-family:var(--font-display); font-size:1.4rem; font-weight:800; margin-bottom:6px; }
+.modal-close { position:absolute; top:16px; right:16px; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:6px 10px; cursor:pointer; color:var(--text2); font-size:1rem; }
 
-.note-card:hover { border-color: var(--accent); }
-.note-date { font-size: 0.75rem; color: var(--text3); font-family: var(--font-mono); margin-bottom: 6px; }
-.note-content { font-size: 0.88rem; line-height: 1.6; color: var(--text); }
-.note-tag-row { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.toast-container { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+.toast { background:var(--card2); border:1px solid var(--border2); border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:12px; min-width:300px; animation:toastIn 0.3s ease; font-size:0.88rem; }
+@keyframes toastIn { from{opacity:0;transform:translateX(40px);} to{opacity:1;transform:translateX(0);} }
+.toast.t-success { border-left:3px solid var(--green); }
+.toast.t-warn { border-left:3px solid var(--yellow); }
+.toast.t-err { border-left:3px solid var(--accent); }
+.toast.t-info { border-left:3px solid var(--blue); }
 
-/* ── MED CARD ── */
-.med-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 10px;
-  transition: all 0.2s;
-}
+.spinner { width:32px; height:32px; border:3px solid var(--bg3); border-top:3px solid var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 12px; }
+@keyframes spin { to{transform:rotate(360deg);} }
 
-.med-card:hover { border-color: var(--border2); }
-.med-card.taken { opacity: 0.55; }
+.vital-monitor { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; position:relative; overflow:hidden; }
+.vital-value { font-family:var(--font-mono); font-size:2.2rem; font-weight:700; line-height:1; }
+.vital-unit { font-size:0.8rem; color:var(--text3); margin-top:4px; }
+.vital-label { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text2); margin-bottom:8px; font-family:var(--font-mono); }
+.ecg-line { height:48px; width:100%; margin-top:10px; stroke:var(--accent); overflow:hidden; }
 
-.med-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-.med-name { font-weight: 700; font-size: 1rem; }
-.med-time { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); background: rgba(230,57,80,0.12); padding: 3px 10px; border-radius: 6px; }
-.med-meta { display: flex; gap: 16px; font-size: 0.82rem; color: var(--text2); margin-bottom: 12px; flex-wrap: wrap; }
-.med-meta span { display: flex; align-items: center; gap: 5px; }
-.med-actions-row { display: flex; gap: 8px; }
-
-/* ── LAB RESULT ── */
-.lab-row {
-  display: flex; align-items: center;
-  padding: 14px 16px;
-  background: var(--bg3);
-  border-radius: 10px; margin-bottom: 8px;
-  border: 1px solid var(--border);
-  gap: 16px;
-}
-
-.lab-name { flex: 1; font-weight: 500; font-size: 0.9rem; }
-.lab-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; }
-.lab-normal { color: var(--text3); font-size: 0.78rem; }
-.lab-trend { font-size: 0.82rem; }
-.trend-up { color: var(--accent); }
-.trend-down { color: var(--green); }
-.trend-stable { color: var(--yellow); }
-
-/* ── DOCTOR CARD ── */
-.doctor-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden; transition: all 0.3s; cursor: pointer;
-}
-
-.doctor-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-.doctor-top { background: var(--bg3); padding: 24px; text-align: center; }
-.doctor-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 3px solid rgba(230,57,80,0.4); }
-.doctor-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
-.doctor-spec { font-size: 0.82rem; color: var(--accent); margin-top: 4px; }
-.doctor-rating { display: flex; align-items: center; gap: 4px; justify-content: center; margin-top: 8px; color: var(--yellow); font-size: 0.85rem; }
-.doctor-body { padding: 18px; }
-.time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 12px 0; }
-.time-slot { padding: 7px; text-align: center; border-radius: 8px; font-size: 0.78rem; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; font-family: var(--font-mono); }
-.time-slot:hover:not(.slot-taken) { border-color: var(--accent); color: var(--accent); background: rgba(230,57,80,0.08); }
-.time-slot.slot-taken { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
-.time-slot.slot-selected { background: var(--accent); color: white; border-color: var(--accent); }
-
-/* ── PROFILE PAGE ── */
-.profile-header-bg {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  margin-bottom: 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.profile-header-bg::before {
-  content: '';
-  position: absolute; top: 0; right: 0;
-  width: 300px; height: 100%;
-  background: radial-gradient(ellipse at right center, rgba(230,57,80,0.12), transparent);
-}
-
-.profile-avatar-lg {
-  width: 90px; height: 90px;
-  border-radius: 50%; background: var(--accent);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 2.2rem; font-weight: 800;
-  border: 3px solid rgba(230,57,80,0.5);
-  box-shadow: 0 0 30px rgba(230,57,80,0.3);
-  position: relative; z-index: 1;
-}
-
-.profile-info { position: relative; z-index: 1; }
-.profile-name-lg { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; margin-bottom: 4px; }
-.profile-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
-.profile-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text2); }
-
-.achievement-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-top: 16px; }
-.achievement { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; transition: all 0.2s; }
-.achievement:hover { border-color: var(--yellow); }
-.achievement-icon { font-size: 2rem; margin-bottom: 6px; }
-.achievement-name { font-size: 0.75rem; font-weight: 600; color: var(--text2); }
-.achievement.unlocked { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.05); }
-.achievement.locked { opacity: 0.35; filter: grayscale(1); }
-
-/* ── HEALTH HISTORY TABLE ── */
-.history-table { width: 100%; border-collapse: collapse; }
-.history-table th { text-align: left; padding: 12px 16px; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); font-family: var(--font-mono); border-bottom: 1px solid var(--border); }
-.history-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 0.88rem; vertical-align: middle; }
-.history-table tr:last-child td { border-bottom: none; }
-.history-table tr:hover td { background: rgba(255,255,255,0.02); }
-
-/* ── CHART CONTAINER ── */
-.chart-wrap { position: relative; height: 220px; }
-.chart-wrap-sm { position: relative; height: 160px; }
-
-/* ── MODAL ── */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
-  align-items: center; justify-content: center;
-}
-
-.modal-overlay.active { display: flex; }
-
-.modal-box {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  max-width: 560px; width: 90%;
-  max-height: 90vh; overflow-y: auto;
-  animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes modalIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.modal-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
-.modal-close { position: absolute; top: 16px; right: 16px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; cursor: pointer; color: var(--text2); font-size: 1rem; }
-.modal-box { position: relative; }
-
-/* ── TOAST ── */
-.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-.toast {
-  background: var(--card2);
-  border: 1px solid var(--border2);
-  border-radius: 12px;
-  padding: 14px 18px;
-  display: flex; align-items: center; gap: 12px;
-  min-width: 300px;
-  animation: toastIn 0.3s ease;
-  font-size: 0.88rem;
-}
-
-@keyframes toastIn {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.toast.t-success { border-left: 3px solid var(--green); }
-.toast.t-warn { border-left: 3px solid var(--yellow); }
-.toast.t-err { border-left: 3px solid var(--accent); }
-.toast.t-info { border-left: 3px solid var(--blue); }
-
-/* ── SPINNER ── */
-.spinner { width: 32px; height: 32px; border: 3px solid var(--bg3); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ── VITALS MONITOR ── */
-.vital-monitor {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
-}
-
-.vital-value { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; line-height: 1; }
-.vital-unit { font-size: 0.8rem; color: var(--text3); margin-top: 4px; }
-.vital-label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; font-family: var(--font-mono); }
-
-.ecg-line {
-  height: 48px; width: 100%;
-  margin-top: 10px;
-  stroke: var(--accent);
-  overflow: hidden;
-}
-
-.divider { height: 1px; background: var(--border); margin: 20px 0; }
+.divider { height:1px; background:var(--border); margin:20px 0; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1100px) {
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: 1fr 1fr; }
+@media (max-width:1100px) {
+  .grid-4 { grid-template-columns:repeat(2,1fr); }
+  .grid-3 { grid-template-columns:1fr 1fr; }
 }
 
-@media (max-width: 900px) {
-  /* Sidebar overlay mode */
-  .sidebar {
-    transform: translateX(-260px);
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    z-index: 200;
-    box-shadow: 4px 0 30px rgba(0,0,0,0.5);
-  }
-  .sidebar.open { transform: translateX(0); }
-
-  /* Overlay backdrop */
-  .sidebar-backdrop {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 199;
-    backdrop-filter: blur(4px);
-  }
-  .sidebar-backdrop.show { display: block; }
-
-  .main { margin-left: 0; }
-  .page { padding: 16px 12px 90px; }
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-
-  .topbar {
-    padding: 0 12px;
-    height: 56px;
-    gap: 8px;
-  }
-  .topbar-title { font-size: 1rem; }
-  .topbar-sub { display: none; }
-
-  /* Hide desktop SOS in topbar, show in bottom bar instead */
-  .sos-btn { display: none; }
-  .icon-btn { width: 34px; height: 34px; font-size: 0.85rem; }
-
-  /* Bottom navigation bar */
-  .bottom-nav {
-    display: flex !important;
-  }
-
-  /* Hamburger button */
-  .hamburger-btn { display: flex !important; }
-
-  /* Stats compact */
-  .stat-value { font-size: 1.5rem; }
-  .stat-icon { width: 36px; height: 36px; font-size: 1rem; margin-bottom: 10px; }
-
-  /* Doctor cards */
-  .doctor-card { margin-bottom: 0; }
-
-  /* Modal full screen on mobile */
-  .modal-box {
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
-    border-radius: 20px 20px 0 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    max-height: 92vh;
-    padding: 24px 20px;
-    animation: slideUpModal 0.3s ease;
-  }
-  @keyframes slideUpModal {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-  .modal-overlay { align-items: flex-end; }
-
-  /* Profile header on mobile */
-  .profile-header-bg { padding: 20px; }
-  .profile-avatar-lg { width: 64px; height: 64px; font-size: 1.6rem; }
-  .profile-name-lg { font-size: 1.3rem; }
-  .profile-meta { gap: 8px; }
-
-  /* Time slots 2 col on mobile */
-  .time-slots { grid-template-columns: repeat(3, 1fr); }
-
-  /* Vitals compact */
-  .vital-value { font-size: 1.8rem; }
-
-  /* Toast bottom offset */
-  .toast-container { bottom: 80px; right: 12px; left: 12px; }
-  .toast { min-width: unset; }
-
-  /* Achievement grid */
-  .achievement-grid { grid-template-columns: repeat(3, 1fr); }
-
-  /* Section header mobile */
-  .section-header { flex-direction: column; gap: 12px; }
-
-  /* Lab rows wrap */
-  .lab-row { flex-wrap: wrap; gap: 8px; }
-  .lab-row .lab-name { flex: 100%; }
-
-  /* med card actions */
-  .med-actions-row { flex-wrap: wrap; }
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-260px); transition:transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index:200; box-shadow:4px 0 30px rgba(0,0,0,0.5); }
+  .sidebar.open { transform:translateX(0); }
+  .sidebar-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:199; backdrop-filter:blur(4px); }
+  .sidebar-backdrop.show { display:block; }
+  .main { margin-left:0; }
+  .page { padding:16px 14px 90px; }
+  .grid-2 { grid-template-columns:1fr; }
+  .grid-3 { grid-template-columns:1fr; }
+  .grid-4 { grid-template-columns:1fr 1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .topbar { padding:0 14px; height:58px; gap:10px; }
+  .topbar-title { font-size:1.05rem; }
+  .topbar-sub { display:none; }
+  .sos-btn { display:none; }
+  .icon-btn { width:36px; height:36px; font-size:0.85rem; }
+  .bottom-nav { display:flex !important; }
+  .hamburger-btn { display:flex !important; }
+  .stat-value { font-size:1.6rem; }
+  .stat-icon { width:36px; height:36px; font-size:1rem; margin-bottom:10px; }
+  .modal-box { max-width:100%; width:100%; margin:0; border-radius:20px 20px 0 0; position:fixed; bottom:0; left:0; max-height:92vh; padding:24px 20px 32px; animation:slideUpModal 0.3s ease; }
+  @keyframes slideUpModal { from{transform:translateY(100%);} to{transform:translateY(0);} }
+  .modal-overlay { align-items:flex-end; }
+  .profile-header-bg { padding:20px; }
+  .profile-avatar-lg { width:64px; height:64px; font-size:1.6rem; }
+  .profile-name-lg { font-size:1.3rem; }
+  .profile-meta { gap:8px; }
+  .vital-value { font-size:1.8rem; }
+  .toast-container { bottom:80px; right:12px; left:12px; }
+  .toast { min-width:unset; }
+  .achievement-grid { grid-template-columns:repeat(3,1fr); }
+  .section-header { flex-direction:column; gap:12px; }
+  .lab-row { flex-wrap:wrap; gap:8px; }
+  .lab-row .lab-name { flex:100%; }
+  .med-actions-row { flex-wrap:wrap; }
+  /* Assessment grid on mobile - single column */
+  #page-assessment .grid-2 { grid-template-columns:1fr; }
+  /* Alcohol options 2 cols on mobile */
+  .alcohol-options { grid-template-columns:1fr 1fr; }
+  /* Stats 2x2 on mobile */
+  .profile-stats-grid { grid-template-columns:1fr 1fr !important; }
+  /* Doctor grid single col */
+  #doctorGrid { grid-template-columns:1fr !important; }
 }
 
-@media (max-width: 400px) {
-  .grid-4 { grid-template-columns: 1fr 1fr; }
-  .achievement-grid { grid-template-columns: repeat(2, 1fr); }
-  .page { padding: 12px 10px 90px; }
+@media (max-width:480px) {
+  .grid-4 { grid-template-columns:1fr 1fr; }
+  .achievement-grid { grid-template-columns:repeat(2,1fr); }
+  .page { padding:12px 12px 88px; }
+  .section-title { font-size:1.3rem; }
+  .card { padding:18px; }
+  .topbar-title { font-size:0.95rem; }
+  .theme-toggle-btn span:last-of-type { display:none; }
+  .alcohol-options { grid-template-columns:1fr 1fr; }
+  .time-slots { grid-template-columns:repeat(2,1fr); }
+  .modal-box { padding:20px 16px 28px; }
 }
 
-/* ── BOTTOM NAVIGATION (mobile only) ── */
-.bottom-nav {
-  display: none;
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 64px;
-  background: var(--card);
-  border-top: 1px solid var(--border2);
-  z-index: 150;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 4px;
-  box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
-}
-
-.bn-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--text3);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  min-width: 44px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.bn-item i { font-size: 1.15rem; transition: all 0.2s; }
-.bn-item:active { transform: scale(0.92); }
-.bn-item.active { color: var(--accent); }
-.bn-item.active i { color: var(--accent); text-shadow: 0 0 12px var(--accent-glow); }
-
-.bn-sos {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  background: #ef4444;
-  display: flex; align-items: center; justify-content: center;
-  color: white;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 20px rgba(239,68,68,0.6);
-  animation: sosPulse 2s infinite;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
+/* ── BOTTOM NAV ── */
+.bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; height:66px; background:var(--card); border-top:1px solid var(--border2); z-index:150; align-items:center; justify-content:space-around; padding:0 4px; box-shadow:0 -8px 30px rgba(0,0,0,0.4); }
+.bn-item { display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 10px; border-radius:12px; cursor:pointer; transition:all 0.2s; color:var(--text3); font-size:0.62rem; font-weight:600; letter-spacing:0.02em; min-width:44px; -webkit-tap-highlight-color:transparent; }
+.bn-item i { font-size:1.15rem; transition:all 0.2s; }
+.bn-item:active { transform:scale(0.9); }
+.bn-item.active { color:var(--accent); }
+.bn-item.active i { color:var(--accent); text-shadow:0 0 12px var(--accent-glow); }
+.bn-sos { width:50px; height:50px; border-radius:50%; background:#ef4444; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem; box-shadow:0 4px 20px rgba(239,68,68,0.6); animation:sosPulse 2s infinite; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 
 /* ── HAMBURGER ── */
-.hamburger-btn {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 36px; height: 36px;
-  border-radius: 8px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-}
+.hamburger-btn { display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:var(--card); border:1px solid var(--border); color:var(--text); cursor:pointer; -webkit-tap-highlight-color:transparent; flex-shrink:0; }
 
-/* ── ECG Animation ── */
-.ecg-anim {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 40px; opacity: 0.15;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0,20 L40,20 L45,5 L50,35 L55,20 L200,20' stroke='%23e63950' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x;
-  background-size: 200px 40px;
-  animation: ecgScroll 3s linear infinite;
-}
-@keyframes ecgScroll { to { background-position: 200px 0; } }
+/* ── ECG ── */
+.ecg-anim { position:absolute; bottom:0; left:0; right:0; height:40px; opacity:0.15; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0,20 L40,20 L45,5 L50,35 L55,20 L200,20' stroke='%23e63950' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x; background-size:200px 40px; animation:ecgScroll 3s linear infinite; }
+@keyframes ecgScroll { to{background-position:200px 0;} }
+@keyframes wave { 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(20deg);} 75%{transform:rotate(-10deg);} }
 
-@keyframes wave {
-  0%,100% { transform: rotate(0deg); }
-  25% { transform: rotate(20deg); }
-  75% { transform: rotate(-10deg); }
-}
-
-/* ── Input type=number arrows hide ── */
 input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
 </style>
 </head>
 <body>
@@ -1043,56 +513,31 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
       <div>
         <div class="logo-text">NeuroGuard</div>
-        <div class="logo-sub">AI PRO v2.0</div>
+        <div class="logo-sub">AI PRO v2.1</div>
       </div>
     </div>
   </div>
-
   <div class="nav-section">
     <div class="nav-label">Bosh Sahifa</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')">
-      <i class="fas fa-th-large"></i> Dashboard
-    </div>
-    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')">
-      <i class="fas fa-stethoscope"></i> AI Tekshiruv
-      <span class="nav-badge">Yangi</span>
-    </div>
+    <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i> Dashboard</div>
+    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> AI Tekshiruv<span class="nav-badge">Yangi</span></div>
   </div>
-
   <div class="nav-section">
     <div class="nav-label">Salomatlik</div>
-    <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')">
-      <i class="fas fa-heart-pulse"></i> Vital Ko'rsatkichlar
-    </div>
-    <div class="nav-item" id="nav-medications" onclick="navGo('medications')">
-      <i class="fas fa-pills"></i> Dorilar
-      <span class="nav-badge" id="medBadge" style="display:none;"></span>
-    </div>
-    <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')">
-      <i class="fas fa-flask"></i> Tahlillar
-    </div>
-    <div class="nav-item" id="nav-notes" onclick="navGo('notes')">
-      <i class="fas fa-notes-medical"></i> Qaydnoma
-    </div>
+    <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i> Vital Ko'rsatkichlar</div>
+    <div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i> Dorilar<span class="nav-badge" id="medBadge" style="display:none;"></span></div>
+    <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')"><i class="fas fa-flask"></i> Tahlillar</div>
+    <div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i> Qaydnoma</div>
   </div>
-
   <div class="nav-section">
     <div class="nav-label">Diagnoz & Shifokor</div>
-    <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')">
-      <i class="fas fa-calendar-check"></i> Konsultatsiya
-    </div>
-    <div class="nav-item" id="nav-history" onclick="navGo('history')">
-      <i class="fas fa-chart-line"></i> Tarix & Diagramma
-    </div>
+    <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i> Konsultatsiya</div>
+    <div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i> Tarix & Diagramma</div>
   </div>
-
   <div class="nav-section">
     <div class="nav-label">Sozlamalar</div>
-    <div class="nav-item" id="nav-profile" onclick="navGo('profile')">
-      <i class="fas fa-user-circle"></i> Profilim
-    </div>
+    <div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i> Profilim</div>
   </div>
-
   <div class="sidebar-profile">
     <div class="profile-card" onclick="navGo('profile')">
       <div class="avatar" id="sidebarAvatar">A</div>
@@ -1109,24 +554,17 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
   <!-- TOPBAR -->
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
-      <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-      </div>
+      <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
       <div>
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
         <div class="topbar-sub" id="topbarSub">Umumiy holat ko'rinishi</div>
       </div>
     </div>
     <div class="topbar-right">
-      <button class="sos-btn" onclick="openSOS()">
-        <i class="fas fa-ambulance"></i> SOS
-      </button>
+      <button class="sos-btn" onclick="openSOS()"><i class="fas fa-ambulance"></i> SOS</button>
       <button class="theme-toggle-btn" onclick="toggleDark()" id="themeToggleBtn" title="Kunduzgi/Kechki rejim">
         <span id="themeIcon">🌙</span>
-        <div class="theme-toggle-track">
-          <div class="theme-toggle-thumb"></div>
-        </div>
-        <span id="themeLabel" style="display:none;" class="topbar-sub">Kechki</span>
+        <div class="theme-toggle-track"><div class="theme-toggle-thumb"></div></div>
       </button>
       <div class="icon-btn" onclick="navGo('notes')" title="Qaydnoma"><i class="fas fa-sticky-note"></i></div>
     </div>
@@ -1135,11 +573,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
   <!-- DASHBOARD PAGE -->
   <div class="page active" id="page-dashboard">
     <div class="section-header">
-      <div class="section-title" style="font-size:2.6rem;letter-spacing:-0.02em;line-height:1.1;">Xush kelibsiz! <span style="display:inline-block;animation:wave 1.5s infinite;">👋</span></div>
-      <div class="section-desc" style="font-size:1rem;margin-top:6px;">Sog'lig'ingizning bugungi ko'rsatkichlari</div>
+      <div class="section-title" style="font-size:2.2rem;letter-spacing:-0.02em;line-height:1.1;">Xush kelibsiz! <span style="display:inline-block;animation:wave 1.5s infinite;">👋</span></div>
+      <div class="section-desc" style="margin-top:6px;">Sog'lig'ingizning bugungi ko'rsatkichlari</div>
     </div>
-
-    <!-- Stat Row -->
     <div class="grid-4" style="margin-bottom:24px;">
       <div class="stat-card">
         <div class="stat-glow" style="background:rgba(230,57,80,0.6);"></div>
@@ -1170,10 +606,8 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         <div class="stat-change" id="dashBMIStatus"><span style="color:var(--text3);">Ma'lumot yo'q</span></div>
       </div>
     </div>
-
     <div class="grid-2" style="margin-bottom:24px;">
-      <!-- Risk gauge -->
-      <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:240px;">
         <div class="risk-gauge-wrap" id="dashGauge">
           <div style="text-align:center;color:var(--text3);padding:20px;">
             <i class="fas fa-robot" style="font-size:2rem;margin-bottom:10px;display:block;"></i>
@@ -1183,44 +617,28 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
         <div class="tag tag-red" style="margin-top:8px;" id="dashRiskTag">Tahlil yo'q</div>
       </div>
-
-      <!-- Quick chart -->
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
           <div class="section-title" style="font-size:1rem;">Qon Bosimi Tarixi</div>
-          <div class="tag tag-blue" id="chartPeriod">So'ngi tahlil</div>
+          <div class="tag tag-blue">So'ngi tahlil</div>
         </div>
-        <div class="chart-wrap">
-          <canvas id="dashBPChart"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="dashBPChart"></canvas></div>
       </div>
     </div>
-
-    <!-- Recent meds & notes -->
     <div class="grid-2">
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
           <div class="section-title" style="font-size:1rem;">Bugungi Dorilar</div>
           <button class="btn btn-ghost" onclick="navGo('medications')" style="padding:6px 12px;font-size:0.8rem;">Hammasi <i class="fas fa-arrow-right"></i></button>
         </div>
-        <div id="dashMeds">
-          <div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;">
-            <i class="fas fa-pills" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>
-            Dorilar qo'shilmagan
-          </div>
-        </div>
+        <div id="dashMeds"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;"><i class="fas fa-pills" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>Dorilar qo'shilmagan</div></div>
       </div>
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
           <div class="section-title" style="font-size:1rem;">So'ngi Qaydnomalar</div>
           <button class="btn btn-ghost" onclick="navGo('notes')" style="padding:6px 12px;font-size:0.8rem;">Hammasi <i class="fas fa-arrow-right"></i></button>
         </div>
-        <div id="dashNotes">
-          <div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;">
-            <i class="fas fa-sticky-note" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>
-            Qaydnomalar yo'q
-          </div>
-        </div>
+        <div id="dashNotes"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;"><i class="fas fa-sticky-note" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>Qaydnomalar yo'q</div></div>
       </div>
     </div>
   </div>
@@ -1231,10 +649,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-robot" style="color:var(--accent);"></i> AI Insult Xavfi Tahlili</div>
       <div class="section-desc">Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi</div>
     </div>
-
     <div class="grid-2">
       <div class="card">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
           <div class="tag tag-red">AI Tahlilchi</div>
           <div style="font-size:0.82rem;color:var(--text3);" id="formProgress">0% to'ldirildi</div>
         </div>
@@ -1252,7 +669,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
             <input class="form-input" type="number" id="diastolic" placeholder="80" min="50" max="130" oninput="updateFormProgress()">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label class="form-label"><i class="fas fa-heartbeat" style="color:var(--accent);"></i> Yurak urishi (bpm)</label>
@@ -1263,7 +679,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
             <input class="form-input" type="number" id="glucose" placeholder="5.5" step="0.1" min="2" max="30" oninput="updateFormProgress()">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label class="form-label"><i class="fas fa-ruler-vertical" style="color:var(--cyan);"></i> Bo'y (sm)</label>
@@ -1274,7 +689,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
             <input class="form-input" type="number" id="weight" placeholder="70" min="30" max="250" oninput="updateFormProgress()">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label class="form-label"><i class="fas fa-birthday-cake"></i> Yosh</label>
@@ -1285,7 +699,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
             <input class="form-input" type="number" id="cholesterol" placeholder="5.0" step="0.1" min="2" max="12" oninput="updateFormProgress()">
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label class="form-label"><i class="fas fa-smoking"></i> Chekasizmi?</label>
@@ -1307,6 +720,16 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         </div>
 
         <div class="form-group">
+          <label class="form-label"><i class="fas fa-wine-glass" style="color:var(--yellow);"></i> Alkogol iste'mol qilasizmi?</label>
+          <select class="form-select" id="alcohol">
+            <option value="none">Yo'q</option>
+            <option value="rare">Kamdan-kam (oyda 1-2 marta)</option>
+            <option value="often">Tez-tez (haftada 1-2 marta)</option>
+            <option value="daily">Har kuni</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label class="form-label"><i class="fas fa-brain" style="color:var(--accent);"></i> Shikoyatlar va xavf omillari</label>
           <div class="checkbox-list">
             <label class="checkbox-item"><input type="checkbox" id="headache"><span>Tez-tez bosh og'rig'i</span></label>
@@ -1319,11 +742,10 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
             <label class="checkbox-item"><input type="checkbox" id="familyVascular"><span>Oilada qon tomir kasalliklari bo'lgan</span></label>
             <label class="checkbox-item"><input type="checkbox" id="ownVascular"><span>O'zida qon tomir kasalliklari bor</span></label>
             <label class="checkbox-item"><input type="checkbox" id="familyHistory"><span>Oilada insult bo'lgan</span></label>
-            <label class="checkbox-item"><input type="checkbox" id="alcohol"><span>Alkogol iste'mol qiladi</span></label>
           </div>
         </div>
 
-        <button class="btn btn-accent btn-full btn-lg" onclick="analyzeRisk()">
+        <button class="btn btn-accent btn-full btn-lg" onclick="analyzeRisk()" style="margin-top:8px;">
           <i class="fas fa-brain"></i> AI Tahlil Qilsin
         </button>
       </div>
@@ -1347,15 +769,12 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent);"></i> Vital Ko'rsatkichlar</div>
       <div class="section-desc">Real vaqt monitoringi</div>
     </div>
-
     <div class="grid-4" style="margin-bottom:24px;">
       <div class="vital-monitor">
         <div class="vital-label"><i class="fas fa-heart"></i> QONBOSIM</div>
         <div class="vital-value" style="color:var(--accent);" id="vBP">—/—</div>
         <div class="vital-unit">mmHg</div>
-        <svg class="ecg-line" viewBox="0 0 300 48">
-          <path d="M0,24 L60,24 L70,10 L80,38 L90,24 L300,24" stroke="var(--accent)" stroke-width="2" fill="none"/>
-        </svg>
+        <svg class="ecg-line" viewBox="0 0 300 48"><path d="M0,24 L60,24 L70,10 L80,38 L90,24 L300,24" stroke="var(--accent)" stroke-width="2" fill="none"/></svg>
         <div class="ecg-anim"></div>
       </div>
       <div class="vital-monitor">
@@ -1374,19 +793,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         <div class="vital-unit">kg/m²</div>
       </div>
     </div>
-
     <div class="grid-2">
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Qon Bosimi Dinamikasi</div>
-        <div class="chart-wrap">
-          <canvas id="vitBPChart"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="vitBPChart"></canvas></div>
       </div>
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Xavf Ko'rsatkichi Dynamikasi</div>
-        <div class="chart-wrap">
-          <canvas id="vitRiskChart"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div>
       </div>
     </div>
   </div>
@@ -1409,26 +823,17 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-flask" style="color:var(--blue);"></i> Laboratoriya Tahlillari</div>
       <div class="section-desc">Qon va boshqa tahlillar natijalari</div>
     </div>
-
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
           <div class="section-title" style="font-size:1rem;">Oxirgi Natijalar</div>
           <button class="btn btn-blue" onclick="openAddLabModal()" style="padding:8px 14px;font-size:0.82rem;"><i class="fas fa-plus"></i> Yangi natija</button>
         </div>
-        <div id="labResultsList">
-          <div style="text-align:center;color:var(--text3);padding:30px;font-size:0.85rem;">
-            <i class="fas fa-flask" style="font-size:2rem;margin-bottom:10px;display:block;"></i>
-            Tahlil natijalari yo'q
-          </div>
-        </div>
+        <div id="labResultsList"><div style="text-align:center;color:var(--text3);padding:30px;font-size:0.85rem;"><i class="fas fa-flask" style="font-size:2rem;margin-bottom:10px;display:block;"></i>Tahlil natijalari yo'q</div></div>
       </div>
-
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Tahlillar Grafigi</div>
-        <div class="chart-wrap">
-          <canvas id="labChart"></canvas>
-        </div>
+        <div class="chart-wrap"><canvas id="labChart"></canvas></div>
       </div>
     </div>
   </div>
@@ -1442,12 +847,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       </div>
       <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Qaydnoma Qo'shish</button>
     </div>
-    <div id="notesList">
-      <div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;">
-        <i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>
-        Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!
-      </div>
-    </div>
+    <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!</div></div>
   </div>
 
   <!-- APPOINTMENTS PAGE -->
@@ -1456,14 +856,12 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green);"></i> Shifokor Konsultatsiyasi</div>
       <div class="section-desc">Mutaxassis shifokorlardan vaqt oling</div>
     </div>
-
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
       <button class="btn btn-ghost" onclick="filterDocs('all')" id="df-all">Barchasi</button>
       <button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button>
       <button class="btn btn-ghost" onclick="filterDocs('kardiolog')" id="df-kardiolog">Kardiolog</button>
       <button class="btn btn-ghost" onclick="filterDocs('endokrinolog')" id="df-endokrinolog">Endokrinolog</button>
     </div>
-
     <div class="grid-3" id="doctorGrid"></div>
   </div>
 
@@ -1473,34 +871,19 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue);"></i> Tarix & Diagrammalar</div>
       <div class="section-desc">Barcha tekshiruv natijalari va trendlar</div>
     </div>
-
     <div class="card" style="margin-bottom:24px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
         <div class="section-title" style="font-size:1rem;">Xavf Ko'rsatkichi Tarixi</div>
         <button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.8rem;"><i class="fas fa-trash"></i> Tozalash</button>
       </div>
-      <div class="chart-wrap" style="height:260px;">
-        <canvas id="historyRiskChart"></canvas>
-      </div>
+      <div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div>
     </div>
-
     <div class="card">
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div>
       <div style="overflow-x:auto;">
         <table class="history-table" id="historyTable">
-          <thead>
-            <tr>
-              <th>Sana</th>
-              <th>Qon Bosimi</th>
-              <th>Qand</th>
-              <th>BMI</th>
-              <th>Xavf</th>
-              <th>Daraja</th>
-            </tr>
-          </thead>
-          <tbody id="historyBody">
-            <tr><td colspan="6" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr>
-          </tbody>
+          <thead><tr><th>Sana</th><th>Qon Bosimi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
+          <tbody id="historyBody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -1511,10 +894,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
     <div class="section-header">
       <div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent);"></i> Mening Profilim</div>
     </div>
-
     <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
       <div class="profile-avatar-lg" id="profileAvatar">A</div>
-      <div class="profile-info">
+      <div class="profile-info" style="flex:1;min-width:200px;">
         <div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div>
         <div class="tag tag-red" id="profileRiskTag" style="margin-top:8px;">Tahlil yo'q</div>
         <div class="profile-meta" id="profileMeta">
@@ -1523,26 +905,21 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
           <div class="profile-meta-item"><i class="fas fa-star" style="color:var(--yellow);"></i><span id="pm-points">0 ball</span></div>
         </div>
       </div>
-      <button class="btn btn-ghost" style="margin-left:auto;" onclick="openEditProfileModal()"><i class="fas fa-edit"></i> Tahrirlash</button>
+      <button class="btn btn-ghost" onclick="openEditProfileModal()"><i class="fas fa-edit"></i> Tahrirlash</button>
     </div>
-
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-user"></i> Shaxsiy Ma'lumotlar</div>
-        <div id="profileDetails">
-          <div style="color:var(--text3);font-size:0.85rem;">Ma'lumotlar to'ldirilmagan. Profilni tahrirlang.</div>
-        </div>
+        <div id="profileDetails"><div style="color:var(--text3);font-size:0.85rem;">Ma'lumotlar to'ldirilmagan. Profilni tahrirlang.</div></div>
       </div>
-
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i> Yutuqlar</div>
         <div class="achievement-grid" id="achievementGrid"></div>
       </div>
     </div>
-
     <div class="card">
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-bar"></i> Statistika</div>
-      <div class="grid-4">
+      <div class="grid-4 profile-stats-grid">
         <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
           <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div>
           <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Tahlil soni</div>
@@ -1564,33 +941,19 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
   </div>
 </div>
 
-<!-- SIDEBAR BACKDROP (mobile) -->
+<!-- SIDEBAR BACKDROP -->
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
-<!-- BOTTOM NAVIGATION (mobile) -->
+<!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottomNav">
-  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')">
-    <i class="fas fa-th-large"></i>
-    <span>Bosh</span>
-  </div>
-  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')">
-    <i class="fas fa-stethoscope"></i>
-    <span>Tekshiruv</span>
-  </div>
-  <div class="bn-sos" onclick="openSOS()">
-    <i class="fas fa-ambulance"></i>
-  </div>
-  <div class="bn-item" id="bn-medications" onclick="navGo('medications')">
-    <i class="fas fa-pills"></i>
-    <span>Dorilar</span>
-  </div>
-  <div class="bn-item" id="bn-more" onclick="toggleSidebar()">
-    <i class="fas fa-bars"></i>
-    <span>Menu</span>
-  </div>
+  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span>Bosh</span></div>
+  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span>Tekshiruv</span></div>
+  <div class="bn-sos" onclick="openSOS()"><i class="fas fa-ambulance"></i></div>
+  <div class="bn-item" id="bn-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span>Dorilar</span></div>
+  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span>Menu</span></div>
 </div>
 
-<!-- === MODALS === -->
+<!-- MODALS -->
 
 <!-- SOS Modal -->
 <div class="modal-overlay" id="sosModal">
@@ -1601,10 +964,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
       <div class="modal-title" style="color:#ef4444;">FAVQULODDA YORDAM</div>
       <div style="font-size:0.9rem;color:var(--text2);">FAST testini o'tkazing</div>
     </div>
-
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
       <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
-        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"> 
+        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;">
         <div><strong style="color:#ef4444;">F</strong> — Yuz bir tomonlama og'ayapti</div>
       </label>
       <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
@@ -1620,10 +982,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
         <div><strong style="color:#ef4444;">T</strong> — VAQT muhim! Zudlik bilan harakat</div>
       </label>
     </div>
-
-    <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'">
-      <i class="fas fa-phone"></i> 103 — Tez Yordam Chaqirish
-    </button>
+    <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'"><i class="fas fa-phone"></i> 103 — Tez Yordam Chaqirish</button>
     <button class="btn btn-ghost btn-full" onclick="closeSOS()">Yopish</button>
   </div>
 </div>
@@ -1634,37 +993,15 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
     <button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-pills" style="color:var(--accent);"></i> Dori Qo'shish</div>
     <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">Yangi dori va eslatma qo'shing</div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Dori nomi *</label>
-        <input class="form-input" id="mName" placeholder="Masalan: Aspirin">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Dozasi *</label>
-        <input class="form-input" id="mDose" placeholder="100mg, 1 tabletka">
-      </div>
+      <div class="form-group"><label class="form-label">Dori nomi *</label><input class="form-input" id="mName" placeholder="Masalan: Aspirin"></div>
+      <div class="form-group"><label class="form-label">Dozasi *</label><input class="form-input" id="mDose" placeholder="100mg, 1 tabletka"></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Vaqt *</label>
-        <input class="form-input" type="time" id="mTime">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Chastota</label>
-        <select class="form-select" id="mFreq">
-          <option>Kuniga 1 marta</option>
-          <option>Kuniga 2 marta</option>
-          <option>Kuniga 3 marta</option>
-          <option>Ovqatdan oldin</option>
-          <option>Ovqatdan keyin</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Vaqt *</label><input class="form-input" type="time" id="mTime"></div>
+      <div class="form-group"><label class="form-label">Chastota</label><select class="form-select" id="mFreq"><option>Kuniga 1 marta</option><option>Kuniga 2 marta</option><option>Kuniga 3 marta</option><option>Ovqatdan oldin</option><option>Ovqatdan keyin</option></select></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Izoh (ixtiyoriy)</label>
-      <input class="form-input" id="mNotes" placeholder="Qo'shimcha eslatma...">
-    </div>
+    <div class="form-group"><label class="form-label">Izoh (ixtiyoriy)</label><input class="form-input" id="mNotes" placeholder="Qo'shimcha eslatma..."></div>
     <div style="display:flex;gap:10px;">
       <button class="btn btn-accent btn-full" onclick="saveMedication()"><i class="fas fa-save"></i> Saqlash</button>
       <button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')">Bekor</button>
@@ -1678,25 +1015,9 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
     <button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> Qaydnoma Qo'shish</div>
     <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">O'z-o'zingiz haqingizda eslatma yozing</div>
-
-    <div class="form-group">
-      <label class="form-label">Sarlavha</label>
-      <input class="form-input" id="noteTitle" placeholder="Masalan: Bugun bosh og'rig'i bo'ldi">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Matn *</label>
-      <textarea class="form-input" id="noteContent" rows="4" placeholder="Batafsil yozing..." style="resize:vertical;"></textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Kategoriya</label>
-      <select class="form-select" id="noteCategory">
-        <option value="general">Umumiy</option>
-        <option value="symptom">Belgi</option>
-        <option value="medication">Dori</option>
-        <option value="appointment">Shifokor</option>
-        <option value="exercise">Mashq</option>
-      </select>
-    </div>
+    <div class="form-group"><label class="form-label">Sarlavha</label><input class="form-input" id="noteTitle" placeholder="Masalan: Bugun bosh og'rig'i bo'ldi"></div>
+    <div class="form-group"><label class="form-label">Matn *</label><textarea class="form-input" id="noteContent" rows="4" placeholder="Batafsil yozing..." style="resize:vertical;"></textarea></div>
+    <div class="form-group"><label class="form-label">Kategoriya</label><select class="form-select" id="noteCategory"><option value="general">Umumiy</option><option value="symptom">Belgi</option><option value="medication">Dori</option><option value="appointment">Shifokor</option><option value="exercise">Mashq</option></select></div>
     <div style="display:flex;gap:10px;">
       <button class="btn btn-accent btn-full" onclick="saveNote()"><i class="fas fa-save"></i> Saqlash</button>
       <button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')">Bekor</button>
@@ -1709,38 +1030,13 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addLabModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-flask" style="color:var(--blue);"></i> Lab Natija Qo'shish</div>
-
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Tahlil turi</label>
-        <select class="form-select" id="labType">
-          <option>Umumiy qon tahlili</option>
-          <option>Qand (glyukoza)</option>
-          <option>Xolesterin</option>
-          <option>Kreatinin</option>
-          <option>Gematokrit</option>
-          <option>Gemoglobin</option>
-          <option>Boshqa</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Qiymat</label>
-        <input class="form-input" id="labValue" placeholder="5.5" type="number" step="0.01">
-      </div>
+      <div class="form-group"><label class="form-label">Tahlil turi</label><select class="form-select" id="labType"><option>Umumiy qon tahlili</option><option>Qand (glyukoza)</option><option>Xolesterin</option><option>Kreatinin</option><option>Gematokrit</option><option>Gemoglobin</option><option>Boshqa</option></select></div>
+      <div class="form-group"><label class="form-label">Qiymat</label><input class="form-input" id="labValue" placeholder="5.5" type="number" step="0.01"></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Birlik</label>
-        <input class="form-input" id="labUnit" placeholder="mmol/L, g/dL...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Holat</label>
-        <select class="form-select" id="labStatus">
-          <option value="normal">Normal</option>
-          <option value="abnormal">Og'ish bor</option>
-          <option value="critical">Kritik</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Birlik</label><input class="form-input" id="labUnit" placeholder="mmol/L, g/dL..."></div>
+      <div class="form-group"><label class="form-label">Holat</label><select class="form-select" id="labStatus"><option value="normal">Normal</option><option value="abnormal">Og'ish bor</option><option value="critical">Kritik</option></select></div>
     </div>
     <button class="btn btn-blue btn-full" onclick="saveLabResult()"><i class="fas fa-save"></i> Saqlash</button>
   </div>
@@ -1752,47 +1048,18 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
     <button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent);"></i> Profilni Tahrirlash</div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Ism</label>
-        <input class="form-input" id="pName" placeholder="Ismingiz">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Familiya</label>
-        <input class="form-input" id="pSurname" placeholder="Familiyangiz">
-      </div>
+      <div class="form-group"><label class="form-label">Ism</label><input class="form-input" id="pName" placeholder="Ismingiz"></div>
+      <div class="form-group"><label class="form-label">Familiya</label><input class="form-input" id="pSurname" placeholder="Familiyangiz"></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Yosh</label>
-        <input class="form-input" id="pAge" type="number" placeholder="45">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Jins</label>
-        <select class="form-select" id="pGender">
-          <option value="male">Erkak</option>
-          <option value="female">Ayol</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Yosh</label><input class="form-input" id="pAge" type="number" placeholder="45"></div>
+      <div class="form-group"><label class="form-label">Jins</label><select class="form-select" id="pGender"><option value="male">Erkak</option><option value="female">Ayol</option></select></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Telefon</label>
-        <input class="form-input" id="pPhone" placeholder="+998 90 000 00 00">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Qon guruhi</label>
-        <select class="form-select" id="pBloodType">
-          <option>I+</option><option>I-</option>
-          <option>II+</option><option>II-</option>
-          <option>III+</option><option>III-</option>
-          <option>IV+</option><option>IV-</option>
-        </select>
-      </div>
+      <div class="form-group"><label class="form-label">Telefon</label><input class="form-input" id="pPhone" placeholder="+998 90 000 00 00"></div>
+      <div class="form-group"><label class="form-label">Qon guruhi</label><select class="form-select" id="pBloodType"><option>I+</option><option>I-</option><option>II+</option><option>II-</option><option>III+</option><option>III-</option><option>IV+</option><option>IV-</option></select></div>
     </div>
-    <div class="form-group">
-      <label class="form-label">Kasalliklar (surunkali)</label>
-      <input class="form-input" id="pConditions" placeholder="Diabet, gipertenziya...">
-    </div>
+    <div class="form-group"><label class="form-label">Kasalliklar (surunkali)</label><input class="form-input" id="pConditions" placeholder="Diabet, gipertenziya..."></div>
     <button class="btn btn-accent btn-full" onclick="saveProfile()"><i class="fas fa-save"></i> Saqlash</button>
   </div>
 </div>
@@ -1805,11 +1072,8 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin
     <div style="font-size:0.85rem;color:var(--accent);margin-bottom:16px;" id="bookDocSpec"></div>
     <div style="font-size:0.9rem;color:var(--text2);margin-bottom:16px;">Vaqt tanlang:</div>
     <div class="time-slots" id="bookSlots"></div>
-    <div class="form-group" style="margin-top:16px;">
-      <label class="form-label">Muammo/Shikoyat</label>
-      <textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea>
-    </div>
-    <button class="btn btn-green btn-full" style="background:var(--green);color:white;border:none;" onclick="confirmBooking()"><i class="fas fa-calendar-check"></i> Band Qilish</button>
+    <div class="form-group" style="margin-top:16px;"><label class="form-label">Muammo/Shikoyat</label><textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea></div>
+    <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;margin-top:8px;" onclick="confirmBooking()"><i class="fas fa-calendar-check"></i> Band Qilish</button>
   </div>
 </div>
 
@@ -1825,17 +1089,17 @@ const state = {
   notes: JSON.parse(localStorage.getItem('ng_notes') || '[]'),
   profile: JSON.parse(localStorage.getItem('ng_profile') || '{}'),
   points: parseInt(localStorage.getItem('ng_points') || '0'),
-  currentPage: 'dashboard'
+  currentPage: 'dashboard',
 };
 
 function save(key) {
-  const map = {history:'ng_history', medications:'ng_medications', labResults:'ng_lab', notes:'ng_notes', profile:'ng_profile', points:'ng_points'};
+  const map = {history:'ng_history',medications:'ng_medications',labResults:'ng_lab',notes:'ng_notes',profile:'ng_profile',points:'ng_points'};
   localStorage.setItem(map[key], JSON.stringify(state[key]));
 }
 
 /* ====================== TOAST ====================== */
 function toast(msg, type='success') {
-  const icons = {success:'✅', warn:'⚠️', err:'❌', info:'ℹ️'};
+  const icons = {success:'✅',warn:'⚠️',err:'❌',info:'ℹ️'};
   const el = document.createElement('div');
   el.className = `toast t-${type}`;
   el.innerHTML = `<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
@@ -1843,31 +1107,28 @@ function toast(msg, type='success') {
   setTimeout(() => el.remove(), 4000);
 }
 
+/* ====================== ALCOHOL SELECTION ====================== */
+
+
 /* ====================== NAVIGATION ====================== */
 const pages = {
-  dashboard:    { title: 'Dashboard',              sub: 'Umumiy holat ko\'rinishi' },
-  assessment:   { title: 'AI Tekshiruv',           sub: 'Insult xavfini aniqlash' },
-  vitals:       { title: 'Vital Ko\'rsatkichlar',  sub: 'Real vaqt monitoringi' },
-  medications:  { title: 'Dorilar',                sub: 'Kundalik dori jadvalingiz' },
-  labTests:     { title: 'Laboratoriya',           sub: 'Tahlil natijalari' },
-  notes:        { title: 'Qaydnomalar',             sub: 'Tibbiy qaydnomalar' },
-  appointments: { title: 'Konsultatsiya',          sub: 'Shifokor bilan uchrashish' },
-  history:      { title: 'Tarix & Diagrammalar',   sub: 'Barcha tekshiruvlar' },
-  profile:      { title: 'Mening Profilim',        sub: 'Shaxsiy ma\'lumotlar' }
+  dashboard:    {title:'Dashboard',             sub:"Umumiy holat ko'rinishi"},
+  assessment:   {title:'AI Tekshiruv',          sub:'Insult xavfini aniqlash'},
+  vitals:       {title:"Vital Ko'rsatkichlar",  sub:'Real vaqt monitoringi'},
+  medications:  {title:'Dorilar',               sub:'Kundalik dori jadvalingiz'},
+  labTests:     {title:'Laboratoriya',          sub:'Tahlil natijalari'},
+  notes:        {title:'Qaydnomalar',           sub:'Tibbiy qaydnomalar'},
+  appointments: {title:'Konsultatsiya',         sub:'Shifokor bilan uchrashish'},
+  history:      {title:'Tarix & Diagrammalar',  sub:'Barcha tekshiruvlar'},
+  profile:      {title:'Mening Profilim',       sub:"Shaxsiy ma'lumotlar"}
 };
 
-/* ====================== SIDEBAR MOBILE ====================== */
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const bd = document.getElementById('sidebarBackdrop');
   const isOpen = sb.classList.contains('open');
-  if (isOpen) {
-    sb.classList.remove('open');
-    bd.classList.remove('show');
-  } else {
-    sb.classList.add('open');
-    bd.classList.add('show');
-  }
+  if (isOpen) { sb.classList.remove('open'); bd.classList.remove('show'); }
+  else { sb.classList.add('open'); bd.classList.add('show'); }
 }
 
 function closeSidebar() {
@@ -1875,40 +1136,27 @@ function closeSidebar() {
   document.getElementById('sidebarBackdrop').classList.remove('show');
 }
 
-/* navGo — sidebar tugmalari shu funksiyani chaqiradi */
 function navGo(id) {
   closeSidebar();
   showPage(id);
-  // sync bottom nav
   document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
   const bnEl = document.getElementById('bn-' + id);
   if (bnEl) bnEl.classList.add('active');
 }
 
 function showPage(id) {
-  /* barcha sahifalarni yashir */
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  /* barcha nav-item active klassini olib tashla */
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-  /* tegishli sahifani ko'rsat */
   const pageEl = document.getElementById('page-' + id);
   if (pageEl) pageEl.classList.add('active');
-
-  /* tegishli nav itemni active qil */
   const navEl = document.getElementById('nav-' + id);
   if (navEl) navEl.classList.add('active');
-
-  /* topbar matnni yangilar */
   const p = pages[id];
   if (p) {
     document.getElementById('topbarTitle').textContent = p.title;
-    document.getElementById('topbarSub').textContent   = p.sub;
+    document.getElementById('topbarSub').textContent = p.sub;
   }
-
   state.currentPage = id;
-
-  /* har bir sahifaning render funksiyasi */
   if (id === 'vitals')       renderVitals();
   if (id === 'medications')  renderMedications();
   if (id === 'labTests')     renderLabResults();
@@ -1917,43 +1165,30 @@ function showPage(id) {
   if (id === 'history')      renderHistory();
   if (id === 'profile')      renderProfile();
   if (id === 'dashboard')    renderDashboard();
-
   window.scrollTo(0, 0);
 }
 
-/* ====================== DARK / LIGHT MODE ====================== */
+/* ====================== THEME ====================== */
 function applyTheme(mode) {
-  const body = document.body;
   const icon = document.getElementById('themeIcon');
-
-  if (mode === 'light') {
-    body.classList.add('light-mode');
-    if (icon) icon.textContent = '☀️';
-  } else {
-    body.classList.remove('light-mode');
-    if (icon) icon.textContent = '🌙';
-  }
+  if (mode === 'light') { document.body.classList.add('light-mode'); if (icon) icon.textContent = '☀️'; }
+  else { document.body.classList.remove('light-mode'); if (icon) icon.textContent = '🌙'; }
   localStorage.setItem('ng_theme', mode);
 }
 
 function toggleDark() {
   const isLight = document.body.classList.contains('light-mode');
-  if (isLight) {
-    applyTheme('dark');
-    toast('🌙 Kechki rejim yoqildi', 'info');
-  } else {
-    applyTheme('light');
-    toast('☀️ Kunduzgi rejim yoqildi', 'info');
-  }
+  if (isLight) { applyTheme('dark'); toast('🌙 Kechki rejim yoqildi', 'info'); }
+  else { applyTheme('light'); toast('☀️ Kunduzgi rejim yoqildi', 'info'); }
 }
 
-/* ====================== PROGRESS BAR ====================== */
+/* ====================== FORM PROGRESS ====================== */
 function updateFormProgress() {
   const fields = ['systolic','diastolic','heartrate','glucose','height','weight','age'];
   const filled = fields.filter(f => document.getElementById(f)?.value).length;
-  const pct = Math.round((filled/fields.length)*100);
-  document.getElementById('formProgressBar').style.width = pct+'%';
-  document.getElementById('formProgress').textContent = pct+'% to\'ldirildi';
+  const pct = Math.round((filled / fields.length) * 100);
+  document.getElementById('formProgressBar').style.width = pct + '%';
+  document.getElementById('formProgress').textContent = pct + "% to'ldirildi";
 }
 
 /* ====================== AI ANALYSIS ====================== */
@@ -1964,9 +1199,10 @@ function analyzeRisk() {
   const chol = v('cholesterol') || 5;
   const smoking = document.getElementById('smoking').value;
   const exercise = document.getElementById('exercise').value;
+  const alcohol = document.getElementById('alcohol').value;
 
   if (!s || !d || !hr || !gl || !h || !w || !age) {
-    toast('Barcha majburiy maydonlarni to\'ldiring!', 'err');
+    toast("Barcha majburiy maydonlarni to'ldiring!", 'err');
     return;
   }
 
@@ -1974,33 +1210,33 @@ function analyzeRisk() {
   panel.innerHTML = `<div class="card" style="min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;"><div class="spinner"></div><div style="color:var(--text2);font-size:0.9rem;">AI tahlil qilmoqda...</div></div>`;
 
   setTimeout(() => {
-    const bmi = w / ((h/100)**2);
+    const bmi = w / ((h / 100) ** 2);
     let score = 0;
     const factors = [];
 
     // Blood pressure
-    if (s > 140 || d > 90) { score += 25; factors.push({n:'Qon Bosimi', s:'bad', t: s+'/'+d+' — Yuqori'}); }
-    else if (s > 130 || d > 85) { score += 12; factors.push({n:'Qon Bosimi', s:'warn', t: s+'/'+d+' — Chegaraviy'}); }
-    else { factors.push({n:'Qon Bosimi', s:'good', t: s+'/'+d+' — Normal'}); }
+    if (s > 140 || d > 90) { score += 25; factors.push({n:'Qon Bosimi', s:'bad', t:s+'/'+d+' — Yuqori'}); }
+    else if (s > 130 || d > 85) { score += 12; factors.push({n:'Qon Bosimi', s:'warn', t:s+'/'+d+' — Chegaraviy'}); }
+    else { factors.push({n:'Qon Bosimi', s:'good', t:s+'/'+d+' — Normal'}); }
 
     // Heart rate
-    if (hr > 100 || hr < 55) { score += 12; factors.push({n:'Yurak Urishi', s:'warn', t: hr+' bpm — Beqaror'}); }
-    else { factors.push({n:'Yurak Urishi', s:'good', t: hr+' bpm — Normal'}); }
+    if (hr > 100 || hr < 55) { score += 12; factors.push({n:'Yurak Urishi', s:'warn', t:hr+' bpm — Beqaror'}); }
+    else { factors.push({n:'Yurak Urishi', s:'good', t:hr+' bpm — Normal'}); }
 
     // Glucose
-    if (gl > 7.0) { score += 22; factors.push({n:'Qand', s:'bad', t: gl+' mmol/L — Yuqori (Diabet xavfi)'}); }
-    else if (gl > 6.1) { score += 10; factors.push({n:'Qand', s:'warn', t: gl+' mmol/L — Prediabetik'}); }
-    else { factors.push({n:'Qand', s:'good', t: gl+' mmol/L — Normal'}); }
+    if (gl > 7.0) { score += 22; factors.push({n:'Qand', s:'bad', t:gl+' mmol/L — Yuqori (Diabet xavfi)'}); }
+    else if (gl > 6.1) { score += 10; factors.push({n:'Qand', s:'warn', t:gl+' mmol/L — Prediabetik'}); }
+    else { factors.push({n:'Qand', s:'good', t:gl+' mmol/L — Normal'}); }
 
     // Cholesterol
-    if (chol > 6.2) { score += 12; factors.push({n:'Xolesterin', s:'bad', t: chol+' — Yuqori'}); }
-    else if (chol > 5.2) { score += 6; factors.push({n:'Xolesterin', s:'warn', t: chol+' — Chegaraviy'}); }
-    else { factors.push({n:'Xolesterin', s:'good', t: chol+' — Normal'}); }
+    if (chol > 6.2) { score += 12; factors.push({n:'Xolesterin', s:'bad', t:chol+' — Yuqori'}); }
+    else if (chol > 5.2) { score += 6; factors.push({n:'Xolesterin', s:'warn', t:chol+' — Chegaraviy'}); }
+    else { factors.push({n:'Xolesterin', s:'good', t:chol+' — Normal'}); }
 
     // BMI
-    if (bmi > 30) { score += 15; factors.push({n:'BMI', s:'bad', t: bmi.toFixed(1)+' — Semirib ketgan'}); }
-    else if (bmi > 25) { score += 8; factors.push({n:'BMI', s:'warn', t: bmi.toFixed(1)+' — Ortiqcha vazn'}); }
-    else { factors.push({n:'BMI', s:'good', t: bmi.toFixed(1)+' — Normal'}); }
+    if (bmi > 30) { score += 15; factors.push({n:'BMI', s:'bad', t:bmi.toFixed(1)+' — Semirib ketgan'}); }
+    else if (bmi > 25) { score += 8; factors.push({n:'BMI', s:'warn', t:bmi.toFixed(1)+' — Ortiqcha vazn'}); }
+    else { factors.push({n:'BMI', s:'good', t:bmi.toFixed(1)+' — Normal'}); }
 
     // Age
     if (age > 65) score += 15;
@@ -2008,48 +1244,48 @@ function analyzeRisk() {
     else if (age > 45) score += 5;
 
     // Smoking
-    if (smoking === 'yes') { score += 20; factors.push({n:'Chekish', s:'bad', t:'Ha — Katta xavf omili'}); }
+    if (smoking === 'yes') { score += 20; factors.push({n:'Chekish', s:'bad', t:"Ha — Katta xavf omili"}); }
     else if (smoking === 'ex') { score += 5; factors.push({n:'Chekish', s:'warn', t:'Tark etgan'}); }
-    else { factors.push({n:'Chekish', s:'good', t:'Yo\'q'}); }
+    else { factors.push({n:'Chekish', s:'good', t:"Yo'q"}); }
 
     // Exercise
-    const exMap = { none:12, light:6, moderate:2, active:0 };
+    const exMap = {none:12, light:6, moderate:2, active:0};
     score += exMap[exercise];
 
-    // Neurological symptoms & risk factors
-    const neuro = ['headache','dizziness','numbness','speech','bloodThick','movement','rheumatism','familyVascular','ownVascular','familyHistory','alcohol'];
-    const neuroCount = neuro.filter(n => document.getElementById(n)?.checked).length;
+    // ── ALCOHOL (NEW weighted scoring) ──
+    const alcoholMap = {none:0, rare:5, often:12, daily:18};
+    const alcoholLabelMap = {
+      none: {s:'good', t:"Yo'q — Xavfsiz"},
+      rare: {s:'warn', t:'Kamdan-kam — Past xavf'},
+      often: {s:'bad', t:'Tez-tez — O\'rtacha xavf'},
+      daily: {s:'bad', t:'Har kuni — Yuqori xavf!'}
+    };
+    score += alcoholMap[alcohol] || 0;
+    factors.push({n:'Alkogol', ...alcoholLabelMap[alcohol] || alcoholLabelMap['none']});
 
-    // Weighted scoring for new factors
-    if (document.getElementById('bloodThick')?.checked)    score += 8;
-    if (document.getElementById('movement')?.checked)      score += 7;
-    if (document.getElementById('rheumatism')?.checked)    score += 5;
-    if (document.getElementById('familyVascular')?.checked) score += 8;
-    if (document.getElementById('ownVascular')?.checked)   score += 12;
-    if (document.getElementById('alcohol')?.checked)       score += 10;
-    if (document.getElementById('familyHistory')?.checked) score += 7;
-    if (document.getElementById('headache')?.checked)      score += 5;
-    if (document.getElementById('dizziness')?.checked)     score += 5;
-    if (document.getElementById('numbness')?.checked)      score += 6;
-    if (document.getElementById('speech')?.checked)        score += 8;
-
-    if (neuroCount > 0) factors.push({n:'Shikoyatlar va xavf omillari', s: neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t: neuroCount+' ta belgi/omil aniqlandi'});
+    // Neurological checkboxes
+    const neuroChecks = ['headache','dizziness','numbness','speech','bloodThick','movement','rheumatism','familyVascular','ownVascular','familyHistory'];
+    const scoreWeights = {bloodThick:8,movement:7,rheumatism:5,familyVascular:8,ownVascular:12,familyHistory:7,headache:5,dizziness:5,numbness:6,speech:8};
+    const neuroCount = neuroChecks.filter(n => document.getElementById(n)?.checked).length;
+    neuroChecks.forEach(n => { if (document.getElementById(n)?.checked) score += scoreWeights[n] || 0; });
+    if (neuroCount > 0) factors.push({n:'Shikoyatlar va xavf omillari', s: neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t:neuroCount+' ta belgi/omil aniqlandi'});
 
     score = Math.min(Math.round(score), 100);
 
     let level, lvlClass, lvlColor, lvlDesc, icon;
-    if (score < 25) { level='Past Xavf'; lvlClass='tag-green'; lvlColor='var(--green)'; icon='✅'; lvlDesc='Sog\'lom hayot tarzi davom ettirilsin!'; }
-    else if (score < 50) { level='O\'rtacha Xavf'; lvlClass='tag-yellow'; lvlColor='var(--yellow)'; icon='⚠️'; lvlDesc='Ehtiyot bo\'ling — ba\'zi omillar tuzatish talab qiladi.'; }
-    else if (score < 75) { level='Yuqori Xavf'; lvlClass='tag-red'; lvlColor='var(--accent)'; icon='🚨'; lvlDesc='Shifokor bilan maslahatlashing!'; }
-    else { level='Juda Yuqori Xavf'; lvlClass='tag-red'; lvlColor='#ef4444'; icon='🆘'; lvlDesc='Zudlik bilan shifokorga murojaat qiling!'; }
+    if (score < 25) { level="Past Xavf"; lvlClass='tag-green'; lvlColor='var(--green)'; icon='✅'; lvlDesc="Sog'lik holati yaxshi! Sog'lom hayot tarzi davom ettirilsin."; }
+    else if (score < 50) { level="O'rtacha Xavf"; lvlClass='tag-yellow'; lvlColor='var(--yellow)'; icon='⚠️'; lvlDesc="Ehtiyot bo'ling — ba'zi omillar tuzatish talab qiladi."; }
+    else if (score < 75) { level="Yuqori Xavf"; lvlClass='tag-red'; lvlColor='var(--accent)'; icon='🚨'; lvlDesc='Shifokor bilan maslahatlashing!'; }
+    else { level="Juda Yuqori Xavf"; lvlClass='tag-red'; lvlColor='#ef4444'; icon='🆘'; lvlDesc='Zudlik bilan shifokorga murojaat qiling!'; }
 
     const recs = [];
-    if (s > 130 || d > 85) recs.push('Qon bosimini kundalik o\'lchang');
-    if (gl > 6.1) recs.push('Qandli mahsulotlarni cheklang');
+    if (s > 130 || d > 85) recs.push("Qon bosimini kundalik o'lchang");
+    if (gl > 6.1) recs.push("Qandli mahsulotlarni cheklang");
     if (bmi > 25) recs.push('Mutanosib ovqatlanish va sport');
-    if (smoking === 'yes') recs.push('Chekishni tark eting — eng katta qadam');
+    if (smoking === 'yes') recs.push("Chekishni tark eting — eng katta qadam");
+    if (alcohol === 'often' || alcohol === 'daily') recs.push("Alkogol iste'molini kamaytiring yoki to'xtatang");
     if (exercise === 'none' || exercise === 'light') recs.push('Haftada 150 daqiqa aerobik mashq');
-    if (chol > 5.2) recs.push('Yog\'li ovqatlarni kamaytiring');
+    if (chol > 5.2) recs.push("Yog'li ovqatlarni kamaytiring");
     recs.push('Muntazam tibbiy tekshiruv o\'ting');
 
     const factorsHTML = factors.map(f => `
@@ -2069,12 +1305,9 @@ function analyzeRisk() {
         <div>
           <div class="alert-title">Shifokorga Murojaat Qiling!</div>
           <div class="alert-desc">Xavf darajangiz ${score}% — mutaxassis konsultatsiyasi zarur.</div>
-          <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;">
-            <i class="fas fa-calendar-plus"></i> Vaqt Band Qilish
-          </button>
+          <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
         </div>
-      </div>
-    ` : '';
+      </div>` : '';
 
     panel.innerHTML = `
       <div class="card" style="height:100%;">
@@ -2103,7 +1336,6 @@ function analyzeRisk() {
       </div>
     `;
 
-    // Update sidebar profile points
     state.points += 10;
     save('points');
     updateSidebarProfile();
@@ -2112,20 +1344,11 @@ function analyzeRisk() {
 }
 
 function saveAnalysisResult(score, level, s, d, gl, bmi) {
-  const entry = {
-    date: new Date().toISOString(),
-    score, level,
-    systolic: s, diastolic: d,
-    glucose: gl, bmi
-  };
+  const entry = {date:new Date().toISOString(), score, level, systolic:s, diastolic:d, glucose:gl, bmi};
   state.history.unshift(entry);
   save('history');
   updateDashboardStats();
   toast('Natija saqlandi!', 'success');
-
-  // Update vitals displays
-  state.lastVitals = { s, d, gl, bmi };
-  save('history');
 }
 
 /* ====================== DASHBOARD ====================== */
@@ -2139,8 +1362,6 @@ function renderDashboard() {
     document.getElementById('dashBPStatus').innerHTML = last.systolic > 140 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashGlucoseStatus').innerHTML = last.glucose > 6.1 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashBMIStatus').innerHTML = last.bmi > 25 ? '<span class="stat-down">Ortiqcha</span>' : '<span class="stat-up">Normal</span>';
-
-    // Update gauge
     const gc = document.getElementById('dashGauge');
     const color = last.score < 25 ? 'var(--green)' : last.score < 50 ? 'var(--yellow)' : 'var(--accent)';
     gc.innerHTML = `
@@ -2156,8 +1377,6 @@ function renderDashboard() {
     document.getElementById('dashRiskTag').textContent = last.level;
     document.getElementById('dashRiskTag').className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
   }
-
-  // BP Chart
   renderMiniChart();
   renderDashMeds();
   renderDashNotes();
@@ -2167,32 +1386,17 @@ function renderMiniChart() {
   const ctx = document.getElementById('dashBPChart');
   if (!ctx) return;
   if (window.dashBPChartInst) window.dashBPChartInst.destroy();
-
   const labels = state.history.slice(0,8).reverse().map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'}));
   const sys = state.history.slice(0,8).reverse().map(h => h.systolic);
   const dia = state.history.slice(0,8).reverse().map(h => h.diastolic);
-
-  if (!labels.length) {
-    labels.push('Hozir'); sys.push(120); dia.push(80);
-  }
-
+  if (!labels.length) { labels.push('Hozir'); sys.push(120); dia.push(80); }
   window.dashBPChartInst = new Chart(ctx, {
     type:'line',
-    data:{
-      labels,
-      datasets:[
-        {label:'Sistolik', data:sys, borderColor:'#e63950', backgroundColor:'rgba(230,57,80,0.1)', tension:0.4, pointRadius:4, pointBackgroundColor:'#e63950'},
-        {label:'Diastolik', data:dia, borderColor:'#3b82f6', backgroundColor:'rgba(59,130,246,0.1)', tension:0.4, pointRadius:4, pointBackgroundColor:'#3b82f6'}
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#8899bb',font:{size:11}}}},
-      scales:{
-        x:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},
-        y:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}}
-      }
-    }
+    data:{labels, datasets:[
+      {label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,pointRadius:4,pointBackgroundColor:'#e63950'},
+      {label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.1)',tension:0.4,pointRadius:4,pointBackgroundColor:'#3b82f6'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb',font:{size:11}}}},scales:{x:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}}}}
   });
 }
 
@@ -2220,9 +1424,7 @@ function renderDashNotes() {
   `).join('');
 }
 
-function updateDashboardStats() {
-  renderDashboard();
-}
+function updateDashboardStats() { renderDashboard(); }
 
 /* ====================== VITALS ====================== */
 function renderVitals() {
@@ -2232,35 +1434,20 @@ function renderVitals() {
     document.getElementById('vGlucose').textContent = last.glucose;
     document.getElementById('vBMI').textContent = last.bmi;
   }
-
-  // BP trend chart
   const bpCtx = document.getElementById('vitBPChart');
   if (bpCtx) {
     if (window.vitBPChartInst) window.vitBPChartInst.destroy();
     const labels = state.history.slice(0,10).reverse().map((h,i) => 'Tahlil '+(i+1));
     const sys = state.history.slice(0,10).reverse().map(h => h.systolic);
     const dia = state.history.slice(0,10).reverse().map(h => h.diastolic);
-    window.vitBPChartInst = new Chart(bpCtx, {
-      type:'line',
-      data:{labels, datasets:[
-        {label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,fill:true},
-        {label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.05)',tension:0.4,fill:true}
-      ]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
-    });
+    window.vitBPChartInst = new Chart(bpCtx, {type:'line',data:{labels,datasets:[{label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,fill:true},{label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.05)',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}}); 
   }
-
-  // Risk chart
   const rCtx = document.getElementById('vitRiskChart');
   if (rCtx) {
     if (window.vitRiskChartInst) window.vitRiskChartInst.destroy();
     const labels = state.history.slice(0,8).reverse().map((h,i) => 'T'+(i+1));
     const risks = state.history.slice(0,8).reverse().map(h => h.score);
-    window.vitRiskChartInst = new Chart(rCtx, {
-      type:'bar',
-      data:{labels, datasets:[{label:'Xavf %',data:risks,backgroundColor: risks.map(r => r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
-    });
+    window.vitRiskChartInst = new Chart(rCtx, {type:'bar',data:{labels,datasets:[{label:'Xavf %',data:risks,backgroundColor:risks.map(r=>r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}}); 
   }
 }
 
@@ -2283,16 +1470,11 @@ function renderMedications() {
         ${m.notes ? `<span><i class="fas fa-info-circle"></i> ${m.notes}</span>` : ''}
       </div>
       <div class="med-actions-row">
-        <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}">
-          <i class="fas fa-check"></i> ${m.taken?'Qabul qilindi':'Qabul qildim'}
-        </button>
-        <button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.82rem;padding:8px 14px;">
-          <i class="fas fa-trash"></i>
-        </button>
+        <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}"><i class="fas fa-check"></i> ${m.taken?'Qabul qilindi':'Qabul qildim'}</button>
+        <button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-trash"></i></button>
       </div>
     </div>
   `).join('');
-  
   const pending = state.medications.filter(m => !m.taken).length;
   const badge = document.getElementById('medBadge');
   if (pending > 0) { badge.style.display=''; badge.textContent = pending; }
@@ -2305,38 +1487,34 @@ function saveMedication() {
   const name = document.getElementById('mName').value.trim();
   const dosage = document.getElementById('mDose').value.trim();
   const time = document.getElementById('mTime').value;
-  if (!name || !dosage || !time) { toast('Barcha maydonlarni to\'ldiring!', 'err'); return; }
-  state.medications.push({ name, dosage, time, frequency: document.getElementById('mFreq').value, notes: document.getElementById('mNotes').value, taken: false, date: new Date().toISOString() });
+  if (!name || !dosage || !time) { toast("Barcha maydonlarni to'ldiring!", 'err'); return; }
+  state.medications.push({name, dosage, time, frequency:document.getElementById('mFreq').value, notes:document.getElementById('mNotes').value, taken:false, date:new Date().toISOString()});
   save('medications');
   document.getElementById('addMedModal').classList.remove('active');
   ['mName','mDose','mTime','mNotes'].forEach(id => document.getElementById(id).value = '');
-  state.points += 5;
-  save('points');
-  updateSidebarProfile();
+  state.points += 5; save('points'); updateSidebarProfile();
   renderMedications();
-  toast('Dori qo\'shildi! +5 ball', 'success');
+  toast("Dori qo'shildi! +5 ball", 'success');
 }
 
 function takeMed(i) {
   state.medications[i].taken = true;
   save('medications');
   renderMedications();
-  state.points += 5;
-  save('points');
-  updateSidebarProfile();
+  state.points += 5; save('points'); updateSidebarProfile();
   toast('✅ Dori qabul qilindi! +5 ball', 'success');
 }
 
 function deleteMed(i) {
-  if (confirm('Bu dorini o\'chirmoqchimisiz?')) {
+  if (confirm("Bu dorini o'chirmoqchimisiz?")) {
     state.medications.splice(i, 1);
     save('medications');
     renderMedications();
-    toast('Dori o\'chirildi', 'warn');
+    toast("Dori o'chirildi", 'warn');
   }
 }
 
-/* ====================== LAB RESULTS ====================== */
+/* ====================== LAB ====================== */
 function renderLabResults() {
   const el = document.getElementById('labResultsList');
   if (!state.labResults.length) {
@@ -2345,31 +1523,19 @@ function renderLabResults() {
     el.innerHTML = state.labResults.map((r, i) => `
       <div class="lab-row">
         <div class="lab-name"><i class="fas fa-vials" style="color:var(--blue);margin-right:8px;"></i>${r.type}</div>
-        <div>
-          <div class="lab-value" style="color:${r.status==='normal'?'var(--green)':r.status==='abnormal'?'var(--yellow)':'var(--accent)'}">${r.value}</div>
-          <div class="lab-normal">${r.unit}</div>
-        </div>
-        <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?'Normal':r.status==='abnormal'?'Og\'ish':'Kritik'}</span>
+        <div><div class="lab-value" style="color:${r.status==='normal'?'var(--green)':r.status==='abnormal'?'var(--yellow)':'var(--accent)'}">${r.value}</div><div class="lab-normal">${r.unit}</div></div>
+        <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?'Normal':r.status==='abnormal'?"Og'ish":'Kritik'}</span>
         <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(r.date).toLocaleDateString('uz-UZ')}</div>
         <button onclick="deleteLabResult(${i})" class="btn btn-danger" style="padding:5px 10px;font-size:0.78rem;"><i class="fas fa-trash"></i></button>
       </div>
     `).join('');
   }
-
-  // Lab chart
   const ctx = document.getElementById('labChart');
   if (ctx) {
     if (window.labChartInst) window.labChartInst.destroy();
     const glucose = state.labResults.filter(r => r.type.includes('Qand'));
     if (glucose.length > 1) {
-      window.labChartInst = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: glucose.map((g,i) => 'T'+(i+1)),
-          datasets:[{label:'Qand (mmol/L)', data:glucose.map(g=>g.value), borderColor:'#f59e0b', backgroundColor:'rgba(245,158,11,0.1)', tension:0.4, fill:true, pointRadius:5}]
-        },
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
-      });
+      window.labChartInst = new Chart(ctx, {type:'line',data:{labels:glucose.map((g,i)=>'T'+(i+1)),datasets:[{label:'Qand (mmol/L)',data:glucose.map(g=>g.value),borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.1)',tension:0.4,fill:true,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
     } else {
       ctx.parentElement.innerHTML = `<div style="text-align:center;color:var(--text3);padding:40px;font-size:0.85rem;">Grafik uchun kamida 2 ta qand tahlili kerak</div>`;
     }
@@ -2384,13 +1550,11 @@ function saveLabResult() {
   const unit = document.getElementById('labUnit').value || 'mmol/L';
   const status = document.getElementById('labStatus').value;
   if (!value) { toast('Qiymat kiriting!', 'err'); return; }
-  state.labResults.unshift({ type, value, unit, status, date: new Date().toISOString() });
+  state.labResults.unshift({type, value, unit, status, date:new Date().toISOString()});
   save('labResults');
   document.getElementById('addLabModal').classList.remove('active');
   renderLabResults();
-  state.points += 5;
-  save('points');
-  updateSidebarProfile();
+  state.points += 5; save('points'); updateSidebarProfile();
   toast('Tahlil natijasi saqlandi! +5 ball', 'success');
 }
 
@@ -2398,7 +1562,7 @@ function deleteLabResult(i) {
   state.labResults.splice(i,1);
   save('labResults');
   renderLabResults();
-  toast('O\'chirildi', 'warn');
+  toast("O'chirildi", 'warn');
 }
 
 /* ====================== NOTES ====================== */
@@ -2429,18 +1593,11 @@ function openAddNoteModal() { document.getElementById('addNoteModal').classList.
 function saveNote() {
   const content = document.getElementById('noteContent').value.trim();
   if (!content) { toast('Matn yozing!', 'err'); return; }
-  state.notes.unshift({
-    title: document.getElementById('noteTitle').value.trim(),
-    content,
-    category: document.getElementById('noteCategory').value,
-    date: new Date().toISOString()
-  });
+  state.notes.unshift({title:document.getElementById('noteTitle').value.trim(), content, category:document.getElementById('noteCategory').value, date:new Date().toISOString()});
   save('notes');
   document.getElementById('addNoteModal').classList.remove('active');
   ['noteTitle','noteContent'].forEach(id => document.getElementById(id).value = '');
-  state.points += 3;
-  save('points');
-  updateSidebarProfile();
+  state.points += 3; save('points'); updateSidebarProfile();
   renderNotes();
   toast('Qaydnoma saqlandi! +3 ball', 'success');
 }
@@ -2449,24 +1606,24 @@ function deleteNote(i) {
   state.notes.splice(i,1);
   save('notes');
   renderNotes();
-  toast('Qaydnoma o\'chirildi', 'warn');
+  toast("Qaydnoma o'chirildi", 'warn');
 }
 
-/* ====================== APPOINTMENTS / DOCTORS ====================== */
+/* ====================== APPOINTMENTS ====================== */
 const doctors = [
-  {id:1, name:'Dr. Alisher Karimov', spec:'nevrolog', exp:'15 yil', rating:4.9, slots:['09:00','10:30','14:00','15:30','16:00'], avatar:'🧠', desc:'Insult va miya kasalliklari bo\'yicha mutaxassis'},
-  {id:2, name:'Dr. Mohira Yusupova', spec:'kardiolog', exp:'12 yil', rating:4.8, slots:['08:30','11:00','13:30','15:00'], avatar:'❤️', desc:'Yurak-qon tomir kasalliklari mutaxassisi'},
-  {id:3, name:'Dr. Bobur Toshmatov', spec:'endokrinolog', exp:'10 yil', rating:4.7, slots:['10:00','12:00','14:30','16:30'], avatar:'🔬', desc:'Diabet va gormon kasalliklari'},
-  {id:4, name:'Dr. Sarvar Rahimov', spec:'nevrolog', exp:'8 yil', rating:4.6, slots:['09:30','11:30','14:00','16:00'], avatar:'🧠', desc:'Nevrologik diagnostika va davolash'},
-  {id:5, name:'Dr. Zulfiya Nazarova', spec:'kardiolog', exp:'18 yil', rating:5.0, slots:['08:00','10:00','13:00','15:00'], avatar:'💙', desc:'Yurak kasalliklari: anginadan tutib aritmiyagacha'},
+  {id:1,name:'Dr. Alisher Karimov',spec:'nevrolog',exp:'15 yil',rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:"Insult va miya kasalliklari bo'yicha mutaxassis"},
+  {id:2,name:'Dr. Mohira Yusupova',spec:'kardiolog',exp:'12 yil',rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'❤️',desc:'Yurak-qon tomir kasalliklari mutaxassisi'},
+  {id:3,name:'Dr. Bobur Toshmatov',spec:'endokrinolog',exp:'10 yil',rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🔬',desc:'Diabet va gormon kasalliklari'},
+  {id:4,name:'Dr. Sarvar Rahimov',spec:'nevrolog',exp:'8 yil',rating:4.6,slots:['09:30','11:30','14:00','16:00'],avatar:'🧠',desc:'Nevrologik diagnostika va davolash'},
+  {id:5,name:'Dr. Zulfiya Nazarova',spec:'kardiolog',exp:'18 yil',rating:5.0,slots:['08:00','10:00','13:00','15:00'],avatar:'💙',desc:'Yurak kasalliklari: anginadan tutib aritmiyagacha'},
 ];
 
 let selectedSlot = {};
+let currentDocId = null;
 
 function renderDoctors(filter) {
   const list = filter === 'all' ? doctors : doctors.filter(d => d.spec === filter);
-  const el = document.getElementById('doctorGrid');
-  el.innerHTML = list.map(doc => `
+  document.getElementById('doctorGrid').innerHTML = list.map(doc => `
     <div class="doctor-card" onclick="openBooking(${doc.id})">
       <div class="doctor-top">
         <div class="doctor-avatar">${doc.avatar}</div>
@@ -2477,41 +1634,27 @@ function renderDoctors(filter) {
       <div class="doctor-body">
         <div style="font-size:0.83rem;color:var(--text2);margin-bottom:12px;">${doc.desc}</div>
         <div style="font-size:0.78rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">MAVJUD VAQTLAR</div>
-        <div class="time-slots">
-          ${doc.slots.map(s => `<div class="time-slot">${s}</div>`).join('')}
-        </div>
-        <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();">
-          <i class="fas fa-calendar-plus"></i> Vaqt Band Qilish
-        </button>
+        <div class="time-slots">${doc.slots.map(s => `<div class="time-slot">${s}</div>`).join('')}</div>
+        <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
       </div>
     </div>
   `).join('');
 }
 
-function filterDocs(type) {
-  renderDoctors(type);
-  setDocFilter(type);
-}
+function filterDocs(type) { renderDoctors(type); setDocFilter(type); }
 
 function setDocFilter(type) {
-  document.querySelectorAll('[id^="df-"]').forEach(b => {
-    b.classList.remove('btn-accent');
-    b.classList.add('btn-ghost');
-  });
+  document.querySelectorAll('[id^="df-"]').forEach(b => { b.classList.remove('btn-accent'); b.classList.add('btn-ghost'); });
   const btn = document.getElementById('df-' + type);
   if (btn) { btn.classList.add('btn-accent'); btn.classList.remove('btn-ghost'); }
 }
-
-let currentDocId = null;
 
 function openBooking(id) {
   currentDocId = id;
   const doc = doctors.find(d => d.id === id);
   document.getElementById('bookDocName').textContent = doc.name;
   document.getElementById('bookDocSpec').textContent = doc.spec.charAt(0).toUpperCase()+doc.spec.slice(1)+' — '+doc.exp+' tajriba';
-  document.getElementById('bookSlots').innerHTML = doc.slots.map(s => `
-    <div class="time-slot" onclick="selectSlot(this,'${s}')">${s}</div>
-  `).join('');
+  document.getElementById('bookSlots').innerHTML = doc.slots.map(s => `<div class="time-slot" onclick="selectSlot(this,'${s}')">${s}</div>`).join('');
   selectedSlot = {};
   document.getElementById('bookModal').classList.add('active');
 }
@@ -2526,12 +1669,9 @@ function confirmBooking() {
   if (!selectedSlot) { toast('Vaqt tanlang!', 'err'); return; }
   const doc = doctors.find(d => d.id === currentDocId);
   const complaint = document.getElementById('bookComplaint').value;
-  const appt = { docName: doc.name, spec: doc.spec, slot: selectedSlot, complaint, date: new Date().toISOString() };
-  state.notes.unshift({ title: `Shifokor: ${doc.name} — ${selectedSlot}`, content: complaint || 'Konsultatsiya band qilindi', category: 'appointment', date: new Date().toISOString() });
+  state.notes.unshift({title:`Shifokor: ${doc.name} — ${selectedSlot}`, content:complaint||'Konsultatsiya band qilindi', category:'appointment', date:new Date().toISOString()});
   save('notes');
-  state.points += 15;
-  save('points');
-  updateSidebarProfile();
+  state.points += 15; save('points'); updateSidebarProfile();
   document.getElementById('bookModal').classList.remove('active');
   toast(`✅ ${doc.name} bilan ${selectedSlot} — band qilindi! +15 ball`, 'success');
 }
@@ -2540,24 +1680,20 @@ function confirmBooking() {
 function renderHistory() {
   const tbody = document.getElementById('historyBody');
   if (!state.history.length) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo\'q</td></tr>';
+    tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:var(--text3);padding:30px;'>Tahlillar yo'q</td></tr>";
   } else {
     tbody.innerHTML = state.history.map(h => {
       const color = h.score<25?'var(--green)':h.score<50?'var(--yellow)':'var(--accent)';
-      return `
-        <tr>
-          <td style="font-family:var(--font-mono);font-size:0.82rem;">${new Date(h.date).toLocaleDateString('uz-UZ')}</td>
-          <td>${h.systolic}/${h.diastolic}</td>
-          <td>${h.glucose}</td>
-          <td>${h.bmi}</td>
-          <td style="font-family:var(--font-mono);font-weight:700;color:${color};">${h.score}%</td>
-          <td><span class="tag ${h.score<25?'tag-green':h.score<50?'tag-yellow':'tag-red'}">${h.level}</span></td>
-        </tr>
-      `;
+      return `<tr>
+        <td style="font-family:var(--font-mono);font-size:0.82rem;">${new Date(h.date).toLocaleDateString('uz-UZ')}</td>
+        <td>${h.systolic}/${h.diastolic}</td>
+        <td>${h.glucose}</td>
+        <td>${h.bmi}</td>
+        <td style="font-family:var(--font-mono);font-weight:700;color:${color};">${h.score}%</td>
+        <td><span class="tag ${h.score<25?'tag-green':h.score<50?'tag-yellow':'tag-red'}">${h.level}</span></td>
+      </tr>`;
     }).join('');
   }
-
-  // History risk chart
   const ctx = document.getElementById('historyRiskChart');
   if (ctx) {
     if (window.histRiskChartInst) window.histRiskChartInst.destroy();
@@ -2565,18 +1701,13 @@ function renderHistory() {
     window.histRiskChartInst = new Chart(ctx, {
       type:'line',
       data:{
-        labels: d.map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),
+        labels:d.map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),
         datasets:[{
           label:'Insult Xavfi %',
-          data: d.map(h => h.score),
+          data:d.map(h => h.score),
           borderColor:'#e63950',
-          backgroundColor: (ctx) => {
-            const g = ctx.chart.ctx.createLinearGradient(0,0,0,260);
-            g.addColorStop(0,'rgba(230,57,80,0.3)');
-            g.addColorStop(1,'rgba(230,57,80,0)');
-            return g;
-          },
-          tension:0.4, fill:true, pointRadius:5, pointBackgroundColor:'#e63950', pointBorderColor:'#fff', pointBorderWidth:2
+          backgroundColor:(ctx) => { const g=ctx.chart.ctx.createLinearGradient(0,0,0,260); g.addColorStop(0,'rgba(230,57,80,0.3)'); g.addColorStop(1,'rgba(230,57,80,0)'); return g; },
+          tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#e63950',pointBorderColor:'#fff',pointBorderWidth:2
         }]
       },
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{max:100,min:0,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
@@ -2585,36 +1716,34 @@ function renderHistory() {
 }
 
 function clearHistory() {
-  if (!confirm('Barcha tarix o\'chiriladi. Davom etasizmi?')) return;
+  if (!confirm("Barcha tarix o'chiriladi. Davom etasizmi?")) return;
   state.history = [];
   save('history');
   renderHistory();
-  toast('Tarix tozalandi', 'warn');
+  toast("Tarix tozalandi", 'warn');
 }
 
 /* ====================== PROFILE ====================== */
 const achievements = [
-  {id:'first_analysis', icon:'🔬', name:'Birinchi tahlil', cond: () => state.history.length >= 1},
-  {id:'regular', icon:'📅', name:'Muntazam (5 tahlil)', cond: () => state.history.length >= 5},
-  {id:'med_taker', icon:'💊', name:'Dori qabul qildi', cond: () => state.medications.some(m => m.taken)},
-  {id:'note_keeper', icon:'📝', name:'Qaydnoma yozdi', cond: () => state.notes.length >= 1},
-  {id:'doctor_visit', icon:'👨‍⚕️', name:'Shifokor oldi', cond: () => state.notes.some(n => n.category==='appointment')},
-  {id:'low_risk', icon:'✅', name:'Past xavf', cond: () => state.history.some(h => h.score < 25)},
-  {id:'pro', icon:'🏆', name:'Pro (10 tahlil)', cond: () => state.history.length >= 10},
-  {id:'century', icon:'💯', name:'100 ball', cond: () => state.points >= 100},
+  {id:'first_analysis', icon:'🔬', name:'Birinchi tahlil', cond:() => state.history.length >= 1},
+  {id:'regular', icon:'📅', name:'Muntazam (5 tahlil)', cond:() => state.history.length >= 5},
+  {id:'med_taker', icon:'💊', name:'Dori qabul qildi', cond:() => state.medications.some(m => m.taken)},
+  {id:'note_keeper', icon:'📝', name:'Qaydnoma yozdi', cond:() => state.notes.length >= 1},
+  {id:'doctor_visit', icon:'👨‍⚕️', name:'Shifokor oldi', cond:() => state.notes.some(n => n.category==='appointment')},
+  {id:'low_risk', icon:'✅', name:'Past xavf', cond:() => state.history.some(h => h.score < 25)},
+  {id:'pro', icon:'🏆', name:'Pro (10 tahlil)', cond:() => state.history.length >= 10},
+  {id:'century', icon:'💯', name:'100 ball', cond:() => state.points >= 100},
 ];
 
 function renderProfile() {
   const p = state.profile;
   const firstName = (p.name || '').trim();
   const lastName  = (p.surname || '').trim();
-  const initials  = ((firstName ? firstName[0] : 'U') + (lastName ? lastName[0] : '')).toUpperCase() || 'U';
-
+  const initials  = ((firstName?firstName[0]:'U') + (lastName?lastName[0]:'')).toUpperCase() || 'U';
   document.getElementById('profileAvatar').textContent = initials;
   document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('profileNameDisplay').textContent = (p.name||'') + ' ' + (p.surname||'') || 'Foydalanuvchi';
+  document.getElementById('profileNameDisplay').textContent = ((p.name||'') + ' ' + (p.surname||'')).trim() || 'Foydalanuvchi';
   document.getElementById('sidebarName').textContent = p.name || 'Profil';
-
   const last = state.history[0];
   if (last) {
     document.getElementById('pm-age').textContent = 'Yosh: ' + (p.age || '—');
@@ -2624,35 +1753,26 @@ function renderProfile() {
     tag.textContent = last.level;
     tag.className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
   }
-
-  // Details
   const det = document.getElementById('profileDetails');
   if (p.name) {
-    det.innerHTML = `
-      <div class="grid-2" style="gap:10px;">
-        ${renderProfileField('user','Ism',p.name||'—')}
-        ${renderProfileField('user-tie','Familiya',p.surname||'—')}
-        ${renderProfileField('birthday-cake','Yosh',p.age||'—')}
-        ${renderProfileField('venus-mars','Jins',p.gender==='male'?'Erkak':'Ayol')}
-        ${renderProfileField('phone','Telefon',p.phone||'—')}
-        ${renderProfileField('tint','Qon Guruhi',p.bloodType||'—')}
-        ${p.conditions ? renderProfileField('notes-medical','Kasalliklar',p.conditions) : ''}
-      </div>
-    `;
+    det.innerHTML = `<div class="grid-2" style="gap:10px;">
+      ${rPF('user','Ism',p.name||'—')}
+      ${rPF('user-tie','Familiya',p.surname||'—')}
+      ${rPF('birthday-cake','Yosh',p.age||'—')}
+      ${rPF('venus-mars','Jins',p.gender==='male'?'Erkak':'Ayol')}
+      ${rPF('phone','Telefon',p.phone||'—')}
+      ${rPF('tint','Qon Guruhi',p.bloodType||'—')}
+      ${p.conditions ? rPF('notes-medical','Kasalliklar',p.conditions) : ''}
+    </div>`;
   } else {
     det.innerHTML = '<div style="color:var(--text3);font-size:0.85rem;">Ma\'lumotlar to\'ldirilmagan. <button class="btn btn-ghost" onclick="openEditProfileModal()" style="padding:4px 10px;font-size:0.82rem;margin-left:8px;">Tahrirlash</button></div>';
   }
-
-  // Achievements
-  const ag = document.getElementById('achievementGrid');
-  ag.innerHTML = achievements.map(a => `
+  document.getElementById('achievementGrid').innerHTML = achievements.map(a => `
     <div class="achievement ${a.cond()?'unlocked':'locked'}">
       <div class="achievement-icon">${a.icon}</div>
       <div class="achievement-name">${a.name}</div>
     </div>
   `).join('');
-
-  // Stats
   document.getElementById('statAnalyses').textContent = state.history.length;
   document.getElementById('statMeds').textContent = state.medications.length;
   document.getElementById('statNotes').textContent = state.notes.length;
@@ -2660,38 +1780,35 @@ function renderProfile() {
   document.getElementById('sidebarPoints').textContent = state.points;
 }
 
-function renderProfileField(icon, label, value) {
-  return `
-    <div style="padding:10px 14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);">
-      <div style="font-size:0.72rem;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
-      <div style="font-weight:600;margin-top:4px;font-size:0.88rem;"><i class="fas fa-${icon}" style="color:var(--accent);margin-right:6px;font-size:0.8rem;"></i>${value}</div>
-    </div>
-  `;
+function rPF(icon, label, value) {
+  return `<div style="padding:10px 14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);">
+    <div style="font-size:0.72rem;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+    <div style="font-weight:600;margin-top:4px;font-size:0.88rem;"><i class="fas fa-${icon}" style="color:var(--accent);margin-right:6px;font-size:0.8rem;"></i>${value}</div>
+  </div>`;
 }
 
 function openEditProfileModal() {
   const p = state.profile;
-  ['pName','pSurname','pPhone','pConditions'].forEach(id => {
-    const field = id.slice(1).toLowerCase();
-    if (document.getElementById(id)) document.getElementById(id).value = p[field] || '';
-  });
-  if (p.age) document.getElementById('pAge').value = p.age;
+  document.getElementById('pName').value = p.name || '';
+  document.getElementById('pSurname').value = p.surname || '';
+  document.getElementById('pAge').value = p.age || '';
+  document.getElementById('pPhone').value = p.phone || '';
+  document.getElementById('pConditions').value = p.conditions || '';
   document.getElementById('editProfileModal').classList.add('active');
 }
 
 function saveProfile() {
   state.profile = {
-    name: document.getElementById('pName').value.trim(),
-    surname: document.getElementById('pSurname').value.trim(),
-    age: document.getElementById('pAge').value,
-    gender: document.getElementById('pGender').value,
-    phone: document.getElementById('pPhone').value.trim(),
-    bloodType: document.getElementById('pBloodType').value,
-    conditions: document.getElementById('pConditions').value.trim()
+    name:document.getElementById('pName').value.trim(),
+    surname:document.getElementById('pSurname').value.trim(),
+    age:document.getElementById('pAge').value,
+    gender:document.getElementById('pGender').value,
+    phone:document.getElementById('pPhone').value.trim(),
+    bloodType:document.getElementById('pBloodType').value,
+    conditions:document.getElementById('pConditions').value.trim()
   };
   save('profile');
-  state.points += 10;
-  save('points');
+  state.points += 10; save('points');
   document.getElementById('editProfileModal').classList.remove('active');
   renderProfile();
   updateSidebarProfile();
@@ -2701,10 +1818,9 @@ function saveProfile() {
 function updateSidebarProfile() {
   document.getElementById('sidebarPoints').textContent = state.points;
   document.getElementById('sidebarName').textContent = state.profile.name || 'Profil';
-  const firstName = (state.profile.name || '').trim();
-  const lastName  = (state.profile.surname || '').trim();
-  const initials  = (firstName ? firstName[0] : 'U') + (lastName ? lastName[0] : '');
-  document.getElementById('sidebarAvatar').textContent = initials.toUpperCase() || 'U';
+  const fn = (state.profile.name || '').trim();
+  const ln = (state.profile.surname || '').trim();
+  document.getElementById('sidebarAvatar').textContent = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase() || 'U';
 }
 
 /* ====================== SOS ====================== */
@@ -2713,23 +1829,18 @@ function closeSOS() { document.getElementById('sosModal').classList.remove('acti
 
 /* ====================== INIT ====================== */
 window.addEventListener('load', () => {
-  // Load saved theme — default is dark
   const savedTheme = localStorage.getItem('ng_theme') || 'dark';
   applyTheme(savedTheme);
-
   updateSidebarProfile();
   renderDashboard();
-  // Make sure dashboard nav item is active on load
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const navDash = document.getElementById('nav-dashboard');
   if (navDash) navDash.classList.add('active');
-  // bottom nav
   const bnDash = document.getElementById('bn-dashboard');
   if (bnDash) bnDash.classList.add('active');
-  toast('Xush kelibsiz! NeuroGuard AI Pro', 'info');
+  toast('Xush kelibsiz! NeuroGuard AI Pro v2.1', 'info');
 });
 
-// Close modals on outside click
 document.querySelectorAll('.modal-overlay').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
 });
