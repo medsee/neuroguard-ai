@@ -812,8 +812,8 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div>
       <div style="overflow-x:auto;">
         <table class="history-table" id="historyTable">
-          <thead><tr><th>Sana</th><th>Qon Bosimi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
-          <tbody id="historyBody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
+          <thead><tr><th>Sana</th><th>Qon Bosimi</th><th>Yurak Urishi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
+          <tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -1194,7 +1194,7 @@ function analyzeRisk() {
         <div style="margin-top:16px;padding:12px 16px;background:rgba(245,158,11,0.08);border-radius:10px;border-left:3px solid var(--yellow);font-size:0.78rem;color:var(--text2);">
           ⚠️ Bu natija faqat umumiy fikr beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.
         </div>
-        <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${gl},${bmi.toFixed(1)})" class="btn btn-accent btn-full" style="margin-top:16px;">
+        <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" class="btn btn-accent btn-full" style="margin-top:16px;">
           <i class="fas fa-save"></i> Natijani Saqlash
         </button>
       </div>`;
@@ -1204,8 +1204,9 @@ function analyzeRisk() {
   }, 1800);
 }
 
-function saveAnalysisResult(score, level, s, d, gl, bmi) {
-  const entry = {date:new Date().toISOString(), score, level, systolic:s, diastolic:d, glucose:gl, bmi};
+// ✅ FIX 1: hr parametri qo'shildi
+function saveAnalysisResult(score, level, s, d, hr, gl, bmi) {
+  const entry = {date:new Date().toISOString(), score, level, systolic:s, diastolic:d, heartrate:hr, glucose:gl, bmi};
   state.history.unshift(entry);
   save('history');
   updateDashboardStats();
@@ -1218,6 +1219,11 @@ function renderDashboard() {
     document.getElementById('dashBP').textContent = last.systolic+'/'+last.diastolic;
     document.getElementById('dashGlucose').textContent = last.glucose;
     document.getElementById('dashBMI').textContent = last.bmi;
+    // ✅ FIX 2: dashHR endi ko'rsatiladi
+    if (last.heartrate) {
+      document.getElementById('dashHR').textContent = last.heartrate;
+      document.getElementById('dashHRStatus').innerHTML = (last.heartrate>100||last.heartrate<55) ? '<span class="stat-down">Beqaror</span>' : '<span class="stat-up">Normal</span>';
+    }
     document.getElementById('dashBPStatus').innerHTML = last.systolic > 140 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashGlucoseStatus').innerHTML = last.glucose > 6.1 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashBMIStatus').innerHTML = last.bmi > 25 ? '<span class="stat-down">Ortiqcha</span>' : '<span class="stat-up">Normal</span>';
@@ -1238,7 +1244,7 @@ function renderDashboard() {
 function renderMiniChart() {
   const ctx = document.getElementById('dashBPChart');
   if (!ctx) return;
-  if (window.dashBPChartInst) window.dashBPChartInst.destroy();
+  if (window.dashBPChartInst) { try { window.dashBPChartInst.destroy(); } catch(e){} }
   const labels = state.history.slice(0,8).reverse().map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'}));
   const sys = state.history.slice(0,8).reverse().map(h => h.systolic);
   const dia = state.history.slice(0,8).reverse().map(h => h.diastolic);
@@ -1283,10 +1289,12 @@ function renderVitals() {
     document.getElementById('vBP').textContent = last.systolic+'/'+last.diastolic;
     document.getElementById('vGlucose').textContent = last.glucose;
     document.getElementById('vBMI').textContent = last.bmi;
+    // ✅ FIX 3: vHR endi ko'rsatiladi
+    document.getElementById('vHR').textContent = last.heartrate || '—';
   }
   const bpCtx = document.getElementById('vitBPChart');
   if (bpCtx) {
-    if (window.vitBPChartInst) window.vitBPChartInst.destroy();
+    if (window.vitBPChartInst) { try { window.vitBPChartInst.destroy(); } catch(e){} }
     const labels = state.history.slice(0,10).reverse().map((h,i) => 'Tahlil '+(i+1));
     const sys = state.history.slice(0,10).reverse().map(h => h.systolic);
     const dia = state.history.slice(0,10).reverse().map(h => h.diastolic);
@@ -1294,7 +1302,7 @@ function renderVitals() {
   }
   const rCtx = document.getElementById('vitRiskChart');
   if (rCtx) {
-    if (window.vitRiskChartInst) window.vitRiskChartInst.destroy();
+    if (window.vitRiskChartInst) { try { window.vitRiskChartInst.destroy(); } catch(e){} }
     const labels = state.history.slice(0,8).reverse().map((h,i) => 'T'+(i+1));
     const risks = state.history.slice(0,8).reverse().map(h => h.score);
     window.vitRiskChartInst = new Chart(rCtx, {type:'bar',data:{labels,datasets:[{label:'Xavf %',data:risks,backgroundColor:risks.map(r=>r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
@@ -1305,6 +1313,9 @@ function renderMedications() {
   const el = document.getElementById('medList');
   if (!state.medications.length) {
     el.innerHTML = `<div class="card" style="text-align:center;padding:60px;color:var(--text3);"><i class="fas fa-pills" style="font-size:3rem;opacity:0.3;margin-bottom:16px;display:block;"></i>Hali dorilar qo'shilmagan</div>`;
+    // ✅ FIX 4: badge null check
+    const badge = document.getElementById('medBadge');
+    if (badge) badge.style.display = 'none';
     return;
   }
   el.innerHTML = state.medications.map((m, i) => `
@@ -1324,9 +1335,12 @@ function renderMedications() {
       </div>
     </div>`).join('');
   const pending = state.medications.filter(m => !m.taken).length;
+  // ✅ FIX 4: null check
   const badge = document.getElementById('medBadge');
-  if (pending > 0) { badge.style.display=''; badge.textContent = pending; }
-  else badge.style.display = 'none';
+  if (badge) {
+    if (pending > 0) { badge.style.display=''; badge.textContent = pending; }
+    else badge.style.display = 'none';
+  }
 }
 
 function openAddMedModal() { document.getElementById('addMedModal').classList.add('active'); }
@@ -1372,9 +1386,10 @@ function renderLabResults() {
         <button onclick="deleteLabResult(${i})" class="btn btn-danger" style="padding:5px 10px;font-size:0.78rem;"><i class="fas fa-trash"></i></button>
       </div>`).join('');
   }
+  // ✅ FIX 5: canvas destroy xatosini try/catch bilan himoya qilindi
   const ctx = document.getElementById('labChart');
   if (ctx) {
-    if (window.labChartInst) window.labChartInst.destroy();
+    try { if (window.labChartInst) window.labChartInst.destroy(); } catch(e) {}
     const glucose = state.labResults.filter(r => r.type.includes('Qand'));
     if (glucose.length > 1) {
       window.labChartInst = new Chart(ctx, {type:'line',data:{labels:glucose.map((g,i)=>'T'+(i+1)),datasets:[{label:'Qand (mmol/L)',data:glucose.map(g=>g.value),borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.1)',tension:0.4,fill:true,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
@@ -1414,6 +1429,7 @@ function renderNotes() {
     el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q</div>`;
     return;
   }
+  // ✅ FIX 6: note-card lar alohida, grid-2 ichida emas (mobil uchun ham ishlaydi)
   el.innerHTML = `<div class="grid-2">${state.notes.map((n,i) => `
     <div class="note-card">
       <div class="note-date"><i class="fas fa-clock" style="margin-right:4px;"></i>${new Date(n.date).toLocaleString('uz-UZ')}</div>
@@ -1447,8 +1463,8 @@ function deleteNote(i) {
 
 const doctors = [
   {id:1,name:'Dr. Kseniya Shimirina',spec:'nevrolog',exp:'15 yil',rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:"Insult va miya kasalliklari bo'yicha mutaxassis"},
-  {id:2,name:'Dr. Akmal Gaibiyev',spec:'nevrolog',exp:'12 yil',rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:'Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassisi'},
-  {id:3,name:'Dr. Shuhrat Niyozov',spec:'endokrinolog',exp:'10 yil',rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:'Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis'},
+  {id:2,name:'Dr. Akmal Gaibiyev',spec:'nevrolog',exp:'12 yil',rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassisi"},
+  {id:3,name:'Dr. Shuhrat Niyozov',spec:'endokrinolog',exp:'10 yil',rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis"},
 ];
 
 let selectedSlot = {};
@@ -1561,13 +1577,15 @@ function finishBooking(doc, complaint, phone) {
 function renderHistory() {
   const tbody = document.getElementById('historyBody');
   if (!state.history.length) {
-    tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:var(--text3);padding:30px;'>Tahlillar yo'q</td></tr>";
+    tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;color:var(--text3);padding:30px;'>Tahlillar yo'q</td></tr>";
   } else {
     tbody.innerHTML = state.history.map(h => {
       const color = h.score<25?'var(--green)':h.score<50?'var(--yellow)':'var(--accent)';
       return `<tr>
         <td style="font-family:var(--font-mono);font-size:0.82rem;">${new Date(h.date).toLocaleDateString('uz-UZ')}</td>
-        <td>${h.systolic}/${h.diastolic}</td><td>${h.glucose}</td><td>${h.bmi}</td>
+        <td>${h.systolic}/${h.diastolic}</td>
+        <td>${h.heartrate || '—'}</td>
+        <td>${h.glucose}</td><td>${h.bmi}</td>
         <td style="font-family:var(--font-mono);font-weight:700;color:${color};">${h.score}%</td>
         <td><span class="tag ${h.score<25?'tag-green':h.score<50?'tag-yellow':'tag-red'}">${h.level}</span></td>
       </tr>`;
@@ -1575,7 +1593,7 @@ function renderHistory() {
   }
   const ctx = document.getElementById('historyRiskChart');
   if (ctx) {
-    if (window.histRiskChartInst) window.histRiskChartInst.destroy();
+    try { if (window.histRiskChartInst) window.histRiskChartInst.destroy(); } catch(e) {}
     const d = state.history.slice(0,12).reverse();
     window.histRiskChartInst = new Chart(ctx, {
       type:'line',
@@ -1699,6 +1717,7 @@ function downloadPDFReport() {
 <div class="risk">${last.level} — ${last.score}%</div>
 <h2>📊 Ko'rsatkichlar</h2>
 <p>Qon bosimi: ${last.systolic}/${last.diastolic} mmHg</p>
+<p>Yurak urishi: ${last.heartrate||'—'} bpm</p>
 <p>Qand: ${last.glucose} mmol/L</p>
 <p>BMI: ${last.bmi}</p>
 ${state.medications.length ? '<h2>💊 Dorilar</h2>'+state.medications.map(m=>'<p>'+m.name+' — '+m.dosage+'</p>').join('') : ''}
@@ -1739,8 +1758,11 @@ const LANGS = {
     smoking_q:"Chekasizmi?", exercise_q:"Jismoniy faollik",
     alcohol_q:"Alkogol iste'mol qilasizmi?", complaints:"Shikoyatlar va xavf omillari",
     c_headache:"Tez-tez bosh og'rig'i", c_dizziness:"Bosh aylanishi",
-    c_numbness:"Qo'l-oyoq kuchsizlanishi / uvishishi", 
-    c_bloodThick:"Qon quyuqligi (trombofiliya)", 
+    c_numbness:"Qo'l-oyoq kuchsizlanishi / uvishishi",
+    // ✅ FIX 7: missing uz translations added
+    c_speech:"Nutq qiyinligi",
+    c_bloodThick:"Qon quyuqligi (trombofiliya)",
+    c_movement:"Harakat o'zgarishi (muvozanat, koordinatsiya)",
     c_rheumatism:"Revmatizm / bo'g'im kasalliklari", c_familyVascular:"Oilada qon tomir kasalliklari",
     c_ownVascular:"O'zida qon tomir kasalliklari bor", c_familyHistory:"Oilada insult bo'lgan",
     ai_analyze:"AI Tahlil Qilsin", result_ready:"Tahlil uchun tayyor",
