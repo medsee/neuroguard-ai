@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroGuard — Maxfiylik Siyosati</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070d;
+    --bg2: #0f0f1a;
+    --bg3: #161622;
+    --border: rgba(255,255,255,0.07);
+    --accent: #e84855;
+    --accent2: #ff6b6b;
+    --blue: #3b82f6;
+    --green: #22c55e;
+    --text1: #f0f0f8;
+    --text2: #9898b8;
+    --text3: #55556a;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text1);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,72,85,0.08) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px; right: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Header ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(7,7,13,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--text1);
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .logo span { color: var(--accent); }
+
+  /* Lang switcher */
+  .lang-switcher {
+    display: flex; gap: 4px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+  }
+  .lang-btn {
+    padding: 5px 12px;
+    border: none; background: transparent;
+    color: var(--text2);
+    font-family: var(--font-body);
+    font-size: 0.78rem; font-weight: 500;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: white;
+  }
+  .lang-btn:hover:not(.active) { color: var(--text1); background: rgba(255,255,255,0.05); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative; z-index: 1;
+    max-width: 800px; margin: 0 auto;
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,72,85,0.1);
+    border: 1px solid rgba(232,72,85,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--accent2);
+    margin-bottom: 24px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #f0f0f8 0%, #9898b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-meta {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; flex-wrap: wrap;
+    font-size: 0.82rem; color: var(--text3);
+    margin-top: 12px;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 5px; }
+
+  /* ── Main content ── */
+  main {
+    position: relative; z-index: 1;
+    max-width: 800px; margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* Quick summary cards */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .summary-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .summary-card:hover { border-color: rgba(232,72,85,0.3); }
+  .summary-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .summary-icon.green  { background: rgba(34,197,94,0.12);  }
+  .summary-icon.red    { background: rgba(232,72,85,0.12);   }
+  .summary-icon.blue   { background: rgba(59,130,246,0.12);  }
+  .summary-icon.yellow { background: rgba(245,158,11,0.12);  }
+  .summary-card h4 { font-size: 0.82rem; font-weight: 600; color: var(--text1); margin-bottom: 3px; }
+  .summary-card p  { font-size: 0.76rem; color: var(--text3); line-height: 1.5; }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-num {
+    width: 28px; height: 28px; flex-shrink: 0;
+    background: rgba(232,72,85,0.12);
+    border: 1px solid rgba(232,72,85,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 0.78rem; font-weight: 800;
+    color: var(--accent);
+  }
+  .section-header h2 {
+    font-family: var(--font-display);
+    font-size: 1rem; font-weight: 700;
+    color: var(--text1);
+  }
+  .section-body { padding: 20px 24px; }
+  .section-body p { color: var(--text2); font-size: 0.9rem; margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  /* List */
+  .pp-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+    margin: 12px 0;
+  }
+  .pp-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.88rem; color: var(--text2);
+  }
+  .pp-list li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-weight: 600;
+    margin-top: 1px;
+  }
+
+  /* Highlight box */
+  .highlight {
+    background: rgba(34,197,94,0.06);
+    border: 1px solid rgba(34,197,94,0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.85rem; color: var(--text2);
+    margin: 12px 0;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .highlight.warn {
+    background: rgba(245,158,11,0.06);
+    border-color: rgba(245,158,11,0.15);
+  }
+  .highlight.info {
+    background: rgba(59,130,246,0.06);
+    border-color: rgba(59,130,246,0.15);
+  }
+
+  /* Contact card */
+  .contact-card {
+    background: linear-gradient(135deg, rgba(232,72,85,0.08) 0%, rgba(59,130,246,0.06) 100%);
+    border: 1px solid rgba(232,72,85,0.2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .contact-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .contact-card p { color: var(--text3); font-size: 0.85rem; margin-bottom: 16px; }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: var(--accent2);
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .contact-email:hover { border-color: var(--accent); }
+
+  /* Footer */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    color: var(--text3);
+    font-size: 0.78rem;
+  }
+
+  /* ── Language sections ── */
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+
+  /* Divider */
+  .divider {
+    height: 1px; background: var(--border);
+    margin: 16px 0;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 30px; }
+    main { padding: 0 16px 60px; }
+    .section-body { padding: 16px; }
+    .section-header { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">🛡️</div>
+    Neuro<span>Guard</span>
+  </a>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
+    <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════ O'ZBEKCHA ═══════════════════════ -->
+<div class="lang-section active" id="lang-uz">
+  <div class="hero">
+    <div class="hero-badge">📋 Rasmiy hujjat</div>
+    <h1>Maxfiylik Siyosati</h1>
+    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
+      NeuroGuard ilovasida shaxsiy ma'lumotlaringiz qanday saqlanishi va ishlatilishi haqida to'liq ma'lumot.
+    </p>
+    <div class="hero-meta">
+      <span>📅 Kuchga kirish sanasi: 1 Yanvar 2025</span>
+      <span>🔄 So'nggi yangilanish: 11 Mart 2026</span>
+    </div>
+  </div>
+
+  <main>
+    <!-- Summary cards -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-icon green">✅</div>
+        <div><h4>Ma'lumot saqlanmaydi</h4><p>Barcha ma'lumotlar faqat qurilmangizda saqlandi</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon red">🚫</div>
+        <div><h4>Uchinchi taraflarga berilmaydi</h4><p>Hech qanday reklama yoki analitika yo'q</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon blue">🔒</div>
+        <div><h4>Tibbiy diagnoz emas</h4><p>Bu ilova faqat umumiy ma'lumot beradi</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon yellow">📞</div>
+        <div><h4>Shifokor konsultatsiyasi</h4><p>Muhim qarorlar uchun shifokorga murojaat qiling</p></div>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2>Ilova Haqida</h2>
+      </div>
+      <div class="section-body">
+        <p><strong style="color:var(--text1);">NeuroGuard</strong> — bu insult va yurak-qon tomir kasalliklari xavfini baholashga yordam beruvchi mobil ilova. Ilova tibbiy ma'lumotlarni umumiy tarzda tahlil qiladi va foydalanuvchiga sog'liq haqida fikr bildiradi.</p>
+        <div class="highlight warn">
+          ⚠️ <span>Bu ilova tibbiy diagnoz qo'ymaydi va professional shifokor maslahatini almashtira olmaydi. Muhim sog'liq qarorlari uchun mutaxassis bilan maslahatlashing.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2>Qanday Ma'lumotlar Yig'iladi</h2>
+      </div>
+      <div class="section-body">
+        <p>Ilova faqat siz kiritgan ma'lumotlarni saqlaydi:</p>
+        <ul class="pp-list">
+          <li>Qon bosimi, yurak urishi, qand darajasi, BMI ko'rsatkichlari</li>
+          <li>Yosh, jins, vazn va bo'y (profil uchun)</li>
+          <li>Dori vaqtlari va eslatmalar</li>
+          <li>Shaxsiy tibbiy qaydnomalar</li>
+          <li>Tahlil tarixi</li>
+        </ul>
+        <div class="highlight">
+          ✅ <span><strong>Barcha ma'lumotlar faqat qurilmangizda</strong> (local storage) saqlanadi. Bizning serverlarimizga hech qanday ma'lumot yuborilmaydi.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2>Ma'lumotlar Qanday Ishlatiladi</h2>
+      </div>
+      <div class="section-body">
+        <p>Yig'ilgan ma'lumotlar faqat quyidagi maqsadlarda ishlatiladi:</p>
+        <ul class="pp-list">
+          <li>Insult xavfini hisoblash va tavsiyalar berish</li>
+          <li>Vital ko'rsatkichlar dinamikasini ko'rsatish</li>
+          <li>Dori jadvalidagi eslatmalar</li>
+          <li>Shifokor bilan bog'lanish uchun (faqat siz ruxsat berganda)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2>Telegram Integratsiyasi</h2>
+      </div>
+      <div class="section-body">
+        <p>Shifokorga vaqt band qilish tugmasini bosganda, quyidagi ma'lumotlar Telegram orqali shifokorga yuboriladi:</p>
+        <ul class="pp-list">
+          <li>Ism va telefon raqam (siz kiritgan)</li>
+          <li>Tanlangan shifokor va vaqt</li>
+          <li>Shikoyat matni (ixtiyoriy)</li>
+        </ul>
+        <div class="highlight info">
+          ℹ️ <span>Bu ma'lumotlar faqat <strong>siz tasdiqlagan taqdirda</strong> yuboriladi. Avtomatik ravishda hech narsa yuborilmaydi.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2>Uchinchi Tomon Xizmatlari</h2>
+      </div>
+      <div class="section-body">
+        <p>Ilova quyidagi tashqi xizmatlardan foydalanadi:</p>
+        <ul class="pp-list">
+          <li><strong style="color:var(--text1);">Google Fonts</strong> — shrift yuklash uchun (internet kerak)</li>
+          <li><strong style="color:var(--text1);">Font Awesome</strong> — ikonkalar uchun (internet kerak)</li>
+          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — shifokorga xabar yuborish uchun (faqat siz tasdiqlaganda)</li>
+        </ul>
+        <p>Reklama, analitika yoki foydalanuvchi kuzatuvi yo'q.</p>
+      </div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h2>Ma'lumotlarni O'chirish</h2>
+      </div>
+      <div class="section-body">
+        <p>Barcha ma'lumotlarni istalgan vaqt o'chirishingiz mumkin:</p>
+        <ul class="pp-list">
+          <li>Ilova ichidagi "Tarix → Tozalash" tugmasi orqali</li>
+          <li>Telefoningiz sozlamalaridan ilovani o'chirish orqali</li>
+          <li>Android: Sozlamalar → Ilovalar → NeuroGuard → Ma'lumotlarni tozalash</li>
+        </ul>
+        <div class="highlight">
+          ✅ <span>Ilova o'chirilganda <strong>barcha ma'lumotlar butunlay yo'qoladi</strong>. Biz hech qanday nusxa saqlamaymiz.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <h2>Bolalar Maxfiyligi</h2>
+      </div>
+      <div class="section-body">
+        <p>NeuroGuard 16 yoshdan kichik foydalanuvchilarga mo'ljallanmagan. Agar siz ota-ona bo'lsangiz va farzandingiz ilovadan foydalanayotganini bilsangiz, bizga xabar bering.</p>
+      </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <h2>O'zgarishlar</h2>
+      </div>
+      <div class="section-body">
+        <p>Bu siyosat o'zgartirilgan taqdirda, yangi versiya ilovaning keyingi yangilanishida e'lon qilinadi. Muhim o'zgarishlar haqida ilova ichida xabardor qilinasiz.</p>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-card">
+      <h3>Savollaringiz bormi?</h3>
+      <p>Maxfiylik siyosati bo'yicha savol yoki murojaat uchun bizga yozing</p>
+      <a href="mailto:privacy@neuroguard.uz" class="contact-email">
+        ✉️ privacy@neuroguard.uz
+      </a>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════ РУССКИЙ ═══════════════════════ -->
+<div class="lang-section" id="lang-ru">
+  <div class="hero">
+    <div class="hero-badge">📋 Официальный документ</div>
+    <h1>Политика конфиденциальности</h1>
+    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
+      Полная информация о том, как NeuroGuard хранит и использует ваши личные данные.
+    </p>
+    <div class="hero-meta">
+      <span>📅 Дата вступления в силу: 1 января 2025</span>
+      <span>🔄 Последнее обновление: 11 марта 2026</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-icon green">✅</div>
+        <div><h4>Данные не передаются</h4><p>Всё хранится только на вашем устройстве</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon red">🚫</div>
+        <div><h4>Без рекламы и трекинга</h4><p>Нет аналитики и сторонних трекеров</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon blue">🔒</div>
+        <div><h4>Не медицинский диагноз</h4><p>Приложение даёт лишь общую информацию</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon yellow">📞</div>
+        <div><h4>Консультация врача</h4><p>Для важных решений обращайтесь к специалисту</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">1</div><h2>О приложении</h2></div>
+      <div class="section-body">
+        <p><strong style="color:var(--text1);">NeuroGuard</strong> — мобильное приложение для оценки риска инсульта и сердечно-сосудистых заболеваний. Приложение анализирует медицинские данные в общих чертах и предоставляет рекомендации по здоровью.</p>
+        <div class="highlight warn">⚠️ <span>Это приложение <strong>не ставит медицинский диагноз</strong> и не заменяет консультацию врача. Для важных решений обращайтесь к специалисту.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">2</div><h2>Какие данные собираются</h2></div>
+      <div class="section-body">
+        <p>Приложение сохраняет только те данные, которые вы вводите:</p>
+        <ul class="pp-list">
+          <li>Артериальное давление, пульс, уровень сахара, ИМТ</li>
+          <li>Возраст, пол, вес и рост (для профиля)</li>
+          <li>Расписание приёма лекарств и напоминания</li>
+          <li>Личные медицинские заметки</li>
+          <li>История анализов</li>
+        </ul>
+        <div class="highlight">✅ <span><strong>Все данные хранятся только на вашем устройстве</strong> (local storage). На наши серверы ничего не отправляется.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">3</div><h2>Как используются данные</h2></div>
+      <div class="section-body">
+        <p>Собранные данные используются исключительно для:</p>
+        <ul class="pp-list">
+          <li>Расчёта риска инсульта и формирования рекомендаций</li>
+          <li>Отображения динамики показателей</li>
+          <li>Напоминаний о приёме лекарств</li>
+          <li>Связи с врачом (только с вашего разрешения)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">4</div><h2>Интеграция с Telegram</h2></div>
+      <div class="section-body">
+        <p>При нажатии кнопки записи к врачу следующие данные отправляются через Telegram:</p>
+        <ul class="pp-list">
+          <li>Имя и номер телефона (введённые вами)</li>
+          <li>Выбранный врач и время</li>
+          <li>Текст жалобы (по желанию)</li>
+        </ul>
+        <div class="highlight info">ℹ️ <span>Данные отправляются <strong>только после вашего подтверждения</strong>. Ничего не отправляется автоматически.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">5</div><h2>Сторонние сервисы</h2></div>
+      <div class="section-body">
+        <p>Приложение использует следующие внешние сервисы:</p>
+        <ul class="pp-list">
+          <li><strong style="color:var(--text1);">Google Fonts</strong> — загрузка шрифтов</li>
+          <li><strong style="color:var(--text1);">Font Awesome</strong> — иконки</li>
+          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — только при записи к врачу</li>
+        </ul>
+        <p>Реклама, аналитика и слежка за пользователем отсутствуют.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">6</div><h2>Удаление данных</h2></div>
+      <div class="section-body">
+        <p>Вы можете удалить все данные в любое время:</p>
+        <ul class="pp-list">
+          <li>Через кнопку «История → Очистить» в приложении</li>
+          <li>Удалив приложение с телефона</li>
+          <li>Android: Настройки → Приложения → NeuroGuard → Очистить данные</li>
+        </ul>
+        <div class="highlight">✅ <span>При удалении приложения <strong>все данные полностью удаляются</strong>. Мы не храним копий.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">7</div><h2>Конфиденциальность детей</h2></div>
+      <div class="section-body">
+        <p>NeuroGuard не предназначен для пользователей младше 16 лет. Если вы родитель и ваш ребёнок использует приложение, пожалуйста, свяжитесь с нами.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">8</div><h2>Изменения политики</h2></div>
+      <div class="section-body">
+        <p>При обновлении политики новая версия будет опубликована в следующем обновлении приложения. О существенных изменениях вы будете уведомлены внутри приложения.</p>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Есть вопросы?</h3>
+      <p>По вопросам конфиденциальности пишите нам</p>
+      <a href="mailto:privacy@neuroguard.uz" class="contact-email">✉️ privacy@neuroguard.uz</a>
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════ ENGLISH ═══════════════════════ -->
+<div class="lang-section" id="lang-en">
+  <div class="hero">
+    <div class="hero-badge">📋 Official Document</div>
+    <h1>Privacy Policy</h1>
+    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
+      Full information about how NeuroGuard stores and uses your personal data.
+    </p>
+    <div class="hero-meta">
+      <span>📅 Effective: January 1, 2025</span>
+      <span>🔄 Last updated: March 11, 2026</span>
+    </div>
+  </div>
+
+  <main>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-icon green">✅</div>
+        <div><h4>Data stays on device</h4><p>Everything is stored locally on your phone only</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon red">🚫</div>
+        <div><h4>No ads or tracking</h4><p>Zero analytics or third-party trackers</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon blue">🔒</div>
+        <div><h4>Not a medical diagnosis</h4><p>The app provides general information only</p></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-icon yellow">📞</div>
+        <div><h4>Consult a doctor</h4><p>For important decisions, see a specialist</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">1</div><h2>About the App</h2></div>
+      <div class="section-body">
+        <p><strong style="color:var(--text1);">NeuroGuard</strong> is a mobile application that helps assess the risk of stroke and cardiovascular disease. The app analyses medical data in general terms and provides health recommendations.</p>
+        <div class="highlight warn">⚠️ <span>This app <strong>does not provide a medical diagnosis</strong> and cannot replace professional medical advice. For important health decisions, please consult a specialist.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">2</div><h2>What Data Is Collected</h2></div>
+      <div class="section-body">
+        <p>The app only saves data that you enter:</p>
+        <ul class="pp-list">
+          <li>Blood pressure, heart rate, glucose level, BMI</li>
+          <li>Age, sex, weight and height (for profile)</li>
+          <li>Medication schedules and reminders</li>
+          <li>Personal medical notes</li>
+          <li>Assessment history</li>
+        </ul>
+        <div class="highlight">✅ <span><strong>All data is stored only on your device</strong> (local storage). Nothing is sent to our servers.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">3</div><h2>How Data Is Used</h2></div>
+      <div class="section-body">
+        <p>Collected data is used solely for:</p>
+        <ul class="pp-list">
+          <li>Calculating stroke risk and generating recommendations</li>
+          <li>Displaying vital sign trends</li>
+          <li>Medication reminders</li>
+          <li>Contacting a doctor (only with your permission)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">4</div><h2>Telegram Integration</h2></div>
+      <div class="section-body">
+        <p>When you tap the "Book Appointment" button, the following data is sent via Telegram:</p>
+        <ul class="pp-list">
+          <li>Name and phone number (entered by you)</li>
+          <li>Selected doctor and appointment time</li>
+          <li>Complaint text (optional)</li>
+        </ul>
+        <div class="highlight info">ℹ️ <span>Data is sent <strong>only after your explicit confirmation</strong>. Nothing is sent automatically.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">5</div><h2>Third-Party Services</h2></div>
+      <div class="section-body">
+        <p>The app uses the following external services:</p>
+        <ul class="pp-list">
+          <li><strong style="color:var(--text1);">Google Fonts</strong> — font loading</li>
+          <li><strong style="color:var(--text1);">Font Awesome</strong> — icons</li>
+          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — only when booking a doctor</li>
+        </ul>
+        <p>No advertising, analytics, or user tracking of any kind.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">6</div><h2>Deleting Your Data</h2></div>
+      <div class="section-body">
+        <p>You can delete all data at any time:</p>
+        <ul class="pp-list">
+          <li>Via the "History → Clear" button inside the app</li>
+          <li>By uninstalling the app from your phone</li>
+          <li>Android: Settings → Apps → NeuroGuard → Clear Data</li>
+        </ul>
+        <div class="highlight">✅ <span>Uninstalling the app <strong>permanently deletes all data</strong>. We keep no copies.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">7</div><h2>Children's Privacy</h2></div>
+      <div class="section-body">
+        <p>NeuroGuard is not intended for users under 16 years of age. If you are a parent and your child is using the app, please contact us.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header"><div class="section-num">8</div><h2>Changes to This Policy</h2></div>
+      <div class="section-body">
+        <p>If this policy is updated, the new version will be published in the next app update. You will be notified inside the app of any significant changes.</p>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <h3>Have questions?</h3>
+      <p>For privacy-related questions or requests, write to us</p>
+      <a href="mailto:privacy@neuroguard.uz" class="contact-email">✉️ privacy@neuroguard.uz</a>
+    </div>
+  </main>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025–2026 NeuroGuard AI Pro · uz.neuroguard.app · Barcha huquqlar himoyalangan</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('lang-' + lang).classList.add('active');
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    document.documentElement.lang = lang;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
