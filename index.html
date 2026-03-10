@@ -1,778 +1,2364 @@
+
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NeuroGuard — Maxfiylik Siyosati</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NeuroGuard AI Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg: #07070d;
-    --bg2: #0f0f1a;
-    --bg3: #161622;
-    --border: rgba(255,255,255,0.07);
-    --accent: #e84855;
-    --accent2: #ff6b6b;
-    --blue: #3b82f6;
-    --green: #22c55e;
-    --text1: #f0f0f8;
-    --text2: #9898b8;
-    --text3: #55556a;
-    --font-display: 'Syne', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
+:root {
+  --bg: #080c14;
+  --bg2: #0d1525;
+  --bg3: #111e33;
+  --card: #0f1a2e;
+  --card2: #162236;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --accent: #e63950;
+  --accent2: #ff5f6d;
+  --accent-glow: rgba(230,57,80,0.35);
+  --blue: #3b82f6;
+  --blue-glow: rgba(59,130,246,0.3);
+  --cyan: #06b6d4;
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --text: #e8edf5;
+  --text2: #8899bb;
+  --text3: #4a5a7a;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 16px;
+  --radius-lg: 24px;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+body.light-mode {
+  --bg: #f0f4f8; --bg2: #e8eef5; --bg3: #dce5ef;
+  --card: #ffffff; --card2: #f5f8fb;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --accent: #c41e38; --accent2: #e63950; --accent-glow: rgba(196,30,56,0.2);
+  --blue: #2563eb; --blue-glow: rgba(37,99,235,0.2);
+  --cyan: #0891b2; --green: #059669; --yellow: #d97706;
+  --text: #111827; --text2: #4b5a6e; --text3: #8a9ab0;
+}
+body.light-mode .bg-grid { background-image: linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px); }
+body.light-mode .orb1 { background:rgba(196,30,56,0.07); }
+body.light-mode .orb2 { background:rgba(37,99,235,0.06); }
+body.light-mode .orb3 { background:rgba(8,145,178,0.05); }
+body.light-mode .topbar { background:rgba(240,244,248,0.95); border-bottom-color:rgba(0,0,0,0.08); }
+body.light-mode .sidebar { background:var(--card); border-right-color:var(--border); box-shadow:2px 0 20px rgba(0,0,0,0.06); }
+body.light-mode ::-webkit-scrollbar-track { background:var(--bg); }
+body.light-mode ::-webkit-scrollbar-thumb { background:var(--accent); }
+body.light-mode .nav-item { color:var(--text2); }
+body.light-mode .nav-item:hover { background:rgba(0,0,0,0.04); color:var(--text); }
+body.light-mode .nav-item.active { background:rgba(196,30,56,0.09); color:var(--accent); border-color:rgba(196,30,56,0.2); }
+body.light-mode .profile-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .logo-sub { color:var(--text3); }
+body.light-mode .nav-label { color:var(--text3); }
+body.light-mode .stat-card { background:var(--card); border-color:var(--border); box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+body.light-mode .card { background:var(--card); border-color:var(--border); box-shadow:0 2px 16px rgba(0,0,0,0.05); }
+body.light-mode .card:hover { border-color:var(--border2); box-shadow:0 4px 24px rgba(0,0,0,0.08); }
+body.light-mode .form-input { background:var(--bg3); border-color:var(--border); color:var(--text); }
+body.light-mode .form-select { background-color:var(--bg3); border-color:var(--border); color:var(--text); }
+body.light-mode .form-input::placeholder { color:var(--text3); }
+body.light-mode .form-input:focus,body.light-mode .form-select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(196,30,56,0.1); }
+body.light-mode .vital-monitor { background:var(--bg3); border-color:var(--border); }
+body.light-mode .factor-row { background:var(--bg3); border-color:var(--border); }
+body.light-mode .med-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .note-card { background:var(--bg3); border-color:var(--border); }
+body.light-mode .lab-row { background:var(--bg3); border-color:var(--border); }
+body.light-mode .doctor-card { background:var(--card); border-color:var(--border); }
+body.light-mode .doctor-top { background:var(--bg3); }
+body.light-mode .time-slot { border-color:var(--border); color:var(--text); }
+body.light-mode .modal-box { background:var(--card); border-color:var(--border2); box-shadow:0 20px 60px rgba(0,0,0,0.15); }
+body.light-mode .modal-close { background:var(--bg3); border-color:var(--border); color:var(--text2); }
+body.light-mode .toast { background:#ffffff; border-color:var(--border2); box-shadow:0 4px 20px rgba(0,0,0,0.12); }
+body.light-mode .bottom-nav { background:#ffffff; border-top-color:var(--border2); box-shadow:0 -4px 20px rgba(0,0,0,0.08); }
+body.light-mode .bn-item { color:#9aabb8; }
+body.light-mode .bn-item.active { color:var(--accent); }
+body.light-mode .sidebar-backdrop { background:rgba(0,0,0,0.4); }
+body.light-mode .hamburger-btn { background:var(--card); border-color:var(--border); color:var(--text); }
+body.light-mode .achievement { background:var(--bg3); border-color:var(--border); }
+body.light-mode .progress-track { background:var(--bg3); }
+body.light-mode .history-table th { border-bottom-color:var(--border); }
+body.light-mode .history-table td { border-bottom-color:var(--border); }
+body.light-mode .history-table tr:hover td { background:rgba(0,0,0,0.02); }
+body.light-mode .profile-header-bg { background:var(--card); border-color:var(--border); }
+body.light-mode .profile-header-bg::before { background:radial-gradient(ellipse at right center,rgba(196,30,56,0.08),transparent); }
+body.light-mode .icon-btn { background:var(--card); border-color:var(--border); color:var(--text2); }
+body.light-mode .icon-btn:hover { background:var(--bg3); color:var(--text); }
+body.light-mode .btn-ghost { color:var(--text2); border-color:var(--border); }
+body.light-mode .btn-ghost:hover { background:var(--bg3); color:var(--text); border-color:var(--border2); }
+body.light-mode .rec-item { background:rgba(37,99,235,0.06); }
+body.light-mode .doctor-alert { background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.25); }
+body.light-mode .tag-red { background:rgba(196,30,56,0.1); color:var(--accent); border-color:rgba(196,30,56,0.25); }
+body.light-mode .tag-blue { background:rgba(37,99,235,0.1); color:var(--blue); border-color:rgba(37,99,235,0.25); }
+body.light-mode .tag-green { background:rgba(5,150,105,0.1); color:var(--green); border-color:rgba(5,150,105,0.25); }
+body.light-mode .tag-yellow { background:rgba(217,119,6,0.1); color:var(--yellow); border-color:rgba(217,119,6,0.25); }
+body.light-mode .logo-icon { box-shadow:0 0 16px rgba(196,30,56,0.25); }
 
-  body {
-    background: var(--bg);
-    color: var(--text1);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.ob-dot { width:8px; height:8px; border-radius:50%; background:var(--border2); transition:all 0.3s; }
+.ob-dot.active { width:24px; background:var(--accent); }
+.ob-slide { animation: fadeInUp 0.4s ease; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 
-  /* ── Background ── */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -200px; left: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(232,72,85,0.08) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -150px; right: -150px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
+.theme-toggle-btn {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 14px; border-radius:50px;
+  background:var(--bg3); border:1.5px solid var(--border2);
+  color:var(--text2); cursor:pointer; transition:all 0.3s;
+  font-size:0.82rem; font-weight:600; font-family:var(--font-body);
+  -webkit-tap-highlight-color:transparent;
+}
+.theme-toggle-btn:hover { border-color:var(--accent); color:var(--text); }
+.theme-toggle-track { width:36px; height:20px; border-radius:10px; background:var(--bg); border:1.5px solid var(--border2); position:relative; transition:all 0.3s; flex-shrink:0; }
+body.light-mode .theme-toggle-track { background:var(--accent); border-color:var(--accent); }
+.theme-toggle-thumb { width:14px; height:14px; border-radius:50%; background:var(--text3); position:absolute; top:1px; left:2px; transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+body.light-mode .theme-toggle-thumb { transform:translateX(16px); background:white; }
 
-  /* ── Header ── */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(7,7,13,0.85);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); overflow-x:hidden; min-height:100vh; }
 
-  .logo {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--font-display);
-    font-weight: 800; font-size: 1.1rem;
-    color: var(--text1);
-    text-decoration: none;
-  }
-  .logo-icon {
-    width: 32px; height: 32px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.9rem;
-  }
-  .logo span { color: var(--accent); }
+.bg-grid { position:fixed; inset:0; z-index:0; background-image:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; }
+.bg-orbs { position:fixed; inset:0; z-index:0; pointer-events:none; }
+.orb { position:absolute; border-radius:50%; filter:blur(120px); animation:orbFloat 20s infinite ease-in-out; }
+.orb1 { width:600px; height:600px; background:rgba(230,57,80,0.08); top:-200px; right:-100px; }
+.orb2 { width:500px; height:500px; background:rgba(59,130,246,0.07); bottom:-200px; left:-100px; animation-delay:-10s; }
+.orb3 { width:300px; height:300px; background:rgba(6,182,212,0.05); top:50%; left:50%; animation-delay:-5s; }
+@keyframes orbFloat { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(30px,-20px) scale(1.05);} 66%{transform:translate(-20px,30px) scale(0.95);} }
 
-  /* Lang switcher */
-  .lang-switcher {
-    display: flex; gap: 4px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 4px;
-  }
-  .lang-btn {
-    padding: 5px 12px;
-    border: none; background: transparent;
-    color: var(--text2);
-    font-family: var(--font-body);
-    font-size: 0.78rem; font-weight: 500;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.05em;
-  }
-  .lang-btn.active {
-    background: var(--accent);
-    color: white;
-  }
-  .lang-btn:hover:not(.active) { color: var(--text1); background: rgba(255,255,255,0.05); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--accent); border-radius:3px; }
 
-  /* ── Hero ── */
-  .hero {
-    position: relative; z-index: 1;
-    max-width: 800px; margin: 0 auto;
-    padding: 60px 24px 40px;
-    text-align: center;
-  }
+.app { display:flex; min-height:100vh; position:relative; z-index:1; }
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(232,72,85,0.1);
-    border: 1px solid rgba(232,72,85,0.25);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 0.78rem; font-weight: 500;
-    color: var(--accent2);
-    margin-bottom: 24px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+.sidebar { width:260px; background:var(--card); border-right:1px solid var(--border); position:fixed; height:100vh; left:0; top:0; display:flex; flex-direction:column; z-index:100; overflow-y:auto; }
+.sidebar-logo { padding:28px 24px 20px; border-bottom:1px solid var(--border); }
+.logo-mark { display:flex; align-items:center; gap:12px; }
+.logo-icon { width:42px; height:42px; background:var(--accent); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; box-shadow:0 0 20px var(--accent-glow); }
+.logo-text { font-family:var(--font-display); font-size:1.1rem; font-weight:800; }
+.logo-sub { font-size:0.72rem; color:var(--text2); font-family:var(--font-mono); letter-spacing:0.1em; margin-top:2px; }
+.nav-section { padding:16px 12px 8px; }
+.nav-label { font-size:0.65rem; letter-spacing:0.12em; color:var(--text3); text-transform:uppercase; font-family:var(--font-mono); padding:0 12px; margin-bottom:6px; }
+.nav-item { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:10px; cursor:pointer; transition:all 0.2s; font-size:0.9rem; font-weight:500; color:var(--text2); margin-bottom:2px; -webkit-tap-highlight-color:transparent; user-select:none; }
+.nav-item:hover { background:var(--border); color:var(--text); }
+.nav-item.active { background:rgba(230,57,80,0.15); color:var(--accent); border:1px solid rgba(230,57,80,0.25); }
+.nav-item i { width:18px; text-align:center; font-size:0.95rem; }
+.nav-badge { margin-left:auto; background:var(--accent); color:white; font-size:0.7rem; padding:2px 7px; border-radius:20px; font-weight:700; }
+.sidebar-profile { margin-top:auto; padding:16px; border-top:1px solid var(--border); }
+.profile-card { background:var(--bg3); border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:all 0.2s; border:1px solid var(--border); }
+.profile-card:hover { border-color:var(--accent); }
+.avatar { width:40px; height:40px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:700; font-family:var(--font-display); }
+.profile-name { font-weight:600; font-size:0.9rem; }
+.profile-points { font-size:0.75rem; color:var(--yellow); display:flex; align-items:center; gap:4px; margin-top:2px; }
 
-  .hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    margin-bottom: 16px;
-    background: linear-gradient(135deg, #f0f0f8 0%, #9898b8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.main { margin-left:260px; flex:1; min-height:100vh; }
 
-  .hero-meta {
-    display: flex; align-items: center; justify-content: center;
-    gap: 20px; flex-wrap: wrap;
-    font-size: 0.82rem; color: var(--text3);
-    margin-top: 12px;
-  }
-  .hero-meta span { display: flex; align-items: center; gap: 5px; }
+.topbar { position:sticky; top:0; z-index:90; background:rgba(8,12,20,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+.topbar-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; }
+.topbar-sub { font-size:0.8rem; color:var(--text2); margin-top:2px; }
+.topbar-right { display:flex; align-items:center; gap:12px; }
 
-  /* ── Main content ── */
-  main {
-    position: relative; z-index: 1;
-    max-width: 800px; margin: 0 auto;
-    padding: 0 24px 80px;
-  }
+.sos-btn { display:flex; align-items:center; gap:8px; padding:9px 18px; background:rgba(239,68,68,0.15); border:1.5px solid rgba(239,68,68,0.5); border-radius:50px; color:#ef4444; font-weight:600; font-size:0.85rem; cursor:pointer; transition:all 0.2s; animation:sosPulse 2s infinite; }
+.sos-btn:hover { background:rgba(239,68,68,0.25); transform:scale(1.03); }
+@keyframes sosPulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,0.4);} 50%{box-shadow:0 0 0 6px rgba(239,68,68,0);} }
 
-  /* Quick summary cards */
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-  .summary-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px 20px;
-    display: flex; align-items: flex-start; gap: 14px;
-    transition: border-color 0.2s;
-  }
-  .summary-card:hover { border-color: rgba(232,72,85,0.3); }
-  .summary-icon {
-    width: 36px; height: 36px; flex-shrink: 0;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-  }
-  .summary-icon.green  { background: rgba(34,197,94,0.12);  }
-  .summary-icon.red    { background: rgba(232,72,85,0.12);   }
-  .summary-icon.blue   { background: rgba(59,130,246,0.12);  }
-  .summary-icon.yellow { background: rgba(245,158,11,0.12);  }
-  .summary-card h4 { font-size: 0.82rem; font-weight: 600; color: var(--text1); margin-bottom: 3px; }
-  .summary-card p  { font-size: 0.76rem; color: var(--text3); line-height: 1.5; }
+.icon-btn { width:38px; height:38px; border-radius:10px; background:var(--card); border:1px solid var(--border); color:var(--text2); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s; font-size:0.9rem; }
+.icon-btn:hover { color:var(--text); border-color:var(--border2); background:var(--card2); }
 
-  /* Section */
-  .section {
-    margin-bottom: 40px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
-  }
-  .section-header {
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-num {
-    width: 28px; height: 28px; flex-shrink: 0;
-    background: rgba(232,72,85,0.12);
-    border: 1px solid rgba(232,72,85,0.2);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display);
-    font-size: 0.78rem; font-weight: 800;
-    color: var(--accent);
-  }
-  .section-header h2 {
-    font-family: var(--font-display);
-    font-size: 1rem; font-weight: 700;
-    color: var(--text1);
-  }
-  .section-body { padding: 20px 24px; }
-  .section-body p { color: var(--text2); font-size: 0.9rem; margin-bottom: 12px; }
-  .section-body p:last-child { margin-bottom: 0; }
+.page { padding:32px; display:none; }
+.page.active { display:block; }
 
-  /* List */
-  .pp-list {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 8px;
-    margin: 12px 0;
-  }
-  .pp-list li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 0.88rem; color: var(--text2);
-  }
-  .pp-list li::before {
-    content: '→';
-    color: var(--accent);
-    flex-shrink: 0;
-    font-weight: 600;
-    margin-top: 1px;
-  }
+.section-header { margin-bottom:24px; }
+.section-title { font-family:var(--font-display); font-size:1.6rem; font-weight:800; margin-bottom:4px; }
+.section-desc { color:var(--text2); font-size:0.9rem; }
+.tag { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:600; font-family:var(--font-mono); }
+.tag-red { background:rgba(230,57,80,0.15); color:var(--accent); border:1px solid rgba(230,57,80,0.3); }
+.tag-blue { background:rgba(59,130,246,0.15); color:var(--blue); border:1px solid rgba(59,130,246,0.3); }
+.tag-green { background:rgba(16,185,129,0.15); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+.tag-yellow { background:rgba(245,158,11,0.15); color:var(--yellow); border:1px solid rgba(245,158,11,0.3); }
 
-  /* Highlight box */
-  .highlight {
-    background: rgba(34,197,94,0.06);
-    border: 1px solid rgba(34,197,94,0.15);
-    border-radius: 10px;
-    padding: 14px 16px;
-    font-size: 0.85rem; color: var(--text2);
-    margin: 12px 0;
-    display: flex; gap: 10px; align-items: flex-start;
-  }
-  .highlight.warn {
-    background: rgba(245,158,11,0.06);
-    border-color: rgba(245,158,11,0.15);
-  }
-  .highlight.info {
-    background: rgba(59,130,246,0.06);
-    border-color: rgba(59,130,246,0.15);
-  }
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px; transition:border-color 0.2s; }
+.card:hover { border-color:var(--border2); }
+.card-sm { padding:18px; border-radius:var(--radius); }
 
-  /* Contact card */
-  .contact-card {
-    background: linear-gradient(135deg, rgba(232,72,85,0.08) 0%, rgba(59,130,246,0.06) 100%);
-    border: 1px solid rgba(232,72,85,0.2);
-    border-radius: 16px;
-    padding: 28px 24px;
-    text-align: center;
-    margin-top: 48px;
-  }
-  .contact-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.1rem; font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .contact-card p { color: var(--text3); font-size: 0.85rem; margin-bottom: 16px; }
-  .contact-email {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
-    color: var(--accent2);
-    text-decoration: none;
-    transition: border-color 0.2s;
-  }
-  .contact-email:hover { border-color: var(--accent); }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 
-  /* Footer */
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 24px;
-    text-align: center;
-    color: var(--text3);
-    font-size: 0.78rem;
-  }
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; position:relative; overflow:hidden; transition:all 0.3s; }
+.stat-card:hover { transform:translateY(-2px); border-color:var(--border2); }
+.stat-glow { position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; filter:blur(40px); opacity:0.4; }
+.stat-icon { width:42px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; margin-bottom:16px; }
+.stat-value { font-family:var(--font-display); font-size:2rem; font-weight:800; line-height:1; }
+.stat-label { color:var(--text2); font-size:0.82rem; margin-top:6px; }
+.stat-change { font-size:0.78rem; margin-top:8px; display:flex; align-items:center; gap:4px; }
+.stat-up { color:var(--green); }
+.stat-down { color:var(--accent); }
 
-  /* ── Language sections ── */
-  .lang-section { display: none; }
-  .lang-section.active { display: block; }
+.risk-gauge-wrap { display:flex; flex-direction:column; align-items:center; padding:32px 24px; }
 
-  /* Divider */
-  .divider {
-    height: 1px; background: var(--border);
-    margin: 16px 0;
-  }
+.progress-track { height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
+.progress-fill-bar { height:100%; border-radius:3px; transition:width 1s ease; }
 
-  @media (max-width: 600px) {
-    .hero { padding: 40px 16px 30px; }
-    main { padding: 0 16px 60px; }
-    .section-body { padding: 16px; }
-    .section-header { padding: 16px; }
-  }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.form-group { margin-bottom:16px; }
+.form-label { font-size:0.82rem; font-weight:600; color:var(--text2); margin-bottom:8px; display:flex; align-items:center; gap:6px; letter-spacing:0.03em; }
+.form-input { width:100%; background:var(--bg3); border:1.5px solid var(--border); border-radius:10px; padding:11px 14px; color:var(--text); font-family:var(--font-body); font-size:0.9rem; transition:all 0.2s; outline:none; }
+.form-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
+.form-input::placeholder { color:var(--text3); }
+.form-select {
+  width:100%; background-color:var(--bg3);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238899bb' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px;
+  border:1.5px solid var(--border); border-radius:10px; padding:11px 38px 11px 14px;
+  color:var(--text); font-size:0.9rem; font-family:var(--font-body); cursor:pointer; outline:none;
+  transition:all 0.2s; appearance:none; -webkit-appearance:none; -moz-appearance:none;
+}
+.form-select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
+body.light-mode .form-select {
+  background-color:var(--bg3);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b5a6e' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px;
+}
+
+.checkbox-list { display:flex; flex-direction:column; gap:10px; }
+.checkbox-item { display:flex; align-items:center; gap:10px; cursor:pointer; padding:8px 10px; border-radius:8px; transition:background 0.15s; }
+.checkbox-item:hover { background:var(--bg3); }
+.checkbox-item input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
+.checkbox-item span { font-size:0.88rem; color:var(--text2); }
+
+.btn { display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:10px; font-family:var(--font-body); font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; border:none; outline:none; -webkit-tap-highlight-color:transparent; user-select:none; }
+.btn-accent { background:var(--accent); color:white; box-shadow:0 4px 20px rgba(230,57,80,0.35); }
+.btn-accent:hover { background:var(--accent2); transform:translateY(-1px); box-shadow:0 6px 28px rgba(230,57,80,0.5); }
+.btn-ghost { background:transparent; color:var(--text2); border:1.5px solid var(--border); }
+.btn-ghost:hover { color:var(--text); border-color:var(--border2); background:var(--card); }
+.btn-blue { background:var(--blue); color:white; box-shadow:0 4px 20px var(--blue-glow); }
+.btn-blue:hover { opacity:0.9; transform:translateY(-1px); }
+.btn-danger { background:rgba(239,68,68,0.2); color:#ef4444; border:1px solid rgba(239,68,68,0.3); }
+.btn-danger:hover { background:rgba(239,68,68,0.3); }
+.btn-success { background:rgba(16,185,129,0.15); color:var(--green); border:1px solid rgba(16,185,129,0.3); }
+.btn-success:hover { background:rgba(16,185,129,0.25); }
+.btn-full { width:100%; justify-content:center; }
+.btn-lg { padding:14px 28px; font-size:0.95rem; border-radius:12px; }
+
+.factor-row { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:var(--bg3); border-radius:10px; margin-bottom:8px; border:1px solid var(--border); }
+.factor-name { font-size:0.88rem; font-weight:500; display:flex; align-items:center; gap:8px; }
+.factor-badge { padding:4px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; font-family:var(--font-mono); }
+.fb-good { background:rgba(16,185,129,0.15); color:var(--green); }
+.fb-warn { background:rgba(245,158,11,0.15); color:var(--yellow); }
+.fb-bad { background:rgba(230,57,80,0.15); color:var(--accent); }
+
+.rec-item { display:flex; align-items:flex-start; gap:12px; padding:12px 16px; background:rgba(59,130,246,0.07); border-left:3px solid var(--blue); border-radius:0 10px 10px 0; margin-bottom:8px; font-size:0.88rem; }
+.rec-item .rec-icon { color:var(--blue); margin-top:2px; flex-shrink:0; }
+
+.doctor-alert { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.4); border-radius:12px; padding:18px 20px; display:flex; gap:14px; align-items:flex-start; margin-top:16px; }
+.alert-icon { font-size:2rem; flex-shrink:0; }
+.alert-title { font-weight:700; font-size:1rem; color:#ef4444; margin-bottom:4px; }
+.alert-desc { font-size:0.85rem; color:var(--text2); margin-bottom:10px; }
+
+.note-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:12px; transition:all 0.2s; position:relative; }
+.note-card:hover { border-color:var(--accent); }
+.note-date { font-size:0.75rem; color:var(--text3); font-family:var(--font-mono); margin-bottom:6px; }
+.note-content { font-size:0.88rem; line-height:1.6; color:var(--text); }
+.note-tag-row { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+
+.med-card { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:10px; transition:all 0.2s; }
+.med-card:hover { border-color:var(--border2); }
+.med-card.taken { opacity:0.55; }
+.med-header-row { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.med-name { font-weight:700; font-size:1rem; }
+.med-time { font-family:var(--font-mono); font-size:0.82rem; color:var(--accent); background:rgba(230,57,80,0.12); padding:3px 10px; border-radius:6px; }
+.med-meta { display:flex; gap:16px; font-size:0.82rem; color:var(--text2); margin-bottom:12px; flex-wrap:wrap; }
+.med-meta span { display:flex; align-items:center; gap:5px; }
+.med-actions-row { display:flex; gap:8px; }
+
+.lab-row { display:flex; align-items:center; padding:14px 16px; background:var(--bg3); border-radius:10px; margin-bottom:8px; border:1px solid var(--border); gap:16px; }
+.lab-name { flex:1; font-weight:500; font-size:0.9rem; }
+.lab-value { font-family:var(--font-mono); font-size:1.1rem; font-weight:700; }
+.lab-normal { color:var(--text3); font-size:0.78rem; }
+
+.doctor-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.3s; cursor:pointer; }
+.doctor-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+.doctor-top { background:var(--bg3); padding:24px; text-align:center; }
+.doctor-avatar { width:80px; height:80px; border-radius:50%; background:var(--accent); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:2rem; border:3px solid rgba(230,57,80,0.4); }
+.doctor-name { font-family:var(--font-display); font-weight:700; font-size:1.05rem; }
+.doctor-spec { font-size:0.82rem; color:var(--accent); margin-top:4px; }
+.doctor-rating { display:flex; align-items:center; gap:4px; justify-content:center; margin-top:8px; color:var(--yellow); font-size:0.85rem; }
+.doctor-body { padding:18px; }
+.time-slots { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:12px 0; }
+.time-slot { padding:7px; text-align:center; border-radius:8px; font-size:0.78rem; border:1px solid var(--border); cursor:pointer; transition:all 0.2s; font-family:var(--font-mono); }
+.time-slot:hover:not(.slot-taken) { border-color:var(--accent); color:var(--accent); background:rgba(230,57,80,0.08); }
+.time-slot.slot-taken { opacity:0.35; cursor:not-allowed; text-decoration:line-through; }
+.time-slot.slot-selected { background:var(--accent); color:white; border-color:var(--accent); }
+
+.profile-header-bg { background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; margin-bottom:24px; position:relative; overflow:hidden; }
+.profile-header-bg::before { content:''; position:absolute; top:0; right:0; width:300px; height:100%; background:radial-gradient(ellipse at right center,rgba(230,57,80,0.12),transparent); }
+.profile-avatar-lg { width:90px; height:90px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:2.2rem; font-weight:800; border:3px solid rgba(230,57,80,0.5); box-shadow:0 0 30px rgba(230,57,80,0.3); position:relative; z-index:1; }
+.profile-info { position:relative; z-index:1; }
+.profile-name-lg { font-family:var(--font-display); font-size:1.8rem; font-weight:800; margin-bottom:4px; }
+.profile-meta { display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; }
+.profile-meta-item { display:flex; align-items:center; gap:6px; font-size:0.85rem; color:var(--text2); }
+
+.achievement-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin-top:16px; }
+.achievement { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; transition:all 0.2s; }
+.achievement:hover { border-color:var(--yellow); }
+.achievement-icon { font-size:2rem; margin-bottom:6px; }
+.achievement-name { font-size:0.75rem; font-weight:600; color:var(--text2); }
+.achievement.unlocked { border-color:rgba(245,158,11,0.4); background:rgba(245,158,11,0.05); }
+.achievement.locked { opacity:0.35; filter:grayscale(1); }
+
+.history-table { width:100%; border-collapse:collapse; }
+.history-table th { text-align:left; padding:12px 16px; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text3); font-family:var(--font-mono); border-bottom:1px solid var(--border); }
+.history-table td { padding:14px 16px; border-bottom:1px solid var(--border); font-size:0.88rem; vertical-align:middle; }
+.history-table tr:last-child td { border-bottom:none; }
+.history-table tr:hover td { background:rgba(255,255,255,0.02); }
+
+.chart-wrap { position:relative; height:220px; }
+
+.modal-overlay { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:var(--card); border:1px solid var(--border2); border-radius:var(--radius-lg); padding:32px; max-width:560px; width:90%; max-height:90vh; overflow-y:auto; animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); position:relative; }
+@keyframes modalIn { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
+.modal-title { font-family:var(--font-display); font-size:1.4rem; font-weight:800; margin-bottom:6px; }
+.modal-close { position:absolute; top:16px; right:16px; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:6px 10px; cursor:pointer; color:var(--text2); font-size:1rem; }
+
+.toast-container { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+.toast { background:var(--card2); border:1px solid var(--border2); border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:12px; min-width:300px; animation:toastIn 0.3s ease; font-size:0.88rem; }
+@keyframes toastIn { from{opacity:0;transform:translateX(40px);} to{opacity:1;transform:translateX(0);} }
+.toast.t-success { border-left:3px solid var(--green); }
+.toast.t-warn { border-left:3px solid var(--yellow); }
+.toast.t-err { border-left:3px solid var(--accent); }
+.toast.t-info { border-left:3px solid var(--blue); }
+
+.spinner { width:32px; height:32px; border:3px solid var(--bg3); border-top:3px solid var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 12px; }
+@keyframes spin { to{transform:rotate(360deg);} }
+
+.vital-monitor { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:18px; position:relative; overflow:hidden; }
+.vital-value { font-family:var(--font-mono); font-size:2.2rem; font-weight:700; line-height:1; }
+.vital-unit { font-size:0.8rem; color:var(--text3); margin-top:4px; }
+.vital-label { font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text2); margin-bottom:8px; font-family:var(--font-mono); }
+.ecg-line { height:48px; width:100%; margin-top:10px; stroke:var(--accent); overflow:hidden; }
+
+.divider { height:1px; background:var(--border); margin:20px 0; }
+
+@media (max-width:1100px) {
+  .grid-4 { grid-template-columns:repeat(2,1fr); }
+  .grid-3 { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:900px) {
+  .sidebar { transform:translateX(-260px); transition:transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index:200; box-shadow:4px 0 30px rgba(0,0,0,0.5); }
+  .sidebar.open { transform:translateX(0); }
+  .sidebar-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:199; backdrop-filter:blur(4px); }
+  .sidebar-backdrop.show { display:block; }
+  .main { margin-left:0; }
+  .page { padding:16px 14px 90px; }
+  .grid-2 { grid-template-columns:1fr; }
+  .grid-3 { grid-template-columns:1fr; }
+  .grid-4 { grid-template-columns:1fr 1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .topbar { padding:0 14px; height:58px; gap:10px; }
+  .topbar-title { font-size:1.05rem; }
+  .topbar-sub { display:none; }
+  .sos-btn { display:none; }
+  .icon-btn { width:36px; height:36px; font-size:0.85rem; }
+  .bottom-nav { display:flex !important; }
+  .hamburger-btn { display:flex !important; }
+  .stat-value { font-size:1.6rem; }
+  .modal-box { max-width:100%; width:100%; margin:0; border-radius:20px 20px 0 0; position:fixed; bottom:0; left:0; max-height:92vh; padding:24px 20px 32px; animation:slideUpModal 0.3s ease; }
+  @keyframes slideUpModal { from{transform:translateY(100%);} to{transform:translateY(0);} }
+  .modal-overlay { align-items:flex-end; }
+  .profile-header-bg { padding:20px; }
+  .profile-avatar-lg { width:64px; height:64px; font-size:1.6rem; }
+  .profile-name-lg { font-size:1.3rem; }
+  .toast-container { bottom:80px; right:12px; left:12px; }
+  .toast { min-width:unset; }
+  .achievement-grid { grid-template-columns:repeat(3,1fr); }
+  .lab-row { flex-wrap:wrap; gap:8px; }
+  .lab-row .lab-name { flex:100%; }
+  .med-actions-row { flex-wrap:wrap; }
+  #page-assessment .grid-2 { grid-template-columns:1fr; }
+  #doctorGrid { grid-template-columns:1fr !important; }
+  .profile-stats-grid { grid-template-columns:1fr 1fr !important; }
+}
+@media (max-width:480px) {
+  .grid-4 { grid-template-columns:1fr 1fr; }
+  .achievement-grid { grid-template-columns:repeat(2,1fr); }
+  .page { padding:12px 12px 88px; }
+  .section-title { font-size:1.3rem; }
+  .card { padding:18px; }
+  .topbar-title { font-size:0.95rem; }
+  .theme-toggle-btn span:last-of-type { display:none; }
+  .time-slots { grid-template-columns:repeat(2,1fr); }
+  .modal-box { padding:20px 16px 28px; }
+}
+
+.bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; height:66px; background:var(--card); border-top:1px solid var(--border2); z-index:150; align-items:center; justify-content:space-around; padding:0 4px; box-shadow:0 -8px 30px rgba(0,0,0,0.4); }
+.bn-item { display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 10px; border-radius:12px; cursor:pointer; transition:all 0.2s; color:var(--text3); font-size:0.62rem; font-weight:600; letter-spacing:0.02em; min-width:44px; -webkit-tap-highlight-color:transparent; }
+.bn-item i { font-size:1.15rem; transition:all 0.2s; }
+.bn-item:active { transform:scale(0.9); }
+.bn-item.active { color:var(--accent); }
+.bn-item.active i { color:var(--accent); text-shadow:0 0 12px var(--accent-glow); }
+.bn-sos { width:50px; height:50px; border-radius:50%; background:#ef4444; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem; box-shadow:0 4px 20px rgba(239,68,68,0.6); animation:sosPulse 2s infinite; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+
+.hamburger-btn { display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:var(--card); border:1px solid var(--border); color:var(--text); cursor:pointer; -webkit-tap-highlight-color:transparent; flex-shrink:0; }
+
+.ecg-anim { position:absolute; bottom:0; left:0; right:0; height:40px; opacity:0.15; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0,20 L40,20 L45,5 L50,35 L55,20 L200,20' stroke='%23e63950' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x; background-size:200px 40px; animation:ecgScroll 3s linear infinite; }
+@keyframes ecgScroll { to{background-position:200px 0;} }
+@keyframes wave { 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(20deg);} 75%{transform:rotate(-10deg);} }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<header>
-  <a class="logo" href="#">
-    <div class="logo-icon">🛡️</div>
-    Neuro<span>Guard</span>
-  </a>
-  <div class="lang-switcher">
-    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
-    <button class="lang-btn" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
+<!-- ONBOARDING -->
+<div id="onboarding" style="display:none;position:fixed;inset:0;z-index:9000;background:var(--bg);overflow:hidden;">
+  <div style="max-width:500px;margin:0 auto;height:100%;display:flex;flex-direction:column;padding:40px 24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;">
+      <div class="logo-mark">
+        <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
+        <div><div class="logo-text">NeuroGuard</div></div>
+      </div>
+      <button onclick="skipOnboarding()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.85rem;">O'tkazib yuborish</button>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div id="onboardSlides">
+        <div class="ob-slide active" id="ob-0">
+          <div style="font-size:5rem;text-align:center;margin-bottom:24px;">🧠</div>
+          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;text-align:center;margin-bottom:12px;line-height:1.2;">NeuroGuard<br>AI Pro ga xush kelibsiz!</div>
+          <div style="text-align:center;color:var(--text2);font-size:0.95rem;line-height:1.7;">Sun'iy intellekt asosida insult va qon-tomir kasalliklarini erta aniqlash tizimi</div>
+        </div>
+        <div class="ob-slide" id="ob-1" style="display:none;">
+          <div style="font-size:5rem;text-align:center;margin-bottom:24px;">📊</div>
+          <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;text-align:center;margin-bottom:12px;">AI Tahlil</div>
+          <div style="text-align:center;color:var(--text2);font-size:0.95rem;line-height:1.7;">Qon bosimi, qand, BMI va boshqa ko'rsatkichlar asosida xavf darajangizni bir zumda bilib oling</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">🎯</span><span style="font-size:0.88rem;color:var(--text2);">100 ballik xavf ko'rsatkichi</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">💊</span><span style="font-size:0.88rem;color:var(--text2);">Dori eslatmalari va monitoring</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">👨‍⚕️</span><span style="font-size:0.88rem;color:var(--text2);">Onlayn shifokor konsultatsiyasi</span></div>
+          </div>
+        </div>
+        <div class="ob-slide" id="ob-2" style="display:none;">
+          <div style="font-size:5rem;text-align:center;margin-bottom:24px;">👤</div>
+          <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;text-align:center;margin-bottom:20px;">Profilingizni sozlang</div>
+          <div class="form-row" style="margin-bottom:12px;">
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">Ismingiz</label><input class="form-input" id="ob-name" placeholder="Ism"></div>
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">Yoshingiz</label><input class="form-input" type="number" id="ob-age" placeholder="45"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Jins</label>
+            <select class="form-select" id="ob-gender"><option value="male">Erkak</option><option value="female">Ayol</option></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Til</label>
+            <select class="form-select" id="ob-lang" onchange="previewLang(this.value)">
+              <option value="uz">O'zbek tili</option><option value="ru">Русский</option><option value="en">English</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px;">
+      <div class="ob-dot active" id="dot-0"></div>
+      <div class="ob-dot" id="dot-1"></div>
+      <div class="ob-dot" id="dot-2"></div>
+    </div>
+    <button class="btn btn-accent btn-full btn-lg" id="obNextBtn" onclick="obNext()">Davom etish <i class="fas fa-arrow-right"></i></button>
   </div>
-</header>
-
-<!-- ═══════════════════════ O'ZBEKCHA ═══════════════════════ -->
-<div class="lang-section active" id="lang-uz">
-  <div class="hero">
-    <div class="hero-badge">📋 Rasmiy hujjat</div>
-    <h1>Maxfiylik Siyosati</h1>
-    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
-      NeuroGuard ilovasida shaxsiy ma'lumotlaringiz qanday saqlanishi va ishlatilishi haqida to'liq ma'lumot.
-    </p>
-    <div class="hero-meta">
-      <span>📅 Kuchga kirish sanasi: 1 Yanvar 2025</span>
-      <span>🔄 So'nggi yangilanish: 11 Mart 2026</span>
-    </div>
-  </div>
-
-  <main>
-    <!-- Summary cards -->
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="summary-icon green">✅</div>
-        <div><h4>Ma'lumot saqlanmaydi</h4><p>Barcha ma'lumotlar faqat qurilmangizda saqlandi</p></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon red">🚫</div>
-        <div><h4>Uchinchi taraflarga berilmaydi</h4><p>Hech qanday reklama yoki analitika yo'q</p></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon blue">🔒</div>
-        <div><h4>Tibbiy diagnoz emas</h4><p>Bu ilova faqat umumiy ma'lumot beradi</p></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon yellow">📞</div>
-        <div><h4>Shifokor konsultatsiyasi</h4><p>Muhim qarorlar uchun shifokorga murojaat qiling</p></div>
-      </div>
-    </div>
-
-    <!-- Section 1 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">1</div>
-        <h2>Ilova Haqida</h2>
-      </div>
-      <div class="section-body">
-        <p><strong style="color:var(--text1);">NeuroGuard</strong> — bu insult va yurak-qon tomir kasalliklari xavfini baholashga yordam beruvchi mobil ilova. Ilova tibbiy ma'lumotlarni umumiy tarzda tahlil qiladi va foydalanuvchiga sog'liq haqida fikr bildiradi.</p>
-        <div class="highlight warn">
-          ⚠️ <span>Bu ilova tibbiy diagnoz qo'ymaydi va professional shifokor maslahatini almashtira olmaydi. Muhim sog'liq qarorlari uchun mutaxassis bilan maslahatlashing.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 2 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">2</div>
-        <h2>Qanday Ma'lumotlar Yig'iladi</h2>
-      </div>
-      <div class="section-body">
-        <p>Ilova faqat siz kiritgan ma'lumotlarni saqlaydi:</p>
-        <ul class="pp-list">
-          <li>Qon bosimi, yurak urishi, qand darajasi, BMI ko'rsatkichlari</li>
-          <li>Yosh, jins, vazn va bo'y (profil uchun)</li>
-          <li>Dori vaqtlari va eslatmalar</li>
-          <li>Shaxsiy tibbiy qaydnomalar</li>
-          <li>Tahlil tarixi</li>
-        </ul>
-        <div class="highlight">
-          ✅ <span><strong>Barcha ma'lumotlar faqat qurilmangizda</strong> (local storage) saqlanadi. Bizning serverlarimizga hech qanday ma'lumot yuborilmaydi.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 3 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">3</div>
-        <h2>Ma'lumotlar Qanday Ishlatiladi</h2>
-      </div>
-      <div class="section-body">
-        <p>Yig'ilgan ma'lumotlar faqat quyidagi maqsadlarda ishlatiladi:</p>
-        <ul class="pp-list">
-          <li>Insult xavfini hisoblash va tavsiyalar berish</li>
-          <li>Vital ko'rsatkichlar dinamikasini ko'rsatish</li>
-          <li>Dori jadvalidagi eslatmalar</li>
-          <li>Shifokor bilan bog'lanish uchun (faqat siz ruxsat berganda)</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Section 4 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">4</div>
-        <h2>Telegram Integratsiyasi</h2>
-      </div>
-      <div class="section-body">
-        <p>Shifokorga vaqt band qilish tugmasini bosganda, quyidagi ma'lumotlar Telegram orqali shifokorga yuboriladi:</p>
-        <ul class="pp-list">
-          <li>Ism va telefon raqam (siz kiritgan)</li>
-          <li>Tanlangan shifokor va vaqt</li>
-          <li>Shikoyat matni (ixtiyoriy)</li>
-        </ul>
-        <div class="highlight info">
-          ℹ️ <span>Bu ma'lumotlar faqat <strong>siz tasdiqlagan taqdirda</strong> yuboriladi. Avtomatik ravishda hech narsa yuborilmaydi.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 5 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">5</div>
-        <h2>Uchinchi Tomon Xizmatlari</h2>
-      </div>
-      <div class="section-body">
-        <p>Ilova quyidagi tashqi xizmatlardan foydalanadi:</p>
-        <ul class="pp-list">
-          <li><strong style="color:var(--text1);">Google Fonts</strong> — shrift yuklash uchun (internet kerak)</li>
-          <li><strong style="color:var(--text1);">Font Awesome</strong> — ikonkalar uchun (internet kerak)</li>
-          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — shifokorga xabar yuborish uchun (faqat siz tasdiqlaganda)</li>
-        </ul>
-        <p>Reklama, analitika yoki foydalanuvchi kuzatuvi yo'q.</p>
-      </div>
-    </div>
-
-    <!-- Section 6 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">6</div>
-        <h2>Ma'lumotlarni O'chirish</h2>
-      </div>
-      <div class="section-body">
-        <p>Barcha ma'lumotlarni istalgan vaqt o'chirishingiz mumkin:</p>
-        <ul class="pp-list">
-          <li>Ilova ichidagi "Tarix → Tozalash" tugmasi orqali</li>
-          <li>Telefoningiz sozlamalaridan ilovani o'chirish orqali</li>
-          <li>Android: Sozlamalar → Ilovalar → NeuroGuard → Ma'lumotlarni tozalash</li>
-        </ul>
-        <div class="highlight">
-          ✅ <span>Ilova o'chirilganda <strong>barcha ma'lumotlar butunlay yo'qoladi</strong>. Biz hech qanday nusxa saqlamaymiz.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 7 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">7</div>
-        <h2>Bolalar Maxfiyligi</h2>
-      </div>
-      <div class="section-body">
-        <p>NeuroGuard 16 yoshdan kichik foydalanuvchilarga mo'ljallanmagan. Agar siz ota-ona bo'lsangiz va farzandingiz ilovadan foydalanayotganini bilsangiz, bizga xabar bering.</p>
-      </div>
-    </div>
-
-    <!-- Section 8 -->
-    <div class="section">
-      <div class="section-header">
-        <div class="section-num">8</div>
-        <h2>O'zgarishlar</h2>
-      </div>
-      <div class="section-body">
-        <p>Bu siyosat o'zgartirilgan taqdirda, yangi versiya ilovaning keyingi yangilanishida e'lon qilinadi. Muhim o'zgarishlar haqida ilova ichida xabardor qilinasiz.</p>
-      </div>
-    </div>
-
-    <!-- Contact -->
-    <div class="contact-card">
-      <h3>Savollaringiz bormi?</h3>
-      <p>Maxfiylik siyosati bo'yicha savol yoki murojaat uchun bizga yozing</p>
-      <a href="mailto:privacy@neuroguard.uz" class="contact-email">
-        ✉️ privacy@neuroguard.uz
-      </a>
-    </div>
-  </main>
 </div>
 
-<!-- ═══════════════════════ РУССКИЙ ═══════════════════════ -->
-<div class="lang-section" id="lang-ru">
-  <div class="hero">
-    <div class="hero-badge">📋 Официальный документ</div>
-    <h1>Политика конфиденциальности</h1>
-    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
-      Полная информация о том, как NeuroGuard хранит и использует ваши личные данные.
-    </p>
-    <div class="hero-meta">
-      <span>📅 Дата вступления в силу: 1 января 2025</span>
-      <span>🔄 Последнее обновление: 11 марта 2026</span>
+<div class="bg-grid"></div>
+<div class="bg-orbs">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
+      <div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v2.1</div></div>
+    </div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div>
+    <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i> <span data-i18n="nav_dashboard">Dashboard</span></div>
+    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> <span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge" data-i18n="badge_new">Yangi</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div>
+    <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i> <span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div>
+    <div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i> <span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none;"></span></div>
+    <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')"><i class="fas fa-flask"></i> <span data-i18n="nav_labTests">Tahlillar</span></div>
+    <div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i> <span data-i18n="nav_notes">Qaydnoma</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label" data-i18n="nav_sec_doctor">Diagnoz & Shifokor</div>
+    <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i> <span data-i18n="nav_appointments">Konsultatsiya</span></div>
+    <div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i> <span data-i18n="nav_history">Tarix & Diagramma</span></div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label" data-i18n="nav_sec_settings">Sozlamalar</div>
+    <div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i> <span data-i18n="nav_profile">Profilim</span></div>
+  </div>
+  <div class="sidebar-profile">
+    <div class="profile-card" onclick="navGo('profile')">
+      <div class="avatar" id="sidebarAvatar">A</div>
+      <div>
+        <div class="profile-name" id="sidebarName">Profil</div>
+        <div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> <span data-i18n="points_lbl">ball</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+      <div>
+        <div class="topbar-title" id="topbarTitle">Dashboard</div>
+        <div class="topbar-sub" id="topbarSub">Umumiy holat ko'rinishi</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="sos-btn" onclick="openSOS()"><i class="fas fa-ambulance"></i> SOS</button>
+      <button class="theme-toggle-btn" onclick="toggleDark()" id="themeToggleBtn" title="Kunduzgi/Kechki rejim">
+        <span id="themeIcon">🌙</span>
+        <div class="theme-toggle-track"><div class="theme-toggle-thumb"></div></div>
+      </button>
+      <div id="langSwitcher" style="display:flex;gap:4px;align-items:center;margin-right:4px;"></div>
+      <div class="icon-btn" onclick="downloadPDFReport()" title="PDF Hisobot"><i class="fas fa-file-pdf" style="color:var(--accent);"></i></div>
+      <div class="icon-btn" onclick="requestNotificationPermission()" title="Bildirishnomalar" id="notifBtn"><i class="fas fa-bell"></i></div>
+      <div class="icon-btn" onclick="navGo('notes')" title="Qaydnoma"><i class="fas fa-sticky-note"></i></div>
     </div>
   </div>
 
-  <main>
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="summary-icon green">✅</div>
-        <div><h4>Данные не передаются</h4><p>Всё хранится только на вашем устройстве</p></div>
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="section-header">
+      <div class="section-title" style="font-size:2.2rem;letter-spacing:-0.02em;line-height:1.1;"><span data-i18n="welcome">Xush kelibsiz!</span> <span style="display:inline-block;animation:wave 1.5s infinite;">👋</span></div>
+      <div class="section-desc" style="margin-top:6px;"><span data-i18n="welcome_sub">Sog'lig'ingizning bugungi ko'rsatkichlari</span></div>
+    </div>
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="stat-card">
+        <div class="stat-glow" style="background:rgba(230,57,80,0.6);"></div>
+        <div class="stat-icon" style="background:rgba(230,57,80,0.15);color:var(--accent);"><i class="fas fa-heart"></i></div>
+        <div class="stat-value" id="dashBP">—/—</div>
+        <div class="stat-label"><span data-i18n="bp_label">Qon Bosimi (mmHg)</span></div>
+        <div class="stat-change" id="dashBPStatus"><span class="stat-down">Ma'lumot yo'q</span></div>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon red">🚫</div>
-        <div><h4>Без рекламы и трекинга</h4><p>Нет аналитики и сторонних трекеров</p></div>
+      <div class="stat-card">
+        <div class="stat-glow" style="background:rgba(59,130,246,0.6);"></div>
+        <div class="stat-icon" style="background:rgba(59,130,246,0.15);color:var(--blue);"><i class="fas fa-droplet"></i></div>
+        <div class="stat-value" id="dashGlucose">—</div>
+        <div class="stat-label"><span data-i18n="glucose_label">Qand (mmol/L)</span></div>
+        <div class="stat-change" id="dashGlucoseStatus"><span style="color:var(--text3);">Ma'lumot yo'q</span></div>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon blue">🔒</div>
-        <div><h4>Не медицинский диагноз</h4><p>Приложение даёт лишь общую информацию</p></div>
+      <div class="stat-card">
+        <div class="stat-glow" style="background:rgba(6,182,212,0.6);"></div>
+        <div class="stat-icon" style="background:rgba(6,182,212,0.15);color:var(--cyan);"><i class="fas fa-heartbeat"></i></div>
+        <div class="stat-value" id="dashHR">—</div>
+        <div class="stat-label"><span data-i18n="hr_label">Yurak Urishi (bpm)</span></div>
+        <div class="stat-change" id="dashHRStatus"><span style="color:var(--text3);">Ma'lumot yo'q</span></div>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon yellow">📞</div>
-        <div><h4>Консультация врача</h4><p>Для важных решений обращайтесь к специалисту</p></div>
+      <div class="stat-card">
+        <div class="stat-glow" style="background:rgba(245,158,11,0.6);"></div>
+        <div class="stat-icon" style="background:rgba(245,158,11,0.15);color:var(--yellow);"><i class="fas fa-weight"></i></div>
+        <div class="stat-value" id="dashBMI">—</div>
+        <div class="stat-label"><span data-i18n="bmi_label">BMI</span></div>
+        <div class="stat-change" id="dashBMIStatus"><span style="color:var(--text3);">Ma'lumot yo'q</span></div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">1</div><h2>О приложении</h2></div>
-      <div class="section-body">
-        <p><strong style="color:var(--text1);">NeuroGuard</strong> — мобильное приложение для оценки риска инсульта и сердечно-сосудистых заболеваний. Приложение анализирует медицинские данные в общих чертах и предоставляет рекомендации по здоровью.</p>
-        <div class="highlight warn">⚠️ <span>Это приложение <strong>не ставит медицинский диагноз</strong> и не заменяет консультацию врача. Для важных решений обращайтесь к специалисту.</span></div>
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:240px;">
+        <div class="risk-gauge-wrap" id="dashGauge">
+          <div style="text-align:center;color:var(--text3);padding:20px;">
+            <i class="fas fa-robot" style="font-size:2rem;margin-bottom:10px;display:block;"></i>
+            <div style="font-size:0.9rem;"><span data-i18n="complete_check">Tekshiruvni yakunlang</span></div>
+            <div style="font-size:0.8rem;margin-top:4px;"><span data-i18n="for_ai">AI tahlili uchun</span></div>
+          </div>
+        </div>
+        <div class="tag tag-red" style="margin-top:8px;" id="dashRiskTag">Tahlil yo'q</div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div class="section-title" style="font-size:1rem;"><span data-i18n="bp_history">Qon Bosimi Tarixi</span></div>
+          <div class="tag tag-blue"><span data-i18n="latest_check">So'ngi tahlil</span></div>
+        </div>
+        <div class="chart-wrap"><canvas id="dashBPChart"></canvas></div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">2</div><h2>Какие данные собираются</h2></div>
-      <div class="section-body">
-        <p>Приложение сохраняет только те данные, которые вы вводите:</p>
-        <ul class="pp-list">
-          <li>Артериальное давление, пульс, уровень сахара, ИМТ</li>
-          <li>Возраст, пол, вес и рост (для профиля)</li>
-          <li>Расписание приёма лекарств и напоминания</li>
-          <li>Личные медицинские заметки</li>
-          <li>История анализов</li>
-        </ul>
-        <div class="highlight">✅ <span><strong>Все данные хранятся только на вашем устройстве</strong> (local storage). На наши серверы ничего не отправляется.</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div class="section-title" style="font-size:1rem;"><span data-i18n="today_meds">Bugungi Dorilar</span></div>
+          <button class="btn btn-ghost" onclick="navGo('medications')" style="padding:6px 12px;font-size:0.8rem;">Hammasi <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div id="dashMeds"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;"><i class="fas fa-pills" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>Dorilar qo'shilmagan</div></div>
       </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">3</div><h2>Как используются данные</h2></div>
-      <div class="section-body">
-        <p>Собранные данные используются исключительно для:</p>
-        <ul class="pp-list">
-          <li>Расчёта риска инсульта и формирования рекомендаций</li>
-          <li>Отображения динамики показателей</li>
-          <li>Напоминаний о приёме лекарств</li>
-          <li>Связи с врачом (только с вашего разрешения)</li>
-        </ul>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div class="section-title" style="font-size:1rem;"><span data-i18n="recent_notes">So'ngi Qaydnomalar</span></div>
+          <button class="btn btn-ghost" onclick="navGo('notes')" style="padding:6px 12px;font-size:0.8rem;">Hammasi <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div id="dashNotes"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.85rem;"><i class="fas fa-sticky-note" style="font-size:1.5rem;margin-bottom:8px;display:block;"></i>Qaydnomalar yo'q</div></div>
       </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">4</div><h2>Интеграция с Telegram</h2></div>
-      <div class="section-body">
-        <p>При нажатии кнопки записи к врачу следующие данные отправляются через Telegram:</p>
-        <ul class="pp-list">
-          <li>Имя и номер телефона (введённые вами)</li>
-          <li>Выбранный врач и время</li>
-          <li>Текст жалобы (по желанию)</li>
-        </ul>
-        <div class="highlight info">ℹ️ <span>Данные отправляются <strong>только после вашего подтверждения</strong>. Ничего не отправляется автоматически.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">5</div><h2>Сторонние сервисы</h2></div>
-      <div class="section-body">
-        <p>Приложение использует следующие внешние сервисы:</p>
-        <ul class="pp-list">
-          <li><strong style="color:var(--text1);">Google Fonts</strong> — загрузка шрифтов</li>
-          <li><strong style="color:var(--text1);">Font Awesome</strong> — иконки</li>
-          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — только при записи к врачу</li>
-        </ul>
-        <p>Реклама, аналитика и слежка за пользователем отсутствуют.</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">6</div><h2>Удаление данных</h2></div>
-      <div class="section-body">
-        <p>Вы можете удалить все данные в любое время:</p>
-        <ul class="pp-list">
-          <li>Через кнопку «История → Очистить» в приложении</li>
-          <li>Удалив приложение с телефона</li>
-          <li>Android: Настройки → Приложения → NeuroGuard → Очистить данные</li>
-        </ul>
-        <div class="highlight">✅ <span>При удалении приложения <strong>все данные полностью удаляются</strong>. Мы не храним копий.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">7</div><h2>Конфиденциальность детей</h2></div>
-      <div class="section-body">
-        <p>NeuroGuard не предназначен для пользователей младше 16 лет. Если вы родитель и ваш ребёнок использует приложение, пожалуйста, свяжитесь с нами.</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">8</div><h2>Изменения политики</h2></div>
-      <div class="section-body">
-        <p>При обновлении политики новая версия будет опубликована в следующем обновлении приложения. О существенных изменениях вы будете уведомлены внутри приложения.</p>
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <h3>Есть вопросы?</h3>
-      <p>По вопросам конфиденциальности пишите нам</p>
-      <a href="mailto:privacy@neuroguard.uz" class="contact-email">✉️ privacy@neuroguard.uz</a>
-    </div>
-  </main>
-</div>
-
-<!-- ═══════════════════════ ENGLISH ═══════════════════════ -->
-<div class="lang-section" id="lang-en">
-  <div class="hero">
-    <div class="hero-badge">📋 Official Document</div>
-    <h1>Privacy Policy</h1>
-    <p style="color:var(--text2);font-size:0.95rem;max-width:560px;margin:0 auto;">
-      Full information about how NeuroGuard stores and uses your personal data.
-    </p>
-    <div class="hero-meta">
-      <span>📅 Effective: January 1, 2025</span>
-      <span>🔄 Last updated: March 11, 2026</span>
     </div>
   </div>
 
-  <main>
-    <div class="summary-grid">
-      <div class="summary-card">
-        <div class="summary-icon green">✅</div>
-        <div><h4>Data stays on device</h4><p>Everything is stored locally on your phone only</p></div>
+  <!-- ASSESSMENT -->
+  <div class="page" id="page-assessment">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-robot" style="color:var(--accent);"></i> <span data-i18n="assessment_title">AI Insult Xavfi Tahlili</span></div>
+      <div class="section-desc"><span data-i18n="assessment_desc">Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi</span></div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+          <div class="tag tag-red"><span data-i18n="ai_analyst">AI Tahlilchi</span></div>
+          <div style="font-size:0.82rem;color:var(--text3);" id="formProgress">0% to'ldirildi</div>
+        </div>
+        <div class="progress-track" style="margin-bottom:24px;">
+          <div class="progress-fill-bar" id="formProgressBar" style="width:0%;background:var(--accent);"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label"><i class="fas fa-tint" style="color:var(--accent);"></i> <span data-i18n="systolic">Sistolik qon bosimi</span></label><input class="form-input" type="number" id="systolic" placeholder="120" min="80" max="220" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-tint" style="color:var(--blue);"></i> <span data-i18n="diastolic">Diastolik</span></label><input class="form-input" type="number" id="diastolic" placeholder="80" min="50" max="130" oninput="updateFormProgress()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label"><i class="fas fa-heartbeat" style="color:var(--accent);"></i> <span data-i18n="heartrate">Yurak urishi (bpm)</span></label><input class="form-input" type="number" id="heartrate" placeholder="72" min="40" max="200" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-candy-cane" style="color:var(--yellow);"></i> <span data-i18n="glucose_mmol">Qand (mmol/L)</span></label><input class="form-input" type="number" id="glucose" placeholder="5.5" step="0.1" min="2" max="30" oninput="updateFormProgress()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label"><i class="fas fa-ruler-vertical" style="color:var(--cyan);"></i> <span data-i18n="height_cm">Bo'y (sm)</span></label><input class="form-input" type="number" id="height" placeholder="170" min="120" max="230" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-weight" style="color:var(--green);"></i> <span data-i18n="weight_kg">Vazn (kg)</span></label><input class="form-input" type="number" id="weight" placeholder="70" min="30" max="250" oninput="updateFormProgress()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label"><i class="fas fa-birthday-cake"></i> <span data-i18n="age_label">Yosh</span></label><input class="form-input" type="number" id="age" placeholder="45" min="18" max="110" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-vials"></i> <span data-i18n="cholesterol">Xolesterin (mmol/L)</span></label><input class="form-input" type="number" id="cholesterol" placeholder="5.0" step="0.1" min="2" max="12" oninput="updateFormProgress()"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label"><i class="fas fa-smoking"></i> <span data-i18n="smoking_q">Chekasizmi?</span></label>
+            <select class="form-select" id="smoking">
+              <option value="no">Yo'q</option><option value="ex">Tark etdim</option><option value="yes">Ha</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label"><i class="fas fa-running"></i> <span data-i18n="exercise_q">Jismoniy faollik</span></label>
+            <select class="form-select" id="exercise">
+              <option value="none">Umuman yo'q</option><option value="light">1-2 kun/hafta</option><option value="moderate">3-4 kun/hafta</option><option value="active">5+ kun/hafta</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-wine-glass" style="color:var(--yellow);"></i> <span data-i18n="alcohol_q">Alkogol iste'mol qilasizmi?</span></label>
+          <select class="form-select" id="alcohol">
+            <option value="none">Yo'q</option><option value="rare">Kamdan-kam (oyda 1-2 marta)</option><option value="often">Tez-tez (haftada 1-2 marta)</option><option value="daily">Har kuni</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-brain" style="color:var(--accent);"></i> <span data-i18n="complaints">Shikoyatlar va xavf omillari</span></label>
+          <div class="checkbox-list">
+            <label class="checkbox-item"><input type="checkbox" id="headache"><span><span data-i18n="c_headache">Tez-tez bosh og'rig'i</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="dizziness"><span><span data-i18n="c_dizziness">Bosh aylanishi</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="numbness"><span><span data-i18n="c_numbness">Qo'l-oyoq kuchsizlanishi / uvishishi</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="bloodThick"><span><span data-i18n="c_bloodThick">Qon quyuqligi (trombofiliya)</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="rheumatism"><span><span data-i18n="c_rheumatism">Revmatizm / bo'g'im kasalliklari</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="familyVascular"><span><span data-i18n="c_familyVascular">Oilada qon tomir kasalliklari bo'lgan</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="ownVascular"><span><span data-i18n="c_ownVascular">O'zida qon tomir kasalliklari bor</span></span></label>
+            <label class="checkbox-item"><input type="checkbox" id="familyHistory"><span><span data-i18n="c_familyHistory">Oilada insult bo'lgan</span></span></label>
+          </div>
+        </div>
+        <button class="btn btn-accent btn-full btn-lg" onclick="analyzeRisk()" style="margin-top:8px;">
+          <i class="fas fa-brain"></i> <span data-i18n="ai_analyze">AI Tahlil Qilsin</span>
+        </button>
       </div>
-      <div class="summary-card">
-        <div class="summary-icon red">🚫</div>
-        <div><h4>No ads or tracking</h4><p>Zero analytics or third-party trackers</p></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon blue">🔒</div>
-        <div><h4>Not a medical diagnosis</h4><p>The app provides general information only</p></div>
-      </div>
-      <div class="summary-card">
-        <div class="summary-icon yellow">📞</div>
-        <div><h4>Consult a doctor</h4><p>For important decisions, see a specialist</p></div>
+      <div id="resultPanel">
+        <div class="card" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;">
+          <div style="width:100px;height:100px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid var(--border);"><i class="fas fa-robot" style="font-size:2.5rem;color:var(--text3);"></i></div>
+          <div style="font-size:1.1rem;font-weight:600;margin-bottom:8px;color:var(--text2);"><span data-i18n="result_ready">Tahlil uchun tayyor</span></div>
+          <div style="font-size:0.85rem;color:var(--text3);max-width:250px;line-height:1.6;"><span data-i18n="result_hint">Chap tomondagi ma'lumotlarni to'ldiring va AI tahlil tugmasini bosing</span></div>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="section-header"><div class="section-num">1</div><h2>About the App</h2></div>
-      <div class="section-body">
-        <p><strong style="color:var(--text1);">NeuroGuard</strong> is a mobile application that helps assess the risk of stroke and cardiovascular disease. The app analyses medical data in general terms and provides health recommendations.</p>
-        <div class="highlight warn">⚠️ <span>This app <strong>does not provide a medical diagnosis</strong> and cannot replace professional medical advice. For important health decisions, please consult a specialist.</span></div>
+  <!-- VITALS -->
+  <div class="page" id="page-vitals">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent);"></i> <span data-i18n="vitals_title">Vital Ko'rsatkichlar</span></div>
+      <div class="section-desc" data-i18n="vitals_desc">Real vaqt monitoringi</div>
+    </div>
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="vital-monitor">
+        <div class="vital-label"><i class="fas fa-heart"></i> <span data-i18n="vl_bp">QONBOSIM</span></div>
+        <div class="vital-value" style="color:var(--accent);" id="vBP">—/—</div>
+        <div class="vital-unit">mmHg</div>
+        <svg class="ecg-line" viewBox="0 0 300 48"><path d="M0,24 L60,24 L70,10 L80,38 L90,24 L300,24" stroke="var(--accent)" stroke-width="2" fill="none"/></svg>
+        <div class="ecg-anim"></div>
+      </div>
+      <div class="vital-monitor">
+        <div class="vital-label"><i class="fas fa-heartbeat"></i> <span data-i18n="vl_hr">YURAK URISHI</span></div>
+        <div class="vital-value" style="color:var(--blue);" id="vHR">—</div>
+        <div class="vital-unit">bpm</div>
+      </div>
+      <div class="vital-monitor">
+        <div class="vital-label"><i class="fas fa-droplet"></i> <span data-i18n="vl_glucose">QAND</span></div>
+        <div class="vital-value" style="color:var(--yellow);" id="vGlucose">—</div>
+        <div class="vital-unit">mmol/L</div>
+      </div>
+      <div class="vital-monitor">
+        <div class="vital-label"><i class="fas fa-weight"></i> <span data-i18n="vl_bmi">BMI</span></div>
+        <div class="vital-value" style="color:var(--cyan);" id="vBMI">—</div>
+        <div class="vital-unit">kg/m²</div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">2</div><h2>What Data Is Collected</h2></div>
-      <div class="section-body">
-        <p>The app only saves data that you enter:</p>
-        <ul class="pp-list">
-          <li>Blood pressure, heart rate, glucose level, BMI</li>
-          <li>Age, sex, weight and height (for profile)</li>
-          <li>Medication schedules and reminders</li>
-          <li>Personal medical notes</li>
-          <li>Assessment history</li>
-        </ul>
-        <div class="highlight">✅ <span><strong>All data is stored only on your device</strong> (local storage). Nothing is sent to our servers.</span></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="bp_dynamics">Qon Bosimi Dinamikasi</div>
+        <div class="chart-wrap"><canvas id="vitBPChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="risk_dynamics">Xavf Ko'rsatkichi Dinamikasi</div>
+        <div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div>
       </div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="section-header"><div class="section-num">3</div><h2>How Data Is Used</h2></div>
-      <div class="section-body">
-        <p>Collected data is used solely for:</p>
-        <ul class="pp-list">
-          <li>Calculating stroke risk and generating recommendations</li>
-          <li>Displaying vital sign trends</li>
-          <li>Medication reminders</li>
-          <li>Contacting a doctor (only with your permission)</li>
-        </ul>
+  <!-- MEDICATIONS -->
+  <div class="page" id="page-medications">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="section-title"><i class="fas fa-pills" style="color:var(--accent);"></i> <span data-i18n="meds_title">Dorilar</span></div>
+        <div class="section-desc" data-i18n="meds_desc">Kundalik dori jadvalingiz</div>
+      </div>
+      <button class="btn btn-accent" onclick="openAddMedModal()"><i class="fas fa-plus"></i> <span data-i18n="add_med_btn">Dori Qo'shish</span></button>
+    </div>
+    <div id="medList"></div>
+  </div>
+
+  <!-- LAB TESTS -->
+  <div class="page" id="page-labTests">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-flask" style="color:var(--blue);"></i> <span data-i18n="lab_title">Laboratoriya Tahlillari</span></div>
+      <div class="section-desc" data-i18n="lab_desc">Qon va boshqa tahlillar natijalari</div>
+    </div>
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <div class="section-title" style="font-size:1rem;" data-i18n="lab_results">Oxirgi Natijalar</div>
+          <button class="btn btn-blue" onclick="openAddLabModal()" style="padding:8px 14px;font-size:0.82rem;"><i class="fas fa-plus"></i> <span data-i18n="add_lab_btn">Yangi natija</span></button>
+        </div>
+        <div id="labResultsList"><div style="text-align:center;color:var(--text3);padding:30px;font-size:0.85rem;"><i class="fas fa-flask" style="font-size:2rem;margin-bottom:10px;display:block;"></i>Tahlil natijalari yo'q</div></div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="lab_chart">Tahlillar Grafigi</div>
+        <div class="chart-wrap"><canvas id="labChart"></canvas></div>
       </div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="section-header"><div class="section-num">4</div><h2>Telegram Integration</h2></div>
-      <div class="section-body">
-        <p>When you tap the "Book Appointment" button, the following data is sent via Telegram:</p>
-        <ul class="pp-list">
-          <li>Name and phone number (entered by you)</li>
-          <li>Selected doctor and appointment time</li>
-          <li>Complaint text (optional)</li>
-        </ul>
-        <div class="highlight info">ℹ️ <span>Data is sent <strong>only after your explicit confirmation</strong>. Nothing is sent automatically.</span></div>
+  <!-- NOTES -->
+  <div class="page" id="page-notes">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> <span data-i18n="notes_title">Tibbiy Qaydnomalar</span></div>
+        <div class="section-desc" data-i18n="notes_desc">O'z salomatligigingiz haqida qaydnomalar yozing</div>
+      </div>
+      <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> <span data-i18n="add_note_btn">Qaydnoma Qo'shish</span></button>
+    </div>
+    <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!</div></div>
+  </div>
+
+  <!-- APPOINTMENTS -->
+  <div class="page" id="page-appointments">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green);"></i> <span data-i18n="appt_title">Shifokor Konsultatsiyasi</span></div>
+      <div class="section-desc" data-i18n="appt_desc">Mutaxassis shifokorlardan vaqt oling</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="filterDocs('all')" id="df-all" data-i18n="df_all">Barchasi</button>
+      <button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog" data-i18n="df_nevrolog">Nevrolog</button>
+      <button class="btn btn-ghost" onclick="filterDocs('kardiolog')" id="df-kardiolog" data-i18n="df_kardiolog">Kardiolog</button>
+      <button class="btn btn-ghost" onclick="filterDocs('endokrinolog')" id="df-endokrinolog" data-i18n="df_endokrinolog">Endokrinolog</button>
+    </div>
+    <div class="grid-3" id="doctorGrid"></div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="page" id="page-history">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue);"></i> <span data-i18n="hist_title">Tarix & Diagrammalar</span></div>
+      <div class="section-desc" data-i18n="hist_desc">Barcha tekshiruv natijalari va trendlar</div>
+    </div>
+    <div class="card" style="margin-bottom:24px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+        <div class="section-title" style="font-size:1rem;" data-i18n="risk_history">Xavf Ko'rsatkichi Tarixi</div>
+        <button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.8rem;"><i class="fas fa-trash"></i> <span data-i18n="clear_btn">Tozalash</span></button>
+      </div>
+      <div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="all_checks">Barcha Tekshiruvlar</div>
+      <div style="overflow-x:auto;">
+        <table class="history-table" id="historyTable">
+          <thead><tr><th data-i18n="th_date">Sana</th><th data-i18n="th_bp">Qon Bosimi</th><th data-i18n="th_hr">Yurak Urishi</th><th data-i18n="th_glucose">Qand</th><th>BMI</th><th data-i18n="th_risk">Xavf</th><th data-i18n="th_level">Daraja</th></tr></thead>
+          <tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
+        </table>
       </div>
     </div>
+  </div>
 
-    <div class="section">
-      <div class="section-header"><div class="section-num">5</div><h2>Third-Party Services</h2></div>
-      <div class="section-body">
-        <p>The app uses the following external services:</p>
-        <ul class="pp-list">
-          <li><strong style="color:var(--text1);">Google Fonts</strong> — font loading</li>
-          <li><strong style="color:var(--text1);">Font Awesome</strong> — icons</li>
-          <li><strong style="color:var(--text1);">Telegram Bot API</strong> — only when booking a doctor</li>
-        </ul>
-        <p>No advertising, analytics, or user tracking of any kind.</p>
+  <!-- PROFILE -->
+  <div class="page" id="page-profile">
+    <div class="section-header">
+      <div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent);"></i> <span data-i18n="prof_title">Mening Profilim</span></div>
+    </div>
+    <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <div class="profile-avatar-lg" id="profileAvatar">A</div>
+      <div class="profile-info" style="flex:1;min-width:200px;">
+        <div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div>
+        <div class="tag tag-red" id="profileRiskTag" style="margin-top:8px;">Tahlil yo'q</div>
+        <div class="profile-meta" id="profileMeta">
+          <div class="profile-meta-item"><i class="fas fa-birthday-cake"></i><span id="pm-age">Yosh: —</span></div>
+          <div class="profile-meta-item"><i class="fas fa-weight"></i><span id="pm-bmi">BMI: —</span></div>
+          <div class="profile-meta-item"><i class="fas fa-star" style="color:var(--yellow);"></i><span id="pm-points">0 ball</span></div>
+        </div>
+      </div>
+      <button class="btn btn-ghost" onclick="openEditProfileModal()"><i class="fas fa-edit"></i> Tahrirlash</button>
+    </div>
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-user"></i> <span data-i18n="personal_info">Shaxsiy Ma'lumotlar</span></div>
+        <div id="profileDetails"><div style="color:var(--text3);font-size:0.85rem;">Ma'lumotlar to'ldirilmagan. Profilni tahrirlang.</div></div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i> <span data-i18n="achievements">Yutuqlar</span></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">6</div><h2>Deleting Your Data</h2></div>
-      <div class="section-body">
-        <p>You can delete all data at any time:</p>
-        <ul class="pp-list">
-          <li>Via the "History → Clear" button inside the app</li>
-          <li>By uninstalling the app from your phone</li>
-          <li>Android: Settings → Apps → NeuroGuard → Clear Data</li>
-        </ul>
-        <div class="highlight">✅ <span>Uninstalling the app <strong>permanently deletes all data</strong>. We keep no copies.</span></div>
+    <div class="card">
+      <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-bar"></i> <span data-i18n="stats_title">Statistika</span></div>
+      <div class="grid-4 profile-stats-grid">
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_analyses">Tahlil soni</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="statMeds">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_meds_lbl">Dorilar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_notes_lbl">Qaydnomalar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_points_lbl">Ball</div></div>
       </div>
     </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">7</div><h2>Children's Privacy</h2></div>
-      <div class="section-body">
-        <p>NeuroGuard is not intended for users under 16 years of age. If you are a parent and your child is using the app, please contact us.</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-header"><div class="section-num">8</div><h2>Changes to This Policy</h2></div>
-      <div class="section-body">
-        <p>If this policy is updated, the new version will be published in the next app update. You will be notified inside the app of any significant changes.</p>
-      </div>
-    </div>
-
-    <div class="contact-card">
-      <h3>Have questions?</h3>
-      <p>For privacy-related questions or requests, write to us</p>
-      <a href="mailto:privacy@neuroguard.uz" class="contact-email">✉️ privacy@neuroguard.uz</a>
-    </div>
-  </main>
+  </div>
 </div>
 
-<!-- Footer -->
-<footer>
-  <p>© 2025–2026 NeuroGuard AI Pro · uz.neuroguard.app · Barcha huquqlar himoyalangan</p>
-</footer>
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottomNav">
+  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="bn_home">Bosh</span></div>
+  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="bn_check">Tekshiruv</span></div>
+  <div class="bn-sos" onclick="openSOS()"><i class="fas fa-ambulance"></i></div>
+  <div class="bn-item" id="bn-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="bn_meds">Dorilar</span></div>
+  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span data-i18n="bn_menu">Menu</span></div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="sosModal">
+  <div class="modal-box" style="border-color:rgba(239,68,68,0.5);max-width:500px;">
+    <button class="modal-close" onclick="closeSOS()"><i class="fas fa-times"></i></button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="width:70px;height:70px;border-radius:50%;background:rgba(239,68,68,0.2);border:2px solid rgba(239,68,68,0.5);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 12px;animation:sosPulse 1.5s infinite;">🚨</div>
+      <div class="modal-title" style="color:#ef4444;" data-i18n="sos_title">FAVQULODDA YORDAM</div>
+      <div style="font-size:0.9rem;color:var(--text2);" data-i18n="sos_fast">FAST testini o'tkazing</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">F</strong> — Yuz bir tomonlama og'ayapti</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">A</strong> — Qo'llarni ko'tarib bo'lmayapti</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">S</strong> — Nutq buzilgan, chalkash</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">T</strong> — VAQT muhim! Zudlik bilan harakat</div></label>
+    </div>
+    <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'"><i class="fas fa-phone"></i> <span data-i18n="sos_call">103 — Tez Yordam Chaqirish</span></button>
+    <button class="btn btn-ghost btn-full" onclick="closeSOS()" data-i18n="close_btn">Yopish</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addMedModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button>
+    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-pills" style="color:var(--accent);"></i> <span data-i18n="modal_add_med">Dori Qo'shish</span></div>
+    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;" data-i18n="modal_add_med_sub">Yangi dori va eslatma qo'shing</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Dori nomi *</label><input class="form-input" id="mName" placeholder="Masalan: Aspirin"></div>
+      <div class="form-group"><label class="form-label">Dozasi *</label><input class="form-input" id="mDose" placeholder="100mg, 1 tabletka"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Vaqt *</label><input class="form-input" type="time" id="mTime"></div>
+      <div class="form-group"><label class="form-label">Chastota</label><select class="form-select" id="mFreq"><option>Kuniga 1 marta</option><option>Kuniga 2 marta</option><option>Kuniga 3 marta</option><option>Ovqatdan oldin</option><option>Ovqatdan keyin</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Izoh (ixtiyoriy)</label><input class="form-input" id="mNotes" placeholder="Qo'shimcha eslatma..."></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-accent btn-full" onclick="saveMedication()"><i class="fas fa-save"></i> Saqlash</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')" data-i18n="cancel_btn">Bekor</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addNoteModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button>
+    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> <span data-i18n="modal_add_note">Qaydnoma Qo'shish</span></div>
+    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;" data-i18n="modal_add_note_sub">O'z-o'zingiz haqingizda eslatma yozing</div>
+    <div class="form-group"><label class="form-label">Sarlavha</label><input class="form-input" id="noteTitle" placeholder="Masalan: Bugun bosh og'rig'i bo'ldi"></div>
+    <div class="form-group"><label class="form-label">Matn *</label><textarea class="form-input" id="noteContent" rows="4" placeholder="Batafsil yozing..." style="resize:vertical;"></textarea></div>
+    <div class="form-group"><label class="form-label">Kategoriya</label><select class="form-select" id="noteCategory"><option value="general">Umumiy</option><option value="symptom">Belgi</option><option value="medication">Dori</option><option value="appointment">Shifokor</option><option value="exercise">Mashq</option></select></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-accent btn-full" onclick="saveNote()"><i class="fas fa-save"></i> Saqlash</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')" data-i18n="cancel_btn">Bekor</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addLabModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('addLabModal').classList.remove('active')"><i class="fas fa-times"></i></button>
+    <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-flask" style="color:var(--blue);"></i> Lab Natija Qo'shish</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Tahlil turi</label><select class="form-select" id="labType"><option>Umumiy qon tahlili</option><option>Qand (glyukoza)</option><option>Xolesterin</option><option>Kreatinin</option><option>Gematokrit</option><option>Gemoglobin</option><option>Boshqa</option></select></div>
+      <div class="form-group"><label class="form-label">Qiymat</label><input class="form-input" id="labValue" placeholder="5.5" type="number" step="0.01"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Birlik</label><input class="form-input" id="labUnit" placeholder="mmol/L, g/dL..."></div>
+      <div class="form-group"><label class="form-label">Holat</label><select class="form-select" id="labStatus"><option value="normal">Normal</option><option value="abnormal">Og'ish bor</option><option value="critical">Kritik</option></select></div>
+    </div>
+    <button class="btn btn-blue btn-full" onclick="saveLabResult()"><i class="fas fa-save"></i> Saqlash</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="editProfileModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button>
+    <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent);"></i> <span data-i18n="modal_edit_profile">Profilni Tahrirlash</span></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Ism</label><input class="form-input" id="pName" placeholder="Ismingiz"></div>
+      <div class="form-group"><label class="form-label">Familiya</label><input class="form-input" id="pSurname" placeholder="Familiyangiz"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Yosh</label><input class="form-input" id="pAge" type="number" placeholder="45"></div>
+      <div class="form-group"><label class="form-label">Jins</label><select class="form-select" id="pGender"><option value="male">Erkak</option><option value="female">Ayol</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Telefon</label><input class="form-input" id="pPhone" placeholder="+998 90 000 00 00"></div>
+      <div class="form-group"><label class="form-label">Qon guruhi</label><select class="form-select" id="pBloodType"><option>I+</option><option>I-</option><option>II+</option><option>II-</option><option>III+</option><option>III-</option><option>IV+</option><option>IV-</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Kasalliklar (surunkali)</label><input class="form-input" id="pConditions" placeholder="Diabet, gipertenziya..."></div>
+    <button class="btn btn-accent btn-full" onclick="saveProfile()"><i class="fas fa-save"></i> Saqlash</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bookModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('active')"><i class="fas fa-times"></i></button>
+    <div class="modal-title" style="margin-bottom:4px;" id="bookDocName">Shifokor</div>
+    <div style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;" id="bookDocSpec"></div>
+    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i><span data-i18n="book_select_time">Vaqt tanlang:</span></div>
+    <div class="time-slots" id="bookSlots"></div>
+    <div class="form-group" style="margin-top:16px;">
+      <label class="form-label"><i class="fas fa-phone" style="color:var(--green);"></i> Telefon raqamingiz *</label>
+      <input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00">
+      <div style="font-size:0.75rem;color:var(--text3);margin-top:5px;"><i class="fas fa-info-circle"></i> <span data-i18n="book_phone_hint">Shifokor siz bilan bog'lanish uchun ishlatiladi</span></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label"><i class="fas fa-comment-medical" style="color:var(--blue);"></i> Muammo / Shikoyat</label>
+      <textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea>
+    </div>
+    <div id="tgSendStatus" style="display:none;padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;"></div>
+    <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;" onclick="confirmBooking()" id="bookSubmitBtn">
+      <i class="fas fa-calendar-check"></i> Band Qilish
+    </button>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
 
 <script>
-  function setLang(lang) {
-    document.querySelectorAll('.lang-section').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById('lang-' + lang).classList.add('active');
-    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-    document.documentElement.lang = lang;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+const state = {
+  history: JSON.parse(localStorage.getItem('ng_history') || '[]'),
+  medications: JSON.parse(localStorage.getItem('ng_medications') || '[]'),
+  labResults: JSON.parse(localStorage.getItem('ng_lab') || '[]'),
+  notes: JSON.parse(localStorage.getItem('ng_notes') || '[]'),
+  profile: JSON.parse(localStorage.getItem('ng_profile') || '{}'),
+  points: parseInt(localStorage.getItem('ng_points') || '0'),
+  currentPage: 'dashboard',
+};
+
+function save(key) {
+  const map = {history:'ng_history',medications:'ng_medications',labResults:'ng_lab',notes:'ng_notes',profile:'ng_profile',points:'ng_points'};
+  localStorage.setItem(map[key], JSON.stringify(state[key]));
+}
+
+function toast(msg, type='success') {
+  const icons = {success:'✅',warn:'⚠️',err:'❌',info:'ℹ️'};
+  const el = document.createElement('div');
+  el.className = `toast t-${type}`;
+  el.innerHTML = `<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+  document.getElementById('toastContainer').appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebarBackdrop');
+  if (sb.classList.contains('open')) { sb.classList.remove('open'); bd.classList.remove('show'); }
+  else { sb.classList.add('open'); bd.classList.add('show'); }
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarBackdrop').classList.remove('show');
+}
+
+function navGo(id) {
+  closeSidebar();
+  showPage(id);
+  document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+  const bnEl = document.getElementById('bn-' + id);
+  if (bnEl) bnEl.classList.add('active');
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pageEl = document.getElementById('page-' + id);
+  if (pageEl) pageEl.classList.add('active');
+  const navEl = document.getElementById('nav-' + id);
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent = t('topbar_' + id) || id;
+  document.getElementById('topbarSub').textContent = t('topbar_sub_' + id) || '';
+  state.currentPage = id;
+  if (id === 'vitals')       renderVitals();
+  if (id === 'medications')  renderMedications();
+  if (id === 'labTests')     renderLabResults();
+  if (id === 'notes')        renderNotes();
+  if (id === 'appointments') { renderDoctors('all'); setDocFilter('all'); }
+  if (id === 'history')      renderHistory();
+  if (id === 'profile')      renderProfile();
+  if (id === 'dashboard')    renderDashboard();
+  window.scrollTo(0, 0);
+}
+
+function applyTheme(mode) {
+  const icon = document.getElementById('themeIcon');
+  if (mode === 'light') { document.body.classList.add('light-mode'); if (icon) icon.textContent = '☀️'; }
+  else { document.body.classList.remove('light-mode'); if (icon) icon.textContent = '🌙'; }
+  localStorage.setItem('ng_theme', mode);
+}
+function toggleDark() {
+  if (document.body.classList.contains('light-mode')) { applyTheme('dark'); toast('🌙 Kechki rejim', 'info'); }
+  else { applyTheme('light'); toast('☀️ Kunduzgi rejim', 'info'); }
+}
+
+function updateFormProgress() {
+  const fields = ['systolic','diastolic','heartrate','glucose','height','weight','age'];
+  const filled = fields.filter(f => document.getElementById(f)?.value).length;
+  const pct = Math.round((filled / fields.length) * 100);
+  document.getElementById('formProgressBar').style.width = pct + '%';
+  document.getElementById('formProgress').textContent = pct + "% to'ldirildi";
+}
+
+function analyzeRisk() {
+  const v = (id) => parseFloat(document.getElementById(id)?.value);
+  const s = v('systolic'), d = v('diastolic'), hr = v('heartrate');
+  const gl = v('glucose'), h = v('height'), w = v('weight'), age = v('age');
+  const chol = v('cholesterol') || 5;
+  const smoking = document.getElementById('smoking').value;
+  const exercise = document.getElementById('exercise').value;
+  const alcohol = document.getElementById('alcohol').value;
+
+  if (!s || !d || !hr || !gl || !h || !w || !age) {
+    toast(t('fill_fields_err'), 'err'); return;
   }
+
+  const panel = document.getElementById('resultPanel');
+  panel.innerHTML = `<div class="card" style="min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;"><div class="spinner"></div><div style="color:var(--text2);font-size:0.9rem;">AI tahlil qilmoqda...</div></div>`;
+
+  setTimeout(() => {
+    const bmi = w / ((h / 100) ** 2);
+    let score = 0;
+    const factors = [];
+
+    if (s > 140 || d > 90) { score += 25; factors.push({n:'Qon Bosimi', s:'bad', t:s+'/'+d+' — Yuqori'}); }
+    else if (s > 130 || d > 85) { score += 12; factors.push({n:'Qon Bosimi', s:'warn', t:s+'/'+d+' — Chegaraviy'}); }
+    else { factors.push({n:'Qon Bosimi', s:'good', t:s+'/'+d+' — Normal'}); }
+
+    if (hr > 100 || hr < 55) { score += 12; factors.push({n:'Yurak Urishi', s:'warn', t:hr+' bpm — Beqaror'}); }
+    else { factors.push({n:'Yurak Urishi', s:'good', t:hr+' bpm — Normal'}); }
+
+    if (gl > 7.0) { score += 22; factors.push({n:'Qand', s:'bad', t:gl+' mmol/L — Yuqori'}); }
+    else if (gl > 6.1) { score += 10; factors.push({n:'Qand', s:'warn', t:gl+' mmol/L — Prediabetik'}); }
+    else { factors.push({n:'Qand', s:'good', t:gl+' mmol/L — Normal'}); }
+
+    if (chol > 6.2) { score += 12; factors.push({n:'Xolesterin', s:'bad', t:chol+' — Yuqori'}); }
+    else if (chol > 5.2) { score += 6; factors.push({n:'Xolesterin', s:'warn', t:chol+' — Chegaraviy'}); }
+    else { factors.push({n:'Xolesterin', s:'good', t:chol+' — Normal'}); }
+
+    if (bmi > 30) { score += 15; factors.push({n:'BMI', s:'bad', t:bmi.toFixed(1)+' — Semirib ketgan'}); }
+    else if (bmi > 25) { score += 8; factors.push({n:'BMI', s:'warn', t:bmi.toFixed(1)+' — Ortiqcha vazn'}); }
+    else { factors.push({n:'BMI', s:'good', t:bmi.toFixed(1)+' — Normal'}); }
+
+    if (age > 65) score += 15; else if (age > 55) score += 10; else if (age > 45) score += 5;
+
+    if (smoking === 'yes') { score += 20; factors.push({n:'Chekish', s:'bad', t:"Ha — Katta xavf omili"}); }
+    else if (smoking === 'ex') { score += 5; factors.push({n:'Chekish', s:'warn', t:'Tark etgan'}); }
+    else { factors.push({n:'Chekish', s:'good', t:"Yo'q"}); }
+
+    const exMap = {none:12, light:6, moderate:2, active:0};
+    score += exMap[exercise];
+
+    const alcoholMap = {none:0, rare:5, often:12, daily:18};
+    const alcoholLabelMap = {
+      none:{s:'good',t:"Yo'q — Xavfsiz"},
+      rare:{s:'warn',t:'Kamdan-kam — Past xavf'},
+      often:{s:'bad',t:"Tez-tez — O'rtacha xavf"},
+      daily:{s:'bad',t:'Har kuni — Yuqori xavf!'}
+    };
+    score += alcoholMap[alcohol] || 0;
+    factors.push({n:'Alkogol', ...alcoholLabelMap[alcohol] || alcoholLabelMap['none']});
+
+    const neuroChecks = ['headache','dizziness','numbness','bloodThick','rheumatism','familyVascular','ownVascular','familyHistory'];
+    const scoreWeights = {bloodThick:8,rheumatism:5,familyVascular:8,ownVascular:12,familyHistory:7,headache:5,dizziness:5,numbness:6};
+    const neuroCount = neuroChecks.filter(n => document.getElementById(n)?.checked).length;
+    neuroChecks.forEach(n => { if (document.getElementById(n)?.checked) score += scoreWeights[n] || 0; });
+    if (neuroCount > 0) factors.push({n:'Shikoyatlar', s:neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t:neuroCount+' ta belgi/omil'});
+
+    score = Math.min(Math.round(score), 100);
+
+    let level, lvlClass, lvlColor, lvlDesc, icon;
+    if (score < 25) { level="Past Xavf"; lvlClass='tag-green'; lvlColor='var(--green)'; icon='✅'; lvlDesc="Sog'lik holati yaxshi!"; }
+    else if (score < 50) { level="O'rtacha Xavf"; lvlClass='tag-yellow'; lvlColor='var(--yellow)'; icon='⚠️'; lvlDesc="Ehtiyot bo'ling — ba'zi omillar tuzatish talab qiladi."; }
+    else if (score < 75) { level="Yuqori Xavf"; lvlClass='tag-red'; lvlColor='var(--accent)'; icon='🚨'; lvlDesc='Shifokor bilan maslahatlashing!'; }
+    else { level="Juda Yuqori Xavf"; lvlClass='tag-red'; lvlColor='#ef4444'; icon='🆘'; lvlDesc='Zudlik bilan shifokorga murojaat qiling!'; }
+
+    // Tavsiyalar — har bir omil uchun icon + rang + i18n key
+    const recs = [];
+    if (s > 130 || d > 85)  recs.push({key:'rec_bp',      icon:'🩺', cat:'warn'});
+    if (s > 160 || d > 100) recs.push({key:'rec_bp_high',  icon:'🚨', cat:'bad'});
+    if (gl > 6.1)            recs.push({key:'rec_glucose',  icon:'🍬', cat:'warn'});
+    if (gl > 7.0)            recs.push({key:'rec_glucose_h',icon:'⚠️', cat:'bad'});
+    if (bmi > 25)            recs.push({key:'rec_bmi',      icon:'🥗', cat:'warn'});
+    if (bmi > 30)            recs.push({key:'rec_bmi_high', icon:'🏃', cat:'bad'});
+    if (smoking === 'yes')   recs.push({key:'rec_smoking',  icon:'🚭', cat:'bad'});
+    if (alcohol === 'often' || alcohol === 'daily') recs.push({key:'rec_alcohol', icon:'🍷', cat:'warn'});
+    if (exercise === 'none') recs.push({key:'rec_exercise_none', icon:'🏋️', cat:'bad'});
+    else if (exercise === 'light') recs.push({key:'rec_exercise',  icon:'🚶', cat:'warn'});
+    if (chol > 5.2)          recs.push({key:'rec_chol',     icon:'🥑', cat:'warn'});
+    if (chol > 6.5)          recs.push({key:'rec_chol_high',icon:'💊', cat:'bad'});
+    if (document.getElementById('bloodThick')?.checked) recs.push({key:'rec_blood', icon:'💉', cat:'warn'});
+    if (document.getElementById('familyHistory')?.checked || document.getElementById('familyVascular')?.checked)
+                             recs.push({key:'rec_family',   icon:'👨‍👩‍👦', cat:'warn'});
+    if (score >= 50)         recs.push({key:'rec_stress',   icon:'🧘', cat:'warn'});
+    if (score >= 25)         recs.push({key:'rec_salt',     icon:'🧂', cat:'warn'});
+    recs.push(                         {key:'rec_regular',  icon:'📅', cat:'good'});
+    recs.push(                         {key:'rec_water',    icon:'💧', cat:'good'});
+    if (score >= 30)         recs.push({key:'rec_sleep',    icon:'😴', cat:'warn'});
+
+    const factorsHTML = factors.map(f => `
+      <div class="factor-row">
+        <span class="factor-name"><i class="fas fa-circle-dot" style="font-size:0.6rem;color:var(--${f.s==='bad'?'accent':f.s==='warn'?'yellow':'green'});"></i>${f.n}</span>
+        <span class="factor-badge fb-${f.s==='bad'?'bad':f.s==='warn'?'warn':'good'}">${f.t}</span>
+      </div>`).join('');
+
+    const catColor = {good:'var(--green)', warn:'var(--yellow)', bad:'var(--accent)'};
+    const catIcon  = {good:'fa-circle-check', warn:'fa-triangle-exclamation', bad:'fa-circle-xmark'};
+    const recsHTML = recs.map(r => `
+      <div class="rec-item" style="border-left-color:${catColor[r.cat]};background:rgba(${r.cat==='bad'?'239,68,68':r.cat==='warn'?'245,158,11':'34,197,94'},0.07);margin-bottom:8px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <span style="font-size:1.2rem;flex-shrink:0;line-height:1.4;">${r.icon}</span>
+          <div style="flex:1;">
+            <div style="font-size:0.88rem;font-weight:600;color:var(--text1);">${t(r.key+'_title')}</div>
+            <div style="font-size:0.79rem;color:var(--text2);margin-top:2px;line-height:1.5;">${t(r.key+'_desc')}</div>
+          </div>
+          <i class="fas ${catIcon[r.cat]}" style="color:${catColor[r.cat]};flex-shrink:0;margin-top:3px;font-size:0.9rem;"></i>
+        </div>
+      </div>`).join('');
+
+    const doctorAlert = score >= 50 ? `
+      <div class="doctor-alert">
+        <div class="alert-icon">👨‍⚕️</div>
+        <div>
+          <div class="alert-title">${t('alert_see_doctor')}</div>
+          <div class="alert-desc">${t('risk_alert_desc').replace('{score}', score)}</div>
+          <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-calendar-plus"></i> <span>${t('book_btn')}</span></button>
+        </div>
+      </div>` : '';
+
+    panel.innerHTML = `
+      <div class="card" style="height:100%;">
+        <div style="text-align:center;padding:20px 0;border-bottom:1px solid var(--border);margin-bottom:20px;">
+          <div style="font-size:3rem;margin-bottom:8px;">${icon}</div>
+          <div style="font-family:var(--font-display);font-size:2.8rem;font-weight:800;color:${lvlColor};">${score}%</div>
+          <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:${lvlColor};">${level}</div>
+          <div style="font-size:0.85rem;color:var(--text2);margin-top:8px;">${lvlDesc}</div>
+          <div style="margin-top:12px;"><span class="${lvlClass} tag">Insult Xavfi: ${score}%</span></div>
+        </div>
+        ${doctorAlert}
+        <div style="margin-top:20px;">
+          <div style="font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);font-family:var(--font-mono);margin-bottom:12px;">Xavf Omillari Tahlili</div>
+          ${factorsHTML}
+        </div>
+        <div style="margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);font-family:var(--font-mono);" data-i18n-js="rec_section">${t('rec_section')}</div>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <span style="font-size:0.75rem;background:var(--bg3);color:var(--text3);padding:2px 8px;border-radius:20px;border:1px solid var(--border);">${recs.length} ${t('rec_count')}</span>
+          </div>
+          ${recsHTML}
+        </div>
+        <div style="margin-top:16px;padding:14px 16px;background:rgba(245,158,11,0.08);border-radius:12px;border-left:3px solid var(--yellow);font-size:0.8rem;color:var(--text2);display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:1.1rem;flex-shrink:0;">⚠️</span>
+          <span>${t('disclaimer_text')}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+          <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" class="btn btn-accent" style="font-size:0.88rem;">
+            <i class="fas fa-save"></i> <span>${t('save_result_btn')}</span>
+          </button>
+          <button onclick="navGo('appointments')" class="btn btn-outline" style="font-size:0.88rem;border:1px solid var(--border);background:var(--bg3);color:var(--text1);border-radius:12px;cursor:pointer;padding:12px 16px;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <i class="fas fa-calendar-plus" style="color:var(--accent);"></i> <span>${t('book_specialist_btn')}</span>
+          </button>
+        </div>
+        <button onclick="downloadPDFReport(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" style="width:100%;margin-top:8px;background:transparent;border:1px dashed var(--border);border-radius:12px;padding:10px;font-size:0.8rem;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+          <i class="fas fa-file-pdf" style="color:var(--accent);"></i> <span>${t('download_pdf_btn')}</span>
+        </button>
+      </div>`;
+
+    state.points += 10; save('points'); updateSidebarProfile();
+    toast(t('analysis_done_toast'), 'success');
+  }, 1800);
+}
+
+// ✅ FIX 1: hr parametri qo'shildi
+function saveAnalysisResult(score, level, s, d, hr, gl, bmi) {
+  const entry = {date:new Date().toISOString(), score, level, systolic:s, diastolic:d, heartrate:hr, glucose:gl, bmi};
+  state.history.unshift(entry);
+  save('history');
+  updateDashboardStats();
+  toast(t('result_saved_toast'), 'success');
+}
+
+function renderDashboard() {
+  const last = state.history[0];
+  if (last) {
+    document.getElementById('dashBP').textContent = last.systolic+'/'+last.diastolic;
+    document.getElementById('dashGlucose').textContent = last.glucose;
+    document.getElementById('dashBMI').textContent = last.bmi;
+    // ✅ FIX 2: dashHR endi ko'rsatiladi
+    if (last.heartrate) {
+      document.getElementById('dashHR').textContent = last.heartrate;
+      document.getElementById('dashHRStatus').innerHTML = (last.heartrate>100||last.heartrate<55) ? '<span class="stat-down">Beqaror</span>' : '<span class="stat-up">Normal</span>';
+    }
+    document.getElementById('dashBPStatus').innerHTML = last.systolic > 140 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
+    document.getElementById('dashGlucoseStatus').innerHTML = last.glucose > 6.1 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
+    document.getElementById('dashBMIStatus').innerHTML = last.bmi > 25 ? '<span class="stat-down">Ortiqcha</span>' : '<span class="stat-up">Normal</span>';
+    const gc = document.getElementById('dashGauge');
+    const color = last.score < 25 ? 'var(--green)' : last.score < 50 ? 'var(--yellow)' : 'var(--accent)';
+    gc.innerHTML = `<div style="text-align:center;padding:20px;">
+      <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:800;color:${color};">${last.score}%</div>
+      <div style="font-size:0.85rem;color:var(--text2);margin-top:6px;">Insult Xavfi</div>
+      <div style="margin-top:10px;"><span class="tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}">${last.level}</span></div>
+      <div class="progress-track" style="margin-top:16px;height:8px;"><div class="progress-fill-bar" style="width:${last.score}%;background:${color};"></div></div>
+    </div>`;
+    document.getElementById('dashRiskTag').textContent = last.level;
+    document.getElementById('dashRiskTag').className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
+  }
+  renderMiniChart(); renderDashMeds(); renderDashNotes();
+}
+
+function renderMiniChart() {
+  const ctx = document.getElementById('dashBPChart');
+  if (!ctx) return;
+  if (window.dashBPChartInst) { try { window.dashBPChartInst.destroy(); } catch(e){} }
+  const labels = state.history.slice(0,8).reverse().map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'}));
+  const sys = state.history.slice(0,8).reverse().map(h => h.systolic);
+  const dia = state.history.slice(0,8).reverse().map(h => h.diastolic);
+  if (!labels.length) { labels.push('Hozir'); sys.push(120); dia.push(80); }
+  window.dashBPChartInst = new Chart(ctx, {
+    type:'line',
+    data:{labels, datasets:[
+      {label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,pointRadius:4,pointBackgroundColor:'#e63950'},
+      {label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.1)',tension:0.4,pointRadius:4,pointBackgroundColor:'#3b82f6'}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb',font:{size:11}}}},scales:{x:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}}}}
+  });
+}
+
+function renderDashMeds() {
+  const el = document.getElementById('dashMeds');
+  const today = state.medications.slice(0,3);
+  if (!today.length) return;
+  el.innerHTML = today.map(m => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);">
+      <span style="font-size:0.88rem;font-weight:500;"><i class="fas fa-capsules" style="color:var(--accent);margin-right:6px;"></i>${m.name}</span>
+      <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent);">${m.time}</span>
+    </div>`).join('');
+}
+
+function renderDashNotes() {
+  const el = document.getElementById('dashNotes');
+  const recent = state.notes.slice(0,3);
+  if (!recent.length) return;
+  el.innerHTML = recent.map(n => `
+    <div style="padding:10px 14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);">
+      <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(n.date).toLocaleDateString('uz-UZ')}</div>
+      <div style="font-size:0.88rem;margin-top:4px;">${n.title || n.content.slice(0,50)}</div>
+    </div>`).join('');
+}
+
+function updateDashboardStats() { renderDashboard(); }
+
+function renderVitals() {
+  const last = state.history[0];
+  if (last) {
+    document.getElementById('vBP').textContent = last.systolic+'/'+last.diastolic;
+    document.getElementById('vGlucose').textContent = last.glucose;
+    document.getElementById('vBMI').textContent = last.bmi;
+    // ✅ FIX 3: vHR endi ko'rsatiladi
+    document.getElementById('vHR').textContent = last.heartrate || '—';
+  }
+  const bpCtx = document.getElementById('vitBPChart');
+  if (bpCtx) {
+    if (window.vitBPChartInst) { try { window.vitBPChartInst.destroy(); } catch(e){} }
+    const labels = state.history.slice(0,10).reverse().map((h,i) => 'Tahlil '+(i+1));
+    const sys = state.history.slice(0,10).reverse().map(h => h.systolic);
+    const dia = state.history.slice(0,10).reverse().map(h => h.diastolic);
+    window.vitBPChartInst = new Chart(bpCtx, {type:'line',data:{labels,datasets:[{label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,fill:true},{label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.05)',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+  }
+  const rCtx = document.getElementById('vitRiskChart');
+  if (rCtx) {
+    if (window.vitRiskChartInst) { try { window.vitRiskChartInst.destroy(); } catch(e){} }
+    const labels = state.history.slice(0,8).reverse().map((h,i) => 'T'+(i+1));
+    const risks = state.history.slice(0,8).reverse().map(h => h.score);
+    window.vitRiskChartInst = new Chart(rCtx, {type:'bar',data:{labels,datasets:[{label:'Xavf %',data:risks,backgroundColor:risks.map(r=>r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+  }
+}
+
+function renderMedications() {
+  const el = document.getElementById('medList');
+  if (!state.medications.length) {
+    el.innerHTML = `<div class="card" style="text-align:center;padding:60px;color:var(--text3);"><i class="fas fa-pills" style="font-size:3rem;opacity:0.3;margin-bottom:16px;display:block;"></i>${t('no_meds')}</div>`;
+    // ✅ FIX 4: badge null check
+    const badge = document.getElementById('medBadge');
+    if (badge) badge.style.display = 'none';
+    return;
+  }
+  el.innerHTML = state.medications.map((m, i) => `
+    <div class="med-card ${m.taken?'taken':''}">
+      <div class="med-header-row">
+        <div class="med-name"><i class="fas fa-capsules" style="color:var(--accent);margin-right:8px;"></i>${m.name}</div>
+        <div class="med-time">${m.time}</div>
+      </div>
+      <div class="med-meta">
+        <span><i class="fas fa-prescription"></i> ${m.dosage}</span>
+        <span><i class="fas fa-repeat"></i> ${m.frequency}</span>
+        ${m.notes ? `<span><i class="fas fa-info-circle"></i> ${m.notes}</span>` : ''}
+      </div>
+      <div class="med-actions-row">
+        <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}"><i class="fas fa-check"></i> ${m.taken?t('taken'):t('take_med')}</button>
+        <button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`).join('');
+  const pending = state.medications.filter(m => !m.taken).length;
+  // ✅ FIX 4: null check
+  const badge = document.getElementById('medBadge');
+  if (badge) {
+    if (pending > 0) { badge.style.display=''; badge.textContent = pending; }
+    else badge.style.display = 'none';
+  }
+}
+
+function openAddMedModal() { document.getElementById('addMedModal').classList.add('active'); }
+
+function saveMedication() {
+  const name = document.getElementById('mName').value.trim();
+  const dosage = document.getElementById('mDose').value.trim();
+  const time = document.getElementById('mTime').value;
+  if (!name || !dosage || !time) { toast(t('fill_fields_err'), 'err'); return; }
+  state.medications.push({name, dosage, time, frequency:document.getElementById('mFreq').value, notes:document.getElementById('mNotes').value, taken:false, date:new Date().toISOString()});
+  save('medications');
+  document.getElementById('addMedModal').classList.remove('active');
+  ['mName','mDose','mTime','mNotes'].forEach(id => document.getElementById(id).value = '');
+  state.points += 5; save('points'); updateSidebarProfile();
+  renderMedications();
+  toast(t('med_added_toast'), 'success');
+}
+
+function takeMed(i) {
+  state.medications[i].taken = true; save('medications'); renderMedications();
+  state.points += 5; save('points'); updateSidebarProfile();
+  toast('✅ ' + t('med_taken_toast'), 'success');
+}
+
+function deleteMed(i) {
+  if (confirm(t('confirm_del_med'))) {
+    state.medications.splice(i, 1); save('medications'); renderMedications();
+    toast(t('med_deleted'), 'warn');
+  }
+}
+
+function renderLabResults() {
+  const el = document.getElementById('labResultsList');
+  if (!state.labResults.length) {
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:30px;">${t('no_lab_results')}</div>`;
+  } else {
+    el.innerHTML = state.labResults.map((r, i) => `
+      <div class="lab-row">
+        <div class="lab-name"><i class="fas fa-vials" style="color:var(--blue);margin-right:8px;"></i>${r.type}</div>
+        <div><div class="lab-value" style="color:${r.status==='normal'?'var(--green)':r.status==='abnormal'?'var(--yellow)':'var(--accent)'}">${r.value}</div><div class="lab-normal">${r.unit}</div></div>
+        <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?t('status_normal'):r.status==='abnormal'?t('status_abnormal'):t('status_critical')}</span>
+        <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(r.date).toLocaleDateString('uz-UZ')}</div>
+        <button onclick="deleteLabResult(${i})" class="btn btn-danger" style="padding:5px 10px;font-size:0.78rem;"><i class="fas fa-trash"></i></button>
+      </div>`).join('');
+  }
+  // ✅ FIX 5: canvas destroy xatosini try/catch bilan himoya qilindi
+  const ctx = document.getElementById('labChart');
+  if (ctx) {
+    try { if (window.labChartInst) window.labChartInst.destroy(); } catch(e) {}
+    const glucose = state.labResults.filter(r => r.type.includes('Qand'));
+    if (glucose.length > 1) {
+      window.labChartInst = new Chart(ctx, {type:'line',data:{labels:glucose.map((g,i)=>'T'+(i+1)),datasets:[{label:'Qand (mmol/L)',data:glucose.map(g=>g.value),borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.1)',tension:0.4,fill:true,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+    } else {
+      ctx.parentElement.innerHTML = `<div style="text-align:center;color:var(--text3);padding:40px;font-size:0.85rem;">${t('lab_chart_hint')}</div>`;
+    }
+  }
+}
+
+function openAddLabModal() { document.getElementById('addLabModal').classList.add('active'); }
+
+function saveLabResult() {
+  const type = document.getElementById('labType').value;
+  const value = parseFloat(document.getElementById('labValue').value);
+  const unit = document.getElementById('labUnit').value || 'mmol/L';
+  const status = document.getElementById('labStatus').value;
+  if (!value) { toast(t('enter_value_err'), 'err'); return; }
+  state.labResults.unshift({type, value, unit, status, date:new Date().toISOString()});
+  save('labResults');
+  document.getElementById('addLabModal').classList.remove('active');
+  renderLabResults();
+  state.points += 5; save('points'); updateSidebarProfile();
+  toast(t('lab_saved_toast'), 'success');
+}
+
+function deleteLabResult(i) {
+  state.labResults.splice(i,1); save('labResults'); renderLabResults();
+  toast(t('deleted_toast'), 'warn');
+}
+
+const catColors = {general:'tag-blue', symptom:'tag-red', medication:'tag-green', appointment:'tag-yellow', exercise:'tag-blue'};
+const catLabels = {general:'Umumiy', symptom:'Belgi', medication:'Dori', appointment:'Shifokor', exercise:'Mashq'};
+
+function renderNotes() {
+  const el = document.getElementById('notesList');
+  if (!state.notes.length) {
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>${t('no_notes')}</div>`;
+    return;
+  }
+  // ✅ FIX 6: note-card lar alohida, grid-2 ichida emas (mobil uchun ham ishlaydi)
+  el.innerHTML = `<div class="grid-2">${state.notes.map((n,i) => `
+    <div class="note-card">
+      <div class="note-date"><i class="fas fa-clock" style="margin-right:4px;"></i>${new Date(n.date).toLocaleString('uz-UZ')}</div>
+      ${n.title ? `<div style="font-weight:700;font-size:1rem;margin-bottom:6px;">${n.title}</div>` : ''}
+      <div class="note-content">${n.content}</div>
+      <div class="note-tag-row">
+        <span class="tag ${catColors[n.category]||'tag-blue'}">${catLabels[n.category]||'Umumiy'}</span>
+        <button onclick="deleteNote(${i})" class="btn btn-danger" style="padding:3px 10px;font-size:0.75rem;margin-left:auto;"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function openAddNoteModal() { document.getElementById('addNoteModal').classList.add('active'); }
+
+function saveNote() {
+  const content = document.getElementById('noteContent').value.trim();
+  if (!content) { toast(t('write_text_err'), 'err'); return; }
+  state.notes.unshift({title:document.getElementById('noteTitle').value.trim(), content, category:document.getElementById('noteCategory').value, date:new Date().toISOString()});
+  save('notes');
+  document.getElementById('addNoteModal').classList.remove('active');
+  ['noteTitle','noteContent'].forEach(id => document.getElementById(id).value = '');
+  state.points += 3; save('points'); updateSidebarProfile();
+  renderNotes();
+  toast(t('note_saved_toast'), 'success');
+}
+
+function deleteNote(i) {
+  state.notes.splice(i,1); save('notes'); renderNotes();
+  toast(t('note_deleted'), 'warn');
+}
+
+const doctors = [
+  {id:1,name:'Dr. Kseniya Shimirina',specKey:'spec_nevrolog',expYears:15,rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',descKey:'doc1_desc'},
+  {id:2,name:'Dr. Akmal Gaibiyev',specKey:'spec_nevrolog',expYears:12,rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',descKey:'doc2_desc'},
+  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'spec_endokrinolog',expYears:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',descKey:'doc3_desc'},
+];
+
+let selectedSlot = {};
+let currentDocId = null;
+
+function renderDoctors(filter) {
+  const list = filter === 'all' ? doctors : doctors.filter(d => d.specKey === 'spec_'+filter);
+  document.getElementById('doctorGrid').innerHTML = list.map(doc => `
+    <div class="doctor-card" onclick="openBooking(${doc.id})">
+      <div class="doctor-top">
+        <div class="doctor-avatar">${doc.avatar}</div>
+        <div class="doctor-name">${doc.name}</div>
+        <div class="doctor-spec">${t(doc.specKey)}</div>
+        <div class="doctor-rating"><i class="fas fa-star"></i> ${doc.rating} · ${doc.expYears} ${t('years_exp')}</div>
+      </div>
+      <div class="doctor-body">
+        <div style="font-size:0.83rem;color:var(--text2);margin-bottom:12px;">${t(doc.descKey)}</div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">${t('available_times')}</div>
+        <div class="time-slots">${doc.slots.map(s => `<div class="time-slot">${s}</div>`).join('')}</div>
+        <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> ${t('book_btn')}</button>
+      </div>
+    </div>`).join('');
+}
+
+let lastDocFilter = 'all';
+function filterDocs(type) { lastDocFilter = type; renderDoctors(type); setDocFilter(type); }
+
+function setDocFilter(type) {
+  document.querySelectorAll('[id^="df-"]').forEach(b => { b.classList.remove('btn-accent'); b.classList.add('btn-ghost'); });
+  const btn = document.getElementById('df-' + type);
+  if (btn) { btn.classList.add('btn-accent'); btn.classList.remove('btn-ghost'); }
+}
+
+function openBooking(id) {
+  currentDocId = id;
+  const doc = doctors.find(d => d.id === id);
+  document.getElementById('bookDocName').textContent = doc.name;
+  document.getElementById('bookDocSpec').textContent = t(doc.specKey)+' — '+doc.expYears+' '+t('years_exp');
+  document.getElementById('bookSlots').innerHTML = doc.slots.map(s => `<div class="time-slot" onclick="selectSlot(this,'${s}')">${s}</div>`).join('');
+  selectedSlot = {};
+  document.getElementById('bookModal').classList.add('active');
+}
+
+function selectSlot(el, slot) {
+  document.querySelectorAll('#bookSlots .time-slot').forEach(s => s.classList.remove('slot-selected'));
+  el.classList.add('slot-selected');
+  selectedSlot = slot;
+}
+
+const TG_DEFAULT_TOKEN  = '8732267586:AAE2PcLwVHhyfE6AxeEzOICyIx_inV7BJ3Y';
+const TG_DEFAULT_CHATID = '@konsultatsiyas';
+function getTGToken()  { return localStorage.getItem('ng_tg_token')  || TG_DEFAULT_TOKEN; }
+function getTGChatId() { return localStorage.getItem('ng_tg_chatid') || TG_DEFAULT_CHATID; }
+
+async function sendTelegramMessage(text) {
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${getTGToken()}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:getTGChatId(), text, parse_mode:'HTML'})
+    });
+    return await res.json();
+  } catch(e) { return {ok:false, error:e.message}; }
+}
+
+async function confirmBooking() {
+  if (!selectedSlot) { toast(t('select_time_err'), 'err'); return; }
+  const phone = document.getElementById('bookPhone').value.trim();
+  if (!phone) { toast(t('enter_phone_err'), 'err'); return; }
+  const doc = doctors.find(d => d.id === currentDocId);
+  const complaint = document.getElementById('bookComplaint').value.trim();
+  const dateStr = new Date().toLocaleString('uz-UZ');
+  const bemorLine = state.profile.name ? '\n\u{1F464} <b>Bemor:</b> '+state.profile.name+' '+(state.profile.surname||'') : '';
+  const xavfLine = state.history[0] ? '\n\u26A0\uFE0F <b>Xavf:</b> '+state.history[0].score+'% - '+state.history[0].level : '';
+  const tgText = '🏥 <b>YANGI KONSULTATSIYA SO\'ROVI</b>\n\n👨‍⚕️ <b>Shifokor:</b> '+doc.name+'\n🔬 <b>Mutaxassislik:</b> '+t(doc.specKey)+'\n🕐 <b>Vaqt:</b> '+selectedSlot+'\n📱 <b>Telefon:</b> '+phone+'\n📝 <b>Shikoyat:</b> '+(complaint||'Korsatilmagan')+'\n📅 <b>Yuborilgan:</b> '+dateStr+bemorLine+xavfLine;
+
+  const btn = document.getElementById('bookSubmitBtn');
+  const statusEl = document.getElementById('tgSendStatus');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+  statusEl.style.display = 'none';
+
+  const result = await sendTelegramMessage(tgText);
+
+  if (result.ok) {
+    statusEl.style.display = 'block';
+    statusEl.style.cssText = 'display:block;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--green);padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;';
+    statusEl.innerHTML = '✅ <b>Telegram ga muvaffaqiyatli yuborildi!</b>';
+    setTimeout(() => finishBooking(doc, complaint, phone), 1200);
+  } else {
+    statusEl.style.display = 'block';
+    statusEl.style.cssText = 'display:block;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;';
+    statusEl.innerHTML = '⚙️ Demo rejim — band qilindi.';
+    setTimeout(() => finishBooking(doc, complaint, phone), 1500);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-calendar-check"></i> Band Qilish';
+}
+
+function finishBooking(doc, complaint, phone) {
+  state.notes.unshift({title:`Shifokor: ${doc.name} — ${selectedSlot}`, content:'📱 Tel: '+phone+'\n'+(complaint||'Konsultatsiya band qilindi'), category:'appointment', date:new Date().toISOString()});
+  save('notes');
+  state.points += 15; save('points'); updateSidebarProfile();
+  document.getElementById('bookModal').classList.remove('active');
+  document.getElementById('bookPhone').value = '';
+  document.getElementById('bookComplaint').value = '';
+  document.getElementById('tgSendStatus').style.display = 'none';
+  toast(`✅ ${doc.name} ${t('booked_with')} ${selectedSlot}! +15 ${t('points_lbl')}`, 'success');
+}
+
+function renderHistory() {
+  const tbody = document.getElementById('historyBody');
+  if (!state.history.length) {
+    tbody.innerHTML = `<tr><td colspan='7' style='text-align:center;color:var(--text3);padding:30px;'>${t('no_analyses')}</td></tr>`;
+  } else {
+    tbody.innerHTML = state.history.map(h => {
+      const color = h.score<25?'var(--green)':h.score<50?'var(--yellow)':'var(--accent)';
+      return `<tr>
+        <td style="font-family:var(--font-mono);font-size:0.82rem;">${new Date(h.date).toLocaleDateString('uz-UZ')}</td>
+        <td>${h.systolic}/${h.diastolic}</td>
+        <td>${h.heartrate || '—'}</td>
+        <td>${h.glucose}</td><td>${h.bmi}</td>
+        <td style="font-family:var(--font-mono);font-weight:700;color:${color};">${h.score}%</td>
+        <td><span class="tag ${h.score<25?'tag-green':h.score<50?'tag-yellow':'tag-red'}">${h.level}</span></td>
+      </tr>`;
+    }).join('');
+  }
+  const ctx = document.getElementById('historyRiskChart');
+  if (ctx) {
+    try { if (window.histRiskChartInst) window.histRiskChartInst.destroy(); } catch(e) {}
+    const d = state.history.slice(0,12).reverse();
+    window.histRiskChartInst = new Chart(ctx, {
+      type:'line',
+      data:{labels:d.map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),datasets:[{label:'Insult Xavfi %',data:d.map(h=>h.score),borderColor:'#e63950',backgroundColor:(c)=>{const g=c.chart.ctx.createLinearGradient(0,0,0,260);g.addColorStop(0,'rgba(230,57,80,0.3)');g.addColorStop(1,'rgba(230,57,80,0)');return g;},tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#e63950',pointBorderColor:'#fff',pointBorderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{max:100,min:0,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
+    });
+  }
+}
+
+function clearHistory() {
+  if (!confirm("Barcha tarix o'chiriladi. Davom etasizmi?")) return;
+  state.history = []; save('history'); renderHistory();
+  toast(t('hist_cleared'), 'warn');
+}
+
+const achievements = [
+  {id:'first_analysis', icon:'🔬', name:'Birinchi tahlil', cond:() => state.history.length >= 1},
+  {id:'regular', icon:'📅', name:'Muntazam (5 tahlil)', cond:() => state.history.length >= 5},
+  {id:'med_taker', icon:'💊', name:'Dori qabul qildi', cond:() => state.medications.some(m => m.taken)},
+  {id:'note_keeper', icon:'📝', name:'Qaydnoma yozdi', cond:() => state.notes.length >= 1},
+  {id:'doctor_visit', icon:'👨‍⚕️', name:'Shifokor oldi', cond:() => state.notes.some(n => n.category==='appointment')},
+  {id:'low_risk', icon:'✅', name:'Past xavf', cond:() => state.history.some(h => h.score < 25)},
+  {id:'pro', icon:'🏆', name:'Pro (10 tahlil)', cond:() => state.history.length >= 10},
+  {id:'century', icon:'💯', name:'100 ball', cond:() => state.points >= 100},
+];
+
+function renderProfile() {
+  const p = state.profile;
+  const fn = (p.name||'').trim(), ln = (p.surname||'').trim();
+  const initials = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U';
+  document.getElementById('profileAvatar').textContent = initials;
+  document.getElementById('sidebarAvatar').textContent = initials;
+  document.getElementById('profileNameDisplay').textContent = (fn+' '+ln).trim()||'Foydalanuvchi';
+  document.getElementById('sidebarName').textContent = p.name||'Profil';
+  const last = state.history[0];
+  if (last) {
+    document.getElementById('pm-age').textContent = 'Yosh: '+(p.age||'—');
+    document.getElementById('pm-bmi').textContent = 'BMI: '+last.bmi;
+    document.getElementById('pm-points').textContent = state.points+' ball';
+    const tag = document.getElementById('profileRiskTag');
+    tag.textContent = last.level;
+    tag.className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
+  }
+  const det = document.getElementById('profileDetails');
+  if (p.name) {
+    det.innerHTML = `<div class="grid-2" style="gap:10px;">
+      ${rPF('user','Ism',p.name||'—')}${rPF('user-tie','Familiya',p.surname||'—')}
+      ${rPF('birthday-cake','Yosh',p.age||'—')}${rPF('venus-mars','Jins',p.gender==='male'?'Erkak':'Ayol')}
+      ${rPF('phone','Telefon',p.phone||'—')}${rPF('tint','Qon Guruhi',p.bloodType||'—')}
+      ${p.conditions ? rPF('notes-medical','Kasalliklar',p.conditions) : ''}
+    </div>`;
+  } else {
+    det.innerHTML = '<div style="color:var(--text3);font-size:0.85rem;">Ma\'lumotlar to\'ldirilmagan. <button class="btn btn-ghost" onclick="openEditProfileModal()" style="padding:4px 10px;font-size:0.82rem;margin-left:8px;">Tahrirlash</button></div>';
+  }
+  document.getElementById('achievementGrid').innerHTML = achievements.map(a => `
+    <div class="achievement ${a.cond()?'unlocked':'locked'}">
+      <div class="achievement-icon">${a.icon}</div>
+      <div class="achievement-name">${a.name}</div>
+    </div>`).join('');
+  document.getElementById('statAnalyses').textContent = state.history.length;
+  document.getElementById('statMeds').textContent = state.medications.length;
+  document.getElementById('statNotes').textContent = state.notes.length;
+  document.getElementById('statPoints').textContent = state.points;
+  document.getElementById('sidebarPoints').textContent = state.points;
+}
+
+function rPF(icon, label, value) {
+  return `<div style="padding:10px 14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);">
+    <div style="font-size:0.72rem;color:var(--text3);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+    <div style="font-weight:600;margin-top:4px;font-size:0.88rem;"><i class="fas fa-${icon}" style="color:var(--accent);margin-right:6px;font-size:0.8rem;"></i>${value}</div>
+  </div>`;
+}
+
+function openEditProfileModal() {
+  const p = state.profile;
+  document.getElementById('pName').value = p.name||'';
+  document.getElementById('pSurname').value = p.surname||'';
+  document.getElementById('pAge').value = p.age||'';
+  document.getElementById('pPhone').value = p.phone||'';
+  document.getElementById('pConditions').value = p.conditions||'';
+  document.getElementById('editProfileModal').classList.add('active');
+}
+
+function saveProfile() {
+  state.profile = {name:document.getElementById('pName').value.trim(), surname:document.getElementById('pSurname').value.trim(), age:document.getElementById('pAge').value, gender:document.getElementById('pGender').value, phone:document.getElementById('pPhone').value.trim(), bloodType:document.getElementById('pBloodType').value, conditions:document.getElementById('pConditions').value.trim()};
+  save('profile');
+  state.points += 10; save('points');
+  document.getElementById('editProfileModal').classList.remove('active');
+  renderProfile(); updateSidebarProfile();
+  toast(t('profile_saved_toast'), 'success');
+}
+
+function updateSidebarProfile() {
+  document.getElementById('sidebarPoints').textContent = state.points;
+  document.getElementById('sidebarName').textContent = state.profile.name||'Profil';
+  const fn = (state.profile.name||'').trim(), ln = (state.profile.surname||'').trim();
+  document.getElementById('sidebarAvatar').textContent = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U';
+}
+
+function openSOS() { document.getElementById('sosModal').classList.add('active'); }
+function closeSOS() { document.getElementById('sosModal').classList.remove('active'); }
+
+function requestNotificationPermission() {
+  if (!('Notification' in window)) { toast(t('notif_unsupported'), 'warn'); return; }
+  if (Notification.permission === 'granted') { toast(t('notif_on'), 'info'); return; }
+  Notification.requestPermission().then(p => {
+    if (p === 'granted') toast(t('notif_granted'), 'success');
+    else toast(t('notif_denied'), 'warn');
+  });
+}
+
+function downloadPDFReport() {
+  const last = state.history[0];
+  if (!last) { toast(t('run_analysis_first'), 'err'); return; }
+  const p = state.profile;
+  const name = ((p.name||'')+' '+(p.surname||'')).trim() || 'Bemor';
+  const date = new Date(last.date).toLocaleDateString('uz-UZ');
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:40px;color:#1a1a2e;max-width:800px;margin:0 auto;}.header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #e63950;padding-bottom:20px;margin-bottom:30px;}.logo{font-size:1.8rem;font-weight:900;color:#e63950;}h2{color:#e63950;margin-top:24px;font-size:1.1rem;}.risk{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;font-size:1.1rem;margin:12px 0;background:${last.score<25?'#d1fae5':last.score<50?'#fef3c7':'#fee2e2'};color:${last.score<25?'#065f46':last.score<50?'#92400e':'#991b1b'};}.footer{margin-top:40px;padding-top:16px;border-top:1px solid #eee;font-size:0.75rem;color:#999;text-align:center;}</style></head><body>
+<div class="header"><div><div class="logo">NeuroGuard</div><div style="font-size:0.8rem;color:#666;">AI Pro v2.1 — Tibbiy Hisobot</div></div><div style="text-align:right;font-size:0.85rem;color:#666;">${date}<br>${name}</div></div>
+<h2>🎯 Xavf Baholash Natijasi</h2>
+<div class="risk">${last.level} — ${last.score}%</div>
+<h2>📊 Ko'rsatkichlar</h2>
+<p>Qon bosimi: ${last.systolic}/${last.diastolic} mmHg</p>
+<p>Yurak urishi: ${last.heartrate||'—'} bpm</p>
+<p>Qand: ${last.glucose} mmol/L</p>
+<p>BMI: ${last.bmi}</p>
+${state.medications.length ? '<h2>💊 Dorilar</h2>'+state.medications.map(m=>'<p>'+m.name+' — '+m.dosage+'</p>').join('') : ''}
+<div class="footer">NeuroGuard AI Pro — Bu hisobot faqat ma'lumot berish uchun. Tibbiy diagnoz emas.<br>Yaratilgan: ${new Date().toLocaleString('uz-UZ')}</div>
+</body></html>`;
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'NeuroGuard_Hisobot_'+new Date().toISOString().slice(0,10)+'.html';
+  a.click(); URL.revokeObjectURL(url);
+  toast(t('report_downloaded'), 'success');
+}
+
+/* ── MULTI-LANGUAGE ── */
+const LANGS = {
+  uz: {
+    nav_dashboard:"Dashboard", nav_assessment:"AI Tekshiruv", nav_vitals:"Vital Ko'rsatkichlar",
+    nav_medications:"Dorilar", nav_labTests:"Tahlillar", nav_notes:"Qaydnoma",
+    nav_appointments:"Konsultatsiya", nav_history:"Tarix & Diagramma", nav_profile:"Profilim",
+    topbar_dashboard:"Dashboard", topbar_sub_dashboard:"Umumiy holat ko'rinishi",
+    topbar_assessment:"AI Tekshiruv", topbar_sub_assessment:"Insult xavfini aniqlash",
+    topbar_vitals:"Vital Ko'rsatkichlar", topbar_sub_vitals:"Real vaqt monitoringi",
+    topbar_medications:"Dorilar", topbar_sub_medications:"Dori jadvalingiz",
+    topbar_labTests:"Tahlillar", topbar_sub_labTests:"Laboratoriya natijalari",
+    topbar_notes:"Qaydnoma", topbar_sub_notes:"Tibbiy eslatmalar",
+    topbar_appointments:"Konsultatsiya", topbar_sub_appointments:"Shifokor bilan uchrashish",
+    topbar_history:"Tarix & Diagramma", topbar_sub_history:"O'tgan tahlillar",
+    topbar_profile:"Mening Profilim", topbar_sub_profile:"Shaxsiy ma'lumotlar",
+    welcome:"Xush kelibsiz!", welcome_sub:"Sog'lig'ingizning bugungi ko'rsatkichlari",
+    bp_label:"Qon Bosimi (mmHg)", glucose_label:"Qand (mmol/L)", hr_label:"Yurak Urishi (bpm)", bmi_label:"BMI",
+    complete_check:"Tekshiruvni yakunlang", for_ai:"AI tahlili uchun",
+    bp_history:"Qon Bosimi Tarixi", latest_check:"So'ngi tahlil",
+    today_meds:"Bugungi Dorilar", recent_notes:"So'ngi Qaydnomalar",
+    assessment_title:"AI Insult Xavfi Tahlili", assessment_desc:"Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi",
+    ai_analyst:"AI Tahlilchi", systolic:"Sistolik qon bosimi", diastolic:"Diastolik",
+    heartrate:"Yurak urishi (bpm)", glucose_mmol:"Qand (mmol/L)", height_cm:"Bo'y (sm)", weight_kg:"Vazn (kg)",
+    age_label:"Yosh", cholesterol:"Xolesterin (mmol/L)",
+    smoking_q:"Chekasizmi?", exercise_q:"Jismoniy faollik",
+    alcohol_q:"Alkogol iste'mol qilasizmi?", complaints:"Shikoyatlar va xavf omillari",
+    c_headache:"Tez-tez bosh og'rig'i", c_dizziness:"Bosh aylanishi",
+    c_numbness:"Qo'l-oyoq kuchsizlanishi / uvishishi",
+    // ✅ FIX 7: missing uz translations added
+    c_speech:"Nutq qiyinligi",
+    c_bloodThick:"Qon quyuqligi (trombofiliya)",
+    c_movement:"Harakat o'zgarishi (muvozanat, koordinatsiya)",
+    c_rheumatism:"Revmatizm / bo'g'im kasalliklari", c_familyVascular:"Oilada qon tomir kasalliklari",
+    c_ownVascular:"O'zida qon tomir kasalliklari bor", c_familyHistory:"Oilada insult bo'lgan",
+    ai_analyze:"AI Tahlil Qilsin", result_ready:"Tahlil uchun tayyor",
+    result_hint:"Chap tomondagi ma'lumotlarni to'ldiring va AI tahlil tugmasini bosing",
+    prof_title:"Mening Profilim", achievements:"Yutuqlar", stats_title:"Statistika",
+    vitals_title:"Vital Ko'rsatkichlar", vitals_desc:"Real vaqt monitoringi",
+    vl_bp:"QONBOSIM", vl_hr:"YURAK URISHI", vl_glucose:"QAND", vl_bmi:"BMI",
+    bp_dynamics:"Qon Bosimi Dinamikasi", risk_dynamics:"Xavf Ko'rsatkichi Dinamikasi",
+    meds_title:"Dorilar", meds_desc:"Kundalik dori jadvalingiz",
+    add_med_btn:"Dori Qo'shish",
+    lab_title:"Laboratoriya Tahlillari", lab_desc:"Qon va boshqa tahlillar natijalari",
+    lab_results:"Oxirgi Natijalar", lab_chart:"Tahlillar Grafigi", add_lab_btn:"Yangi natija",
+    notes_title:"Tibbiy Qaydnomalar", notes_desc:"O'z salomatligigingiz haqida qaydnomalar yozing",
+    add_note_btn:"Qaydnoma Qo'shish",
+    appt_title:"Shifokor Konsultatsiyasi", appt_desc:"Mutaxassis shifokorlardan vaqt oling",
+    df_all:"Barchasi", df_nevrolog:"Nevrolog", df_kardiolog:"Kardiolog", df_endokrinolog:"Endokrinolog",
+    hist_title:"Tarix & Diagrammalar", hist_desc:"Barcha tekshiruv natijalari va trendlar",
+    risk_history:"Xavf Ko'rsatkichi Tarixi", clear_btn:"Tozalash",
+    all_checks:"Barcha Tekshiruvlar",
+    th_date:"Sana", th_bp:"Qon Bosimi", th_hr:"Yurak Urishi", th_glucose:"Qand",
+    th_risk:"Xavf", th_level:"Daraja",
+    personal_info:"Shaxsiy Ma'lumotlar",
+    stat_analyses:"Tahlil soni", stat_meds_lbl:"Dorilar", stat_notes_lbl:"Qaydnomalar", stat_points_lbl:"Ball",
+    points_lbl:"ball",
+    bn_home:"Bosh", bn_check:"Tekshiruv", bn_meds:"Dorilar", bn_menu:"Menu",
+    nav_sec_home:"Bosh Sahifa", nav_sec_health:"Salomatlik",
+    nav_sec_doctor:"Diagnoz & Shifokor", nav_sec_settings:"Sozlamalar",
+    badge_new:"Yangi",
+    no_meds:"Hali dorilar qo'shilmagan",
+    taken:"Qabul qilindi",
+    take_med:"Qabul qildim",
+    no_notes:"Hali qaydnoma yo'q",
+    no_lab_results:"Natijalar yo'q",
+    lab_chart_hint:"Grafik uchun kamida 2 ta qand tahlili kerak",
+    status_normal:"Normal",
+    status_abnormal:"Og'ish",
+    status_critical:"Kritik",
+    no_analyses:"Tahlillar yo'q",
+    hist_cleared:"Tarix tozalandi",
+    med_taken_toast:"Dori qabul qilindi! +5 ball",
+    confirm_del_med:"Bu dorini o'chirmoqchimisiz?",
+    med_deleted:"Dori o'chirildi",
+    deleted_toast:"O'chirildi",
+    note_deleted:"Qaydnoma o'chirildi",
+    available_times:"MAVJUD VAQTLAR",
+    book_btn:"Vaqt Band Qilish",
+    note_saved_toast:"Qaydnoma saqlandi! +3 ball",
+    med_added_toast:"Dori qo'shildi! +5 ball",
+    lab_saved_toast:"Tahlil natijasi saqlandi! +5 ball",
+    result_saved_toast:"Natija saqlandi!",
+    fill_fields_err:"Barcha maydonlarni to'ldiring!",
+    analysis_done_toast:"Tahlil tayyor! +10 ball",
+    profile_saved_toast:"Profil saqlandi! +10 ball",
+    write_text_err:"Matn yozing!",
+    enter_value_err:"Qiymat kiriting!",
+    run_analysis_first:"Avval AI tekshiruv o'tkazing!",
+    report_downloaded:"Hisobot yuklab olindi!",
+    select_time_err:"Vaqt tanlang!",
+    enter_phone_err:"Telefon raqamingizni kiriting!",
+    booked_with:"bilan",
+    notif_unsupported:"Bu brauzer bildirishnomalarni qo'llab-quvvatlamaydi",
+    notif_on:"Bildirishnomalar yoqilgan",
+    notif_granted:"Bildirishnomalar yoqildi!",
+    notif_denied:"Bildirishnomalar rad etildi",
+    sos_title:"FAVQULODDA YORDAM",
+    sos_fast:"FAST testini o'tkazing",
+    sos_call:"103 — Tez Yordam Chaqirish",
+    close_btn:"Yopish",
+    cancel_btn:"Bekor",
+    modal_add_med:"Dori Qo'shish",
+    modal_add_med_sub:"Yangi dori va eslatma qo'shing",
+    modal_add_note:"Qaydnoma Qo'shish",
+    modal_add_note_sub:"O'z-o'zingiz haqingizda eslatma yozing",
+    modal_edit_profile:"Profilni Tahrirlash",
+    book_select_time:"Vaqt tanlang:",
+    book_phone_hint:"Shifokor siz bilan bog'lanish uchun ishlatiladi",
+    spec_nevrolog:"Nevrolog",
+    spec_kardiolog:"Kardiolog",
+    spec_endokrinolog:"Endokrinolog",
+    years_exp:"yil tajriba",
+    doc1_desc:"Insult va miya kasalliklari bo'yicha mutaxassis",
+    doc2_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
+    doc3_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
+    risk_alert_desc:"Xavf darajangiz {score}% — mutaxassis konsultatsiyasi zarur.",
+    rec_section:"TAVSIYALAR",
+    rec_count:"ta maslahat",
+    disclaimer_text:"Bu natija faqat umumiy ma'lumot beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.",
+    save_result_btn:"Natijani Saqlash",
+    book_specialist_btn:"Mutaxassis Bilan",
+    download_pdf_btn:"PDF Hisobot Yuklab Olish",
+    alert_see_doctor:"Shifokorga Murojaat Qiling!",
+    rec_bp_title:"Qon bosimini nazorat qiling",
+    rec_bp_desc:"Har kuni ertalab va kechqurun o'lchang. 130/85 dan oshmasligi kerak.",
+    rec_bp_high_title:"Qon bosimi juda yuqori!",
+    rec_bp_high_desc:"Darhol shifokorga murojaat qiling. Bu insult xavfini keskin oshiradi.",
+    rec_glucose_title:"Qand darajasini cheklang",
+    rec_glucose_desc:"Shirin ichimlik va non mahsulotlarini kamaytiring. Norma: 3.9–6.1 mmol/L.",
+    rec_glucose_h_title:"Qand darajasi xavfli darajada yuqori",
+    rec_glucose_h_desc:"Endokrinolog bilan maslahatlashing. Diabet rivojlanish xavfi bor.",
+    rec_bmi_title:"Ovqatlanishni tartibga soling",
+    rec_bmi_desc:"Sabzavot, meva va oqsilga boy ovqatlar tanlang. Tez ovqatlardan saqlaning.",
+    rec_bmi_high_title:"Vazningizni kamaytiring",
+    rec_bmi_high_desc:"Haftada kamida 3 marta 30 daqiqalik jismoniy mashq qiling.",
+    rec_smoking_title:"Chekishni tark eting",
+    rec_smoking_desc:"Chekish insult xavfini 2 barobarga oshiradi. Hoziroq tashlang!",
+    rec_alcohol_title:"Alkogol iste'molini kamaytiring",
+    rec_alcohol_desc:"Haftada 1-2 martadan ko'p qabul qilmang. Yaxshisi butunlay tashlang.",
+    rec_exercise_none_title:"Jismoniy faollik zarur",
+    rec_exercise_none_desc:"Harakatlanmaslik yurak va qon tomir kasalligi xavfini oshiradi. Kundalik yurish boshlang.",
+    rec_exercise_title:"Mashq intensivligini oshiring",
+    rec_exercise_desc:"Haftada 150 daqiqa o'rtacha intensivlikda aerobik mashq tavsiya etiladi.",
+    rec_chol_title:"Yog'li ovqatlarni kamaytiring",
+    rec_chol_desc:"Baliq, zeytun moyi va yong'oq foydaliroq. Qovurilgan ovqatlardan saqlaning.",
+    rec_chol_high_title:"Xolesterin darajasi yuqori",
+    rec_chol_high_desc:"Shifokor bilan maslahatlashing. Statin dorilar tavsiya qilinishi mumkin.",
+    rec_blood_title:"Qon quyuqligi — diqqat!",
+    rec_blood_desc:"Trombofiliya bor bo'lsa gematolog nazorati kerak. Ko'p suv iching.",
+    rec_family_title:"Oilaviy tarix — ehtiyot bo'ling",
+    rec_family_desc:"Yaqin qarindoshlaringizda insult yoki yurak kasalligi bo'lsa, yiliga 1 marta kardiolog ko'rigidan o'ting.",
+    rec_stress_title:"Stressni boshqaring",
+    rec_stress_desc:"Meditatsiya, nafas mashqlari yoki yaxshi uyqu stress darajasini kamaytiradi.",
+    rec_salt_title:"Tuz iste'molini cheklang",
+    rec_salt_desc:"Kundalik tuz norma — 5g dan kam. Konserva va kolbasa mahsulotlarini kamaytiring.",
+    rec_regular_title:"Muntazam tibbiy tekshiruv",
+    rec_regular_desc:"Yiliga kamida 1 marta umumiy qon tahlili, EKG va qon bosim tekshiruvi o'tkazing.",
+    rec_water_title:"Kundalik suv miqdori",
+    rec_water_desc:"Har kuni kamida 1.5–2 litr toza suv iching. Bu qon quyuqlanishini oldini oladi.",
+    rec_sleep_title:"Yetarli uxlang",
+    rec_sleep_desc:"Kuniga 7–8 soat sifatli uyqu insult xavfini 40% gacha kamaytiradi.",
+    lang_name:"O'zbek",
+  },
+  ru: {
+    nav_dashboard:"Главная", nav_assessment:"ИИ Анализ", nav_vitals:"Показатели",
+    nav_medications:"Лекарства", nav_labTests:"Лаборатория", nav_notes:"Записи",
+    nav_appointments:"Консультация", nav_history:"История", nav_profile:"Профиль",
+    topbar_dashboard:"Главная", topbar_sub_dashboard:"Обзор состояния здоровья",
+    topbar_assessment:"ИИ Анализ", topbar_sub_assessment:"Оценка риска инсульта",
+    topbar_vitals:"Показатели", topbar_sub_vitals:"Мониторинг в реальном времени",
+    topbar_medications:"Лекарства", topbar_sub_medications:"Расписание приёма",
+    topbar_labTests:"Лаборатория", topbar_sub_labTests:"Результаты анализов",
+    topbar_notes:"Записи", topbar_sub_notes:"Медицинские заметки",
+    topbar_appointments:"Консультация", topbar_sub_appointments:"Запись к врачу",
+    topbar_history:"История", topbar_sub_history:"Прошлые анализы",
+    topbar_profile:"Мой профиль", topbar_sub_profile:"Личные данные",
+    welcome:"Добро пожаловать!", welcome_sub:"Показатели здоровья за сегодня",
+    bp_label:"АД (мм рт.ст.)", glucose_label:"Глюкоза (ммоль/л)", hr_label:"Пульс (уд/мин)", bmi_label:"ИМТ",
+    complete_check:"Завершите обследование", for_ai:"Для AI анализа",
+    bp_history:"История АД", latest_check:"Последний анализ",
+    today_meds:"Лекарства на сегодня", recent_notes:"Последние записи",
+    assessment_title:"AI Анализ риска инсульта", assessment_desc:"Введите данные — AI выдаст результат за секунды",
+    ai_analyst:"AI Аналитик", systolic:"Систолическое АД", diastolic:"Диастолическое",
+    heartrate:"Пульс (уд/мин)", glucose_mmol:"Глюкоза (ммоль/л)", height_cm:"Рост (см)", weight_kg:"Вес (кг)",
+    age_label:"Возраст", cholesterol:"Холестерин (ммоль/л)",
+    smoking_q:"Курите?", exercise_q:"Физическая активность",
+    alcohol_q:"Употребляете алкоголь?", complaints:"Жалобы и факторы риска",
+    c_headache:"Частые головные боли", c_dizziness:"Головокружение",
+    c_numbness:"Слабость/онемение рук или ног", c_speech:"Нарушение речи",
+    c_bloodThick:"Густая кровь (тромбофилия)", c_movement:"Нарушение движения",
+    c_rheumatism:"Ревматизм / болезни суставов", c_familyVascular:"Сердечно-сосудистые болезни в семье",
+    c_ownVascular:"Собственные сосудистые заболевания", c_familyHistory:"Инсульт в семье",
+    ai_analyze:"Анализировать", result_ready:"Готов к анализу",
+    result_hint:"Заполните данные слева и нажмите кнопку анализа",
+    prof_title:"Мой профиль", achievements:"Достижения", stats_title:"Статистика",
+    vitals_title:"Показатели", vitals_desc:"Мониторинг в реальном времени",
+    vl_bp:"ДАВЛЕНИЕ", vl_hr:"ПУЛЬС", vl_glucose:"САХАР", vl_bmi:"ИМТ",
+    bp_dynamics:"Динамика АД", risk_dynamics:"Динамика риска",
+    meds_title:"Лекарства", meds_desc:"Ваше расписание приёма",
+    add_med_btn:"Добавить лекарство",
+    lab_title:"Лабораторные анализы", lab_desc:"Результаты анализов крови и других",
+    lab_results:"Последние результаты", lab_chart:"График анализов", add_lab_btn:"Новый результат",
+    notes_title:"Медицинские записи", notes_desc:"Ведите заметки о своём здоровье",
+    add_note_btn:"Добавить запись",
+    appt_title:"Консультация врача", appt_desc:"Запишитесь к специалисту",
+    df_all:"Все", df_nevrolog:"Невролог", df_kardiolog:"Кардиолог", df_endokrinolog:"Эндокринолог",
+    hist_title:"История & Диаграммы", hist_desc:"Все результаты обследований и тренды",
+    risk_history:"История риска", clear_btn:"Очистить",
+    all_checks:"Все обследования",
+    th_date:"Дата", th_bp:"АД", th_hr:"Пульс", th_glucose:"Сахар",
+    th_risk:"Риск", th_level:"Уровень",
+    personal_info:"Личные данные",
+    stat_analyses:"Анализов", stat_meds_lbl:"Лекарств", stat_notes_lbl:"Записей", stat_points_lbl:"Баллов",
+    points_lbl:"балл",
+    bn_home:"Главная", bn_check:"Анализ", bn_meds:"Лекарства", bn_menu:"Меню",
+    nav_sec_home:"Главная", nav_sec_health:"Здоровье",
+    nav_sec_doctor:"Диагноз & Врач", nav_sec_settings:"Настройки",
+    badge_new:"Новый",
+    no_meds:"Лекарства ещё не добавлены",
+    taken:"Принято",
+    take_med:"Принять",
+    no_notes:"Записей пока нет",
+    no_lab_results:"Результатов нет",
+    lab_chart_hint:"Для графика нужно минимум 2 анализа сахара",
+    status_normal:"Норма",
+    status_abnormal:"Отклонение",
+    status_critical:"Критично",
+    no_analyses:"Анализов нет",
+    hist_cleared:"История очищена",
+    med_taken_toast:"Лекарство принято! +5 баллов",
+    confirm_del_med:"Удалить это лекарство?",
+    med_deleted:"Лекарство удалено",
+    deleted_toast:"Удалено",
+    note_deleted:"Запись удалена",
+    available_times:"ДОСТУПНОЕ ВРЕМЯ",
+    book_btn:"Записаться",
+    note_saved_toast:"Запись сохранена! +3 балла",
+    med_added_toast:"Лекарство добавлено! +5 баллов",
+    lab_saved_toast:"Результат сохранён! +5 баллов",
+    result_saved_toast:"Результат сохранён!",
+    fill_fields_err:"Заполните все поля!",
+    analysis_done_toast:"Анализ готов! +10 баллов",
+    profile_saved_toast:"Профиль сохранён! +10 баллов",
+    write_text_err:"Введите текст!",
+    enter_value_err:"Введите значение!",
+    run_analysis_first:"Сначала пройдите AI анализ!",
+    report_downloaded:"Отчёт загружен!",
+    select_time_err:"Выберите время!",
+    enter_phone_err:"Введите номер телефона!",
+    booked_with:"с",
+    notif_unsupported:"Этот браузер не поддерживает уведомления",
+    notif_on:"Уведомления включены",
+    notif_granted:"Уведомления включены!",
+    notif_denied:"Уведомления отклонены",
+    sos_title:"ЭКСТРЕННАЯ ПОМОЩЬ",
+    sos_fast:"Пройдите FAST тест",
+    sos_call:"103 — Вызвать скорую помощь",
+    close_btn:"Закрыть",
+    cancel_btn:"Отмена",
+    modal_add_med:"Добавить лекарство",
+    modal_add_med_sub:"Добавьте новое лекарство и напоминание",
+    modal_add_note:"Добавить запись",
+    modal_add_note_sub:"Запишите заметку о себе",
+    modal_edit_profile:"Редактировать профиль",
+    book_select_time:"Выберите время:",
+    book_phone_hint:"Врач свяжется с вами по этому номеру",
+    spec_nevrolog:"Невролог",
+    spec_kardiolog:"Кардиолог",
+    spec_endokrinolog:"Эндокринолог",
+    years_exp:"лет опыта",
+    doc1_desc:"Специалист по инсультам и заболеваниям мозга",
+    doc2_desc:"Специалист по неврологии и детской неврологии",
+    doc3_desc:"Специалист по неврологии и детской неврологии",
+    risk_alert_desc:"Ваш уровень риска {score}% — необходима консультация специалиста.",
+    rec_section:"РЕКОМЕНДАЦИИ",
+    rec_count:"совета",
+    disclaimer_text:"Этот результат носит информационный характер. Он не заменяет профессиональный медицинский диагноз.",
+    save_result_btn:"Сохранить результат",
+    book_specialist_btn:"К специалисту",
+    download_pdf_btn:"Скачать PDF отчёт",
+    alert_see_doctor:"Обратитесь к врачу!",
+    rec_bp_title:"Контролируйте давление",
+    rec_bp_desc:"Измеряйте утром и вечером. Норма: ниже 130/85 мм рт.ст.",
+    rec_bp_high_title:"Давление критически высокое!",
+    rec_bp_high_desc:"Немедленно обратитесь к врачу. Это резко повышает риск инсульта.",
+    rec_glucose_title:"Ограничьте сахар",
+    rec_glucose_desc:"Сократите сладкие напитки и выпечку. Норма: 3.9–6.1 ммоль/л.",
+    rec_glucose_h_title:"Уровень сахара опасно высок",
+    rec_glucose_h_desc:"Проконсультируйтесь с эндокринологом. Есть риск развития диабета.",
+    rec_bmi_title:"Скорректируйте питание",
+    rec_bmi_desc:"Выбирайте овощи, фрукты и белок. Избегайте фастфуда.",
+    rec_bmi_high_title:"Снизьте вес",
+    rec_bmi_high_desc:"Занимайтесь физкультурой минимум 30 минут 3 раза в неделю.",
+    rec_smoking_title:"Бросьте курить",
+    rec_smoking_desc:"Курение удваивает риск инсульта. Бросьте прямо сейчас!",
+    rec_alcohol_title:"Сократите алкоголь",
+    rec_alcohol_desc:"Не более 1–2 раз в неделю. Лучше отказаться полностью.",
+    rec_exercise_none_title:"Необходима физическая активность",
+    rec_exercise_none_desc:"Малоподвижность повышает риск болезней сердца. Начните с ежедневных прогулок.",
+    rec_exercise_title:"Увеличьте нагрузку",
+    rec_exercise_desc:"Рекомендуется 150 минут умеренной аэробной нагрузки в неделю.",
+    rec_chol_title:"Уменьшите жирную пищу",
+    rec_chol_desc:"Рыба, оливковое масло и орехи полезнее. Избегайте жареного.",
+    rec_chol_high_title:"Холестерин повышен",
+    rec_chol_high_desc:"Проконсультируйтесь с врачом. Возможно, нужны статины.",
+    rec_blood_title:"Внимание: густая кровь",
+    rec_blood_desc:"При тромбофилии необходим контроль гематолога. Пейте больше воды.",
+    rec_family_title:"Семейная история — будьте осторожны",
+    rec_family_desc:"При инсульте у родственников проходите кардиологическое обследование раз в год.",
+    rec_stress_title:"Управляйте стрессом",
+    rec_stress_desc:"Медитация, дыхательные упражнения и хороший сон снижают стресс.",
+    rec_salt_title:"Ограничьте соль",
+    rec_salt_desc:"Суточная норма — менее 5 г. Уменьшите консервы и колбасные изделия.",
+    rec_regular_title:"Регулярные обследования",
+    rec_regular_desc:"Раз в год: общий анализ крови, ЭКГ и измерение давления.",
+    rec_water_title:"Суточная норма воды",
+    rec_water_desc:"Выпивайте минимум 1.5–2 литра чистой воды в день.",
+    rec_sleep_title:"Полноценный сон",
+    rec_sleep_desc:"7–8 часов качественного сна снижают риск инсульта до 40%.",
+    lang_name:"Русский",
+  },
+  en: {
+    nav_dashboard:"Dashboard", nav_assessment:"AI Assessment", nav_vitals:"Vital Signs",
+    nav_medications:"Medications", nav_labTests:"Lab Tests", nav_notes:"Notes",
+    nav_appointments:"Consultation", nav_history:"History", nav_profile:"Profile",
+    topbar_dashboard:"Dashboard", topbar_sub_dashboard:"Today's health overview",
+    topbar_assessment:"AI Assessment", topbar_sub_assessment:"Stroke risk evaluation",
+    topbar_vitals:"Vital Signs", topbar_sub_vitals:"Real-time monitoring",
+    topbar_medications:"Medications", topbar_sub_medications:"Medication schedule",
+    topbar_labTests:"Lab Tests", topbar_sub_labTests:"Laboratory results",
+    topbar_notes:"Notes", topbar_sub_notes:"Medical notes",
+    topbar_appointments:"Consultation", topbar_sub_appointments:"Book a doctor",
+    topbar_history:"History", topbar_sub_history:"Past analyses",
+    topbar_profile:"My Profile", topbar_sub_profile:"Personal information",
+    welcome:"Welcome!", welcome_sub:"Your health indicators for today",
+    bp_label:"Blood Pressure (mmHg)", glucose_label:"Blood Sugar (mmol/L)", hr_label:"Heart Rate (bpm)", bmi_label:"BMI",
+    complete_check:"Complete the assessment", for_ai:"For AI analysis",
+    bp_history:"Blood Pressure History", latest_check:"Latest check",
+    today_meds:"Today's Medications", recent_notes:"Recent Notes",
+    assessment_title:"AI Stroke Risk Analysis", assessment_desc:"Enter your medical data — AI provides results in seconds",
+    ai_analyst:"AI Analyst", systolic:"Systolic blood pressure", diastolic:"Diastolic",
+    heartrate:"Heart rate (bpm)", glucose_mmol:"Blood sugar (mmol/L)", height_cm:"Height (cm)", weight_kg:"Weight (kg)",
+    age_label:"Age", cholesterol:"Cholesterol (mmol/L)",
+    smoking_q:"Do you smoke?", exercise_q:"Physical activity",
+    alcohol_q:"Do you drink alcohol?", complaints:"Complaints & risk factors",
+    c_headache:"Frequent headaches", c_dizziness:"Dizziness",
+    c_numbness:"Arm/leg weakness or numbness", c_speech:"Speech difficulty",
+    c_bloodThick:"Thick blood (thrombophilia)", c_movement:"Movement disorder",
+    c_rheumatism:"Rheumatism / joint diseases", c_familyVascular:"Family history of vascular disease",
+    c_ownVascular:"Personal vascular disease", c_familyHistory:"Family history of stroke",
+    ai_analyze:"Analyze with AI", result_ready:"Ready to analyze",
+    result_hint:"Fill in the data on the left and click the AI analysis button",
+    prof_title:"My Profile", achievements:"Achievements", stats_title:"Statistics",
+    vitals_title:"Vital Signs", vitals_desc:"Real-time monitoring",
+    vl_bp:"BLOOD PRESSURE", vl_hr:"HEART RATE", vl_glucose:"GLUCOSE", vl_bmi:"BMI",
+    bp_dynamics:"Blood Pressure Dynamics", risk_dynamics:"Risk Score Dynamics",
+    meds_title:"Medications", meds_desc:"Your daily medication schedule",
+    add_med_btn:"Add Medication",
+    lab_title:"Laboratory Tests", lab_desc:"Blood and other lab results",
+    lab_results:"Latest Results", lab_chart:"Lab Chart", add_lab_btn:"New result",
+    notes_title:"Medical Notes", notes_desc:"Keep notes about your health",
+    add_note_btn:"Add Note",
+    appt_title:"Doctor Consultation", appt_desc:"Book an appointment with a specialist",
+    df_all:"All", df_nevrolog:"Neurologist", df_kardiolog:"Cardiologist", df_endokrinolog:"Endocrinologist",
+    hist_title:"History & Charts", hist_desc:"All assessment results and trends",
+    risk_history:"Risk Score History", clear_btn:"Clear",
+    all_checks:"All Assessments",
+    th_date:"Date", th_bp:"Blood Pressure", th_hr:"Heart Rate", th_glucose:"Glucose",
+    th_risk:"Risk", th_level:"Level",
+    personal_info:"Personal Information",
+    stat_analyses:"Analyses", stat_meds_lbl:"Medications", stat_notes_lbl:"Notes", stat_points_lbl:"Points",
+    points_lbl:"pts",
+    bn_home:"Home", bn_check:"Check", bn_meds:"Meds", bn_menu:"Menu",
+    nav_sec_home:"Home", nav_sec_health:"Health",
+    nav_sec_doctor:"Diagnosis & Doctor", nav_sec_settings:"Settings",
+    badge_new:"New",
+    no_meds:"No medications added yet",
+    taken:"Taken",
+    take_med:"Take it",
+    no_notes:"No notes yet",
+    no_lab_results:"No results yet",
+    lab_chart_hint:"Need at least 2 glucose tests for chart",
+    status_normal:"Normal",
+    status_abnormal:"Abnormal",
+    status_critical:"Critical",
+    no_analyses:"No analyses yet",
+    hist_cleared:"History cleared",
+    med_taken_toast:"Medication taken! +5 pts",
+    confirm_del_med:"Delete this medication?",
+    med_deleted:"Medication deleted",
+    deleted_toast:"Deleted",
+    note_deleted:"Note deleted",
+    available_times:"AVAILABLE TIMES",
+    book_btn:"Book Appointment",
+    note_saved_toast:"Note saved! +3 pts",
+    med_added_toast:"Medication added! +5 pts",
+    lab_saved_toast:"Lab result saved! +5 pts",
+    result_saved_toast:"Result saved!",
+    fill_fields_err:"Fill in all required fields!",
+    analysis_done_toast:"Analysis ready! +10 pts",
+    profile_saved_toast:"Profile saved! +10 pts",
+    write_text_err:"Please write some text!",
+    enter_value_err:"Please enter a value!",
+    run_analysis_first:"Run AI analysis first!",
+    report_downloaded:"Report downloaded!",
+    select_time_err:"Please select a time!",
+    enter_phone_err:"Please enter your phone number!",
+    booked_with:"booked with",
+    notif_unsupported:"This browser doesn't support notifications",
+    notif_on:"Notifications are enabled",
+    notif_granted:"Notifications enabled!",
+    notif_denied:"Notifications denied",
+    sos_title:"EMERGENCY HELP",
+    sos_fast:"Take the FAST test",
+    sos_call:"103 — Call Emergency Services",
+    close_btn:"Close",
+    cancel_btn:"Cancel",
+    modal_add_med:"Add Medication",
+    modal_add_med_sub:"Add a new medication and reminder",
+    modal_add_note:"Add Note",
+    modal_add_note_sub:"Write a note about yourself",
+    modal_edit_profile:"Edit Profile",
+    book_select_time:"Select time:",
+    book_phone_hint:"The doctor will contact you at this number",
+    spec_nevrolog:"Neurologist",
+    spec_kardiolog:"Cardiologist",
+    spec_endokrinolog:"Endocrinologist",
+    years_exp:"years experience",
+    doc1_desc:"Specialist in stroke and brain diseases",
+    doc2_desc:"Specialist in neurology and pediatric neurology",
+    doc3_desc:"Specialist in neurology and pediatric neurology",
+    risk_alert_desc:"Your risk level is {score}% — specialist consultation required.",
+    rec_section:"RECOMMENDATIONS",
+    rec_count:"tips",
+    disclaimer_text:"This result is for general informational purposes only and does not replace professional medical diagnosis.",
+    save_result_btn:"Save Result",
+    book_specialist_btn:"See a Specialist",
+    download_pdf_btn:"Download PDF Report",
+    alert_see_doctor:"See a Doctor!",
+    rec_bp_title:"Monitor your blood pressure",
+    rec_bp_desc:"Measure morning and evening. Target: below 130/85 mmHg.",
+    rec_bp_high_title:"Blood pressure is critically high!",
+    rec_bp_high_desc:"Seek immediate medical attention. This sharply increases stroke risk.",
+    rec_glucose_title:"Reduce sugar intake",
+    rec_glucose_desc:"Cut sweet drinks and baked goods. Normal range: 3.9–6.1 mmol/L.",
+    rec_glucose_h_title:"Glucose level is dangerously high",
+    rec_glucose_h_desc:"Consult an endocrinologist. Risk of diabetes is elevated.",
+    rec_bmi_title:"Improve your diet",
+    rec_bmi_desc:"Choose vegetables, fruits and protein-rich foods. Avoid fast food.",
+    rec_bmi_high_title:"Reduce your weight",
+    rec_bmi_high_desc:"Exercise at least 30 minutes, 3 times a week.",
+    rec_smoking_title:"Quit smoking",
+    rec_smoking_desc:"Smoking doubles your stroke risk. Quit today!",
+    rec_alcohol_title:"Reduce alcohol consumption",
+    rec_alcohol_desc:"No more than 1–2 times per week. Ideally, quit entirely.",
+    rec_exercise_none_title:"Physical activity is essential",
+    rec_exercise_none_desc:"Inactivity increases heart disease risk. Start with daily walking.",
+    rec_exercise_title:"Increase exercise intensity",
+    rec_exercise_desc:"150 minutes of moderate aerobic activity per week is recommended.",
+    rec_chol_title:"Cut fatty foods",
+    rec_chol_desc:"Fish, olive oil and nuts are better choices. Avoid fried food.",
+    rec_chol_high_title:"Cholesterol is elevated",
+    rec_chol_high_desc:"Consult your doctor. Statin therapy may be needed.",
+    rec_blood_title:"Attention: thick blood",
+    rec_blood_desc:"Thrombophilia requires haematologist monitoring. Drink more water.",
+    rec_family_title:"Family history — be cautious",
+    rec_family_desc:"With stroke in relatives, get annual cardiovascular check-ups.",
+    rec_stress_title:"Manage stress",
+    rec_stress_desc:"Meditation, breathing exercises and good sleep reduce stress levels.",
+    rec_salt_title:"Reduce salt intake",
+    rec_salt_desc:"Daily limit: under 5g. Cut back on processed meats and canned foods.",
+    rec_regular_title:"Regular health check-ups",
+    rec_regular_desc:"Annually: full blood count, ECG and blood pressure check.",
+    rec_water_title:"Daily water intake",
+    rec_water_desc:"Drink at least 1.5–2 litres of water per day to prevent blood thickening.",
+    rec_sleep_title:"Get enough sleep",
+    rec_sleep_desc:"7–8 hours of quality sleep can reduce stroke risk by up to 40%.",
+    lang_name:"English",
+  }
+};
+
+let currentLang = localStorage.getItem('ng_lang') || 'uz';
+function t(key) { return (LANGS[currentLang]||LANGS.uz)[key] || key; }
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('ng_lang', lang);
+  applyLangToUI();
+  const names = {uz:"🇺🇿 O'zbek", ru:"🇷🇺 Русский", en:"🇬🇧 English"};
+  toast(names[lang]||lang, 'info');
+}
+
+function applyLangToUI() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  const pg = state.currentPage;
+  const ttEl = document.getElementById('topbarTitle');
+  const tsEl = document.getElementById('topbarSub');
+  if (ttEl) ttEl.textContent = t('topbar_' + pg);
+  if (tsEl) tsEl.textContent = t('topbar_sub_' + pg) || '';
+  renderLangSwitcher();
+
+  // ── Dinamik render qilingan bo'limlarni ham yangilash ──
+  if (pg === 'appointments') { renderDoctors(lastDocFilter); setDocFilter(lastDocFilter); }
+  if (pg === 'medications')  renderMedications();
+  if (pg === 'notes')        renderNotes();
+  if (pg === 'labTests')     renderLabResults();
+  if (pg === 'history')      renderHistory();
+  if (pg === 'vitals')       renderVitals();
+  if (pg === 'dashboard')    renderDashboard();
+  if (pg === 'profile')      renderProfile();
+  if (pg === 'assessment') {
+    // result panel agar ko'rsatilgan bo'lsa, uni ham yangilaymiz
+    const rp = document.getElementById('resultPanel');
+    if (rp && rp.querySelector('.spinner') === null && rp.innerHTML.includes('data-i18n') === false) {
+      // placeholder ni yangilaymiz
+      const readyEl = rp.querySelector('[data-i18n="result_ready"]');
+      if (readyEl) readyEl.textContent = t('result_ready');
+      const hintEl = rp.querySelector('[data-i18n="result_hint"]');
+      if (hintEl) hintEl.textContent = t('result_hint');
+    }
+  }
+}
+
+function previewLang(lang) { currentLang = lang; applyLangToUI(); }
+
+function renderLangSwitcher() {
+  const el = document.getElementById('langSwitcher');
+  if (!el) return;
+  const labels = {uz:'🇺🇿 UZ', ru:'🇷🇺 RU', en:'🇬🇧 EN'};
+  el.innerHTML = ['uz','ru','en'].map(l => {
+    const active = currentLang === l;
+    return `<button onclick="setLang('${l}')"
+      style="padding:5px 11px;border-radius:20px;font-size:0.73rem;font-weight:700;letter-spacing:0.03em;cursor:pointer;transition:all 0.25s;
+             border:1px solid ${active?'rgba(230,57,80,0.5)':'var(--border)'};background:${active?'rgba(230,57,80,0.18)':'transparent'};
+             color:${active?'var(--accent)':'var(--text2)'};">${labels[l]}</button>`;
+  }).join('');
+}
+
+/* ── ONBOARDING ── */
+let obStep = 0;
+function showOnboarding() {
+  if (!localStorage.getItem('ng_onboarded')) {
+    document.getElementById('onboarding').style.display = 'flex';
+    document.getElementById('onboarding').style.flexDirection = 'column';
+  }
+}
+function obNext() {
+  if (obStep === 2) { finishOnboarding(); return; }
+  document.getElementById('ob-' + obStep).style.display = 'none';
+  document.getElementById('dot-' + obStep).classList.remove('active');
+  obStep++;
+  document.getElementById('ob-' + obStep).style.display = 'block';
+  document.getElementById('dot-' + obStep).classList.add('active');
+  if (obStep === 2) document.getElementById('obNextBtn').innerHTML = '<i class="fas fa-check"></i> Boshlash';
+}
+function finishOnboarding() {
+  const name = document.getElementById('ob-name').value.trim();
+  const age  = document.getElementById('ob-age').value.trim();
+  const gender = document.getElementById('ob-gender').value;
+  const lang   = document.getElementById('ob-lang').value;
+  if (name) { state.profile.name = name; state.profile.gender = gender; if (age) state.profile.age = age; save('profile'); updateSidebarProfile(); }
+  setLang(lang);
+  localStorage.setItem('ng_onboarded', '1');
+  document.getElementById('onboarding').style.display = 'none';
+  toast(t('welcome') + (name ? ' ' + name + '!' : ''), 'success');
+}
+function skipOnboarding() {
+  localStorage.setItem('ng_onboarded', '1');
+  document.getElementById('onboarding').style.display = 'none';
+}
+
+window.addEventListener('load', () => {
+  applyTheme(localStorage.getItem('ng_theme') || 'dark');
+  currentLang = localStorage.getItem('ng_lang') || 'uz';
+  updateSidebarProfile();
+  renderDashboard();
+  document.getElementById('nav-dashboard')?.classList.add('active');
+  document.getElementById('bn-dashboard')?.classList.add('active');
+  showOnboarding();
+  applyLangToUI();
+  renderLangSwitcher();
+  toast(t('welcome') + ' NeuroGuard AI Pro v2.1', 'info');
+});
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
+});
 </script>
 </body>
 </html>
