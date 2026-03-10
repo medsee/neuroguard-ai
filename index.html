@@ -486,24 +486,24 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
   </div>
   <div class="nav-section">
-    <div class="nav-label">Bosh Sahifa</div>
+    <div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div>
     <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i> <span data-i18n="nav_dashboard">Dashboard</span></div>
-    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> <span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">Yangi</span></div>
+    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> <span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge" data-i18n="badge_new">Yangi</span></div>
   </div>
   <div class="nav-section">
-    <div class="nav-label">Salomatlik</div>
+    <div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div>
     <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i> <span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div>
     <div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i> <span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none;"></span></div>
     <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')"><i class="fas fa-flask"></i> <span data-i18n="nav_labTests">Tahlillar</span></div>
     <div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i> <span data-i18n="nav_notes">Qaydnoma</span></div>
   </div>
   <div class="nav-section">
-    <div class="nav-label">Diagnoz & Shifokor</div>
+    <div class="nav-label" data-i18n="nav_sec_doctor">Diagnoz & Shifokor</div>
     <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i> <span data-i18n="nav_appointments">Konsultatsiya</span></div>
     <div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i> <span data-i18n="nav_history">Tarix & Diagramma</span></div>
   </div>
   <div class="nav-section">
-    <div class="nav-label">Sozlamalar</div>
+    <div class="nav-label" data-i18n="nav_sec_settings">Sozlamalar</div>
     <div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i> <span data-i18n="nav_profile">Profilim</span></div>
   </div>
   <div class="sidebar-profile">
@@ -511,7 +511,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
       <div class="avatar" id="sidebarAvatar">A</div>
       <div>
         <div class="profile-name" id="sidebarName">Profil</div>
-        <div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> ball</div>
+        <div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> <span data-i18n="points_lbl">ball</span></div>
       </div>
     </div>
   </div>
@@ -696,40 +696,40 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <!-- VITALS -->
   <div class="page" id="page-vitals">
     <div class="section-header">
-      <div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent);"></i> Vital Ko'rsatkichlar</div>
-      <div class="section-desc">Real vaqt monitoringi</div>
+      <div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent);"></i> <span data-i18n="vitals_title">Vital Ko'rsatkichlar</span></div>
+      <div class="section-desc" data-i18n="vitals_desc">Real vaqt monitoringi</div>
     </div>
     <div class="grid-4" style="margin-bottom:24px;">
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-heart"></i> QONBOSIM</div>
+        <div class="vital-label"><i class="fas fa-heart"></i> <span data-i18n="vl_bp">QONBOSIM</span></div>
         <div class="vital-value" style="color:var(--accent);" id="vBP">—/—</div>
         <div class="vital-unit">mmHg</div>
         <svg class="ecg-line" viewBox="0 0 300 48"><path d="M0,24 L60,24 L70,10 L80,38 L90,24 L300,24" stroke="var(--accent)" stroke-width="2" fill="none"/></svg>
         <div class="ecg-anim"></div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-heartbeat"></i> YURAK URISHI</div>
+        <div class="vital-label"><i class="fas fa-heartbeat"></i> <span data-i18n="vl_hr">YURAK URISHI</span></div>
         <div class="vital-value" style="color:var(--blue);" id="vHR">—</div>
         <div class="vital-unit">bpm</div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-droplet"></i> QAND</div>
+        <div class="vital-label"><i class="fas fa-droplet"></i> <span data-i18n="vl_glucose">QAND</span></div>
         <div class="vital-value" style="color:var(--yellow);" id="vGlucose">—</div>
         <div class="vital-unit">mmol/L</div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-weight"></i> BMI</div>
+        <div class="vital-label"><i class="fas fa-weight"></i> <span data-i18n="vl_bmi">BMI</span></div>
         <div class="vital-value" style="color:var(--cyan);" id="vBMI">—</div>
         <div class="vital-unit">kg/m²</div>
       </div>
     </div>
     <div class="grid-2">
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Qon Bosimi Dinamikasi</div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="bp_dynamics">Qon Bosimi Dinamikasi</div>
         <div class="chart-wrap"><canvas id="vitBPChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Xavf Ko'rsatkichi Dinamikasi</div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="risk_dynamics">Xavf Ko'rsatkichi Dinamikasi</div>
         <div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div>
       </div>
     </div>
@@ -739,10 +739,10 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <div class="page" id="page-medications">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
-        <div class="section-title"><i class="fas fa-pills" style="color:var(--accent);"></i> Dorilar</div>
-        <div class="section-desc">Kundalik dori jadvalingiz</div>
+        <div class="section-title"><i class="fas fa-pills" style="color:var(--accent);"></i> <span data-i18n="meds_title">Dorilar</span></div>
+        <div class="section-desc" data-i18n="meds_desc">Kundalik dori jadvalingiz</div>
       </div>
-      <button class="btn btn-accent" onclick="openAddMedModal()"><i class="fas fa-plus"></i> Dori Qo'shish</button>
+      <button class="btn btn-accent" onclick="openAddMedModal()"><i class="fas fa-plus"></i> <span data-i18n="add_med_btn">Dori Qo'shish</span></button>
     </div>
     <div id="medList"></div>
   </div>
@@ -750,19 +750,19 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <!-- LAB TESTS -->
   <div class="page" id="page-labTests">
     <div class="section-header">
-      <div class="section-title"><i class="fas fa-flask" style="color:var(--blue);"></i> Laboratoriya Tahlillari</div>
-      <div class="section-desc">Qon va boshqa tahlillar natijalari</div>
+      <div class="section-title"><i class="fas fa-flask" style="color:var(--blue);"></i> <span data-i18n="lab_title">Laboratoriya Tahlillari</span></div>
+      <div class="section-desc" data-i18n="lab_desc">Qon va boshqa tahlillar natijalari</div>
     </div>
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-          <div class="section-title" style="font-size:1rem;">Oxirgi Natijalar</div>
-          <button class="btn btn-blue" onclick="openAddLabModal()" style="padding:8px 14px;font-size:0.82rem;"><i class="fas fa-plus"></i> Yangi natija</button>
+          <div class="section-title" style="font-size:1rem;" data-i18n="lab_results">Oxirgi Natijalar</div>
+          <button class="btn btn-blue" onclick="openAddLabModal()" style="padding:8px 14px;font-size:0.82rem;"><i class="fas fa-plus"></i> <span data-i18n="add_lab_btn">Yangi natija</span></button>
         </div>
         <div id="labResultsList"><div style="text-align:center;color:var(--text3);padding:30px;font-size:0.85rem;"><i class="fas fa-flask" style="font-size:2rem;margin-bottom:10px;display:block;"></i>Tahlil natijalari yo'q</div></div>
       </div>
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Tahlillar Grafigi</div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="lab_chart">Tahlillar Grafigi</div>
         <div class="chart-wrap"><canvas id="labChart"></canvas></div>
       </div>
     </div>
@@ -772,10 +772,10 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <div class="page" id="page-notes">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
-        <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> Tibbiy Qaydnomalar</div>
-        <div class="section-desc">O'z salomatligigingiz haqida qaydnomalar yozing</div>
+        <div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan);"></i> <span data-i18n="notes_title">Tibbiy Qaydnomalar</span></div>
+        <div class="section-desc" data-i18n="notes_desc">O'z salomatligigingiz haqida qaydnomalar yozing</div>
       </div>
-      <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Qaydnoma Qo'shish</button>
+      <button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> <span data-i18n="add_note_btn">Qaydnoma Qo'shish</span></button>
     </div>
     <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!</div></div>
   </div>
@@ -783,14 +783,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <!-- APPOINTMENTS -->
   <div class="page" id="page-appointments">
     <div class="section-header">
-      <div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green);"></i> Shifokor Konsultatsiyasi</div>
-      <div class="section-desc">Mutaxassis shifokorlardan vaqt oling</div>
+      <div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green);"></i> <span data-i18n="appt_title">Shifokor Konsultatsiyasi</span></div>
+      <div class="section-desc" data-i18n="appt_desc">Mutaxassis shifokorlardan vaqt oling</div>
     </div>
     <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
-      <button class="btn btn-ghost" onclick="filterDocs('all')" id="df-all">Barchasi</button>
-      <button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button>
-      <button class="btn btn-ghost" onclick="filterDocs('kardiolog')" id="df-kardiolog">Kardiolog</button>
-      <button class="btn btn-ghost" onclick="filterDocs('endokrinolog')" id="df-endokrinolog">Endokrinolog</button>
+      <button class="btn btn-ghost" onclick="filterDocs('all')" id="df-all" data-i18n="df_all">Barchasi</button>
+      <button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog" data-i18n="df_nevrolog">Nevrolog</button>
+      <button class="btn btn-ghost" onclick="filterDocs('kardiolog')" id="df-kardiolog" data-i18n="df_kardiolog">Kardiolog</button>
+      <button class="btn btn-ghost" onclick="filterDocs('endokrinolog')" id="df-endokrinolog" data-i18n="df_endokrinolog">Endokrinolog</button>
     </div>
     <div class="grid-3" id="doctorGrid"></div>
   </div>
@@ -798,21 +798,21 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <!-- HISTORY -->
   <div class="page" id="page-history">
     <div class="section-header">
-      <div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue);"></i> Tarix & Diagrammalar</div>
-      <div class="section-desc">Barcha tekshiruv natijalari va trendlar</div>
+      <div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue);"></i> <span data-i18n="hist_title">Tarix & Diagrammalar</span></div>
+      <div class="section-desc" data-i18n="hist_desc">Barcha tekshiruv natijalari va trendlar</div>
     </div>
     <div class="card" style="margin-bottom:24px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-        <div class="section-title" style="font-size:1rem;">Xavf Ko'rsatkichi Tarixi</div>
-        <button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.8rem;"><i class="fas fa-trash"></i> Tozalash</button>
+        <div class="section-title" style="font-size:1rem;" data-i18n="risk_history">Xavf Ko'rsatkichi Tarixi</div>
+        <button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.8rem;"><i class="fas fa-trash"></i> <span data-i18n="clear_btn">Tozalash</span></button>
       </div>
       <div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div>
+      <div class="section-title" style="font-size:1rem;margin-bottom:16px;" data-i18n="all_checks">Barcha Tekshiruvlar</div>
       <div style="overflow-x:auto;">
         <table class="history-table" id="historyTable">
-          <thead><tr><th>Sana</th><th>Qon Bosimi</th><th>Yurak Urishi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
+          <thead><tr><th data-i18n="th_date">Sana</th><th data-i18n="th_bp">Qon Bosimi</th><th data-i18n="th_hr">Yurak Urishi</th><th data-i18n="th_glucose">Qand</th><th>BMI</th><th data-i18n="th_risk">Xavf</th><th data-i18n="th_level">Daraja</th></tr></thead>
           <tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
         </table>
       </div>
@@ -839,7 +839,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-user"></i> Shaxsiy Ma'lumotlar</div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-user"></i> <span data-i18n="personal_info">Shaxsiy Ma'lumotlar</span></div>
         <div id="profileDetails"><div style="color:var(--text3);font-size:0.85rem;">Ma'lumotlar to'ldirilmagan. Profilni tahrirlang.</div></div>
       </div>
       <div class="card">
@@ -850,10 +850,10 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div class="card">
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-bar"></i> <span data-i18n="stats_title">Statistika</span></div>
       <div class="grid-4 profile-stats-grid">
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Tahlil soni</div></div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="statMeds">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Dorilar</div></div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Qaydnomalar</div></div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Ball</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_analyses">Tahlil soni</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="statMeds">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_meds_lbl">Dorilar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_notes_lbl">Qaydnomalar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;" data-i18n="stat_points_lbl">Ball</div></div>
       </div>
     </div>
   </div>
@@ -863,11 +863,11 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottomNav">
-  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span>Bosh</span></div>
-  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span>Tekshiruv</span></div>
+  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="bn_home">Bosh</span></div>
+  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="bn_check">Tekshiruv</span></div>
   <div class="bn-sos" onclick="openSOS()"><i class="fas fa-ambulance"></i></div>
-  <div class="bn-item" id="bn-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span>Dorilar</span></div>
-  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span>Menu</span></div>
+  <div class="bn-item" id="bn-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="bn_meds">Dorilar</span></div>
+  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span data-i18n="bn_menu">Menu</span></div>
 </div>
 
 <!-- MODALS -->
@@ -876,8 +876,8 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <button class="modal-close" onclick="closeSOS()"><i class="fas fa-times"></i></button>
     <div style="text-align:center;margin-bottom:20px;">
       <div style="width:70px;height:70px;border-radius:50%;background:rgba(239,68,68,0.2);border:2px solid rgba(239,68,68,0.5);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 12px;animation:sosPulse 1.5s infinite;">🚨</div>
-      <div class="modal-title" style="color:#ef4444;">FAVQULODDA YORDAM</div>
-      <div style="font-size:0.9rem;color:var(--text2);">FAST testini o'tkazing</div>
+      <div class="modal-title" style="color:#ef4444;" data-i18n="sos_title">FAVQULODDA YORDAM</div>
+      <div style="font-size:0.9rem;color:var(--text2);" data-i18n="sos_fast">FAST testini o'tkazing</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
       <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">F</strong> — Yuz bir tomonlama og'ayapti</div></label>
@@ -885,16 +885,16 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
       <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">S</strong> — Nutq buzilgan, chalkash</div></label>
       <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">T</strong> — VAQT muhim! Zudlik bilan harakat</div></label>
     </div>
-    <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'"><i class="fas fa-phone"></i> 103 — Tez Yordam Chaqirish</button>
-    <button class="btn btn-ghost btn-full" onclick="closeSOS()">Yopish</button>
+    <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'"><i class="fas fa-phone"></i> <span data-i18n="sos_call">103 — Tez Yordam Chaqirish</span></button>
+    <button class="btn btn-ghost btn-full" onclick="closeSOS()" data-i18n="close_btn">Yopish</button>
   </div>
 </div>
 
 <div class="modal-overlay" id="addMedModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button>
-    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-pills" style="color:var(--accent);"></i> Dori Qo'shish</div>
-    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">Yangi dori va eslatma qo'shing</div>
+    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-pills" style="color:var(--accent);"></i> <span data-i18n="modal_add_med">Dori Qo'shish</span></div>
+    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;" data-i18n="modal_add_med_sub">Yangi dori va eslatma qo'shing</div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Dori nomi *</label><input class="form-input" id="mName" placeholder="Masalan: Aspirin"></div>
       <div class="form-group"><label class="form-label">Dozasi *</label><input class="form-input" id="mDose" placeholder="100mg, 1 tabletka"></div>
@@ -906,7 +906,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div class="form-group"><label class="form-label">Izoh (ixtiyoriy)</label><input class="form-input" id="mNotes" placeholder="Qo'shimcha eslatma..."></div>
     <div style="display:flex;gap:10px;">
       <button class="btn btn-accent btn-full" onclick="saveMedication()"><i class="fas fa-save"></i> Saqlash</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')">Bekor</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')" data-i18n="cancel_btn">Bekor</button>
     </div>
   </div>
 </div>
@@ -914,14 +914,14 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 <div class="modal-overlay" id="addNoteModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button>
-    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> Qaydnoma Qo'shish</div>
-    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;">O'z-o'zingiz haqingizda eslatma yozing</div>
+    <div class="modal-title" style="margin-bottom:6px;"><i class="fas fa-sticky-note" style="color:var(--cyan);"></i> <span data-i18n="modal_add_note">Qaydnoma Qo'shish</span></div>
+    <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;" data-i18n="modal_add_note_sub">O'z-o'zingiz haqingizda eslatma yozing</div>
     <div class="form-group"><label class="form-label">Sarlavha</label><input class="form-input" id="noteTitle" placeholder="Masalan: Bugun bosh og'rig'i bo'ldi"></div>
     <div class="form-group"><label class="form-label">Matn *</label><textarea class="form-input" id="noteContent" rows="4" placeholder="Batafsil yozing..." style="resize:vertical;"></textarea></div>
     <div class="form-group"><label class="form-label">Kategoriya</label><select class="form-select" id="noteCategory"><option value="general">Umumiy</option><option value="symptom">Belgi</option><option value="medication">Dori</option><option value="appointment">Shifokor</option><option value="exercise">Mashq</option></select></div>
     <div style="display:flex;gap:10px;">
       <button class="btn btn-accent btn-full" onclick="saveNote()"><i class="fas fa-save"></i> Saqlash</button>
-      <button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')">Bekor</button>
+      <button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')" data-i18n="cancel_btn">Bekor</button>
     </div>
   </div>
 </div>
@@ -945,7 +945,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 <div class="modal-overlay" id="editProfileModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button>
-    <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent);"></i> Profilni Tahrirlash</div>
+    <div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent);"></i> <span data-i18n="modal_edit_profile">Profilni Tahrirlash</span></div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Ism</label><input class="form-input" id="pName" placeholder="Ismingiz"></div>
       <div class="form-group"><label class="form-label">Familiya</label><input class="form-input" id="pSurname" placeholder="Familiyangiz"></div>
@@ -968,12 +968,12 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:4px;" id="bookDocName">Shifokor</div>
     <div style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;" id="bookDocSpec"></div>
-    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i>Vaqt tanlang:</div>
+    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i><span data-i18n="book_select_time">Vaqt tanlang:</span></div>
     <div class="time-slots" id="bookSlots"></div>
     <div class="form-group" style="margin-top:16px;">
       <label class="form-label"><i class="fas fa-phone" style="color:var(--green);"></i> Telefon raqamingiz *</label>
       <input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00">
-      <div style="font-size:0.75rem;color:var(--text3);margin-top:5px;"><i class="fas fa-info-circle"></i> Shifokor siz bilan bog'lanish uchun ishlatiladi</div>
+      <div style="font-size:0.75rem;color:var(--text3);margin-top:5px;"><i class="fas fa-info-circle"></i> <span data-i18n="book_phone_hint">Shifokor siz bilan bog'lanish uchun ishlatiladi</span></div>
     </div>
     <div class="form-group">
       <label class="form-label"><i class="fas fa-comment-medical" style="color:var(--blue);"></i> Muammo / Shikoyat</label>
@@ -1082,7 +1082,7 @@ function analyzeRisk() {
   const alcohol = document.getElementById('alcohol').value;
 
   if (!s || !d || !hr || !gl || !h || !w || !age) {
-    toast("Barcha majburiy maydonlarni to'ldiring!", 'err'); return;
+    toast(t('fill_fields_err'), 'err'); return;
   }
 
   const panel = document.getElementById('resultPanel');
@@ -1168,7 +1168,7 @@ function analyzeRisk() {
         <div class="alert-icon">👨‍⚕️</div>
         <div>
           <div class="alert-title">Shifokorga Murojaat Qiling!</div>
-          <div class="alert-desc">Xavf darajangiz ${score}% — mutaxassis konsultatsiyasi zarur.</div>
+          <div class="alert-desc">${t('risk_alert_desc').replace('{score}', score)}</div>
           <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
         </div>
       </div>` : '';
@@ -1200,7 +1200,7 @@ function analyzeRisk() {
       </div>`;
 
     state.points += 10; save('points'); updateSidebarProfile();
-    toast('Tahlil tayyor! +10 ball', 'success');
+    toast(t('analysis_done_toast'), 'success');
   }, 1800);
 }
 
@@ -1210,7 +1210,7 @@ function saveAnalysisResult(score, level, s, d, hr, gl, bmi) {
   state.history.unshift(entry);
   save('history');
   updateDashboardStats();
-  toast('Natija saqlandi!', 'success');
+  toast(t('result_saved_toast'), 'success');
 }
 
 function renderDashboard() {
@@ -1312,7 +1312,7 @@ function renderVitals() {
 function renderMedications() {
   const el = document.getElementById('medList');
   if (!state.medications.length) {
-    el.innerHTML = `<div class="card" style="text-align:center;padding:60px;color:var(--text3);"><i class="fas fa-pills" style="font-size:3rem;opacity:0.3;margin-bottom:16px;display:block;"></i>Hali dorilar qo'shilmagan</div>`;
+    el.innerHTML = `<div class="card" style="text-align:center;padding:60px;color:var(--text3);"><i class="fas fa-pills" style="font-size:3rem;opacity:0.3;margin-bottom:16px;display:block;"></i>${t('no_meds')}</div>`;
     // ✅ FIX 4: badge null check
     const badge = document.getElementById('medBadge');
     if (badge) badge.style.display = 'none';
@@ -1330,7 +1330,7 @@ function renderMedications() {
         ${m.notes ? `<span><i class="fas fa-info-circle"></i> ${m.notes}</span>` : ''}
       </div>
       <div class="med-actions-row">
-        <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}"><i class="fas fa-check"></i> ${m.taken?'Qabul qilindi':'Qabul qildim'}</button>
+        <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}"><i class="fas fa-check"></i> ${m.taken?t('taken'):t('take_med')}</button>
         <button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-trash"></i></button>
       </div>
     </div>`).join('');
@@ -1349,39 +1349,39 @@ function saveMedication() {
   const name = document.getElementById('mName').value.trim();
   const dosage = document.getElementById('mDose').value.trim();
   const time = document.getElementById('mTime').value;
-  if (!name || !dosage || !time) { toast("Barcha maydonlarni to'ldiring!", 'err'); return; }
+  if (!name || !dosage || !time) { toast(t('fill_fields_err'), 'err'); return; }
   state.medications.push({name, dosage, time, frequency:document.getElementById('mFreq').value, notes:document.getElementById('mNotes').value, taken:false, date:new Date().toISOString()});
   save('medications');
   document.getElementById('addMedModal').classList.remove('active');
   ['mName','mDose','mTime','mNotes'].forEach(id => document.getElementById(id).value = '');
   state.points += 5; save('points'); updateSidebarProfile();
   renderMedications();
-  toast("Dori qo'shildi! +5 ball", 'success');
+  toast(t('med_added_toast'), 'success');
 }
 
 function takeMed(i) {
   state.medications[i].taken = true; save('medications'); renderMedications();
   state.points += 5; save('points'); updateSidebarProfile();
-  toast('✅ Dori qabul qilindi! +5 ball', 'success');
+  toast('✅ ' + t('med_taken_toast'), 'success');
 }
 
 function deleteMed(i) {
-  if (confirm("Bu dorini o'chirmoqchimisiz?")) {
+  if (confirm(t('confirm_del_med'))) {
     state.medications.splice(i, 1); save('medications'); renderMedications();
-    toast("Dori o'chirildi", 'warn');
+    toast(t('med_deleted'), 'warn');
   }
 }
 
 function renderLabResults() {
   const el = document.getElementById('labResultsList');
   if (!state.labResults.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:30px;">Natijalar yo'q</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:30px;">${t('no_lab_results')}</div>`;
   } else {
     el.innerHTML = state.labResults.map((r, i) => `
       <div class="lab-row">
         <div class="lab-name"><i class="fas fa-vials" style="color:var(--blue);margin-right:8px;"></i>${r.type}</div>
         <div><div class="lab-value" style="color:${r.status==='normal'?'var(--green)':r.status==='abnormal'?'var(--yellow)':'var(--accent)'}">${r.value}</div><div class="lab-normal">${r.unit}</div></div>
-        <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?'Normal':r.status==='abnormal'?"Og'ish":'Kritik'}</span>
+        <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?t('status_normal'):r.status==='abnormal'?t('status_abnormal'):t('status_critical')}</span>
         <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(r.date).toLocaleDateString('uz-UZ')}</div>
         <button onclick="deleteLabResult(${i})" class="btn btn-danger" style="padding:5px 10px;font-size:0.78rem;"><i class="fas fa-trash"></i></button>
       </div>`).join('');
@@ -1394,7 +1394,7 @@ function renderLabResults() {
     if (glucose.length > 1) {
       window.labChartInst = new Chart(ctx, {type:'line',data:{labels:glucose.map((g,i)=>'T'+(i+1)),datasets:[{label:'Qand (mmol/L)',data:glucose.map(g=>g.value),borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,0.1)',tension:0.4,fill:true,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
     } else {
-      ctx.parentElement.innerHTML = `<div style="text-align:center;color:var(--text3);padding:40px;font-size:0.85rem;">Grafik uchun kamida 2 ta qand tahlili kerak</div>`;
+      ctx.parentElement.innerHTML = `<div style="text-align:center;color:var(--text3);padding:40px;font-size:0.85rem;">${t('lab_chart_hint')}</div>`;
     }
   }
 }
@@ -1406,18 +1406,18 @@ function saveLabResult() {
   const value = parseFloat(document.getElementById('labValue').value);
   const unit = document.getElementById('labUnit').value || 'mmol/L';
   const status = document.getElementById('labStatus').value;
-  if (!value) { toast('Qiymat kiriting!', 'err'); return; }
+  if (!value) { toast(t('enter_value_err'), 'err'); return; }
   state.labResults.unshift({type, value, unit, status, date:new Date().toISOString()});
   save('labResults');
   document.getElementById('addLabModal').classList.remove('active');
   renderLabResults();
   state.points += 5; save('points'); updateSidebarProfile();
-  toast('Tahlil natijasi saqlandi! +5 ball', 'success');
+  toast(t('lab_saved_toast'), 'success');
 }
 
 function deleteLabResult(i) {
   state.labResults.splice(i,1); save('labResults'); renderLabResults();
-  toast("O'chirildi", 'warn');
+  toast(t('deleted_toast'), 'warn');
 }
 
 const catColors = {general:'tag-blue', symptom:'tag-red', medication:'tag-green', appointment:'tag-yellow', exercise:'tag-blue'};
@@ -1426,7 +1426,7 @@ const catLabels = {general:'Umumiy', symptom:'Belgi', medication:'Dori', appoint
 function renderNotes() {
   const el = document.getElementById('notesList');
   if (!state.notes.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>${t('no_notes')}</div>`;
     return;
   }
   // ✅ FIX 6: note-card lar alohida, grid-2 ichida emas (mobil uchun ham ishlaydi)
@@ -1446,50 +1446,51 @@ function openAddNoteModal() { document.getElementById('addNoteModal').classList.
 
 function saveNote() {
   const content = document.getElementById('noteContent').value.trim();
-  if (!content) { toast('Matn yozing!', 'err'); return; }
+  if (!content) { toast(t('write_text_err'), 'err'); return; }
   state.notes.unshift({title:document.getElementById('noteTitle').value.trim(), content, category:document.getElementById('noteCategory').value, date:new Date().toISOString()});
   save('notes');
   document.getElementById('addNoteModal').classList.remove('active');
   ['noteTitle','noteContent'].forEach(id => document.getElementById(id).value = '');
   state.points += 3; save('points'); updateSidebarProfile();
   renderNotes();
-  toast('Qaydnoma saqlandi! +3 ball', 'success');
+  toast(t('note_saved_toast'), 'success');
 }
 
 function deleteNote(i) {
   state.notes.splice(i,1); save('notes'); renderNotes();
-  toast("Qaydnoma o'chirildi", 'warn');
+  toast(t('note_deleted'), 'warn');
 }
 
 const doctors = [
-  {id:1,name:'Dr. Kseniya Shimirina',spec:'nevrolog',exp:'15 yil',rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:"Insult va miya kasalliklari bo'yicha mutaxassis"},
-  {id:2,name:'Dr. Akmal Gaibiyev',spec:'nevrolog',exp:'12 yil',rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassisi"},
-  {id:3,name:'Dr. Shuhrat Niyozov',spec:'endokrinolog',exp:'10 yil',rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis"},
+  {id:1,name:'Dr. Kseniya Shimirina',specKey:'spec_nevrolog',expYears:15,rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',descKey:'doc1_desc'},
+  {id:2,name:'Dr. Akmal Gaibiyev',specKey:'spec_nevrolog',expYears:12,rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',descKey:'doc2_desc'},
+  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'spec_endokrinolog',expYears:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',descKey:'doc3_desc'},
 ];
 
 let selectedSlot = {};
 let currentDocId = null;
 
 function renderDoctors(filter) {
-  const list = filter === 'all' ? doctors : doctors.filter(d => d.spec === filter);
+  const list = filter === 'all' ? doctors : doctors.filter(d => d.specKey === 'spec_'+filter);
   document.getElementById('doctorGrid').innerHTML = list.map(doc => `
     <div class="doctor-card" onclick="openBooking(${doc.id})">
       <div class="doctor-top">
         <div class="doctor-avatar">${doc.avatar}</div>
         <div class="doctor-name">${doc.name}</div>
-        <div class="doctor-spec">${doc.spec.charAt(0).toUpperCase()+doc.spec.slice(1)}</div>
-        <div class="doctor-rating"><i class="fas fa-star"></i> ${doc.rating} · ${doc.exp} tajriba</div>
+        <div class="doctor-spec">${t(doc.specKey)}</div>
+        <div class="doctor-rating"><i class="fas fa-star"></i> ${doc.rating} · ${doc.expYears} ${t('years_exp')}</div>
       </div>
       <div class="doctor-body">
-        <div style="font-size:0.83rem;color:var(--text2);margin-bottom:12px;">${doc.desc}</div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">MAVJUD VAQTLAR</div>
+        <div style="font-size:0.83rem;color:var(--text2);margin-bottom:12px;">${t(doc.descKey)}</div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">${t('available_times')}</div>
         <div class="time-slots">${doc.slots.map(s => `<div class="time-slot">${s}</div>`).join('')}</div>
-        <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
+        <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> ${t('book_btn')}</button>
       </div>
     </div>`).join('');
 }
 
-function filterDocs(type) { renderDoctors(type); setDocFilter(type); }
+let lastDocFilter = 'all';
+function filterDocs(type) { lastDocFilter = type; renderDoctors(type); setDocFilter(type); }
 
 function setDocFilter(type) {
   document.querySelectorAll('[id^="df-"]').forEach(b => { b.classList.remove('btn-accent'); b.classList.add('btn-ghost'); });
@@ -1501,7 +1502,7 @@ function openBooking(id) {
   currentDocId = id;
   const doc = doctors.find(d => d.id === id);
   document.getElementById('bookDocName').textContent = doc.name;
-  document.getElementById('bookDocSpec').textContent = doc.spec.charAt(0).toUpperCase()+doc.spec.slice(1)+' — '+doc.exp+' tajriba';
+  document.getElementById('bookDocSpec').textContent = t(doc.specKey)+' — '+doc.expYears+' '+t('years_exp');
   document.getElementById('bookSlots').innerHTML = doc.slots.map(s => `<div class="time-slot" onclick="selectSlot(this,'${s}')">${s}</div>`).join('');
   selectedSlot = {};
   document.getElementById('bookModal').classList.add('active');
@@ -1529,15 +1530,15 @@ async function sendTelegramMessage(text) {
 }
 
 async function confirmBooking() {
-  if (!selectedSlot) { toast("Vaqt tanlang!", 'err'); return; }
+  if (!selectedSlot) { toast(t('select_time_err'), 'err'); return; }
   const phone = document.getElementById('bookPhone').value.trim();
-  if (!phone) { toast("Telefon raqamingizni kiriting!", 'err'); return; }
+  if (!phone) { toast(t('enter_phone_err'), 'err'); return; }
   const doc = doctors.find(d => d.id === currentDocId);
   const complaint = document.getElementById('bookComplaint').value.trim();
   const dateStr = new Date().toLocaleString('uz-UZ');
   const bemorLine = state.profile.name ? '\n\u{1F464} <b>Bemor:</b> '+state.profile.name+' '+(state.profile.surname||'') : '';
   const xavfLine = state.history[0] ? '\n\u26A0\uFE0F <b>Xavf:</b> '+state.history[0].score+'% - '+state.history[0].level : '';
-  const tgText = '🏥 <b>YANGI KONSULTATSIYA SO\'ROVI</b>\n\n👨‍⚕️ <b>Shifokor:</b> '+doc.name+'\n🔬 <b>Mutaxassislik:</b> '+doc.spec+'\n🕐 <b>Vaqt:</b> '+selectedSlot+'\n📱 <b>Telefon:</b> '+phone+'\n📝 <b>Shikoyat:</b> '+(complaint||'Korsatilmagan')+'\n📅 <b>Yuborilgan:</b> '+dateStr+bemorLine+xavfLine;
+  const tgText = '🏥 <b>YANGI KONSULTATSIYA SO\'ROVI</b>\n\n👨‍⚕️ <b>Shifokor:</b> '+doc.name+'\n🔬 <b>Mutaxassislik:</b> '+t(doc.specKey)+'\n🕐 <b>Vaqt:</b> '+selectedSlot+'\n📱 <b>Telefon:</b> '+phone+'\n📝 <b>Shikoyat:</b> '+(complaint||'Korsatilmagan')+'\n📅 <b>Yuborilgan:</b> '+dateStr+bemorLine+xavfLine;
 
   const btn = document.getElementById('bookSubmitBtn');
   const statusEl = document.getElementById('tgSendStatus');
@@ -1571,13 +1572,13 @@ function finishBooking(doc, complaint, phone) {
   document.getElementById('bookPhone').value = '';
   document.getElementById('bookComplaint').value = '';
   document.getElementById('tgSendStatus').style.display = 'none';
-  toast(`✅ ${doc.name} bilan ${selectedSlot} — band qilindi! +15 ball`, 'success');
+  toast(`✅ ${doc.name} ${t('booked_with')} ${selectedSlot}! +15 ${t('points_lbl')}`, 'success');
 }
 
 function renderHistory() {
   const tbody = document.getElementById('historyBody');
   if (!state.history.length) {
-    tbody.innerHTML = "<tr><td colspan='7' style='text-align:center;color:var(--text3);padding:30px;'>Tahlillar yo'q</td></tr>";
+    tbody.innerHTML = `<tr><td colspan='7' style='text-align:center;color:var(--text3);padding:30px;'>${t('no_analyses')}</td></tr>`;
   } else {
     tbody.innerHTML = state.history.map(h => {
       const color = h.score<25?'var(--green)':h.score<50?'var(--yellow)':'var(--accent)';
@@ -1606,7 +1607,7 @@ function renderHistory() {
 function clearHistory() {
   if (!confirm("Barcha tarix o'chiriladi. Davom etasizmi?")) return;
   state.history = []; save('history'); renderHistory();
-  toast("Tarix tozalandi", 'warn');
+  toast(t('hist_cleared'), 'warn');
 }
 
 const achievements = [
@@ -1683,7 +1684,7 @@ function saveProfile() {
   state.points += 10; save('points');
   document.getElementById('editProfileModal').classList.remove('active');
   renderProfile(); updateSidebarProfile();
-  toast('Profil saqlandi! +10 ball', 'success');
+  toast(t('profile_saved_toast'), 'success');
 }
 
 function updateSidebarProfile() {
@@ -1697,17 +1698,17 @@ function openSOS() { document.getElementById('sosModal').classList.add('active')
 function closeSOS() { document.getElementById('sosModal').classList.remove('active'); }
 
 function requestNotificationPermission() {
-  if (!('Notification' in window)) { toast("Bu brauzer bildirishnomalarni qo'llab-quvvatlamaydi", 'warn'); return; }
-  if (Notification.permission === 'granted') { toast('Bildirishnomalar yoqilgan ✅', 'info'); return; }
+  if (!('Notification' in window)) { toast(t('notif_unsupported'), 'warn'); return; }
+  if (Notification.permission === 'granted') { toast(t('notif_on'), 'info'); return; }
   Notification.requestPermission().then(p => {
-    if (p === 'granted') toast('✅ Bildirishnomalar yoqildi!', 'success');
-    else toast('Bildirishnomalar rad etildi', 'warn');
+    if (p === 'granted') toast(t('notif_granted'), 'success');
+    else toast(t('notif_denied'), 'warn');
   });
 }
 
 function downloadPDFReport() {
   const last = state.history[0];
-  if (!last) { toast("Avval AI tekshiruv o'tkazing!", 'err'); return; }
+  if (!last) { toast(t('run_analysis_first'), 'err'); return; }
   const p = state.profile;
   const name = ((p.name||'')+' '+(p.surname||'')).trim() || 'Bemor';
   const date = new Date(last.date).toLocaleDateString('uz-UZ');
@@ -1728,7 +1729,7 @@ ${state.medications.length ? '<h2>💊 Dorilar</h2>'+state.medications.map(m=>'<
   const a = document.createElement('a');
   a.href = url; a.download = 'NeuroGuard_Hisobot_'+new Date().toISOString().slice(0,10)+'.html';
   a.click(); URL.revokeObjectURL(url);
-  toast('📄 Hisobot yuklab olindi!', 'success');
+  toast(t('report_downloaded'), 'success');
 }
 
 /* ── MULTI-LANGUAGE ── */
@@ -1768,6 +1769,85 @@ const LANGS = {
     ai_analyze:"AI Tahlil Qilsin", result_ready:"Tahlil uchun tayyor",
     result_hint:"Chap tomondagi ma'lumotlarni to'ldiring va AI tahlil tugmasini bosing",
     prof_title:"Mening Profilim", achievements:"Yutuqlar", stats_title:"Statistika",
+    vitals_title:"Vital Ko'rsatkichlar", vitals_desc:"Real vaqt monitoringi",
+    vl_bp:"QONBOSIM", vl_hr:"YURAK URISHI", vl_glucose:"QAND", vl_bmi:"BMI",
+    bp_dynamics:"Qon Bosimi Dinamikasi", risk_dynamics:"Xavf Ko'rsatkichi Dinamikasi",
+    meds_title:"Dorilar", meds_desc:"Kundalik dori jadvalingiz",
+    add_med_btn:"Dori Qo'shish",
+    lab_title:"Laboratoriya Tahlillari", lab_desc:"Qon va boshqa tahlillar natijalari",
+    lab_results:"Oxirgi Natijalar", lab_chart:"Tahlillar Grafigi", add_lab_btn:"Yangi natija",
+    notes_title:"Tibbiy Qaydnomalar", notes_desc:"O'z salomatligigingiz haqida qaydnomalar yozing",
+    add_note_btn:"Qaydnoma Qo'shish",
+    appt_title:"Shifokor Konsultatsiyasi", appt_desc:"Mutaxassis shifokorlardan vaqt oling",
+    df_all:"Barchasi", df_nevrolog:"Nevrolog", df_kardiolog:"Kardiolog", df_endokrinolog:"Endokrinolog",
+    hist_title:"Tarix & Diagrammalar", hist_desc:"Barcha tekshiruv natijalari va trendlar",
+    risk_history:"Xavf Ko'rsatkichi Tarixi", clear_btn:"Tozalash",
+    all_checks:"Barcha Tekshiruvlar",
+    th_date:"Sana", th_bp:"Qon Bosimi", th_hr:"Yurak Urishi", th_glucose:"Qand",
+    th_risk:"Xavf", th_level:"Daraja",
+    personal_info:"Shaxsiy Ma'lumotlar",
+    stat_analyses:"Tahlil soni", stat_meds_lbl:"Dorilar", stat_notes_lbl:"Qaydnomalar", stat_points_lbl:"Ball",
+    points_lbl:"ball",
+    bn_home:"Bosh", bn_check:"Tekshiruv", bn_meds:"Dorilar", bn_menu:"Menu",
+    nav_sec_home:"Bosh Sahifa", nav_sec_health:"Salomatlik",
+    nav_sec_doctor:"Diagnoz & Shifokor", nav_sec_settings:"Sozlamalar",
+    badge_new:"Yangi",
+    no_meds:"Hali dorilar qo'shilmagan",
+    taken:"Qabul qilindi",
+    take_med:"Qabul qildim",
+    no_notes:"Hali qaydnoma yo'q",
+    no_lab_results:"Natijalar yo'q",
+    lab_chart_hint:"Grafik uchun kamida 2 ta qand tahlili kerak",
+    status_normal:"Normal",
+    status_abnormal:"Og'ish",
+    status_critical:"Kritik",
+    no_analyses:"Tahlillar yo'q",
+    hist_cleared:"Tarix tozalandi",
+    med_taken_toast:"Dori qabul qilindi! +5 ball",
+    confirm_del_med:"Bu dorini o'chirmoqchimisiz?",
+    med_deleted:"Dori o'chirildi",
+    deleted_toast:"O'chirildi",
+    note_deleted:"Qaydnoma o'chirildi",
+    available_times:"MAVJUD VAQTLAR",
+    book_btn:"Vaqt Band Qilish",
+    note_saved_toast:"Qaydnoma saqlandi! +3 ball",
+    med_added_toast:"Dori qo'shildi! +5 ball",
+    lab_saved_toast:"Tahlil natijasi saqlandi! +5 ball",
+    result_saved_toast:"Natija saqlandi!",
+    fill_fields_err:"Barcha maydonlarni to'ldiring!",
+    analysis_done_toast:"Tahlil tayyor! +10 ball",
+    profile_saved_toast:"Profil saqlandi! +10 ball",
+    write_text_err:"Matn yozing!",
+    enter_value_err:"Qiymat kiriting!",
+    run_analysis_first:"Avval AI tekshiruv o'tkazing!",
+    report_downloaded:"Hisobot yuklab olindi!",
+    select_time_err:"Vaqt tanlang!",
+    enter_phone_err:"Telefon raqamingizni kiriting!",
+    booked_with:"bilan",
+    notif_unsupported:"Bu brauzer bildirishnomalarni qo'llab-quvvatlamaydi",
+    notif_on:"Bildirishnomalar yoqilgan",
+    notif_granted:"Bildirishnomalar yoqildi!",
+    notif_denied:"Bildirishnomalar rad etildi",
+    sos_title:"FAVQULODDA YORDAM",
+    sos_fast:"FAST testini o'tkazing",
+    sos_call:"103 — Tez Yordam Chaqirish",
+    close_btn:"Yopish",
+    cancel_btn:"Bekor",
+    modal_add_med:"Dori Qo'shish",
+    modal_add_med_sub:"Yangi dori va eslatma qo'shing",
+    modal_add_note:"Qaydnoma Qo'shish",
+    modal_add_note_sub:"O'z-o'zingiz haqingizda eslatma yozing",
+    modal_edit_profile:"Profilni Tahrirlash",
+    book_select_time:"Vaqt tanlang:",
+    book_phone_hint:"Shifokor siz bilan bog'lanish uchun ishlatiladi",
+    spec_nevrolog:"Nevrolog",
+    spec_kardiolog:"Kardiolog",
+    spec_endokrinolog:"Endokrinolog",
+    years_exp:"yil tajriba",
+    doc1_desc:"Insult va miya kasalliklari bo'yicha mutaxassis",
+    doc2_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
+    doc3_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
+    risk_alert_desc:"Xavf darajangiz {score}% — mutaxassis konsultatsiyasi zarur.",
     lang_name:"O'zbek",
   },
   ru: {
@@ -1802,6 +1882,85 @@ const LANGS = {
     ai_analyze:"Анализировать", result_ready:"Готов к анализу",
     result_hint:"Заполните данные слева и нажмите кнопку анализа",
     prof_title:"Мой профиль", achievements:"Достижения", stats_title:"Статистика",
+    vitals_title:"Показатели", vitals_desc:"Мониторинг в реальном времени",
+    vl_bp:"ДАВЛЕНИЕ", vl_hr:"ПУЛЬС", vl_glucose:"САХАР", vl_bmi:"ИМТ",
+    bp_dynamics:"Динамика АД", risk_dynamics:"Динамика риска",
+    meds_title:"Лекарства", meds_desc:"Ваше расписание приёма",
+    add_med_btn:"Добавить лекарство",
+    lab_title:"Лабораторные анализы", lab_desc:"Результаты анализов крови и других",
+    lab_results:"Последние результаты", lab_chart:"График анализов", add_lab_btn:"Новый результат",
+    notes_title:"Медицинские записи", notes_desc:"Ведите заметки о своём здоровье",
+    add_note_btn:"Добавить запись",
+    appt_title:"Консультация врача", appt_desc:"Запишитесь к специалисту",
+    df_all:"Все", df_nevrolog:"Невролог", df_kardiolog:"Кардиолог", df_endokrinolog:"Эндокринолог",
+    hist_title:"История & Диаграммы", hist_desc:"Все результаты обследований и тренды",
+    risk_history:"История риска", clear_btn:"Очистить",
+    all_checks:"Все обследования",
+    th_date:"Дата", th_bp:"АД", th_hr:"Пульс", th_glucose:"Сахар",
+    th_risk:"Риск", th_level:"Уровень",
+    personal_info:"Личные данные",
+    stat_analyses:"Анализов", stat_meds_lbl:"Лекарств", stat_notes_lbl:"Записей", stat_points_lbl:"Баллов",
+    points_lbl:"балл",
+    bn_home:"Главная", bn_check:"Анализ", bn_meds:"Лекарства", bn_menu:"Меню",
+    nav_sec_home:"Главная", nav_sec_health:"Здоровье",
+    nav_sec_doctor:"Диагноз & Врач", nav_sec_settings:"Настройки",
+    badge_new:"Новый",
+    no_meds:"Лекарства ещё не добавлены",
+    taken:"Принято",
+    take_med:"Принять",
+    no_notes:"Записей пока нет",
+    no_lab_results:"Результатов нет",
+    lab_chart_hint:"Для графика нужно минимум 2 анализа сахара",
+    status_normal:"Норма",
+    status_abnormal:"Отклонение",
+    status_critical:"Критично",
+    no_analyses:"Анализов нет",
+    hist_cleared:"История очищена",
+    med_taken_toast:"Лекарство принято! +5 баллов",
+    confirm_del_med:"Удалить это лекарство?",
+    med_deleted:"Лекарство удалено",
+    deleted_toast:"Удалено",
+    note_deleted:"Запись удалена",
+    available_times:"ДОСТУПНОЕ ВРЕМЯ",
+    book_btn:"Записаться",
+    note_saved_toast:"Запись сохранена! +3 балла",
+    med_added_toast:"Лекарство добавлено! +5 баллов",
+    lab_saved_toast:"Результат сохранён! +5 баллов",
+    result_saved_toast:"Результат сохранён!",
+    fill_fields_err:"Заполните все поля!",
+    analysis_done_toast:"Анализ готов! +10 баллов",
+    profile_saved_toast:"Профиль сохранён! +10 баллов",
+    write_text_err:"Введите текст!",
+    enter_value_err:"Введите значение!",
+    run_analysis_first:"Сначала пройдите AI анализ!",
+    report_downloaded:"Отчёт загружен!",
+    select_time_err:"Выберите время!",
+    enter_phone_err:"Введите номер телефона!",
+    booked_with:"с",
+    notif_unsupported:"Этот браузер не поддерживает уведомления",
+    notif_on:"Уведомления включены",
+    notif_granted:"Уведомления включены!",
+    notif_denied:"Уведомления отклонены",
+    sos_title:"ЭКСТРЕННАЯ ПОМОЩЬ",
+    sos_fast:"Пройдите FAST тест",
+    sos_call:"103 — Вызвать скорую помощь",
+    close_btn:"Закрыть",
+    cancel_btn:"Отмена",
+    modal_add_med:"Добавить лекарство",
+    modal_add_med_sub:"Добавьте новое лекарство и напоминание",
+    modal_add_note:"Добавить запись",
+    modal_add_note_sub:"Запишите заметку о себе",
+    modal_edit_profile:"Редактировать профиль",
+    book_select_time:"Выберите время:",
+    book_phone_hint:"Врач свяжется с вами по этому номеру",
+    spec_nevrolog:"Невролог",
+    spec_kardiolog:"Кардиолог",
+    spec_endokrinolog:"Эндокринолог",
+    years_exp:"лет опыта",
+    doc1_desc:"Специалист по инсультам и заболеваниям мозга",
+    doc2_desc:"Специалист по неврологии и детской неврологии",
+    doc3_desc:"Специалист по неврологии и детской неврологии",
+    risk_alert_desc:"Ваш уровень риска {score}% — необходима консультация специалиста.",
     lang_name:"Русский",
   },
   en: {
@@ -1836,6 +1995,85 @@ const LANGS = {
     ai_analyze:"Analyze with AI", result_ready:"Ready to analyze",
     result_hint:"Fill in the data on the left and click the AI analysis button",
     prof_title:"My Profile", achievements:"Achievements", stats_title:"Statistics",
+    vitals_title:"Vital Signs", vitals_desc:"Real-time monitoring",
+    vl_bp:"BLOOD PRESSURE", vl_hr:"HEART RATE", vl_glucose:"GLUCOSE", vl_bmi:"BMI",
+    bp_dynamics:"Blood Pressure Dynamics", risk_dynamics:"Risk Score Dynamics",
+    meds_title:"Medications", meds_desc:"Your daily medication schedule",
+    add_med_btn:"Add Medication",
+    lab_title:"Laboratory Tests", lab_desc:"Blood and other lab results",
+    lab_results:"Latest Results", lab_chart:"Lab Chart", add_lab_btn:"New result",
+    notes_title:"Medical Notes", notes_desc:"Keep notes about your health",
+    add_note_btn:"Add Note",
+    appt_title:"Doctor Consultation", appt_desc:"Book an appointment with a specialist",
+    df_all:"All", df_nevrolog:"Neurologist", df_kardiolog:"Cardiologist", df_endokrinolog:"Endocrinologist",
+    hist_title:"History & Charts", hist_desc:"All assessment results and trends",
+    risk_history:"Risk Score History", clear_btn:"Clear",
+    all_checks:"All Assessments",
+    th_date:"Date", th_bp:"Blood Pressure", th_hr:"Heart Rate", th_glucose:"Glucose",
+    th_risk:"Risk", th_level:"Level",
+    personal_info:"Personal Information",
+    stat_analyses:"Analyses", stat_meds_lbl:"Medications", stat_notes_lbl:"Notes", stat_points_lbl:"Points",
+    points_lbl:"pts",
+    bn_home:"Home", bn_check:"Check", bn_meds:"Meds", bn_menu:"Menu",
+    nav_sec_home:"Home", nav_sec_health:"Health",
+    nav_sec_doctor:"Diagnosis & Doctor", nav_sec_settings:"Settings",
+    badge_new:"New",
+    no_meds:"No medications added yet",
+    taken:"Taken",
+    take_med:"Take it",
+    no_notes:"No notes yet",
+    no_lab_results:"No results yet",
+    lab_chart_hint:"Need at least 2 glucose tests for chart",
+    status_normal:"Normal",
+    status_abnormal:"Abnormal",
+    status_critical:"Critical",
+    no_analyses:"No analyses yet",
+    hist_cleared:"History cleared",
+    med_taken_toast:"Medication taken! +5 pts",
+    confirm_del_med:"Delete this medication?",
+    med_deleted:"Medication deleted",
+    deleted_toast:"Deleted",
+    note_deleted:"Note deleted",
+    available_times:"AVAILABLE TIMES",
+    book_btn:"Book Appointment",
+    note_saved_toast:"Note saved! +3 pts",
+    med_added_toast:"Medication added! +5 pts",
+    lab_saved_toast:"Lab result saved! +5 pts",
+    result_saved_toast:"Result saved!",
+    fill_fields_err:"Fill in all required fields!",
+    analysis_done_toast:"Analysis ready! +10 pts",
+    profile_saved_toast:"Profile saved! +10 pts",
+    write_text_err:"Please write some text!",
+    enter_value_err:"Please enter a value!",
+    run_analysis_first:"Run AI analysis first!",
+    report_downloaded:"Report downloaded!",
+    select_time_err:"Please select a time!",
+    enter_phone_err:"Please enter your phone number!",
+    booked_with:"booked with",
+    notif_unsupported:"This browser doesn't support notifications",
+    notif_on:"Notifications are enabled",
+    notif_granted:"Notifications enabled!",
+    notif_denied:"Notifications denied",
+    sos_title:"EMERGENCY HELP",
+    sos_fast:"Take the FAST test",
+    sos_call:"103 — Call Emergency Services",
+    close_btn:"Close",
+    cancel_btn:"Cancel",
+    modal_add_med:"Add Medication",
+    modal_add_med_sub:"Add a new medication and reminder",
+    modal_add_note:"Add Note",
+    modal_add_note_sub:"Write a note about yourself",
+    modal_edit_profile:"Edit Profile",
+    book_select_time:"Select time:",
+    book_phone_hint:"The doctor will contact you at this number",
+    spec_nevrolog:"Neurologist",
+    spec_kardiolog:"Cardiologist",
+    spec_endokrinolog:"Endocrinologist",
+    years_exp:"years experience",
+    doc1_desc:"Specialist in stroke and brain diseases",
+    doc2_desc:"Specialist in neurology and pediatric neurology",
+    doc3_desc:"Specialist in neurology and pediatric neurology",
+    risk_alert_desc:"Your risk level is {score}% — specialist consultation required.",
     lang_name:"English",
   }
 };
@@ -1862,6 +2100,27 @@ function applyLangToUI() {
   if (ttEl) ttEl.textContent = t('topbar_' + pg);
   if (tsEl) tsEl.textContent = t('topbar_sub_' + pg) || '';
   renderLangSwitcher();
+
+  // ── Dinamik render qilingan bo'limlarni ham yangilash ──
+  if (pg === 'appointments') { renderDoctors(lastDocFilter); setDocFilter(lastDocFilter); }
+  if (pg === 'medications')  renderMedications();
+  if (pg === 'notes')        renderNotes();
+  if (pg === 'labTests')     renderLabResults();
+  if (pg === 'history')      renderHistory();
+  if (pg === 'vitals')       renderVitals();
+  if (pg === 'dashboard')    renderDashboard();
+  if (pg === 'profile')      renderProfile();
+  if (pg === 'assessment') {
+    // result panel agar ko'rsatilgan bo'lsa, uni ham yangilaymiz
+    const rp = document.getElementById('resultPanel');
+    if (rp && rp.querySelector('.spinner') === null && rp.innerHTML.includes('data-i18n') === false) {
+      // placeholder ni yangilaymiz
+      const readyEl = rp.querySelector('[data-i18n="result_ready"]');
+      if (readyEl) readyEl.textContent = t('result_ready');
+      const hintEl = rp.querySelector('[data-i18n="result_hint"]');
+      if (hintEl) hintEl.textContent = t('result_hint');
+    }
+  }
 }
 
 function previewLang(lang) { currentLang = lang; applyLangToUI(); }
