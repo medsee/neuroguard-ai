@@ -670,9 +670,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
             <label class="checkbox-item"><input type="checkbox" id="headache"><span><span data-i18n="c_headache">Tez-tez bosh og'rig'i</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="dizziness"><span><span data-i18n="c_dizziness">Bosh aylanishi</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="numbness"><span><span data-i18n="c_numbness">Qo'l-oyoq kuchsizlanishi / uvishishi</span></span></label>
-            <label class="checkbox-item"><input type="checkbox" id="speech"><span><span data-i18n="c_speech">Nutq qiyinligi</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="bloodThick"><span><span data-i18n="c_bloodThick">Qon quyuqligi (trombofiliya)</span></span></label>
-            <label class="checkbox-item"><input type="checkbox" id="movement"><span><span data-i18n="c_movement">Harakat o'zgarishi (muvozanat, koordinatsiya)</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="rheumatism"><span><span data-i18n="c_rheumatism">Revmatizm / bo'g'im kasalliklari</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="familyVascular"><span><span data-i18n="c_familyVascular">Oilada qon tomir kasalliklari bo'lgan</span></span></label>
             <label class="checkbox-item"><input type="checkbox" id="ownVascular"><span><span data-i18n="c_ownVascular">O'zida qon tomir kasalliklari bor</span></span></label>
@@ -1131,8 +1129,8 @@ function analyzeRisk() {
     score += alcoholMap[alcohol] || 0;
     factors.push({n:'Alkogol', ...alcoholLabelMap[alcohol] || alcoholLabelMap['none']});
 
-    const neuroChecks = ['headache','dizziness','numbness','speech','bloodThick','movement','rheumatism','familyVascular','ownVascular','familyHistory'];
-    const scoreWeights = {bloodThick:8,movement:7,rheumatism:5,familyVascular:8,ownVascular:12,familyHistory:7,headache:5,dizziness:5,numbness:6,speech:8};
+    const neuroChecks = ['headache','dizziness','numbness','bloodThick','rheumatism','familyVascular','ownVascular','familyHistory'];
+    const scoreWeights = {bloodThick:8,rheumatism:5,familyVascular:8,ownVascular:12,familyHistory:7,headache:5,dizziness:5,numbness:6};
     const neuroCount = neuroChecks.filter(n => document.getElementById(n)?.checked).length;
     neuroChecks.forEach(n => { if (document.getElementById(n)?.checked) score += scoreWeights[n] || 0; });
     if (neuroCount > 0) factors.push({n:'Shikoyatlar', s:neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t:neuroCount+' ta belgi/omil'});
@@ -1145,15 +1143,28 @@ function analyzeRisk() {
     else if (score < 75) { level="Yuqori Xavf"; lvlClass='tag-red'; lvlColor='var(--accent)'; icon='🚨'; lvlDesc='Shifokor bilan maslahatlashing!'; }
     else { level="Juda Yuqori Xavf"; lvlClass='tag-red'; lvlColor='#ef4444'; icon='🆘'; lvlDesc='Zudlik bilan shifokorga murojaat qiling!'; }
 
+    // Tavsiyalar — har bir omil uchun icon + rang + i18n key
     const recs = [];
-    if (s > 130 || d > 85) recs.push("Qon bosimini kundalik o'lchang");
-    if (gl > 6.1) recs.push("Qandli mahsulotlarni cheklang");
-    if (bmi > 25) recs.push('Mutanosib ovqatlanish va sport');
-    if (smoking === 'yes') recs.push("Chekishni tark eting");
-    if (alcohol === 'often' || alcohol === 'daily') recs.push("Alkogol iste'molini kamaytiring");
-    if (exercise === 'none' || exercise === 'light') recs.push('Haftada 150 daqiqa aerobik mashq');
-    if (chol > 5.2) recs.push("Yog'li ovqatlarni kamaytiring");
-    recs.push("Muntazam tibbiy tekshiruv o'ting");
+    if (s > 130 || d > 85)  recs.push({key:'rec_bp',      icon:'🩺', cat:'warn'});
+    if (s > 160 || d > 100) recs.push({key:'rec_bp_high',  icon:'🚨', cat:'bad'});
+    if (gl > 6.1)            recs.push({key:'rec_glucose',  icon:'🍬', cat:'warn'});
+    if (gl > 7.0)            recs.push({key:'rec_glucose_h',icon:'⚠️', cat:'bad'});
+    if (bmi > 25)            recs.push({key:'rec_bmi',      icon:'🥗', cat:'warn'});
+    if (bmi > 30)            recs.push({key:'rec_bmi_high', icon:'🏃', cat:'bad'});
+    if (smoking === 'yes')   recs.push({key:'rec_smoking',  icon:'🚭', cat:'bad'});
+    if (alcohol === 'often' || alcohol === 'daily') recs.push({key:'rec_alcohol', icon:'🍷', cat:'warn'});
+    if (exercise === 'none') recs.push({key:'rec_exercise_none', icon:'🏋️', cat:'bad'});
+    else if (exercise === 'light') recs.push({key:'rec_exercise',  icon:'🚶', cat:'warn'});
+    if (chol > 5.2)          recs.push({key:'rec_chol',     icon:'🥑', cat:'warn'});
+    if (chol > 6.5)          recs.push({key:'rec_chol_high',icon:'💊', cat:'bad'});
+    if (document.getElementById('bloodThick')?.checked) recs.push({key:'rec_blood', icon:'💉', cat:'warn'});
+    if (document.getElementById('familyHistory')?.checked || document.getElementById('familyVascular')?.checked)
+                             recs.push({key:'rec_family',   icon:'👨‍👩‍👦', cat:'warn'});
+    if (score >= 50)         recs.push({key:'rec_stress',   icon:'🧘', cat:'warn'});
+    if (score >= 25)         recs.push({key:'rec_salt',     icon:'🧂', cat:'warn'});
+    recs.push(                         {key:'rec_regular',  icon:'📅', cat:'good'});
+    recs.push(                         {key:'rec_water',    icon:'💧', cat:'good'});
+    if (score >= 30)         recs.push({key:'rec_sleep',    icon:'😴', cat:'warn'});
 
     const factorsHTML = factors.map(f => `
       <div class="factor-row">
@@ -1161,15 +1172,27 @@ function analyzeRisk() {
         <span class="factor-badge fb-${f.s==='bad'?'bad':f.s==='warn'?'warn':'good'}">${f.t}</span>
       </div>`).join('');
 
-    const recsHTML = recs.map(r => `<div class="rec-item"><i class="fas fa-circle-check rec-icon"></i><span>${r}</span></div>`).join('');
+    const catColor = {good:'var(--green)', warn:'var(--yellow)', bad:'var(--accent)'};
+    const catIcon  = {good:'fa-circle-check', warn:'fa-triangle-exclamation', bad:'fa-circle-xmark'};
+    const recsHTML = recs.map(r => `
+      <div class="rec-item" style="border-left-color:${catColor[r.cat]};background:rgba(${r.cat==='bad'?'239,68,68':r.cat==='warn'?'245,158,11':'34,197,94'},0.07);margin-bottom:8px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <span style="font-size:1.2rem;flex-shrink:0;line-height:1.4;">${r.icon}</span>
+          <div style="flex:1;">
+            <div style="font-size:0.88rem;font-weight:600;color:var(--text1);">${t(r.key+'_title')}</div>
+            <div style="font-size:0.79rem;color:var(--text2);margin-top:2px;line-height:1.5;">${t(r.key+'_desc')}</div>
+          </div>
+          <i class="fas ${catIcon[r.cat]}" style="color:${catColor[r.cat]};flex-shrink:0;margin-top:3px;font-size:0.9rem;"></i>
+        </div>
+      </div>`).join('');
 
     const doctorAlert = score >= 50 ? `
       <div class="doctor-alert">
         <div class="alert-icon">👨‍⚕️</div>
         <div>
-          <div class="alert-title">Shifokorga Murojaat Qiling!</div>
+          <div class="alert-title">${t('alert_see_doctor')}</div>
           <div class="alert-desc">${t('risk_alert_desc').replace('{score}', score)}</div>
-          <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
+          <button class="btn btn-danger" onclick="navGo('appointments')" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-calendar-plus"></i> <span>${t('book_btn')}</span></button>
         </div>
       </div>` : '';
 
@@ -1187,15 +1210,28 @@ function analyzeRisk() {
           <div style="font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);font-family:var(--font-mono);margin-bottom:12px;">Xavf Omillari Tahlili</div>
           ${factorsHTML}
         </div>
-        <div style="margin-top:16px;">
-          <div style="font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);font-family:var(--font-mono);margin-bottom:12px;">Tavsiyalar</div>
+        <div style="margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);font-family:var(--font-mono);" data-i18n-js="rec_section">${t('rec_section')}</div>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <span style="font-size:0.75rem;background:var(--bg3);color:var(--text3);padding:2px 8px;border-radius:20px;border:1px solid var(--border);">${recs.length} ${t('rec_count')}</span>
+          </div>
           ${recsHTML}
         </div>
-        <div style="margin-top:16px;padding:12px 16px;background:rgba(245,158,11,0.08);border-radius:10px;border-left:3px solid var(--yellow);font-size:0.78rem;color:var(--text2);">
-          ⚠️ Bu natija faqat umumiy fikr beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.
+        <div style="margin-top:16px;padding:14px 16px;background:rgba(245,158,11,0.08);border-radius:12px;border-left:3px solid var(--yellow);font-size:0.8rem;color:var(--text2);display:flex;gap:10px;align-items:flex-start;">
+          <span style="font-size:1.1rem;flex-shrink:0;">⚠️</span>
+          <span>${t('disclaimer_text')}</span>
         </div>
-        <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" class="btn btn-accent btn-full" style="margin-top:16px;">
-          <i class="fas fa-save"></i> Natijani Saqlash
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+          <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" class="btn btn-accent" style="font-size:0.88rem;">
+            <i class="fas fa-save"></i> <span>${t('save_result_btn')}</span>
+          </button>
+          <button onclick="navGo('appointments')" class="btn btn-outline" style="font-size:0.88rem;border:1px solid var(--border);background:var(--bg3);color:var(--text1);border-radius:12px;cursor:pointer;padding:12px 16px;display:flex;align-items:center;justify-content:center;gap:8px;">
+            <i class="fas fa-calendar-plus" style="color:var(--accent);"></i> <span>${t('book_specialist_btn')}</span>
+          </button>
+        </div>
+        <button onclick="downloadPDFReport(${score},'${level}',${s},${d},${hr},${gl},${bmi.toFixed(1)})" style="width:100%;margin-top:8px;background:transparent;border:1px dashed var(--border);border-radius:12px;padding:10px;font-size:0.8rem;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+          <i class="fas fa-file-pdf" style="color:var(--accent);"></i> <span>${t('download_pdf_btn')}</span>
         </button>
       </div>`;
 
@@ -1848,6 +1884,51 @@ const LANGS = {
     doc2_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
     doc3_desc:"Nevrologiya va bolalar nevrologiyasi bo'yicha mutaxassis",
     risk_alert_desc:"Xavf darajangiz {score}% — mutaxassis konsultatsiyasi zarur.",
+    rec_section:"TAVSIYALAR",
+    rec_count:"ta maslahat",
+    disclaimer_text:"Bu natija faqat umumiy ma'lumot beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.",
+    save_result_btn:"Natijani Saqlash",
+    book_specialist_btn:"Mutaxassis Bilan",
+    download_pdf_btn:"PDF Hisobot Yuklab Olish",
+    alert_see_doctor:"Shifokorga Murojaat Qiling!",
+    rec_bp_title:"Qon bosimini nazorat qiling",
+    rec_bp_desc:"Har kuni ertalab va kechqurun o'lchang. 130/85 dan oshmasligi kerak.",
+    rec_bp_high_title:"Qon bosimi juda yuqori!",
+    rec_bp_high_desc:"Darhol shifokorga murojaat qiling. Bu insult xavfini keskin oshiradi.",
+    rec_glucose_title:"Qand darajasini cheklang",
+    rec_glucose_desc:"Shirin ichimlik va non mahsulotlarini kamaytiring. Norma: 3.9–6.1 mmol/L.",
+    rec_glucose_h_title:"Qand darajasi xavfli darajada yuqori",
+    rec_glucose_h_desc:"Endokrinolog bilan maslahatlashing. Diabet rivojlanish xavfi bor.",
+    rec_bmi_title:"Ovqatlanishni tartibga soling",
+    rec_bmi_desc:"Sabzavot, meva va oqsilga boy ovqatlar tanlang. Tez ovqatlardan saqlaning.",
+    rec_bmi_high_title:"Vazningizni kamaytiring",
+    rec_bmi_high_desc:"Haftada kamida 3 marta 30 daqiqalik jismoniy mashq qiling.",
+    rec_smoking_title:"Chekishni tark eting",
+    rec_smoking_desc:"Chekish insult xavfini 2 barobarga oshiradi. Hoziroq tashlang!",
+    rec_alcohol_title:"Alkogol iste'molini kamaytiring",
+    rec_alcohol_desc:"Haftada 1-2 martadan ko'p qabul qilmang. Yaxshisi butunlay tashlang.",
+    rec_exercise_none_title:"Jismoniy faollik zarur",
+    rec_exercise_none_desc:"Harakatlanmaslik yurak va qon tomir kasalligi xavfini oshiradi. Kundalik yurish boshlang.",
+    rec_exercise_title:"Mashq intensivligini oshiring",
+    rec_exercise_desc:"Haftada 150 daqiqa o'rtacha intensivlikda aerobik mashq tavsiya etiladi.",
+    rec_chol_title:"Yog'li ovqatlarni kamaytiring",
+    rec_chol_desc:"Baliq, zeytun moyi va yong'oq foydaliroq. Qovurilgan ovqatlardan saqlaning.",
+    rec_chol_high_title:"Xolesterin darajasi yuqori",
+    rec_chol_high_desc:"Shifokor bilan maslahatlashing. Statin dorilar tavsiya qilinishi mumkin.",
+    rec_blood_title:"Qon quyuqligi — diqqat!",
+    rec_blood_desc:"Trombofiliya bor bo'lsa gematolog nazorati kerak. Ko'p suv iching.",
+    rec_family_title:"Oilaviy tarix — ehtiyot bo'ling",
+    rec_family_desc:"Yaqin qarindoshlaringizda insult yoki yurak kasalligi bo'lsa, yiliga 1 marta kardiolog ko'rigidan o'ting.",
+    rec_stress_title:"Stressni boshqaring",
+    rec_stress_desc:"Meditatsiya, nafas mashqlari yoki yaxshi uyqu stress darajasini kamaytiradi.",
+    rec_salt_title:"Tuz iste'molini cheklang",
+    rec_salt_desc:"Kundalik tuz norma — 5g dan kam. Konserva va kolbasa mahsulotlarini kamaytiring.",
+    rec_regular_title:"Muntazam tibbiy tekshiruv",
+    rec_regular_desc:"Yiliga kamida 1 marta umumiy qon tahlili, EKG va qon bosim tekshiruvi o'tkazing.",
+    rec_water_title:"Kundalik suv miqdori",
+    rec_water_desc:"Har kuni kamida 1.5–2 litr toza suv iching. Bu qon quyuqlanishini oldini oladi.",
+    rec_sleep_title:"Yetarli uxlang",
+    rec_sleep_desc:"Kuniga 7–8 soat sifatli uyqu insult xavfini 40% gacha kamaytiradi.",
     lang_name:"O'zbek",
   },
   ru: {
@@ -1961,6 +2042,51 @@ const LANGS = {
     doc2_desc:"Специалист по неврологии и детской неврологии",
     doc3_desc:"Специалист по неврологии и детской неврологии",
     risk_alert_desc:"Ваш уровень риска {score}% — необходима консультация специалиста.",
+    rec_section:"РЕКОМЕНДАЦИИ",
+    rec_count:"совета",
+    disclaimer_text:"Этот результат носит информационный характер. Он не заменяет профессиональный медицинский диагноз.",
+    save_result_btn:"Сохранить результат",
+    book_specialist_btn:"К специалисту",
+    download_pdf_btn:"Скачать PDF отчёт",
+    alert_see_doctor:"Обратитесь к врачу!",
+    rec_bp_title:"Контролируйте давление",
+    rec_bp_desc:"Измеряйте утром и вечером. Норма: ниже 130/85 мм рт.ст.",
+    rec_bp_high_title:"Давление критически высокое!",
+    rec_bp_high_desc:"Немедленно обратитесь к врачу. Это резко повышает риск инсульта.",
+    rec_glucose_title:"Ограничьте сахар",
+    rec_glucose_desc:"Сократите сладкие напитки и выпечку. Норма: 3.9–6.1 ммоль/л.",
+    rec_glucose_h_title:"Уровень сахара опасно высок",
+    rec_glucose_h_desc:"Проконсультируйтесь с эндокринологом. Есть риск развития диабета.",
+    rec_bmi_title:"Скорректируйте питание",
+    rec_bmi_desc:"Выбирайте овощи, фрукты и белок. Избегайте фастфуда.",
+    rec_bmi_high_title:"Снизьте вес",
+    rec_bmi_high_desc:"Занимайтесь физкультурой минимум 30 минут 3 раза в неделю.",
+    rec_smoking_title:"Бросьте курить",
+    rec_smoking_desc:"Курение удваивает риск инсульта. Бросьте прямо сейчас!",
+    rec_alcohol_title:"Сократите алкоголь",
+    rec_alcohol_desc:"Не более 1–2 раз в неделю. Лучше отказаться полностью.",
+    rec_exercise_none_title:"Необходима физическая активность",
+    rec_exercise_none_desc:"Малоподвижность повышает риск болезней сердца. Начните с ежедневных прогулок.",
+    rec_exercise_title:"Увеличьте нагрузку",
+    rec_exercise_desc:"Рекомендуется 150 минут умеренной аэробной нагрузки в неделю.",
+    rec_chol_title:"Уменьшите жирную пищу",
+    rec_chol_desc:"Рыба, оливковое масло и орехи полезнее. Избегайте жареного.",
+    rec_chol_high_title:"Холестерин повышен",
+    rec_chol_high_desc:"Проконсультируйтесь с врачом. Возможно, нужны статины.",
+    rec_blood_title:"Внимание: густая кровь",
+    rec_blood_desc:"При тромбофилии необходим контроль гематолога. Пейте больше воды.",
+    rec_family_title:"Семейная история — будьте осторожны",
+    rec_family_desc:"При инсульте у родственников проходите кардиологическое обследование раз в год.",
+    rec_stress_title:"Управляйте стрессом",
+    rec_stress_desc:"Медитация, дыхательные упражнения и хороший сон снижают стресс.",
+    rec_salt_title:"Ограничьте соль",
+    rec_salt_desc:"Суточная норма — менее 5 г. Уменьшите консервы и колбасные изделия.",
+    rec_regular_title:"Регулярные обследования",
+    rec_regular_desc:"Раз в год: общий анализ крови, ЭКГ и измерение давления.",
+    rec_water_title:"Суточная норма воды",
+    rec_water_desc:"Выпивайте минимум 1.5–2 литра чистой воды в день.",
+    rec_sleep_title:"Полноценный сон",
+    rec_sleep_desc:"7–8 часов качественного сна снижают риск инсульта до 40%.",
     lang_name:"Русский",
   },
   en: {
@@ -2074,6 +2200,51 @@ const LANGS = {
     doc2_desc:"Specialist in neurology and pediatric neurology",
     doc3_desc:"Specialist in neurology and pediatric neurology",
     risk_alert_desc:"Your risk level is {score}% — specialist consultation required.",
+    rec_section:"RECOMMENDATIONS",
+    rec_count:"tips",
+    disclaimer_text:"This result is for general informational purposes only and does not replace professional medical diagnosis.",
+    save_result_btn:"Save Result",
+    book_specialist_btn:"See a Specialist",
+    download_pdf_btn:"Download PDF Report",
+    alert_see_doctor:"See a Doctor!",
+    rec_bp_title:"Monitor your blood pressure",
+    rec_bp_desc:"Measure morning and evening. Target: below 130/85 mmHg.",
+    rec_bp_high_title:"Blood pressure is critically high!",
+    rec_bp_high_desc:"Seek immediate medical attention. This sharply increases stroke risk.",
+    rec_glucose_title:"Reduce sugar intake",
+    rec_glucose_desc:"Cut sweet drinks and baked goods. Normal range: 3.9–6.1 mmol/L.",
+    rec_glucose_h_title:"Glucose level is dangerously high",
+    rec_glucose_h_desc:"Consult an endocrinologist. Risk of diabetes is elevated.",
+    rec_bmi_title:"Improve your diet",
+    rec_bmi_desc:"Choose vegetables, fruits and protein-rich foods. Avoid fast food.",
+    rec_bmi_high_title:"Reduce your weight",
+    rec_bmi_high_desc:"Exercise at least 30 minutes, 3 times a week.",
+    rec_smoking_title:"Quit smoking",
+    rec_smoking_desc:"Smoking doubles your stroke risk. Quit today!",
+    rec_alcohol_title:"Reduce alcohol consumption",
+    rec_alcohol_desc:"No more than 1–2 times per week. Ideally, quit entirely.",
+    rec_exercise_none_title:"Physical activity is essential",
+    rec_exercise_none_desc:"Inactivity increases heart disease risk. Start with daily walking.",
+    rec_exercise_title:"Increase exercise intensity",
+    rec_exercise_desc:"150 minutes of moderate aerobic activity per week is recommended.",
+    rec_chol_title:"Cut fatty foods",
+    rec_chol_desc:"Fish, olive oil and nuts are better choices. Avoid fried food.",
+    rec_chol_high_title:"Cholesterol is elevated",
+    rec_chol_high_desc:"Consult your doctor. Statin therapy may be needed.",
+    rec_blood_title:"Attention: thick blood",
+    rec_blood_desc:"Thrombophilia requires haematologist monitoring. Drink more water.",
+    rec_family_title:"Family history — be cautious",
+    rec_family_desc:"With stroke in relatives, get annual cardiovascular check-ups.",
+    rec_stress_title:"Manage stress",
+    rec_stress_desc:"Meditation, breathing exercises and good sleep reduce stress levels.",
+    rec_salt_title:"Reduce salt intake",
+    rec_salt_desc:"Daily limit: under 5g. Cut back on processed meats and canned foods.",
+    rec_regular_title:"Regular health check-ups",
+    rec_regular_desc:"Annually: full blood count, ECG and blood pressure check.",
+    rec_water_title:"Daily water intake",
+    rec_water_desc:"Drink at least 1.5–2 litres of water per day to prevent blood thickening.",
+    rec_sleep_title:"Get enough sleep",
+    rec_sleep_desc:"7–8 hours of quality sleep can reduce stroke risk by up to 40%.",
     lang_name:"English",
   }
 };
