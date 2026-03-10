@@ -34,26 +34,14 @@
   --radius-lg: 24px;
 }
 
-/* ── LIGHT MODE ── */
 body.light-mode {
-  --bg: #f0f4f8;
-  --bg2: #e8eef5;
-  --bg3: #dce5ef;
-  --card: #ffffff;
-  --card2: #f5f8fb;
-  --border: rgba(0,0,0,0.08);
-  --border2: rgba(0,0,0,0.14);
-  --accent: #c41e38;
-  --accent2: #e63950;
-  --accent-glow: rgba(196,30,56,0.2);
-  --blue: #2563eb;
-  --blue-glow: rgba(37,99,235,0.2);
-  --cyan: #0891b2;
-  --green: #059669;
-  --yellow: #d97706;
-  --text: #111827;
-  --text2: #4b5a6e;
-  --text3: #8a9ab0;
+  --bg: #f0f4f8; --bg2: #e8eef5; --bg3: #dce5ef;
+  --card: #ffffff; --card2: #f5f8fb;
+  --border: rgba(0,0,0,0.08); --border2: rgba(0,0,0,0.14);
+  --accent: #c41e38; --accent2: #e63950; --accent-glow: rgba(196,30,56,0.2);
+  --blue: #2563eb; --blue-glow: rgba(37,99,235,0.2);
+  --cyan: #0891b2; --green: #059669; --yellow: #d97706;
+  --text: #111827; --text2: #4b5a6e; --text3: #8a9ab0;
 }
 body.light-mode .bg-grid { background-image: linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px); }
 body.light-mode .orb1 { background:rgba(196,30,56,0.07); }
@@ -110,16 +98,12 @@ body.light-mode .tag-blue { background:rgba(37,99,235,0.1); color:var(--blue); b
 body.light-mode .tag-green { background:rgba(5,150,105,0.1); color:var(--green); border-color:rgba(5,150,105,0.25); }
 body.light-mode .tag-yellow { background:rgba(217,119,6,0.1); color:var(--yellow); border-color:rgba(217,119,6,0.25); }
 body.light-mode .logo-icon { box-shadow:0 0 16px rgba(196,30,56,0.25); }
-body.light-mode .alcohol-card { background:var(--bg3); border-color:var(--border); }
 
-
-/* ── ONBOARDING ── */
 .ob-dot { width:8px; height:8px; border-radius:50%; background:var(--border2); transition:all 0.3s; }
 .ob-dot.active { width:24px; background:var(--accent); }
 .ob-slide { animation: fadeInUp 0.4s ease; }
 @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
 
-/* ── THEME TOGGLE ── */
 .theme-toggle-btn {
   display:flex; align-items:center; gap:8px;
   padding:8px 14px; border-radius:50px;
@@ -151,7 +135,6 @@ body { font-family:var(--font-body); background:var(--bg); color:var(--text); ov
 
 .app { display:flex; min-height:100vh; position:relative; z-index:1; }
 
-/* ── SIDEBAR ── */
 .sidebar { width:260px; background:var(--card); border-right:1px solid var(--border); position:fixed; height:100vh; left:0; top:0; display:flex; flex-direction:column; z-index:100; overflow-y:auto; }
 .sidebar-logo { padding:28px 24px 20px; border-bottom:1px solid var(--border); }
 .logo-mark { display:flex; align-items:center; gap:12px; }
@@ -174,7 +157,6 @@ body { font-family:var(--font-body); background:var(--bg); color:var(--text); ov
 
 .main { margin-left:260px; flex:1; min-height:100vh; }
 
-/* ── TOPBAR ── */
 .topbar { position:sticky; top:0; z-index:90; background:rgba(8,12,20,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; }
 .topbar-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; }
 .topbar-sub { font-size:0.8rem; color:var(--text2); margin-top:2px; }
@@ -222,7 +204,6 @@ body { font-family:var(--font-body); background:var(--bg); color:var(--text); ov
 .progress-track { height:6px; background:var(--bg3); border-radius:3px; overflow:hidden; }
 .progress-fill-bar { height:100%; border-radius:3px; transition:width 1s ease; }
 
-/* ── FORM ── */
 .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
 .form-group { margin-bottom:16px; }
 .form-label { font-size:0.82rem; font-weight:600; color:var(--text2); margin-bottom:8px; display:flex; align-items:center; gap:6px; letter-spacing:0.03em; }
@@ -230,32 +211,18 @@ body { font-family:var(--font-body); background:var(--bg); color:var(--text); ov
 .form-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
 .form-input::placeholder { color:var(--text3); }
 .form-select {
-  width:100%;
-  background-color:var(--bg3);
+  width:100%; background-color:var(--bg3);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238899bb' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 12px center;
-  background-size:16px 16px;
-  border:1.5px solid var(--border);
-  border-radius:10px;
-  padding:11px 38px 11px 14px;
-  color:var(--text);
-  font-size:0.9rem;
-  font-family:var(--font-body);
-  cursor:pointer;
-  outline:none;
-  transition:all 0.2s;
-  appearance:none;
-  -webkit-appearance:none;
-  -moz-appearance:none;
+  background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px;
+  border:1.5px solid var(--border); border-radius:10px; padding:11px 38px 11px 14px;
+  color:var(--text); font-size:0.9rem; font-family:var(--font-body); cursor:pointer; outline:none;
+  transition:all 0.2s; appearance:none; -webkit-appearance:none; -moz-appearance:none;
 }
 .form-select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(230,57,80,0.15); }
 body.light-mode .form-select {
   background-color:var(--bg3);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234b5a6e' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:right 12px center;
-  background-size:16px 16px;
+  background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px;
 }
 
 .checkbox-list { display:flex; flex-direction:column; gap:10px; }
@@ -264,47 +231,6 @@ body.light-mode .form-select {
 .checkbox-item input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent); cursor:pointer; flex-shrink:0; }
 .checkbox-item span { font-size:0.88rem; color:var(--text2); }
 
-/* ── ALCOHOL CARD (new) ── */
-.alcohol-card {
-  background: var(--bg3);
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  padding: 16px 18px;
-  margin-bottom: 16px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.alcohol-card::before {
-  content: '';
-  position: absolute; left:0; top:0; bottom:0; width:4px;
-  background: linear-gradient(to bottom, #f59e0b, #e63950);
-  border-radius: 4px 0 0 4px;
-}
-.alcohol-card:focus-within { border-color: var(--accent); }
-.alcohol-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-.alcohol-icon { width:36px; height:36px; border-radius:10px; background:rgba(245,158,11,0.15); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
-.alcohol-title { font-weight:700; font-size:0.92rem; }
-.alcohol-sub { font-size:0.75rem; color:var(--text3); margin-top:2px; }
-
-.alcohol-options { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
-.alcohol-opt {
-  display:flex; align-items:center; gap:10px;
-  padding:11px 14px; border-radius:10px;
-  border:1.5px solid var(--border);
-  cursor:pointer; transition:all 0.2s;
-  background:var(--bg);
-  -webkit-tap-highlight-color:transparent;
-}
-.alcohol-opt:hover { border-color:var(--border2); background:var(--card); }
-.alcohol-opt.selected { border-color:var(--accent); background:rgba(230,57,80,0.08); }
-.alcohol-opt.selected .ao-dot { background:var(--accent); box-shadow:0 0 8px var(--accent-glow); }
-.alcohol-opt.selected .ao-label { color:var(--text); font-weight:600; }
-.ao-dot { width:16px; height:16px; border-radius:50%; border:2px solid var(--text3); flex-shrink:0; transition:all 0.2s; }
-.ao-label { font-size:0.85rem; color:var(--text2); }
-.ao-sublabel { font-size:0.72rem; color:var(--text3); margin-top:1px; }
-
-/* ── BUTTON ── */
 .btn { display:inline-flex; align-items:center; gap:8px; padding:11px 22px; border-radius:10px; font-family:var(--font-body); font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; border:none; outline:none; -webkit-tap-highlight-color:transparent; user-select:none; }
 .btn-accent { background:var(--accent); color:white; box-shadow:0 4px 20px rgba(230,57,80,0.35); }
 .btn-accent:hover { background:var(--accent2); transform:translateY(-1px); box-shadow:0 6px 28px rgba(230,57,80,0.5); }
@@ -392,7 +318,6 @@ body.light-mode .form-select {
 .history-table tr:hover td { background:rgba(255,255,255,0.02); }
 
 .chart-wrap { position:relative; height:220px; }
-.chart-wrap-sm { position:relative; height:160px; }
 
 .modal-overlay { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
 .modal-overlay.active { display:flex; }
@@ -420,12 +345,10 @@ body.light-mode .form-select {
 
 .divider { height:1px; background:var(--border); margin:20px 0; }
 
-/* ── RESPONSIVE ── */
 @media (max-width:1100px) {
   .grid-4 { grid-template-columns:repeat(2,1fr); }
   .grid-3 { grid-template-columns:1fr 1fr; }
 }
-
 @media (max-width:900px) {
   .sidebar { transform:translateX(-260px); transition:transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index:200; box-shadow:4px 0 30px rgba(0,0,0,0.5); }
   .sidebar.open { transform:translateX(0); }
@@ -445,32 +368,22 @@ body.light-mode .form-select {
   .bottom-nav { display:flex !important; }
   .hamburger-btn { display:flex !important; }
   .stat-value { font-size:1.6rem; }
-  .stat-icon { width:36px; height:36px; font-size:1rem; margin-bottom:10px; }
   .modal-box { max-width:100%; width:100%; margin:0; border-radius:20px 20px 0 0; position:fixed; bottom:0; left:0; max-height:92vh; padding:24px 20px 32px; animation:slideUpModal 0.3s ease; }
   @keyframes slideUpModal { from{transform:translateY(100%);} to{transform:translateY(0);} }
   .modal-overlay { align-items:flex-end; }
   .profile-header-bg { padding:20px; }
   .profile-avatar-lg { width:64px; height:64px; font-size:1.6rem; }
   .profile-name-lg { font-size:1.3rem; }
-  .profile-meta { gap:8px; }
-  .vital-value { font-size:1.8rem; }
   .toast-container { bottom:80px; right:12px; left:12px; }
   .toast { min-width:unset; }
   .achievement-grid { grid-template-columns:repeat(3,1fr); }
-  .section-header { flex-direction:column; gap:12px; }
   .lab-row { flex-wrap:wrap; gap:8px; }
   .lab-row .lab-name { flex:100%; }
   .med-actions-row { flex-wrap:wrap; }
-  /* Assessment grid on mobile - single column */
   #page-assessment .grid-2 { grid-template-columns:1fr; }
-  /* Alcohol options 2 cols on mobile */
-  .alcohol-options { grid-template-columns:1fr 1fr; }
-  /* Stats 2x2 on mobile */
-  .profile-stats-grid { grid-template-columns:1fr 1fr !important; }
-  /* Doctor grid single col */
   #doctorGrid { grid-template-columns:1fr !important; }
+  .profile-stats-grid { grid-template-columns:1fr 1fr !important; }
 }
-
 @media (max-width:480px) {
   .grid-4 { grid-template-columns:1fr 1fr; }
   .achievement-grid { grid-template-columns:repeat(2,1fr); }
@@ -479,12 +392,10 @@ body.light-mode .form-select {
   .card { padding:18px; }
   .topbar-title { font-size:0.95rem; }
   .theme-toggle-btn span:last-of-type { display:none; }
-  .alcohol-options { grid-template-columns:1fr 1fr; }
   .time-slots { grid-template-columns:repeat(2,1fr); }
   .modal-box { padding:20px 16px 28px; }
 }
 
-/* ── BOTTOM NAV ── */
 .bottom-nav { display:none; position:fixed; bottom:0; left:0; right:0; height:66px; background:var(--card); border-top:1px solid var(--border2); z-index:150; align-items:center; justify-content:space-around; padding:0 4px; box-shadow:0 -8px 30px rgba(0,0,0,0.4); }
 .bn-item { display:flex; flex-direction:column; align-items:center; gap:3px; padding:8px 10px; border-radius:12px; cursor:pointer; transition:all 0.2s; color:var(--text3); font-size:0.62rem; font-weight:600; letter-spacing:0.02em; min-width:44px; -webkit-tap-highlight-color:transparent; }
 .bn-item i { font-size:1.15rem; transition:all 0.2s; }
@@ -493,10 +404,8 @@ body.light-mode .form-select {
 .bn-item.active i { color:var(--accent); text-shadow:0 0 12px var(--accent-glow); }
 .bn-sos { width:50px; height:50px; border-radius:50%; background:#ef4444; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem; box-shadow:0 4px 20px rgba(239,68,68,0.6); animation:sosPulse 2s infinite; cursor:pointer; -webkit-tap-highlight-color:transparent; }
 
-/* ── HAMBURGER ── */
 .hamburger-btn { display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:var(--card); border:1px solid var(--border); color:var(--text); cursor:pointer; -webkit-tap-highlight-color:transparent; flex-shrink:0; }
 
-/* ── ECG ── */
 .ecg-anim { position:absolute; bottom:0; left:0; right:0; height:40px; opacity:0.15; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 40'%3E%3Cpath d='M0,20 L40,20 L45,5 L50,35 L55,20 L200,20' stroke='%23e63950' stroke-width='2' fill='none'/%3E%3C/svg%3E") repeat-x; background-size:200px 40px; animation:ecgScroll 3s linear infinite; }
 @keyframes ecgScroll { to{background-position:200px 0;} }
 @keyframes wave { 0%,100%{transform:rotate(0deg);} 25%{transform:rotate(20deg);} 75%{transform:rotate(-10deg);} }
@@ -507,7 +416,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 </head>
 <body>
 
-<!-- ════════════════ ONBOARDING ════════════════ -->
+<!-- ONBOARDING -->
 <div id="onboarding" style="display:none;position:fixed;inset:0;z-index:9000;background:var(--bg);overflow:hidden;">
   <div style="max-width:500px;margin:0 auto;height:100%;display:flex;flex-direction:column;padding:40px 24px;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;">
@@ -519,65 +428,41 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <div id="onboardSlides">
-        <!-- Slide 1 -->
         <div class="ob-slide active" id="ob-0">
           <div style="font-size:5rem;text-align:center;margin-bottom:24px;">🧠</div>
           <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;text-align:center;margin-bottom:12px;line-height:1.2;">NeuroGuard<br>AI Pro ga xush kelibsiz!</div>
           <div style="text-align:center;color:var(--text2);font-size:0.95rem;line-height:1.7;">Sun'iy intellekt asosida insult va qon-tomir kasalliklarini erta aniqlash tizimi</div>
         </div>
-        <!-- Slide 2 -->
         <div class="ob-slide" id="ob-1" style="display:none;">
           <div style="font-size:5rem;text-align:center;margin-bottom:24px;">📊</div>
           <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;text-align:center;margin-bottom:12px;">AI Tahlil</div>
           <div style="text-align:center;color:var(--text2);font-size:0.95rem;line-height:1.7;">Qon bosimi, qand, BMI va boshqa ko'rsatkichlar asosida xavf darajangizni bir zumda bilib oling</div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-top:20px;">
-            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);">
-              <span style="font-size:1.3rem;">🎯</span>
-              <span style="font-size:0.88rem;color:var(--text2);">100 ballik xavf ko'rsatkichi</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);">
-              <span style="font-size:1.3rem;">💊</span>
-              <span style="font-size:0.88rem;color:var(--text2);">Dori eslatmalari va monitoring</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);">
-              <span style="font-size:1.3rem;">👨‍⚕️</span>
-              <span style="font-size:0.88rem;color:var(--text2);">Onlayn shifokor konsultatsiyasi</span>
-            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">🎯</span><span style="font-size:0.88rem;color:var(--text2);">100 ballik xavf ko'rsatkichi</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">💊</span><span style="font-size:0.88rem;color:var(--text2);">Dori eslatmalari va monitoring</span></div>
+            <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid var(--border);"><span style="font-size:1.3rem;">👨‍⚕️</span><span style="font-size:0.88rem;color:var(--text2);">Onlayn shifokor konsultatsiyasi</span></div>
           </div>
         </div>
-        <!-- Slide 3 -->
         <div class="ob-slide" id="ob-2" style="display:none;">
           <div style="font-size:5rem;text-align:center;margin-bottom:24px;">👤</div>
           <div style="font-family:var(--font-display);font-size:1.8rem;font-weight:800;text-align:center;margin-bottom:20px;">Profilingizni sozlang</div>
           <div class="form-row" style="margin-bottom:12px;">
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label">Ismingiz</label>
-              <input class="form-input" id="ob-name" placeholder="Ism">
-            </div>
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label">Yoshingiz</label>
-              <input class="form-input" type="number" id="ob-age" placeholder="45">
-            </div>
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">Ismingiz</label><input class="form-input" id="ob-name" placeholder="Ism"></div>
+            <div class="form-group" style="margin-bottom:0;"><label class="form-label">Yoshingiz</label><input class="form-input" type="number" id="ob-age" placeholder="45"></div>
           </div>
           <div class="form-group">
             <label class="form-label">Jins</label>
-            <select class="form-select" id="ob-gender">
-              <option value="male">Erkak</option>
-              <option value="female">Ayol</option>
-            </select>
+            <select class="form-select" id="ob-gender"><option value="male">Erkak</option><option value="female">Ayol</option></select>
           </div>
           <div class="form-group">
             <label class="form-label">Til</label>
             <select class="form-select" id="ob-lang" onchange="previewLang(this.value)">
-              <option value="uz">O'zbek tili</option>
-              <option value="ru">Русский</option>
-              <option value="en">English</option>
+              <option value="uz">O'zbek tili</option><option value="ru">Русский</option><option value="en">English</option>
             </select>
           </div>
         </div>
       </div>
     </div>
-    <!-- Dots -->
     <div style="display:flex;justify-content:center;gap:8px;margin-bottom:24px;">
       <div class="ob-dot active" id="dot-0"></div>
       <div class="ob-dot" id="dot-1"></div>
@@ -589,9 +474,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 
 <div class="bg-grid"></div>
 <div class="bg-orbs">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
 </div>
 
 <!-- SIDEBAR -->
@@ -599,38 +482,29 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <div class="sidebar-logo">
     <div class="logo-mark">
       <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
-      <div>
-        <div class="logo-text">NeuroGuard</div>
-        <div class="logo-sub">AI PRO v2.1</div>
-      </div>
+      <div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v2.1</div></div>
     </div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Bosh Sahifa</div>
-    <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i> Dashboard</div>
-    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> AI Tekshiruv<span class="nav-badge">Yangi</span></div>
+    <div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i> <span data-i18n="nav_dashboard">Dashboard</span></div>
+    <div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i> <span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">Yangi</span></div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Salomatlik</div>
-    <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i> Vital Ko'rsatkichlar</div>
-    <div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i> Dorilar<span class="nav-badge" id="medBadge" style="display:none;"></span></div>
-    <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')"><i class="fas fa-flask"></i> Tahlillar</div>
-    <div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i> Qaydnoma</div>
+    <div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i> <span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div>
+    <div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i> <span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none;"></span></div>
+    <div class="nav-item" id="nav-labTests" onclick="navGo('labTests')"><i class="fas fa-flask"></i> <span data-i18n="nav_labTests">Tahlillar</span></div>
+    <div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i> <span data-i18n="nav_notes">Qaydnoma</span></div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Diagnoz & Shifokor</div>
-    <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i> Konsultatsiya</div>
-    <div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i> Tarix & Diagramma</div>
-  </div>
-  <div class="nav-section">
-    <div class="nav-label">Kengaytmalar</div>
-    <div class="nav-item" id="nav-symptoms" onclick="navGo('symptoms')"><i class="fas fa-virus"></i> Simptom Tekshiruv</div>
-    <div class="nav-item" id="nav-sleep" onclick="navGo('sleep')"><i class="fas fa-moon"></i> Uyqu Monitor</div>
-    <div class="nav-item" id="nav-nutrition" onclick="navGo('nutrition')"><i class="fas fa-apple-alt"></i> Ovqatlanish</div>
+    <div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i> <span data-i18n="nav_appointments">Konsultatsiya</span></div>
+    <div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i> <span data-i18n="nav_history">Tarix & Diagramma</span></div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Sozlamalar</div>
-    <div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i> Profilim</div>
+    <div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i> <span data-i18n="nav_profile">Profilim</span></div>
   </div>
   <div class="sidebar-profile">
     <div class="profile-card" onclick="navGo('profile')">
@@ -645,7 +519,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
 
 <!-- MAIN -->
 <div class="main" id="mainContent">
-  <!-- TOPBAR -->
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="hamburger-btn" id="hamburgerBtn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
@@ -667,7 +540,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
   </div>
 
-  <!-- DASHBOARD PAGE -->
+  <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
     <div class="section-header">
       <div class="section-title" style="font-size:2.2rem;letter-spacing:-0.02em;line-height:1.1;"><span data-i18n="welcome">Xush kelibsiz!</span> <span style="display:inline-block;animation:wave 1.5s infinite;">👋</span></div>
@@ -740,10 +613,10 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
   </div>
 
-  <!-- ASSESSMENT PAGE -->
+  <!-- ASSESSMENT -->
   <div class="page" id="page-assessment">
     <div class="section-header">
-      <div class="section-title"><i class="fas fa-robot" style="color:var(--accent);"></i><span data-i18n="assessment_title">AI Insult Xavfi Tahlili</span></div>
+      <div class="section-title"><i class="fas fa-robot" style="color:var(--accent);"></i> <span data-i18n="assessment_title">AI Insult Xavfi Tahlili</span></div>
       <div class="section-desc"><span data-i18n="assessment_desc">Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi</span></div>
     </div>
     <div class="grid-2">
@@ -755,77 +628,42 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
         <div class="progress-track" style="margin-bottom:24px;">
           <div class="progress-fill-bar" id="formProgressBar" style="width:0%;background:var(--accent);"></div>
         </div>
-
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-tint" style="color:var(--accent);"></i> <span data-i18n="systolic">Sistolik qon bosimi</span></label>
-            <input class="form-input" type="number" id="systolic" placeholder="120" min="80" max="220" oninput="updateFormProgress()">
-          </div>
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-tint" style="color:var(--blue);"></i> <span data-i18n="diastolic">Diastolik</span></label>
-            <input class="form-input" type="number" id="diastolic" placeholder="80" min="50" max="130" oninput="updateFormProgress()">
-          </div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-tint" style="color:var(--accent);"></i> <span data-i18n="systolic">Sistolik qon bosimi</span></label><input class="form-input" type="number" id="systolic" placeholder="120" min="80" max="220" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-tint" style="color:var(--blue);"></i> <span data-i18n="diastolic">Diastolik</span></label><input class="form-input" type="number" id="diastolic" placeholder="80" min="50" max="130" oninput="updateFormProgress()"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-heartbeat" style="color:var(--accent);"></i> <span data-i18n="heartrate">Yurak urishi (bpm)</span></label>
-            <input class="form-input" type="number" id="heartrate" placeholder="72" min="40" max="200" oninput="updateFormProgress()">
-          </div>
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-candy-cane" style="color:var(--yellow);"></i> <span data-i18n="glucose_mmol">Qand (mmol/L)</span></label>
-            <input class="form-input" type="number" id="glucose" placeholder="5.5" step="0.1" min="2" max="30" oninput="updateFormProgress()">
-          </div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-heartbeat" style="color:var(--accent);"></i> <span data-i18n="heartrate">Yurak urishi (bpm)</span></label><input class="form-input" type="number" id="heartrate" placeholder="72" min="40" max="200" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-candy-cane" style="color:var(--yellow);"></i> <span data-i18n="glucose_mmol">Qand (mmol/L)</span></label><input class="form-input" type="number" id="glucose" placeholder="5.5" step="0.1" min="2" max="30" oninput="updateFormProgress()"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-ruler-vertical" style="color:var(--cyan);"></i> <span data-i18n="height_cm">Bo'y (sm)</span></label>
-            <input class="form-input" type="number" id="height" placeholder="170" min="120" max="230" oninput="updateFormProgress()">
-          </div>
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-weight" style="color:var(--green);"></i> <span data-i18n="weight_kg">Vazn (kg)</span></label>
-            <input class="form-input" type="number" id="weight" placeholder="70" min="30" max="250" oninput="updateFormProgress()">
-          </div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-ruler-vertical" style="color:var(--cyan);"></i> <span data-i18n="height_cm">Bo'y (sm)</span></label><input class="form-input" type="number" id="height" placeholder="170" min="120" max="230" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-weight" style="color:var(--green);"></i> <span data-i18n="weight_kg">Vazn (kg)</span></label><input class="form-input" type="number" id="weight" placeholder="70" min="30" max="250" oninput="updateFormProgress()"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-birthday-cake"></i> <span data-i18n="age_label">Yosh</span></label>
-            <input class="form-input" type="number" id="age" placeholder="45" min="18" max="110" oninput="updateFormProgress()">
-          </div>
-          <div class="form-group">
-            <label class="form-label"><i class="fas fa-vials"></i> <span data-i18n="cholesterol">Xolesterin (mmol/L)</span></label>
-            <input class="form-input" type="number" id="cholesterol" placeholder="5.0" step="0.1" min="2" max="12" oninput="updateFormProgress()">
-          </div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-birthday-cake"></i> <span data-i18n="age_label">Yosh</span></label><input class="form-input" type="number" id="age" placeholder="45" min="18" max="110" oninput="updateFormProgress()"></div>
+          <div class="form-group"><label class="form-label"><i class="fas fa-vials"></i> <span data-i18n="cholesterol">Xolesterin (mmol/L)</span></label><input class="form-input" type="number" id="cholesterol" placeholder="5.0" step="0.1" min="2" max="12" oninput="updateFormProgress()"></div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label class="form-label"><i class="fas fa-smoking"></i> <span data-i18n="smoking_q">Chekasizmi?</span></label>
             <select class="form-select" id="smoking">
-              <option value="no">Yo'q</option>
-              <option value="ex">Tark etdim</option>
-              <option value="yes">Ha</option>
+              <option value="no">Yo'q</option><option value="ex">Tark etdim</option><option value="yes">Ha</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label"><i class="fas fa-running"></i> <span data-i18n="exercise_q">Jismoniy faollik</span></label>
             <select class="form-select" id="exercise">
-              <option value="none">Umuman yo'q</option>
-              <option value="light">1-2 kun/hafta</option>
-              <option value="moderate">3-4 kun/hafta</option>
-              <option value="active">5+ kun/hafta</option>
+              <option value="none">Umuman yo'q</option><option value="light">1-2 kun/hafta</option><option value="moderate">3-4 kun/hafta</option><option value="active">5+ kun/hafta</option>
             </select>
           </div>
         </div>
-
         <div class="form-group">
           <label class="form-label"><i class="fas fa-wine-glass" style="color:var(--yellow);"></i> <span data-i18n="alcohol_q">Alkogol iste'mol qilasizmi?</span></label>
           <select class="form-select" id="alcohol">
-            <option value="none">Yo'q</option>
-            <option value="rare">Kamdan-kam (oyda 1-2 marta)</option>
-            <option value="often">Tez-tez (haftada 1-2 marta)</option>
-            <option value="daily">Har kuni</option>
+            <option value="none">Yo'q</option><option value="rare">Kamdan-kam (oyda 1-2 marta)</option><option value="often">Tez-tez (haftada 1-2 marta)</option><option value="daily">Har kuni</option>
           </select>
         </div>
-
         <div class="form-group">
           <label class="form-label"><i class="fas fa-brain" style="color:var(--accent);"></i> <span data-i18n="complaints">Shikoyatlar va xavf omillari</span></label>
           <div class="checkbox-list">
@@ -841,18 +679,13 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
             <label class="checkbox-item"><input type="checkbox" id="familyHistory"><span><span data-i18n="c_familyHistory">Oilada insult bo'lgan</span></span></label>
           </div>
         </div>
-
         <button class="btn btn-accent btn-full btn-lg" onclick="analyzeRisk()" style="margin-top:8px;">
           <i class="fas fa-brain"></i> <span data-i18n="ai_analyze">AI Tahlil Qilsin</span>
         </button>
       </div>
-
-      <!-- Result panel -->
       <div id="resultPanel">
         <div class="card" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;">
-          <div style="width:100px;height:100px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid var(--border);">
-            <i class="fas fa-robot" style="font-size:2.5rem;color:var(--text3);"></i>
-          </div>
+          <div style="width:100px;height:100px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid var(--border);"><i class="fas fa-robot" style="font-size:2.5rem;color:var(--text3);"></i></div>
           <div style="font-size:1.1rem;font-weight:600;margin-bottom:8px;color:var(--text2);"><span data-i18n="result_ready">Tahlil uchun tayyor</span></div>
           <div style="font-size:0.85rem;color:var(--text3);max-width:250px;line-height:1.6;"><span data-i18n="result_hint">Chap tomondagi ma'lumotlarni to'ldiring va AI tahlil tugmasini bosing</span></div>
         </div>
@@ -860,7 +693,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
   </div>
 
-  <!-- VITALS PAGE -->
+  <!-- VITALS -->
   <div class="page" id="page-vitals">
     <div class="section-header">
       <div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent);"></i> Vital Ko'rsatkichlar</div>
@@ -868,41 +701,41 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
     <div class="grid-4" style="margin-bottom:24px;">
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-heart"></i> <span data-i18n="v_bp">QONBOSIM</span></div>
+        <div class="vital-label"><i class="fas fa-heart"></i> QONBOSIM</div>
         <div class="vital-value" style="color:var(--accent);" id="vBP">—/—</div>
         <div class="vital-unit">mmHg</div>
         <svg class="ecg-line" viewBox="0 0 300 48"><path d="M0,24 L60,24 L70,10 L80,38 L90,24 L300,24" stroke="var(--accent)" stroke-width="2" fill="none"/></svg>
         <div class="ecg-anim"></div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-heartbeat"></i> <span data-i18n="v_hr">YURAK URISHI</span></div>
+        <div class="vital-label"><i class="fas fa-heartbeat"></i> YURAK URISHI</div>
         <div class="vital-value" style="color:var(--blue);" id="vHR">—</div>
         <div class="vital-unit">bpm</div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-droplet"></i> <span data-i18n="v_glucose">QAND</span></div>
+        <div class="vital-label"><i class="fas fa-droplet"></i> QAND</div>
         <div class="vital-value" style="color:var(--yellow);" id="vGlucose">—</div>
         <div class="vital-unit">mmol/L</div>
       </div>
       <div class="vital-monitor">
-        <div class="vital-label"><i class="fas fa-weight"></i> <span data-i18n="v_bmi">BMI</span></div>
+        <div class="vital-label"><i class="fas fa-weight"></i> BMI</div>
         <div class="vital-value" style="color:var(--cyan);" id="vBMI">—</div>
         <div class="vital-unit">kg/m²</div>
       </div>
     </div>
     <div class="grid-2">
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><span data-i18n="bp_dynamics">Qon Bosimi Dinamikasi</span></div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Qon Bosimi Dinamikasi</div>
         <div class="chart-wrap"><canvas id="vitBPChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><span data-i18n="risk_dynamics">Xavf Ko'rsatkichi Dynamikasi</span></div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Xavf Ko'rsatkichi Dinamikasi</div>
         <div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div>
       </div>
     </div>
   </div>
 
-  <!-- MEDICATIONS PAGE -->
+  <!-- MEDICATIONS -->
   <div class="page" id="page-medications">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
@@ -914,7 +747,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div id="medList"></div>
   </div>
 
-  <!-- LAB TESTS PAGE -->
+  <!-- LAB TESTS -->
   <div class="page" id="page-labTests">
     <div class="section-header">
       <div class="section-title"><i class="fas fa-flask" style="color:var(--blue);"></i> Laboratoriya Tahlillari</div>
@@ -935,7 +768,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
   </div>
 
-  <!-- NOTES PAGE -->
+  <!-- NOTES -->
   <div class="page" id="page-notes">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
       <div>
@@ -947,7 +780,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q. Birinchi qaydnomangizni yozing!</div></div>
   </div>
 
-  <!-- APPOINTMENTS PAGE -->
+  <!-- APPOINTMENTS -->
   <div class="page" id="page-appointments">
     <div class="section-header">
       <div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green);"></i> Shifokor Konsultatsiyasi</div>
@@ -962,7 +795,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div class="grid-3" id="doctorGrid"></div>
   </div>
 
-  <!-- HISTORY PAGE -->
+  <!-- HISTORY -->
   <div class="page" id="page-history">
     <div class="section-header">
       <div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue);"></i> Tarix & Diagrammalar</div>
@@ -970,23 +803,23 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     </div>
     <div class="card" style="margin-bottom:24px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-        <div class="section-title" style="font-size:1rem;"><span data-i18n="risk_hist">Xavf Ko'rsatkichi Tarixi</span></div>
+        <div class="section-title" style="font-size:1rem;">Xavf Ko'rsatkichi Tarixi</div>
         <button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.8rem;"><i class="fas fa-trash"></i> Tozalash</button>
       </div>
       <div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><span data-i18n="all_checks">Barcha Tekshiruvlar</span></div>
+      <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div>
       <div style="overflow-x:auto;">
         <table class="history-table" id="historyTable">
-          <thead><tr><th><span data-i18n="col_date">Sana</span></th><th>Qon Bosimi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
+          <thead><tr><th>Sana</th><th>Qon Bosimi</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead>
           <tbody id="historyBody"><tr><td colspan="6" style="text-align:center;color:var(--text3);padding:30px;">Tahlillar yo'q</td></tr></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- PROFILE PAGE -->
+  <!-- PROFILE -->
   <div class="page" id="page-profile">
     <div class="section-header">
       <div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent);"></i> <span data-i18n="prof_title">Mening Profilim</span></div>
@@ -1007,7 +840,7 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-user"></i> Shaxsiy Ma'lumotlar</div>
-        <div id="profileDetails"><div style="color:var(--text3);font-size:0.85rem;"><span data-i18n="not_filled">Ma'lumotlar to'ldirilmagan</span>. Profilni tahrirlang.</div></div>
+        <div id="profileDetails"><div style="color:var(--text3);font-size:0.85rem;">Ma'lumotlar to'ldirilmagan. Profilni tahrirlang.</div></div>
       </div>
       <div class="card">
         <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i> <span data-i18n="achievements">Yutuqlar</span></div>
@@ -1017,74 +850,46 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
     <div class="card">
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-bar"></i> <span data-i18n="stats_title">Statistika</span></div>
       <div class="grid-4 profile-stats-grid">
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Tahlil soni</div>
-        </div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="statMeds">0</div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;"><span data-i18n="nav_medications">Dorilar</span></div>
-        </div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Qaydnomalar</div>
-        </div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div>
-          <div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Ball</div>
-        </div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--accent);" id="statAnalyses">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Tahlil soni</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="statMeds">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Dorilar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--green);" id="statNotes">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Qaydnomalar</div></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="statPoints">0</div><div style="font-size:0.78rem;color:var(--text2);margin-top:4px;">Ball</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SIDEBAR BACKDROP -->
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottomNav">
-  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span><span data-i18n="bn_home">Bosh</span></span></div>
-  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span><span data-i18n="bn_check">Tekshiruv</span></span></div>
+  <div class="bn-item active" id="bn-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span>Bosh</span></div>
+  <div class="bn-item" id="bn-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span>Tekshiruv</span></div>
   <div class="bn-sos" onclick="openSOS()"><i class="fas fa-ambulance"></i></div>
   <div class="bn-item" id="bn-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span>Dorilar</span></div>
-  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span><span data-i18n="bn_menu">Menu</span></span></div>
+  <div class="bn-item" id="bn-more" onclick="toggleSidebar()"><i class="fas fa-bars"></i><span>Menu</span></div>
 </div>
 
 <!-- MODALS -->
-
-<!-- SOS Modal -->
 <div class="modal-overlay" id="sosModal">
   <div class="modal-box" style="border-color:rgba(239,68,68,0.5);max-width:500px;">
     <button class="modal-close" onclick="closeSOS()"><i class="fas fa-times"></i></button>
     <div style="text-align:center;margin-bottom:20px;">
       <div style="width:70px;height:70px;border-radius:50%;background:rgba(239,68,68,0.2);border:2px solid rgba(239,68,68,0.5);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 12px;animation:sosPulse 1.5s infinite;">🚨</div>
-      <div class="modal-title" style="color:#ef4444;"><span data-i18n="sos_title">FAVQULODDA YORDAM</span></div>
+      <div class="modal-title" style="color:#ef4444;">FAVQULODDA YORDAM</div>
       <div style="font-size:0.9rem;color:var(--text2);">FAST testini o'tkazing</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
-      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
-        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;">
-        <div><strong style="color:#ef4444;">F</strong> — Yuz bir tomonlama og'ayapti</div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
-        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;">
-        <div><strong style="color:#ef4444;">A</strong> — Qo'llarni ko'tarib bo'lmayapti</div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
-        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;">
-        <div><strong style="color:#ef4444;">S</strong> — Nutq buzilgan, chalkash</div>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);">
-        <input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;">
-        <div><strong style="color:#ef4444;">T</strong> — VAQT muhim! Zudlik bilan harakat</div>
-      </label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">F</strong> — Yuz bir tomonlama og'ayapti</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">A</strong> — Qo'llarni ko'tarib bo'lmayapti</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">S</strong> — Nutq buzilgan, chalkash</div></label>
+      <label style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg3);border-radius:10px;cursor:pointer;border:1px solid var(--border);"><input type="checkbox" style="width:20px;height:20px;accent-color:#ef4444;"><div><strong style="color:#ef4444;">T</strong> — VAQT muhim! Zudlik bilan harakat</div></label>
     </div>
     <button class="btn btn-full btn-lg" style="background:#ef4444;color:white;border:none;cursor:pointer;margin-bottom:10px;box-shadow:0 4px 20px rgba(239,68,68,0.5);" onclick="window.location.href='tel:103'"><i class="fas fa-phone"></i> 103 — Tez Yordam Chaqirish</button>
     <button class="btn btn-ghost btn-full" onclick="closeSOS()">Yopish</button>
   </div>
 </div>
 
-<!-- Add Medication Modal -->
 <div class="modal-overlay" id="addMedModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button>
@@ -1106,7 +911,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   </div>
 </div>
 
-<!-- Add Note Modal -->
 <div class="modal-overlay" id="addNoteModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button>
@@ -1122,7 +926,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   </div>
 </div>
 
-<!-- Add Lab Result Modal -->
 <div class="modal-overlay" id="addLabModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('addLabModal').classList.remove('active')"><i class="fas fa-times"></i></button>
@@ -1139,7 +942,6 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   </div>
 </div>
 
-<!-- Edit Profile Modal -->
 <div class="modal-overlay" id="editProfileModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button>
@@ -1161,229 +963,32 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   </div>
 </div>
 
-<!-- Doctor Booking Modal -->
 <div class="modal-overlay" id="bookModal">
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:4px;" id="bookDocName">Shifokor</div>
     <div style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;" id="bookDocSpec"></div>
-    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i><span data-i18n="book_time">Vaqt tanlang:</span></div>
+    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i>Vaqt tanlang:</div>
     <div class="time-slots" id="bookSlots"></div>
     <div class="form-group" style="margin-top:16px;">
-      <label class="form-label"><i class="fas fa-phone" style="color:var(--green);"></i> <span data-i18n="phone_label">Telefon raqamingiz *</span></label>
-      <input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00" style="letter-spacing:0.03em;">
+      <label class="form-label"><i class="fas fa-phone" style="color:var(--green);"></i> Telefon raqamingiz *</label>
+      <input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00">
       <div style="font-size:0.75rem;color:var(--text3);margin-top:5px;"><i class="fas fa-info-circle"></i> Shifokor siz bilan bog'lanish uchun ishlatiladi</div>
     </div>
     <div class="form-group">
-      <label class="form-label"><i class="fas fa-comment-medical" style="color:var(--blue);"></i> <span data-i18n="complaint_label">Muammo / Shikoyat</span></label>
+      <label class="form-label"><i class="fas fa-comment-medical" style="color:var(--blue);"></i> Muammo / Shikoyat</label>
       <textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea>
     </div>
     <div id="tgSendStatus" style="display:none;padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;"></div>
     <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;" onclick="confirmBooking()" id="bookSubmitBtn">
-      <i class="fas fa-calendar-check"></i> <span data-i18n="book_btn">Band Qilish</span>
+      <i class="fas fa-calendar-check"></i> Band Qilish
     </button>
   </div>
 </div>
 
-
-<!-- ════════════════ SYMPTOMS PAGE ════════════════ -->
-<div class="page" id="page-symptoms">
-  <div class="section-header">
-    <div class="section-title"><i class="fas fa-virus" style="color:var(--accent);"></i> Kasallik Simptom Tekshiruvi</div>
-    <div class="section-desc">Belgilaringizni tanlang — AI mumkin bo'lgan sabablarni ko'rsatadi</div>
-  </div>
-  <div class="grid-2">
-    <div class="card">
-      <div style="font-size:0.82rem;color:var(--text2);margin-bottom:16px;padding:10px 14px;background:rgba(230,57,80,0.07);border-radius:10px;border-left:3px solid var(--accent);">
-        ⚠️ Bu vosita faqat ma'lumot berish uchun. Tibbiy diagnoz emas.
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-        <div class="tag tag-red">Belgilar</div>
-        <span style="font-size:0.8rem;color:var(--text3);" id="symptomCount">0 ta tanlangan</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="symptomGrid">
-      </div>
-      <button class="btn btn-accent btn-full" style="margin-top:20px;" onclick="checkSymptoms()">
-        <i class="fas fa-search"></i> Tekshirish
-      </button>
-    </div>
-    <div id="symptomResult">
-      <div class="card" style="min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-        <i class="fas fa-virus" style="font-size:3rem;color:var(--text3);margin-bottom:16px;opacity:0.3;"></i>
-        <div style="color:var(--text2);font-size:0.9rem;">Belgilarni tanlang va tekshirish bosing</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ SLEEP PAGE ════════════════ -->
-<div class="page" id="page-sleep">
-  <div class="section-header">
-    <div class="section-title"><i class="fas fa-moon" style="color:var(--blue);"></i> Uyqu Monitoringi</div>
-    <div class="section-desc">Uyqu sifatingizni kuzating va yaxshilang</div>
-  </div>
-  <div class="grid-2" style="margin-bottom:24px;">
-    <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-plus-circle" style="color:var(--blue);"></i> Bugungi Uyqu</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label"><i class="fas fa-bed" style="color:var(--blue);"></i> Uxlash vaqti</label>
-          <input class="form-input" type="time" id="sleepStart" value="23:00">
-        </div>
-        <div class="form-group">
-          <label class="form-label"><i class="fas fa-sun" style="color:var(--yellow);"></i> Uyg'onish vaqti</label>
-          <input class="form-input" type="time" id="sleepEnd" value="07:00">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label"><i class="fas fa-star" style="color:var(--yellow);"></i> Uyqu sifati</label>
-        <div style="display:flex;gap:8px;margin-top:4px;" id="sleepQualityBtns">
-          <button class="btn btn-ghost" onclick="setSleepQuality(1,this)" style="flex:1;padding:8px;font-size:1.2rem;">😞</button>
-          <button class="btn btn-ghost" onclick="setSleepQuality(2,this)" style="flex:1;padding:8px;font-size:1.2rem;">😐</button>
-          <button class="btn btn-ghost" onclick="setSleepQuality(3,this)" style="flex:1;padding:8px;font-size:1.2rem;">🙂</button>
-          <button class="btn btn-ghost" onclick="setSleepQuality(4,this)" style="flex:1;padding:8px;font-size:1.2rem;">😊</button>
-          <button class="btn btn-ghost" onclick="setSleepQuality(5,this)" style="flex:1;padding:8px;font-size:1.2rem;">😄</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Izoh (ixtiyoriy)</label>
-        <input class="form-input" id="sleepNote" placeholder="Tush ko'rdim, tez uyg'ondim...">
-      </div>
-      <button class="btn btn-blue btn-full" onclick="saveSleep()"><i class="fas fa-save"></i> Saqlash</button>
-    </div>
-    <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Uyqu Statistikasi</div>
-      <div class="grid-2" style="gap:12px;margin-bottom:16px;">
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--blue);" id="avgSleep">—</div>
-          <div style="font-size:0.75rem;color:var(--text2);margin-top:4px;">O'rtacha soat</div>
-        </div>
-        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;">
-          <div style="font-family:var(--font-display);font-size:2rem;font-weight:800;color:var(--yellow);" id="avgQuality">—</div>
-          <div style="font-size:0.75rem;color:var(--text2);margin-top:4px;">O'rtacha sifat</div>
-        </div>
-      </div>
-      <div class="chart-wrap"><canvas id="sleepChart"></canvas></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Uyqu Tarixi</div>
-    <div id="sleepHistory"><div style="text-align:center;color:var(--text3);padding:30px;">Hali uyqu ma'lumoti yo'q</div></div>
-  </div>
-</div>
-
-<!-- ════════════════ NUTRITION PAGE ════════════════ -->
-<div class="page" id="page-nutrition">
-  <div class="section-header">
-    <div class="section-title"><i class="fas fa-apple-alt" style="color:var(--green);"></i> Ovqatlanish & Kaloriya</div>
-    <div class="section-desc">Kundalik kaloriya va ozuqa moddalarini kuzating</div>
-  </div>
-  <div class="grid-4" style="margin-bottom:24px;">
-    <div class="stat-card">
-      <div class="stat-glow" style="background:rgba(16,185,129,0.6);"></div>
-      <div class="stat-icon" style="background:rgba(16,185,129,0.15);color:var(--green);"><i class="fas fa-fire"></i></div>
-      <div class="stat-value" id="totalCalories">0</div>
-      <div class="stat-label">Bugungi kaloriya</div>
-      <div class="stat-change" id="calorieGoalStatus"><span style="color:var(--text3);">Maqsad: 2000 kcal</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-glow" style="background:rgba(59,130,246,0.6);"></div>
-      <div class="stat-icon" style="background:rgba(59,130,246,0.15);color:var(--blue);"><i class="fas fa-drumstick-bite"></i></div>
-      <div class="stat-value" id="totalProtein">0g</div>
-      <div class="stat-label">Oqsil</div>
-      <div class="stat-change"><span style="color:var(--text3);">Maqsad: 60g</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-glow" style="background:rgba(245,158,11,0.6);"></div>
-      <div class="stat-icon" style="background:rgba(245,158,11,0.15);color:var(--yellow);"><i class="fas fa-bread-slice"></i></div>
-      <div class="stat-value" id="totalCarbs">0g</div>
-      <div class="stat-label">Uglevodlar</div>
-      <div class="stat-change"><span style="color:var(--text3);">Maqsad: 250g</span></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-glow" style="background:rgba(230,57,80,0.6);"></div>
-      <div class="stat-icon" style="background:rgba(230,57,80,0.15);color:var(--accent);"><i class="fas fa-oil-can"></i></div>
-      <div class="stat-value" id="totalFat">0g</div>
-      <div class="stat-label">Yog'lar</div>
-      <div class="stat-change"><span style="color:var(--text3);">Maqsad: 65g</span></div>
-    </div>
-  </div>
-  <div class="grid-2" style="margin-bottom:24px;">
-    <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-plus"></i> Ovqat Qo'shish</div>
-      <div class="form-group">
-        <label class="form-label">Ovqat nomi</label>
-        <input class="form-input" id="foodName" placeholder="Masalan: Palov, Non, Tuxum...">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label"><i class="fas fa-fire" style="color:var(--accent);"></i> Kaloriya (kcal)</label>
-          <input class="form-input" type="number" id="foodCal" placeholder="300">
-        </div>
-        <div class="form-group">
-          <label class="form-label"><i class="fas fa-weight" style="color:var(--blue);"></i> Miqdor (g/ml)</label>
-          <input class="form-input" type="number" id="foodAmount" placeholder="100">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Oqsil (g)</label>
-          <input class="form-input" type="number" id="foodProtein" placeholder="10">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Uglevod (g)</label>
-          <input class="form-input" type="number" id="foodCarbs" placeholder="40">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Yog' (g)</label>
-          <input class="form-input" type="number" id="foodFat" placeholder="5">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Vaqt</label>
-          <select class="form-select" id="foodMeal">
-            <option value="breakfast">Nonushta</option>
-            <option value="lunch">Tushlik</option>
-            <option value="dinner">Kechki ovqat</option>
-            <option value="snack">Gazak</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn btn-success btn-full" onclick="addFood()"><i class="fas fa-plus"></i> Qo'shish</button>
-      <div style="margin-top:16px;">
-        <div style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;font-family:var(--font-mono);letter-spacing:0.06em;">TEZKOR QO'SHISH</div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;" id="quickFoods"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="section-title" style="font-size:1rem;margin-bottom:16px;">Kaloriya Grafigi</div>
-      <div class="chart-wrap"><canvas id="nutritionChart"></canvas></div>
-      <div style="margin-top:16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <span style="font-size:0.82rem;color:var(--text2);">Kunlik progress</span>
-          <span style="font-size:0.82rem;font-family:var(--font-mono);color:var(--green);" id="calProgress">0 / 2000 kcal</span>
-        </div>
-        <div class="progress-track" style="height:10px;">
-          <div class="progress-fill-bar" id="calProgressBar" style="width:0%;background:var(--green);transition:width 0.5s;"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-      <div class="section-title" style="font-size:1rem;">Bugungi Ovqatlar</div>
-      <button class="btn btn-danger" onclick="clearFoods()" style="padding:6px 12px;font-size:0.8rem;"><i class="fas fa-trash"></i> Tozalash</button>
-    </div>
-    <div id="foodList"><div style="text-align:center;color:var(--text3);padding:30px;"><i class="fas fa-utensils" style="font-size:2rem;opacity:0.3;margin-bottom:10px;display:block;"></i>Hali ovqat qo'shilmagan</div></div>
-  </div>
-</div>
-
-<!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-/* ====================== STATE ====================== */
 const state = {
   history: JSON.parse(localStorage.getItem('ng_history') || '[]'),
   medications: JSON.parse(localStorage.getItem('ng_medications') || '[]'),
@@ -1399,7 +1004,6 @@ function save(key) {
   localStorage.setItem(map[key], JSON.stringify(state[key]));
 }
 
-/* ====================== TOAST ====================== */
 function toast(msg, type='success') {
   const icons = {success:'✅',warn:'⚠️',err:'❌',info:'ℹ️'};
   const el = document.createElement('div');
@@ -1409,33 +1013,12 @@ function toast(msg, type='success') {
   setTimeout(() => el.remove(), 4000);
 }
 
-/* ====================== ALCOHOL SELECTION ====================== */
-
-
-/* ====================== NAVIGATION ====================== */
-const pages = {
-  dashboard:    {title:'Dashboard',             sub:"Umumiy holat ko'rinishi"},
-  assessment:   {title:'AI Tekshiruv',          sub:'Insult xavfini aniqlash'},
-  vitals:       {title:"Vital Ko'rsatkichlar",  sub:'Real vaqt monitoringi'},
-  medications:  {title:'Dorilar',               sub:'Kundalik dori jadvalingiz'},
-  labTests:     {title:'Laboratoriya',          sub:'Tahlil natijalari'},
-  notes:        {title:'Qaydnomalar',           sub:'Tibbiy qaydnomalar'},
-  appointments: {title:'Konsultatsiya',         sub:'Shifokor bilan uchrashish'},
-  history:      {title:'Tarix & Diagrammalar',  sub:'Barcha tekshiruvlar'},
-  profile:      {title:'Mening Profilim',       sub:"Shaxsiy ma'lumotlar"},
-  symptoms:     {title:'Simptom Tekshiruv',      sub:'Kasallik belgilarini tekshirish'},
-  sleep:        {title:'Uyqu Monitoringi',        sub:'Uyqu sifati va tahlil'},
-  nutrition:    {title:'Ovqatlanish & Kaloriya',  sub:'Kundalik oziqlanish hisobi'}
-};
-
 function toggleSidebar() {
   const sb = document.getElementById('sidebar');
   const bd = document.getElementById('sidebarBackdrop');
-  const isOpen = sb.classList.contains('open');
-  if (isOpen) { sb.classList.remove('open'); bd.classList.remove('show'); }
+  if (sb.classList.contains('open')) { sb.classList.remove('open'); bd.classList.remove('show'); }
   else { sb.classList.add('open'); bd.classList.add('show'); }
 }
-
 function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarBackdrop').classList.remove('show');
@@ -1456,7 +1039,7 @@ function showPage(id) {
   if (pageEl) pageEl.classList.add('active');
   const navEl = document.getElementById('nav-' + id);
   if (navEl) navEl.classList.add('active');
-  document.getElementById('topbarTitle').textContent = t('topbar_' + id) || t('nav_' + id) || id;
+  document.getElementById('topbarTitle').textContent = t('topbar_' + id) || id;
   document.getElementById('topbarSub').textContent = t('topbar_sub_' + id) || '';
   state.currentPage = id;
   if (id === 'vitals')       renderVitals();
@@ -1467,27 +1050,20 @@ function showPage(id) {
   if (id === 'history')      renderHistory();
   if (id === 'profile')      renderProfile();
   if (id === 'dashboard')    renderDashboard();
-  if (id === 'symptoms')     renderSymptoms();
-  if (id === 'sleep')        renderSleep();
-  if (id === 'nutrition')    renderNutrition();
   window.scrollTo(0, 0);
 }
 
-/* ====================== THEME ====================== */
 function applyTheme(mode) {
   const icon = document.getElementById('themeIcon');
   if (mode === 'light') { document.body.classList.add('light-mode'); if (icon) icon.textContent = '☀️'; }
   else { document.body.classList.remove('light-mode'); if (icon) icon.textContent = '🌙'; }
   localStorage.setItem('ng_theme', mode);
 }
-
 function toggleDark() {
-  const isLight = document.body.classList.contains('light-mode');
-  if (isLight) { applyTheme('dark'); toast('🌙 Kechki rejim yoqildi', 'info'); }
-  else { applyTheme('light'); toast('☀️ Kunduzgi rejim yoqildi', 'info'); }
+  if (document.body.classList.contains('light-mode')) { applyTheme('dark'); toast('🌙 Kechki rejim', 'info'); }
+  else { applyTheme('light'); toast('☀️ Kunduzgi rejim', 'info'); }
 }
 
-/* ====================== FORM PROGRESS ====================== */
 function updateFormProgress() {
   const fields = ['systolic','diastolic','heartrate','glucose','height','weight','age'];
   const filled = fields.filter(f => document.getElementById(f)?.value).length;
@@ -1496,7 +1072,6 @@ function updateFormProgress() {
   document.getElementById('formProgress').textContent = pct + "% to'ldirildi";
 }
 
-/* ====================== AI ANALYSIS ====================== */
 function analyzeRisk() {
   const v = (id) => parseFloat(document.getElementById(id)?.value);
   const s = v('systolic'), d = v('diastolic'), hr = v('heartrate');
@@ -1507,8 +1082,7 @@ function analyzeRisk() {
   const alcohol = document.getElementById('alcohol').value;
 
   if (!s || !d || !hr || !gl || !h || !w || !age) {
-    toast("Barcha majburiy maydonlarni to'ldiring!", 'err');
-    return;
+    toast("Barcha majburiy maydonlarni to'ldiring!", 'err'); return;
   }
 
   const panel = document.getElementById('resultPanel');
@@ -1519,66 +1093,54 @@ function analyzeRisk() {
     let score = 0;
     const factors = [];
 
-    // Blood pressure
     if (s > 140 || d > 90) { score += 25; factors.push({n:'Qon Bosimi', s:'bad', t:s+'/'+d+' — Yuqori'}); }
     else if (s > 130 || d > 85) { score += 12; factors.push({n:'Qon Bosimi', s:'warn', t:s+'/'+d+' — Chegaraviy'}); }
     else { factors.push({n:'Qon Bosimi', s:'good', t:s+'/'+d+' — Normal'}); }
 
-    // Heart rate
     if (hr > 100 || hr < 55) { score += 12; factors.push({n:'Yurak Urishi', s:'warn', t:hr+' bpm — Beqaror'}); }
     else { factors.push({n:'Yurak Urishi', s:'good', t:hr+' bpm — Normal'}); }
 
-    // Glucose
-    if (gl > 7.0) { score += 22; factors.push({n:'Qand', s:'bad', t:gl+' mmol/L — Yuqori (Diabet xavfi)'}); }
+    if (gl > 7.0) { score += 22; factors.push({n:'Qand', s:'bad', t:gl+' mmol/L — Yuqori'}); }
     else if (gl > 6.1) { score += 10; factors.push({n:'Qand', s:'warn', t:gl+' mmol/L — Prediabetik'}); }
     else { factors.push({n:'Qand', s:'good', t:gl+' mmol/L — Normal'}); }
 
-    // Cholesterol
     if (chol > 6.2) { score += 12; factors.push({n:'Xolesterin', s:'bad', t:chol+' — Yuqori'}); }
     else if (chol > 5.2) { score += 6; factors.push({n:'Xolesterin', s:'warn', t:chol+' — Chegaraviy'}); }
     else { factors.push({n:'Xolesterin', s:'good', t:chol+' — Normal'}); }
 
-    // BMI
     if (bmi > 30) { score += 15; factors.push({n:'BMI', s:'bad', t:bmi.toFixed(1)+' — Semirib ketgan'}); }
     else if (bmi > 25) { score += 8; factors.push({n:'BMI', s:'warn', t:bmi.toFixed(1)+' — Ortiqcha vazn'}); }
     else { factors.push({n:'BMI', s:'good', t:bmi.toFixed(1)+' — Normal'}); }
 
-    // Age
-    if (age > 65) score += 15;
-    else if (age > 55) score += 10;
-    else if (age > 45) score += 5;
+    if (age > 65) score += 15; else if (age > 55) score += 10; else if (age > 45) score += 5;
 
-    // Smoking
     if (smoking === 'yes') { score += 20; factors.push({n:'Chekish', s:'bad', t:"Ha — Katta xavf omili"}); }
     else if (smoking === 'ex') { score += 5; factors.push({n:'Chekish', s:'warn', t:'Tark etgan'}); }
     else { factors.push({n:'Chekish', s:'good', t:"Yo'q"}); }
 
-    // Exercise
     const exMap = {none:12, light:6, moderate:2, active:0};
     score += exMap[exercise];
 
-    // ── ALCOHOL (NEW weighted scoring) ──
     const alcoholMap = {none:0, rare:5, often:12, daily:18};
     const alcoholLabelMap = {
-      none: {s:'good', t:"Yo'q — Xavfsiz"},
-      rare: {s:'warn', t:'Kamdan-kam — Past xavf'},
-      often: {s:'bad', t:'Tez-tez — O\'rtacha xavf'},
-      daily: {s:'bad', t:'Har kuni — Yuqori xavf!'}
+      none:{s:'good',t:"Yo'q — Xavfsiz"},
+      rare:{s:'warn',t:'Kamdan-kam — Past xavf'},
+      often:{s:'bad',t:"Tez-tez — O'rtacha xavf"},
+      daily:{s:'bad',t:'Har kuni — Yuqori xavf!'}
     };
     score += alcoholMap[alcohol] || 0;
     factors.push({n:'Alkogol', ...alcoholLabelMap[alcohol] || alcoholLabelMap['none']});
 
-    // Neurological checkboxes
     const neuroChecks = ['headache','dizziness','numbness','speech','bloodThick','movement','rheumatism','familyVascular','ownVascular','familyHistory'];
     const scoreWeights = {bloodThick:8,movement:7,rheumatism:5,familyVascular:8,ownVascular:12,familyHistory:7,headache:5,dizziness:5,numbness:6,speech:8};
     const neuroCount = neuroChecks.filter(n => document.getElementById(n)?.checked).length;
     neuroChecks.forEach(n => { if (document.getElementById(n)?.checked) score += scoreWeights[n] || 0; });
-    if (neuroCount > 0) factors.push({n:'Shikoyatlar va xavf omillari', s: neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t:neuroCount+' ta belgi/omil aniqlandi'});
+    if (neuroCount > 0) factors.push({n:'Shikoyatlar', s:neuroCount>=4?'bad':neuroCount>=2?'warn':'warn', t:neuroCount+' ta belgi/omil'});
 
     score = Math.min(Math.round(score), 100);
 
     let level, lvlClass, lvlColor, lvlDesc, icon;
-    if (score < 25) { level="Past Xavf"; lvlClass='tag-green'; lvlColor='var(--green)'; icon='✅'; lvlDesc="Sog'lik holati yaxshi! Sog'lom hayot tarzi davom ettirilsin."; }
+    if (score < 25) { level="Past Xavf"; lvlClass='tag-green'; lvlColor='var(--green)'; icon='✅'; lvlDesc="Sog'lik holati yaxshi!"; }
     else if (score < 50) { level="O'rtacha Xavf"; lvlClass='tag-yellow'; lvlColor='var(--yellow)'; icon='⚠️'; lvlDesc="Ehtiyot bo'ling — ba'zi omillar tuzatish talab qiladi."; }
     else if (score < 75) { level="Yuqori Xavf"; lvlClass='tag-red'; lvlColor='var(--accent)'; icon='🚨'; lvlDesc='Shifokor bilan maslahatlashing!'; }
     else { level="Juda Yuqori Xavf"; lvlClass='tag-red'; lvlColor='#ef4444'; icon='🆘'; lvlDesc='Zudlik bilan shifokorga murojaat qiling!'; }
@@ -1587,22 +1149,19 @@ function analyzeRisk() {
     if (s > 130 || d > 85) recs.push("Qon bosimini kundalik o'lchang");
     if (gl > 6.1) recs.push("Qandli mahsulotlarni cheklang");
     if (bmi > 25) recs.push('Mutanosib ovqatlanish va sport');
-    if (smoking === 'yes') recs.push("Chekishni tark eting — eng katta qadam");
-    if (alcohol === 'often' || alcohol === 'daily') recs.push("Alkogol iste'molini kamaytiring yoki to'xtatang");
+    if (smoking === 'yes') recs.push("Chekishni tark eting");
+    if (alcohol === 'often' || alcohol === 'daily') recs.push("Alkogol iste'molini kamaytiring");
     if (exercise === 'none' || exercise === 'light') recs.push('Haftada 150 daqiqa aerobik mashq');
     if (chol > 5.2) recs.push("Yog'li ovqatlarni kamaytiring");
-    recs.push('Muntazam tibbiy tekshiruv o\'ting');
+    recs.push("Muntazam tibbiy tekshiruv o'ting");
 
     const factorsHTML = factors.map(f => `
       <div class="factor-row">
         <span class="factor-name"><i class="fas fa-circle-dot" style="font-size:0.6rem;color:var(--${f.s==='bad'?'accent':f.s==='warn'?'yellow':'green'});"></i>${f.n}</span>
         <span class="factor-badge fb-${f.s==='bad'?'bad':f.s==='warn'?'warn':'good'}">${f.t}</span>
-      </div>
-    `).join('');
+      </div>`).join('');
 
-    const recsHTML = recs.map(r => `
-      <div class="rec-item"><i class="fas fa-circle-check rec-icon"></i><span>${r}</span></div>
-    `).join('');
+    const recsHTML = recs.map(r => `<div class="rec-item"><i class="fas fa-circle-check rec-icon"></i><span>${r}</span></div>`).join('');
 
     const doctorAlert = score >= 50 ? `
       <div class="doctor-alert">
@@ -1620,7 +1179,7 @@ function analyzeRisk() {
           <div style="font-size:3rem;margin-bottom:8px;">${icon}</div>
           <div style="font-family:var(--font-display);font-size:2.8rem;font-weight:800;color:${lvlColor};">${score}%</div>
           <div style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:${lvlColor};">${level}</div>
-          <div style="font-size:0.85rem;color:var(--text2);margin-top:8px;max-width:280px;margin-left:auto;margin-right:auto;">${lvlDesc}</div>
+          <div style="font-size:0.85rem;color:var(--text2);margin-top:8px;">${lvlDesc}</div>
           <div style="margin-top:12px;"><span class="${lvlClass} tag">Insult Xavfi: ${score}%</span></div>
         </div>
         ${doctorAlert}
@@ -1638,12 +1197,9 @@ function analyzeRisk() {
         <button onclick="saveAnalysisResult(${score},'${level}',${s},${d},${gl},${bmi.toFixed(1)})" class="btn btn-accent btn-full" style="margin-top:16px;">
           <i class="fas fa-save"></i> Natijani Saqlash
         </button>
-      </div>
-    `;
+      </div>`;
 
-    state.points += 10;
-    save('points');
-    updateSidebarProfile();
+    state.points += 10; save('points'); updateSidebarProfile();
     toast('Tahlil tayyor! +10 ball', 'success');
   }, 1800);
 }
@@ -1656,35 +1212,27 @@ function saveAnalysisResult(score, level, s, d, gl, bmi) {
   toast('Natija saqlandi!', 'success');
 }
 
-/* ====================== DASHBOARD ====================== */
 function renderDashboard() {
   const last = state.history[0];
   if (last) {
     document.getElementById('dashBP').textContent = last.systolic+'/'+last.diastolic;
     document.getElementById('dashGlucose').textContent = last.glucose;
-    document.getElementById('dashHR').textContent = '—';
     document.getElementById('dashBMI').textContent = last.bmi;
     document.getElementById('dashBPStatus').innerHTML = last.systolic > 140 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashGlucoseStatus').innerHTML = last.glucose > 6.1 ? '<span class="stat-down">Yuqori</span>' : '<span class="stat-up">Normal</span>';
     document.getElementById('dashBMIStatus').innerHTML = last.bmi > 25 ? '<span class="stat-down">Ortiqcha</span>' : '<span class="stat-up">Normal</span>';
     const gc = document.getElementById('dashGauge');
     const color = last.score < 25 ? 'var(--green)' : last.score < 50 ? 'var(--yellow)' : 'var(--accent)';
-    gc.innerHTML = `
-      <div style="text-align:center;padding:20px;">
-        <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:800;color:${color};">${last.score}%</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-top:6px;">Insult Xavfi</div>
-        <div style="margin-top:10px;"><span class="tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}">${last.level}</span></div>
-        <div class="progress-track" style="margin-top:16px;height:8px;">
-          <div class="progress-fill-bar" style="width:${last.score}%;background:${color};"></div>
-        </div>
-      </div>
-    `;
+    gc.innerHTML = `<div style="text-align:center;padding:20px;">
+      <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:800;color:${color};">${last.score}%</div>
+      <div style="font-size:0.85rem;color:var(--text2);margin-top:6px;">Insult Xavfi</div>
+      <div style="margin-top:10px;"><span class="tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}">${last.level}</span></div>
+      <div class="progress-track" style="margin-top:16px;height:8px;"><div class="progress-fill-bar" style="width:${last.score}%;background:${color};"></div></div>
+    </div>`;
     document.getElementById('dashRiskTag').textContent = last.level;
     document.getElementById('dashRiskTag').className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
   }
-  renderMiniChart();
-  renderDashMeds();
-  renderDashNotes();
+  renderMiniChart(); renderDashMeds(); renderDashNotes();
 }
 
 function renderMiniChart() {
@@ -1713,8 +1261,7 @@ function renderDashMeds() {
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);">
       <span style="font-size:0.88rem;font-weight:500;"><i class="fas fa-capsules" style="color:var(--accent);margin-right:6px;"></i>${m.name}</span>
       <span style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent);">${m.time}</span>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function renderDashNotes() {
@@ -1725,13 +1272,11 @@ function renderDashNotes() {
     <div style="padding:10px 14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);">
       <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(n.date).toLocaleDateString('uz-UZ')}</div>
       <div style="font-size:0.88rem;margin-top:4px;">${n.title || n.content.slice(0,50)}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function updateDashboardStats() { renderDashboard(); }
 
-/* ====================== VITALS ====================== */
 function renderVitals() {
   const last = state.history[0];
   if (last) {
@@ -1745,18 +1290,17 @@ function renderVitals() {
     const labels = state.history.slice(0,10).reverse().map((h,i) => 'Tahlil '+(i+1));
     const sys = state.history.slice(0,10).reverse().map(h => h.systolic);
     const dia = state.history.slice(0,10).reverse().map(h => h.diastolic);
-    window.vitBPChartInst = new Chart(bpCtx, {type:'line',data:{labels,datasets:[{label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,fill:true},{label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.05)',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}}); 
+    window.vitBPChartInst = new Chart(bpCtx, {type:'line',data:{labels,datasets:[{label:'Sistolik',data:sys,borderColor:'#e63950',backgroundColor:'rgba(230,57,80,0.1)',tension:0.4,fill:true},{label:'Diastolik',data:dia,borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,0.05)',tension:0.4,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
   }
   const rCtx = document.getElementById('vitRiskChart');
   if (rCtx) {
     if (window.vitRiskChartInst) window.vitRiskChartInst.destroy();
     const labels = state.history.slice(0,8).reverse().map((h,i) => 'T'+(i+1));
     const risks = state.history.slice(0,8).reverse().map(h => h.score);
-    window.vitRiskChartInst = new Chart(rCtx, {type:'bar',data:{labels,datasets:[{label:'Xavf %',data:risks,backgroundColor:risks.map(r=>r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}}); 
+    window.vitRiskChartInst = new Chart(rCtx, {type:'bar',data:{labels,datasets:[{label:'Xavf %',data:risks,backgroundColor:risks.map(r=>r<25?'rgba(16,185,129,0.5)':r<50?'rgba(245,158,11,0.5)':'rgba(230,57,80,0.5)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{display:false}},y:{max:100,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
   }
 }
 
-/* ====================== MEDICATIONS ====================== */
 function renderMedications() {
   const el = document.getElementById('medList');
   if (!state.medications.length) {
@@ -1778,8 +1322,7 @@ function renderMedications() {
         <button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.82rem;padding:8px 14px;${m.taken?'opacity:0.5;':''}"><i class="fas fa-check"></i> ${m.taken?'Qabul qilindi':'Qabul qildim'}</button>
         <button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.82rem;padding:8px 14px;"><i class="fas fa-trash"></i></button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
   const pending = state.medications.filter(m => !m.taken).length;
   const badge = document.getElementById('medBadge');
   if (pending > 0) { badge.style.display=''; badge.textContent = pending; }
@@ -1803,27 +1346,22 @@ function saveMedication() {
 }
 
 function takeMed(i) {
-  state.medications[i].taken = true;
-  save('medications');
-  renderMedications();
+  state.medications[i].taken = true; save('medications'); renderMedications();
   state.points += 5; save('points'); updateSidebarProfile();
   toast('✅ Dori qabul qilindi! +5 ball', 'success');
 }
 
 function deleteMed(i) {
   if (confirm("Bu dorini o'chirmoqchimisiz?")) {
-    state.medications.splice(i, 1);
-    save('medications');
-    renderMedications();
+    state.medications.splice(i, 1); save('medications'); renderMedications();
     toast("Dori o'chirildi", 'warn');
   }
 }
 
-/* ====================== LAB ====================== */
 function renderLabResults() {
   const el = document.getElementById('labResultsList');
   if (!state.labResults.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:30px;font-size:0.85rem;">Natijalar yo'q</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:30px;">Natijalar yo'q</div>`;
   } else {
     el.innerHTML = state.labResults.map((r, i) => `
       <div class="lab-row">
@@ -1832,8 +1370,7 @@ function renderLabResults() {
         <span class="factor-badge ${r.status==='normal'?'fb-good':r.status==='abnormal'?'fb-warn':'fb-bad'}">${r.status==='normal'?'Normal':r.status==='abnormal'?"Og'ish":'Kritik'}</span>
         <div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${new Date(r.date).toLocaleDateString('uz-UZ')}</div>
         <button onclick="deleteLabResult(${i})" class="btn btn-danger" style="padding:5px 10px;font-size:0.78rem;"><i class="fas fa-trash"></i></button>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
   const ctx = document.getElementById('labChart');
   if (ctx) {
@@ -1864,20 +1401,17 @@ function saveLabResult() {
 }
 
 function deleteLabResult(i) {
-  state.labResults.splice(i,1);
-  save('labResults');
-  renderLabResults();
+  state.labResults.splice(i,1); save('labResults'); renderLabResults();
   toast("O'chirildi", 'warn');
 }
 
-/* ====================== NOTES ====================== */
 const catColors = {general:'tag-blue', symptom:'tag-red', medication:'tag-green', appointment:'tag-yellow', exercise:'tag-blue'};
 const catLabels = {general:'Umumiy', symptom:'Belgi', medication:'Dori', appointment:'Shifokor', exercise:'Mashq'};
 
 function renderNotes() {
   const el = document.getElementById('notesList');
   if (!state.notes.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;font-size:0.9rem;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--text3);padding:60px;"><i class="fas fa-notes-medical" style="font-size:3rem;margin-bottom:16px;display:block;opacity:0.3;"></i>Hali qaydnoma yo'q</div>`;
     return;
   }
   el.innerHTML = `<div class="grid-2">${state.notes.map((n,i) => `
@@ -1889,8 +1423,7 @@ function renderNotes() {
         <span class="tag ${catColors[n.category]||'tag-blue'}">${catLabels[n.category]||'Umumiy'}</span>
         <button onclick="deleteNote(${i})" class="btn btn-danger" style="padding:3px 10px;font-size:0.75rem;margin-left:auto;"><i class="fas fa-trash"></i></button>
       </div>
-    </div>
-  `).join('')}</div>`;
+    </div>`).join('')}</div>`;
 }
 
 function openAddNoteModal() { document.getElementById('addNoteModal').classList.add('active'); }
@@ -1908,13 +1441,10 @@ function saveNote() {
 }
 
 function deleteNote(i) {
-  state.notes.splice(i,1);
-  save('notes');
-  renderNotes();
+  state.notes.splice(i,1); save('notes'); renderNotes();
   toast("Qaydnoma o'chirildi", 'warn');
 }
 
-/* ====================== APPOINTMENTS ====================== */
 const doctors = [
   {id:1,name:'Dr. Alisher Karimov',spec:'nevrolog',exp:'15 yil',rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:"Insult va miya kasalliklari bo'yicha mutaxassis"},
   {id:2,name:'Dr. Mohira Yusupova',spec:'kardiolog',exp:'12 yil',rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'❤️',desc:'Yurak-qon tomir kasalliklari mutaxassisi'},
@@ -1942,8 +1472,7 @@ function renderDoctors(filter) {
         <div class="time-slots">${doc.slots.map(s => `<div class="time-slot">${s}</div>`).join('')}</div>
         <button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.85rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> Vaqt Band Qilish</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function filterDocs(type) { renderDoctors(type); setDocFilter(type); }
@@ -1970,60 +1499,32 @@ function selectSlot(el, slot) {
   selectedSlot = slot;
 }
 
-/* ====================== TELEGRAM CONFIG ====================== */
 const TG_DEFAULT_TOKEN  = '8732267586:AAE2PcLwVHhyfE6AxeEzOICyIx_inV7BJ3Y';
 const TG_DEFAULT_CHATID = '@konsultatsiyas';
 function getTGToken()  { return localStorage.getItem('ng_tg_token')  || TG_DEFAULT_TOKEN; }
 function getTGChatId() { return localStorage.getItem('ng_tg_chatid') || TG_DEFAULT_CHATID; }
 
 async function sendTelegramMessage(text) {
-  const TG_BOT_TOKEN = getTGToken();
-  const TG_CHAT_ID = getTGChatId();
-  if (!TG_BOT_TOKEN || !TG_CHAT_ID) return { ok: false, demo: true };
   try {
-    const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: TG_CHAT_ID,
-        text: text,
-        parse_mode: 'HTML'
-      })
+    const res = await fetch(`https://api.telegram.org/bot${getTGToken()}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:getTGChatId(), text, parse_mode:'HTML'})
     });
     return await res.json();
-  } catch(e) {
-    return { ok: false, error: e.message };
-  }
+  } catch(e) { return {ok:false, error:e.message}; }
 }
 
 async function confirmBooking() {
   if (!selectedSlot) { toast("Vaqt tanlang!", 'err'); return; }
   const phone = document.getElementById('bookPhone').value.trim();
   if (!phone) { toast("Telefon raqamingizni kiriting!", 'err'); return; }
-
   const doc = doctors.find(d => d.id === currentDocId);
   const complaint = document.getElementById('bookComplaint').value.trim();
-  const now = new Date();
-  const dateStr = now.toLocaleString('uz-UZ');
+  const dateStr = new Date().toLocaleString('uz-UZ');
+  const bemorLine = state.profile.name ? '\n\u{1F464} <b>Bemor:</b> '+state.profile.name+' '+(state.profile.surname||'') : '';
+  const xavfLine = state.history[0] ? '\n\u26A0\uFE0F <b>Xavf:</b> '+state.history[0].score+'% - '+state.history[0].level : '';
+  const tgText = '🏥 <b>YANGI KONSULTATSIYA SO\'ROVI</b>\n\n👨‍⚕️ <b>Shifokor:</b> '+doc.name+'\n🔬 <b>Mutaxassislik:</b> '+doc.spec+'\n🕐 <b>Vaqt:</b> '+selectedSlot+'\n📱 <b>Telefon:</b> '+phone+'\n📝 <b>Shikoyat:</b> '+(complaint||'Korsatilmagan')+'\n📅 <b>Yuborilgan:</b> '+dateStr+bemorLine+xavfLine;
 
-  // Telegram xabari matni
-  const bemorLine = state.profile.name
-    ? '\n\u{1F464} <b>Bemor:</b> ' + state.profile.name + ' ' + (state.profile.surname || '')
-    : '';
-  const xavfLine = state.history[0]
-    ? '\n\u26A0\uFE0F <b>Xavf darajasi:</b> ' + state.history[0].score + '% - ' + state.history[0].level
-    : '';
-  const tgText = '\uD83C\uDFE5 <b>YANGI KONSULTATSIYA SO\'ROVI</b>'
-    + '\n\n\uD83D\uDC68\u200D\u2695\uFE0F <b>Shifokor:</b> ' + doc.name
-    + '\n\uD83D\uDD2C <b>Mutaxassislik:</b> ' + doc.spec.charAt(0).toUpperCase() + doc.spec.slice(1)
-    + '\n\uD83D\uDD50 <b>Tanlangan vaqt:</b> ' + selectedSlot
-    + '\n\uD83D\uDCF1 <b>Telefon:</b> ' + phone
-    + '\n\uD83D\uDCDD <b>Shikoyat:</b> ' + (complaint || 'Korsatilmagan')
-    + '\n\uD83D\uDCC5 <b>Yuborilgan:</b> ' + dateStr
-    + bemorLine
-    + xavfLine;
-
-  // UI: loading holat
   const btn = document.getElementById('bookSubmitBtn');
   const statusEl = document.getElementById('tgSendStatus');
   btn.disabled = true;
@@ -2032,27 +1533,15 @@ async function confirmBooking() {
 
   const result = await sendTelegramMessage(tgText);
 
-  if (result.demo) {
-    // Demo rejim — token kiritilmagan
+  if (result.ok) {
     statusEl.style.display = 'block';
-    statusEl.style.background = 'rgba(245,158,11,0.1)';
-    statusEl.style.border = '1px solid rgba(245,158,11,0.3)';
-    statusEl.style.color = 'var(--yellow)';
-    statusEl.innerHTML = `⚙️ <b>Demo rejim:</b> Telegram yuborilmadi. Sozlamalar uchun kodni oching va <code>TG_BOT_TOKEN</code> ni to'ldiring.`;
-    finishBooking(doc, complaint, phone);
-  } else if (result.ok) {
-    statusEl.style.display = 'block';
-    statusEl.style.background = 'rgba(16,185,129,0.1)';
-    statusEl.style.border = '1px solid rgba(16,185,129,0.3)';
-    statusEl.style.color = 'var(--green)';
-    statusEl.innerHTML = `✅ <b>Telegram ga muvaffaqiyatli yuborildi!</b>`;
+    statusEl.style.cssText = 'display:block;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--green);padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;';
+    statusEl.innerHTML = '✅ <b>Telegram ga muvaffaqiyatli yuborildi!</b>';
     setTimeout(() => finishBooking(doc, complaint, phone), 1200);
   } else {
     statusEl.style.display = 'block';
-    statusEl.style.background = 'rgba(239,68,68,0.1)';
-    statusEl.style.border = '1px solid rgba(239,68,68,0.3)';
-    statusEl.style.color = '#ef4444';
-    statusEl.innerHTML = '❌ Telegram xatolik: ' + (result.description || result.error || 'Noma\'lum xato') + '. Biroq band qilindi.';
+    statusEl.style.cssText = 'display:block;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;';
+    statusEl.innerHTML = '⚙️ Demo rejim — band qilindi.';
     setTimeout(() => finishBooking(doc, complaint, phone), 1500);
   }
 
@@ -2061,12 +1550,7 @@ async function confirmBooking() {
 }
 
 function finishBooking(doc, complaint, phone) {
-  state.notes.unshift({
-    title: `Shifokor: ${doc.name} — ${selectedSlot}`,
-    content: '📱 Tel: ' + phone + '\n' + (complaint || 'Konsultatsiya band qilindi'),
-    category: 'appointment',
-    date: new Date().toISOString()
-  });
+  state.notes.unshift({title:`Shifokor: ${doc.name} — ${selectedSlot}`, content:'📱 Tel: '+phone+'\n'+(complaint||'Konsultatsiya band qilindi'), category:'appointment', date:new Date().toISOString()});
   save('notes');
   state.points += 15; save('points'); updateSidebarProfile();
   document.getElementById('bookModal').classList.remove('active');
@@ -2076,7 +1560,6 @@ function finishBooking(doc, complaint, phone) {
   toast(`✅ ${doc.name} bilan ${selectedSlot} — band qilindi! +15 ball`, 'success');
 }
 
-/* ====================== HISTORY ====================== */
 function renderHistory() {
   const tbody = document.getElementById('historyBody');
   if (!state.history.length) {
@@ -2086,9 +1569,7 @@ function renderHistory() {
       const color = h.score<25?'var(--green)':h.score<50?'var(--yellow)':'var(--accent)';
       return `<tr>
         <td style="font-family:var(--font-mono);font-size:0.82rem;">${new Date(h.date).toLocaleDateString('uz-UZ')}</td>
-        <td>${h.systolic}/${h.diastolic}</td>
-        <td>${h.glucose}</td>
-        <td>${h.bmi}</td>
+        <td>${h.systolic}/${h.diastolic}</td><td>${h.glucose}</td><td>${h.bmi}</td>
         <td style="font-family:var(--font-mono);font-weight:700;color:${color};">${h.score}%</td>
         <td><span class="tag ${h.score<25?'tag-green':h.score<50?'tag-yellow':'tag-red'}">${h.level}</span></td>
       </tr>`;
@@ -2100,16 +1581,7 @@ function renderHistory() {
     const d = state.history.slice(0,12).reverse();
     window.histRiskChartInst = new Chart(ctx, {
       type:'line',
-      data:{
-        labels:d.map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),
-        datasets:[{
-          label:'Insult Xavfi %',
-          data:d.map(h => h.score),
-          borderColor:'#e63950',
-          backgroundColor:(ctx) => { const g=ctx.chart.ctx.createLinearGradient(0,0,0,260); g.addColorStop(0,'rgba(230,57,80,0.3)'); g.addColorStop(1,'rgba(230,57,80,0)'); return g; },
-          tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#e63950',pointBorderColor:'#fff',pointBorderWidth:2
-        }]
-      },
+      data:{labels:d.map(h => new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),datasets:[{label:'Insult Xavfi %',data:d.map(h=>h.score),borderColor:'#e63950',backgroundColor:(c)=>{const g=c.chart.ctx.createLinearGradient(0,0,0,260);g.addColorStop(0,'rgba(230,57,80,0.3)');g.addColorStop(1,'rgba(230,57,80,0)');return g;},tension:0.4,fill:true,pointRadius:5,pointBackgroundColor:'#e63950',pointBorderColor:'#fff',pointBorderWidth:2}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8899bb'}}},scales:{x:{ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}},y:{max:100,min:0,ticks:{color:'#4a5a7a'},grid:{color:'rgba(255,255,255,0.04)'}}}}
     });
   }
@@ -2117,13 +1589,10 @@ function renderHistory() {
 
 function clearHistory() {
   if (!confirm("Barcha tarix o'chiriladi. Davom etasizmi?")) return;
-  state.history = [];
-  save('history');
-  renderHistory();
+  state.history = []; save('history'); renderHistory();
   toast("Tarix tozalandi", 'warn');
 }
 
-/* ====================== PROFILE ====================== */
 const achievements = [
   {id:'first_analysis', icon:'🔬', name:'Birinchi tahlil', cond:() => state.history.length >= 1},
   {id:'regular', icon:'📅', name:'Muntazam (5 tahlil)', cond:() => state.history.length >= 5},
@@ -2137,18 +1606,17 @@ const achievements = [
 
 function renderProfile() {
   const p = state.profile;
-  const firstName = (p.name || '').trim();
-  const lastName  = (p.surname || '').trim();
-  const initials  = ((firstName?firstName[0]:'U') + (lastName?lastName[0]:'')).toUpperCase() || 'U';
+  const fn = (p.name||'').trim(), ln = (p.surname||'').trim();
+  const initials = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U';
   document.getElementById('profileAvatar').textContent = initials;
   document.getElementById('sidebarAvatar').textContent = initials;
-  document.getElementById('profileNameDisplay').textContent = ((p.name||'') + ' ' + (p.surname||'')).trim() || 'Foydalanuvchi';
-  document.getElementById('sidebarName').textContent = p.name || 'Profil';
+  document.getElementById('profileNameDisplay').textContent = (fn+' '+ln).trim()||'Foydalanuvchi';
+  document.getElementById('sidebarName').textContent = p.name||'Profil';
   const last = state.history[0];
   if (last) {
-    document.getElementById('pm-age').textContent = 'Yosh: ' + (p.age || '—');
-    document.getElementById('pm-bmi').textContent = 'BMI: ' + last.bmi;
-    document.getElementById('pm-points').textContent = state.points + ' ball';
+    document.getElementById('pm-age').textContent = 'Yosh: '+(p.age||'—');
+    document.getElementById('pm-bmi').textContent = 'BMI: '+last.bmi;
+    document.getElementById('pm-points').textContent = state.points+' ball';
     const tag = document.getElementById('profileRiskTag');
     tag.textContent = last.level;
     tag.className = `tag ${last.score<25?'tag-green':last.score<50?'tag-yellow':'tag-red'}`;
@@ -2156,12 +1624,9 @@ function renderProfile() {
   const det = document.getElementById('profileDetails');
   if (p.name) {
     det.innerHTML = `<div class="grid-2" style="gap:10px;">
-      ${rPF('user','Ism',p.name||'—')}
-      ${rPF('user-tie','Familiya',p.surname||'—')}
-      ${rPF('birthday-cake','Yosh',p.age||'—')}
-      ${rPF('venus-mars','Jins',p.gender==='male'?'Erkak':'Ayol')}
-      ${rPF('phone','Telefon',p.phone||'—')}
-      ${rPF('tint','Qon Guruhi',p.bloodType||'—')}
+      ${rPF('user','Ism',p.name||'—')}${rPF('user-tie','Familiya',p.surname||'—')}
+      ${rPF('birthday-cake','Yosh',p.age||'—')}${rPF('venus-mars','Jins',p.gender==='male'?'Erkak':'Ayol')}
+      ${rPF('phone','Telefon',p.phone||'—')}${rPF('tint','Qon Guruhi',p.bloodType||'—')}
       ${p.conditions ? rPF('notes-medical','Kasalliklar',p.conditions) : ''}
     </div>`;
   } else {
@@ -2171,8 +1636,7 @@ function renderProfile() {
     <div class="achievement ${a.cond()?'unlocked':'locked'}">
       <div class="achievement-icon">${a.icon}</div>
       <div class="achievement-name">${a.name}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
   document.getElementById('statAnalyses').textContent = state.history.length;
   document.getElementById('statMeds').textContent = state.medications.length;
   document.getElementById('statNotes').textContent = state.notes.length;
@@ -2189,66 +1653,73 @@ function rPF(icon, label, value) {
 
 function openEditProfileModal() {
   const p = state.profile;
-  document.getElementById('pName').value = p.name || '';
-  document.getElementById('pSurname').value = p.surname || '';
-  document.getElementById('pAge').value = p.age || '';
-  document.getElementById('pPhone').value = p.phone || '';
-  document.getElementById('pConditions').value = p.conditions || '';
+  document.getElementById('pName').value = p.name||'';
+  document.getElementById('pSurname').value = p.surname||'';
+  document.getElementById('pAge').value = p.age||'';
+  document.getElementById('pPhone').value = p.phone||'';
+  document.getElementById('pConditions').value = p.conditions||'';
   document.getElementById('editProfileModal').classList.add('active');
 }
 
 function saveProfile() {
-  state.profile = {
-    name:document.getElementById('pName').value.trim(),
-    surname:document.getElementById('pSurname').value.trim(),
-    age:document.getElementById('pAge').value,
-    gender:document.getElementById('pGender').value,
-    phone:document.getElementById('pPhone').value.trim(),
-    bloodType:document.getElementById('pBloodType').value,
-    conditions:document.getElementById('pConditions').value.trim()
-  };
+  state.profile = {name:document.getElementById('pName').value.trim(), surname:document.getElementById('pSurname').value.trim(), age:document.getElementById('pAge').value, gender:document.getElementById('pGender').value, phone:document.getElementById('pPhone').value.trim(), bloodType:document.getElementById('pBloodType').value, conditions:document.getElementById('pConditions').value.trim()};
   save('profile');
   state.points += 10; save('points');
   document.getElementById('editProfileModal').classList.remove('active');
-  renderProfile();
-  updateSidebarProfile();
+  renderProfile(); updateSidebarProfile();
   toast('Profil saqlandi! +10 ball', 'success');
 }
 
 function updateSidebarProfile() {
   document.getElementById('sidebarPoints').textContent = state.points;
-  document.getElementById('sidebarName').textContent = state.profile.name || 'Profil';
-  const fn = (state.profile.name || '').trim();
-  const ln = (state.profile.surname || '').trim();
-  document.getElementById('sidebarAvatar').textContent = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase() || 'U';
+  document.getElementById('sidebarName').textContent = state.profile.name||'Profil';
+  const fn = (state.profile.name||'').trim(), ln = (state.profile.surname||'').trim();
+  document.getElementById('sidebarAvatar').textContent = ((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U';
 }
 
-/* ====================== SOS ====================== */
 function openSOS() { document.getElementById('sosModal').classList.add('active'); }
 function closeSOS() { document.getElementById('sosModal').classList.remove('active'); }
 
-/* ====================== INIT ====================== */
-/* ====================== TELEGRAM SETTINGS ====================== */
+function requestNotificationPermission() {
+  if (!('Notification' in window)) { toast("Bu brauzer bildirishnomalarni qo'llab-quvvatlamaydi", 'warn'); return; }
+  if (Notification.permission === 'granted') { toast('Bildirishnomalar yoqilgan ✅', 'info'); return; }
+  Notification.requestPermission().then(p => {
+    if (p === 'granted') toast('✅ Bildirishnomalar yoqildi!', 'success');
+    else toast('Bildirishnomalar rad etildi', 'warn');
+  });
+}
 
+function downloadPDFReport() {
+  const last = state.history[0];
+  if (!last) { toast("Avval AI tekshiruv o'tkazing!", 'err'); return; }
+  const p = state.profile;
+  const name = ((p.name||'')+' '+(p.surname||'')).trim() || 'Bemor';
+  const date = new Date(last.date).toLocaleDateString('uz-UZ');
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:40px;color:#1a1a2e;max-width:800px;margin:0 auto;}.header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #e63950;padding-bottom:20px;margin-bottom:30px;}.logo{font-size:1.8rem;font-weight:900;color:#e63950;}h2{color:#e63950;margin-top:24px;font-size:1.1rem;}.risk{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;font-size:1.1rem;margin:12px 0;background:${last.score<25?'#d1fae5':last.score<50?'#fef3c7':'#fee2e2'};color:${last.score<25?'#065f46':last.score<50?'#92400e':'#991b1b'};}.footer{margin-top:40px;padding-top:16px;border-top:1px solid #eee;font-size:0.75rem;color:#999;text-align:center;}</style></head><body>
+<div class="header"><div><div class="logo">NeuroGuard</div><div style="font-size:0.8rem;color:#666;">AI Pro v2.1 — Tibbiy Hisobot</div></div><div style="text-align:right;font-size:0.85rem;color:#666;">${date}<br>${name}</div></div>
+<h2>🎯 Xavf Baholash Natijasi</h2>
+<div class="risk">${last.level} — ${last.score}%</div>
+<h2>📊 Ko'rsatkichlar</h2>
+<p>Qon bosimi: ${last.systolic}/${last.diastolic} mmHg</p>
+<p>Qand: ${last.glucose} mmol/L</p>
+<p>BMI: ${last.bmi}</p>
+${state.medications.length ? '<h2>💊 Dorilar</h2>'+state.medications.map(m=>'<p>'+m.name+' — '+m.dosage+'</p>').join('') : ''}
+<div class="footer">NeuroGuard AI Pro — Bu hisobot faqat ma'lumot berish uchun. Tibbiy diagnoz emas.<br>Yaratilgan: ${new Date().toLocaleString('uz-UZ')}</div>
+</body></html>`;
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'NeuroGuard_Hisobot_'+new Date().toISOString().slice(0,10)+'.html';
+  a.click(); URL.revokeObjectURL(url);
+  toast('📄 Hisobot yuklab olindi!', 'success');
+}
 
-
-
-
-
-
-
-
-/* ══════════════════════════════════════════════
-   MULTI-LANGUAGE SYSTEM — FULL i18n
-══════════════════════════════════════════════ */
+/* ── MULTI-LANGUAGE ── */
 const LANGS = {
   uz: {
-    /* NAV */
     nav_dashboard:"Dashboard", nav_assessment:"AI Tekshiruv", nav_vitals:"Vital Ko'rsatkichlar",
     nav_medications:"Dorilar", nav_labTests:"Tahlillar", nav_notes:"Qaydnoma",
     nav_appointments:"Konsultatsiya", nav_history:"Tarix & Diagramma", nav_profile:"Profilim",
-    nav_symptoms:"Simptom Tekshiruv", nav_sleep:"Uyqu Monitor", nav_nutrition:"Ovqatlanish",
-    /* TOPBAR */
     topbar_dashboard:"Dashboard", topbar_sub_dashboard:"Umumiy holat ko'rinishi",
     topbar_assessment:"AI Tekshiruv", topbar_sub_assessment:"Insult xavfini aniqlash",
     topbar_vitals:"Vital Ko'rsatkichlar", topbar_sub_vitals:"Real vaqt monitoringi",
@@ -2258,110 +1729,31 @@ const LANGS = {
     topbar_appointments:"Konsultatsiya", topbar_sub_appointments:"Shifokor bilan uchrashish",
     topbar_history:"Tarix & Diagramma", topbar_sub_history:"O'tgan tahlillar",
     topbar_profile:"Mening Profilim", topbar_sub_profile:"Shaxsiy ma'lumotlar",
-    topbar_symptoms:"Simptom Tekshiruv", topbar_sub_symptoms:"Kasallik belgilari",
-    topbar_sleep:"Uyqu Monitor", topbar_sub_sleep:"Uyqu sifatini kuzatish",
-    topbar_nutrition:"Ovqatlanish", topbar_sub_nutrition:"Kaloriya va ovqat",
-    /* DASHBOARD */
     welcome:"Xush kelibsiz!", welcome_sub:"Sog'lig'ingizning bugungi ko'rsatkichlari",
-    bp_label:"Qon Bosimi (mmHg)", glucose_label:"Qand (mmol/L)",
-    hr_label:"Yurak Urishi (bpm)", bmi_label:"BMI",
-    no_data:"Ma'lumot yo'q", complete_check:"Tekshiruvni yakunlang",
-    for_ai:"AI tahlili uchun", bp_history:"Qon Bosimi Tarixi",
-    latest_check:"So'ngi tahlil", today_meds:"Bugungi Dorilar",
-    all:"Hammasi", no_meds:"Dorilar qo'shilmagan",
-    recent_notes:"So'ngi Qaydnomalar", no_notes:"Qaydnomalar yo'q",
-    no_analysis:"Tahlil yo'q",
-    /* ASSESSMENT */
-    assessment_title:"AI Insult Xavfi Tahlili",
-    assessment_desc:"Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi",
-    ai_analyst:"AI Tahlilchi", form_filled:"% to'ldirildi",
-    systolic:"Sistolik qon bosimi", diastolic:"Diastolik",
-    heartrate:"Yurak urishi (bpm)", glucose_mmol:"Qand (mmol/L)",
-    height_cm:"Bo'y (sm)", weight_kg:"Vazn (kg)",
+    bp_label:"Qon Bosimi (mmHg)", glucose_label:"Qand (mmol/L)", hr_label:"Yurak Urishi (bpm)", bmi_label:"BMI",
+    complete_check:"Tekshiruvni yakunlang", for_ai:"AI tahlili uchun",
+    bp_history:"Qon Bosimi Tarixi", latest_check:"So'ngi tahlil",
+    today_meds:"Bugungi Dorilar", recent_notes:"So'ngi Qaydnomalar",
+    assessment_title:"AI Insult Xavfi Tahlili", assessment_desc:"Tibbiy ma'lumotlaringizni kiriting — AI bir necha soniyada natija beradi",
+    ai_analyst:"AI Tahlilchi", systolic:"Sistolik qon bosimi", diastolic:"Diastolik",
+    heartrate:"Yurak urishi (bpm)", glucose_mmol:"Qand (mmol/L)", height_cm:"Bo'y (sm)", weight_kg:"Vazn (kg)",
     age_label:"Yosh", cholesterol:"Xolesterin (mmol/L)",
-    smoking_q:"Chekasizmi?", smoking_no:"Yo'q", smoking_ex:"Tark etdim", smoking_yes:"Ha",
-    exercise_q:"Jismoniy faollik", ex_none:"Umuman yo'q",
-    ex_light:"1-2 kun/hafta", ex_mod:"3-4 kun/hafta", ex_active:"5+ kun/hafta",
-    alcohol_q:"Alkogol iste'mol qilasizmi?",
-    alc_none:"Yo'q", alc_rare:"Kamdan-kam (oyda 1-2 marta)",
-    alc_often:"Tez-tez (haftada 1-2 marta)", alc_daily:"Har kuni",
-    complaints:"Shikoyatlar va xavf omillari",
+    smoking_q:"Chekasizmi?", exercise_q:"Jismoniy faollik",
+    alcohol_q:"Alkogol iste'mol qilasizmi?", complaints:"Shikoyatlar va xavf omillari",
     c_headache:"Tez-tez bosh og'rig'i", c_dizziness:"Bosh aylanishi",
     c_numbness:"Qo'l-oyoq kuchsizlanishi / uvishishi", c_speech:"Nutq qiyinligi",
-    c_bloodThick:"Qon quyuqligi (trombofiliya)",
-    c_movement:"Harakat o'zgarishi (muvozanat, koordinatsiya)",
-    c_rheumatism:"Revmatizm / bo'g'im kasalliklari",
-    c_familyVascular:"Oilada qon tomir kasalliklari bo'lgan",
-    c_ownVascular:"O'zida qon tomir kasalliklari bor",
-    c_familyHistory:"Oilada insult bo'lgan",
-    ai_analyze:"AI Tahlil Qilsin",
-    result_ready:"Tahlil uchun tayyor",
+    c_bloodThick:"Qon quyuqligi (trombofiliya)", c_movement:"Harakat o'zgarishi",
+    c_rheumatism:"Revmatizm / bo'g'im kasalliklari", c_familyVascular:"Oilada qon tomir kasalliklari",
+    c_ownVascular:"O'zida qon tomir kasalliklari bor", c_familyHistory:"Oilada insult bo'lgan",
+    ai_analyze:"AI Tahlil Qilsin", result_ready:"Tahlil uchun tayyor",
     result_hint:"Chap tomondagi ma'lumotlarni to'ldiring va AI tahlil tugmasini bosing",
-    /* RISK LEVELS */
-    risk_low:"Past xavf", risk_med:"O'rtacha xavf", risk_high:"Yuqori xavf", risk_crit:"Kritik xavf",
-    /* VITALS */
-    vitals_title:"Vital Ko'rsatkichlar", vitals_desc:"Real vaqt monitoringi",
-    v_bp:"QONBOSIM", v_hr:"YURAK URISHI", v_glucose:"QAND", v_bmi:"BMI",
-    bp_dynamics:"Qon Bosimi Dinamikasi", risk_dynamics:"Xavf Ko'rsatkichi Dinamikasi",
-    /* MEDICATIONS */
-    meds_title:"Dorilar", meds_desc:"Dori jadvalingiz",
-    add_med:"Dori Qo'shish", no_meds_yet:"Dorilar qo'shilmagan",
-    med_name:"Dori nomi", med_dose:"Dozasi", med_freq:"Qabul vaqti",
-    med_note:"Izoh", take:"Qabul qilindi",
-    /* LAB TESTS */
-    lab_title:"Laboratoriya Tahlillari", lab_desc:"Tahlil natijalari",
-    add_lab:"Tahlil Qo'shish", no_lab:"Tahlillar qo'shilmagan",
-    lab_name:"Tahlil nomi", lab_value:"Natija", lab_unit:"Birlik", lab_ref:"Me'yor",
-    lab_chart:"Tahlillar Grafigi",
-    /* NOTES */
-    notes_title:"Tibbiy Qaydnomalar", notes_desc:"Eslatmalar",
-    add_note:"Qaydnoma Qo'shish", no_notes_yet:"Qaydnomalar yo'q",
-    /* APPOINTMENTS */
-    appt_title:"Shifokor Konsultatsiyasi", appt_desc:"Mutaxassislar bilan uchrashing",
-    book_time:"Vaqt tanlang:", phone_label:"Telefon raqamingiz *",
-    phone_hint:"Shifokor siz bilan bog'lanish uchun ishlatiladi",
-    complaint_label:"Muammo / Shikoyat", complaint_ph:"Shifokorga murojaat sababi...",
-    book_btn:"Band Qilish", sending:"Yuborilmoqda...",
-    /* HISTORY */
-    hist_title:"Tarix & Diagrammalar", hist_desc:"O'tgan tahlillar statistikasi",
-    risk_hist:"Xavf Ko'rsatkichi Tarixi", all_checks:"Barcha Tekshiruvlar",
-    no_hist:"Tahlillar yo'q",
-    col_date:"Sana", col_bp:"Qon Bosimi", col_risk:"Xavf", col_level:"Daraja",
-    col_bmi:"BMI", col_action:"Amal",
-    /* PROFILE */
-    prof_title:"Mening Profilim", prof_desc:"Shaxsiy ma'lumotlar",
-    edit_profile:"Tahrirlash", not_filled:"Ma'lumotlar to'ldirilmagan",
-    achievements:"Yutuqlar", stats_title:"Statistika",
-    analyses_count:"Tahlil soni", meds_count:"Dorilar", notes_count:"Qaydnomalar", points_count:"Ball",
-    /* PROFILE EDIT */
-    p_name:"Ism", p_surname:"Familiya", p_age:"Yosh",
-    p_gender:"Jins", p_male:"Erkak", p_female:"Ayol",
-    p_phone:"Telefon", p_blood:"Qon guruhi", p_conditions:"Surunkali kasalliklar",
-    save:"Saqlash", cancel:"Bekor qilish",
-    /* SYMPTOMS */
-    symp_title:"Simptom Tekshiruv", symp_desc:"Kasallik belgilarini tekshirish",
-    /* SLEEP */
-    sleep_title:"Uyqu Monitor", sleep_desc:"Uyqu sifatini kuzatish",
-    /* NUTRITION */
-    nutr_title:"Ovqatlanish", nutr_desc:"Kunlik kaloriya va ovqat",
-    /* SOS */
-    sos_title:"FAVQULODDA YORDAM", sos_call:"Tez Yordam", sos_fast:"FAST Tekshiruvi",
-    fast_f:"F — Yuz (Og'iz bir tomonga qiyshayganmi?)",
-    fast_a:"A — Qo'l (Bir qo'l kuchsizmi?)",
-    fast_s:"S — Nutq (So'zlar noto'g'ri chiqyaptimi?)",
-    fast_t:"T — Vaqt (Darhol 103 ga zang!)",
-    /* TOAST / COMMON */
-    saved:"Saqlandi", deleted:"O'chirildi", error:"Xatolik",
-    points_suffix:"ball", lang_name:"O'zbek",
-    /* BOTTOM NAV */
-    bn_home:"Bosh", bn_check:"Tekshiruv", bn_meds:"Dorilar", bn_menu:"Menu",
+    prof_title:"Mening Profilim", achievements:"Yutuqlar", stats_title:"Statistika",
+    lang_name:"O'zbek",
   },
-
   ru: {
     nav_dashboard:"Главная", nav_assessment:"ИИ Анализ", nav_vitals:"Показатели",
     nav_medications:"Лекарства", nav_labTests:"Лаборатория", nav_notes:"Записи",
     nav_appointments:"Консультация", nav_history:"История", nav_profile:"Профиль",
-    nav_symptoms:"Симптомы", nav_sleep:"Сон", nav_nutrition:"Питание",
     topbar_dashboard:"Главная", topbar_sub_dashboard:"Обзор состояния здоровья",
     topbar_assessment:"ИИ Анализ", topbar_sub_assessment:"Оценка риска инсульта",
     topbar_vitals:"Показатели", topbar_sub_vitals:"Мониторинг в реальном времени",
@@ -2371,91 +1763,31 @@ const LANGS = {
     topbar_appointments:"Консультация", topbar_sub_appointments:"Запись к врачу",
     topbar_history:"История", topbar_sub_history:"Прошлые анализы",
     topbar_profile:"Мой профиль", topbar_sub_profile:"Личные данные",
-    topbar_symptoms:"Симптомы", topbar_sub_symptoms:"Проверка симптомов",
-    topbar_sleep:"Сон", topbar_sub_sleep:"Мониторинг сна",
-    topbar_nutrition:"Питание", topbar_sub_nutrition:"Калории и питание",
     welcome:"Добро пожаловать!", welcome_sub:"Показатели здоровья за сегодня",
-    bp_label:"АД (мм рт.ст.)", glucose_label:"Глюкоза (ммоль/л)",
-    hr_label:"Пульс (уд/мин)", bmi_label:"ИМТ",
-    no_data:"Нет данных", complete_check:"Завершите обследование",
-    for_ai:"Для AI анализа", bp_history:"История АД",
-    latest_check:"Последний анализ", today_meds:"Лекарства на сегодня",
-    all:"Все", no_meds:"Лекарства не добавлены",
-    recent_notes:"Последние записи", no_notes:"Записей нет",
-    no_analysis:"Нет анализа",
-    assessment_title:"AI Анализ риска инсульта",
-    assessment_desc:"Введите медицинские данные — AI выдаст результат за секунды",
-    ai_analyst:"AI Аналитик", form_filled:"% заполнено",
-    systolic:"Систолическое АД", diastolic:"Диастолическое",
-    heartrate:"Пульс (уд/мин)", glucose_mmol:"Глюкоза (ммоль/л)",
-    height_cm:"Рост (см)", weight_kg:"Вес (кг)",
+    bp_label:"АД (мм рт.ст.)", glucose_label:"Глюкоза (ммоль/л)", hr_label:"Пульс (уд/мин)", bmi_label:"ИМТ",
+    complete_check:"Завершите обследование", for_ai:"Для AI анализа",
+    bp_history:"История АД", latest_check:"Последний анализ",
+    today_meds:"Лекарства на сегодня", recent_notes:"Последние записи",
+    assessment_title:"AI Анализ риска инсульта", assessment_desc:"Введите данные — AI выдаст результат за секунды",
+    ai_analyst:"AI Аналитик", systolic:"Систолическое АД", diastolic:"Диастолическое",
+    heartrate:"Пульс (уд/мин)", glucose_mmol:"Глюкоза (ммоль/л)", height_cm:"Рост (см)", weight_kg:"Вес (кг)",
     age_label:"Возраст", cholesterol:"Холестерин (ммоль/л)",
-    smoking_q:"Курите?", smoking_no:"Нет", smoking_ex:"Бросил(а)", smoking_yes:"Да",
-    exercise_q:"Физическая активность", ex_none:"Никакой",
-    ex_light:"1-2 дня/нед", ex_mod:"3-4 дня/нед", ex_active:"5+ дней/нед",
-    alcohol_q:"Употребляете алкоголь?",
-    alc_none:"Нет", alc_rare:"Редко (1-2 раза в месяц)",
-    alc_often:"Часто (1-2 раза в нед)", alc_daily:"Каждый день",
-    complaints:"Жалобы и факторы риска",
+    smoking_q:"Курите?", exercise_q:"Физическая активность",
+    alcohol_q:"Употребляете алкоголь?", complaints:"Жалобы и факторы риска",
     c_headache:"Частые головные боли", c_dizziness:"Головокружение",
     c_numbness:"Слабость/онемение рук или ног", c_speech:"Нарушение речи",
-    c_bloodThick:"Густая кровь (тромбофилия)",
-    c_movement:"Нарушение движения (равновесие, координация)",
-    c_rheumatism:"Ревматизм / болезни суставов",
-    c_familyVascular:"Сердечно-сосудистые болезни в семье",
-    c_ownVascular:"Собственные сосудистые заболевания",
-    c_familyHistory:"Инсульт в семье",
-    ai_analyze:"Анализировать",
-    result_ready:"Готов к анализу",
+    c_bloodThick:"Густая кровь (тромбофилия)", c_movement:"Нарушение движения",
+    c_rheumatism:"Ревматизм / болезни суставов", c_familyVascular:"Сердечно-сосудистые болезни в семье",
+    c_ownVascular:"Собственные сосудистые заболевания", c_familyHistory:"Инсульт в семье",
+    ai_analyze:"Анализировать", result_ready:"Готов к анализу",
     result_hint:"Заполните данные слева и нажмите кнопку анализа",
-    risk_low:"Низкий риск", risk_med:"Средний риск", risk_high:"Высокий риск", risk_crit:"Критический риск",
-    vitals_title:"Показатели здоровья", vitals_desc:"Мониторинг в реальном времени",
-    v_bp:"АД", v_hr:"ПУЛЬС", v_glucose:"ГЛЮКОЗА", v_bmi:"ИМТ",
-    bp_dynamics:"Динамика АД", risk_dynamics:"Динамика риска",
-    meds_title:"Лекарства", meds_desc:"Расписание приёма",
-    add_med:"Добавить лекарство", no_meds_yet:"Лекарства не добавлены",
-    med_name:"Название", med_dose:"Дозировка", med_freq:"Время приёма",
-    med_note:"Примечание", take:"Принять",
-    lab_title:"Лабораторные анализы", lab_desc:"Результаты анализов",
-    add_lab:"Добавить анализ", no_lab:"Анализы не добавлены",
-    lab_name:"Название", lab_value:"Результат", lab_unit:"Единица", lab_ref:"Норма",
-    lab_chart:"График анализов",
-    notes_title:"Медицинские записи", notes_desc:"Заметки",
-    add_note:"Добавить запись", no_notes_yet:"Записей нет",
-    appt_title:"Консультация врача", appt_desc:"Запишитесь к специалисту",
-    book_time:"Выберите время:", phone_label:"Ваш номер телефона *",
-    phone_hint:"Используется для связи с вами",
-    complaint_label:"Жалоба / Проблема", complaint_ph:"Причина обращения к врачу...",
-    book_btn:"Записаться", sending:"Отправляется...",
-    hist_title:"История & Графики", hist_desc:"Статистика прошлых анализов",
-    risk_hist:"История риска", all_checks:"Все обследования",
-    no_hist:"Нет анализов",
-    col_date:"Дата", col_bp:"АД", col_risk:"Риск", col_level:"Уровень",
-    col_bmi:"ИМТ", col_action:"Действие",
-    prof_title:"Мой профиль", prof_desc:"Личные данные",
-    edit_profile:"Редактировать", not_filled:"Данные не заполнены",
-    achievements:"Достижения", stats_title:"Статистика",
-    analyses_count:"Анализы", meds_count:"Лекарства", notes_count:"Записи", points_count:"Баллы",
-    p_name:"Имя", p_surname:"Фамилия", p_age:"Возраст",
-    p_gender:"Пол", p_male:"Мужской", p_female:"Женский",
-    p_phone:"Телефон", p_blood:"Группа крови", p_conditions:"Хронические болезни",
-    save:"Сохранить", cancel:"Отмена",
-    symp_title:"Проверка симптомов", symp_desc:"Проверьте признаки болезни",
-    sleep_title:"Мониторинг сна", sleep_desc:"Отслеживание качества сна",
-    nutr_title:"Питание", nutr_desc:"Ежедневные калории и питание",
-    sos_title:"ЭКСТРЕННАЯ ПОМОЩЬ", sos_call:"Скорая помощь", sos_fast:"Тест FAST",
-    fast_f:"F — Лицо (Перекошено?)", fast_a:"A — Рука (Слабость в руке?)",
-    fast_s:"S — Речь (Говорит невнятно?)", fast_t:"T — Время (Звони 103!)",
-    saved:"Сохранено", deleted:"Удалено", error:"Ошибка",
-    points_suffix:"баллов", lang_name:"Русский",
-    bn_home:"Главная", bn_check:"Анализ", bn_meds:"Лекарства", bn_menu:"Меню",
+    prof_title:"Мой профиль", achievements:"Достижения", stats_title:"Статистика",
+    lang_name:"Русский",
   },
-
   en: {
     nav_dashboard:"Dashboard", nav_assessment:"AI Assessment", nav_vitals:"Vital Signs",
     nav_medications:"Medications", nav_labTests:"Lab Tests", nav_notes:"Notes",
     nav_appointments:"Consultation", nav_history:"History", nav_profile:"Profile",
-    nav_symptoms:"Symptoms", nav_sleep:"Sleep", nav_nutrition:"Nutrition",
     topbar_dashboard:"Dashboard", topbar_sub_dashboard:"Today's health overview",
     topbar_assessment:"AI Assessment", topbar_sub_assessment:"Stroke risk evaluation",
     topbar_vitals:"Vital Signs", topbar_sub_vitals:"Real-time monitoring",
@@ -2465,202 +1797,76 @@ const LANGS = {
     topbar_appointments:"Consultation", topbar_sub_appointments:"Book a doctor",
     topbar_history:"History", topbar_sub_history:"Past analyses",
     topbar_profile:"My Profile", topbar_sub_profile:"Personal information",
-    topbar_symptoms:"Symptoms", topbar_sub_symptoms:"Check symptoms",
-    topbar_sleep:"Sleep", topbar_sub_sleep:"Sleep quality tracking",
-    topbar_nutrition:"Nutrition", topbar_sub_nutrition:"Calories & food",
     welcome:"Welcome!", welcome_sub:"Your health indicators for today",
-    bp_label:"Blood Pressure (mmHg)", glucose_label:"Blood Sugar (mmol/L)",
-    hr_label:"Heart Rate (bpm)", bmi_label:"BMI",
-    no_data:"No data", complete_check:"Complete the assessment",
-    for_ai:"For AI analysis", bp_history:"Blood Pressure History",
-    latest_check:"Latest check", today_meds:"Today's Medications",
-    all:"All", no_meds:"No medications added",
-    recent_notes:"Recent Notes", no_notes:"No notes",
-    no_analysis:"No analysis",
-    assessment_title:"AI Stroke Risk Analysis",
-    assessment_desc:"Enter your medical data — AI provides results in seconds",
-    ai_analyst:"AI Analyst", form_filled:"% filled",
-    systolic:"Systolic blood pressure", diastolic:"Diastolic",
-    heartrate:"Heart rate (bpm)", glucose_mmol:"Blood sugar (mmol/L)",
-    height_cm:"Height (cm)", weight_kg:"Weight (kg)",
+    bp_label:"Blood Pressure (mmHg)", glucose_label:"Blood Sugar (mmol/L)", hr_label:"Heart Rate (bpm)", bmi_label:"BMI",
+    complete_check:"Complete the assessment", for_ai:"For AI analysis",
+    bp_history:"Blood Pressure History", latest_check:"Latest check",
+    today_meds:"Today's Medications", recent_notes:"Recent Notes",
+    assessment_title:"AI Stroke Risk Analysis", assessment_desc:"Enter your medical data — AI provides results in seconds",
+    ai_analyst:"AI Analyst", systolic:"Systolic blood pressure", diastolic:"Diastolic",
+    heartrate:"Heart rate (bpm)", glucose_mmol:"Blood sugar (mmol/L)", height_cm:"Height (cm)", weight_kg:"Weight (kg)",
     age_label:"Age", cholesterol:"Cholesterol (mmol/L)",
-    smoking_q:"Do you smoke?", smoking_no:"No", smoking_ex:"Quit", smoking_yes:"Yes",
-    exercise_q:"Physical activity", ex_none:"None",
-    ex_light:"1-2 days/week", ex_mod:"3-4 days/week", ex_active:"5+ days/week",
-    alcohol_q:"Do you drink alcohol?",
-    alc_none:"No", alc_rare:"Rarely (1-2 times/month)",
-    alc_often:"Often (1-2 times/week)", alc_daily:"Every day",
-    complaints:"Complaints & risk factors",
+    smoking_q:"Do you smoke?", exercise_q:"Physical activity",
+    alcohol_q:"Do you drink alcohol?", complaints:"Complaints & risk factors",
     c_headache:"Frequent headaches", c_dizziness:"Dizziness",
     c_numbness:"Arm/leg weakness or numbness", c_speech:"Speech difficulty",
-    c_bloodThick:"Thick blood (thrombophilia)",
-    c_movement:"Movement disorder (balance, coordination)",
-    c_rheumatism:"Rheumatism / joint diseases",
-    c_familyVascular:"Family history of vascular disease",
-    c_ownVascular:"Personal vascular disease",
-    c_familyHistory:"Family history of stroke",
-    ai_analyze:"Analyze with AI",
-    result_ready:"Ready to analyze",
+    c_bloodThick:"Thick blood (thrombophilia)", c_movement:"Movement disorder",
+    c_rheumatism:"Rheumatism / joint diseases", c_familyVascular:"Family history of vascular disease",
+    c_ownVascular:"Personal vascular disease", c_familyHistory:"Family history of stroke",
+    ai_analyze:"Analyze with AI", result_ready:"Ready to analyze",
     result_hint:"Fill in the data on the left and click the AI analysis button",
-    risk_low:"Low risk", risk_med:"Medium risk", risk_high:"High risk", risk_crit:"Critical risk",
-    vitals_title:"Vital Signs", vitals_desc:"Real-time monitoring",
-    v_bp:"BLOOD PRESSURE", v_hr:"HEART RATE", v_glucose:"GLUCOSE", v_bmi:"BMI",
-    bp_dynamics:"Blood Pressure Dynamics", risk_dynamics:"Risk Score Dynamics",
-    meds_title:"Medications", meds_desc:"Medication schedule",
-    add_med:"Add Medication", no_meds_yet:"No medications added",
-    med_name:"Name", med_dose:"Dosage", med_freq:"Schedule",
-    med_note:"Note", take:"Take",
-    lab_title:"Laboratory Tests", lab_desc:"Lab results",
-    add_lab:"Add Lab Result", no_lab:"No lab results added",
-    lab_name:"Test name", lab_value:"Result", lab_unit:"Unit", lab_ref:"Reference",
-    lab_chart:"Lab Results Chart",
-    notes_title:"Medical Notes", notes_desc:"Notes",
-    add_note:"Add Note", no_notes_yet:"No notes",
-    appt_title:"Doctor Consultation", appt_desc:"Meet with specialists",
-    book_time:"Select time:", phone_label:"Your phone number *",
-    phone_hint:"Used to contact you",
-    complaint_label:"Complaint / Problem", complaint_ph:"Reason for consultation...",
-    book_btn:"Book", sending:"Sending...",
-    hist_title:"History & Charts", hist_desc:"Past analyses statistics",
-    risk_hist:"Risk Score History", all_checks:"All Assessments",
-    no_hist:"No analyses",
-    col_date:"Date", col_bp:"BP", col_risk:"Risk", col_level:"Level",
-    col_bmi:"BMI", col_action:"Action",
-    prof_title:"My Profile", prof_desc:"Personal information",
-    edit_profile:"Edit", not_filled:"Information not filled",
-    achievements:"Achievements", stats_title:"Statistics",
-    analyses_count:"Analyses", meds_count:"Medications", notes_count:"Notes", points_count:"Points",
-    p_name:"First name", p_surname:"Last name", p_age:"Age",
-    p_gender:"Gender", p_male:"Male", p_female:"Female",
-    p_phone:"Phone", p_blood:"Blood type", p_conditions:"Chronic conditions",
-    save:"Save", cancel:"Cancel",
-    symp_title:"Symptom Checker", symp_desc:"Check disease signs",
-    sleep_title:"Sleep Monitor", sleep_desc:"Track sleep quality",
-    nutr_title:"Nutrition", nutr_desc:"Daily calories & food",
-    sos_title:"EMERGENCY", sos_call:"Emergency Services", sos_fast:"FAST Test",
-    fast_f:"F — Face (Drooping?)", fast_a:"A — Arms (Weakness?)",
-    fast_s:"S — Speech (Slurred?)", fast_t:"T — Time (Call 103 now!)",
-    saved:"Saved", deleted:"Deleted", error:"Error",
-    points_suffix:"points", lang_name:"English",
-    bn_home:"Home", bn_check:"Check", bn_meds:"Meds", bn_menu:"Menu",
+    prof_title:"My Profile", achievements:"Achievements", stats_title:"Statistics",
+    lang_name:"English",
   }
 };
 
 let currentLang = localStorage.getItem('ng_lang') || 'uz';
-function t(key) { return (LANGS[currentLang] || LANGS.uz)[key] || key; }
+function t(key) { return (LANGS[currentLang]||LANGS.uz)[key] || key; }
 
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('ng_lang', lang);
   applyLangToUI();
   const names = {uz:"🇺🇿 O'zbek", ru:"🇷🇺 Русский", en:"🇬🇧 English"};
-  toast(names[lang] || lang, 'info');
+  toast(names[lang]||lang, 'info');
 }
 
 function applyLangToUI() {
-  // — Sidebar nav items —
-  const navMap = {
-    'nav-dashboard':'nav_dashboard','nav-assessment':'nav_assessment','nav-vitals':'nav_vitals',
-    'nav-medications':'nav_medications','nav-labTests':'nav_labTests','nav-notes':'nav_notes',
-    'nav-appointments':'nav_appointments','nav-history':'nav_history','nav-profile':'nav_profile',
-    'nav-symptoms':'nav_symptoms','nav-sleep':'nav_sleep','nav-nutrition':'nav_nutrition'
-  };
-  for (const [id, key] of Object.entries(navMap)) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-    // last text node
-    const nodes = [...el.childNodes].filter(n => n.nodeType === 3);
-    if (nodes.length) nodes[nodes.length-1].textContent = ' ' + t(key);
-    else el.childNodes[el.childNodes.length-1].textContent = ' ' + t(key);
-  }
-
-  // — Bottom nav —
-  const bnMap = {'bn-dashboard':'bn_home','bn-assessment':'bn_check','bn-medications':'bn_meds'};
-  for (const [id, key] of Object.entries(bnMap)) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-    const span = el.querySelector('span');
-    if (span) span.textContent = t(key);
-  }
-  const menuEl = document.getElementById('bn-menu');
-  if (menuEl) { const sp = menuEl.querySelector('span'); if(sp) sp.textContent = t('bn_menu'); }
-
-  // — Topbar title & sub —
-  const pg = (typeof state !== 'undefined' && state.currentPage) ? state.currentPage : 'dashboard';
-  const ttEl = document.getElementById('topbarTitle');
-  const tsEl = document.getElementById('topbarSub');
-  if (ttEl) ttEl.textContent = t('topbar_' + pg) || t('nav_' + pg);
-  if (tsEl) tsEl.textContent = t('topbar_sub_' + pg) || '';
-
-  // — Dashboard —
-  _setText('dashBPStatus','no_data');
-  _setText('dashGlucoseStatus','no_data');
-  _setText('dashHRStatus','no_data');
-  _setText('dashBMIStatus','no_data');
-
-  // — All data-i18n elements —
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    const attr = el.getAttribute('data-i18n-attr');
-    if (attr) el.setAttribute(attr, t(key));
-    else el.textContent = t(key);
+    el.textContent = t(key);
   });
-
-  // — All data-i18n-html elements —
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    el.innerHTML = t(el.getAttribute('data-i18n-html'));
-  });
-
-  // — select options —
-  _setOpts('smoking', ['smoking_no','smoking_ex','smoking_yes']);
-  _setOpts('exercise', ['ex_none','ex_light','ex_mod','ex_active']);
-  _setOpts('alcohol',  ['alc_none','alc_rare','alc_often','alc_daily']);
-
-  // — sidebar points label —
-  const spEl = document.getElementById('sidebarPoints');
-  if (spEl) {
-    const pts = (typeof state !== 'undefined') ? state.points : 0;
-    spEl.textContent = pts;
-  }
-
-  // — lang switcher active state —
-  document.querySelectorAll('.lang-pill').forEach(btn => {
-    const l = btn.getAttribute('data-lang');
-    btn.style.background = l === currentLang ? 'rgba(230,57,80,0.18)' : 'transparent';
-    btn.style.color = l === currentLang ? 'var(--accent)' : 'var(--text2)';
-    btn.style.border = l === currentLang ? '1px solid rgba(230,57,80,0.5)' : '1px solid var(--border)';
-  });
-
-  // re-render current page so dynamic content also translates
-  if (typeof renderCurrentPage === 'function') renderCurrentPage();
-}
-
-function _setText(id, key) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = t(key);
-}
-
-function _setOpts(selectId, keys) {
-  const sel = document.getElementById(selectId);
-  if (!sel) return;
-  const opts = sel.querySelectorAll('option');
-  keys.forEach((key, i) => { if (opts[i]) opts[i].textContent = t(key); });
+  const pg = state.currentPage;
+  const ttEl = document.getElementById('topbarTitle');
+  const tsEl = document.getElementById('topbarSub');
+  if (ttEl) ttEl.textContent = t('topbar_' + pg);
+  if (tsEl) tsEl.textContent = t('topbar_sub_' + pg) || '';
+  renderLangSwitcher();
 }
 
 function previewLang(lang) { currentLang = lang; applyLangToUI(); }
 
-/* ══════════════════════════════════════════════
-   ONBOARDING
-══════════════════════════════════════════════ */
+function renderLangSwitcher() {
+  const el = document.getElementById('langSwitcher');
+  if (!el) return;
+  const labels = {uz:'🇺🇿 UZ', ru:'🇷🇺 RU', en:'🇬🇧 EN'};
+  el.innerHTML = ['uz','ru','en'].map(l => {
+    const active = currentLang === l;
+    return `<button onclick="setLang('${l}')"
+      style="padding:5px 11px;border-radius:20px;font-size:0.73rem;font-weight:700;letter-spacing:0.03em;cursor:pointer;transition:all 0.25s;
+             border:1px solid ${active?'rgba(230,57,80,0.5)':'var(--border)'};background:${active?'rgba(230,57,80,0.18)':'transparent'};
+             color:${active?'var(--accent)':'var(--text2)'};">${labels[l]}</button>`;
+  }).join('');
+}
+
+/* ── ONBOARDING ── */
 let obStep = 0;
 function showOnboarding() {
-  const done = localStorage.getItem('ng_onboarded');
-  if (!done) {
+  if (!localStorage.getItem('ng_onboarded')) {
     document.getElementById('onboarding').style.display = 'flex';
     document.getElementById('onboarding').style.flexDirection = 'column';
   }
 }
-
 function obNext() {
   if (obStep === 2) { finishOnboarding(); return; }
   document.getElementById('ob-' + obStep).style.display = 'none';
@@ -2668,11 +1874,8 @@ function obNext() {
   obStep++;
   document.getElementById('ob-' + obStep).style.display = 'block';
   document.getElementById('dot-' + obStep).classList.add('active');
-  if (obStep === 2) {
-    document.getElementById('obNextBtn').innerHTML = '<i class="fas fa-check"></i> Boshlash';
-  }
+  if (obStep === 2) document.getElementById('obNextBtn').innerHTML = '<i class="fas fa-check"></i> Boshlash';
 }
-
 function finishOnboarding() {
   const name = document.getElementById('ob-name').value.trim();
   const age  = document.getElementById('ob-age').value.trim();
@@ -2684,558 +1887,21 @@ function finishOnboarding() {
   document.getElementById('onboarding').style.display = 'none';
   toast(t('welcome') + (name ? ' ' + name + '!' : ''), 'success');
 }
-
 function skipOnboarding() {
   localStorage.setItem('ng_onboarded', '1');
   document.getElementById('onboarding').style.display = 'none';
 }
 
-/* ══════════════════════════════════════════════
-   PUSH NOTIFICATIONS (Dori eslatmalari)
-══════════════════════════════════════════════ */
-function requestNotificationPermission() {
-  if (!('Notification' in window)) { toast("Bu brauzer bildirishnomalarni qo'llab-quvvatlamaydi", 'warn'); return; }
-  if (Notification.permission === 'granted') { toast('Bildirishnomalar allaqachon yoqilgan ✅', 'info'); setupMedReminders(); return; }
-  Notification.requestPermission().then(p => {
-    if (p === 'granted') { toast('✅ Bildirishnomalar yoqildi! Dori vaqtlarida xabar olasiz.', 'success'); setupMedReminders(); }
-    else { toast('Bildirishnomalar rad etildi', 'warn'); }
-  });
-}
-
-function setupMedReminders() {
-  const meds = state.medications.filter(m => m.times && m.times.length);
-  if (!meds.length) return;
-  meds.forEach(med => {
-    med.times.forEach(timeStr => {
-      scheduleNotification(med.name, timeStr);
-    });
-  });
-}
-
-function scheduleNotification(medName, timeStr) {
-  const [h, m] = timeStr.split(':').map(Number);
-  const now = new Date();
-  const target = new Date();
-  target.setHours(h, m, 0, 0);
-  if (target <= now) target.setDate(target.getDate() + 1);
-  const delay = target - now;
-  setTimeout(() => {
-    if (Notification.permission === 'granted') {
-      new Notification('💊 Dori vaqti!', {
-        body: medName + ' ichish vaqti keldi — ' + timeStr,
-        icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💊</text></svg>'
-      });
-    }
-    scheduleNotification(medName, timeStr); // har kuni takrorlash
-  }, delay);
-}
-
-function checkNotificationStatus() {
-  if (!('Notification' in window)) return 'unsupported';
-  return Notification.permission;
-}
-
-/* ══════════════════════════════════════════════
-   PDF REPORT
-══════════════════════════════════════════════ */
-function downloadPDFReport() {
-  const last = state.history[0];
-  if (!last) { toast("Avval AI tekshiruv o'tkazing!", 'err'); return; }
-  const p = state.profile;
-  const name = (p.name || '') + ' ' + (p.surname || '') || 'Bemor';
-  const date = new Date(last.date).toLocaleDateString('uz-UZ');
-
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<style>
-  body{font-family:Arial,sans-serif;padding:40px;color:#1a1a2e;max-width:800px;margin:0 auto;}
-  .header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #e63950;padding-bottom:20px;margin-bottom:30px;}
-  .logo{font-size:1.8rem;font-weight:900;color:#e63950;}
-  .logo span{color:#1a1a2e;}
-  h2{color:#e63950;margin-top:24px;margin-bottom:12px;font-size:1.1rem;}
-  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-  .info-box{background:#f8f9ff;border:1px solid #e0e4ff;border-radius:10px;padding:14px;}
-  .info-label{font-size:0.75rem;color:#666;margin-bottom:4px;}
-  .info-value{font-size:1.1rem;font-weight:700;color:#1a1a2e;}
-  .risk-badge{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;font-size:1.1rem;margin:12px 0;}
-  .risk-low{background:#d1fae5;color:#065f46;}
-  .risk-med{background:#fef3c7;color:#92400e;}
-  .risk-high{background:#fee2e2;color:#991b1b;}
-  .risk-crit{background:#fce7f3;color:#831843;}
-  .factors{margin-top:16px;}
-  .factor-row{display:flex;justify-content:space-between;padding:8px 14px;border-radius:8px;margin-bottom:6px;font-size:0.88rem;}
-  .factor-good{background:#f0fdf4;color:#166534;}
-  .factor-warn{background:#fffbeb;color:#854d0e;}
-  .factor-bad{background:#fef2f2;color:#991b1b;}
-  .footer{margin-top:40px;padding-top:16px;border-top:1px solid #eee;font-size:0.75rem;color:#999;text-align:center;}
-  .med-item{padding:8px 14px;background:#f8f9ff;border-radius:8px;margin-bottom:6px;font-size:0.88rem;}
-</style></head><body>
-<div class="header">
-  <div><div class="logo">Neuro<span>Guard</span></div><div style="font-size:0.8rem;color:#666;margin-top:4px;">AI Pro v2.1 — Tibbiy Hisobot</div></div>
-  <div style="text-align:right;font-size:0.85rem;color:#666;">${date}<br>${name}</div>
-</div>
-
-<h2>🎯 Xavf Baholash Natijasi</h2>
-<div class="risk-badge ${last.score < 25 ? 'risk-low' : last.score < 50 ? 'risk-med' : last.score < 75 ? 'risk-high' : 'risk-crit'}">
-  ${last.level} — ${last.score}%
-</div>
-<div style="color:#666;font-size:0.88rem;margin-bottom:20px;">${last.summary || ''}</div>
-
-<h2>📊 Ko'rsatkichlar</h2>
-<div class="info-grid">
-  ${last.factors ? last.factors.map(f => `<div class="info-box"><div class="info-label">${f.label}</div><div class="info-value">${f.value}</div></div>`).join('') : ''}
-</div>
-
-<h2>🔍 Omillar Tahlili</h2>
-<div class="factors">
-  ${last.factors ? last.factors.map(f => `<div class="factor-row factor-${f.status}"><span>${f.label}</span><span>${f.value}</span></div>`).join('') : ''}
-</div>
-
-${state.medications.length ? `<h2>💊 Dori-Darmonlar</h2>${state.medications.map(m => `<div class="med-item">💊 <b>${m.name}</b> — ${m.dose || ''} ${m.freq || ''}</div>`).join('')}` : ''}
-
-<div class="footer">
-  NeuroGuard AI Pro — Bu hisobot faqat ma'lumot berish uchun. Tibbiy diagnoz emas.<br>
-  Yaratilgan: ${new Date().toLocaleString('uz-UZ')}
-</div>
-</body></html>`;
-
-  const blob = new Blob([html], {type: 'text/html'});
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href     = url;
-  a.download = 'NeuroGuard_Hisobot_' + new Date().toISOString().slice(0,10) + '.html';
-  a.click();
-  URL.revokeObjectURL(url);
-  toast('📄 Hisobot yuklab olindi!', 'success');
-}
-
-/* ══════════════════════════════════════════════
-   SYMPTOM CHECKER
-══════════════════════════════════════════════ */
-const SYMPTOMS_LIST = [
-  {id:'headache',    label:'Bosh og\'riq',      icon:'🤕', weight:3},
-  {id:'dizziness',   label:'Bosh aylanishi',    icon:'💫', weight:4},
-  {id:'chest',       label:'Ko\'krak og\'rig\'i', icon:'💔', weight:5},
-  {id:'shortbreath', label:'Nafas qisishi',     icon:'😮‍💨', weight:4},
-  {id:'nausea',      label:'Ko\'ngil aynishi',  icon:'🤢', weight:2},
-  {id:'fatigue',     label:'Charchoq',          icon:'😴', weight:2},
-  {id:'numbness',    label:'Uvishish',          icon:'🦾', weight:4},
-  {id:'vision',      label:'Ko\'rish buzilishi', icon:'👁', weight:5},
-  {id:'speech',      label:'Nutq buzilishi',    icon:'🗣', weight:5},
-  {id:'weakness',    label:'Mushak zaifligi',   icon:'💪', weight:3},
-  {id:'fever',       label:'Harorat',           icon:'🌡', weight:2},
-  {id:'swelling',    label:'Shish',             icon:'🦵', weight:3},
-  {id:'heartbeat',   label:'Yurak urish o\'zgarishi', icon:'❤️', weight:4},
-  {id:'memory',      label:'Xotira susaishi',   icon:'🧠', weight:3},
-  {id:'balance',     label:'Muvozanat yo\'qotish', icon:'⚖️', weight:4},
-  {id:'sweating',    label:'Ko\'p terlash',     icon:'💧', weight:2},
-];
-
-const DISEASE_MAP = [
-  {name:'Insult (Stroke)', icon:'🧠', color:'#ef4444',
-   symptoms:['dizziness','numbness','vision','speech','weakness','balance','headache'],
-   minMatch:3, desc:"Shoshilinch tibbiy yordam zarur. Darhol 103 ga qo'ng'iroq qiling."},
-  {name:'Yurak xurujи', icon:'❤️', color:'#f97316',
-   symptoms:['chest','shortbreath','sweating','nausea','fatigue','heartbeat'],
-   minMatch:3, desc:"Yurak xurujи belgilari. Darhol ambulatoriyaga boring."},
-  {name:'Gipertoniya', icon:'🩸', color:'#ef4444',
-   symptoms:['headache','dizziness','heartbeat','shortbreath','fatigue'],
-   minMatch:2, desc:"Qon bosimini o'lchang. Shifokor maslahati tavsiya etiladi."},
-  {name:'Qandli diabet', icon:'🍬', color:'#f59e0b',
-   symptoms:['fatigue','vision','numbness','sweating','weakness'],
-   minMatch:2, desc:"Qand darajasini tekshiring."},
-  {name:'Migren', icon:'🤕', color:'#8b5cf6',
-   symptoms:['headache','vision','nausea','dizziness'],
-   minMatch:2, desc:"Dam olish va dori ichish tavsiya etiladi."},
-  {name:'Umumiy charchоq', icon:'😴', color:'#6b7280',
-   symptoms:['fatigue','headache','dizziness','nausea'],
-   minMatch:2, desc:"Ko'proq dam oling va suv iching."},
-];
-
-let selectedSymptoms = new Set();
-
-function renderSymptoms() {
-  const grid = document.getElementById('symptomGrid');
-  if (!grid) return;
-  grid.innerHTML = SYMPTOMS_LIST.map(s => `
-    <div onclick="toggleSymptom('${s.id}',this)"
-      id="sym-${s.id}"
-      style="padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;
-             display:flex;align-items:center;gap:8px;font-size:0.82rem;transition:all 0.2s;
-             background:var(--card);user-select:none;">
-      <span style="font-size:1.2rem;">${s.icon}</span>
-      <span>${s.label}</span>
-    </div>`).join('');
-  selectedSymptoms.clear();
-  document.getElementById('symptomCount').textContent = '0 ta tanlangan';
-  document.getElementById('symptomResult').innerHTML = `
-    <div class="card" style="min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-      <i class="fas fa-search" style="font-size:3rem;color:var(--text3);margin-bottom:16px;opacity:0.3;"></i>
-      <div style="color:var(--text2);font-size:0.9rem;">Belgilarni tanlang va tekshirish bosing</div>
-    </div>`;
-}
-
-function toggleSymptom(id, el) {
-  if (selectedSymptoms.has(id)) {
-    selectedSymptoms.delete(id);
-    el.style.borderColor = 'var(--border)';
-    el.style.background  = 'var(--card)';
-    el.style.color       = 'var(--text)';
-  } else {
-    selectedSymptoms.add(id);
-    el.style.borderColor = 'var(--accent)';
-    el.style.background  = 'rgba(230,57,80,0.1)';
-    el.style.color       = 'var(--accent)';
-  }
-  document.getElementById('symptomCount').textContent = selectedSymptoms.size + ' ta tanlangan';
-}
-
-function checkSymptoms() {
-  if (!selectedSymptoms.size) { toast("Kamida 1 ta belgi tanlang", 'err'); return; }
-  const sel = Array.from(selectedSymptoms);
-  const results = [];
-  DISEASE_MAP.forEach(d => {
-    const matched = sel.filter(s => d.symptoms.includes(s));
-    if (matched.length >= d.minMatch) {
-      const pct = Math.round((matched.length / d.symptoms.length) * 100);
-      results.push({...d, matched, pct});
-    }
-  });
-  results.sort((a,b) => b.pct - a.pct);
-
-  const resEl = document.getElementById('symptomResult');
-  if (!results.length) {
-    resEl.innerHTML = `<div class="card" style="text-align:center;padding:30px;">
-      <div style="font-size:3rem;margin-bottom:12px;">✅</div>
-      <div style="font-weight:700;color:var(--green);margin-bottom:8px;">Jiddiy belgi aniqlanmadi</div>
-      <div style="color:var(--text2);font-size:0.88rem;">Siz tanlagan belgilar jiddiy kasallik bilan bog'liq emas. Biroq uzoq davom etsa shifokorga murojaat qiling.</div>
-    </div>`;
-    return;
-  }
-
-  resEl.innerHTML = results.map((r, i) => `
-    <div class="card" style="margin-bottom:16px;${i===0 ? 'border-color:'+r.color+';' : ''}">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <span style="font-size:1.8rem;">${r.icon}</span>
-        <div style="flex:1;">
-          <div style="font-weight:700;font-size:1rem;">${r.name}</div>
-          <div style="font-size:0.78rem;color:var(--text2);">${r.matched.length} ta mos belgi</div>
-        </div>
-        <div style="font-family:var(--font-mono);font-size:1.1rem;font-weight:700;color:${r.color};">${r.pct}%</div>
-      </div>
-      <div class="progress-track" style="height:6px;margin-bottom:12px;">
-        <div style="width:${r.pct}%;height:100%;border-radius:3px;background:${r.color};transition:width 0.6s;"></div>
-      </div>
-      <div style="font-size:0.82rem;color:var(--text2);padding:10px 12px;background:var(--bg3);border-radius:8px;">
-        ${r.desc}
-      </div>
-      ${i===0 && (r.name.includes('Insult') || r.name.includes('Yurak xuruj')) ? `
-      <button onclick="document.getElementById('sosModal').classList.add('active')"
-        style="margin-top:12px;width:100%;padding:10px;border-radius:10px;border:none;
-               background:${r.color};color:white;font-weight:700;cursor:pointer;font-size:0.88rem;">
-        🚨 Favqulodda yordam
-      </button>` : ''}
-    </div>`).join('');
-}
-
-/* ══════════════════════════════════════════════
-   SLEEP MONITOR
-══════════════════════════════════════════════ */
-let sleepQuality = 3;
-let sleepChartInst = null;
-
-function setSleepQuality(q, btn) {
-  sleepQuality = q;
-  document.querySelectorAll('#sleepQualityBtns button').forEach(b => {
-    b.style.background = 'var(--card)';
-    b.style.borderColor = 'var(--border)';
-  });
-  btn.style.background   = 'rgba(59,130,246,0.2)';
-  btn.style.borderColor  = 'var(--blue)';
-}
-
-function saveSleep() {
-  const start = document.getElementById('sleepStart').value;
-  const end   = document.getElementById('sleepEnd').value;
-  const note  = document.getElementById('sleepNote').value;
-  if (!start || !end) { toast("Uxlash va uyg'onish vaqtini kiriting", 'err'); return; }
-
-  let startH = parseInt(start.split(':')[0]), startM = parseInt(start.split(':')[1]);
-  let endH   = parseInt(end.split(':')[0]),   endM   = parseInt(end.split(':')[1]);
-  let hours  = endH + endM/60 - startH - startM/60;
-  if (hours < 0) hours += 24;
-  hours = Math.round(hours * 10) / 10;
-
-  const entry = {
-    date: new Date().toISOString().slice(0,10),
-    start, end, hours, quality: sleepQuality, note,
-    saved: new Date().toISOString()
-  };
-  const sleepData = JSON.parse(localStorage.getItem('ng_sleep') || '[]');
-  sleepData.unshift(entry);
-  if (sleepData.length > 30) sleepData.pop();
-  localStorage.setItem('ng_sleep', JSON.stringify(sleepData));
-  toast('✅ Uyqu ma\'lumoti saqlandi! ' + hours + ' soat', 'success');
-  renderSleep();
-}
-
-function renderSleep() {
-  const sleepData = JSON.parse(localStorage.getItem('ng_sleep') || '[]');
-  // Stats
-  if (sleepData.length) {
-    const avgH = (sleepData.reduce((s,d) => s+d.hours, 0) / sleepData.length).toFixed(1);
-    const avgQ = (sleepData.reduce((s,d) => s+d.quality, 0) / sleepData.length).toFixed(1);
-    const avgEl = document.getElementById('avgSleep');
-    const avgQEl = document.getElementById('avgQuality');
-    if (avgEl) avgEl.textContent = avgH;
-    if (avgQEl) avgQEl.textContent = avgQ + '/5';
-  }
-  // History
-  const histEl = document.getElementById('sleepHistory');
-  if (histEl) {
-    if (!sleepData.length) {
-      histEl.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;">Hali uyqu ma\'lumoti yo\'q</div>';
-    } else {
-      histEl.innerHTML = sleepData.slice(0,7).map(d => {
-        const qual = ['','😞','😐','🙂','😊','😄'][d.quality] || '🙂';
-        const bar  = Math.min(100, (d.hours / 10) * 100);
-        const col  = d.hours >= 7 ? 'var(--green)' : d.hours >= 5 ? 'var(--yellow)' : 'var(--accent)';
-        return `<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;margin-bottom:8px;border:1px solid var(--border);">
-          <div style="font-size:1.4rem;">${qual}</div>
-          <div style="flex:1;">
-            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
-              <span style="font-size:0.85rem;font-weight:600;">${d.date}</span>
-              <span style="font-family:var(--font-mono);font-size:0.85rem;color:${col};">${d.hours}h</span>
-            </div>
-            <div class="progress-track" style="height:5px;">
-              <div style="width:${bar}%;height:100%;border-radius:3px;background:${col};"></div>
-            </div>
-            ${d.note ? '<div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">'+d.note+'</div>' : ''}
-          </div>
-          <span style="font-size:0.75rem;color:var(--text3);">${d.start}–${d.end}</span>
-        </div>`;
-      }).join('');
-    }
-  }
-  // Chart
-  const ctx = document.getElementById('sleepChart');
-  if (ctx && sleepData.length) {
-    if (sleepChartInst) sleepChartInst.destroy();
-    const last7 = sleepData.slice(0,7).reverse();
-    sleepChartInst = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: last7.map(d => d.date.slice(5)),
-        datasets: [{
-          label: 'Uyqu soati',
-          data: last7.map(d => d.hours),
-          backgroundColor: last7.map(d => d.hours >= 7 ? 'rgba(16,185,129,0.7)' : d.hours >= 5 ? 'rgba(245,158,11,0.7)' : 'rgba(230,57,80,0.7)'),
-          borderRadius: 8
-        }]
-      },
-      options: {
-        responsive:true, maintainAspectRatio:true,
-        plugins:{legend:{display:false}},
-        scales:{
-          y:{min:0,max:12,grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#8899bb',font:{size:11}}},
-          x:{grid:{display:false},ticks:{color:'#8899bb',font:{size:11}}}
-        }
-      }
-    });
-  }
-}
-
-/* ══════════════════════════════════════════════
-   NUTRITION TRACKER
-══════════════════════════════════════════════ */
-const QUICK_FOODS = [
-  {name:'Palov', cal:450, protein:12, carbs:60, fat:18},
-  {name:'Non (1 bo\'lak)', cal:80, protein:3, carbs:15, fat:1},
-  {name:'Tuxum', cal:70, protein:6, carbs:1, fat:5},
-  {name:'Qozon kabob', cal:320, protein:25, carbs:5, fat:22},
-  {name:'Sho\'rva', cal:180, protein:15, carbs:8, fat:10},
-  {name:'Choy', cal:5, protein:0, carbs:1, fat:0},
-  {name:'Sut (200ml)', cal:120, protein:6, carbs:10, fat:6},
-  {name:'Banan', cal:90, protein:1, carbs:23, fat:0},
-  {name:'Olma', cal:52, protein:0, carbs:14, fat:0},
-  {name:'Yogurt', cal:100, protein:5, carbs:10, fat:4},
-];
-
-let nutritionChartInst = null;
-
-function renderNutrition() {
-  // Quick foods
-  const qf = document.getElementById('quickFoods');
-  if (qf) {
-    qf.innerHTML = QUICK_FOODS.map(f =>
-      `<button onclick="quickAddFood(${JSON.stringify(f).replace(/"/g,'&quot;')})"
-        style="padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--card);
-               color:var(--text2);font-size:0.78rem;cursor:pointer;transition:all 0.2s;"
-        onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'"
-        onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">
-        ${f.name}
-      </button>`
-    ).join('');
-  }
-  updateNutritionTotals();
-}
-
-function quickAddFood(food) {
-  const foods = JSON.parse(localStorage.getItem('ng_foods') || '[]');
-  foods.unshift({...food, meal: 'snack', amount: 100, time: new Date().toISOString()});
-  localStorage.setItem('ng_foods', JSON.stringify(foods));
-  updateNutritionTotals();
-  toast('✅ ' + food.name + ' qo\'shildi', 'success');
-}
-
-function addFood() {
-  const name    = document.getElementById('foodName').value.trim();
-  const cal     = parseFloat(document.getElementById('foodCal').value)     || 0;
-  const amount  = parseFloat(document.getElementById('foodAmount').value)  || 100;
-  const protein = parseFloat(document.getElementById('foodProtein').value) || 0;
-  const carbs   = parseFloat(document.getElementById('foodCarbs').value)   || 0;
-  const fat     = parseFloat(document.getElementById('foodFat').value)     || 0;
-  const meal    = document.getElementById('foodMeal').value;
-  if (!name || !cal) { toast("Ovqat nomi va kaloriyasini kiriting", 'err'); return; }
-
-  const foods = JSON.parse(localStorage.getItem('ng_foods') || '[]');
-  foods.unshift({name, cal, amount, protein, carbs, fat, meal, time: new Date().toISOString()});
-  localStorage.setItem('ng_foods', JSON.stringify(foods));
-  ['foodName','foodCal','foodAmount','foodProtein','foodCarbs','foodFat'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  updateNutritionTotals();
-  toast('✅ ' + name + ' qo\'shildi', 'success');
-}
-
-function clearFoods() {
-  const today = new Date().toISOString().slice(0,10);
-  let foods = JSON.parse(localStorage.getItem('ng_foods') || '[]');
-  foods = foods.filter(f => !f.time.startsWith(today));
-  localStorage.setItem('ng_foods', JSON.stringify(foods));
-  updateNutritionTotals();
-  toast('Bugungi ovqatlar tozalandi', 'info');
-}
-
-function updateNutritionTotals() {
-  const today = new Date().toISOString().slice(0,10);
-  const foods = JSON.parse(localStorage.getItem('ng_foods') || '[]')
-    .filter(f => f.time && f.time.startsWith(today));
-
-  const totals = foods.reduce((acc, f) => ({
-    cal:     acc.cal     + (f.cal     || 0),
-    protein: acc.protein + (f.protein || 0),
-    carbs:   acc.carbs   + (f.carbs   || 0),
-    fat:     acc.fat     + (f.fat     || 0),
-  }), {cal:0, protein:0, carbs:0, fat:0});
-
-  const setEl = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-  setEl('totalCalories', Math.round(totals.cal));
-  setEl('totalProtein',  Math.round(totals.protein) + 'g');
-  setEl('totalCarbs',    Math.round(totals.carbs) + 'g');
-  setEl('totalFat',      Math.round(totals.fat) + 'g');
-
-  const pct = Math.min(100, Math.round((totals.cal / 2000) * 100));
-  const pb  = document.getElementById('calProgressBar');
-  const cp  = document.getElementById('calProgress');
-  if (pb) pb.style.width = pct + '%';
-  if (cp) cp.textContent = Math.round(totals.cal) + ' / 2000 kcal';
-  if (pb) pb.style.background = pct > 110 ? 'var(--accent)' : pct >= 80 ? 'var(--green)' : 'var(--blue)';
-
-  // Food list
-  const listEl = document.getElementById('foodList');
-  if (listEl) {
-    if (!foods.length) {
-      listEl.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;"><i class="fas fa-utensils" style="font-size:2rem;opacity:0.3;margin-bottom:10px;display:block;"></i>Hali ovqat qo\'shilmagan</div>';
-    } else {
-      const mealLabels = {breakfast:'🌅 Nonushta', lunch:'☀️ Tushlik', dinner:'🌙 Kechki', snack:'🍎 Gazak'};
-      listEl.innerHTML = foods.map(f => `
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;margin-bottom:8px;border:1px solid var(--border);">
-          <div style="font-size:1.1rem;">${mealLabels[f.meal]||'🍽'}</div>
-          <div style="flex:1;">
-            <div style="font-weight:600;font-size:0.88rem;">${f.name}</div>
-            <div style="font-size:0.75rem;color:var(--text3);">${f.protein||0}g oqsil · ${f.carbs||0}g uglevod · ${f.fat||0}g yog'</div>
-          </div>
-          <div style="font-family:var(--font-mono);color:var(--accent);font-weight:700;font-size:0.9rem;">${f.cal} kcal</div>
-        </div>`).join('');
-    }
-  }
-
-  // Chart
-  const ctx = document.getElementById('nutritionChart');
-  if (ctx) {
-    if (nutritionChartInst) nutritionChartInst.destroy();
-    const meals = ['breakfast','lunch','dinner','snack'];
-    const labels = ['Nonushta','Tushlik','Kechki','Gazak'];
-    const data = meals.map(m => foods.filter(f => f.meal === m).reduce((s,f) => s + (f.cal||0), 0));
-    nutritionChartInst = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels,
-        datasets:[{
-          data,
-          backgroundColor:['rgba(245,158,11,0.8)','rgba(59,130,246,0.8)','rgba(139,92,246,0.8)','rgba(16,185,129,0.8)'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive:true, maintainAspectRatio:true,
-        plugins:{legend:{position:'bottom',labels:{color:'#8899bb',font:{size:11}}}}
-      }
-    });
-  }
-}
-
-/* ══════════════════════════════════════════════
-   LANGUAGE SWITCHER in topbar
-══════════════════════════════════════════════ */
-function renderLangSwitcher() {
-  const el = document.getElementById('langSwitcher');
-  if (!el) return;
-  const labels = {uz:'🇺🇿 UZ', ru:'🇷🇺 RU', en:'🇬🇧 EN'};
-  el.innerHTML = ['uz','ru','en'].map(l => {
-    const active = currentLang === l;
-    return `<button class="lang-pill" data-lang="${l}" onclick="setLang('${l}')"
-      style="padding:5px 11px;border-radius:20px;font-size:0.73rem;font-weight:700;
-             letter-spacing:0.03em;cursor:pointer;transition:all 0.25s;
-             border:1px solid ${active?'rgba(230,57,80,0.5)':'var(--border)'};
-             background:${active?'rgba(230,57,80,0.18)':'transparent'};
-             color:${active?'var(--accent)':'var(--text2)'};
-             box-shadow:${active?'0 0 12px rgba(230,57,80,0.2)':'none'};">
-      ${labels[l]}
-    </button>`;
-  }).join('');
-}
-
-function renderCurrentPage() {
-  const pg = state.currentPage;
-  if (pg === 'dashboard') renderDashboard();
-  else if (pg === 'medications') renderMedications();
-  else if (pg === 'labTests') renderLabTests();
-  else if (pg === 'notes') renderNotes();
-  else if (pg === 'history') renderHistory();
-  else if (pg === 'appointments') renderAppointments();
-  else if (pg === 'profile') renderProfile();
-  else if (pg === 'sleep') renderSleep();
-  else if (pg === 'nutrition') renderNutrition();
-  else if (pg === 'symptoms') renderSymptoms();
-  renderLangSwitcher();
-}
-
 window.addEventListener('load', () => {
-  const savedTheme = localStorage.getItem('ng_theme') || 'dark';
-  applyTheme(savedTheme);
+  applyTheme(localStorage.getItem('ng_theme') || 'dark');
+  currentLang = localStorage.getItem('ng_lang') || 'uz';
   updateSidebarProfile();
   renderDashboard();
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const navDash = document.getElementById('nav-dashboard');
-  if (navDash) navDash.classList.add('active');
-  const bnDash = document.getElementById('bn-dashboard');
-  if (bnDash) bnDash.classList.add('active');
+  document.getElementById('nav-dashboard')?.classList.add('active');
+  document.getElementById('bn-dashboard')?.classList.add('active');
   showOnboarding();
-  currentLang = localStorage.getItem('ng_lang') || 'uz';
   applyLangToUI();
   renderLangSwitcher();
-  if (Notification.permission === 'granted') setupMedReminders();
   toast(t('welcome') + ' NeuroGuard AI Pro v2.1', 'info');
 });
 
