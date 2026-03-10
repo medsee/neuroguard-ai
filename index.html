@@ -917,6 +917,38 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
         <div class="achievement-grid" id="achievementGrid"></div>
       </div>
     </div>
+    <!-- Telegram Settings Card -->
+    <div class="card" style="margin-bottom:24px;border-color:rgba(0,136,204,0.3);">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(0,136,204,0.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">✈️</div>
+        <div>
+          <div class="section-title" style="font-size:1rem;margin-bottom:2px;">Telegram Sozlamalari</div>
+          <div style="font-size:0.8rem;color:var(--text3);">Konsultatsiya xabarlari yuborilish manzili</div>
+        </div>
+        <div id="tgStatusBadge" style="margin-left:auto;"></div>
+      </div>
+      <div style="background:rgba(0,136,204,0.06);border:1px solid rgba(0,136,204,0.2);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:0.82rem;color:var(--text2);line-height:1.7;">
+        <div style="font-weight:600;color:var(--text);margin-bottom:6px;">⚙️ Qanday sozlash kerak?</div>
+        <div>1. Telegramda <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;">@BotFather</code> ga yozing → <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;">/newbot</code></div>
+        <div>2. Bot tokenini oling va pastga kiriting</div>
+        <div>3. <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;">@userinfobot</code> ga <code style="background:var(--bg3);padding:1px 6px;border-radius:4px;">/start</code> yuboring → Chat ID ni oling</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-key" style="color:var(--yellow);"></i> Bot Token</label>
+          <input class="form-input" id="tgTokenInput" placeholder="1234567890:AAF..." style="font-family:var(--font-mono);font-size:0.82rem;">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-hashtag" style="color:var(--blue);"></i> Chat ID</label>
+          <input class="form-input" id="tgChatInput" placeholder="-100123456789" style="font-family:var(--font-mono);font-size:0.82rem;">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-blue" onclick="saveTelegramSettings()" style="flex:1;justify-content:center;"><i class="fas fa-save"></i> Saqlash</button>
+        <button class="btn btn-ghost" onclick="testTelegram()" style="flex:1;justify-content:center;"><i class="fas fa-paper-plane"></i> Test yuborish</button>
+      </div>
+    </div>
+
     <div class="card">
       <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-bar"></i> Statistika</div>
       <div class="grid-4 profile-stats-grid">
@@ -1069,11 +1101,22 @@ input[type=number]::-webkit-outer-spin-button { -webkit-appearance:none; margin:
   <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('active')"><i class="fas fa-times"></i></button>
     <div class="modal-title" style="margin-bottom:4px;" id="bookDocName">Shifokor</div>
-    <div style="font-size:0.85rem;color:var(--accent);margin-bottom:16px;" id="bookDocSpec"></div>
-    <div style="font-size:0.9rem;color:var(--text2);margin-bottom:16px;">Vaqt tanlang:</div>
+    <div style="font-size:0.85rem;color:var(--accent);margin-bottom:12px;" id="bookDocSpec"></div>
+    <div style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;"><i class="fas fa-clock" style="margin-right:4px;"></i>Vaqt tanlang:</div>
     <div class="time-slots" id="bookSlots"></div>
-    <div class="form-group" style="margin-top:16px;"><label class="form-label">Muammo/Shikoyat</label><textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea></div>
-    <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;margin-top:8px;" onclick="confirmBooking()"><i class="fas fa-calendar-check"></i> Band Qilish</button>
+    <div class="form-group" style="margin-top:16px;">
+      <label class="form-label"><i class="fas fa-phone" style="color:var(--green);"></i> Telefon raqamingiz *</label>
+      <input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00" style="letter-spacing:0.03em;">
+      <div style="font-size:0.75rem;color:var(--text3);margin-top:5px;"><i class="fas fa-info-circle"></i> Shifokor siz bilan bog'lanish uchun ishlatiladi</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label"><i class="fas fa-comment-medical" style="color:var(--blue);"></i> Muammo / Shikoyat</label>
+      <textarea class="form-input" id="bookComplaint" rows="3" placeholder="Shifokorga murojaat sababi..."></textarea>
+    </div>
+    <div id="tgSendStatus" style="display:none;padding:10px 14px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;"></div>
+    <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;" onclick="confirmBooking()" id="bookSubmitBtn">
+      <i class="fas fa-calendar-check"></i> Band Qilish
+    </button>
   </div>
 </div>
 
@@ -1163,7 +1206,7 @@ function showPage(id) {
   if (id === 'notes')        renderNotes();
   if (id === 'appointments') { renderDoctors('all'); setDocFilter('all'); }
   if (id === 'history')      renderHistory();
-  if (id === 'profile')      renderProfile();
+  if (id === 'profile')      { renderProfile(); loadTgInputs(); }
   if (id === 'dashboard')    renderDashboard();
   window.scrollTo(0, 0);
 }
@@ -1665,14 +1708,109 @@ function selectSlot(el, slot) {
   selectedSlot = slot;
 }
 
-function confirmBooking() {
-  if (!selectedSlot) { toast('Vaqt tanlang!', 'err'); return; }
+/* ====================== TELEGRAM CONFIG ====================== */
+const TG_DEFAULT_TOKEN  = '8732267586:AAE2PcLwVHhyfE6AxeEzOICyIx_inV7BJ3Y';
+const TG_DEFAULT_CHATID = '@konsultatsiyas';
+function getTGToken()  { return localStorage.getItem('ng_tg_token')  || TG_DEFAULT_TOKEN; }
+function getTGChatId() { return localStorage.getItem('ng_tg_chatid') || TG_DEFAULT_CHATID; }
+
+async function sendTelegramMessage(text) {
+  const TG_BOT_TOKEN = getTGToken();
+  const TG_CHAT_ID = getTGChatId();
+  if (!TG_BOT_TOKEN || !TG_CHAT_ID) return { ok: false, demo: true };
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TG_CHAT_ID,
+        text: text,
+        parse_mode: 'HTML'
+      })
+    });
+    return await res.json();
+  } catch(e) {
+    return { ok: false, error: e.message };
+  }
+}
+
+async function confirmBooking() {
+  if (!selectedSlot) { toast("Vaqt tanlang!", 'err'); return; }
+  const phone = document.getElementById('bookPhone').value.trim();
+  if (!phone) { toast("Telefon raqamingizni kiriting!", 'err'); return; }
+
   const doc = doctors.find(d => d.id === currentDocId);
-  const complaint = document.getElementById('bookComplaint').value;
-  state.notes.unshift({title:`Shifokor: ${doc.name} — ${selectedSlot}`, content:complaint||'Konsultatsiya band qilindi', category:'appointment', date:new Date().toISOString()});
+  const complaint = document.getElementById('bookComplaint').value.trim();
+  const now = new Date();
+  const dateStr = now.toLocaleString('uz-UZ');
+
+  // Telegram xabari matni
+  const bemorLine = state.profile.name
+    ? '\n\u{1F464} <b>Bemor:</b> ' + state.profile.name + ' ' + (state.profile.surname || '')
+    : '';
+  const xavfLine = state.history[0]
+    ? '\n\u26A0\uFE0F <b>Xavf darajasi:</b> ' + state.history[0].score + '% - ' + state.history[0].level
+    : '';
+  const tgText = '\uD83C\uDFE5 <b>YANGI KONSULTATSIYA SO\'ROVI</b>'
+    + '\n\n\uD83D\uDC68\u200D\u2695\uFE0F <b>Shifokor:</b> ' + doc.name
+    + '\n\uD83D\uDD2C <b>Mutaxassislik:</b> ' + doc.spec.charAt(0).toUpperCase() + doc.spec.slice(1)
+    + '\n\uD83D\uDD50 <b>Tanlangan vaqt:</b> ' + selectedSlot
+    + '\n\uD83D\uDCF1 <b>Telefon:</b> ' + phone
+    + '\n\uD83D\uDCDD <b>Shikoyat:</b> ' + (complaint || 'Korsatilmagan')
+    + '\n\uD83D\uDCC5 <b>Yuborilgan:</b> ' + dateStr
+    + bemorLine
+    + xavfLine;
+
+  // UI: loading holat
+  const btn = document.getElementById('bookSubmitBtn');
+  const statusEl = document.getElementById('tgSendStatus');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+  statusEl.style.display = 'none';
+
+  const result = await sendTelegramMessage(tgText);
+
+  if (result.demo) {
+    // Demo rejim — token kiritilmagan
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'rgba(245,158,11,0.1)';
+    statusEl.style.border = '1px solid rgba(245,158,11,0.3)';
+    statusEl.style.color = 'var(--yellow)';
+    statusEl.innerHTML = `⚙️ <b>Demo rejim:</b> Telegram yuborilmadi. Sozlamalar uchun kodni oching va <code>TG_BOT_TOKEN</code> ni to'ldiring.`;
+    finishBooking(doc, complaint, phone);
+  } else if (result.ok) {
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'rgba(16,185,129,0.1)';
+    statusEl.style.border = '1px solid rgba(16,185,129,0.3)';
+    statusEl.style.color = 'var(--green)';
+    statusEl.innerHTML = `✅ <b>Telegram ga muvaffaqiyatli yuborildi!</b>`;
+    setTimeout(() => finishBooking(doc, complaint, phone), 1200);
+  } else {
+    statusEl.style.display = 'block';
+    statusEl.style.background = 'rgba(239,68,68,0.1)';
+    statusEl.style.border = '1px solid rgba(239,68,68,0.3)';
+    statusEl.style.color = '#ef4444';
+    statusEl.innerHTML = '❌ Telegram xatolik: ' + (result.description || result.error || 'Noma\'lum xato') + '. Biroq band qilindi.';
+    setTimeout(() => finishBooking(doc, complaint, phone), 1500);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-calendar-check"></i> Band Qilish';
+}
+
+function finishBooking(doc, complaint, phone) {
+  state.notes.unshift({
+    title: `Shifokor: ${doc.name} — ${selectedSlot}`,
+    content: '📱 Tel: ' + phone + '\n' + (complaint || 'Konsultatsiya band qilindi'),
+    category: 'appointment',
+    date: new Date().toISOString()
+  });
   save('notes');
   state.points += 15; save('points'); updateSidebarProfile();
   document.getElementById('bookModal').classList.remove('active');
+  document.getElementById('bookPhone').value = '';
+  document.getElementById('bookComplaint').value = '';
+  document.getElementById('tgSendStatus').style.display = 'none';
   toast(`✅ ${doc.name} bilan ${selectedSlot} — band qilindi! +15 ball`, 'success');
 }
 
@@ -1828,6 +1966,57 @@ function openSOS() { document.getElementById('sosModal').classList.add('active')
 function closeSOS() { document.getElementById('sosModal').classList.remove('active'); }
 
 /* ====================== INIT ====================== */
+/* ====================== TELEGRAM SETTINGS ====================== */
+function saveTelegramSettings() {
+  const token = document.getElementById('tgTokenInput').value.trim();
+  const chatId = document.getElementById('tgChatInput').value.trim();
+  if (!token || !chatId) { toast("Token va Chat ID ni to'ldiring!", 'err'); return; }
+  localStorage.setItem('ng_tg_token', token);
+  localStorage.setItem('ng_tg_chatid', chatId);
+  updateTgStatusBadge();
+  toast('✅ Telegram sozlamalari saqlandi!', 'success');
+}
+
+async function testTelegram() {
+  const token = document.getElementById('tgTokenInput').value.trim() || getTGToken();
+  const chatId = document.getElementById('tgChatInput').value.trim() || getTGChatId();
+  if (!token || !chatId) { toast("Avval token va chat ID kiriting!", 'err'); return; }
+  localStorage.setItem('ng_tg_token', token);
+  localStorage.setItem('ng_tg_chatid', chatId);
+  toast('📨 Test xabari yuborilmoqda...', 'info');
+  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: "✅ <b>NeuroGuard AI Pro</b> — Telegram ulanishi muvaffaqiyatli sozlandi!\n\nEndi konsultatsiya so'rovlari shu yerga keladi. 🏥",
+      parse_mode: 'HTML'
+    })
+  });
+  const data = await res.json();
+  if (data.ok) { toast('✅ Test xabari yuborildi! Telegramni tekshiring.', 'success'); updateTgStatusBadge(); }
+  else { toast('❌ Xatolik: ' + (data.description || 'Token yoki Chat ID notogri'), 'err'); }
+}
+
+function updateTgStatusBadge() {
+  const badge = document.getElementById('tgStatusBadge');
+  if (!badge) return;
+  const hasConfig = getTGToken() && getTGChatId();
+  if (hasConfig) {
+    badge.innerHTML = '<span style="background:rgba(16,185,129,0.15);color:var(--green);border:1px solid rgba(16,185,129,0.3);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">● Ulangan</span>';
+  } else {
+    badge.innerHTML = '<span style="background:rgba(245,158,11,0.12);color:var(--yellow);border:1px solid rgba(245,158,11,0.3);padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:700;">○ Sozlanmagan</span>';
+  }
+}
+
+function loadTgInputs() {
+  const ti = document.getElementById('tgTokenInput');
+  const ci = document.getElementById('tgChatInput');
+  if (ti) ti.value = getTGToken();
+  if (ci) ci.value = getTGChatId();
+  updateTgStatusBadge();
+}
+
 window.addEventListener('load', () => {
   const savedTheme = localStorage.getItem('ng_theme') || 'dark';
   applyTheme(savedTheme);
