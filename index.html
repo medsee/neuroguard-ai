@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>NeuroGuard AI Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -158,7 +157,7 @@ body { font-family:var(--font-body); background:var(--bg); color:var(--text); ov
 
 .main { margin-left:260px; flex:1; min-height:100vh; }
 
-.topbar { position:sticky; top:0; z-index:90; background:rgba(8,12,20,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+.topbar { position:sticky; top:0; z-index:90; background:rgba(8,12,20,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:var(--status-bar-height, env(safe-area-inset-top, 0px)) 32px 0; height:calc(64px + var(--status-bar-height, env(safe-area-inset-top, 0px))); display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:0; }
 .topbar-title { font-family:var(--font-display); font-size:1.25rem; font-weight:700; }
 .topbar-sub { font-size:0.8rem; color:var(--text2); margin-top:2px; }
 .topbar-right { display:flex; align-items:center; gap:12px; }
@@ -361,7 +360,7 @@ body.light-mode .form-select {
   .grid-3 { grid-template-columns:1fr; }
   .grid-4 { grid-template-columns:1fr 1fr; }
   .form-row { grid-template-columns:1fr; }
-  .topbar { padding:0 14px; height:58px; gap:10px; }
+  .topbar { padding:var(--status-bar-height, env(safe-area-inset-top, 0px)) 14px 0; height:calc(58px + var(--status-bar-height, env(safe-area-inset-top, 0px))); gap:10px; }
   .topbar-title { font-size:1.05rem; }
   .topbar-sub { display:none; }
   .sos-btn { display:none; }
@@ -2354,6 +2353,18 @@ window.addEventListener('load', () => {
   applyLangToUI();
   renderLangSwitcher();
   toast(t('welcome') + ' NeuroGuard AI Pro v2.1', 'info');
+
+  // Status bar height — Android injects this via evaluateJavascript
+  // Also handle via CSS env(safe-area-inset-top) for notch devices
+  window.setStatusBarHeight = function(px) {
+    document.documentElement.style.setProperty('--status-bar-height', px + 'px');
+  };
+  // Auto-detect if running in Android WebView
+  if (navigator.userAgent.includes('wv') || navigator.userAgent.includes('Android')) {
+    // Try to get it from Android bridge, fallback to 24px (typical status bar)
+    const h = window.AndroidBridge?.getStatusBarHeight?.() || 0;
+    if (h > 0) window.setStatusBarHeight(h);
+  }
 });
 
 document.querySelectorAll('.modal-overlay').forEach(m => {
