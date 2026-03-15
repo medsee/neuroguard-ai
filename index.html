@@ -1360,7 +1360,7 @@ function renderProfile(){
   document.getElementById('profileAvatar').textContent=init;document.getElementById('sidebarAvatar').textContent=init;
   document.getElementById('profileNameDisplay').textContent=(fn+' '+ln).trim()||'Foydalanuvchi';document.getElementById('sidebarName').textContent=p.name||'Profil';
   const l=state.history[0];if(l){document.getElementById('pm-age').textContent='Yosh: '+(p.age||'—');document.getElementById('pm-points').textContent=state.points+' ball';
-  const t=document.getElementById('profileRiskTag');t.textContent=l.level;t.className=`tag ${l.score<25?'tag-green':l.score<50?'tag-yellow':'tag-red'}`}
+  const rTag=document.getElementById('profileRiskTag');rTag.textContent=l.level;rTag.className=`tag ${l.score<25?'tag-green':l.score<50?'tag-yellow':'tag-red'}`}
   const det=document.getElementById('profileDetails');
   if(p.name){det.innerHTML=`<div class="grid-2" style="gap:10px;">${rpf('user',t('prof_name'),p.name||'—')}${rpf('phone',t('prof_phone'),p.phone||'—')}${rpf('birthday-cake',t('prof_age'),p.age||'—')}${rpf('tint',t('lbl_blood_type'),p.bloodType||'—')}</div>`}
   document.getElementById('achievementGrid').innerHTML=achievements.map(a=>`<div class="achievement ${a.cond()?'unlocked':'locked'}"><div class="achievement-icon">${a.icon}</div><div class="achievement-name">${a.name}</div></div>`).join('');
