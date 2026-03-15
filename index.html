@@ -2511,7 +2511,7 @@ window.addEventListener('load',()=>{
     toast(t('welcome')+' NeuroGuard AI Pro v8.0','info');
     initPushNotifications();initSmartReminders();trackSession();
     // Show tour for first-time users
-    if(!localStorage.getItem('ng_toured')&&localStorage.getItem('ng_onboarded')){setTimeout(()=>startTour(),1500);}
+    // Tour only starts manually from profile page
   },2200);
 });
 document.querySelectorAll('.modal-overlay').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})});
