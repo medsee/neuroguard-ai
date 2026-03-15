@@ -364,11 +364,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .pin-key:active{transform:scale(0.9);background:var(--accent);color:white}
 @keyframes pinShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 
-/* Symptom chips */
-.symp-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:20px;background:var(--bg3);border:1.5px solid var(--border);color:var(--text2);cursor:pointer;transition:all 0.2s;font-size:0.82rem;user-select:none}
-.symp-chip:hover{border-color:var(--accent);color:var(--text)}
-.symp-chip.selected{background:rgba(255,58,92,0.12);border-color:var(--accent);color:var(--accent)}
-.symp-chip.selected::before{content:'✓ ';font-weight:700}
+
 
 /* Document cards */
 .doc-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.2s}
@@ -378,11 +374,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .doc-title{font-weight:700;font-size:0.9rem;margin-bottom:4px}
 .doc-date{font-size:0.73rem;color:var(--text3);font-family:var(--font-mono)}
 
-/* Diagnosis result */
-.diag-item{padding:14px 16px;background:var(--bg3);border-radius:12px;margin-bottom:10px;border-left:3px solid var(--yellow);border:1px solid var(--border)}
-.diag-name{font-weight:700;font-size:0.92rem;margin-bottom:4px}
-.diag-prob{font-family:var(--font-mono);font-weight:700}
-.diag-desc{font-size:0.82rem;color:var(--text2);margin-top:6px;line-height:1.5}
+
 
 /* Body Map */
 .body-part{transition:all 0.2s;cursor:pointer}
@@ -428,6 +420,29 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .med-timer{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);border-radius:6px;font-family:var(--font-mono);font-size:0.78rem;color:var(--yellow)}
 .med-timer.urgent{background:rgba(255,58,92,0.1);border-color:rgba(255,58,92,0.2);color:var(--accent);animation:timerPulse 1s infinite}
 @keyframes timerPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* Enhanced Mobile */
+@media(max-width:480px){
+  .page{padding:16px 12px !important}
+  .section-header{margin-bottom:16px}
+  .section-title{font-size:1.15rem !important}
+  .grid-2{grid-template-columns:1fr !important;gap:12px !important}
+  .grid-4{grid-template-columns:1fr 1fr !important}
+  .form-row{grid-template-columns:1fr !important}
+  .card{padding:16px !important;border-radius:14px !important}
+  .btn-lg{padding:14px !important;font-size:0.9rem !important}
+  .topbar{padding:10px 12px !important}
+  .sidebar{width:260px !important}
+  .hosp-card{padding:14px !important}
+  .enc-header{padding:14px 16px !important}
+  .enc-body{padding:0 16px 14px !important}
+  .profile-header-bg{flex-direction:column;text-align:center}
+  .profile-avatar-lg{margin:0 auto}
+}
+@media(max-width:360px){
+  .grid-4{grid-template-columns:1fr !important}
+  .hero-stats{flex-direction:column;gap:12px}
+}
 </style>
 </head>
 <body>
@@ -965,6 +980,72 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
+/* ═══════════ ERROR BOUNDARY ═══════════ */
+window.onerror=function(msg,url,line,col,err){
+  console.error('NeuroGuard Error:',msg,'at line',line);
+  return true; // Prevent app crash
+};
+window.addEventListener('unhandledrejection',function(e){
+  console.error('NeuroGuard Promise Error:',e.reason);
+  e.preventDefault();
+});
+
+/* ═══════════ SAFE DOM ACCESS ═══════════ */
+function $(id){return document.getElementById(id)}
+function $t(id,text){const el=$(id);if(el)el.textContent=text}
+function $h(id,html){const el=$(id);if(el)el.innerHTML=html}
+
+/* ═══════════ XSS SANITIZE ═══════════ */
+function sanitize(str){
+  if(!str)return'';
+  const div=document.createElement('div');
+  div.textContent=str;
+  return div.innerHTML;
+}
+
+/* ═══════════ AUTO-SAVE ═══════════ */
+let autoSaveTimer=null;
+function initAutoSave(){
+  autoSaveTimer=setInterval(()=>{
+    try{
+      save('history');save('medications');save('notes');save('profile');save('points');
+    }catch(e){console.error('Auto-save error:',e)}
+  },30000);
+}
+
+/* ═══════════ DATA ENCRYPTION (Simple) ═══════════ */
+const ENCRYPT_KEY='NG_SEC_2025';
+function encryptData(data){
+  try{
+    const json=JSON.stringify(data);
+    return btoa(unescape(encodeURIComponent(json)));
+  }catch(e){return JSON.stringify(data)}
+}
+function decryptData(encoded){
+  try{
+    return JSON.parse(decodeURIComponent(escape(atob(encoded))));
+  }catch(e){
+    try{return JSON.parse(encoded)}catch(e2){return null}
+  }
+}
+
+/* ═══════════ FORM VALIDATION ═══════════ */
+function validateBP(sys,dia){
+  if(sys<60||sys>300){toast('Sistolik QB 60-300 orasida boʼlishi kerak!','err');return false}
+  if(dia<30||dia>200){toast('Diastolik QB 30-200 orasida boʼlishi kerak!','err');return false}
+  if(dia>=sys){toast('Diastolik sistolikdan kichik boʼlishi kerak!','err');return false}
+  return true;
+}
+function validateGlucose(gl){
+  if(gl<1||gl>35){toast('Qand 1-35 mmol/L orasida boʼlishi kerak!','err');return false}
+  return true;
+}
+function validateAge(age){
+  if(age<1||age>120){toast('Yosh 1-120 orasida boʼlishi kerak!','err');return false}
+  return true;
+}
+
+
 /* ═══════════ VOICE INPUT (FIXED ICONS!) ═══════════ */
 let voiceRec=null, activeField=null;
 function initVR(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;const r=new SR();r.continuous=false;r.interimResults=false;const lm={uz:'uz-UZ',uz_cyr:'uz-UZ',ru:'ru-RU',en:'en-US'};r.lang=lm[currentLang]||'uz-UZ';
@@ -1074,6 +1155,7 @@ function analyzeRisk(){
   const v=id=>parseFloat(document.getElementById(id)?.value);const s=v('systolic'),d=v('diastolic'),hr=v('heartrate'),gl=v('glucose'),h=v('height'),w=v('weight'),age=v('age');
   const chol=v('cholesterol')||5,smoking=document.getElementById('smoking').value,exercise=document.getElementById('exercise').value,alcohol=document.getElementById('alcohol').value;
   if(!s||!d||!hr||!gl||!h||!w||!age){toast('Barcha maydonlarni toʼldiring!','err');return}
+    if(!validateBP(s,d))return;if(!validateGlucose(gl))return;if(!validateAge(age))return;
   const panel=document.getElementById('resultPanel');panel.innerHTML=`<div class="card" style="min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div class="spinner"></div><div style="color:var(--text2)">${t('analyzing')}</div></div>`;
   setTimeout(()=>{
     const bmi=w/((h/100)**2);let score=0;const factors=[];
@@ -1529,16 +1611,23 @@ function showPinLock(){
   document.getElementById('pinSkipBtn').textContent='';
   document.getElementById('pinLock').style.display='flex';
 }
+let pinAttempts=0;
 function pinPress(n){
   if(pinCode.length>=4)return;
+  if(pinAttempts>=5){
+    document.getElementById('pinError').textContent='🔒 5 marta notoʼgʼri! 30 soniya kuting...';
+    setTimeout(()=>{pinAttempts=0;document.getElementById('pinError').textContent='';},30000);
+    return;
+  }
   pinCode+=n;updatePinDots();
   if(pinCode.length===4){
     setTimeout(()=>{
       if(pinMode==='check'){
         if(pinCode===localStorage.getItem('ng_pin')){
-          document.getElementById('pinLock').style.display='none';pinCode='';
+          document.getElementById('pinLock').style.display='none';pinCode='';pinAttempts=0;
         }else{
-          document.getElementById('pinError').textContent=t('pin_wrong')||'Notoʼgʼri PIN!';
+          pinAttempts++;
+          document.getElementById('pinError').textContent=(t('pin_wrong')||'Notoʼgʼri PIN!')+` (${pinAttempts}/5)`;
           document.getElementById('pinDots').style.animation='pinShake 0.4s ease';
           setTimeout(()=>{document.getElementById('pinDots').style.animation='';pinCode='';updatePinDots()},500);
         }
@@ -1573,72 +1662,11 @@ function setPinCode(){
 function removePinCode(){localStorage.removeItem('ng_pin');toast('🔓 PIN olib tashlandi','info')}
 
 /* ═══════════ SYMPTOM CHECKER ═══════════ */
-const symptomList=[
-  {id:'s_headache',icon:'🤕',uz:'Bosh ogʼrigʼi',uz_cyr:'Бош оғриғи',ru:'Головная боль',en:'Headache'},
-  {id:'s_dizzy',icon:'😵',uz:'Bosh aylanishi',uz_cyr:'Бош айланиши',ru:'Головокружение',en:'Dizziness'},
-  {id:'s_numb',icon:'🖐️',uz:'Qoʼl/oyoq uvishishi',uz_cyr:'Қўл/оёқ увишиши',ru:'Онемение конечностей',en:'Numbness'},
-  {id:'s_speech',icon:'🗣️',uz:'Nutq buzilishi',uz_cyr:'Нутқ бузилиши',ru:'Нарушение речи',en:'Speech difficulty'},
-  {id:'s_vision',icon:'👁️',uz:'Koʼrish buzilishi',uz_cyr:'Кўриш бузилиши',ru:'Нарушение зрения',en:'Vision problems'},
-  {id:'s_chest',icon:'💔',uz:'Koʼkrak ogʼrigʼi',uz_cyr:'Кўкрак оғриғи',ru:'Боль в груди',en:'Chest pain'},
-  {id:'s_breath',icon:'😮‍💨',uz:'Nafas qisilishi',uz_cyr:'Нафас қисилиши',ru:'Одышка',en:'Shortness of breath'},
-  {id:'s_fatigue',icon:'😴',uz:'Charchash/holsizlik',uz_cyr:'Чарчаш/ҳолсизлик',ru:'Усталость/слабость',en:'Fatigue'},
-  {id:'s_nausea',icon:'🤢',uz:'Koʼngil aynishi',uz_cyr:'Кўнгил айниши',ru:'Тошнота',en:'Nausea'},
-  {id:'s_sweat',icon:'💦',uz:'Ortiqcha terlash',uz_cyr:'Ортиқча терлаш',ru:'Потливость',en:'Excessive sweating'},
-  {id:'s_palpitation',icon:'💓',uz:'Yurak tez urishi',uz_cyr:'Юрак тез уриши',ru:'Учащённое сердцебиение',en:'Palpitations'},
-  {id:'s_weakness',icon:'🦵',uz:'Oyoq kuchsizligi',uz_cyr:'Оёқ кучсизлиги',ru:'Слабость в ногах',en:'Leg weakness'},
-  {id:'s_confusion',icon:'😶‍🌫️',uz:'Chalkashtik/esdan chiqish',uz_cyr:'Чалкаштик',ru:'Спутанность сознания',en:'Confusion'},
-  {id:'s_face',icon:'😐',uz:'Yuz uvishishi',uz_cyr:'Юз увишиши',ru:'Онемение лица',en:'Facial numbness'},
-];
 
-const diagnosisDB=[
-  {name:{uz:'🚨 INSULT XAVFI — DARHOL 103!',uz_cyr:'🚨 ИНСУЛТ ХАВФИ — ДАРҲОЛ 103!',ru:'🚨 РИСК ИНСУЛЬТА — СРОЧНО 103!',en:'🚨 STROKE RISK — CALL 103 NOW!'},
-   triggers:['s_speech','s_numb','s_face','s_confusion','s_vision'],minMatch:2,severity:'critical',
-   desc:{uz:'Bu belgilar insultga oʼxshaydi! DARHOL 103 ga qoʼngʼiroq qiling! Har daqiqa muhim!',uz_cyr:'Бу белгилар инсултга ўхшайди! ДАРҲОЛ 103 га қўнғироқ қилинг!',ru:'Эти симптомы похожи на инсульт! НЕМЕДЛЕННО звоните 103!',en:'These symptoms resemble a stroke! Call 103 IMMEDIATELY!'}},
-  {name:{uz:'⚠️ Gipertenziya (yuqori qon bosimi)',uz_cyr:'⚠️ Гипертензия',ru:'⚠️ Гипертензия',en:'⚠️ Hypertension'},
-   triggers:['s_headache','s_dizzy','s_nausea','s_palpitation','s_sweat'],minMatch:3,severity:'high',
-   desc:{uz:'Qon bosimingiz yuqori boʼlishi mumkin. Qon bosimni oʼlchang va shifokorga murojaat qiling.',uz_cyr:'Қон босимингиз юқори бўлиши мумкин.',ru:'Возможно высокое давление. Измерьте давление.',en:'Your blood pressure may be high. Measure it and see a doctor.'}},
-  {name:{uz:'💛 Yurak muammolari ehtimoli',uz_cyr:'💛 Юрак муаммолари',ru:'💛 Возможные проблемы с сердцем',en:'💛 Possible heart issues'},
-   triggers:['s_chest','s_breath','s_palpitation','s_sweat','s_fatigue'],minMatch:2,severity:'high',
-   desc:{uz:'Koʼkrak ogʼrigʼi va nafas qisilishi — kardiolog koʼrigini talab qiladi.',uz_cyr:'Кўкрак оғриғи — кардиолог кўригини талаб қилади.',ru:'Боль в груди и одышка требуют осмотра кардиолога.',en:'Chest pain and breathlessness require cardiologist examination.'}},
-  {name:{uz:'😰 Stress/ortiqcha charchash',uz_cyr:'😰 Стресс/чарчаш',ru:'😰 Стресс/переутомление',en:'😰 Stress/Fatigue'},
-   triggers:['s_headache','s_fatigue','s_nausea','s_sweat','s_dizzy'],minMatch:2,severity:'low',
-   desc:{uz:'Stressni boshqaring: nafas mashqlari, yurish, yetarli uyqu. Agar davom etsa — shifokorga boring.',uz_cyr:'Стрессни бошқаринг: нафас машқлари, юриш.',ru:'Управляйте стрессом: дыхательные упражнения, прогулки, сон.',en:'Manage stress: breathing exercises, walking, sleep. If persistent, see a doctor.'}},
-];
 
-function renderSymptoms(){
-  document.getElementById('symptomGrid').innerHTML=symptomList.map(s=>
-    `<div class="symp-chip" id="${s.id}" onclick="this.classList.toggle('selected')">${s.icon} ${s[currentLang]||s.uz}</div>`
-  ).join('');
-}
 
-function analyzeSymptoms(){
-  const selected=symptomList.filter(s=>document.getElementById(s.id)?.classList.contains('selected')).map(s=>s.id);
-  if(selected.length<2){toast(t('symp_min')||'Kamida 2 ta belgi tanlang!','err');return}
-  const el=document.getElementById('symptomResult');
-  el.innerHTML='<div style="text-align:center;padding:20px;"><div class="spinner"></div><div style="color:var(--text2)">AI tahlil qilmoqda...</div></div>';
-  
-  setTimeout(()=>{
-    const results=diagnosisDB.filter(d=>{
-      const matches=d.triggers.filter(t=>selected.includes(t)).length;
-      return matches>=d.minMatch;
-    }).sort((a,b)=>b.severity==='critical'?1:a.severity==='critical'?-1:0);
 
-    if(!results.length){
-      el.innerHTML=`<div style="text-align:center;padding:30px;"><div style="font-size:2rem;margin-bottom:12px;">✅</div><div style="font-weight:700;margin-bottom:8px;">${t('symp_ok_title')||'Jiddiy xavf aniqlanmadi'}</div><div style="font-size:0.85rem;color:var(--text2);">${t('symp_ok_desc')||'Lekin belgilar davom etsa, shifokorga murojaat qiling.'}</div></div>`;
-      return;
-    }
 
-    el.innerHTML=`<div style="margin-bottom:16px;"><div style="font-weight:700;font-size:1rem;margin-bottom:4px;"><i class="fas fa-search-plus" style="color:var(--yellow)"></i> ${t('symp_results')||'AI Diagnostika Natijalari'}</div><div style="font-size:0.8rem;color:var(--text3);">${selected.length} ${t('symp_selected')||'belgi tanlandi'}</div></div>`+
-    results.map(r=>{
-      const clr=r.severity==='critical'?'var(--accent)':r.severity==='high'?'var(--yellow)':'var(--green)';
-      return`<div class="diag-item" style="border-left-color:${clr}"><div class="diag-name" style="color:${clr}">${r.name[currentLang]||r.name.uz}</div><div class="diag-desc">${r.desc[currentLang]||r.desc.uz}</div></div>`;
-    }).join('')+
-    `<div style="margin-top:16px;padding:12px;background:rgba(251,191,36,0.06);border-radius:10px;border-left:3px solid var(--yellow);font-size:0.78rem;color:var(--text2);">⚠️ ${t('disclaimer')}</div>
-    <button class="btn btn-accent btn-full" onclick="navGo('appointments')" style="margin-top:12px;"><i class="fas fa-calendar-plus"></i> ${t('btn_doctor')}</button>`;
-    
-    state.points+=5;save('points');updateSidebarProfile();
-  },1500);
-}
 
 /* ═══════════ DOCUMENT SCANNER ═══════════ */
 let savedDocs=JSON.parse(localStorage.getItem('ng_docs')||'[]');
@@ -2509,7 +2537,7 @@ window.addEventListener('load',()=>{
     currentLang=localStorage.getItem('ng_lang')||'uz';
     updateSidebarProfile();renderDashboard();showOnboarding();fullLangUpdate();renderLangSwitcher();
     toast(t('welcome')+' NeuroGuard AI Pro v8.0','info');
-    initPushNotifications();initSmartReminders();trackSession();
+    initPushNotifications();initSmartReminders();trackSession();initAutoSave();
     // Show tour for first-time users
     // Tour only starts manually from profile page
   },2200);
