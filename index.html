@@ -587,7 +587,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <!-- APPOINTMENTS -->
   <div class="page" id="page-appointments">
     <div class="section-header"><div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green)"></i> Konsultatsiya</div></div>
-    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;"><button class="btn btn-accent" onclick="filterDocs('all')" id="df-all">Barchasi</button><button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button><button class="btn btn-ghost" onclick="filterDocs('kardiolog')" id="df-kardiolog">Kardiolog</button></div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;"><button class="btn btn-accent" onclick="filterDocs('all')" id="df-all">Barchasi</button><button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button></div>
     <div class="grid-3" id="doctorGrid"></div>
   </div>
 
@@ -852,7 +852,7 @@ function deleteNote(i){state.notes.splice(i,1);save('notes');renderNotes();toast
 const doctors=[
   {id:1,name:'Dr. Kseniya Shimirina',specKey:'nevrolog',exp:15,rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:'Insult va miya mutaxassisi',addr:'Samarqand, Registon ko\'chasi 12'},
   {id:2,name:'Dr. Akmal Gaibiyev',specKey:'nevrolog',exp:12,rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Amir Temur ko\'chasi 45'},
-  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'kardiolog',exp:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'❤️',desc:'Kardiologiya mutaxassisi',addr:'Samarqand, Gagarin ko\'chasi 8'},
+  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'nevrolog',exp:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Gagarin ko\'chasi 8'},
 ];
 let selectedSlot='',currentDocId=null,lastDocFilter='all';
 function renderDoctors(f){const list=f==='all'?doctors:doctors.filter(d=>d.specKey===f);document.getElementById('doctorGrid').innerHTML=list.map(doc=>`<div class="doctor-card" onclick="openBooking(${doc.id})"><div class="doctor-top"><div class="doctor-avatar">${doc.avatar}</div><div class="doctor-name">${doc.name}</div><div class="doctor-spec">${t('df_'+doc.specKey)}</div><div class="doctor-rating"><i class="fas fa-star"></i> ${doc.rating} · ${doc.exp} ${t('yil')}</div></div><div class="doctor-body"><div style="font-size:0.8rem;color:var(--text2);margin-bottom:8px;">${doc.desc}</div><div style="font-size:0.76rem;color:var(--text3);display:flex;align-items:center;gap:5px;margin-bottom:10px;"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i>${doc.addr}</div><div style="font-size:0.74rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">${t('avail_times')}</div><div class="time-slots">${doc.slots.map(s=>`<div class="time-slot">${s}</div>`).join('')}</div><button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.83rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> ${t('book_btn')}</button></div></div>`).join('')}
@@ -1439,7 +1439,6 @@ function fullLangUpdate(){
   // Appointments filter buttons  
   const dfAll=document.getElementById('df-all');if(dfAll)dfAll.textContent=t('df_all');
   const dfN=document.getElementById('df-nevrolog');if(dfN)dfN.textContent=t('df_nevrolog');
-  const dfK=document.getElementById('df-kardiolog');if(dfK)dfK.textContent=t('df_kardiolog');
 
   // Appointment title
   const apptTitle=document.querySelector('#page-appointments .section-title');
