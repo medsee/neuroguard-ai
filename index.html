@@ -528,7 +528,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="sidebar-logo"><div class="logo-mark"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v5.0</div></div></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div><div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="nav_dashboard">Dashboard</span></div><div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">AI</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-bodymap" onclick="navGo('bodymap')"><i class="fas fa-person"></i><span data-i18n="nav_bodymap">Tana Xaritasi</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-calendar" onclick="navGo('calendar')"><i class="fas fa-calendar-alt"></i><span data-i18n="nav_calendar">Tibbiy Kalendar</span></div><div class="nav-item" id="nav-documents" onclick="navGo('documents')"><i class="fas fa-camera-retro"></i><span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
-  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-aichat" onclick="navGo('aichat')"><i class="fas fa-robot"></i><span data-i18n="nav_aichat">AI Shifokor</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">Claude</span></div><div class="nav-item" id="nav-prognoz" onclick="navGo('prognoz')"><i class="fas fa-chart-line"></i><span data-i18n="nav_prognoz">Prognoz AI</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--cyan),var(--green))">ML</span></div><div class="nav-item" id="nav-telemedicine" onclick="navGo('telemedicine')"><i class="fas fa-video"></i><span data-i18n="nav_telemedicine">Telemedicina</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
+  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-prognoz" onclick="navGo('prognoz')"><i class="fas fa-chart-line"></i><span data-i18n="nav_prognoz">Prognoz AI</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--cyan),var(--green))">ML</span></div><div class="nav-item" id="nav-telemedicine" onclick="navGo('telemedicine')"><i class="fas fa-video"></i><span data-i18n="nav_telemedicine">Telemedicina</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
   <div class="nav-section"><div class="nav-label">Sozlamalar</div><div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i><span data-i18n="nav_profile">Profilim</span></div></div>
   <div class="sidebar-profile"><div class="profile-card" onclick="navGo('profile')"><div class="avatar" id="sidebarAvatar">A</div><div><div class="profile-name" id="sidebarName">Profil</div><div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> ball</div></div></div></div>
 </div>
@@ -893,25 +893,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 
   <!-- HISTORY -->
-  <div class="page" id="page-aichat">
-    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
-    <div class="card" style="min-height:500px;display:flex;flex-direction:column;">
-      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:400px;padding:8px 0;"></div>
-      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:12px;">
-        <div class="input-row">
-          <input class="form-input" id="chatInput" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter')sendChat()">
-          <button class="mic-btn" onclick="voiceInput('chatInput')"><i class="fas fa-microphone"></i></button>
-          <button class="btn btn-accent" onclick="sendChat()" style="padding:12px 18px;"><i class="fas fa-paper-plane"></i></button>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
-          <button class="btn btn-ghost" onclick="quickChat('Boshim og\'riyapti')" style="padding:6px 12px;font-size:0.75rem;">🤕 Bosh og'rig'i</button>
-          <button class="btn btn-ghost" onclick="quickChat('Qon bosimim yuqori')" style="padding:6px 12px;font-size:0.75rem;">❤️ QB yuqori</button>
-          <button class="btn btn-ghost" onclick="quickChat('Insult belgilari qanday?')" style="padding:6px 12px;font-size:0.75rem;">🧠 Insult</button>
-          <button class="btn btn-ghost" onclick="quickChat('Stress boshqarish')" style="padding:6px 12px;font-size:0.75rem;">🧘 Stress</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <div class="page" id="page-history">
     <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue)"></i> Tarix</div></div>
@@ -1117,7 +1099,6 @@ function showPage(id){
   if(id==='vitals')renderVitals();if(id==='medications')renderMedications();if(id==='notes')renderNotes();
   if(id==='appointments'){renderDoctors('all');setDocFilter('all');}if(id==='history')renderHistory();if(id==='profile')renderProfile();
   if(id==='dashboard')renderDashboard();if(id==='steps')renderSteps();
-  if(id==='aichat'){const cm=document.getElementById('chatMessages');if(!cm.innerHTML)addChatMsg('Salom! Men AI shifokor yordamchiman. 🧠\n\nSizga insult, qon bosimi, dorilar va sogʼliq haqida maslahat bera olaman.\n\nSavol bering yoki pastdagi tugmalarni bosing!',false);}
   if(id==='encyclopedia')renderEncyclopedia();
   if(id==='hospitals')renderHospitals();
   if(id==='prognoz'){}
