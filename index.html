@@ -640,13 +640,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
   <!-- ENCYCLOPEDIA -->
   <div class="page" id="page-encyclopedia">
-    <div class="section-header"><div class="section-title"><i class="fas fa-book-medical" style="color:var(--cyan)"></i> Tibbiy Ensiklopediya</div><div class="section-desc">Insult va qon-tomir kasalliklari haqida bilimlar</div></div>
+    <div class="section-header"><div class="section-title"><i class="fas fa-book-medical" style="color:var(--cyan)"></i> <span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="section-desc" data-i18n="enc_desc">Insult va qon-tomir kasalliklari haqida</div></div>
     <div id="encContent"></div>
   </div>
 
   <!-- HOSPITALS MAP -->
   <div class="page" id="page-hospitals">
-    <div class="section-header"><div class="section-title"><i class="fas fa-hospital" style="color:var(--green)"></i> Yaqin Shifoxonalar</div><div class="section-desc">Samarqanddagi shifoxonalar va klinikalar</div></div>
+    <div class="section-header"><div class="section-title" id="hospPageTitle"><i class="fas fa-hospital" style="color:var(--green)"></i> <span data-i18n="nav_hospitals">Yaqin Shifoxonalar</span></div><div class="section-desc" id="hospPageDesc" data-i18n="hosp_desc">Samarqanddagi shifoxonalar va klinikalar</div></div>
     <div class="card" style="margin-bottom:20px;">
       <div id="hospitalMap" style="width:100%;height:350px;border-radius:16px;overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;">
         <div style="text-align:center;color:var(--text3);"><i class="fas fa-map-marked-alt" style="font-size:2.5rem;margin-bottom:12px;display:block;"></i><button class="btn btn-success" onclick="loadHospitalMap()"><i class="fas fa-location-crosshairs"></i> Xaritani yuklash</button></div>
@@ -980,27 +980,72 @@ function sendChat(){
 function quickChat(msg){document.getElementById('chatInput').value=msg;sendChat()}
 
 /* ═══════════ ENCYCLOPEDIA ═══════════ */
-const encArticles=[
-  {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Insult nima?',
-   body:'<b>Insult</b> — bu miyaga qon oqimining to\'satdan buzilishi. 2 turi bor:<br><br><b>1. Ishemik insult (85%)</b> — miya arteriyasi tiqilib qoladi. Qon oqmaydi, hujayralar nobud bo\'ladi.<br><br><b>2. Gemorragik insult (15%)</b> — miya arteriyasi yorilib, qon oqib chiqadi.<br><br><b>Xavf omillari:</b><br>• Yuqori qon bosimi (eng katta sabab!)<br>• Diabet<br>• Chekish<br>• Yuqori xolesterin<br>• Oilada insult bo\'lgan<br>• 55 yoshdan katta<br><br>⏰ <b>Oltin vaqt:</b> Dastlabki 4.5 soatda yordam berilsa — miya tiklanishi mumkin!'},
-  {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Insult Aniqlash',
-   body:'FAST — insultni tezkor aniqlash usuli:<br><br>🔴 <b>F — Face (Yuz)</b><br>Tabassumga ayting. Yuz bir tomonga og\'ayaptimi?<br><br>🔴 <b>A — Arms (Qo\'llar)</b><br>Ikki qo\'lni ko\'tarsin. Biri tushib ketayaptimi?<br><br>🔴 <b>S — Speech (Nutq)</b><br>Oddiy gap aytsin. Nutqi chalkashmi?<br><br>🔴 <b>T — Time (Vaqt)</b><br>Bu belgilardan biri bo\'lsa — DARHOL 103!<br><br>⏱️ Har bir daqiqa muhim — 1.9 million neyron nobud bo\'ladi!'},
-  {id:'bp',icon:'❤️',color:'var(--accent)',title:'Qon Bosimi haqida',
-   body:'<b>Qon bosimi</b> — yurak qonni arteriyalarga qanchalik kuch bilan itarishi:<br><br>📊 <b>Darajalar:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Ko\'tarilgan: 120-129/&lt;80<br>• 🔴 1-bosqich gipertenziya: 130-139/80-89<br>• 🆘 2-bosqich: 140+/90+<br>• 🚨 Kriz: 180+/120+<br><br><b>Nima qilish kerak:</b><br>• Tuzni kamaytiring<br>• Har kuni 30 min yuring<br>• Tamaki va alkogolni tashlang<br>• Dorilarni muntazam qabul qiling<br>• Stressni boshqaring'},
-  {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Insultda Birinchi Yordam',
-   body:'🚨 <b>Insult belgisini ko\'rdingizmi? Darhol:</b><br><br>1️⃣ <b>103 ga qo\'ng\'iroq qiling</b> — vaqtni ayting<br><br>2️⃣ <b>Bemorni yotqizing</b> — boshi biroz baland<br><br>3️⃣ <b>Hech narsa yedirmang/ichirmang</b> — yutish refleksi buzilgan bo\'lishi mumkin<br><br>4️⃣ <b>Tor kiyimlarni bo\'shating</b> — galstuk, tugma<br><br>5️⃣ <b>Agar hushi yo\'qolsa</b> — yoniga yotqizing (tili tiqilib qolmasligi uchun)<br><br>6️⃣ <b>Vaqtni yozib oling</b> — belgilar qachon boshlangani muhim!<br><br>❌ <b>QILMANG:</b> Aspirin bermang, suv bermang, ko\'tarmasdan yotqizing'},
-  {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Insultdan Himoyalanish',
-   body:'<b>Insultni 80% gacha oldini olish mumkin!</b><br><br>✅ <b>Qon bosimni nazorat qiling</b> — eng muhim!<br>✅ <b>Chekishni tashlang</b> — 2-5 yilda xavf tushadi<br>✅ <b>Har kuni 30 min harakat</b> — yurish, suzish, velosiped<br>✅ <b>To\'g\'ri ovqatlaning</b> — sabzavot, meva, baliq<br>✅ <b>Vaznni nazoratda saqlang</b> — BMI 25 dan kam<br>✅ <b>Qandni tekshiring</b> — diabetni davolang<br>✅ <b>Alkogolni cheklang</b><br>✅ <b>Stressni boshqaring</b> — meditatsiya, nafas mashqi<br>✅ <b>Yiliga 1 marta tekshiruvdan o\'ting</b>'},
-  {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabet va Insult',
-   body:'<b>Diabet insult xavfini 2-4 baravar oshiradi!</b><br><br>📊 <b>Qand normalari:</b><br>• ✅ Normal: 3.9-5.5 mmol/L (ochqoringa)<br>• ⚠️ Prediabet: 5.6-6.9<br>• 🔴 Diabet: 7.0+<br><br><b>Nima qilish:</b><br>• Qandni muntazam tekshiring<br>• Shirinni kamaytiring<br>• Oqsilga boy ovqat tanlang<br>• Dorilarni muntazam qabul qiling<br>• Kuniga 30 daqiqa yuring'},
-];
+const encData={
+  uz:[
+    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Insult nima?',sub:'Batafsil o\'qish uchun bosing',
+     body:'<b>Insult</b> — bu miyaga qon oqimining to\'satdan buzilishi. 2 turi bor:<br><br><b>1. Ishemik insult (85%)</b> — miya arteriyasi tiqilib qoladi.<br><b>2. Gemorragik insult (15%)</b> — miya arteriyasi yorilib ketadi.<br><br><b>Xavf omillari:</b><br>• Yuqori qon bosimi<br>• Diabet<br>• Chekish<br>• Yuqori xolesterin<br>• Oilada insult bo\'lgan<br>• 55 yoshdan katta<br><br>⏰ <b>Oltin vaqt:</b> Dastlabki 4.5 soatda yordam berilsa — miya tiklanishi mumkin!'},
+    {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Insult Aniqlash',sub:'Batafsil o\'qish uchun bosing',
+     body:'FAST — insultni tezkor aniqlash usuli:<br><br>🔴 <b>F — Face (Yuz)</b> — Yuz bir tomonga og\'ayaptimi?<br>🔴 <b>A — Arms (Qo\'llar)</b> — Qo\'l tushib ketayaptimi?<br>🔴 <b>S — Speech (Nutq)</b> — Nutqi chalkashmi?<br>🔴 <b>T — Time (Vaqt)</b> — DARHOL 103!<br><br>⏱️ Har daqiqada 1.9 million neyron nobud bo\'ladi!'},
+    {id:'bp',icon:'❤️',color:'var(--accent)',title:'Qon Bosimi haqida',sub:'Batafsil o\'qish uchun bosing',
+     body:'<b>Darajalar:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Ko\'tarilgan: 120-129<br>• 🔴 Gipertenziya: 140+/90+<br>• 🚨 Kriz: 180+/120+<br><br><b>Nima qilish:</b> Tuzni kamaytiring, har kuni yuring, tamakini tashlang, dori qabul qiling.'},
+    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Insultda Birinchi Yordam',sub:'Batafsil o\'qish uchun bosing',
+     body:'1️⃣ 103 ga qo\'ng\'iroq qiling<br>2️⃣ Bemorni yotqizing, boshi baland<br>3️⃣ Hech narsa yedirmang<br>4️⃣ Tor kiyimlarni bo\'shating<br>5️⃣ Hushi yo\'qolsa — yoniga yotqizing<br>6️⃣ Vaqtni yozib oling<br><br>❌ Aspirin bermang, suv bermang!'},
+    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Insultdan Himoyalanish',sub:'Batafsil o\'qish uchun bosing',
+     body:'<b>80% gacha oldini olish mumkin!</b><br><br>✅ Qon bosimni nazorat qiling<br>✅ Chekishni tashlang<br>✅ Har kuni 30 min harakat<br>✅ Sabzavot, meva, baliq yeying<br>✅ BMI 25 dan kam<br>✅ Qandni tekshiring<br>✅ Stressni boshqaring<br>✅ Yiliga 1 marta tekshiruv'},
+    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabet va Insult',sub:'Batafsil o\'qish uchun bosing',
+     body:'<b>Diabet insult xavfini 2-4x oshiradi!</b><br><br>• ✅ Normal: 3.9-5.5 mmol/L<br>• ⚠️ Prediabet: 5.6-6.9<br>• 🔴 Diabet: 7.0+<br><br>Qandni tekshiring, shirinni kamaytiring, kuniga 30 daqiqa yuring.'},
+  ],
+  uz_cyr:[
+    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Инсулт нима?',sub:'Батафсил ўқиш учун босинг',
+     body:'<b>Инсулт</b> — бу мияга қон оқимининг тўсатдан бузилиши. 2 тури бор:<br><br><b>1. Ишемик инсулт (85%)</b> — мия артерияси тиқилиб қолади.<br><b>2. Геморрагик инсулт (15%)</b> — мия артерияси ёрилиб кетади.<br><br><b>Хавф омиллари:</b><br>• Юқори қон босими<br>• Диабет<br>• Чекиш<br>• Юқори холестерин<br>• Оилада инсулт бўлган<br>• 55 ёшдан катта<br><br>⏰ <b>Олтин вақт:</b> Дастлабки 4.5 соатда ёрдам берилса — мия тикланиши мумкин!'},
+    {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Тест — Инсулт Аниқлаш',sub:'Батафсил ўқиш учун босинг',
+     body:'FAST — инсултни тезкор аниқлаш усули:<br><br>🔴 <b>F — Юз</b> — Юз бир томонга оғаяптими?<br>🔴 <b>A — Қўллар</b> — Қўл тушиб кетаяптими?<br>🔴 <b>S — Нутқ</b> — Нутқи чалкашми?<br>🔴 <b>T — Вақт</b> — ДАРҲОЛ 103!<br><br>⏱️ Ҳар дақиқада 1.9 миллион нейрон нобуд бўлади!'},
+    {id:'bp',icon:'❤️',color:'var(--accent)',title:'Қон Босими ҳақида',sub:'Батафсил ўқиш учун босинг',
+     body:'<b>Даражалар:</b><br>• ✅ Нормал: &lt;120/80<br>• ⚠️ Кўтарилган: 120-129<br>• 🔴 Гипертензия: 140+/90+<br>• 🚨 Криз: 180+/120+<br><br><b>Нима қилиш:</b> Тузни камайтиринг, ҳар куни юринг, тамакини ташланг.'},
+    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Инсултда Биринчи Ёрдам',sub:'Батафсил ўқиш учун босинг',
+     body:'1️⃣ 103 га қўнғироқ қилинг<br>2️⃣ Беморни ётқизинг<br>3️⃣ Ҳеч нарса едирманг<br>4️⃣ Тор кийимларни бўшатинг<br>5️⃣ Ҳуши йўқолса — ёнига ётқизинг<br>6️⃣ Вақтни ёзиб олинг<br><br>❌ Аспирин берманг, сув берманг!'},
+    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Инсултдан Ҳимояланиш',sub:'Батафсил ўқиш учун босинг',
+     body:'<b>80% гача олдини олиш мумкин!</b><br><br>✅ Қон босимни назорат қилинг<br>✅ Чекишни ташланг<br>✅ Ҳар куни 30 мин ҳаракат<br>✅ Сабзавот, мева, балиқ енг<br>✅ BMI 25 дан кам<br>✅ Қандни текширинг<br>✅ Стрессни бошқаринг'},
+    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Диабет ва Инсулт',sub:'Батафсил ўқиш учун босинг',
+     body:'<b>Диабет инсулт хавфини 2-4x оширади!</b><br><br>• ✅ Нормал: 3.9-5.5 ммол/Л<br>• ⚠️ Предиабет: 5.6-6.9<br>• 🔴 Диабет: 7.0+<br><br>Қандни текширинг, ширинни камайтиринг, кунига 30 дақиқа юринг.'},
+  ],
+  ru:[
+    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Что такое инсульт?',sub:'Нажмите для подробностей',
+     body:'<b>Инсульт</b> — внезапное нарушение кровоснабжения мозга. 2 типа:<br><br><b>1. Ишемический (85%)</b> — закупорка артерии мозга.<br><b>2. Геморрагический (15%)</b> — разрыв артерии мозга.<br><br><b>Факторы риска:</b><br>• Высокое давление<br>• Диабет<br>• Курение<br>• Высокий холестерин<br>• Инсульт в семье<br>• Возраст 55+<br><br>⏰ <b>Золотое время:</b> Первые 4.5 часа — шанс на восстановление!'},
+    {id:'fast',icon:'🚨',color:'#ef4444',title:'Тест FAST — Распознать инсульт',sub:'Нажмите для подробностей',
+     body:'FAST — быстрое распознавание инсульта:<br><br>🔴 <b>F — Face (Лицо)</b> — Перекос лица?<br>🔴 <b>A — Arms (Руки)</b> — Рука опускается?<br>🔴 <b>S — Speech (Речь)</b> — Речь нарушена?<br>🔴 <b>T — Time (Время)</b> — СРОЧНО 103!<br><br>⏱️ Каждую минуту гибнет 1.9 млн нейронов!'},
+    {id:'bp',icon:'❤️',color:'var(--accent)',title:'О кровяном давлении',sub:'Нажмите для подробностей',
+     body:'<b>Уровни:</b><br>• ✅ Норма: &lt;120/80<br>• ⚠️ Повышенное: 120-129<br>• 🔴 Гипертензия: 140+/90+<br>• 🚨 Криз: 180+/120+<br><br><b>Что делать:</b> Ограничьте соль, ходите ежедневно, бросьте курить, принимайте лекарства.'},
+    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Первая помощь при инсульте',sub:'Нажмите для подробностей',
+     body:'1️⃣ Вызовите 103<br>2️⃣ Уложите больного, голова приподнята<br>3️⃣ Ничего не давайте есть/пить<br>4️⃣ Расстегните тесную одежду<br>5️⃣ При потере сознания — на бок<br>6️⃣ Запишите время начала<br><br>❌ Не давайте аспирин и воду!'},
+    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Профилактика инсульта',sub:'Нажмите для подробностей',
+     body:'<b>Можно предотвратить до 80%!</b><br><br>✅ Контролируйте давление<br>✅ Бросьте курить<br>✅ 30 мин активности ежедневно<br>✅ Овощи, фрукты, рыба<br>✅ ИМТ ниже 25<br>✅ Проверяйте сахар<br>✅ Управляйте стрессом<br>✅ Ежегодный осмотр'},
+    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Диабет и инсульт',sub:'Нажмите для подробностей',
+     body:'<b>Диабет увеличивает риск инсульта в 2-4 раза!</b><br><br>• ✅ Норма: 3.9-5.5 ммоль/л<br>• ⚠️ Преддиабет: 5.6-6.9<br>• 🔴 Диабет: 7.0+<br><br>Проверяйте сахар, ограничьте сладкое, ходите 30 мин в день.'},
+  ],
+  en:[
+    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'What is a Stroke?',sub:'Tap to read more',
+     body:'<b>Stroke</b> — sudden interruption of blood flow to the brain. 2 types:<br><br><b>1. Ischemic stroke (85%)</b> — brain artery gets blocked.<br><b>2. Hemorrhagic stroke (15%)</b> — brain artery ruptures.<br><br><b>Risk factors:</b><br>• High blood pressure<br>• Diabetes<br>• Smoking<br>• High cholesterol<br>• Family history<br>• Age 55+<br><br>⏰ <b>Golden window:</b> First 4.5 hours — brain recovery is possible!'},
+    {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Spot a Stroke',sub:'Tap to read more',
+     body:'FAST — quick stroke recognition:<br><br>🔴 <b>F — Face</b> — Is the face drooping?<br>🔴 <b>A — Arms</b> — Can they raise both arms?<br>🔴 <b>S — Speech</b> — Is speech slurred?<br>🔴 <b>T — Time</b> — Call 103 IMMEDIATELY!<br><br>⏱️ Every minute 1.9 million neurons die!'},
+    {id:'bp',icon:'❤️',color:'var(--accent)',title:'About Blood Pressure',sub:'Tap to read more',
+     body:'<b>Levels:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Elevated: 120-129<br>• 🔴 Hypertension: 140+/90+<br>• 🚨 Crisis: 180+/120+<br><br><b>What to do:</b> Reduce salt, walk daily, quit smoking, take medication regularly.'},
+    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Stroke First Aid',sub:'Tap to read more',
+     body:'1️⃣ Call 103 immediately<br>2️⃣ Lay the person down, head elevated<br>3️⃣ Don\'t give food or water<br>4️⃣ Loosen tight clothing<br>5️⃣ If unconscious — recovery position<br>6️⃣ Note the time symptoms started<br><br>❌ Don\'t give aspirin or water!'},
+    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Stroke Prevention',sub:'Tap to read more',
+     body:'<b>Up to 80% of strokes are preventable!</b><br><br>✅ Control blood pressure<br>✅ Quit smoking<br>✅ 30 min activity daily<br>✅ Eat vegetables, fruits, fish<br>✅ Keep BMI under 25<br>✅ Monitor blood sugar<br>✅ Manage stress<br>✅ Annual check-up'},
+    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabetes & Stroke',sub:'Tap to read more',
+     body:'<b>Diabetes increases stroke risk 2-4x!</b><br><br>• ✅ Normal: 3.9-5.5 mmol/L<br>• ⚠️ Prediabetes: 5.6-6.9<br>• 🔴 Diabetes: 7.0+<br><br>Monitor blood sugar, reduce sweets, walk 30 min daily.'},
+  ],
+};
 
 function renderEncyclopedia(){
-  document.getElementById('encContent').innerHTML=encArticles.map(a=>`
+  const articles=encData[currentLang]||encData.uz;
+  document.getElementById('encContent').innerHTML=articles.map(a=>`
     <div class="enc-card" id="enc-${a.id}" onclick="toggleEnc('${a.id}')">
       <div class="enc-header">
         <div class="enc-icon" style="background:${a.color}22;color:${a.color}">${a.icon}</div>
-        <div style="flex:1;"><div style="font-weight:700;font-size:0.95rem;">${a.title}</div><div style="font-size:0.78rem;color:var(--text3);margin-top:2px;">Batafsil o'qish uchun bosing</div></div>
+        <div style="flex:1;"><div style="font-weight:700;font-size:0.95rem;">${a.title}</div><div style="font-size:0.78rem;color:var(--text3);margin-top:2px;">${a.sub}</div></div>
         <i class="fas fa-chevron-down enc-chevron"></i>
       </div>
       <div class="enc-body">${a.body}</div>
@@ -1009,31 +1054,64 @@ function renderEncyclopedia(){
 function toggleEnc(id){document.getElementById('enc-'+id).classList.toggle('open')}
 
 /* ═══════════ HOSPITALS ═══════════ */
-const hospitals=[
-  {name:'Samarqand Viloyat Ko\'p Tarmoqli Tibbiyot Markazi',addr:'Samarqand, A. Temur ko\'chasi 1',phone:'+998 66 233 12 34',tags:['Nevrolog','Kardiolog','Tez yordam'],lat:39.6542,lng:66.9597},
-  {name:'Samarqand Shahar Tibbiy Birlashmasi',addr:'Samarqand, Registon ko\'chasi 25',phone:'+998 66 235 45 67',tags:['Umumiy','Nevrolog'],lat:39.6547,lng:66.9607},
-  {name:'MedLife Klinikasi',addr:'Samarqand, Gagarin ko\'chasi 14',phone:'+998 66 231 78 90',tags:['Xususiy','Kardiolog','Endokrinolog'],lat:39.6510,lng:66.9550},
-  {name:'Salomatlik Markazi',addr:'Samarqand, Navoiy ko\'chasi 8',phone:'+998 66 237 11 22',tags:['Xususiy','Nevrolog','Laboratoriya'],lat:39.6580,lng:66.9620},
-  {name:'Samarqand Tez Tibbiy Yordam',addr:'Samarqand, Bunyodkor ko\'chasi 3',phone:'103',tags:['Tez yordam','24/7'],lat:39.6560,lng:66.9570},
-  {name:'EndoCare Markazi',addr:'Samarqand, Ibn Sino ko\'chasi 17',phone:'+998 66 238 55 66',tags:['Endokrinolog','Diabet','Laboratoriya'],lat:39.6530,lng:66.9640},
-];
+const hospData={
+  uz:[
+    {name:'Samarqand Viloyat Ko\'p Tarmoqli Tibbiyot Markazi',addr:'Samarqand, A. Temur ko\'chasi 1',phone:'+998 66 233 12 34',tags:['Nevrolog','Kardiolog','Tez yordam'],lat:39.6542,lng:66.9597},
+    {name:'Samarqand Shahar Tibbiy Birlashmasi',addr:'Samarqand, Registon ko\'chasi 25',phone:'+998 66 235 45 67',tags:['Umumiy','Nevrolog'],lat:39.6547,lng:66.9607},
+    {name:'MedLife Klinikasi',addr:'Samarqand, Gagarin ko\'chasi 14',phone:'+998 66 231 78 90',tags:['Xususiy','Kardiolog','Endokrinolog'],lat:39.6510,lng:66.9550},
+    {name:'Salomatlik Markazi',addr:'Samarqand, Navoiy ko\'chasi 8',phone:'+998 66 237 11 22',tags:['Xususiy','Nevrolog','Laboratoriya'],lat:39.6580,lng:66.9620},
+    {name:'Samarqand Tez Tibbiy Yordam',addr:'Samarqand, Bunyodkor ko\'chasi 3',phone:'103',tags:['Tez yordam','24/7'],lat:39.6560,lng:66.9570},
+    {name:'EndoCare Markazi',addr:'Samarqand, Ibn Sino ko\'chasi 17',phone:'+998 66 238 55 66',tags:['Endokrinolog','Diabet','Laboratoriya'],lat:39.6530,lng:66.9640},
+  ],
+  uz_cyr:[
+    {name:'Самарқанд Вилоят Кўп Тармоқли Тиббиёт Маркази',addr:'Самарқанд, А. Темур кўчаси 1',phone:'+998 66 233 12 34',tags:['Невролог','Кардиолог','Тез ёрдам'],lat:39.6542,lng:66.9597},
+    {name:'Самарқанд Шаҳар Тиббий Бирлашмаси',addr:'Самарқанд, Регистон кўчаси 25',phone:'+998 66 235 45 67',tags:['Умумий','Невролог'],lat:39.6547,lng:66.9607},
+    {name:'MedLife Клиникаси',addr:'Самарқанд, Гагарин кўчаси 14',phone:'+998 66 231 78 90',tags:['Хусусий','Кардиолог','Эндокринолог'],lat:39.6510,lng:66.9550},
+    {name:'Саломатлик Маркази',addr:'Самарқанд, Навоий кўчаси 8',phone:'+998 66 237 11 22',tags:['Хусусий','Невролог','Лаборатория'],lat:39.6580,lng:66.9620},
+    {name:'Самарқанд Тез Тиббий Ёрдам',addr:'Самарқанд, Бунёдкор кўчаси 3',phone:'103',tags:['Тез ёрдам','24/7'],lat:39.6560,lng:66.9570},
+    {name:'EndoCare Маркази',addr:'Самарқанд, Ибн Сино кўчаси 17',phone:'+998 66 238 55 66',tags:['Эндокринолог','Диабет','Лаборатория'],lat:39.6530,lng:66.9640},
+  ],
+  ru:[
+    {name:'Самаркандский Многопрофильный Медицинский Центр',addr:'Самарканд, ул. А. Темура 1',phone:'+998 66 233 12 34',tags:['Невролог','Кардиолог','Скорая'],lat:39.6542,lng:66.9597},
+    {name:'Самаркандское Городское Мед. Объединение',addr:'Самарканд, ул. Регистон 25',phone:'+998 66 235 45 67',tags:['Общий','Невролог'],lat:39.6547,lng:66.9607},
+    {name:'Клиника MedLife',addr:'Самарканд, ул. Гагарина 14',phone:'+998 66 231 78 90',tags:['Частная','Кардиолог','Эндокринолог'],lat:39.6510,lng:66.9550},
+    {name:'Центр Здоровья',addr:'Самарканд, ул. Навои 8',phone:'+998 66 237 11 22',tags:['Частная','Невролог','Лаборатория'],lat:39.6580,lng:66.9620},
+    {name:'Самаркандская Скорая Помощь',addr:'Самарканд, ул. Бунёдкор 3',phone:'103',tags:['Скорая','24/7'],lat:39.6560,lng:66.9570},
+    {name:'Центр EndoCare',addr:'Самарканд, ул. Ибн Сино 17',phone:'+998 66 238 55 66',tags:['Эндокринолог','Диабет','Лаборатория'],lat:39.6530,lng:66.9640},
+  ],
+  en:[
+    {name:'Samarkand Regional Multidisciplinary Medical Center',addr:'Samarkand, A. Temur st. 1',phone:'+998 66 233 12 34',tags:['Neurologist','Cardiologist','Emergency'],lat:39.6542,lng:66.9597},
+    {name:'Samarkand City Medical Association',addr:'Samarkand, Registon st. 25',phone:'+998 66 235 45 67',tags:['General','Neurologist'],lat:39.6547,lng:66.9607},
+    {name:'MedLife Clinic',addr:'Samarkand, Gagarin st. 14',phone:'+998 66 231 78 90',tags:['Private','Cardiologist','Endocrinologist'],lat:39.6510,lng:66.9550},
+    {name:'Health Center',addr:'Samarkand, Navoiy st. 8',phone:'+998 66 237 11 22',tags:['Private','Neurologist','Laboratory'],lat:39.6580,lng:66.9620},
+    {name:'Samarkand Emergency Medical Services',addr:'Samarkand, Bunyodkor st. 3',phone:'103',tags:['Emergency','24/7'],lat:39.6560,lng:66.9570},
+    {name:'EndoCare Center',addr:'Samarkand, Ibn Sino st. 17',phone:'+998 66 238 55 66',tags:['Endocrinologist','Diabetes','Laboratory'],lat:39.6530,lng:66.9640},
+  ],
+};
+const hospUI={uz:{dir:"Yo'nalish",load:"Xaritani yuklash"},uz_cyr:{dir:"Йўналиш",load:"Харитани юклаш"},ru:{dir:"Маршрут",load:"Загрузить карту"},en:{dir:"Directions",load:"Load Map"}};
 
 function renderHospitals(){
-  document.getElementById('hospitalList').innerHTML=hospitals.map(h=>`
+  const list=hospData[currentLang]||hospData.uz;
+  const ui=hospUI[currentLang]||hospUI.uz;
+  document.getElementById('hospitalList').innerHTML=list.map(h=>`
     <div class="hosp-card">
       <div class="hosp-name"><i class="fas fa-hospital" style="color:var(--green);margin-right:8px;"></i>${h.name}</div>
       <div class="hosp-addr"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i>${h.addr}</div>
-      <div class="hosp-tags">${h.tags.map(t=>`<span class="tag tag-green">${t}</span>`).join('')}</div>
+      <div class="hosp-tags">${h.tags.map(tg=>`<span class="tag tag-green">${tg}</span>`).join('')}</div>
       <div style="display:flex;gap:8px;">
         <a href="tel:${h.phone.replace(/\s/g,'')}" class="btn btn-success" style="font-size:0.78rem;padding:7px 12px;text-decoration:none;"><i class="fas fa-phone"></i> ${h.phone}</a>
-        <a href="https://www.google.com/maps?q=${h.lat},${h.lng}" target="_blank" class="btn btn-ghost" style="font-size:0.78rem;padding:7px 12px;text-decoration:none;"><i class="fas fa-directions"></i> Yo'nalish</a>
+        <a href="https://www.google.com/maps?q=${h.lat},${h.lng}" target="_blank" class="btn btn-ghost" style="font-size:0.78rem;padding:7px 12px;text-decoration:none;"><i class="fas fa-directions"></i> ${ui.dir}</a>
       </div>
     </div>`).join('');
+  // Update load button
+  const loadBtn=document.querySelector('#hospitalMap .btn-success');
+  if(loadBtn)loadBtn.innerHTML='<i class="fas fa-location-crosshairs"></i> '+ui.load;
 }
 
 function loadHospitalMap(){
   const mapEl=document.getElementById('hospitalMap');
-  const center=hospitals[0];
+  const list=hospData[currentLang]||hospData.uz;
+  const center=list[0];
   mapEl.innerHTML=`<iframe width="100%" height="100%" frameborder="0" style="border:0;border-radius:16px;" src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=hospitals+clinics+Samarkand+Uzbekistan&center=${center.lat},${center.lng}&zoom=14" allowfullscreen></iframe>`;
 }
 
@@ -1161,6 +1239,7 @@ L.uz={
   // General
   points_lbl:"ball",btn_all:"Hammasi",dark_mode:"Kechki rejim",light_mode:"Kunduzgi rejim",
   bn_home:"Bosh",bn_ai:"AI",bn_meds:"Dori",bn_steps:"Qadam",bn_menu:"Menu",
+  nav_aichat:"AI Shifokor",nav_encyclopedia:"Ensiklopediya",enc_desc:"Insult va qon-tomir kasalliklari haqida",nav_hospitals:"Shifoxonalar",hosp_desc:"Samarqanddagi shifoxonalar va klinikalar",
   sending:"Yuborilmoqda...",
 };
 // ─── UZ KIRILL — auto-transliterate ───
@@ -1228,6 +1307,7 @@ L.ru={
   stat_analyses:"Анализов",stat_meds:"Лекарств",stat_notes:"Записей",stat_points:"Баллов",
   points_lbl:"б.",btn_all:"Все",dark_mode:"Тёмная тема",light_mode:"Светлая тема",
   bn_home:"Главная",bn_ai:"ИИ",bn_meds:"Лекарства",bn_steps:"Шаги",bn_menu:"Меню",
+  nav_aichat:"ИИ Врач",nav_encyclopedia:"Энциклопедия",enc_desc:"Об инсульте и сердечно-сосудистых заболеваниях",nav_hospitals:"Больницы",hosp_desc:"Больницы и клиники Самарканда",
   sending:"Отправка...",
 };
 // ─── ENGLISH ───
@@ -1279,6 +1359,7 @@ L.en={
   stat_analyses:"Analyses",stat_meds:"Medications",stat_notes:"Notes",stat_points:"Points",
   points_lbl:"pts",btn_all:"All",dark_mode:"Dark mode",light_mode:"Light mode",
   bn_home:"Home",bn_ai:"AI",bn_meds:"Meds",bn_steps:"Steps",bn_menu:"Menu",
+  nav_aichat:"AI Doctor",nav_encyclopedia:"Encyclopedia",enc_desc:"About stroke and cardiovascular diseases",nav_hospitals:"Hospitals",hosp_desc:"Hospitals and clinics in Samarkand",
   sending:"Sending...",
 };
 
@@ -1475,6 +1556,9 @@ function fullLangUpdate(){
   if(state.currentPage==='appointments'){renderDoctors(lastDocFilter);setDocFilter(lastDocFilter)}
   if(state.currentPage==='history')renderHistory();
   if(state.currentPage==='profile')renderProfile();
+  if(state.currentPage==='encyclopedia')renderEncyclopedia();
+  if(state.currentPage==='hospitals')renderHospitals();
+  if(state.currentPage==='aichat'){} // chat keeps history
   renderLangSwitcher();
 }
 function previewLang(l){currentLang=l;fullLangUpdate()}
