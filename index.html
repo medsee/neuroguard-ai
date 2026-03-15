@@ -194,14 +194,19 @@ body.light-mode .tt-thumb{transform:translateX(16px);background:white}
 .tag-yellow{background:rgba(251,191,36,0.12);color:var(--yellow);border:1px solid rgba(251,191,36,0.25)}
 .tag-purple{background:rgba(192,132,252,0.12);color:var(--purple);border:1px solid rgba(192,132,252,0.25)}
 
-.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all 0.3s}
+.card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all 0.3s;animation:cardFadeIn 0.4s ease both}
+.card:hover{border-color:var(--border2)}
+@keyframes cardFadeIn{from{opacity:0}to{opacity:1}}
 .card:hover{border-color:var(--border2)}
 
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 
-.stat-card{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden;transition:all 0.3s}
+.stat-card{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden;transition:all 0.3s;animation:cardSlideUp 0.5s ease both}
+.stat-card:nth-child(1){animation-delay:0.1s}.stat-card:nth-child(2){animation-delay:0.2s}.stat-card:nth-child(3){animation-delay:0.3s}.stat-card:nth-child(4){animation-delay:0.4s}
+.stat-card:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+@keyframes cardSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .stat-card:hover{transform:translateY(-3px);border-color:var(--border2);box-shadow:0 16px 48px rgba(0,0,0,0.3)}
 .stat-glow{position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;filter:blur(40px);opacity:0.35}
 .stat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:14px}
@@ -448,21 +453,29 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <body>
 
 <!-- SPLASH SCREEN -->
-<div id="splashScreen" style="position:fixed;inset:0;z-index:99999;background:#05080f;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s;">
-  <div style="animation:splashPulse 1.5s ease-in-out infinite;">
-    <div style="width:100px;height:100px;border-radius:28px;background:linear-gradient(135deg,#ff3a5c,#c084fc);display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 0 60px rgba(255,58,92,0.4);">🧠</div>
+<div id="splashScreen" style="position:fixed;inset:0;z-index:99999;background:#05080f;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s;overflow:hidden;">
+  <canvas id="splashParticles" style="position:absolute;inset:0;opacity:0.4;"></canvas>
+  <div style="position:relative;z-index:1;text-align:center;">
+    <div style="animation:splashFloat 2s ease-in-out infinite;">
+      <div style="width:110px;height:110px;border-radius:30px;background:linear-gradient(135deg,#ff3a5c,#c084fc,#4f8fff);display:flex;align-items:center;justify-content:center;font-size:3.2rem;box-shadow:0 0 80px rgba(255,58,92,0.35),0 0 160px rgba(192,132,252,0.15);margin:0 auto;">🧠</div>
+    </div>
+    <div style="font-family:'Outfit',sans-serif;font-size:2.2rem;font-weight:900;margin-top:28px;background:linear-gradient(135deg,#fff,#ff3a5c,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:splashGradient 2s ease infinite;">NeuroGuard</div>
+    <div style="font-family:'Space Mono',monospace;font-size:0.72rem;color:#4b5e80;letter-spacing:0.2em;margin-top:6px;">AI PRO v8.0</div>
+    <div style="margin-top:36px;width:160px;height:3px;border-radius:2px;background:#0f1724;overflow:hidden;margin-left:auto;margin-right:auto;">
+      <div style="width:0%;height:100%;background:linear-gradient(90deg,#ff3a5c,#c084fc,#4f8fff);border-radius:2px;animation:splashLoad 2.2s ease forwards;"></div>
+    </div>
+    <div style="font-size:0.72rem;color:#4b5e80;margin-top:14px;animation:splashFadeIn 1s 0.5s ease both;">Sunʼiy intellekt tibbiy yordamchi</div>
   </div>
-  <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;margin-top:24px;background:linear-gradient(135deg,#ff3a5c,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">NeuroGuard</div>
-  <div style="font-family:'Space Mono',monospace;font-size:0.72rem;color:#4b5e80;letter-spacing:0.15em;margin-top:6px;">AI PRO v8.0</div>
-  <div style="margin-top:32px;width:140px;height:3px;border-radius:2px;background:#0f1724;overflow:hidden;">
-    <div style="width:0%;height:100%;background:linear-gradient(90deg,#ff3a5c,#c084fc);border-radius:2px;animation:splashLoad 2s ease forwards;"></div>
-  </div>
-  <div style="font-size:0.7rem;color:#4b5e80;margin-top:12px;">Sun'iy intellekt tibbiy yordamchi</div>
 </div>
 <style>
-@keyframes splashPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-@keyframes splashLoad{0%{width:0%}50%{width:70%}100%{width:100%}}
+@keyframes splashFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes splashLoad{0%{width:0%}40%{width:60%}100%{width:100%}}
+@keyframes splashGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes splashFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 </style>
+<script>
+(function(){const c=document.getElementById('splashParticles');if(!c)return;const ctx=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;const pts=[];for(let i=0;i<60;i++)pts.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+0.5,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5,o:Math.random()*0.5+0.1});function draw(){ctx.clearRect(0,0,c.width,c.height);pts.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>c.width)p.dx*=-1;if(p.y<0||p.y>c.height)p.dy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,58,92,${p.o})`;ctx.fill();});pts.forEach((a,i)=>{pts.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(192,132,252,${0.08*(1-d/120)})`;ctx.stroke();}});});requestAnimationFrame(draw);}draw()})();
+</script>
 
 <!-- PIN LOCK SCREEN -->
 <div id="pinLock" style="display:none;position:fixed;inset:0;z-index:9500;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;">
@@ -522,7 +535,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-logo"><div class="logo-mark"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v5.0</div></div></div></div>
+  <div class="sidebar-logo"><div class="logo-mark"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v8.0</div></div></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div><div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="nav_dashboard">Dashboard</span></div><div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">AI</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-bodymap" onclick="navGo('bodymap')"><i class="fas fa-person"></i><span data-i18n="nav_bodymap">Tana Xaritasi</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-calendar" onclick="navGo('calendar')"><i class="fas fa-calendar-alt"></i><span data-i18n="nav_calendar">Tibbiy Kalendar</span></div><div class="nav-item" id="nav-documents" onclick="navGo('documents')"><i class="fas fa-camera-retro"></i><span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-prognoz" onclick="navGo('prognoz')"><i class="fas fa-chart-line"></i><span data-i18n="nav_prognoz">Prognoz AI</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--cyan),var(--green))">ML</span></div><div class="nav-item" id="nav-telemedicine" onclick="navGo('telemedicine')"><i class="fas fa-video"></i><span data-i18n="nav_telemedicine">Telemedicina</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
