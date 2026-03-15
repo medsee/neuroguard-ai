@@ -539,7 +539,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div><div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="nav_dashboard">Dashboard</span></div><div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">AI</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-bodymap" onclick="navGo('bodymap')"><i class="fas fa-person"></i><span data-i18n="nav_bodymap">Tana Xaritasi</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-calendar" onclick="navGo('calendar')"><i class="fas fa-calendar-alt"></i><span data-i18n="nav_calendar">Tibbiy Kalendar</span></div><div class="nav-item" id="nav-documents" onclick="navGo('documents')"><i class="fas fa-camera-retro"></i><span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-prognoz" onclick="navGo('prognoz')"><i class="fas fa-chart-line"></i><span data-i18n="nav_prognoz">Prognoz AI</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--cyan),var(--green))">ML</span></div><div class="nav-item" id="nav-telemedicine" onclick="navGo('telemedicine')"><i class="fas fa-video"></i><span data-i18n="nav_telemedicine">Telemedicina</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
-  <div class="nav-section"><div class="nav-label">Sozlamalar</div><div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i><span data-i18n="nav_profile">Profilim</span></div></div>
+  <div class="nav-section"><div class="nav-label" data-i18n="prof_settings">Sozlamalar</div><div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i><span data-i18n="nav_profile">Profilim</span></div></div>
   <div class="sidebar-profile"><div class="profile-card" onclick="navGo('profile')"><div class="avatar" id="sidebarAvatar">A</div><div><div class="profile-name" id="sidebarName">Profil</div><div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> ball</div></div></div></div>
 </div>
 
@@ -622,7 +622,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         </div>
         <button class="btn btn-accent btn-full btn-lg" onclick="analyzeRisk()" style="margin-top:8px;"><i class="fas fa-brain"></i> <span data-i18n="btn_analyze">AI Tahlil Qilsin</span></button>
       </div>
-      <div id="resultPanel"><div class="card" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;"><div style="width:100px;height:100px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid var(--border)"><i class="fas fa-robot" style="font-size:2.5rem;color:var(--text3)"></i></div><div style="font-size:1rem;font-weight:600;color:var(--text2)">Tahlil uchun tayyor</div><div style="font-size:0.83rem;color:var(--text3);max-width:240px;margin-top:8px;line-height:1.5;">Ma'lumotlarni to'ldiring va AI tugmasini bosing</div></div></div>
+      <div id="resultPanel"><div class="card" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;text-align:center;"><div style="width:100px;height:100px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:2px solid var(--border)"><i class="fas fa-robot" style="font-size:2.5rem;color:var(--text3)"></i></div><div style="font-size:1rem;font-weight:600;color:var(--text2)" data-i18n="ready_title">Tahlil uchun tayyor</div><div style="font-size:0.83rem;color:var(--text3);max-width:240px;margin-top:8px;line-height:1.5;" data-i18n="ready_desc" data-i18n="ready_desc">Maʼlumotlarni toʼldiring va AI tugmasini bosing</div></div></div>
     </div>
   </div>
 
@@ -648,7 +648,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
   <!-- PROGNOZ AI -->
   <div class="page" id="page-prognoz">
-    <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--cyan)"></i> Prognoz AI</div><div class="section-desc">Kelajakdagi xavfni bashorat qilish</div></div>
+    <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--cyan)"></i> <span data-i18n="prognoz_title">Prognoz AI</span></div><div class="section-desc"><span data-i18n="prognoz_desc">Kelajakdagi xavfni bashorat qilish</span></div></div>
     <div class="grid-2">
       <div class="card">
         <div style="text-align:center;padding:20px;">
@@ -661,14 +661,14 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <div style="font-size:1.5rem;">🔮</div>
               <div style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--cyan);" id="prognozScore">—</div>
-              <div style="font-size:0.75rem;color:var(--text3);">5 yillik prognoz</div>
+              <div style="font-size:0.75rem;color:var(--text3);" data-i18n="prognoz_5year">5 yillik prognoz</div>
             </div>
           </div>
-          <button class="btn btn-accent btn-full btn-lg" onclick="runPrognoz()" style="margin-top:20px;"><i class="fas fa-brain"></i> Prognoz Hisoblash</button>
+          <button class="btn btn-accent btn-full btn-lg" onclick="runPrognoz()" style="margin-top:20px;" data-i18n="prognoz_btn_full"><i class="fas fa-brain"></i> Prognoz Hisoblash</button>
         </div>
       </div>
       <div class="card" id="prognozResult">
-        <div style="text-align:center;padding:40px;color:var(--text3);"><i class="fas fa-crystal-ball" style="font-size:2rem;margin-bottom:12px;display:block;">🔮</i><div style="font-size:0.88rem;">Tahlil natijalaringiz asosida 5 yillik prognoz hisoblaydi</div><div style="font-size:0.78rem;margin-top:8px;">Avval AI Tekshiruv bo'limida kamida 1 ta tahlil o'tkazing</div></div>
+        <div style="text-align:center;padding:40px;color:var(--text3);"><i class="fas fa-crystal-ball" style="font-size:2rem;margin-bottom:12px;display:block;">🔮</i><div style="font-size:0.88rem;" data-i18n="prognoz_ready">Tahlil natijalaringiz asosida 5 yillik prognoz hisoblaydi</div><div style="font-size:0.78rem;margin-top:8px;">Avval AI Tekshiruv bo'limida kamida 1 ta tahlil o'tkazing</div></div>
       </div>
     </div>
     <div class="card" style="margin-top:20px;">
@@ -679,15 +679,15 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
   <!-- TELEMEDICINA -->
   <div class="page" id="page-telemedicine">
-    <div class="section-header"><div class="section-title"><i class="fas fa-video" style="color:var(--green)"></i> Telemedicina</div><div class="section-desc">Shifokor bilan onlayn uchrashish</div></div>
+    <div class="section-header"><div class="section-title"><i class="fas fa-video" style="color:var(--green)"></i> <span data-i18n="tele_title">Telemedicina</span></div><div class="section-desc"><span data-i18n="tele_desc">Shifokor bilan onlayn uchrashish</span></div></div>
     <div class="grid-2">
       <div class="card" style="text-align:center;padding:32px;">
         <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--cyan));margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 0 40px rgba(52,211,153,0.3);">📹</div>
-        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:8px;">Video Konsultatsiya</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;line-height:1.6;">Shifokor bilan yuzma-yuz onlayn suhbat. Uydan chiqmasdan professional maslahat oling.</div>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;margin-bottom:8px;" data-i18n="tele_video">Video Konsultatsiya</div>
+        <div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;line-height:1.6;" data-i18n="tele_video_desc">Shifokor bilan yuzma-yuz onlayn suhbat. Uydan chiqmasdan professional maslahat oling.</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <button class="btn btn-accent btn-full btn-lg" onclick="startVideoCall()"><i class="fas fa-video"></i> Video Qo'ng'iroq Boshlash</button>
-          <button class="btn btn-ghost btn-full" onclick="scheduleVideoCall()"><i class="fas fa-calendar-plus"></i> Vaqt Belgilash</button>
+          <button class="btn btn-ghost btn-full" onclick="scheduleVideoCall()" data-i18n="tele_schedule_btn"><i class="fas fa-calendar-plus"></i> Vaqt Belgilash</button>
         </div>
         <div style="margin-top:16px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text3);"><i class="fas fa-lock" style="color:var(--green)"></i> Shifrlangan</div>
@@ -773,16 +773,16 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         </svg>
         <div style="font-size:0.75rem;color:var(--text3);margin-top:10px;text-align:center;">Og\'riq joyini bosing ☝️</div>
         <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn btn-danger" onclick="clearPainMarks()" style="font-size:0.78rem;padding:7px 14px;"><i class="fas fa-trash"></i> Tozalash</button>
-          <button class="btn btn-accent" onclick="savePainMap()" style="font-size:0.78rem;padding:7px 14px;"><i class="fas fa-save"></i> Saqlash</button>
+          <button class="btn btn-danger" onclick="clearPainMarks()" style="font-size:0.78rem;padding:7px 14px;" data-i18n="pain_clear_btn"><i class="fas fa-trash"></i> Tozalash</button>
+          <button class="btn btn-accent" onclick="savePainMap()" style="font-size:0.78rem;padding:7px 14px;" data-i18n="pain_save_btn"><i class="fas fa-save"></i> Saqlash</button>
         </div>
       </div>
       <div class="card">
         <div style="font-weight:700;margin-bottom:12px;"><i class="fas fa-list-check" style="color:var(--accent)"></i> <span data-i18n="body_log">Og\'riq Qaydlari</span></div>
         <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;">
-          <span class="tag tag-red" style="cursor:pointer;padding:6px 14px;" onclick="setPainLevel(3)">🔴 Kuchli</span>
+          <span class="tag tag-red" style="cursor:pointer;padding:6px 14px;" onclick="setPainLevel(3)" data-i18n="pain_severe_btn">🔴 Kuchli</span>
           <span class="tag tag-yellow" style="cursor:pointer;padding:6px 14px;" onclick="setPainLevel(2)">🟡 O\'rtacha</span>
-          <span class="tag tag-green" style="cursor:pointer;padding:6px 14px;" onclick="setPainLevel(1)">🟢 Yengil</span>
+          <span class="tag tag-green" style="cursor:pointer;padding:6px 14px;" onclick="setPainLevel(1)" data-i18n="pain_mild_btn">🟢 Yengil</span>
         </div>
         <div id="painLog" style="max-height:400px;overflow-y:auto;"></div>
       </div>
@@ -812,7 +812,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <!-- DOCUMENT SCANNER -->
   <div class="page" id="page-documents">
     <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
-      <div><div class="section-title"><i class="fas fa-camera-retro" style="color:var(--purple)"></i> <span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="section-desc" data-i18n="doc_desc">Retsept va tahlil rasmlarini saqlang</div></div>
+      <div><div class="section-title"><i class="fas fa-camera-retro" style="color:var(--purple)"></i> <span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="section-desc" data-i18n="doc_desc" data-i18n="doc_desc">Retsept va tahlil rasmlarini saqlang</div></div>
       <label class="btn btn-accent" style="cursor:pointer;"><i class="fas fa-camera"></i> <span data-i18n="doc_upload">Rasm Yuklash</span><input type="file" accept="image/*" capture="environment" id="docFileInput" onchange="handleDocUpload(event)" style="display:none;"></label>
     </div>
     <div id="docList" class="grid-2"></div>
@@ -900,13 +900,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
   <div class="page" id="page-history">
     <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue)"></i> Tarix</div></div>
-    <div class="card" style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;">Xavf Tarixi</div><button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.78rem;"><i class="fas fa-trash"></i> Tozalash</button></div><div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div></div>
+    <div class="card" style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;">Xavf Tarixi</div><button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.78rem;" data-i18n="pain_clear_btn"><i class="fas fa-trash"></i> Tozalash</button></div><div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div></div>
     <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div><div style="overflow-x:auto;"><table class="history-table"><thead><tr><th>Sana</th><th>QB</th><th>Yurak</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead><tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Yo'q</td></tr></tbody></table></div></div>
   </div>
 
   <!-- PROFILE -->
   <div class="page" id="page-profile">
-    <div class="section-header"><div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent)"></i> Profilim</div></div>
+    <div class="section-header"><div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent)"></i> <span data-i18n="prof_title">Profilim</span></div></div>
     
     <!-- Profile Hero Card -->
     <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px;">
@@ -922,7 +922,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
               <div style="display:flex;align-items:center;gap:4px;font-size:0.8rem;color:var(--yellow);"><i class="fas fa-star" style="font-size:0.7rem;"></i><span id="pm-points">0 ball</span></div>
             </div>
           </div>
-          <button class="btn btn-ghost" onclick="openEditProfileModal()" style="border-radius:50%;width:44px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;"><i class="fas fa-pen"></i></button>
+          <button class="btn btn-ghost" onclick="openEditProfileModal()" style="border-radius:50%;width:44px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:5;background:var(--bg3);border:1px solid var(--border);"><i class="fas fa-pen"></i></button>
         </div>
       </div>
       <!-- Quick Stats Bar -->
@@ -937,45 +937,45 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <!-- Info & Achievements -->
     <div class="grid-2" style="margin-bottom:20px;">
       <div class="card">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-id-card" style="color:var(--accent);"></i><span style="font-weight:700;">Shaxsiy Maʼlumotlar</span></div>
-        <div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;">Maʼlumotlar toʼldirilmagan</div></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-id-card" style="color:var(--accent);"></i><span style="font-weight:700;" data-i18n="prof_info">Shaxsiy Maʼlumotlar</span></div>
+        <div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;" data-i18n="prof_nodata">Maʼlumotlar toʼldirilmagan</div></div>
       </div>
       <div class="card">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i><span style="font-weight:700;">Yutuqlar</span></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i><span style="font-weight:700;" data-i18n="prof_achievements">Yutuqlar</span></div>
         <div class="achievement-grid" id="achievementGrid"></div>
       </div>
     </div>
 
     <!-- Actions Grid -->
     <div class="card" style="margin-bottom:20px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i class="fas fa-cog" style="color:var(--text3);"></i><span style="font-weight:700;">Sozlamalar</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i class="fas fa-cog" style="color:var(--text3);"></i><span style="font-weight:700;" data-i18n="prof_settings">Sozlamalar</span></div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
         <!-- PIN -->
         <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="setPinCode()" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(192,132,252,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-lock" style="color:var(--purple);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">PIN Himoya</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Oʼrnatish / oʼzgartirish</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(192,132,252,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-lock" style="color:var(--purple);"></i></div><div><div style="font-weight:700;font-size:0.88rem;" data-i18n="prof_pin">PIN Himoya</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;" data-i18n="prof_pin_desc">Oʼrnatish / oʼzgartirish</div></div></div>
         </div>
         <!-- Telegram -->
         <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="sendAnalysisTG()" onmouseover="this.style.borderColor='#29b6f6'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(41,182,246,0.1);display:flex;align-items:center;justify-content:center;"><i class="fab fa-telegram" style="color:#29b6f6;"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Telegram</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Natijani yuborish</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(41,182,246,0.1);display:flex;align-items:center;justify-content:center;"><i class="fab fa-telegram" style="color:#29b6f6;"></i></div><div><div style="font-weight:700;font-size:0.88rem;" data-i18n="prof_telegram">Telegram</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;" data-i18n="prof_telegram_desc">Natijani yuborish</div></div></div>
         </div>
         <!-- Export -->
         <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="exportAllData()" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(52,211,153,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-download" style="color:var(--green);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Eksport</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">JSON ga saqlash</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(52,211,153,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-download" style="color:var(--green);"></i></div><div><div style="font-weight:700;font-size:0.88rem;" data-i18n="prof_export">Eksport</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;" data-i18n="prof_export_desc">JSON ga saqlash</div></div></div>
         </div>
         <!-- Import -->
         <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="importAllData()" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">
-          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(34,211,238,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-upload" style="color:var(--cyan);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Import</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Maʼlumot tiklash</div></div></div>
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(34,211,238,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-upload" style="color:var(--cyan);"></i></div><div><div style="font-weight:700;font-size:0.88rem;" data-i18n="prof_import">Import</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;" data-i18n="prof_import_desc">Maʼlumot tiklash</div></div></div>
         </div>
       </div>
     </div>
 
     <!-- Analytics -->
     <div class="card">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-chart-pie" style="color:var(--yellow);"></i><span style="font-weight:700;">Foydalanish statistikasi</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-chart-pie" style="color:var(--yellow);"></i><span style="font-weight:700;" data-i18n="prof_analytics">Foydalanish statistikasi</span></div>
       <div id="analyticsInfo" style="font-size:0.82rem;color:var(--text2);"></div>
       <div style="display:flex;gap:10px;margin-top:14px;">
-        <button class="btn btn-ghost" onclick="startTour()" style="font-size:0.78rem;padding:8px 14px;"><i class="fas fa-route"></i> Qoʼllanma</button>
-        <button class="btn btn-danger" onclick="removePinCode()" style="font-size:0.78rem;padding:8px 14px;"><i class="fas fa-unlock"></i> PIN olib tashlash</button>
+        <button class="btn btn-ghost" onclick="startTour()" style="font-size:0.78rem;padding:8px 14px;" data-i18n="prof_guide_btn"><i class="fas fa-route"></i> Qoʼllanma</button>
+        <button class="btn btn-danger" onclick="removePinCode()" style="font-size:0.78rem;padding:8px 14px;" data-i18n="prof_pin_remove_btn"><i class="fas fa-unlock"></i> PIN olib tashlash</button>
       </div>
     </div>
   </div>
@@ -995,11 +995,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <!-- MODALS -->
 <!-- Modals -->
 
-<div class="modal-overlay" id="addMedModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-pills" style="color:var(--accent)"></i> Dori Qo'shish</div><div class="form-row"><div class="form-group"><label class="form-label">Nomi *</label><div class="input-row"><input class="form-input" id="mName" placeholder="Aspirin"><button class="mic-btn" onclick="voiceInput('mName')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Doza *</label><input class="form-input" id="mDose" placeholder="100mg"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Vaqt *</label><input class="form-input" type="time" id="mTime"></div><div class="form-group"><label class="form-label">Chastota</label><select class="form-select" id="mFreq"><option>1 marta/kun</option><option>2 marta/kun</option><option>3 marta/kun</option></select></div></div><div class="form-group"><label class="form-label">Izoh</label><div class="input-row"><input class="form-input" id="mNotes" placeholder="Eslatma..."><button class="mic-btn" onclick="voiceInput('mNotes')"><i class="fas fa-microphone"></i></button></div></div><div style="display:flex;gap:10px;"><button class="btn btn-accent btn-full" onclick="saveMedication()"><i class="fas fa-save"></i> Saqlash</button><button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')">Bekor</button></div></div></div>
+<div class="modal-overlay" id="addMedModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('addMedModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-pills" style="color:var(--accent)"></i> Dori Qo'shish</div><div class="form-row"><div class="form-group"><label class="form-label">Nomi *</label><div class="input-row"><input class="form-input" id="mName" placeholder="Aspirin"><button class="mic-btn" onclick="voiceInput('mName')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Doza *</label><input class="form-input" id="mDose" placeholder="100mg"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Vaqt *</label><input class="form-input" type="time" id="mTime"></div><div class="form-group"><label class="form-label">Chastota</label><select class="form-select" id="mFreq"><option>1 marta/kun</option><option>2 marta/kun</option><option>3 marta/kun</option></select></div></div><div class="form-group"><label class="form-label">Izoh</label><div class="input-row"><input class="form-input" id="mNotes" placeholder="Eslatma..."><button class="mic-btn" onclick="voiceInput('mNotes')"><i class="fas fa-microphone"></i></button></div></div><div style="display:flex;gap:10px;"><button class="btn btn-accent btn-full" onclick="saveMedication()" data-i18n="pain_save_btn"><i class="fas fa-save"></i> Saqlash</button><button class="btn btn-ghost" onclick="document.getElementById('addMedModal').classList.remove('active')">Bekor</button></div></div></div>
 
-<div class="modal-overlay" id="addNoteModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-sticky-note" style="color:var(--cyan)"></i> Qaydnoma</div><div class="form-group"><label class="form-label">Sarlavha</label><div class="input-row"><input class="form-input" id="noteTitle" placeholder="Sarlavha"><button class="mic-btn" onclick="voiceInput('noteTitle')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Matn *</label><div class="input-row" style="align-items:flex-start;"><textarea class="form-input" id="noteContent" rows="4" placeholder="Yozing..." style="resize:vertical;"></textarea><button class="mic-btn" onclick="voiceInput('noteContent')" style="height:auto;align-self:stretch;"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Kategoriya</label><select class="form-select" id="noteCategory"><option value="general">Umumiy</option><option value="symptom">Belgi</option><option value="medication">Dori</option><option value="appointment">Shifokor</option></select></div><div style="display:flex;gap:10px;"><button class="btn btn-accent btn-full" onclick="saveNote()"><i class="fas fa-save"></i> Saqlash</button><button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')">Bekor</button></div></div></div>
+<div class="modal-overlay" id="addNoteModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('addNoteModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-sticky-note" style="color:var(--cyan)"></i> Qaydnoma</div><div class="form-group"><label class="form-label">Sarlavha</label><div class="input-row"><input class="form-input" id="noteTitle" placeholder="Sarlavha"><button class="mic-btn" onclick="voiceInput('noteTitle')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Matn *</label><div class="input-row" style="align-items:flex-start;"><textarea class="form-input" id="noteContent" rows="4" placeholder="Yozing..." style="resize:vertical;"></textarea><button class="mic-btn" onclick="voiceInput('noteContent')" style="height:auto;align-self:stretch;"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Kategoriya</label><select class="form-select" id="noteCategory"><option value="general">Umumiy</option><option value="symptom">Belgi</option><option value="medication">Dori</option><option value="appointment">Shifokor</option></select></div><div style="display:flex;gap:10px;"><button class="btn btn-accent btn-full" onclick="saveNote()" data-i18n="pain_save_btn"><i class="fas fa-save"></i> Saqlash</button><button class="btn btn-ghost" onclick="document.getElementById('addNoteModal').classList.remove('active')">Bekor</button></div></div></div>
 
-<div class="modal-overlay" id="editProfileModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent)"></i> Profil</div><div class="form-row"><div class="form-group"><label class="form-label">Ism</label><input class="form-input" id="pName"></div><div class="form-group"><label class="form-label">Familiya</label><input class="form-input" id="pSurname"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Yosh</label><input class="form-input" id="pAge" type="number"></div><div class="form-group"><label class="form-label">Telefon</label><input class="form-input" id="pPhone" placeholder="+998"></div></div><button class="btn btn-accent btn-full" onclick="saveProfile()"><i class="fas fa-save"></i> Saqlash</button></div></div>
+<div class="modal-overlay" id="editProfileModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('editProfileModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-user-edit" style="color:var(--accent)"></i> Profil</div><div class="form-row"><div class="form-group"><label class="form-label">Ism</label><input class="form-input" id="pName"></div><div class="form-group"><label class="form-label">Familiya</label><input class="form-input" id="pSurname"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Yosh</label><input class="form-input" id="pAge" type="number"></div><div class="form-group"><label class="form-label">Telefon</label><input class="form-input" id="pPhone" placeholder="+998"></div></div><button class="btn btn-accent btn-full" onclick="saveProfile()" data-i18n="pain_save_btn"><i class="fas fa-save"></i> Saqlash</button></div></div>
 
 <!-- BOOKING MODAL with GPS -->
 <div class="modal-overlay" id="bookModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('bookModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" id="bookDocName">Shifokor</div><div style="font-size:0.83rem;color:var(--accent);margin-bottom:12px;" id="bookDocSpec"></div><div style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;"><i class="fas fa-clock"></i> Vaqt tanlang:</div><div class="time-slots" id="bookSlots"></div><div class="form-group" style="margin-top:16px;"><label class="form-label"><i class="fas fa-phone" style="color:var(--green)"></i> Telefon *</label><div class="input-row"><input class="form-input" id="bookPhone" type="tel" placeholder="+998 90 000 00 00"><button class="mic-btn" onclick="voiceInput('bookPhone')"><i class="fas fa-microphone"></i></button></div></div>
@@ -1008,7 +1008,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div id="tgSendStatus" style="display:none;padding:10px;border-radius:10px;font-size:0.83rem;margin-bottom:12px;"></div>
 <button class="btn btn-full btn-lg" style="background:var(--green);color:white;border:none;" onclick="confirmBooking()" id="bookSubmitBtn"><i class="fas fa-calendar-check"></i> Band Qilish</button></div></div>
 
-<div class="modal-overlay" id="calEventModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('calEventModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-calendar-plus" style="color:var(--blue)"></i> Voqea Qo'shish</div><div class="form-group"><label class="form-label">Sana *</label><input class="form-input" type="date" id="calDate"></div><div class="form-group"><label class="form-label">Nomi *</label><div class="input-row"><input class="form-input" id="calTitle" placeholder="Masalan: Shifokor ko'rigi"><button class="mic-btn" onclick="voiceInput('calTitle')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Turi</label><select class="form-select" id="calType"><option value="checkup">🩺 Tekshiruv</option><option value="medication">💊 Dori</option><option value="doctor">👨‍⚕️ Shifokor</option><option value="lab">🧪 Tahlil</option><option value="other">📌 Boshqa</option></select></div><div class="form-group"><label class="form-label">Izoh</label><div class="input-row"><input class="form-input" id="calNote" placeholder="Qo'shimcha..."><button class="mic-btn" onclick="voiceInput('calNote')"><i class="fas fa-microphone"></i></button></div></div><button class="btn btn-blue btn-full" onclick="saveCalEvent()"><i class="fas fa-save"></i> Saqlash</button></div></div>
+<div class="modal-overlay" id="calEventModal"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('calEventModal').classList.remove('active')"><i class="fas fa-times"></i></button><div class="modal-title" style="margin-bottom:16px;"><i class="fas fa-calendar-plus" style="color:var(--blue)"></i> Voqea Qo'shish</div><div class="form-group"><label class="form-label">Sana *</label><input class="form-input" type="date" id="calDate"></div><div class="form-group"><label class="form-label">Nomi *</label><div class="input-row"><input class="form-input" id="calTitle" placeholder="Masalan: Shifokor ko'rigi"><button class="mic-btn" onclick="voiceInput('calTitle')"><i class="fas fa-microphone"></i></button></div></div><div class="form-group"><label class="form-label">Turi</label><select class="form-select" id="calType"><option value="checkup">🩺 Tekshiruv</option><option value="medication">💊 Dori</option><option value="doctor">👨‍⚕️ Shifokor</option><option value="lab">🧪 Tahlil</option><option value="other">📌 Boshqa</option></select></div><div class="form-group"><label class="form-label">Izoh</label><div class="input-row"><input class="form-input" id="calNote" placeholder="Qo'shimcha..."><button class="mic-btn" onclick="voiceInput('calNote')"><i class="fas fa-microphone"></i></button></div></div><button class="btn btn-blue btn-full" onclick="saveCalEvent()" data-i18n="pain_save_btn"><i class="fas fa-save"></i> Saqlash</button></div></div>
 
 <div class="toast-container" id="toastContainer"></div>
 
@@ -1354,11 +1354,11 @@ function renderHistory(){const tb=document.getElementById('historyBody');if(!sta
 const ctx=document.getElementById('historyRiskChart');if(ctx){try{if(window.hRC)window.hRC.destroy()}catch(e){}const d=state.history.slice(0,12).reverse();window.hRC=new Chart(ctx,{type:'line',data:{labels:d.map(h=>new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'})),datasets:[{label:'%',data:d.map(h=>h.score),borderColor:'#ff3a5c',backgroundColor:c=>{const g=c.chart.ctx.createLinearGradient(0,0,0,260);g.addColorStop(0,'rgba(255,58,92,0.25)');g.addColorStop(1,'rgba(255,58,92,0)');return g},tension:0.4,fill:true,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8a9cc0'}}},scales:{x:{ticks:{color:'#4b5e80'},grid:{color:'rgba(255,255,255,0.03)'}},y:{max:100,min:0,ticks:{color:'#4b5e80'},grid:{color:'rgba(255,255,255,0.03)'}}}}})}}
 function clearHistory(){if(!confirm('Tozalash?'))return;state.history=[];save('history');renderHistory();toast('Tozalandi','warn')}
 
-const achievements=[{icon:'🔬',name:'1-tahlil',cond:()=>state.history.length>=1},{icon:'📅',name:'5-tahlil',cond:()=>state.history.length>=5},{icon:'💊',name:'Dori',cond:()=>state.medications.some(m=>m.taken)},{icon:'📝',name:'Qayd',cond:()=>state.notes.length>=1},{icon:'👨‍⚕️',name:'Shifokor',cond:()=>state.notes.some(n=>n.category==='appointment')},{icon:'✅',name:'Past xavf',cond:()=>state.history.some(h=>h.score<25)},{icon:'🚶',name:'10K qadam',cond:()=>stepData.today>=10000},{icon:'💯',name:'100 ball',cond:()=>state.points>=100}];
+const achievements=[{icon:'🔬',get name(){return t('ach_1analysis')||'1-tahlil'},cond:()=>state.history.length>=1},{icon:'📅',get name(){return t('ach_5analysis')||'5-tahlil'},cond:()=>state.history.length>=5},{icon:'💊',get name(){return t('ach_med')||'Dori'},cond:()=>state.medications.some(m=>m.taken)},{icon:'📝',get name(){return t('ach_note')||'Qayd'},cond:()=>state.notes.length>=1},{icon:'👨‍⚕️',get name(){return t('ach_doctor')||'Shifokor'},cond:()=>state.notes.some(n=>n.category==='appointment')},{icon:'✅',get name(){return t('ach_lowrisk')||'Past xavf'},cond:()=>state.history.some(h=>h.score<25)},{icon:'🚶',get name(){return t('ach_10k')||'10K qadam'},cond:()=>stepData.today>=10000},{icon:'💯',get name(){return t('ach_100pts')||'100 ball'},cond:()=>state.points>=100}];
 function renderProfile(){
   const p=state.profile;const fn=(p.name||'').trim(),ln=(p.surname||'').trim();const init=((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U';
   document.getElementById('profileAvatar').textContent=init;document.getElementById('sidebarAvatar').textContent=init;
-  document.getElementById('profileNameDisplay').textContent=(fn+' '+ln).trim()||'Foydalanuvchi';document.getElementById('sidebarName').textContent=p.name||'Profil';
+  document.getElementById('profileNameDisplay').textContent=(fn+' '+ln).trim()||t('prof_default_name')||'User';document.getElementById('sidebarName').textContent=p.name||'Profil';
   const l=state.history[0];if(l){document.getElementById('pm-age').textContent='Yosh: '+(p.age||'—');document.getElementById('pm-points').textContent=state.points+' ball';
   const rTag=document.getElementById('profileRiskTag');rTag.textContent=l.level;rTag.className=`tag ${l.score<25?'tag-green':l.score<50?'tag-yellow':'tag-red'}`}
   const det=document.getElementById('profileDetails');
@@ -1367,7 +1367,7 @@ function renderProfile(){
   document.getElementById('statAnalyses').textContent=state.history.length;document.getElementById('statMeds').textContent=state.medications.length;document.getElementById('statNotes').textContent=state.notes.length;document.getElementById('statPoints').textContent=state.points;document.getElementById('sidebarPoints').textContent=state.points;
   // Analytics
   const aEl=document.getElementById('analyticsInfo');
-  if(aEl){const a=getAnalytics();aEl.innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;"><div>📊 Seanslar: <b>${a.sessions||0}</b></div><div>👁️ Sahifa koʼrishlar: <b>${a.totalViews||0}</b></div><div>📅 Birinchi foydalanish: <b>${a.firstUse?new Date(a.firstUse).toLocaleDateString():'-'}</b></div><div>⏰ Soʼnggi: <b>${a.lastUse?new Date(a.lastUse).toLocaleString():'-'}</b></div></div>`}
+  if(aEl){const a=getAnalytics();aEl.innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;"><div>📊 ${t('anal_sessions')}: <b>${a.sessions||0}</b></div><div>👁️ ${t('anal_views')}: <b>${a.totalViews||0}</b></div><div>📅 ${t('anal_first')}: <b>${a.firstUse?new Date(a.firstUse).toLocaleDateString():'-'}</b></div><div>⏰ ${t('anal_last')}: <b>${a.lastUse?new Date(a.lastUse).toLocaleString():'-'}</b></div></div>`}
 }
 function rpf(icon,lbl,val){return`<div style="padding:10px 14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);"><div style="font-size:0.7rem;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;">${lbl}</div><div style="font-weight:600;margin-top:4px;font-size:0.86rem;"><i class="fas fa-${icon}" style="color:var(--accent);margin-right:6px;font-size:0.78rem;"></i>${val}</div></div>`}
 function openEditProfileModal(){const p=state.profile;document.getElementById('pName').value=p.name||'';document.getElementById('pSurname').value=p.surname||'';document.getElementById('pAge').value=p.age||'';document.getElementById('pPhone').value=p.phone||'';document.getElementById('editProfileModal').classList.add('active')}
@@ -2090,6 +2090,36 @@ nav_encyclopedia:"Ensiklopediya",enc_desc:"Insult va qon-tomir kasalliklari haqi
   nav_bodymap:"Tana Xaritasi",body_desc:"Ogʼriq joyini bosib belgilang",body_log:"Ogʼriq Qaydlari",
   nav_calendar:"Tibbiy Kalendar",cal_desc:"Barcha tibbiy voqealar bir joyda",
   nav_symptoms:"Simptom Tekshiruv",nav_documents:"Hujjat Skaner",
+  nav_prognoz:"Prognoz AI",nav_telemedicine:"Telemedicina",
+  // Prognoz
+  prognoz_title:"Prognoz AI",prognoz_desc:"Kelajakdagi xavfni bashorat qilish",prognoz_btn:"Prognoz Hisoblash",prognoz_5year:"5 yillik prognoz",prognoz_trend:"Xavf Trendi (Prognoz)",
+  // Telemedicine
+  tele_title:"Telemedicina",tele_desc:"Shifokor bilan onlayn uchrashish",tele_video:"Video Konsultatsiya",tele_video_desc:"Shifokor bilan yuzma-yuz onlayn suhbat. Uydan chiqmasdan professional maslahat oling.",tele_start:"Video Qoʼngʼiroq Boshlash",tele_schedule:"Vaqt Belgilash",tele_encrypted:"Shifrlangan",tele_duration:"30 daqiqa",tele_certified:"Sertifikatlangan",tele_history:"Soʼnggi Seanslar",tele_no_sessions:"Hali seans oʼtkazilmagan",tele_how:"Qanday ishlaydi?",tele_how_desc:"1. Vaqt belgilang yoki hozir boshlang\n2. Shifokor video orqali qoʼshiladi\n3. Natijalar avtomatik saqlanadi",
+  // Documents
+  doc_desc:"Retsept va tahlil rasmlarini saqlang",doc_upload:"Rasm Yuklash",doc_empty:"Hujjatlar yoʼq",doc_name_prompt:"Hujjat nomini kiriting:",
+  // Calendar
+  cal_add:"Voqea Qoʼshish",cal_date:"Sana",cal_name:"Nomi",cal_type:"Turi",cal_note:"Izoh",cal_save:"Saqlash",cal_no_events:"Bu oyda voqealar yoʼq",
+  cal_checkup:"🩺 Tekshiruv",cal_medication:"💊 Dori",cal_doctor:"👨‍⚕️ Shifokor",cal_lab:"🧪 Tahlil",cal_other:"📌 Boshqa",
+  // Body Map
+  pain_mild:"Yengil",pain_moderate:"Oʼrtacha",pain_severe:"Kuchli",pain_clear:"Tozalash",pain_save:"Saqlash",pain_no:"Ogʼriq belgilanmagan",
+  // Profile settings
+  prof_settings:"Sozlamalar",prof_pin:"PIN Himoya",prof_pin_desc:"Oʼrnatish / oʼzgartirish",prof_telegram:"Telegram",prof_telegram_desc:"Natijani yuborish",
+  prof_export:"Eksport",prof_export_desc:"JSON ga saqlash",prof_import:"Import",prof_import_desc:"Maʼlumot tiklash",
+  prof_analytics:"Foydalanish statistikasi",prof_guide:"Qoʼllanma",prof_pin_remove:"PIN olib tashlash",
+  confirm_del:"Oʼchirish?",
+  prof_default_name:"Foydalanuvchi",
+  ach_1analysis:"1-tahlil",ach_5analysis:"5-tahlil",ach_med:"Dori",ach_note:"Qayd",ach_doctor:"Shifokor",ach_lowrisk:"Past xavf",ach_10k:"10K qadam",ach_100pts:"100 ball",book_select_time:"Vaqt tanlang:",
+  anal_sessions:"Seanslar",anal_views:"Sahifa koʼrishlar",anal_first:"Birinchi foydalanish",anal_last:"Soʼnggi",
+  prof_guide_btn:"Qoʼllanma",prof_pin_remove_btn:"PIN olib tashlash",pain_clear_btn:"Tozalash",pain_save_btn:"Saqlash",
+  prognoz_ready:"Tahlil natijalaringiz asosida 5 yillik prognoz hisoblaydi",
+  prognoz_btn_full:"Prognoz Hisoblash",
+  body_click:"Ogʼriq joyini bosing ☝️",
+  pain_severe_btn:"🔴 Kuchli",
+  pain_moderate_btn:"🟡 Oʼrtacha",
+  pain_mild_btn:"🟢 Yengil",
+  cal_add_btn:"Voqea Qoʼshish",
+  tele_start_btn:"Video Qoʼngʼiroq Boshlash",
+  tele_schedule_btn:"Vaqt Belgilash",
   sending:"Yuborilmoqda...",
 };
 // ─── UZ KIRILL — auto-transliterate ───
@@ -2161,6 +2191,30 @@ nav_encyclopedia:"Энциклопедия",enc_desc:"Об инсульте и �
   nav_bodymap:"Карта Тела",body_desc:"Отметьте место боли",body_log:"Записи боли",
   nav_calendar:"Мед. Календарь",cal_desc:"Все мед. события в одном месте",
   nav_symptoms:"Проверка Симптомов",nav_documents:"Сканер Документов",
+  nav_prognoz:"Прогноз ИИ",nav_telemedicine:"Телемедицина",
+  prognoz_title:"Прогноз ИИ",prognoz_desc:"Прогноз будущего риска",prognoz_btn:"Рассчитать прогноз",prognoz_5year:"Прогноз на 5 лет",prognoz_trend:"Тренд риска (Прогноз)",
+  tele_title:"Телемедицина",tele_desc:"Онлайн приём у врача",tele_video:"Видеоконсультация",tele_video_desc:"Очная онлайн-консультация с врачом. Получите профессиональную помощь не выходя из дома.",tele_start:"Начать видеозвонок",tele_schedule:"Записаться",tele_encrypted:"Зашифровано",tele_duration:"30 минут",tele_certified:"Сертифицировано",tele_history:"Последние сеансы",tele_no_sessions:"Сеансов пока нет",tele_how:"Как это работает?",tele_how_desc:"1. Запишитесь или начните сейчас\n2. Врач подключится по видео\n3. Результаты сохраняются автоматически",
+  doc_desc:"Сохраняйте фото рецептов и анализов",doc_upload:"Загрузить фото",doc_empty:"Нет документов",doc_name_prompt:"Введите название документа:",
+  cal_add:"Добавить событие",cal_date:"Дата",cal_name:"Название",cal_type:"Тип",cal_note:"Заметка",cal_save:"Сохранить",cal_no_events:"Нет событий в этом месяце",
+  cal_checkup:"🩺 Осмотр",cal_medication:"💊 Лекарство",cal_doctor:"👨‍⚕️ Врач",cal_lab:"🧪 Анализ",cal_other:"📌 Другое",
+  pain_mild:"Лёгкая",pain_moderate:"Средняя",pain_severe:"Сильная",pain_clear:"Очистить",pain_save:"Сохранить",pain_no:"Боль не отмечена",
+  prof_settings:"Настройки",prof_pin:"PIN-защита",prof_pin_desc:"Установить / изменить",prof_telegram:"Telegram",prof_telegram_desc:"Отправить результат",
+  prof_export:"Экспорт",prof_export_desc:"Сохранить в JSON",prof_import:"Импорт",prof_import_desc:"Восстановить данные",
+  prof_analytics:"Статистика использования",prof_guide:"Руководство",prof_pin_remove:"Удалить PIN",
+  confirm_del:"Удалить?",
+  prof_default_name:"Пользователь",
+  ach_1analysis:"1 анализ",ach_5analysis:"5 анализов",ach_med:"Лекарство",ach_note:"Запись",ach_doctor:"Врач",ach_lowrisk:"Низкий риск",ach_10k:"10К шагов",ach_100pts:"100 баллов",book_select_time:"Выберите время:",
+  anal_sessions:"Сеансов",anal_views:"Просмотров",anal_first:"Первое использование",anal_last:"Последний",
+  prof_guide_btn:"Руководство",prof_pin_remove_btn:"Удалить PIN",pain_clear_btn:"Очистить",pain_save_btn:"Сохранить",
+  prognoz_ready:"Рассчитает 5-летний прогноз на основе ваших анализов",
+  prognoz_btn_full:"Рассчитать прогноз",
+  body_click:"Нажмите на место боли ☝️",
+  pain_severe_btn:"🔴 Сильная",
+  pain_moderate_btn:"🟡 Средняя",
+  pain_mild_btn:"🟢 Лёгкая",
+  cal_add_btn:"Добавить событие",
+  tele_start_btn:"Начать видеозвонок",
+  tele_schedule_btn:"Записаться",
   sending:"Отправка...",
 };
 // ─── ENGLISH ───
@@ -2216,6 +2270,30 @@ nav_encyclopedia:"Encyclopedia",enc_desc:"About stroke and cardiovascular diseas
   nav_bodymap:"Body Map",body_desc:"Mark pain locations on body",body_log:"Pain Log",
   nav_calendar:"Medical Calendar",cal_desc:"All medical events in one place",
   nav_symptoms:"Symptom Checker",nav_documents:"Document Scanner",
+  nav_prognoz:"AI Prognosis",nav_telemedicine:"Telemedicine",
+  prognoz_title:"AI Prognosis",prognoz_desc:"Predict future risk",prognoz_btn:"Calculate Prognosis",prognoz_5year:"5-year prognosis",prognoz_trend:"Risk Trend (Prognosis)",
+  tele_title:"Telemedicine",tele_desc:"Online doctor consultation",tele_video:"Video Consultation",tele_video_desc:"Face-to-face online consultation with a doctor. Get professional advice from home.",tele_start:"Start Video Call",tele_schedule:"Schedule",tele_encrypted:"Encrypted",tele_duration:"30 minutes",tele_certified:"Certified",tele_history:"Recent Sessions",tele_no_sessions:"No sessions yet",tele_how:"How it works?",tele_how_desc:"1. Schedule or start now\n2. Doctor joins via video\n3. Results saved automatically",
+  doc_desc:"Save photos of prescriptions and test results",doc_upload:"Upload Photo",doc_empty:"No documents",doc_name_prompt:"Enter document name:",
+  cal_add:"Add Event",cal_date:"Date",cal_name:"Name",cal_type:"Type",cal_note:"Note",cal_save:"Save",cal_no_events:"No events this month",
+  cal_checkup:"🩺 Checkup",cal_medication:"💊 Medication",cal_doctor:"👨‍⚕️ Doctor",cal_lab:"🧪 Lab Test",cal_other:"📌 Other",
+  pain_mild:"Mild",pain_moderate:"Moderate",pain_severe:"Severe",pain_clear:"Clear",pain_save:"Save",pain_no:"No pain marked",
+  prof_settings:"Settings",prof_pin:"PIN Protection",prof_pin_desc:"Set / change",prof_telegram:"Telegram",prof_telegram_desc:"Send results",
+  prof_export:"Export",prof_export_desc:"Save to JSON",prof_import:"Import",prof_import_desc:"Restore data",
+  prof_analytics:"Usage statistics",prof_guide:"Guide",prof_pin_remove:"Remove PIN",
+  confirm_del:"Delete?",
+  prof_default_name:"User",
+  ach_1analysis:"1st analysis",ach_5analysis:"5 analyses",ach_med:"Medicine",ach_note:"Note",ach_doctor:"Doctor",ach_lowrisk:"Low risk",ach_10k:"10K steps",ach_100pts:"100 points",book_select_time:"Select time:",
+  anal_sessions:"Sessions",anal_views:"Page views",anal_first:"First use",anal_last:"Last",
+  prof_guide_btn:"Guide",prof_pin_remove_btn:"Remove PIN",pain_clear_btn:"Clear",pain_save_btn:"Save",
+  prognoz_ready:"Calculates 5-year prognosis based on your test results",
+  prognoz_btn_full:"Calculate Prognosis",
+  body_click:"Tap on pain location ☝️",
+  pain_severe_btn:"🔴 Severe",
+  pain_moderate_btn:"🟡 Moderate",
+  pain_mild_btn:"🟢 Mild",
+  cal_add_btn:"Add Event",
+  tele_start_btn:"Start Video Call",
+  tele_schedule_btn:"Schedule",
   sending:"Sending...",
 };
 
@@ -2402,7 +2480,8 @@ function fullLangUpdate(){
   if(vitChartTitles[0])vitChartTitles[0].textContent=t('bp_dynamics');
   if(vitChartTitles[1])vitChartTitles[1].textContent=t('risk_dynamics');
 
-  // 4. Re-render ALL dynamic pages (they use t() internally)
+  // 4. Re-render CURRENT page + always re-render key pages
+  try{
   if(state.currentPage==='dashboard')renderDashboard();
   if(state.currentPage==='vitals')renderVitals();
   if(state.currentPage==='steps')renderSteps();
@@ -2413,7 +2492,55 @@ function fullLangUpdate(){
   if(state.currentPage==='profile')renderProfile();
   if(state.currentPage==='encyclopedia')renderEncyclopedia();
   if(state.currentPage==='hospitals')renderHospitals();
+  if(state.currentPage==='bodymap'){renderPainMarkers();renderPainLog();}
+  if(state.currentPage==='calendar')renderCalendar();
+  if(state.currentPage==='documents')renderDocuments();
+  }catch(e){console.error('Lang update render error:',e)}
+  
+  // 5. Update ALL hardcoded text in Telemedicine page
+  const teleTexts={'tele_video':'Video Konsultatsiya','tele_video_desc':'desc','tele_encrypted':'Shifrlangan','tele_duration':'30 daqiqa','tele_certified':'Sertifikatlangan','tele_history':'Soʼnggi Seanslar','tele_no_sessions':'no','tele_how':'Qanday ishlaydi?','tele_start_btn':'btn','tele_schedule_btn':'btn'};
+  
+  // 6. Update Prognoz page text
+  const progTitle=document.querySelector('#page-prognoz .section-title span');
+  if(progTitle)progTitle.textContent=t('prognoz_title');
+  const progDesc=document.querySelector('#page-prognoz .section-desc span');
+  if(progDesc)progDesc.textContent=t('prognoz_desc');
+  
+  // 7. Update Telemedicine page text
+  const teleTitle=document.querySelector('#page-telemedicine .section-title span');
+  if(teleTitle)teleTitle.textContent=t('tele_title');
+  const teleDesc=document.querySelector('#page-telemedicine .section-desc span');
+  if(teleDesc)teleDesc.textContent=t('tele_desc');
+  
+  // 8. Update Profile page
+  const profTitleEl=document.querySelector('#page-profile .section-title span');
+  if(profTitleEl)profTitleEl.textContent=t('prof_title');
+  if(state.currentPage==='profile')renderProfile();
+  
+  // 9. Update Document page
+  const docDesc=document.querySelector('#page-documents .section-desc');
+  if(docDesc)docDesc.textContent=t('doc_desc');
+  
+  // 10. Update Body Map
+  const bodyTitle=document.querySelector('#page-bodymap .section-title span');
+  if(bodyTitle)bodyTitle.textContent=t('nav_bodymap');
+  const bodyDesc=document.querySelector('#page-bodymap .section-desc');
+  if(bodyDesc)bodyDesc.textContent=t('body_desc');
+  if(state.currentPage==='bodymap'){renderPainMarkers();renderPainLog();}
+  
+  // 11. Update Calendar
+  const calTitle=document.querySelector('#page-calendar .section-title span');
+  if(calTitle)calTitle.textContent=t('nav_calendar');
+  const calDesc=document.querySelector('#page-calendar .section-desc');
+  if(calDesc)calDesc.textContent=t('cal_desc');
   renderLangSwitcher();
+
+  // Update data-i18n elements globally
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    const val=t(key);
+    if(val&&val!==key)el.textContent=val;
+  });
 }
 function previewLang(l){currentLang=l;fullLangUpdate()}
 function renderLangSwitcher(){const el=document.getElementById('langSwitcher');if(!el)return;const lb={uz:'UZ',uz_cyr:'ЎЗ',ru:'RU',en:'EN'};el.innerHTML=['uz','uz_cyr','ru','en'].map(l=>{const a=currentLang===l;return`<button onclick="setLang('${l}')" style="padding:4px 9px;border-radius:20px;font-size:0.68rem;font-weight:700;cursor:pointer;border:1px solid ${a?'rgba(255,58,92,0.5)':'var(--border)'};background:${a?'rgba(255,58,92,0.15)':'transparent'};color:${a?'var(--accent)':'var(--text2)'};transition:all 0.2s;">${lb[l]}</button>`}).join('')}
