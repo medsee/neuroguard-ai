@@ -905,12 +905,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Ilova ochilganda 4 xonali PIN so'raladi</div>
       </div>
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fab fa-telegram" style="color:#29b6f6"></i> Telegram</div>
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fab fa-telegram" style="color:#29b6f6"></i> Ulashish</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
           <button class="btn btn-blue" onclick="sendMedReminderTG()"><i class="fas fa-pills"></i> Dori Eslatma</button>
-          <button class="btn btn-ghost" onclick="sendAnalysisTG()"><i class="fas fa-chart-bar"></i> Tahlil Yuborish</button>
+          <button class="btn btn-ghost" onclick="sendAnalysisTG()"><i class="fab fa-telegram"></i> Tahlil</button>
+          <button class="btn btn-success" onclick="shareLastWhatsApp()" style="background:#25D366;border-color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
         </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Natijalar Telegram kanaliga yuboriladi</div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Natijalarni doʼstlarga yoki shifokorga yuboring</div>
       </div>
     </div>
     <!-- Data Management -->
@@ -930,8 +931,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
     </div>
   </div>
-    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
-    
 
 </div>
 
@@ -1169,6 +1168,10 @@ function analyzeRisk(){
       <button onclick="sendAnalysisTG()" style="width:100%;margin-top:8px;background:transparent;border:1px dashed var(--border);border-radius:12px;padding:10px;font-size:0.78rem;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
         <i class="fab fa-telegram" style="color:#29b6f6;"></i> Telegram ga yuborish
       </button>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+        <button onclick="shareWhatsApp(${score},'${level}',${s},${d},${hr},${gl})" style="background:#25D366;color:white;border:none;border-radius:12px;padding:10px;font-size:0.78rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+        <button onclick="shareNative(${score},'${level}',${s},${d},${hr},${gl})" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:12px;padding:10px;font-size:0.78rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fas fa-share-alt"></i> Ulashish</button>
+      </div>
     </div>`;
     state.points+=10;save('points');updateSidebarProfile();toast('Tahlil tayyor! +10 ball','success');
   },1800);
@@ -1823,6 +1826,109 @@ function startMedReminders(){
   },60000); // Check every minute
 }
 
+/* ═══════════ SHARE (WhatsApp / Native) ═══════════ */
+function shareWhatsApp(score,level,s,d,hr,gl){
+  const name=(state.profile.name||'')+(state.profile.surname?' '+state.profile.surname:'');
+  const text=`🧠 *NeuroGuard AI Pro — Tahlil Natijasi*%0A%0A🎯 Xavf: *${score}%* — ${level}%0A❤️ QB: ${s}/${d} mmHg%0A💓 Yurak: ${hr} bpm%0A🩸 Qand: ${gl} mmol/L%0A👤 ${name||'Bemor'}%0A📅 ${new Date().toLocaleDateString()}%0A%0A📲 NeuroGuard bilan tekshiring: neuroguard.uz`;
+  window.open('https://wa.me/?text='+text,'_blank');
+  state.points+=3;save('points');updateSidebarProfile();toast('📤 WhatsApp ochildi! +3 ball','success');
+}
+
+function shareNative(score,level,s,d,hr,gl){
+  const name=(state.profile.name||'')+(state.profile.surname?' '+state.profile.surname:'');
+  const text=`🧠 NeuroGuard AI Pro\n🎯 Xavf: ${score}% — ${level}\n❤️ QB: ${s}/${d}\n💓 Yurak: ${hr} bpm\n🩸 Qand: ${gl}\n👤 ${name||'Bemor'}\n📅 ${new Date().toLocaleDateString()}`;
+  if(navigator.share){
+    navigator.share({title:'NeuroGuard Natija',text}).catch(()=>{});
+    toast('📤 Ulashish oynasi ochildi','success');
+  }else{
+    navigator.clipboard.writeText(text).then(()=>toast('📋 Nusxalandi! Istalgan joyga joylashtiring','success')).catch(()=>toast('Ulashish imkoni yoʼq','err'));
+  }
+}
+
+function shareLastWhatsApp(){
+  const l=state.history[0];
+  if(!l){toast('Avval tahlil oʼtkazing!','err');return}
+  shareWhatsApp(l.score,l.level,l.systolic,l.diastolic,l.heartrate||'—',l.glucose);
+}
+
+/* ═══════════ SMART REMINDERS ═══════════ */
+let reminderIntervals=[];
+function initSmartReminders(){
+  if(!('Notification' in window))return;
+  if(Notification.permission==='default'){
+    Notification.requestPermission();
+  }
+  // Clear old intervals
+  reminderIntervals.forEach(id=>clearInterval(id));
+  reminderIntervals=[];
+  
+  // Check every minute
+  const mainInterval=setInterval(()=>{
+    if(Notification.permission!=='granted')return;
+    const now=new Date();
+    const hh=now.getHours(),mm=now.getMinutes();
+    const nowTime=String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');
+    
+    // 1. Dori eslatmalari
+    state.medications.forEach(m=>{
+      if(!m.taken&&m.time===nowTime){
+        new Notification('💊 Dori vaqti!',{body:`${m.name} (${m.dosage}) qabul qilish vaqti keldi!`,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="80" font-size="80">💊</text></svg>',tag:'med-'+m.name,requireInteraction:true});
+      }
+    });
+    
+    // 2. Suv eslatma (har 2 soatda, 8:00-22:00)
+    if(mm===0&&hh>=8&&hh<=22&&hh%2===0){
+      const today=now.toISOString().slice(0,10);
+      const lastWater=localStorage.getItem('ng_water_remind');
+      if(lastWater!==today+'-'+hh){
+        localStorage.setItem('ng_water_remind',today+'-'+hh);
+        new Notification('💧 Suv iching!',{body:'Kuniga 2 litr suv — sogʼliq garovi!',tag:'water-'+hh});
+      }
+    }
+    
+    // 3. Yurish eslatma (soat 10:00 va 16:00)
+    if(mm===0&&(hh===10||hh===16)){
+      const today=now.toISOString().slice(0,10);
+      const lastWalk=localStorage.getItem('ng_walk_remind');
+      if(lastWalk!==today+'-'+hh){
+        localStorage.setItem('ng_walk_remind',today+'-'+hh);
+        new Notification('🚶 Yurish vaqti!',{body:'30 daqiqa yurish — insult xavfini kamaytiradi!',tag:'walk-'+hh});
+      }
+    }
+    
+    // 4. Uyqu eslatma (soat 22:00)
+    if(mm===0&&hh===22){
+      const today=now.toISOString().slice(0,10);
+      const lastSleep=localStorage.getItem('ng_sleep_remind');
+      if(lastSleep!==today){
+        localStorage.setItem('ng_sleep_remind',today);
+        new Notification('😴 Uxlash vaqti!',{body:'7-8 soat uyqu — miya sogʼligʼi uchun muhim!',tag:'sleep'});
+      }
+    }
+    
+    // 5. Kalendar voqealari (ertalab 9:00)
+    if(mm===0&&hh===9){
+      const today=now.toISOString().slice(0,10);
+      const todayEvents=(JSON.parse(localStorage.getItem('ng_cal')||'[]')).filter(e=>e.date===today);
+      todayEvents.forEach(e=>{
+        new Notification('📅 Bugun: '+e.title,{body:e.note||'Tibbiy voqea',tag:'cal-'+e.title});
+      });
+    }
+    
+    // 6. QB o'lchash eslatma (ertalab 8:00)
+    if(mm===0&&hh===8){
+      const today=now.toISOString().slice(0,10);
+      const lastBP=localStorage.getItem('ng_bp_remind');
+      if(lastBP!==today){
+        localStorage.setItem('ng_bp_remind',today);
+        new Notification('❤️ Qon bosimni oʼlchang!',{body:'Ertalab QB oʼlchash — eng aniq natija beradi.',tag:'bp'});
+      }
+    }
+  },60000);
+  
+  reminderIntervals.push(mainInterval);
+}
+
 /* ═══════════ PDF REPORT (ENHANCED) ═══════════ */
 function generateWeeklyReport(){
   const recent=state.history.slice(0,7);
@@ -2403,7 +2509,7 @@ window.addEventListener('load',()=>{
     currentLang=localStorage.getItem('ng_lang')||'uz';
     updateSidebarProfile();renderDashboard();showOnboarding();fullLangUpdate();renderLangSwitcher();
     toast(t('welcome')+' NeuroGuard AI Pro v8.0','info');
-    initPushNotifications();trackSession();
+    initPushNotifications();initSmartReminders();trackSession();
     // Show tour for first-time users
     if(!localStorage.getItem('ng_toured')&&localStorage.getItem('ng_onboarded')){setTimeout(()=>startTour(),1500);}
   },2200);
