@@ -387,6 +387,13 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 .cal-event{padding:12px 16px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);border-left:3px solid var(--blue);display:flex;justify-content:space-between;align-items:center}
 .cal-event-type{font-size:1.2rem;margin-right:10px}
 
+/* Dashboard Widgets */
+.dash-widget{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:16px;transition:all 0.3s;cursor:grab;min-height:100px}
+.dash-widget:hover{border-color:var(--border2);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.dash-widget:active{cursor:grabbing;transform:scale(0.97);opacity:0.8}
+.drag-handle{color:var(--text3);font-size:0.9rem;letter-spacing:2px;user-select:none}
+@media(max-width:900px){#dashWidgets{grid-template-columns:1fr 1fr !important}}
+
 /* AI Chat */
 .chat-msg{display:flex;gap:10px;margin-bottom:14px;animation:chatIn 0.3s ease}
 @keyframes chatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -488,7 +495,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div class="sidebar" id="sidebar">
   <div class="sidebar-logo"><div class="logo-mark"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v5.0</div></div></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div><div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="nav_dashboard">Dashboard</span></div><div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">AI</span></div></div>
-  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-bodymap" onclick="navGo('bodymap')"><i class="fas fa-person"></i><span data-i18n="nav_bodymap">Tana Xaritasi</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--yellow),var(--accent))">Yangi</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-calendar" onclick="navGo('calendar')"><i class="fas fa-calendar-alt"></i><span data-i18n="nav_calendar">Tibbiy Kalendar</span></div><div class="nav-item" id="nav-documents" onclick="navGo('documents')"><i class="fas fa-camera-retro"></i><span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
+  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-bodymap" onclick="navGo('bodymap')"><i class="fas fa-person"></i><span data-i18n="nav_bodymap">Tana Xaritasi</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-calendar" onclick="navGo('calendar')"><i class="fas fa-calendar-alt"></i><span data-i18n="nav_calendar">Tibbiy Kalendar</span></div><div class="nav-item" id="nav-documents" onclick="navGo('documents')"><i class="fas fa-camera-retro"></i><span data-i18n="nav_documents">Hujjat Skaner</span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-aichat" onclick="navGo('aichat')"><i class="fas fa-robot"></i><span data-i18n="nav_aichat">AI Shifokor</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">Claude</span></div><div class="nav-item" id="nav-prognoz" onclick="navGo('prognoz')"><i class="fas fa-chart-line"></i><span data-i18n="nav_prognoz">Prognoz AI</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--cyan),var(--green))">ML</span></div><div class="nav-item" id="nav-telemedicine" onclick="navGo('telemedicine')"><i class="fas fa-video"></i><span data-i18n="nav_telemedicine">Telemedicina</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
   <div class="nav-section"><div class="nav-label">Sozlamalar</div><div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i><span data-i18n="nav_profile">Profilim</span></div></div>
   <div class="sidebar-profile"><div class="profile-card" onclick="navGo('profile')"><div class="avatar" id="sidebarAvatar">A</div><div><div class="profile-name" id="sidebarName">Profil</div><div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> ball</div></div></div></div>
@@ -528,9 +535,14 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;" data-i18n="today_meds">Bugungi Dorilar</div><button class="btn btn-ghost" onclick="navGo('medications')" style="padding:6px 12px;font-size:0.78rem;">Hammasi →</button></div><div id="dashMeds"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Dorilar yo'q</div></div></div>
       <div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;" data-i18n="recent_notes">Qaydnomalar</div><button class="btn btn-ghost" onclick="navGo('notes')" style="padding:6px 12px;font-size:0.78rem;">Hammasi →</button></div><div id="dashNotes"><div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Yo'q</div></div></div>
     </div>
+    <!-- Drag & Drop Widgets -->
+    <div style="margin-top:20px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-size:0.82rem;font-weight:600;color:var(--text2);"><i class="fas fa-grip-vertical" style="color:var(--purple);margin-right:6px;"></i>Widgetlar <span style="font-size:0.7rem;color:var(--text3);">(sudrab joylashtiring)</span></div>
+      </div>
+      <div id="dashWidgets" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;"></div>
+    </div>
   </div>
-
-  <!-- ASSESSMENT -->
   <div class="page" id="page-assessment">
     <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--accent)"></i> <span data-i18n="assessment_title">AI Insult Xavfi Tahlili</span></div><div class="section-desc" data-i18n="assessment_desc">Ma'lumotlarni kiriting — AI natija beradi</div></div>
     <!-- Voice tip -->
@@ -595,6 +607,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 
   <!-- STEP COUNTER -->
+    <!-- STEPS -->
   <div class="page" id="page-steps">
     <div class="section-header"><div class="section-title"><i class="fas fa-shoe-prints" style="color:var(--green)"></i> <span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="section-desc">Kundalik harakatingizni kuzating</div></div>
     <div class="grid-2">
@@ -819,7 +832,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           
           <!-- HEAD -->
           <ellipse cx="100" cy="42" rx="26" ry="32" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.8" opacity="0.9"/>
-          <ellipse cx="100" cy="42" rx="26" ry="32" fill="transparent" stroke="#4a7ab5" stroke-width="0.3" style="cursor:pointer" onclick="markPain(evt,\'head\')"/>
+          <ellipse cx="100" cy="42" rx="26" ry="32" fill="transparent" stroke="#4a7ab5" stroke-width="0.3" style="cursor:pointer" onclick="markPain(evt,'head')"/>
           <!-- Subtle face -->
           <circle cx="91" cy="38" r="1.8" fill="#4a7ab5" opacity="0.2"/>
           <circle cx="109" cy="38" r="1.8" fill="#4a7ab5" opacity="0.2"/>
@@ -835,29 +848,29 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
           <path d="M108,88 Q132,92 146,105 Q150,110 148,112 L132,104 Q120,96 108,92Z" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.6"/>
           
           <!-- TORSO -->
-          <path d="M68,104 Q64,118 62,140 L60,175 Q58,195 60,210 Q62,225 70,232 L84,238 Q100,244 116,238 L130,232 Q138,225 140,210 Q142,195 140,175 L138,140 Q136,118 132,104 Q122,96 100,96 Q78,96 68,104Z" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.8" style="cursor:pointer" onclick="markPain(evt,\'torso\')"/>
+          <path d="M68,104 Q64,118 62,140 L60,175 Q58,195 60,210 Q62,225 70,232 L84,238 Q100,244 116,238 L130,232 Q138,225 140,210 Q142,195 140,175 L138,140 Q136,118 132,104 Q122,96 100,96 Q78,96 68,104Z" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.8" style="cursor:pointer" onclick="markPain(evt,'torso')"/>
           <!-- Chest detail -->
           <path d="M82,115 Q100,108 118,115" fill="none" stroke="#4a7ab5" stroke-width="0.3" opacity="0.2"/>
           <line x1="100" y1="100" x2="100" y2="232" stroke="#4a7ab5" stroke-width="0.2" opacity="0.15"/>
           <ellipse cx="100" cy="206" rx="2" ry="2.5" fill="none" stroke="#4a7ab5" stroke-width="0.4" opacity="0.2"/>
           
           <!-- LEFT ARM -->
-          <path d="M54,108 Q46,120 42,142 L36,178 Q32,200 34,218 L36,248 Q34,262 32,278 L30,292 Q28,300 32,304 L42,302 Q44,298 44,292 L46,272 Q48,254 50,238 L52,218 Q54,198 52,178 L54,148 Q56,130 58,118" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,\'left_arm\')"/>
+          <path d="M54,108 Q46,120 42,142 L36,178 Q32,200 34,218 L36,248 Q34,262 32,278 L30,292 Q28,300 32,304 L42,302 Q44,298 44,292 L46,272 Q48,254 50,238 L52,218 Q54,198 52,178 L54,148 Q56,130 58,118" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,'left_arm')"/>
           <ellipse cx="34" cy="306" rx="8" ry="5" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.5"/>
           
           <!-- RIGHT ARM -->
-          <path d="M146,108 Q154,120 158,142 L164,178 Q168,200 166,218 L164,248 Q166,262 168,278 L170,292 Q172,300 168,304 L158,302 Q156,298 156,292 L154,272 Q152,254 150,238 L148,218 Q146,198 148,178 L146,148 Q144,130 142,118" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,\'right_arm\')"/>
+          <path d="M146,108 Q154,120 158,142 L164,178 Q168,200 166,218 L164,248 Q166,262 168,278 L170,292 Q172,300 168,304 L158,302 Q156,298 156,292 L154,272 Q152,254 150,238 L148,218 Q146,198 148,178 L146,148 Q144,130 142,118" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,'right_arm')"/>
           <ellipse cx="166" cy="306" rx="8" ry="5" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.5"/>
           
           <!-- PELVIS -->
           <path d="M70,232 Q66,248 68,260 Q74,274 100,278 Q126,274 132,260 Q134,248 130,232" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.6"/>
           
           <!-- LEFT LEG -->
-          <path d="M70,262 Q68,285 66,315 L62,358 Q60,385 58,410 L56,435 Q54,448 58,452 L72,454 Q78,452 78,446 L76,428 Q74,405 76,380 L80,340 Q84,308 88,278" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,\'left_leg\')"/>
+          <path d="M70,262 Q68,285 66,315 L62,358 Q60,385 58,410 L56,435 Q54,448 58,452 L72,454 Q78,452 78,446 L76,428 Q74,405 76,380 L80,340 Q84,308 88,278" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,'left_leg')"/>
           <path d="M56,435 Q50,448 48,454 Q46,460 52,462 L72,458 Q78,456 78,452" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.5"/>
           
           <!-- RIGHT LEG -->
-          <path d="M112,278 Q116,308 120,340 L124,380 Q126,405 124,428 L122,446 Q122,452 128,454 L142,452 Q146,448 144,435 L142,410 Q140,385 138,358 L134,315 Q132,285 130,262" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,\'right_leg\')"/>
+          <path d="M112,278 Q116,308 120,340 L124,380 Q126,405 124,428 L122,446 Q122,452 128,454 L142,452 Q146,448 144,435 L142,410 Q140,385 138,358 L134,315 Q132,285 130,262" fill="url(#sG2)" stroke="#4a7ab5" stroke-width="0.7" style="cursor:pointer" onclick="markPain(evt,'right_leg')"/>
           <path d="M144,435 Q150,448 152,454 Q154,460 148,462 L128,458 Q122,456 122,452" fill="url(#sG)" stroke="#4a7ab5" stroke-width="0.5"/>
           
           <!-- Pain markers -->
@@ -1159,7 +1172,7 @@ function renderDashboard(){
   const gc=document.getElementById('dashGauge');const clr=l.score<25?'var(--green)':l.score<50?'var(--yellow)':'var(--accent)';
   gc.innerHTML=`<div style="text-align:center;padding:20px;"><div style="font-family:var(--font-display);font-size:3.2rem;font-weight:900;color:${clr};">${l.score}%</div><div style="font-size:0.83rem;color:var(--text2);margin-top:6px;">${t('stroke_risk')}</div><div style="margin-top:10px;"><span class="tag ${l.score<25?'tag-green':l.score<50?'tag-yellow':'tag-red'}">${l.level}</span></div><div class="progress-track" style="margin-top:16px;height:8px;"><div class="progress-fill-bar" style="width:${l.score}%;background:${clr};"></div></div></div>`;
   document.getElementById('dashRiskTag').textContent=l.level;document.getElementById('dashRiskTag').className=`tag ${l.score<25?'tag-green':l.score<50?'tag-yellow':'tag-red'}`;}
-  renderMiniChart();renderDashMeds();renderDashNotes();
+  renderMiniChart();renderDashMeds();renderDashNotes();renderDashboardWidgets();
 }
 function renderMiniChart(){const ctx=document.getElementById('dashBPChart');if(!ctx)return;if(window.dBC)try{window.dBC.destroy()}catch(e){}const lb=state.history.slice(0,8).reverse().map(h=>new Date(h.date).toLocaleDateString('uz-UZ',{month:'short',day:'numeric'}));const sy=state.history.slice(0,8).reverse().map(h=>h.systolic);const di=state.history.slice(0,8).reverse().map(h=>h.diastolic);if(!lb.length){lb.push('—');sy.push(120);di.push(80)}window.dBC=new Chart(ctx,{type:'line',data:{labels:lb,datasets:[{label:'Sys',data:sy,borderColor:'#ff3a5c',backgroundColor:'rgba(255,58,92,0.08)',tension:0.4,pointRadius:4},{label:'Dia',data:di,borderColor:'#4f8fff',backgroundColor:'rgba(79,143,255,0.08)',tension:0.4,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8a9cc0',font:{size:11}}}},scales:{x:{ticks:{color:'#4b5e80'},grid:{color:'rgba(255,255,255,0.03)'}},y:{ticks:{color:'#4b5e80'},grid:{color:'rgba(255,255,255,0.03)'}}}}})}
 function renderDashMeds(){const el=document.getElementById('dashMeds');const t=state.medications.slice(0,3);if(!t.length)return;el.innerHTML=t.map(m=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);"><span style="font-size:0.86rem;"><i class="fas fa-capsules" style="color:var(--accent);margin-right:6px;"></i>${m.name}</span><span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--accent);">${m.time}</span></div>`).join('')}
@@ -1293,9 +1306,27 @@ function addChatMsg(text, isUser){
   const el=document.getElementById('chatMessages');
   const cls=isUser?'user':'ai';
   const avatar=isUser?'👤':'🤖';
-  el.innerHTML+=`<div class="chat-msg ${cls}"><div class="chat-avatar ${isUser?'human':'ai'}">${avatar}</div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div></div>`;
+  const ttsBtn=isUser?'':`<button onclick="speakText(this.parentElement.querySelector('.chat-bubble').textContent)" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:0.8rem;margin-top:6px;display:flex;align-items:center;gap:4px;opacity:0.6;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6"><i class="fas fa-volume-up"></i> <span style="font-size:0.7rem;">Eshitish</span></button>`;
+  el.innerHTML+=`<div class="chat-msg ${cls}"><div class="chat-avatar ${isUser?'human':'ai'}">${avatar}</div><div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div>${ttsBtn}</div></div>`;
   el.scrollTop=el.scrollHeight;
 }
+
+/* ═══════════ TEXT-TO-SPEECH ═══════════ */
+function speakText(text){
+  if(!('speechSynthesis' in window)){toast('Brauzer TTS qo\'llab-quvvatlamaydi','err');return}
+  window.speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g,''));
+  const langMap={uz:'uz-UZ',uz_cyr:'ru-RU',ru:'ru-RU',en:'en-US'};
+  utterance.lang=langMap[currentLang]||'uz-UZ';
+  utterance.rate=0.9;utterance.pitch=1;
+  // Try to find a good voice
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=voices.find(v=>v.lang.startsWith(utterance.lang.split('-')[0]));
+  if(preferred)utterance.voice=preferred;
+  window.speechSynthesis.speak(utterance);
+  toast('🔊 O\'qilmoqda...','info');
+}
+function stopSpeaking(){window.speechSynthesis.cancel()}
 
 function sendChat(){
   const inp=document.getElementById('chatInput');
@@ -1952,6 +1983,45 @@ ${parseFloat(avgGl)>6.1?'<li>Qand darajasini nazorat qiling — endokrinolog bil
   a.click();URL.revokeObjectURL(url);
   state.points+=5;save('points');updateSidebarProfile();
   toast('📊 Haftalik hisobot yuklandi! +5 ball','success');
+}
+
+/* ═══════════ DASHBOARD WIDGETS (Drag & Drop) ═══════════ */
+let widgetOrder=JSON.parse(localStorage.getItem('ng_widgets')||'["risk","bp","meds","notes","steps"]');
+
+function renderDashboardWidgets(){
+  const container=document.getElementById('dashWidgets');if(!container)return;
+  const widgetRenderers={
+    risk:()=>`<div class="dash-widget" draggable="true" data-widget="risk" style="grid-column:span 1;">
+      <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>🎯 Xavf</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
+      <div id="dwRisk" style="text-align:center;"></div></div>`,
+    bp:()=>`<div class="dash-widget" draggable="true" data-widget="bp" style="grid-column:span 1;">
+      <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>❤️ QB Grafik</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
+      <div class="chart-wrap" style="height:150px;"><canvas id="dwBPChart"></canvas></div></div>`,
+    meds:()=>`<div class="dash-widget" draggable="true" data-widget="meds" style="grid-column:span 1;">
+      <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>💊 Dorilar</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
+      <div id="dwMeds"></div></div>`,
+    notes:()=>`<div class="dash-widget" draggable="true" data-widget="notes" style="grid-column:span 1;">
+      <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>📝 Qaydlar</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
+      <div id="dwNotes"></div></div>`,
+    steps:()=>`<div class="dash-widget" draggable="true" data-widget="steps" style="grid-column:span 1;">
+      <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>🚶 Qadam</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
+      <div style="text-align:center;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--green);">${stepData.today.toLocaleString()}</div><div style="font-size:0.75rem;color:var(--text3);">/ ${stepData.goal.toLocaleString()}</div></div></div>`,
+`,
+  };
+  container.innerHTML=widgetOrder.map(id=>widgetRenderers[id]?widgetRenderers[id]():'').join('');
+  // Init drag & drop
+  container.querySelectorAll('.dash-widget').forEach(w=>{
+    w.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',w.dataset.widget);w.style.opacity='0.4';});
+    w.addEventListener('dragend',()=>{w.style.opacity='1';});
+    w.addEventListener('dragover',e=>{e.preventDefault();w.style.borderColor='var(--accent)';});
+    w.addEventListener('dragleave',()=>{w.style.borderColor='var(--border)';});
+    w.addEventListener('drop',e=>{
+      e.preventDefault();w.style.borderColor='var(--border)';
+      const from=e.dataTransfer.getData('text/plain');const to=w.dataset.widget;
+      const fi=widgetOrder.indexOf(from),ti=widgetOrder.indexOf(to);
+      if(fi>-1&&ti>-1){widgetOrder.splice(fi,1);widgetOrder.splice(ti,0,from);localStorage.setItem('ng_widgets',JSON.stringify(widgetOrder));renderDashboardWidgets();}
+    });
+  });
 }
 
 /* ═══════════ FULL i18n — ALL 4 LANGUAGES ═══════════ */
