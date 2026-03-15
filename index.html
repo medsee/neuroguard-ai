@@ -907,55 +907,75 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <!-- PROFILE -->
   <div class="page" id="page-profile">
     <div class="section-header"><div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent)"></i> Profilim</div></div>
-    <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
-      <div class="profile-avatar-lg" id="profileAvatar">A</div>
-      <div style="flex:1;min-width:200px;position:relative;z-index:1;"><div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div><div class="tag tag-red" id="profileRiskTag" style="margin-top:8px;">—</div><div class="profile-meta"><div class="profile-meta-item"><i class="fas fa-birthday-cake"></i><span id="pm-age">—</span></div><div class="profile-meta-item"><i class="fas fa-star" style="color:var(--yellow)"></i><span id="pm-points">0 ball</span></div></div></div>
-      <button class="btn btn-ghost" onclick="openEditProfileModal()"><i class="fas fa-edit"></i></button>
-    </div>
-    <div class="grid-2" style="margin-bottom:24px;">
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Shaxsiy Ma'lumotlar</div><div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;">Ma'lumotlar to'ldirilmagan</div></div></div>
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow)"></i> Yutuqlar</div><div class="achievement-grid" id="achievementGrid"></div></div>
-    </div>
-    <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Statistika</div><div class="grid-4 profile-stats-grid">
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--accent)" id="statAnalyses">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Tahlillar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--blue)" id="statMeds">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Dorilar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--green)" id="statNotes">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Qaydnomalar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--yellow)" id="statPoints">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Ball</div></div>
-    </div></div>
-    <!-- Security & Telegram -->
-    <div class="grid-2" style="margin-top:20px;">
-      <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-lock" style="color:var(--purple)"></i> Xavfsizlik</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-accent" onclick="setPinCode()"><i class="fas fa-key"></i> PIN O'rnatish</button>
-          <button class="btn btn-danger" onclick="removePinCode()"><i class="fas fa-unlock"></i> PIN Olib Tashlash</button>
+    
+    <!-- Profile Hero Card -->
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px;">
+      <div style="background:linear-gradient(135deg,rgba(255,58,92,0.15),rgba(192,132,252,0.1),rgba(79,143,255,0.08));padding:32px 24px 24px;position:relative;">
+        <div style="position:absolute;top:-30px;right:-30px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,58,92,0.08),transparent);"></div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div id="profileAvatar" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:900;color:white;box-shadow:0 8px 30px rgba(255,58,92,0.3);flex-shrink:0;">A</div>
+          <div style="flex:1;min-width:180px;">
+            <div id="profileNameDisplay" style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;margin-bottom:4px;">Foydalanuvchi</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <div class="tag tag-red" id="profileRiskTag" style="font-size:0.72rem;">—</div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:0.8rem;color:var(--text3);"><i class="fas fa-birthday-cake" style="font-size:0.7rem;"></i><span id="pm-age">—</span></div>
+              <div style="display:flex;align-items:center;gap:4px;font-size:0.8rem;color:var(--yellow);"><i class="fas fa-star" style="font-size:0.7rem;"></i><span id="pm-points">0 ball</span></div>
+            </div>
+          </div>
+          <button class="btn btn-ghost" onclick="openEditProfileModal()" style="border-radius:50%;width:44px;height:44px;padding:0;display:flex;align-items:center;justify-content:center;"><i class="fas fa-pen"></i></button>
         </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Ilova ochilganda 4 xonali PIN so'raladi</div>
       </div>
-      <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fab fa-telegram" style="color:#29b6f6"></i> Ulashish</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-blue" onclick="sendMedReminderTG()"><i class="fas fa-pills"></i> Dori Eslatma</button>
-          <button class="btn btn-ghost" onclick="sendAnalysisTG()"><i class="fab fa-telegram"></i> Tahlil</button>
-          <button class="btn btn-success" onclick="shareLastWhatsApp()" style="background:#25D366;border-color:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-        </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Natijalarni doʼstlarga yoki shifokorga yuboring</div>
+      <!-- Quick Stats Bar -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);">
+        <div style="text-align:center;padding:18px 8px;border-right:1px solid var(--border);"><div style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--accent);" id="statAnalyses">0</div><div style="font-size:0.68rem;color:var(--text3);margin-top:2px;">Tahlillar</div></div>
+        <div style="text-align:center;padding:18px 8px;border-right:1px solid var(--border);"><div style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--blue);" id="statMeds">0</div><div style="font-size:0.68rem;color:var(--text3);margin-top:2px;">Dorilar</div></div>
+        <div style="text-align:center;padding:18px 8px;border-right:1px solid var(--border);"><div style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--green);" id="statNotes">0</div><div style="font-size:0.68rem;color:var(--text3);margin-top:2px;">Qaydlar</div></div>
+        <div style="text-align:center;padding:18px 8px;"><div style="font-family:var(--font-display);font-size:1.5rem;font-weight:900;color:var(--yellow);" id="statPoints">0</div><div style="font-size:0.68rem;color:var(--text3);margin-top:2px;">Ball</div></div>
       </div>
     </div>
-    <!-- Data Management -->
-    <div class="grid-2" style="margin-top:20px;">
+
+    <!-- Info & Achievements -->
+    <div class="grid-2" style="margin-bottom:20px;">
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-database" style="color:var(--cyan)"></i> Ma'lumotlar</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-success" onclick="exportAllData()"><i class="fas fa-download"></i> Eksport (JSON)</button>
-          <button class="btn btn-ghost" onclick="importAllData()"><i class="fas fa-upload"></i> Import</button>
-        </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Barcha ma'lumotlarni saqlash va tiklash</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-id-card" style="color:var(--accent);"></i><span style="font-weight:700;">Shaxsiy Maʼlumotlar</span></div>
+        <div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;">Maʼlumotlar toʼldirilmagan</div></div>
       </div>
       <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-pie" style="color:var(--yellow)"></i> Foydalanish</div>
-        <div id="analyticsInfo" style="font-size:0.82rem;color:var(--text2);"></div>
-        <button class="btn btn-ghost" onclick="startTour()" style="margin-top:10px;font-size:0.78rem;padding:6px 12px;"><i class="fas fa-route"></i> Qo'llanma</button>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow);"></i><span style="font-weight:700;">Yutuqlar</span></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
+      </div>
+    </div>
+
+    <!-- Actions Grid -->
+    <div class="card" style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;"><i class="fas fa-cog" style="color:var(--text3);"></i><span style="font-weight:700;">Sozlamalar</span></div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        <!-- PIN -->
+        <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="setPinCode()" onmouseover="this.style.borderColor='var(--purple)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(192,132,252,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-lock" style="color:var(--purple);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">PIN Himoya</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Oʼrnatish / oʼzgartirish</div></div></div>
+        </div>
+        <!-- Telegram -->
+        <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="sendAnalysisTG()" onmouseover="this.style.borderColor='#29b6f6'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(41,182,246,0.1);display:flex;align-items:center;justify-content:center;"><i class="fab fa-telegram" style="color:#29b6f6;"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Telegram</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Natijani yuborish</div></div></div>
+        </div>
+        <!-- Export -->
+        <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="exportAllData()" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(52,211,153,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-download" style="color:var(--green);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Eksport</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">JSON ga saqlash</div></div></div>
+        </div>
+        <!-- Import -->
+        <div style="padding:16px;background:var(--bg3);border-radius:14px;border:1px solid var(--border);cursor:pointer;transition:all 0.2s;" onclick="importAllData()" onmouseover="this.style.borderColor='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="display:flex;align-items:center;gap:10px;"><div style="width:40px;height:40px;border-radius:10px;background:rgba(34,211,238,0.1);display:flex;align-items:center;justify-content:center;"><i class="fas fa-upload" style="color:var(--cyan);"></i></div><div><div style="font-weight:700;font-size:0.88rem;">Import</div><div style="font-size:0.72rem;color:var(--text3);margin-top:2px;">Maʼlumot tiklash</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;"><i class="fas fa-chart-pie" style="color:var(--yellow);"></i><span style="font-weight:700;">Foydalanish statistikasi</span></div>
+      <div id="analyticsInfo" style="font-size:0.82rem;color:var(--text2);"></div>
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button class="btn btn-ghost" onclick="startTour()" style="font-size:0.78rem;padding:8px 14px;"><i class="fas fa-route"></i> Qoʼllanma</button>
+        <button class="btn btn-danger" onclick="removePinCode()" style="font-size:0.78rem;padding:8px 14px;"><i class="fas fa-unlock"></i> PIN olib tashlash</button>
       </div>
     </div>
   </div>
@@ -1263,10 +1283,7 @@ function analyzeRisk(){
       <button onclick="sendAnalysisTG()" style="width:100%;margin-top:8px;background:transparent;border:1px dashed var(--border);border-radius:12px;padding:10px;font-size:0.78rem;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
         <i class="fab fa-telegram" style="color:#29b6f6;"></i> Telegram ga yuborish
       </button>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
-        <button onclick="shareWhatsApp(${score},'${level}',${s},${d},${hr},${gl})" style="background:#25D366;color:white;border:none;border-radius:12px;padding:10px;font-size:0.78rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fab fa-whatsapp"></i> WhatsApp</button>
-        <button onclick="shareNative(${score},'${level}',${s},${d},${hr},${gl})" style="background:var(--bg3);color:var(--text2);border:1px solid var(--border);border-radius:12px;padding:10px;font-size:0.78rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fas fa-share-alt"></i> Ulashish</button>
-      </div>
+
     </div>`;
     state.points+=10;save('points');updateSidebarProfile();toast('Tahlil tayyor! +10 ball','success');
   },1800);
@@ -1865,31 +1882,6 @@ function startMedReminders(){
       });
     }
   },60000); // Check every minute
-}
-
-/* ═══════════ SHARE (WhatsApp / Native) ═══════════ */
-function shareWhatsApp(score,level,s,d,hr,gl){
-  const name=(state.profile.name||'')+(state.profile.surname?' '+state.profile.surname:'');
-  const text=`🧠 *NeuroGuard AI Pro — Tahlil Natijasi*%0A%0A🎯 Xavf: *${score}%* — ${level}%0A❤️ QB: ${s}/${d} mmHg%0A💓 Yurak: ${hr} bpm%0A🩸 Qand: ${gl} mmol/L%0A👤 ${name||'Bemor'}%0A📅 ${new Date().toLocaleDateString()}%0A%0A📲 NeuroGuard bilan tekshiring: neuroguard.uz`;
-  window.open('https://wa.me/?text='+text,'_blank');
-  state.points+=3;save('points');updateSidebarProfile();toast('📤 WhatsApp ochildi! +3 ball','success');
-}
-
-function shareNative(score,level,s,d,hr,gl){
-  const name=(state.profile.name||'')+(state.profile.surname?' '+state.profile.surname:'');
-  const text=`🧠 NeuroGuard AI Pro\n🎯 Xavf: ${score}% — ${level}\n❤️ QB: ${s}/${d}\n💓 Yurak: ${hr} bpm\n🩸 Qand: ${gl}\n👤 ${name||'Bemor'}\n📅 ${new Date().toLocaleDateString()}`;
-  if(navigator.share){
-    navigator.share({title:'NeuroGuard Natija',text}).catch(()=>{});
-    toast('📤 Ulashish oynasi ochildi','success');
-  }else{
-    navigator.clipboard.writeText(text).then(()=>toast('📋 Nusxalandi! Istalgan joyga joylashtiring','success')).catch(()=>toast('Ulashish imkoni yoʼq','err'));
-  }
-}
-
-function shareLastWhatsApp(){
-  const l=state.history[0];
-  if(!l){toast('Avval tahlil oʼtkazing!','err');return}
-  shareWhatsApp(l.score,l.level,l.systolic,l.diastolic,l.heartrate||'—',l.glucose);
 }
 
 /* ═══════════ SMART REMINDERS ═══════════ */
