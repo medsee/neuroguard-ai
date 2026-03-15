@@ -341,6 +341,44 @@ body.light-mode .tt-thumb{transform:translateX(16px);background:white}
 @media(max-width:480px){.grid-4{grid-template-columns:1fr 1fr}.page{padding:12px 12px 88px}.section-title{font-size:1.25rem}.card{padding:18px}.time-slots{grid-template-columns:repeat(2,1fr)}}
 
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+
+/* AI Chat */
+.chat-msg{display:flex;gap:10px;margin-bottom:14px;animation:chatIn 0.3s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.user{flex-direction:row-reverse}
+.chat-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+.chat-avatar.ai{background:linear-gradient(135deg,var(--purple),var(--blue));color:white}
+.chat-avatar.human{background:linear-gradient(135deg,var(--accent),var(--purple));color:white}
+.chat-bubble{max-width:80%;padding:12px 16px;border-radius:16px;font-size:0.86rem;line-height:1.6}
+.chat-msg.ai .chat-bubble{background:var(--bg3);border:1px solid var(--border);border-top-left-radius:4px}
+.chat-msg.user .chat-bubble{background:linear-gradient(135deg,var(--accent),#d42a5b);color:white;border-top-right-radius:4px}
+.chat-typing{display:flex;gap:4px;padding:8px 16px}
+.chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--text3);animation:typeDot 1s infinite}
+.chat-typing span:nth-child(2){animation-delay:0.2s}.chat-typing span:nth-child(3){animation-delay:0.4s}
+@keyframes typeDot{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+
+/* Encyclopedia */
+.enc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.3s;cursor:pointer;margin-bottom:16px}
+.enc-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.enc-header{padding:20px 24px;display:flex;align-items:center;gap:16px}
+.enc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.enc-body{padding:0 24px 20px;display:none;font-size:0.86rem;line-height:1.7;color:var(--text2)}
+.enc-card.open .enc-body{display:block}
+.enc-card.open{border-color:var(--accent)}
+.enc-chevron{margin-left:auto;color:var(--text3);transition:transform 0.3s}
+.enc-card.open .enc-chevron{transform:rotate(180deg);color:var(--accent)}
+
+/* Hospital cards */
+.hosp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;transition:all 0.2s}
+.hosp-card:hover{border-color:var(--green)}
+.hosp-name{font-weight:700;font-size:0.95rem;margin-bottom:6px}
+.hosp-addr{font-size:0.8rem;color:var(--text2);display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.hosp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+
+/* Med timer */
+.med-timer{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);border-radius:6px;font-family:var(--font-mono);font-size:0.78rem;color:var(--yellow)}
+.med-timer.urgent{background:rgba(255,58,92,0.1);border-color:rgba(255,58,92,0.2);color:var(--accent);animation:timerPulse 1s infinite}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:0.6}}
 </style>
 </head>
 <body>
@@ -386,7 +424,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <div class="sidebar-logo"><div class="logo-mark"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">NeuroGuard</div><div class="logo-sub">AI PRO v4.0</div></div></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_home">Bosh Sahifa</div><div class="nav-item active" id="nav-dashboard" onclick="navGo('dashboard')"><i class="fas fa-th-large"></i><span data-i18n="nav_dashboard">Dashboard</span></div><div class="nav-item" id="nav-assessment" onclick="navGo('assessment')"><i class="fas fa-stethoscope"></i><span data-i18n="nav_assessment">AI Tekshiruv</span><span class="nav-badge">AI</span></div></div>
   <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_health">Salomatlik</div><div class="nav-item" id="nav-vitals" onclick="navGo('vitals')"><i class="fas fa-heart-pulse"></i><span data-i18n="nav_vitals">Vital Ko'rsatkichlar</span></div><div class="nav-item" id="nav-steps" onclick="navGo('steps')"><i class="fas fa-shoe-prints"></i><span data-i18n="nav_steps">Qadam Sanagich</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--green),var(--cyan))">Yangi</span></div><div class="nav-item" id="nav-medications" onclick="navGo('medications')"><i class="fas fa-pills"></i><span data-i18n="nav_medications">Dorilar</span><span class="nav-badge" id="medBadge" style="display:none"></span></div><div class="nav-item" id="nav-notes" onclick="navGo('notes')"><i class="fas fa-notes-medical"></i><span data-i18n="nav_notes">Qaydnoma</span></div></div>
-  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
+  <div class="nav-section"><div class="nav-label" data-i18n="nav_sec_doctor">Shifokor</div><div class="nav-item" id="nav-aichat" onclick="navGo('aichat')"><i class="fas fa-robot"></i><span data-i18n="nav_aichat">AI Shifokor</span><span class="nav-badge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">AI</span></div><div class="nav-item" id="nav-appointments" onclick="navGo('appointments')"><i class="fas fa-calendar-check"></i><span data-i18n="nav_appointments">Konsultatsiya</span></div><div class="nav-item" id="nav-encyclopedia" onclick="navGo('encyclopedia')"><i class="fas fa-book-medical"></i><span data-i18n="nav_encyclopedia">Ensiklopediya</span></div><div class="nav-item" id="nav-hospitals" onclick="navGo('hospitals')"><i class="fas fa-hospital"></i><span data-i18n="nav_hospitals">Shifoxonalar</span></div><div class="nav-item" id="nav-history" onclick="navGo('history')"><i class="fas fa-chart-line"></i><span data-i18n="nav_history">Tarix</span></div></div>
   <div class="nav-section"><div class="nav-label">Sozlamalar</div><div class="nav-item" id="nav-profile" onclick="navGo('profile')"><i class="fas fa-user-circle"></i><span data-i18n="nav_profile">Profilim</span></div></div>
   <div class="sidebar-profile"><div class="profile-card" onclick="navGo('profile')"><div class="avatar" id="sidebarAvatar">A</div><div><div class="profile-name" id="sidebarName">Profil</div><div class="profile-points"><i class="fas fa-star"></i><span id="sidebarPoints">0</span> ball</div></div></div></div>
 </div>
@@ -397,6 +435,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div class="topbar-right">
       <button class="theme-toggle-btn" onclick="toggleDark()"><span id="themeIcon">🌙</span><div class="tt-track"><div class="tt-thumb"></div></div></button>
       <div id="langSwitcher" style="display:flex;gap:4px;"></div>
+      <div class="icon-btn" onclick="generateWeeklyReport()" title="Haftalik Hisobot"><i class="fas fa-chart-bar" style="color:var(--blue)"></i></div>
       <div class="icon-btn" onclick="downloadPDFReport()" title="PDF"><i class="fas fa-file-pdf" style="color:var(--accent)"></i></div>
     </div>
   </div>
@@ -578,6 +617,44 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--yellow)" id="statPoints">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Ball</div></div>
     </div></div>
   </div>
+  <!-- AI CHAT -->
+  <div class="page" id="page-aichat">
+    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
+    <div class="card" style="min-height:500px;display:flex;flex-direction:column;">
+      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:400px;padding:8px 0;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:12px;">
+        <div class="input-row">
+          <input class="form-input" id="chatInput" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="mic-btn" onclick="voiceInput('chatInput')"><i class="fas fa-microphone"></i></button>
+          <button class="btn btn-accent" onclick="sendChat()" style="padding:12px 18px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+          <button class="btn btn-ghost" onclick="quickChat('Boshim og\'riyapti')" style="padding:6px 12px;font-size:0.75rem;">🤕 Bosh og'rig'i</button>
+          <button class="btn btn-ghost" onclick="quickChat('Qon bosimim yuqori')" style="padding:6px 12px;font-size:0.75rem;">❤️ QB yuqori</button>
+          <button class="btn btn-ghost" onclick="quickChat('Insult belgilari qanday?')" style="padding:6px 12px;font-size:0.75rem;">🧠 Insult</button>
+          <button class="btn btn-ghost" onclick="quickChat('Stress boshqarish')" style="padding:6px 12px;font-size:0.75rem;">🧘 Stress</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENCYCLOPEDIA -->
+  <div class="page" id="page-encyclopedia">
+    <div class="section-header"><div class="section-title"><i class="fas fa-book-medical" style="color:var(--cyan)"></i> Tibbiy Ensiklopediya</div><div class="section-desc">Insult va qon-tomir kasalliklari haqida bilimlar</div></div>
+    <div id="encContent"></div>
+  </div>
+
+  <!-- HOSPITALS MAP -->
+  <div class="page" id="page-hospitals">
+    <div class="section-header"><div class="section-title"><i class="fas fa-hospital" style="color:var(--green)"></i> Yaqin Shifoxonalar</div><div class="section-desc">Samarqanddagi shifoxonalar va klinikalar</div></div>
+    <div class="card" style="margin-bottom:20px;">
+      <div id="hospitalMap" style="width:100%;height:350px;border-radius:16px;overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;">
+        <div style="text-align:center;color:var(--text3);"><i class="fas fa-map-marked-alt" style="font-size:2.5rem;margin-bottom:12px;display:block;"></i><button class="btn btn-success" onclick="loadHospitalMap()"><i class="fas fa-location-crosshairs"></i> Xaritani yuklash</button></div>
+      </div>
+    </div>
+    <div id="hospitalList" class="grid-2"></div>
+  </div>
+
 </div>
 
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
@@ -701,6 +778,9 @@ function showPage(id){
   if(id==='vitals')renderVitals();if(id==='medications')renderMedications();if(id==='notes')renderNotes();
   if(id==='appointments'){renderDoctors('all');setDocFilter('all');}if(id==='history')renderHistory();if(id==='profile')renderProfile();
   if(id==='dashboard')renderDashboard();if(id==='steps')renderSteps();
+  if(id==='aichat'){const cm=document.getElementById('chatMessages');if(!cm.innerHTML)addChatMsg('Salom! Men AI shifokor yordamchiman. 🧠\n\nSizga insult, qon bosimi, dorilar va sog\'liq haqida maslahat bera olaman.\n\nSavol bering yoki pastdagi tugmalarni bosing!',false);}
+  if(id==='encyclopedia')renderEncyclopedia();
+  if(id==='hospitals')renderHospitals();
   window.scrollTo(0,0);
 }
 function applyTheme(m){if(m==='light'){document.body.classList.add('light-mode');document.getElementById('themeIcon').textContent='☀️'}else{document.body.classList.remove('light-mode');document.getElementById('themeIcon').textContent='🌙'}localStorage.setItem('ng_theme',m)}
@@ -756,7 +836,7 @@ const rCtx=document.getElementById('vitRiskChart');if(rCtx){if(window.vRC)try{wi
 }
 
 function renderMedications(){const el=document.getElementById('medList');if(!state.medications.length){el.innerHTML=`<div class="card" style="text-align:center;padding:60px;color:var(--text3);"><i class="fas fa-pills" style="font-size:3rem;opacity:0.3;display:block;margin-bottom:16px;"></i>${t('no_meds_full')}</div>`;const b=document.getElementById('medBadge');if(b)b.style.display='none';return}
-el.innerHTML=state.medications.map((m,i)=>`<div class="med-card ${m.taken?'taken':''}"><div class="med-header-row"><div class="med-name"><i class="fas fa-capsules" style="color:var(--accent);margin-right:8px;"></i>${m.name}</div><div class="med-time">${m.time}</div></div><div class="med-meta"><span><i class="fas fa-prescription"></i> ${m.dosage}</span><span><i class="fas fa-repeat"></i> ${m.frequency}</span></div><div style="display:flex;gap:8px;"><button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.8rem;padding:8px 14px;${m.taken?'opacity:0.5':''}"><i class="fas fa-check"></i> ${m.taken?t('taken'):t('btn_take')}</button><button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.8rem;padding:8px 14px;"><i class="fas fa-trash"></i></button></div></div>`).join('');
+el.innerHTML=state.medications.map((m,i)=>{const timer=getMedTimer(m.time,m.taken);return`<div class="med-card ${m.taken?'taken':''}"><div class="med-header-row"><div class="med-name"><i class="fas fa-capsules" style="color:var(--accent);margin-right:8px;"></i>${m.name}</div><div style="display:flex;gap:8px;align-items:center;"><div class="med-time">${m.time}</div>${timer}</div></div><div class="med-meta"><span><i class="fas fa-prescription"></i> ${m.dosage}</span><span><i class="fas fa-repeat"></i> ${m.frequency}</span></div><div style="display:flex;gap:8px;"><button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.8rem;padding:8px 14px;${m.taken?'opacity:0.5':''}"><i class="fas fa-check"></i> ${m.taken?t('taken'):t('btn_take')}</button><button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.8rem;padding:8px 14px;"><i class="fas fa-trash"></i></button></div></div>`}).join('');
 const p=state.medications.filter(m=>!m.taken).length;const b=document.getElementById('medBadge');if(b){if(p>0){b.style.display='';b.textContent=p}else b.style.display='none'}}
 function openAddMedModal(){document.getElementById('addMedModal').classList.add('active')}
 function saveMedication(){const nm=document.getElementById('mName').value.trim(),ds=document.getElementById('mDose').value.trim(),tm=document.getElementById('mTime').value;if(!nm||!ds||!tm){toast('Maydonlarni to\'ldiring!','err');return}state.medications.push({name:nm,dosage:ds,time:tm,frequency:document.getElementById('mFreq').value,notes:document.getElementById('mNotes').value,taken:false});save('medications');document.getElementById('addMedModal').classList.remove('active');['mName','mDose','mTime','mNotes'].forEach(id=>document.getElementById(id).value='');state.points+=5;save('points');updateSidebarProfile();renderMedications();toast('Qo\'shildi! +5','success')}
@@ -819,6 +899,204 @@ function openEditProfileModal(){const p=state.profile;document.getElementById('p
 function saveProfile(){state.profile={name:document.getElementById('pName').value.trim(),surname:document.getElementById('pSurname').value.trim(),age:document.getElementById('pAge').value,phone:document.getElementById('pPhone').value.trim()};save('profile');state.points+=10;save('points');document.getElementById('editProfileModal').classList.remove('active');renderProfile();updateSidebarProfile();toast('Saqlandi!','success')}
 function updateSidebarProfile(){document.getElementById('sidebarPoints').textContent=state.points;document.getElementById('sidebarName').textContent=state.profile.name||'Profil';const fn=(state.profile.name||'').trim(),ln=(state.profile.surname||'').trim();document.getElementById('sidebarAvatar').textContent=((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U'}
 function downloadPDFReport(){const l=state.history[0];if(!l){toast('Avval tahlil o\'tkazing!','err');return}const nm=((state.profile.name||'')+' '+(state.profile.surname||'')).trim()||'Bemor';const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:40px;max-width:800px;margin:0 auto}.logo{font-size:1.8rem;font-weight:900;color:#ff3a5c}.risk{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;background:${l.score<25?'#d1fae5':l.score<50?'#fef3c7':'#fee2e2'};color:${l.score<25?'#065f46':l.score<50?'#92400e':'#991b1b'}}</style></head><body><div class="logo">NeuroGuard AI Pro v4.0</div><p>${nm} — ${new Date(l.date).toLocaleDateString()}</p><h2><span class="risk">${l.level} — ${l.score}%</span></h2><p>QB: ${l.systolic}/${l.diastolic} | HR: ${l.heartrate||'—'} | Qand: ${l.glucose} | BMI: ${l.bmi}</p><hr><p style="color:#999;font-size:0.8rem;">Bu faqat ma'lumot — diagnoz emas.</p></body></html>`;const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='NeuroGuard_'+new Date().toISOString().slice(0,10)+'.html';a.click();URL.revokeObjectURL(u);toast('Yuklandi!','success')}
+
+/* ═══════════ MED TIMER ═══════════ */
+function getMedTimer(timeStr, taken){
+  if(taken) return '<span class="med-timer"><i class="fas fa-check-circle"></i> ✓</span>';
+  if(!timeStr) return '';
+  const now=new Date();const [h,m]=timeStr.split(':').map(Number);
+  const target=new Date();target.setHours(h,m,0,0);
+  const diff=target-now;
+  if(diff<0) return '<span class="med-timer urgent"><i class="fas fa-clock"></i> Vaqti o\'tdi!</span>';
+  const hrs=Math.floor(diff/3600000);const mins=Math.floor((diff%3600000)/60000);
+  const urgent=diff<1800000;
+  return `<span class="med-timer ${urgent?'urgent':''}"><i class="fas fa-clock"></i> ${hrs>0?hrs+'s ':''}${mins}d</span>`;
+}
+// Auto-refresh timers every 30s
+setInterval(()=>{if(state.currentPage==='medications')renderMedications()},30000);
+
+/* ═══════════ AI CHAT ═══════════ */
+const chatHistory=[];
+const aiResponses={
+  'default':[
+    'Men AI shifokor yordamchiman. Aniq tibbiy diagnoz qo\'ya olmayman, lekin umumiy maslahatlar bera olaman. Qanday yordam kerak?',
+    'Bu haqida shifokor bilan maslahatlashishni tavsiya qilaman. Ammo umumiy ma\'lumot bera olaman.',
+  ],
+  'bosh':[
+    '🧠 Bosh og\'rig\'i sabablari:\n\n• Stress va charchash\n• Qon bosimi yuqoriligi\n• Uyqu yetishmasligi\n• Dehidratsiya (suv yetishmasligi)\n• Ko\'z tolishi\n\n⚠️ Agar bosh og\'rig\'i kuchli, to\'satdan paydo bo\'lgan va nutq buzilishi bilan birga bo\'lsa — DARHOL 103 ga qo\'ng\'iroq qiling! Bu insult belgisi bo\'lishi mumkin.\n\n💡 Tavsiya: Qon bosimingizni o\'lchang va AI Tekshiruv bo\'limida tahlil o\'tkazing.',
+  ],
+  'qon bosim':[
+    '❤️ Yuqori qon bosimi (gipertenziya):\n\n• Normal: 120/80 mmHg\n• Chegaraviy: 130-139/85-89\n• Yuqori: 140+/90+\n\n🚨 160/100 dan oshsa — DARHOL shifokorga!\n\n💊 Nima qilish kerak:\n• Tuzni kamaytiring (kuniga 5g dan kam)\n• Har kuni 30 daqiqa yuring\n• Stress boshqaring\n• Dorilaringizni muntazam qabul qiling\n\n📊 AI Tekshiruv bo\'limida to\'liq tahlil o\'tkazishni tavsiya qilaman.',
+  ],
+  'insult':[
+    '🧠 INSULT BELGILARI (FAST):\n\n🔴 F — Yuz bir tomonlama og\'ayapti\n🔴 A — Qo\'l ko\'tarilmayapti\n🔴 S — Nutq buzilgan\n🔴 T — VAQT muhim! Har bir daqiqa!\n\n⏰ Insultda dastlabki 4.5 soat — \"oltin vaqt\". Bu vaqtda yordam berilsa, miya kamroq shikastlanadi.\n\n🚨 Bu belgilarni ko\'rsangiz:\n1. DARHOL 103 ga qo\'ng\'iroq qiling\n2. Bemorni yotqizing, boshini biroz ko\'taring\n3. Hech narsa yedirmang/ichirmang\n4. Hushini yo\'qotsa — yoniga yotqizing',
+  ],
+  'stress':[
+    '🧘 Stressni boshqarish:\n\n1. 4-7-8 nafas mashqi:\n   • 4 soniya — nafas oling\n   • 7 soniya — ushlab turing\n   • 8 soniya — sekin chiqaring\n\n2. Kundalik yurish (30 daqiqa)\n3. Yetarli uyqu (7-8 soat)\n4. Suv ichish (2 litr/kun)\n5. Ekran vaqtini kamaytiring\n\n💡 Stress qon bosimni oshiradi va insult xavfini 2x oshiradi. Jiddiy qarang!',
+  ],
+  'dori':[
+    '💊 Dori qabul qilish qoidalari:\n\n• Har kuni bir xil vaqtda qabul qiling\n• Shifokor buyurmagan dorini o\'z-o\'zingiz boshlamang\n• Dorilar bo\'limida eslatma qo\'ying — tizim sizga eslatadi!\n\n⚠️ Agar dori nojo\'ya ta\'sir ko\'rsatsa (bosh aylanishi, ko\'ngil aynishi) — shifokorga xabar bering.',
+  ],
+};
+
+function getAIResponse(msg){
+  const lower=msg.toLowerCase();
+  if(lower.includes('bosh')&&(lower.includes('og\'ri')||lower.includes('ogri')))return aiResponses['bosh'][0];
+  if(lower.includes('qon bosim')||lower.includes('bosimi')||lower.includes('gipertenzi'))return aiResponses['qon bosim'][0];
+  if(lower.includes('insult')||lower.includes('fast')||lower.includes('belgi'))return aiResponses['insult'][0];
+  if(lower.includes('stress')||lower.includes('asab'))return aiResponses['stress'][0];
+  if(lower.includes('dori')||lower.includes('tabletka')||lower.includes('preparat'))return aiResponses['dori'][0];
+  // Add last analysis context
+  const last=state.history[0];
+  if(last){
+    return `Men sizning so'nggi tahlil natijalaringizni ko'rdim:\n\n📊 Xavf darajasi: ${last.score}% (${last.level})\n❤️ Qon bosimi: ${last.systolic}/${last.diastolic}\n🩸 Qand: ${last.glucose} mmol/L\n\nSizning holatga qarab, ${last.score>=50?'shifokorga murojaat qilishni qat\'iy tavsiya qilaman!':'davom eting, yaxshi ko\'rsatkichlar.'}\n\nAniqroq savol bering — yordam beraman!`;
+  }
+  return aiResponses['default'][0];
+}
+
+function addChatMsg(text, isUser){
+  const el=document.getElementById('chatMessages');
+  const cls=isUser?'user':'ai';
+  const avatar=isUser?'👤':'🤖';
+  el.innerHTML+=`<div class="chat-msg ${cls}"><div class="chat-avatar ${isUser?'human':'ai'}">${avatar}</div><div class="chat-bubble">${text.replace(/\n/g,'<br>')}</div></div>`;
+  el.scrollTop=el.scrollHeight;
+}
+
+function sendChat(){
+  const inp=document.getElementById('chatInput');
+  const msg=inp.value.trim();if(!msg)return;
+  addChatMsg(msg,true);inp.value='';
+  // Show typing
+  const el=document.getElementById('chatMessages');
+  el.innerHTML+='<div class="chat-msg ai" id="chatTyping"><div class="chat-avatar ai">🤖</div><div class="chat-bubble"><div class="chat-typing"><span></span><span></span><span></span></div></div></div>';
+  el.scrollTop=el.scrollHeight;
+  setTimeout(()=>{
+    const typing=document.getElementById('chatTyping');if(typing)typing.remove();
+    addChatMsg(getAIResponse(msg),false);
+    state.points+=2;save('points');updateSidebarProfile();
+  },1200+Math.random()*800);
+}
+
+function quickChat(msg){document.getElementById('chatInput').value=msg;sendChat()}
+
+/* ═══════════ ENCYCLOPEDIA ═══════════ */
+const encArticles=[
+  {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Insult nima?',
+   body:'<b>Insult</b> — bu miyaga qon oqimining to\'satdan buzilishi. 2 turi bor:<br><br><b>1. Ishemik insult (85%)</b> — miya arteriyasi tiqilib qoladi. Qon oqmaydi, hujayralar nobud bo\'ladi.<br><br><b>2. Gemorragik insult (15%)</b> — miya arteriyasi yorilib, qon oqib chiqadi.<br><br><b>Xavf omillari:</b><br>• Yuqori qon bosimi (eng katta sabab!)<br>• Diabet<br>• Chekish<br>• Yuqori xolesterin<br>• Oilada insult bo\'lgan<br>• 55 yoshdan katta<br><br>⏰ <b>Oltin vaqt:</b> Dastlabki 4.5 soatda yordam berilsa — miya tiklanishi mumkin!'},
+  {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Insult Aniqlash',
+   body:'FAST — insultni tezkor aniqlash usuli:<br><br>🔴 <b>F — Face (Yuz)</b><br>Tabassumga ayting. Yuz bir tomonga og\'ayaptimi?<br><br>🔴 <b>A — Arms (Qo\'llar)</b><br>Ikki qo\'lni ko\'tarsin. Biri tushib ketayaptimi?<br><br>🔴 <b>S — Speech (Nutq)</b><br>Oddiy gap aytsin. Nutqi chalkashmi?<br><br>🔴 <b>T — Time (Vaqt)</b><br>Bu belgilardan biri bo\'lsa — DARHOL 103!<br><br>⏱️ Har bir daqiqa muhim — 1.9 million neyron nobud bo\'ladi!'},
+  {id:'bp',icon:'❤️',color:'var(--accent)',title:'Qon Bosimi haqida',
+   body:'<b>Qon bosimi</b> — yurak qonni arteriyalarga qanchalik kuch bilan itarishi:<br><br>📊 <b>Darajalar:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Ko\'tarilgan: 120-129/&lt;80<br>• 🔴 1-bosqich gipertenziya: 130-139/80-89<br>• 🆘 2-bosqich: 140+/90+<br>• 🚨 Kriz: 180+/120+<br><br><b>Nima qilish kerak:</b><br>• Tuzni kamaytiring<br>• Har kuni 30 min yuring<br>• Tamaki va alkogolni tashlang<br>• Dorilarni muntazam qabul qiling<br>• Stressni boshqaring'},
+  {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Insultda Birinchi Yordam',
+   body:'🚨 <b>Insult belgisini ko\'rdingizmi? Darhol:</b><br><br>1️⃣ <b>103 ga qo\'ng\'iroq qiling</b> — vaqtni ayting<br><br>2️⃣ <b>Bemorni yotqizing</b> — boshi biroz baland<br><br>3️⃣ <b>Hech narsa yedirmang/ichirmang</b> — yutish refleksi buzilgan bo\'lishi mumkin<br><br>4️⃣ <b>Tor kiyimlarni bo\'shating</b> — galstuk, tugma<br><br>5️⃣ <b>Agar hushi yo\'qolsa</b> — yoniga yotqizing (tili tiqilib qolmasligi uchun)<br><br>6️⃣ <b>Vaqtni yozib oling</b> — belgilar qachon boshlangani muhim!<br><br>❌ <b>QILMANG:</b> Aspirin bermang, suv bermang, ko\'tarmasdan yotqizing'},
+  {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Insultdan Himoyalanish',
+   body:'<b>Insultni 80% gacha oldini olish mumkin!</b><br><br>✅ <b>Qon bosimni nazorat qiling</b> — eng muhim!<br>✅ <b>Chekishni tashlang</b> — 2-5 yilda xavf tushadi<br>✅ <b>Har kuni 30 min harakat</b> — yurish, suzish, velosiped<br>✅ <b>To\'g\'ri ovqatlaning</b> — sabzavot, meva, baliq<br>✅ <b>Vaznni nazoratda saqlang</b> — BMI 25 dan kam<br>✅ <b>Qandni tekshiring</b> — diabetni davolang<br>✅ <b>Alkogolni cheklang</b><br>✅ <b>Stressni boshqaring</b> — meditatsiya, nafas mashqi<br>✅ <b>Yiliga 1 marta tekshiruvdan o\'ting</b>'},
+  {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabet va Insult',
+   body:'<b>Diabet insult xavfini 2-4 baravar oshiradi!</b><br><br>📊 <b>Qand normalari:</b><br>• ✅ Normal: 3.9-5.5 mmol/L (ochqoringa)<br>• ⚠️ Prediabet: 5.6-6.9<br>• 🔴 Diabet: 7.0+<br><br><b>Nima qilish:</b><br>• Qandni muntazam tekshiring<br>• Shirinni kamaytiring<br>• Oqsilga boy ovqat tanlang<br>• Dorilarni muntazam qabul qiling<br>• Kuniga 30 daqiqa yuring'},
+];
+
+function renderEncyclopedia(){
+  document.getElementById('encContent').innerHTML=encArticles.map(a=>`
+    <div class="enc-card" id="enc-${a.id}" onclick="toggleEnc('${a.id}')">
+      <div class="enc-header">
+        <div class="enc-icon" style="background:${a.color}22;color:${a.color}">${a.icon}</div>
+        <div style="flex:1;"><div style="font-weight:700;font-size:0.95rem;">${a.title}</div><div style="font-size:0.78rem;color:var(--text3);margin-top:2px;">Batafsil o'qish uchun bosing</div></div>
+        <i class="fas fa-chevron-down enc-chevron"></i>
+      </div>
+      <div class="enc-body">${a.body}</div>
+    </div>`).join('');
+}
+function toggleEnc(id){document.getElementById('enc-'+id).classList.toggle('open')}
+
+/* ═══════════ HOSPITALS ═══════════ */
+const hospitals=[
+  {name:'Samarqand Viloyat Ko\'p Tarmoqli Tibbiyot Markazi',addr:'Samarqand, A. Temur ko\'chasi 1',phone:'+998 66 233 12 34',tags:['Nevrolog','Kardiolog','Tez yordam'],lat:39.6542,lng:66.9597},
+  {name:'Samarqand Shahar Tibbiy Birlashmasi',addr:'Samarqand, Registon ko\'chasi 25',phone:'+998 66 235 45 67',tags:['Umumiy','Nevrolog'],lat:39.6547,lng:66.9607},
+  {name:'MedLife Klinikasi',addr:'Samarqand, Gagarin ko\'chasi 14',phone:'+998 66 231 78 90',tags:['Xususiy','Kardiolog','Endokrinolog'],lat:39.6510,lng:66.9550},
+  {name:'Salomatlik Markazi',addr:'Samarqand, Navoiy ko\'chasi 8',phone:'+998 66 237 11 22',tags:['Xususiy','Nevrolog','Laboratoriya'],lat:39.6580,lng:66.9620},
+  {name:'Samarqand Tez Tibbiy Yordam',addr:'Samarqand, Bunyodkor ko\'chasi 3',phone:'103',tags:['Tez yordam','24/7'],lat:39.6560,lng:66.9570},
+  {name:'EndoCare Markazi',addr:'Samarqand, Ibn Sino ko\'chasi 17',phone:'+998 66 238 55 66',tags:['Endokrinolog','Diabet','Laboratoriya'],lat:39.6530,lng:66.9640},
+];
+
+function renderHospitals(){
+  document.getElementById('hospitalList').innerHTML=hospitals.map(h=>`
+    <div class="hosp-card">
+      <div class="hosp-name"><i class="fas fa-hospital" style="color:var(--green);margin-right:8px;"></i>${h.name}</div>
+      <div class="hosp-addr"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i>${h.addr}</div>
+      <div class="hosp-tags">${h.tags.map(t=>`<span class="tag tag-green">${t}</span>`).join('')}</div>
+      <div style="display:flex;gap:8px;">
+        <a href="tel:${h.phone.replace(/\s/g,'')}" class="btn btn-success" style="font-size:0.78rem;padding:7px 12px;text-decoration:none;"><i class="fas fa-phone"></i> ${h.phone}</a>
+        <a href="https://www.google.com/maps?q=${h.lat},${h.lng}" target="_blank" class="btn btn-ghost" style="font-size:0.78rem;padding:7px 12px;text-decoration:none;"><i class="fas fa-directions"></i> Yo'nalish</a>
+      </div>
+    </div>`).join('');
+}
+
+function loadHospitalMap(){
+  const mapEl=document.getElementById('hospitalMap');
+  const center=hospitals[0];
+  mapEl.innerHTML=`<iframe width="100%" height="100%" frameborder="0" style="border:0;border-radius:16px;" src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=hospitals+clinics+Samarkand+Uzbekistan&center=${center.lat},${center.lng}&zoom=14" allowfullscreen></iframe>`;
+}
+
+/* ═══════════ PDF REPORT (ENHANCED) ═══════════ */
+function generateWeeklyReport(){
+  const recent=state.history.slice(0,7);
+  if(!recent.length){toast('Avval tahlil o\'tkazing!','err');return}
+  const p=state.profile;const name=((p.name||'')+' '+(p.surname||'')).trim()||'Bemor';
+  const avgScore=Math.round(recent.reduce((s,h)=>s+h.score,0)/recent.length);
+  const avgSys=Math.round(recent.reduce((s,h)=>s+h.systolic,0)/recent.length);
+  const avgDia=Math.round(recent.reduce((s,h)=>s+h.diastolic,0)/recent.length);
+  const avgGl=(recent.reduce((s,h)=>s+parseFloat(h.glucose),0)/recent.length).toFixed(1);
+  
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+body{font-family:'Segoe UI',Arial,sans-serif;padding:40px;color:#1a1a2e;max-width:850px;margin:0 auto;line-height:1.6}
+.header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #ff3a5c;padding-bottom:20px;margin-bottom:30px}
+.logo{font-size:2rem;font-weight:900;color:#ff3a5c}
+h2{color:#ff3a5c;margin-top:28px;font-size:1.15rem;border-bottom:1px solid #eee;padding-bottom:8px}
+.risk-badge{display:inline-block;padding:10px 24px;border-radius:50px;font-weight:800;font-size:1.2rem;margin:12px 0}
+.low{background:#d1fae5;color:#065f46}.mid{background:#fef3c7;color:#92400e}.high{background:#fee2e2;color:#991b1b}
+table{width:100%;border-collapse:collapse;margin:12px 0}th{background:#f8fafc;padding:10px 14px;text-align:left;font-size:0.85rem;color:#64748b;border-bottom:2px solid #e2e8f0}
+td{padding:10px 14px;border-bottom:1px solid #f1f5f9;font-size:0.9rem}
+.stat-box{display:inline-block;padding:16px 24px;margin:6px;border-radius:12px;text-align:center;background:#f8fafc;min-width:120px}
+.stat-val{font-size:1.6rem;font-weight:800}.stat-lbl{font-size:0.75rem;color:#94a3b8;margin-top:4px}
+.footer{margin-top:40px;padding-top:16px;border-top:1px solid #eee;font-size:0.75rem;color:#999;text-align:center}
+</style></head><body>
+<div class="header"><div><div class="logo">🧠 NeuroGuard AI Pro</div><div style="color:#666;font-size:0.85rem;">Haftalik Tibbiy Hisobot</div></div><div style="text-align:right;color:#666;font-size:0.85rem;">${name}<br>${new Date().toLocaleDateString('uz-UZ')}<br>${recent.length} ta tahlil</div></div>
+
+<h2>📊 O'rtacha Ko'rsatkichlar</h2>
+<div style="text-align:center;margin:16px 0;">
+  <div class="stat-box"><div class="stat-val" style="color:#ff3a5c">${avgScore}%</div><div class="stat-lbl">O'rtacha Xavf</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#4f8fff">${avgSys}/${avgDia}</div><div class="stat-lbl">O'rtacha QB</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#fbbf24">${avgGl}</div><div class="stat-lbl">O'rtacha Qand</div></div>
+</div>
+
+<div class="risk-badge ${avgScore<25?'low':avgScore<50?'mid':'high'}">${avgScore<25?'✅ Past Xavf':avgScore<50?'⚠️ O\'rtacha Xavf':'🚨 Yuqori Xavf'} — ${avgScore}%</div>
+
+<h2>📋 Barcha Tahlillar</h2>
+<table><thead><tr><th>Sana</th><th>QB</th><th>Yurak</th><th>Qand</th><th>BMI</th><th>Xavf</th></tr></thead><tbody>
+${recent.map(h=>`<tr><td>${new Date(h.date).toLocaleDateString('uz-UZ')}</td><td>${h.systolic}/${h.diastolic}</td><td>${h.heartrate||'—'}</td><td>${h.glucose}</td><td>${h.bmi}</td><td style="font-weight:700;color:${h.score<25?'#059669':h.score<50?'#d97706':'#dc2626'}">${h.score}%</td></tr>`).join('')}
+</tbody></table>
+
+${state.medications.length?`<h2>💊 Dorilar</h2><table><thead><tr><th>Nomi</th><th>Doza</th><th>Vaqt</th><th>Holat</th></tr></thead><tbody>${state.medications.map(m=>`<tr><td>${m.name}</td><td>${m.dosage}</td><td>${m.time}</td><td>${m.taken?'✅ Qabul qilindi':'⏳ Kutilmoqda'}</td></tr>`).join('')}</tbody></table>`:''}
+
+<h2>💡 Tavsiyalar</h2>
+<ul style="color:#475569;">
+${avgScore>=50?'<li><b style="color:#dc2626">Shifokorga murojaat qiling!</b> Xavf darajangiz yuqori.</li>':''}
+${avgSys>130?'<li>Qon bosimni muntazam o\'lchang va tuzni kamaytiring</li>':''}
+${parseFloat(avgGl)>6.1?'<li>Qand darajasini nazorat qiling — endokrinolog bilan maslahatlashing</li>':''}
+<li>Har kuni kamida 30 daqiqa yuring</li>
+<li>Kuniga 1.5-2 litr suv iching</li>
+<li>7-8 soat uxlang</li>
+</ul>
+
+<div class="footer">NeuroGuard AI Pro v4.0 — Haftalik Avtomatik Hisobot<br>Bu hujjat faqat ma'lumot beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.<br>Yaratilgan: ${new Date().toLocaleString('uz-UZ')}</div>
+</body></html>`;
+  
+  const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`NeuroGuard_Haftalik_${new Date().toISOString().slice(0,10)}.html`;
+  a.click();URL.revokeObjectURL(url);
+  state.points+=5;save('points');updateSidebarProfile();
+  toast('📊 Haftalik hisobot yuklandi! +5 ball','success');
+}
 
 /* ═══════════ FULL i18n — ALL 4 LANGUAGES ═══════════ */
 let currentLang=localStorage.getItem('ng_lang')||'uz';
