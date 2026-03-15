@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>NeuroGuard AI Pro v4.0</title>
+<title>NeuroGuard AI Pro</title>
+<meta name="description" content="AI asosida insult va qon-tomir kasalliklarini erta aniqlash tizimi. Yurak urishi, qon bosimi, qand darajasini tekshiring.">
+<meta name="keywords" content="insult, stroke, health, sog'liq, neuroguard, AI, tibbiy, medical">
+<meta name="author" content="NeuroGuard AI Pro">
+<meta name="theme-color" content="#ff3a5c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NeuroGuard">
+<meta property="og:title" content="NeuroGuard AI Pro — Insult Xavfini Aniqlash">
+<meta property="og:description" content="Sun'iy intellekt asosida insult va qon-tomir kasalliklarini erta aniqlash. Bepul va oson.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>🧠</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23ff3a5c' rx='20' width='100' height='100'/><text x='50' y='70' font-size='55' text-anchor='middle' fill='white'>🧠</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23ff3a5c' rx='20' width='100' height='100'/><text x='50' y='70' font-size='55' text-anchor='middle' fill='white'>🧠</text></svg>">
+<link rel="manifest" href="data:application/json,{%22name%22:%22NeuroGuard AI Pro%22,%22short_name%22:%22NeuroGuard%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%2305080f%22,%22theme_color%22:%22%23ff3a5c%22,%22description%22:%22AI-powered stroke risk assessment%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%2523ff3a5c' rx='20' width='100' height='100'/><text x='50' y='70' font-size='55' text-anchor='middle' fill='white'>🧠</text></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22}]}">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -167,6 +181,7 @@ body.light-mode .tt-thumb{transform:translateX(16px);background:white}
 
 .page{padding:32px;display:none;animation:pgIn 0.35s ease}
 .page.active{display:block}
+.page:not(.active){display:none !important;height:0 !important;overflow:hidden !important;padding:0 !important;margin:0 !important}
 @keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 .section-header{margin-bottom:24px}
@@ -435,6 +450,23 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 </head>
 <body>
 
+<!-- SPLASH SCREEN -->
+<div id="splashScreen" style="position:fixed;inset:0;z-index:99999;background:#05080f;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s;">
+  <div style="animation:splashPulse 1.5s ease-in-out infinite;">
+    <div style="width:100px;height:100px;border-radius:28px;background:linear-gradient(135deg,#ff3a5c,#c084fc);display:flex;align-items:center;justify-content:center;font-size:3rem;box-shadow:0 0 60px rgba(255,58,92,0.4);">🧠</div>
+  </div>
+  <div style="font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:900;margin-top:24px;background:linear-gradient(135deg,#ff3a5c,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">NeuroGuard</div>
+  <div style="font-family:'Space Mono',monospace;font-size:0.72rem;color:#4b5e80;letter-spacing:0.15em;margin-top:6px;">AI PRO v8.0</div>
+  <div style="margin-top:32px;width:140px;height:3px;border-radius:2px;background:#0f1724;overflow:hidden;">
+    <div style="width:0%;height:100%;background:linear-gradient(90deg,#ff3a5c,#c084fc);border-radius:2px;animation:splashLoad 2s ease forwards;"></div>
+  </div>
+  <div style="font-size:0.7rem;color:#4b5e80;margin-top:12px;">Sun'iy intellekt tibbiy yordamchi</div>
+</div>
+<style>
+@keyframes splashPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes splashLoad{0%{width:0%}50%{width:70%}100%{width:100%}}
+</style>
+
 <!-- PIN LOCK SCREEN -->
 <div id="pinLock" style="display:none;position:fixed;inset:0;z-index:9500;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;">
   <div style="text-align:center;max-width:320px;padding:24px;">
@@ -592,147 +624,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 
   <!-- VITALS -->
-  <div class="page" id="page-vitals">
-    <div class="section-header"><div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent)"></i> Vital Ko'rsatkichlar</div></div>
-    <div class="grid-4" style="margin-bottom:24px;">
-      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-heart"></i> QB</div><div class="vital-value" style="color:var(--accent)" id="vBP">—/—</div><div class="vital-unit">mmHg</div><div class="ecg-anim"></div></div>
-      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-heartbeat"></i> YURAK</div><div class="vital-value" style="color:var(--blue)" id="vHR">—</div><div class="vital-unit">bpm</div></div>
-      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-droplet"></i> QAND</div><div class="vital-value" style="color:var(--yellow)" id="vGlucose">—</div><div class="vital-unit">mmol/L</div></div>
-      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-weight"></i> BMI</div><div class="vital-value" style="color:var(--cyan)" id="vBMI">—</div><div class="vital-unit">kg/m²</div></div>
-    </div>
-    <div class="grid-2">
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">QB Dinamikasi</div><div class="chart-wrap"><canvas id="vitBPChart"></canvas></div></div>
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Xavf Dinamikasi</div><div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div></div>
-    </div>
-  </div>
 
-  <!-- STEP COUNTER -->
-    <!-- STEPS -->
-  <div class="page" id="page-steps">
-    <div class="section-header"><div class="section-title"><i class="fas fa-shoe-prints" style="color:var(--green)"></i> <span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="section-desc">Kundalik harakatingizni kuzating</div></div>
-    <div class="grid-2">
-      <div class="step-card">
-        <div class="step-ring-wrap">
-          <svg class="step-ring-svg" viewBox="0 0 200 200">
-            <defs><linearGradient id="stepGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#34d399"/><stop offset="100%" style="stop-color:#22d3ee"/></linearGradient></defs>
-            <circle class="step-ring-bg" cx="100" cy="100" r="85"/>
-            <circle class="step-ring-fill" id="stepRing" cx="100" cy="100" r="85" stroke-dasharray="534" stroke-dashoffset="534"/>
-          </svg>
-          <div class="step-center">
-            <div class="step-count" id="stepCount">0</div>
-            <div class="step-goal" id="stepGoalTxt">/ 10,000 qadam</div>
-          </div>
-        </div>
-        <div class="step-stats">
-          <div class="step-stat"><div class="step-stat-val" style="color:var(--green)" id="stepKm">0.0</div><div class="step-stat-lbl">km</div></div>
-          <div class="step-stat"><div class="step-stat-val" style="color:var(--yellow)" id="stepCal">0</div><div class="step-stat-lbl">kkal</div></div>
-          <div class="step-stat"><div class="step-stat-val" style="color:var(--blue)" id="stepMin">0</div><div class="step-stat-lbl">daq</div></div>
-        </div>
-        <div class="step-controls">
-          <button class="btn btn-success" onclick="addSteps(500)"><i class="fas fa-plus"></i> 500</button>
-          <button class="btn btn-success" onclick="addSteps(1000)"><i class="fas fa-plus"></i> 1000</button>
-          <button class="btn btn-ghost" onclick="resetSteps()"><i class="fas fa-redo"></i> Qayta</button>
-        </div>
-        <div style="margin-top:12px;padding:10px 14px;background:rgba(52,211,153,0.06);border-radius:10px;border:1px solid rgba(52,211,153,0.15);font-size:0.78rem;color:var(--text2);text-align:center;">
-          <i class="fas fa-info-circle" style="color:var(--green);margin-right:4px;"></i>
-          Qurilmangizda akselerometr bo'lsa, avtomatik hisoblanadi
-        </div>
-      </div>
-      <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-area" style="color:var(--green)"></i> Haftalik Qadam Tarixi</div>
-        <div class="chart-wrap"><canvas id="stepChart"></canvas></div>
-        <div style="margin-top:16px;">
-          <div class="form-group"><label class="form-label"><i class="fas fa-bullseye" style="color:var(--green)"></i> Kunlik maqsad</label>
-            <div class="input-row"><input class="form-input" type="number" id="stepGoalInput" placeholder="10000" value="10000" onchange="updateStepGoal()"><button class="mic-btn" onclick="voiceInput('stepGoalInput')"><i class="fas fa-microphone"></i></button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MEDICATIONS -->
-  <div class="page" id="page-medications">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;"><div><div class="section-title"><i class="fas fa-pills" style="color:var(--accent)"></i> Dorilar</div></div><button class="btn btn-accent" onclick="openAddMedModal()"><i class="fas fa-plus"></i> Qo'shish</button></div>
-    <div id="medList"></div>
-  </div>
-
-  <!-- NOTES -->
-  <div class="page" id="page-notes">
-    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;"><div><div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan)"></i> Qaydnomalar</div></div><button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Qo'shish</button></div>
-    <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;">Hali qaydnoma yo'q</div></div>
-  </div>
-
-  <!-- APPOINTMENTS -->
-  <div class="page" id="page-appointments">
-    <div class="section-header"><div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green)"></i> Konsultatsiya</div></div>
-    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;"><button class="btn btn-accent" onclick="filterDocs('all')" id="df-all">Barchasi</button><button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button></div>
-    <div class="grid-3" id="doctorGrid"></div>
-  </div>
-
-  <!-- HISTORY -->
-  <div class="page" id="page-history">
-    <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue)"></i> Tarix</div></div>
-    <div class="card" style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;">Xavf Tarixi</div><button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.78rem;"><i class="fas fa-trash"></i> Tozalash</button></div><div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div></div>
-    <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div><div style="overflow-x:auto;"><table class="history-table"><thead><tr><th>Sana</th><th>QB</th><th>Yurak</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead><tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Yo'q</td></tr></tbody></table></div></div>
-  </div>
-
-  <!-- PROFILE -->
-  <div class="page" id="page-profile">
-    <div class="section-header"><div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent)"></i> Profilim</div></div>
-    <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
-      <div class="profile-avatar-lg" id="profileAvatar">A</div>
-      <div style="flex:1;min-width:200px;position:relative;z-index:1;"><div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div><div class="tag tag-red" id="profileRiskTag" style="margin-top:8px;">—</div><div class="profile-meta"><div class="profile-meta-item"><i class="fas fa-birthday-cake"></i><span id="pm-age">—</span></div><div class="profile-meta-item"><i class="fas fa-star" style="color:var(--yellow)"></i><span id="pm-points">0 ball</span></div></div></div>
-      <button class="btn btn-ghost" onclick="openEditProfileModal()"><i class="fas fa-edit"></i></button>
-    </div>
-    <div class="grid-2" style="margin-bottom:24px;">
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Shaxsiy Ma'lumotlar</div><div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;">Ma'lumotlar to'ldirilmagan</div></div></div>
-      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow)"></i> Yutuqlar</div><div class="achievement-grid" id="achievementGrid"></div></div>
-    </div>
-    <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Statistika</div><div class="grid-4 profile-stats-grid">
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--accent)" id="statAnalyses">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Tahlillar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--blue)" id="statMeds">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Dorilar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--green)" id="statNotes">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Qaydnomalar</div></div>
-      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--yellow)" id="statPoints">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Ball</div></div>
-    </div></div>
-    <!-- Security & Telegram -->
-    <div class="grid-2" style="margin-top:20px;">
-      <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-lock" style="color:var(--purple)"></i> Xavfsizlik</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-accent" onclick="setPinCode()"><i class="fas fa-key"></i> PIN O'rnatish</button>
-          <button class="btn btn-danger" onclick="removePinCode()"><i class="fas fa-unlock"></i> PIN Olib Tashlash</button>
-        </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Ilova ochilganda 4 xonali PIN so'raladi</div>
-      </div>
-      <div class="card">
-        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fab fa-telegram" style="color:#29b6f6"></i> Telegram</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-blue" onclick="sendMedReminderTG()"><i class="fas fa-pills"></i> Dori Eslatma</button>
-          <button class="btn btn-ghost" onclick="sendAnalysisTG()"><i class="fas fa-chart-bar"></i> Tahlil Yuborish</button>
-        </div>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Natijalar Telegram kanaliga yuboriladi</div>
-      </div>
-    </div>
-  </div>
-  <div class="page" id="page-aichat">
-    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
-    <div class="card" style="min-height:500px;display:flex;flex-direction:column;">
-      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:400px;padding:8px 0;"></div>
-      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:12px;">
-        <div class="input-row">
-          <input class="form-input" id="chatInput" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter')sendChat()">
-          <button class="mic-btn" onclick="voiceInput('chatInput')"><i class="fas fa-microphone"></i></button>
-          <button class="btn btn-accent" onclick="sendChat()" style="padding:12px 18px;"><i class="fas fa-paper-plane"></i></button>
-        </div>
-        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
-          <button class="btn btn-ghost" onclick="quickChat('Boshim og\'riyapti')" style="padding:6px 12px;font-size:0.75rem;">🤕 Bosh og'rig'i</button>
-          <button class="btn btn-ghost" onclick="quickChat('Qon bosimim yuqori')" style="padding:6px 12px;font-size:0.75rem;">❤️ QB yuqori</button>
-          <button class="btn btn-ghost" onclick="quickChat('Insult belgilari qanday?')" style="padding:6px 12px;font-size:0.75rem;">🧠 Insult</button>
-          <button class="btn btn-ghost" onclick="quickChat('Stress boshqarish')" style="padding:6px 12px;font-size:0.75rem;">🧘 Stress</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ENCYCLOPEDIA -->
   <div class="page" id="page-encyclopedia">
@@ -923,6 +815,183 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
     <div id="docList" class="grid-2"></div>
   </div>
 
+  <div class="page" id="page-vitals">
+    <div class="section-header"><div class="section-title"><i class="fas fa-heart-pulse" style="color:var(--accent)"></i> Vital Ko'rsatkichlar</div></div>
+    <div class="grid-4" style="margin-bottom:24px;">
+      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-heart"></i> QB</div><div class="vital-value" style="color:var(--accent)" id="vBP">—/—</div><div class="vital-unit">mmHg</div><div class="ecg-anim"></div></div>
+      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-heartbeat"></i> YURAK</div><div class="vital-value" style="color:var(--blue)" id="vHR">—</div><div class="vital-unit">bpm</div></div>
+      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-droplet"></i> QAND</div><div class="vital-value" style="color:var(--yellow)" id="vGlucose">—</div><div class="vital-unit">mmol/L</div></div>
+      <div class="vital-monitor"><div class="vital-label"><i class="fas fa-weight"></i> BMI</div><div class="vital-value" style="color:var(--cyan)" id="vBMI">—</div><div class="vital-unit">kg/m²</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">QB Dinamikasi</div><div class="chart-wrap"><canvas id="vitBPChart"></canvas></div></div>
+      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Xavf Dinamikasi</div><div class="chart-wrap"><canvas id="vitRiskChart"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- STEP COUNTER -->
+    <!-- STEPS -->
+  <div class="page" id="page-steps">
+    <div class="section-header"><div class="section-title"><i class="fas fa-shoe-prints" style="color:var(--green)"></i> <span data-i18n="nav_steps">Qadam Sanagich</span></div><div class="section-desc">Kundalik harakatingizni kuzating</div></div>
+    <div class="grid-2">
+      <div class="step-card">
+        <div class="step-ring-wrap">
+          <svg class="step-ring-svg" viewBox="0 0 200 200">
+            <defs><linearGradient id="stepGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#34d399"/><stop offset="100%" style="stop-color:#22d3ee"/></linearGradient></defs>
+            <circle class="step-ring-bg" cx="100" cy="100" r="85"/>
+            <circle class="step-ring-fill" id="stepRing" cx="100" cy="100" r="85" stroke-dasharray="534" stroke-dashoffset="534"/>
+          </svg>
+          <div class="step-center">
+            <div class="step-count" id="stepCount">0</div>
+            <div class="step-goal" id="stepGoalTxt">/ 10,000 qadam</div>
+          </div>
+        </div>
+        <div class="step-stats">
+          <div class="step-stat"><div class="step-stat-val" style="color:var(--green)" id="stepKm">0.0</div><div class="step-stat-lbl">km</div></div>
+          <div class="step-stat"><div class="step-stat-val" style="color:var(--yellow)" id="stepCal">0</div><div class="step-stat-lbl">kkal</div></div>
+          <div class="step-stat"><div class="step-stat-val" style="color:var(--blue)" id="stepMin">0</div><div class="step-stat-lbl">daq</div></div>
+        </div>
+        <div class="step-controls">
+          <button class="btn btn-success" onclick="addSteps(500)"><i class="fas fa-plus"></i> 500</button>
+          <button class="btn btn-success" onclick="addSteps(1000)"><i class="fas fa-plus"></i> 1000</button>
+          <button class="btn btn-ghost" onclick="resetSteps()"><i class="fas fa-redo"></i> Qayta</button>
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:rgba(52,211,153,0.06);border-radius:10px;border:1px solid rgba(52,211,153,0.15);font-size:0.78rem;color:var(--text2);text-align:center;">
+          <i class="fas fa-info-circle" style="color:var(--green);margin-right:4px;"></i>
+          Qurilmangizda akselerometr bo'lsa, avtomatik hisoblanadi
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-area" style="color:var(--green)"></i> Haftalik Qadam Tarixi</div>
+        <div class="chart-wrap"><canvas id="stepChart"></canvas></div>
+        <div style="margin-top:16px;">
+          <div class="form-group"><label class="form-label"><i class="fas fa-bullseye" style="color:var(--green)"></i> Kunlik maqsad</label>
+            <div class="input-row"><input class="form-input" type="number" id="stepGoalInput" placeholder="10000" value="10000" onchange="updateStepGoal()"><button class="mic-btn" onclick="voiceInput('stepGoalInput')"><i class="fas fa-microphone"></i></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDICATIONS -->
+  <div class="page" id="page-medications">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;"><div><div class="section-title"><i class="fas fa-pills" style="color:var(--accent)"></i> Dorilar</div></div><button class="btn btn-accent" onclick="openAddMedModal()"><i class="fas fa-plus"></i> Qo'shish</button></div>
+    <div id="medList"></div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="page" id="page-notes">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;"><div><div class="section-title"><i class="fas fa-notes-medical" style="color:var(--cyan)"></i> Qaydnomalar</div></div><button class="btn btn-accent" onclick="openAddNoteModal()"><i class="fas fa-plus"></i> Qo'shish</button></div>
+    <div id="notesList"><div style="text-align:center;color:var(--text3);padding:60px;">Hali qaydnoma yo'q</div></div>
+  </div>
+
+  <!-- APPOINTMENTS -->
+  <div class="page" id="page-appointments">
+    <div class="section-header"><div class="section-title"><i class="fas fa-calendar-check" style="color:var(--green)"></i> Konsultatsiya</div></div>
+    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;"><button class="btn btn-accent" onclick="filterDocs('all')" id="df-all">Barchasi</button><button class="btn btn-ghost" onclick="filterDocs('nevrolog')" id="df-nevrolog">Nevrolog</button></div>
+    <div class="grid-3" id="doctorGrid"></div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="page" id="page-aichat">
+    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
+    <div class="card" style="min-height:500px;display:flex;flex-direction:column;">
+      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:400px;padding:8px 0;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:12px;">
+        <div class="input-row">
+          <input class="form-input" id="chatInput" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="mic-btn" onclick="voiceInput('chatInput')"><i class="fas fa-microphone"></i></button>
+          <button class="btn btn-accent" onclick="sendChat()" style="padding:12px 18px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+          <button class="btn btn-ghost" onclick="quickChat('Boshim og\'riyapti')" style="padding:6px 12px;font-size:0.75rem;">🤕 Bosh og'rig'i</button>
+          <button class="btn btn-ghost" onclick="quickChat('Qon bosimim yuqori')" style="padding:6px 12px;font-size:0.75rem;">❤️ QB yuqori</button>
+          <button class="btn btn-ghost" onclick="quickChat('Insult belgilari qanday?')" style="padding:6px 12px;font-size:0.75rem;">🧠 Insult</button>
+          <button class="btn btn-ghost" onclick="quickChat('Stress boshqarish')" style="padding:6px 12px;font-size:0.75rem;">🧘 Stress</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="page-history">
+    <div class="section-header"><div class="section-title"><i class="fas fa-chart-line" style="color:var(--blue)"></i> Tarix</div></div>
+    <div class="card" style="margin-bottom:24px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><div class="section-title" style="font-size:1rem;">Xavf Tarixi</div><button class="btn btn-danger" onclick="clearHistory()" style="padding:7px 14px;font-size:0.78rem;"><i class="fas fa-trash"></i> Tozalash</button></div><div class="chart-wrap" style="height:260px;"><canvas id="historyRiskChart"></canvas></div></div>
+    <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Barcha Tekshiruvlar</div><div style="overflow-x:auto;"><table class="history-table"><thead><tr><th>Sana</th><th>QB</th><th>Yurak</th><th>Qand</th><th>BMI</th><th>Xavf</th><th>Daraja</th></tr></thead><tbody id="historyBody"><tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px;">Yo'q</td></tr></tbody></table></div></div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="page" id="page-profile">
+    <div class="section-header"><div class="section-title"><i class="fas fa-user-circle" style="color:var(--accent)"></i> Profilim</div></div>
+    <div class="profile-header-bg" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <div class="profile-avatar-lg" id="profileAvatar">A</div>
+      <div style="flex:1;min-width:200px;position:relative;z-index:1;"><div class="profile-name-lg" id="profileNameDisplay">Foydalanuvchi</div><div class="tag tag-red" id="profileRiskTag" style="margin-top:8px;">—</div><div class="profile-meta"><div class="profile-meta-item"><i class="fas fa-birthday-cake"></i><span id="pm-age">—</span></div><div class="profile-meta-item"><i class="fas fa-star" style="color:var(--yellow)"></i><span id="pm-points">0 ball</span></div></div></div>
+      <button class="btn btn-ghost" onclick="openEditProfileModal()"><i class="fas fa-edit"></i></button>
+    </div>
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Shaxsiy Ma'lumotlar</div><div id="profileDetails"><div style="color:var(--text3);font-size:0.83rem;">Ma'lumotlar to'ldirilmagan</div></div></div>
+      <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-trophy" style="color:var(--yellow)"></i> Yutuqlar</div><div class="achievement-grid" id="achievementGrid"></div></div>
+    </div>
+    <div class="card"><div class="section-title" style="font-size:1rem;margin-bottom:16px;">Statistika</div><div class="grid-4 profile-stats-grid">
+      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--accent)" id="statAnalyses">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Tahlillar</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--blue)" id="statMeds">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Dorilar</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--green)" id="statNotes">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Qaydnomalar</div></div>
+      <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:12px;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--yellow)" id="statPoints">0</div><div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">Ball</div></div>
+    </div></div>
+    <!-- Security & Telegram -->
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-lock" style="color:var(--purple)"></i> Xavfsizlik</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-accent" onclick="setPinCode()"><i class="fas fa-key"></i> PIN O'rnatish</button>
+          <button class="btn btn-danger" onclick="removePinCode()"><i class="fas fa-unlock"></i> PIN Olib Tashlash</button>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Ilova ochilganda 4 xonali PIN so'raladi</div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fab fa-telegram" style="color:#29b6f6"></i> Telegram</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-blue" onclick="sendMedReminderTG()"><i class="fas fa-pills"></i> Dori Eslatma</button>
+          <button class="btn btn-ghost" onclick="sendAnalysisTG()"><i class="fas fa-chart-bar"></i> Tahlil Yuborish</button>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Natijalar Telegram kanaliga yuboriladi</div>
+      </div>
+    </div>
+    <!-- Data Management -->
+    <div class="grid-2" style="margin-top:20px;">
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-database" style="color:var(--cyan)"></i> Ma'lumotlar</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-success" onclick="exportAllData()"><i class="fas fa-download"></i> Eksport (JSON)</button>
+          <button class="btn btn-ghost" onclick="importAllData()"><i class="fas fa-upload"></i> Import</button>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:10px;">Barcha ma'lumotlarni saqlash va tiklash</div>
+      </div>
+      <div class="card">
+        <div class="section-title" style="font-size:1rem;margin-bottom:16px;"><i class="fas fa-chart-pie" style="color:var(--yellow)"></i> Foydalanish</div>
+        <div id="analyticsInfo" style="font-size:0.82rem;color:var(--text2);"></div>
+        <button class="btn btn-ghost" onclick="startTour()" style="margin-top:10px;font-size:0.78rem;padding:6px 12px;"><i class="fas fa-route"></i> Qo'llanma</button>
+      </div>
+    </div>
+  </div>
+    <div class="section-header"><div class="section-title"><i class="fas fa-robot" style="color:var(--purple)"></i> AI Shifokor Chat</div><div class="section-desc">Sun'iy intellekt bilan suhbatlashing</div></div>
+    <div class="card" style="min-height:500px;display:flex;flex-direction:column;">
+      <div id="chatMessages" style="flex:1;overflow-y:auto;max-height:400px;padding:8px 0;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;margin-top:12px;">
+        <div class="input-row">
+          <input class="form-input" id="chatInput" placeholder="Savolingizni yozing..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="mic-btn" onclick="voiceInput('chatInput')"><i class="fas fa-microphone"></i></button>
+          <button class="btn btn-accent" onclick="sendChat()" style="padding:12px 18px;"><i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+          <button class="btn btn-ghost" onclick="quickChat('Boshim og\'riyapti')" style="padding:6px 12px;font-size:0.75rem;">🤕 Bosh og'rig'i</button>
+          <button class="btn btn-ghost" onclick="quickChat('Qon bosimim yuqori')" style="padding:6px 12px;font-size:0.75rem;">❤️ QB yuqori</button>
+          <button class="btn btn-ghost" onclick="quickChat('Insult belgilari qanday?')" style="padding:6px 12px;font-size:0.75rem;">🧠 Insult</button>
+          <button class="btn btn-ghost" onclick="quickChat('Stress boshqarish')" style="padding:6px 12px;font-size:0.75rem;">🧘 Stress</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
@@ -960,10 +1029,10 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 let voiceRec=null, activeField=null;
 function initVR(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return null;const r=new SR();r.continuous=false;r.interimResults=false;const lm={uz:'uz-UZ',uz_cyr:'uz-UZ',ru:'ru-RU',en:'en-US'};r.lang=lm[currentLang]||'uz-UZ';
 r.onresult=function(e){const txt=e.results[0][0].transcript;if(activeField){const el=document.getElementById(activeField);if(el){const numF=['systolic','diastolic','heartrate','glucose','height','weight','age','cholesterol','labValue','stepGoalInput'];if(numF.includes(activeField)){const n=txt.match(/[\d]+[.,]?[\d]*/g);el.value=n?n[0].replace(',','.'):''}else{el.tagName==='TEXTAREA'?el.value=(el.value?el.value+' ':'')+txt:el.value=txt}el.dispatchEvent(new Event('input'));toast('🎙️ "'+txt+'"','success')}}stopVoice()};
-r.onerror=function(e){if(e.error==='not-allowed')toast('Mikrofon ruxsati yo\'q','err');else if(e.error==='no-speech')toast('Ovoz eshitilmadi','warn');else toast('Xatolik','err');stopVoice()};
+r.onerror=function(e){if(e.error==='not-allowed')toast('Mikrofon ruxsati yoʼq','err');else if(e.error==='no-speech')toast('Ovoz eshitilmadi','warn');else toast('Xatolik','err');stopVoice()};
 r.onend=function(){stopVoice()};return r}
 
-function voiceInput(fid){if(!window.SpeechRecognition&&!window.webkitSpeechRecognition){toast('Brauzer qo\'llab-quvvatlamaydi','err');return}
+function voiceInput(fid){if(!window.SpeechRecognition&&!window.webkitSpeechRecognition){toast('Brauzer qoʼllab-quvvatlamaydi','err');return}
 if(voiceRec&&activeField){voiceRec.stop();stopVoice();return}
 activeField=fid;voiceRec=initVR();if(!voiceRec)return;
 try{voiceRec.start();const el=document.getElementById(fid);if(el){const btn=el.closest('.input-row')?.querySelector('.mic-btn');if(btn)btn.classList.add('recording')}document.getElementById('voiceFloat').classList.add('active');document.getElementById('voiceFloatTxt').textContent='Tinglayapman...'}catch(e){toast('Xatolik','err')}}
@@ -975,7 +1044,7 @@ let userCoords=null;
 function getGPSLocation(){
   const btn=document.getElementById('gpsBtn');const txt=document.getElementById('gpsBtnText');const res=document.getElementById('gpsResult');
   if(!navigator.geolocation){
-    txt.textContent='📍 GPS mavjud emas — manzilni qo\'lda yozing';
+    txt.textContent='📍 GPS mavjud emas — manzilni qoʼlda yozing';
     toast('GPS mavjud emas. Manzilni yozing yoki mikrofon bilan ayting','info');return;
   }
   btn.classList.add('loading');txt.textContent='⏳ Aniqlanmoqda...';
@@ -990,21 +1059,21 @@ function getGPSLocation(){
       err=>{
         btn.classList.remove('loading');
         if(err.code===1){
-          txt.textContent='🔒 Ruxsat berilmadi — manzilni qo\'lda yozing';
-          toast('GPS ruxsati yo\'q. Manzilni qo\'lda kiriting yoki 🎙️ mikrofon bilan ayting','info');
+          txt.textContent='🔒 Ruxsat berilmadi — manzilni qoʼlda yozing';
+          toast('GPS ruxsati yoʼq. Manzilni qoʼlda kiriting yoki 🎙️ mikrofon bilan ayting','info');
         }else if(err.code===2){
-          txt.textContent='📡 Signal yo\'q — manzilni yozing';
-          toast('GPS signal topilmadi. Manzilni qo\'lda kiriting','info');
+          txt.textContent='📡 Signal yoʼq — manzilni yozing';
+          toast('GPS signal topilmadi. Manzilni qoʼlda kiriting','info');
         }else{
           txt.textContent='⏱️ Vaqt tugadi — manzilni yozing';
-          toast('GPS javob bermadi. Manzilni qo\'lda yozing','info');
+          toast('GPS javob bermadi. Manzilni qoʼlda yozing','info');
         }
       },
       {enableHighAccuracy:true,timeout:8000,maximumAge:300000}
     );
   }catch(e){
-    btn.classList.remove('loading');txt.textContent='📍 Manzilni qo\'lda yozing';
-    toast('GPS ishlamadi — manzilni qo\'lda kiriting','info');
+    btn.classList.remove('loading');txt.textContent='📍 Manzilni qoʼlda yozing';
+    toast('GPS ishlamadi — manzilni qoʼlda kiriting','info');
   }
 }
 
@@ -1048,7 +1117,7 @@ function showPage(id){
   if(id==='vitals')renderVitals();if(id==='medications')renderMedications();if(id==='notes')renderNotes();
   if(id==='appointments'){renderDoctors('all');setDocFilter('all');}if(id==='history')renderHistory();if(id==='profile')renderProfile();
   if(id==='dashboard')renderDashboard();if(id==='steps')renderSteps();
-  if(id==='aichat'){const cm=document.getElementById('chatMessages');if(!cm.innerHTML)addChatMsg('Salom! Men AI shifokor yordamchiman. 🧠\n\nSizga insult, qon bosimi, dorilar va sog\'liq haqida maslahat bera olaman.\n\nSavol bering yoki pastdagi tugmalarni bosing!',false);}
+  if(id==='aichat'){const cm=document.getElementById('chatMessages');if(!cm.innerHTML)addChatMsg('Salom! Men AI shifokor yordamchiman. 🧠\n\nSizga insult, qon bosimi, dorilar va sogʼliq haqida maslahat bera olaman.\n\nSavol bering yoki pastdagi tugmalarni bosing!',false);}
   if(id==='encyclopedia')renderEncyclopedia();
   if(id==='hospitals')renderHospitals();
   if(id==='prognoz'){}
@@ -1065,7 +1134,7 @@ function updateFormProgress(){const f=['systolic','diastolic','heartrate','gluco
 function analyzeRisk(){
   const v=id=>parseFloat(document.getElementById(id)?.value);const s=v('systolic'),d=v('diastolic'),hr=v('heartrate'),gl=v('glucose'),h=v('height'),w=v('weight'),age=v('age');
   const chol=v('cholesterol')||5,smoking=document.getElementById('smoking').value,exercise=document.getElementById('exercise').value,alcohol=document.getElementById('alcohol').value;
-  if(!s||!d||!hr||!gl||!h||!w||!age){toast('Barcha maydonlarni to\'ldiring!','err');return}
+  if(!s||!d||!hr||!gl||!h||!w||!age){toast('Barcha maydonlarni toʼldiring!','err');return}
   const panel=document.getElementById('resultPanel');panel.innerHTML=`<div class="card" style="min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div class="spinner"></div><div style="color:var(--text2)">${t('analyzing')}</div></div>`;
   setTimeout(()=>{
     const bmi=w/((h/100)**2);let score=0;const factors=[];
@@ -1187,20 +1256,20 @@ function renderMedications(){const el=document.getElementById('medList');if(!sta
 el.innerHTML=state.medications.map((m,i)=>{const timer=getMedTimer(m.time,m.taken);return`<div class="med-card ${m.taken?'taken':''}"><div class="med-header-row"><div class="med-name"><i class="fas fa-capsules" style="color:var(--accent);margin-right:8px;"></i>${m.name}</div><div style="display:flex;gap:8px;align-items:center;"><div class="med-time">${m.time}</div>${timer}</div></div><div class="med-meta"><span><i class="fas fa-prescription"></i> ${m.dosage}</span><span><i class="fas fa-repeat"></i> ${m.frequency}</span></div><div style="display:flex;gap:8px;"><button class="btn btn-success" onclick="takeMed(${i})" ${m.taken?'disabled':''} style="font-size:0.8rem;padding:8px 14px;${m.taken?'opacity:0.5':''}"><i class="fas fa-check"></i> ${m.taken?t('taken'):t('btn_take')}</button><button class="btn btn-danger" onclick="deleteMed(${i})" style="font-size:0.8rem;padding:8px 14px;"><i class="fas fa-trash"></i></button></div></div>`}).join('');
 const p=state.medications.filter(m=>!m.taken).length;const b=document.getElementById('medBadge');if(b){if(p>0){b.style.display='';b.textContent=p}else b.style.display='none'}}
 function openAddMedModal(){document.getElementById('addMedModal').classList.add('active')}
-function saveMedication(){const nm=document.getElementById('mName').value.trim(),ds=document.getElementById('mDose').value.trim(),tm=document.getElementById('mTime').value;if(!nm||!ds||!tm){toast('Maydonlarni to\'ldiring!','err');return}state.medications.push({name:nm,dosage:ds,time:tm,frequency:document.getElementById('mFreq').value,notes:document.getElementById('mNotes').value,taken:false});save('medications');document.getElementById('addMedModal').classList.remove('active');['mName','mDose','mTime','mNotes'].forEach(id=>document.getElementById(id).value='');state.points+=5;save('points');updateSidebarProfile();renderMedications();toast('Qo\'shildi! +5','success')}
+function saveMedication(){const nm=document.getElementById('mName').value.trim(),ds=document.getElementById('mDose').value.trim(),tm=document.getElementById('mTime').value;if(!nm||!ds||!tm){toast('Maydonlarni toʼldiring!','err');return}state.medications.push({name:nm,dosage:ds,time:tm,frequency:document.getElementById('mFreq').value,notes:document.getElementById('mNotes').value,taken:false});save('medications');document.getElementById('addMedModal').classList.remove('active');['mName','mDose','mTime','mNotes'].forEach(id=>document.getElementById(id).value='');state.points+=5;save('points');updateSidebarProfile();renderMedications();toast('Qoʼshildi! +5','success')}
 function takeMed(i){state.medications[i].taken=true;save('medications');renderMedications();state.points+=5;save('points');updateSidebarProfile();toast('✅ Qabul qilindi!','success')}
-function deleteMed(i){if(confirm('O\'chirish?')){state.medications.splice(i,1);save('medications');renderMedications();toast('O\'chirildi','warn')}}
+function deleteMed(i){if(confirm('Oʼchirish?')){state.medications.splice(i,1);save('medications');renderMedications();toast('Oʼchirildi','warn')}}
 
 function renderNotes(){const el=document.getElementById('notesList');if(!state.notes.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:60px;">'+t('no_notes_full')+'</div>';return}
 el.innerHTML=`<div class="grid-2">${state.notes.map((n,i)=>`<div class="note-card"><div class="note-date"><i class="fas fa-clock" style="margin-right:4px;"></i>${new Date(n.date).toLocaleString()}</div>${n.title?`<div style="font-weight:700;margin-bottom:6px;">${n.title}</div>`:''}<div class="note-content">${n.content}</div><div style="display:flex;gap:6px;margin-top:10px;"><span class="tag tag-blue">${n.category||'Umumiy'}</span><button onclick="deleteNote(${i})" class="btn btn-danger" style="padding:3px 10px;font-size:0.73rem;margin-left:auto;"><i class="fas fa-trash"></i></button></div></div>`).join('')}</div>`}
 function openAddNoteModal(){document.getElementById('addNoteModal').classList.add('active')}
 function saveNote(){const c=document.getElementById('noteContent').value.trim();if(!c){toast('Matn yozing!','err');return}state.notes.unshift({title:document.getElementById('noteTitle').value.trim(),content:c,category:document.getElementById('noteCategory').value,date:new Date().toISOString()});save('notes');document.getElementById('addNoteModal').classList.remove('active');['noteTitle','noteContent'].forEach(id=>document.getElementById(id).value='');state.points+=3;save('points');updateSidebarProfile();renderNotes();toast('Saqlandi!','success')}
-function deleteNote(i){state.notes.splice(i,1);save('notes');renderNotes();toast('O\'chirildi','warn')}
+function deleteNote(i){state.notes.splice(i,1);save('notes');renderNotes();toast('Oʼchirildi','warn')}
 
 const doctors=[
-  {id:1,name:'Dr. Kseniya Shimirina',specKey:'nevrolog',exp:15,rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:'Insult va miya mutaxassisi',addr:'Samarqand, Registon ko\'chasi 12'},
-  {id:2,name:'Dr. Akmal Gaibiyev',specKey:'nevrolog',exp:12,rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Amir Temur ko\'chasi 45'},
-  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'nevrolog',exp:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Gagarin ko\'chasi 8'},
+  {id:1,name:'Dr. Kseniya Shimirina',specKey:'nevrolog',exp:15,rating:4.9,slots:['09:00','10:30','14:00','15:30','16:00'],avatar:'🧠',desc:'Insult va miya mutaxassisi',addr:'Samarqand, Registon koʼchasi 12'},
+  {id:2,name:'Dr. Akmal Gaibiyev',specKey:'nevrolog',exp:12,rating:4.8,slots:['08:30','11:00','13:30','15:00'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Amir Temur koʼchasi 45'},
+  {id:3,name:'Dr. Shuhrat Niyozov',specKey:'nevrolog',exp:10,rating:4.7,slots:['10:00','12:00','14:30','16:30'],avatar:'🧠',desc:'Nevrologiya mutaxassisi',addr:'Samarqand, Gagarin koʼchasi 8'},
 ];
 let selectedSlot='',currentDocId=null,lastDocFilter='all';
 function renderDoctors(f){const list=f==='all'?doctors:doctors.filter(d=>d.specKey===f);document.getElementById('doctorGrid').innerHTML=list.map(doc=>`<div class="doctor-card" onclick="openBooking(${doc.id})"><div class="doctor-top"><div class="doctor-avatar">${doc.avatar}</div><div class="doctor-name">${doc.name}</div><div class="doctor-spec">${t('df_'+doc.specKey)}</div><div class="doctor-rating"><i class="fas fa-star"></i> ${doc.rating} · ${doc.exp} ${t('yil')}</div></div><div class="doctor-body"><div style="font-size:0.8rem;color:var(--text2);margin-bottom:8px;">${doc.desc}</div><div style="font-size:0.76rem;color:var(--text3);display:flex;align-items:center;gap:5px;margin-bottom:10px;"><i class="fas fa-map-marker-alt" style="color:var(--accent)"></i>${doc.addr}</div><div style="font-size:0.74rem;color:var(--text3);margin-bottom:6px;font-family:var(--font-mono);">${t('avail_times')}</div><div class="time-slots">${doc.slots.map(s=>`<div class="time-slot">${s}</div>`).join('')}</div><button class="btn btn-accent btn-full" style="margin-top:12px;font-size:0.83rem;" onclick="openBooking(${doc.id});event.stopPropagation();"><i class="fas fa-calendar-plus"></i> ${t('book_btn')}</button></div></div>`).join('')}
@@ -1215,7 +1284,7 @@ async function sendTG(text){try{const r=await fetch(`https://api.telegram.org/bo
 async function confirmBooking(){
   if(!selectedSlot){toast('Vaqt tanlang!','err');return}const phone=document.getElementById('bookPhone').value.trim();if(!phone){toast('Telefon kiriting!','err');return}
   const doc=doctors.find(d=>d.id===currentDocId),complaint=document.getElementById('bookComplaint').value.trim(),address=document.getElementById('bookAddress').value.trim();
-  const gpsLine=userCoords?`\n📍 <b>GPS:</b> <a href="https://www.google.com/maps?q=${userCoords.lat},${userCoords.lng}">Xaritada ko'rish</a>`:'';
+  const gpsLine=userCoords?`\n📍 <b>GPS:</b> <a href="https://www.google.com/maps?q=${userCoords.lat},${userCoords.lng}">Xaritada koʼrish</a>`:'';
   const tgText='🏥 <b>KONSULTATSIYA</b>\n\n👨‍⚕️ '+doc.name+'\n🕐 '+selectedSlot+'\n📱 '+phone+'\n📍 '+(address||'—')+gpsLine+'\n📝 '+(complaint||'—')+'\n📅 '+new Date().toLocaleString();
   const btn=document.getElementById('bookSubmitBtn');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
   const st=document.getElementById('tgSendStatus');st.style.display='none';
@@ -1241,12 +1310,15 @@ function renderProfile(){
   if(p.name){det.innerHTML=`<div class="grid-2" style="gap:10px;">${rpf('user',t('prof_name'),p.name||'—')}${rpf('phone',t('prof_phone'),p.phone||'—')}${rpf('birthday-cake',t('prof_age'),p.age||'—')}${rpf('tint',t('lbl_blood_type'),p.bloodType||'—')}</div>`}
   document.getElementById('achievementGrid').innerHTML=achievements.map(a=>`<div class="achievement ${a.cond()?'unlocked':'locked'}"><div class="achievement-icon">${a.icon}</div><div class="achievement-name">${a.name}</div></div>`).join('');
   document.getElementById('statAnalyses').textContent=state.history.length;document.getElementById('statMeds').textContent=state.medications.length;document.getElementById('statNotes').textContent=state.notes.length;document.getElementById('statPoints').textContent=state.points;document.getElementById('sidebarPoints').textContent=state.points;
+  // Analytics
+  const aEl=document.getElementById('analyticsInfo');
+  if(aEl){const a=getAnalytics();aEl.innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;"><div>📊 Seanslar: <b>${a.sessions||0}</b></div><div>👁️ Sahifa koʼrishlar: <b>${a.totalViews||0}</b></div><div>📅 Birinchi foydalanish: <b>${a.firstUse?new Date(a.firstUse).toLocaleDateString():'-'}</b></div><div>⏰ Soʼnggi: <b>${a.lastUse?new Date(a.lastUse).toLocaleString():'-'}</b></div></div>`}
 }
 function rpf(icon,lbl,val){return`<div style="padding:10px 14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border);"><div style="font-size:0.7rem;color:var(--text3);font-family:var(--font-mono);text-transform:uppercase;">${lbl}</div><div style="font-weight:600;margin-top:4px;font-size:0.86rem;"><i class="fas fa-${icon}" style="color:var(--accent);margin-right:6px;font-size:0.78rem;"></i>${val}</div></div>`}
 function openEditProfileModal(){const p=state.profile;document.getElementById('pName').value=p.name||'';document.getElementById('pSurname').value=p.surname||'';document.getElementById('pAge').value=p.age||'';document.getElementById('pPhone').value=p.phone||'';document.getElementById('editProfileModal').classList.add('active')}
 function saveProfile(){state.profile={name:document.getElementById('pName').value.trim(),surname:document.getElementById('pSurname').value.trim(),age:document.getElementById('pAge').value,phone:document.getElementById('pPhone').value.trim()};save('profile');state.points+=10;save('points');document.getElementById('editProfileModal').classList.remove('active');renderProfile();updateSidebarProfile();toast('Saqlandi!','success')}
 function updateSidebarProfile(){document.getElementById('sidebarPoints').textContent=state.points;document.getElementById('sidebarName').textContent=state.profile.name||'Profil';const fn=(state.profile.name||'').trim(),ln=(state.profile.surname||'').trim();document.getElementById('sidebarAvatar').textContent=((fn?fn[0]:'U')+(ln?ln[0]:'')).toUpperCase()||'U'}
-function downloadPDFReport(){const l=state.history[0];if(!l){toast('Avval tahlil o\'tkazing!','err');return}const nm=((state.profile.name||'')+' '+(state.profile.surname||'')).trim()||'Bemor';const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:40px;max-width:800px;margin:0 auto}.logo{font-size:1.8rem;font-weight:900;color:#ff3a5c}.risk{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;background:${l.score<25?'#d1fae5':l.score<50?'#fef3c7':'#fee2e2'};color:${l.score<25?'#065f46':l.score<50?'#92400e':'#991b1b'}}</style></head><body><div class="logo">NeuroGuard AI Pro v4.0</div><p>${nm} — ${new Date(l.date).toLocaleDateString()}</p><h2><span class="risk">${l.level} — ${l.score}%</span></h2><p>QB: ${l.systolic}/${l.diastolic} | HR: ${l.heartrate||'—'} | Qand: ${l.glucose} | BMI: ${l.bmi}</p><hr><p style="color:#999;font-size:0.8rem;">Bu faqat ma'lumot — diagnoz emas.</p></body></html>`;const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='NeuroGuard_'+new Date().toISOString().slice(0,10)+'.html';a.click();URL.revokeObjectURL(u);toast('Yuklandi!','success')}
+function downloadPDFReport(){const l=state.history[0];if(!l){toast('Avval tahlil oʼtkazing!','err');return}const nm=((state.profile.name||'')+' '+(state.profile.surname||'')).trim()||'Bemor';const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:Arial;padding:40px;max-width:800px;margin:0 auto}.logo{font-size:1.8rem;font-weight:900;color:#ff3a5c}.risk{display:inline-block;padding:8px 20px;border-radius:50px;font-weight:800;background:${l.score<25?'#d1fae5':l.score<50?'#fef3c7':'#fee2e2'};color:${l.score<25?'#065f46':l.score<50?'#92400e':'#991b1b'}}</style></head><body><div class="logo">NeuroGuard AI Pro v4.0</div><p>${nm} — ${new Date(l.date).toLocaleDateString()}</p><h2><span class="risk">${l.level} — ${l.score}%</span></h2><p>QB: ${l.systolic}/${l.diastolic} | HR: ${l.heartrate||'—'} | Qand: ${l.glucose} | BMI: ${l.bmi}</p><hr><p style="color:#999;font-size:0.8rem;">Bu faqat maʼlumot — diagnoz emas.</p></body></html>`;const b=new Blob([html],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='NeuroGuard_'+new Date().toISOString().slice(0,10)+'.html';a.click();URL.revokeObjectURL(u);toast('Yuklandi!','success')}
 
 /* ═══════════ MED TIMER ═══════════ */
 function getMedTimer(timeStr, taken){
@@ -1255,7 +1327,7 @@ function getMedTimer(timeStr, taken){
   const now=new Date();const [h,m]=timeStr.split(':').map(Number);
   const target=new Date();target.setHours(h,m,0,0);
   const diff=target-now;
-  if(diff<0) return '<span class="med-timer urgent"><i class="fas fa-clock"></i> Vaqti o\'tdi!</span>';
+  if(diff<0) return '<span class="med-timer urgent"><i class="fas fa-clock"></i> Vaqti oʼtdi!</span>';
   const hrs=Math.floor(diff/3600000);const mins=Math.floor((diff%3600000)/60000);
   const urgent=diff<1800000;
   return `<span class="med-timer ${urgent?'urgent':''}"><i class="fas fa-clock"></i> ${hrs>0?hrs+'s ':''}${mins}d</span>`;
@@ -1267,29 +1339,29 @@ setInterval(()=>{if(state.currentPage==='medications')renderMedications()},30000
 const chatHistory=[];
 const aiResponses={
   'default':[
-    'Men AI shifokor yordamchiman. Aniq tibbiy diagnoz qo\'ya olmayman, lekin umumiy maslahatlar bera olaman. Qanday yordam kerak?',
-    'Bu haqida shifokor bilan maslahatlashishni tavsiya qilaman. Ammo umumiy ma\'lumot bera olaman.',
+    'Men AI shifokor yordamchiman. Aniq tibbiy diagnoz qoʼya olmayman, lekin umumiy maslahatlar bera olaman. Qanday yordam kerak?',
+    'Bu haqida shifokor bilan maslahatlashishni tavsiya qilaman. Ammo umumiy maʼlumot bera olaman.',
   ],
   'bosh':[
-    '🧠 Bosh og\'rig\'i sabablari:\n\n• Stress va charchash\n• Qon bosimi yuqoriligi\n• Uyqu yetishmasligi\n• Dehidratsiya (suv yetishmasligi)\n• Ko\'z tolishi\n\n⚠️ Agar bosh og\'rig\'i kuchli, to\'satdan paydo bo\'lgan va nutq buzilishi bilan birga bo\'lsa — DARHOL 103 ga qo\'ng\'iroq qiling! Bu insult belgisi bo\'lishi mumkin.\n\n💡 Tavsiya: Qon bosimingizni o\'lchang va AI Tekshiruv bo\'limida tahlil o\'tkazing.',
+    '🧠 Bosh ogʼrigʼi sabablari:\n\n• Stress va charchash\n• Qon bosimi yuqoriligi\n• Uyqu yetishmasligi\n• Dehidratsiya (suv yetishmasligi)\n• Koʼz tolishi\n\n⚠️ Agar bosh ogʼrigʼi kuchli, toʼsatdan paydo boʼlgan va nutq buzilishi bilan birga boʼlsa — DARHOL 103 ga qoʼngʼiroq qiling! Bu insult belgisi boʼlishi mumkin.\n\n💡 Tavsiya: Qon bosimingizni oʼlchang va AI Tekshiruv boʼlimida tahlil oʼtkazing.',
   ],
   'qon bosim':[
-    '❤️ Yuqori qon bosimi (gipertenziya):\n\n• Normal: 120/80 mmHg\n• Chegaraviy: 130-139/85-89\n• Yuqori: 140+/90+\n\n🚨 160/100 dan oshsa — DARHOL shifokorga!\n\n💊 Nima qilish kerak:\n• Tuzni kamaytiring (kuniga 5g dan kam)\n• Har kuni 30 daqiqa yuring\n• Stress boshqaring\n• Dorilaringizni muntazam qabul qiling\n\n📊 AI Tekshiruv bo\'limida to\'liq tahlil o\'tkazishni tavsiya qilaman.',
+    '❤️ Yuqori qon bosimi (gipertenziya):\n\n• Normal: 120/80 mmHg\n• Chegaraviy: 130-139/85-89\n• Yuqori: 140+/90+\n\n🚨 160/100 dan oshsa — DARHOL shifokorga!\n\n💊 Nima qilish kerak:\n• Tuzni kamaytiring (kuniga 5g dan kam)\n• Har kuni 30 daqiqa yuring\n• Stress boshqaring\n• Dorilaringizni muntazam qabul qiling\n\n📊 AI Tekshiruv boʼlimida toʼliq tahlil oʼtkazishni tavsiya qilaman.',
   ],
   'insult':[
-    '🧠 INSULT BELGILARI (FAST):\n\n🔴 F — Yuz bir tomonlama og\'ayapti\n🔴 A — Qo\'l ko\'tarilmayapti\n🔴 S — Nutq buzilgan\n🔴 T — VAQT muhim! Har bir daqiqa!\n\n⏰ Insultda dastlabki 4.5 soat — \"oltin vaqt\". Bu vaqtda yordam berilsa, miya kamroq shikastlanadi.\n\n🚨 Bu belgilarni ko\'rsangiz:\n1. DARHOL 103 ga qo\'ng\'iroq qiling\n2. Bemorni yotqizing, boshini biroz ko\'taring\n3. Hech narsa yedirmang/ichirmang\n4. Hushini yo\'qotsa — yoniga yotqizing',
+    '🧠 INSULT BELGILARI (FAST):\n\n🔴 F — Yuz bir tomonlama ogʼayapti\n🔴 A — Qoʼl koʼtarilmayapti\n🔴 S — Nutq buzilgan\n🔴 T — VAQT muhim! Har bir daqiqa!\n\n⏰ Insultda dastlabki 4.5 soat — \"oltin vaqt\". Bu vaqtda yordam berilsa, miya kamroq shikastlanadi.\n\n🚨 Bu belgilarni koʼrsangiz:\n1. DARHOL 103 ga qoʼngʼiroq qiling\n2. Bemorni yotqizing, boshini biroz koʼtaring\n3. Hech narsa yedirmang/ichirmang\n4. Hushini yoʼqotsa — yoniga yotqizing',
   ],
   'stress':[
     '🧘 Stressni boshqarish:\n\n1. 4-7-8 nafas mashqi:\n   • 4 soniya — nafas oling\n   • 7 soniya — ushlab turing\n   • 8 soniya — sekin chiqaring\n\n2. Kundalik yurish (30 daqiqa)\n3. Yetarli uyqu (7-8 soat)\n4. Suv ichish (2 litr/kun)\n5. Ekran vaqtini kamaytiring\n\n💡 Stress qon bosimni oshiradi va insult xavfini 2x oshiradi. Jiddiy qarang!',
   ],
   'dori':[
-    '💊 Dori qabul qilish qoidalari:\n\n• Har kuni bir xil vaqtda qabul qiling\n• Shifokor buyurmagan dorini o\'z-o\'zingiz boshlamang\n• Dorilar bo\'limida eslatma qo\'ying — tizim sizga eslatadi!\n\n⚠️ Agar dori nojo\'ya ta\'sir ko\'rsatsa (bosh aylanishi, ko\'ngil aynishi) — shifokorga xabar bering.',
+    '💊 Dori qabul qilish qoidalari:\n\n• Har kuni bir xil vaqtda qabul qiling\n• Shifokor buyurmagan dorini oʼz-oʼzingiz boshlamang\n• Dorilar boʼlimida eslatma qoʼying — tizim sizga eslatadi!\n\n⚠️ Agar dori nojoʼya taʼsir koʼrsatsa (bosh aylanishi, koʼngil aynishi) — shifokorga xabar bering.',
   ],
 };
 
 function getAIResponse(msg){
   const lower=msg.toLowerCase();
-  if(lower.includes('bosh')&&(lower.includes('og\'ri')||lower.includes('ogri')))return aiResponses['bosh'][0];
+  if(lower.includes('bosh')&&(lower.includes('ogʼri')||lower.includes('ogri')))return aiResponses['bosh'][0];
   if(lower.includes('qon bosim')||lower.includes('bosimi')||lower.includes('gipertenzi'))return aiResponses['qon bosim'][0];
   if(lower.includes('insult')||lower.includes('fast')||lower.includes('belgi'))return aiResponses['insult'][0];
   if(lower.includes('stress')||lower.includes('asab'))return aiResponses['stress'][0];
@@ -1297,7 +1369,7 @@ function getAIResponse(msg){
   // Add last analysis context
   const last=state.history[0];
   if(last){
-    return `Men sizning so'nggi tahlil natijalaringizni ko'rdim:\n\n📊 Xavf darajasi: ${last.score}% (${last.level})\n❤️ Qon bosimi: ${last.systolic}/${last.diastolic}\n🩸 Qand: ${last.glucose} mmol/L\n\nSizning holatga qarab, ${last.score>=50?'shifokorga murojaat qilishni qat\'iy tavsiya qilaman!':'davom eting, yaxshi ko\'rsatkichlar.'}\n\nAniqroq savol bering — yordam beraman!`;
+    return `Men sizning soʼnggi tahlil natijalaringizni koʼrdim:\n\n📊 Xavf darajasi: ${last.score}% (${last.level})\n❤️ Qon bosimi: ${last.systolic}/${last.diastolic}\n🩸 Qand: ${last.glucose} mmol/L\n\nSizning holatga qarab, ${last.score>=50?'shifokorga murojaat qilishni qatʼiy tavsiya qilaman!':'davom eting, yaxshi koʼrsatkichlar.'}\n\nAniqroq savol bering — yordam beraman!`;
   }
   return aiResponses['default'][0];
 }
@@ -1313,7 +1385,7 @@ function addChatMsg(text, isUser){
 
 /* ═══════════ TEXT-TO-SPEECH ═══════════ */
 function speakText(text){
-  if(!('speechSynthesis' in window)){toast('Brauzer TTS qo\'llab-quvvatlamaydi','err');return}
+  if(!('speechSynthesis' in window)){toast('Brauzer TTS qoʼllab-quvvatlamaydi','err');return}
   window.speechSynthesis.cancel();
   const utterance=new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g,''));
   const langMap={uz:'uz-UZ',uz_cyr:'ru-RU',ru:'ru-RU',en:'en-US'};
@@ -1324,7 +1396,7 @@ function speakText(text){
   const preferred=voices.find(v=>v.lang.startsWith(utterance.lang.split('-')[0]));
   if(preferred)utterance.voice=preferred;
   window.speechSynthesis.speak(utterance);
-  toast('🔊 O\'qilmoqda...','info');
+  toast('🔊 Oʼqilmoqda...','info');
 }
 function stopSpeaking(){window.speechSynthesis.cancel()}
 
@@ -1353,8 +1425,8 @@ async function sendChat(){
 
   // Build context with user health data
   const last=state.history[0];
-  const healthCtx=last?`Bemor ma'lumotlari: Xavf=${last.score}%, QB=${last.systolic}/${last.diastolic}, Yurak=${last.heartrate||'?'}bpm, Qand=${last.glucose}mmol/L, BMI=${last.bmi}. `:'';
-  const systemPrompt=`Sen NeuroGuard AI Pro tibbiy yordamchisan. Insult, qon bosimi, yurak kasalliklari bo'yicha maslahat berasan. O'zbek tilida javob ber. Qisqa, aniq, foydalanuvchiga do'stona javob ber. ${healthCtx}Agar jiddiy belgilar bo'lsa DARHOL 103 ga qo'ng'iroq qilishni tavsiya et.`;
+  const healthCtx=last?`Bemor maʼlumotlari: Xavf=${last.score}%, QB=${last.systolic}/${last.diastolic}, Yurak=${last.heartrate||'?'}bpm, Qand=${last.glucose}mmol/L, BMI=${last.bmi}. `:'';
+  const systemPrompt=`Sen NeuroGuard AI Pro tibbiy yordamchisan. Insult, qon bosimi, yurak kasalliklari boʼyicha maslahat berasan. Oʼzbek tilida javob ber. Qisqa, aniq, foydalanuvchiga doʼstona javob ber. ${healthCtx}Agar jiddiy belgilar boʼlsa DARHOL 103 ga qoʼngʼiroq qilishni tavsiya et.`;
 
   try{
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -1381,7 +1453,7 @@ function quickChat(msg){document.getElementById('chatInput').value=msg;sendChat(
 
 /* ═══════════ PROGNOZ AI (ML Prediction) ═══════════ */
 function runPrognoz(){
-  if(!state.history.length){toast('Avval AI Tekshiruv o\'tkazing!','err');return}
+  if(!state.history.length){toast('Avval AI Tekshiruv oʼtkazing!','err');return}
   const el=document.getElementById('prognozResult');
   el.innerHTML='<div style="text-align:center;padding:20px;"><div class="spinner"></div><div style="color:var(--text2)">ML model hisoblayapti...</div></div>';
   
@@ -1410,7 +1482,7 @@ function runPrognoz(){
     document.getElementById('prognozScore').textContent=maxPred+'%';
     
     const clr=maxPred<25?'var(--green)':maxPred<50?'var(--yellow)':'var(--accent)';
-    const level=maxPred<25?'Past xavf':maxPred<50?'O\'rtacha xavf':'Yuqori xavf';
+    const level=maxPred<25?'Past xavf':maxPred<50?'Oʼrtacha xavf':'Yuqori xavf';
     
     el.innerHTML=`
       <div style="margin-bottom:16px;">
@@ -1426,7 +1498,7 @@ function runPrognoz(){
         </div>`}).join('')}
       </div>
       <div style="margin-top:16px;padding:12px;background:rgba(34,211,238,0.05);border-radius:10px;border:1px solid rgba(34,211,238,0.12);font-size:0.78rem;color:var(--text2);">
-        💡 <b>Tavsiya:</b> ${maxPred>=50?'Shifokorga murojaat qiling va hayot tarzingizni o\'zgartiring — xavfni 50% gacha kamaytirish mumkin!':maxPred>=25?'Sog\'lom hayot tarzini davom ettiring — yurish, to\'g\'ri ovqatlanish, stress boshqarish.':'Zo\'r natija! Shu holatingizni saqlab qoling — muntazam tekshiruvdan o\'ting.'}
+        💡 <b>Tavsiya:</b> ${maxPred>=50?'Shifokorga murojaat qiling va hayot tarzingizni oʼzgartiring — xavfni 50% gacha kamaytirish mumkin!':maxPred>=25?'Sogʼlom hayot tarzini davom ettiring — yurish, toʼgʼri ovqatlanish, stress boshqarish.':'Zoʼr natija! Shu holatingizni saqlab qoling — muntazam tekshiruvdan oʼting.'}
       </div>`;
     
     // Render chart
@@ -1450,7 +1522,7 @@ function runPrognoz(){
 
 /* ═══════════ TELEMEDICINE ═══════════ */
 function startVideoCall(){
-  toast('📹 Video qo\'ng\'iroq tayyorlanmoqda...','info');
+  toast('📹 Video qoʼngʼiroq tayyorlanmoqda...','info');
   setTimeout(()=>{
     const w=window.open('','_blank','width=800,height=600');
     if(w){
@@ -1466,17 +1538,17 @@ function scheduleVideoCall(){
 /* ═══════════ GLOBAL HOSPITALS (GPS-based) ═══════════ */
 const encData={
   uz:[
-    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Insult nima?',sub:'Batafsil o\'qish uchun bosing',
-     body:'<b>Insult</b> — bu miyaga qon oqimining to\'satdan buzilishi. 2 turi bor:<br><br><b>1. Ishemik insult (85%)</b> — miya arteriyasi tiqilib qoladi.<br><b>2. Gemorragik insult (15%)</b> — miya arteriyasi yorilib ketadi.<br><br><b>Xavf omillari:</b><br>• Yuqori qon bosimi<br>• Diabet<br>• Chekish<br>• Yuqori xolesterin<br>• Oilada insult bo\'lgan<br>• 55 yoshdan katta<br><br>⏰ <b>Oltin vaqt:</b> Dastlabki 4.5 soatda yordam berilsa — miya tiklanishi mumkin!'},
-    {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Insult Aniqlash',sub:'Batafsil o\'qish uchun bosing',
-     body:'FAST — insultni tezkor aniqlash usuli:<br><br>🔴 <b>F — Face (Yuz)</b> — Yuz bir tomonga og\'ayaptimi?<br>🔴 <b>A — Arms (Qo\'llar)</b> — Qo\'l tushib ketayaptimi?<br>🔴 <b>S — Speech (Nutq)</b> — Nutqi chalkashmi?<br>🔴 <b>T — Time (Vaqt)</b> — DARHOL 103!<br><br>⏱️ Har daqiqada 1.9 million neyron nobud bo\'ladi!'},
-    {id:'bp',icon:'❤️',color:'var(--accent)',title:'Qon Bosimi haqida',sub:'Batafsil o\'qish uchun bosing',
-     body:'<b>Darajalar:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Ko\'tarilgan: 120-129<br>• 🔴 Gipertenziya: 140+/90+<br>• 🚨 Kriz: 180+/120+<br><br><b>Nima qilish:</b> Tuzni kamaytiring, har kuni yuring, tamakini tashlang, dori qabul qiling.'},
-    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Insultda Birinchi Yordam',sub:'Batafsil o\'qish uchun bosing',
-     body:'1️⃣ 103 ga qo\'ng\'iroq qiling<br>2️⃣ Bemorni yotqizing, boshi baland<br>3️⃣ Hech narsa yedirmang<br>4️⃣ Tor kiyimlarni bo\'shating<br>5️⃣ Hushi yo\'qolsa — yoniga yotqizing<br>6️⃣ Vaqtni yozib oling<br><br>❌ Aspirin bermang, suv bermang!'},
-    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Insultdan Himoyalanish',sub:'Batafsil o\'qish uchun bosing',
+    {id:'stroke',icon:'🧠',color:'var(--accent)',title:'Insult nima?',sub:'Batafsil oʼqish uchun bosing',
+     body:'<b>Insult</b> — bu miyaga qon oqimining toʼsatdan buzilishi. 2 turi bor:<br><br><b>1. Ishemik insult (85%)</b> — miya arteriyasi tiqilib qoladi.<br><b>2. Gemorragik insult (15%)</b> — miya arteriyasi yorilib ketadi.<br><br><b>Xavf omillari:</b><br>• Yuqori qon bosimi<br>• Diabet<br>• Chekish<br>• Yuqori xolesterin<br>• Oilada insult boʼlgan<br>• 55 yoshdan katta<br><br>⏰ <b>Oltin vaqt:</b> Dastlabki 4.5 soatda yordam berilsa — miya tiklanishi mumkin!'},
+    {id:'fast',icon:'🚨',color:'#ef4444',title:'FAST Test — Insult Aniqlash',sub:'Batafsil oʼqish uchun bosing',
+     body:'FAST — insultni tezkor aniqlash usuli:<br><br>🔴 <b>F — Face (Yuz)</b> — Yuz bir tomonga ogʼayaptimi?<br>🔴 <b>A — Arms (Qoʼllar)</b> — Qoʼl tushib ketayaptimi?<br>🔴 <b>S — Speech (Nutq)</b> — Nutqi chalkashmi?<br>🔴 <b>T — Time (Vaqt)</b> — DARHOL 103!<br><br>⏱️ Har daqiqada 1.9 million neyron nobud boʼladi!'},
+    {id:'bp',icon:'❤️',color:'var(--accent)',title:'Qon Bosimi haqida',sub:'Batafsil oʼqish uchun bosing',
+     body:'<b>Darajalar:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Koʼtarilgan: 120-129<br>• 🔴 Gipertenziya: 140+/90+<br>• 🚨 Kriz: 180+/120+<br><br><b>Nima qilish:</b> Tuzni kamaytiring, har kuni yuring, tamakini tashlang, dori qabul qiling.'},
+    {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Insultda Birinchi Yordam',sub:'Batafsil oʼqish uchun bosing',
+     body:'1️⃣ 103 ga qoʼngʼiroq qiling<br>2️⃣ Bemorni yotqizing, boshi baland<br>3️⃣ Hech narsa yedirmang<br>4️⃣ Tor kiyimlarni boʼshating<br>5️⃣ Hushi yoʼqolsa — yoniga yotqizing<br>6️⃣ Vaqtni yozib oling<br><br>❌ Aspirin bermang, suv bermang!'},
+    {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Insultdan Himoyalanish',sub:'Batafsil oʼqish uchun bosing',
      body:'<b>80% gacha oldini olish mumkin!</b><br><br>✅ Qon bosimni nazorat qiling<br>✅ Chekishni tashlang<br>✅ Har kuni 30 min harakat<br>✅ Sabzavot, meva, baliq yeying<br>✅ BMI 25 dan kam<br>✅ Qandni tekshiring<br>✅ Stressni boshqaring<br>✅ Yiliga 1 marta tekshiruv'},
-    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabet va Insult',sub:'Batafsil o\'qish uchun bosing',
+    {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabet va Insult',sub:'Batafsil oʼqish uchun bosing',
      body:'<b>Diabet insult xavfini 2-4x oshiradi!</b><br><br>• ✅ Normal: 3.9-5.5 mmol/L<br>• ⚠️ Prediabet: 5.6-6.9<br>• 🔴 Diabet: 7.0+<br><br>Qandni tekshiring, shirinni kamaytiring, kuniga 30 daqiqa yuring.'},
   ],
   uz_cyr:[
@@ -1515,7 +1587,7 @@ const encData={
     {id:'bp',icon:'❤️',color:'var(--accent)',title:'About Blood Pressure',sub:'Tap to read more',
      body:'<b>Levels:</b><br>• ✅ Normal: &lt;120/80<br>• ⚠️ Elevated: 120-129<br>• 🔴 Hypertension: 140+/90+<br>• 🚨 Crisis: 180+/120+<br><br><b>What to do:</b> Reduce salt, walk daily, quit smoking, take medication regularly.'},
     {id:'firstaid',icon:'🏥',color:'var(--green)',title:'Stroke First Aid',sub:'Tap to read more',
-     body:'1️⃣ Call 103 immediately<br>2️⃣ Lay the person down, head elevated<br>3️⃣ Don\'t give food or water<br>4️⃣ Loosen tight clothing<br>5️⃣ If unconscious — recovery position<br>6️⃣ Note the time symptoms started<br><br>❌ Don\'t give aspirin or water!'},
+     body:'1️⃣ Call 103 immediately<br>2️⃣ Lay the person down, head elevated<br>3️⃣ Donʼt give food or water<br>4️⃣ Loosen tight clothing<br>5️⃣ If unconscious — recovery position<br>6️⃣ Note the time symptoms started<br><br>❌ Donʼt give aspirin or water!'},
     {id:'prevention',icon:'🛡️',color:'var(--blue)',title:'Stroke Prevention',sub:'Tap to read more',
      body:'<b>Up to 80% of strokes are preventable!</b><br><br>✅ Control blood pressure<br>✅ Quit smoking<br>✅ 30 min activity daily<br>✅ Eat vegetables, fruits, fish<br>✅ Keep BMI under 25<br>✅ Monitor blood sugar<br>✅ Manage stress<br>✅ Annual check-up'},
     {id:'diabetes',icon:'🩸',color:'var(--yellow)',title:'Diabetes & Stroke',sub:'Tap to read more',
@@ -1540,12 +1612,12 @@ function toggleEnc(id){document.getElementById('enc-'+id).classList.toggle('open
 /* ═══════════ HOSPITALS ═══════════ */
 const hospData={
   uz:[
-    {name:'Samarqand Viloyat Ko\'p Tarmoqli Tibbiyot Markazi',addr:'Samarqand, A. Temur ko\'chasi 1',phone:'+998 66 233 12 34',tags:['Nevrolog','Kardiolog','Tez yordam'],lat:39.6542,lng:66.9597},
-    {name:'Samarqand Shahar Tibbiy Birlashmasi',addr:'Samarqand, Registon ko\'chasi 25',phone:'+998 66 235 45 67',tags:['Umumiy','Nevrolog'],lat:39.6547,lng:66.9607},
-    {name:'MedLife Klinikasi',addr:'Samarqand, Gagarin ko\'chasi 14',phone:'+998 66 231 78 90',tags:['Xususiy','Kardiolog','Endokrinolog'],lat:39.6510,lng:66.9550},
-    {name:'Salomatlik Markazi',addr:'Samarqand, Navoiy ko\'chasi 8',phone:'+998 66 237 11 22',tags:['Xususiy','Nevrolog','Laboratoriya'],lat:39.6580,lng:66.9620},
-    {name:'Samarqand Tez Tibbiy Yordam',addr:'Samarqand, Bunyodkor ko\'chasi 3',phone:'103',tags:['Tez yordam','24/7'],lat:39.6560,lng:66.9570},
-    {name:'EndoCare Markazi',addr:'Samarqand, Ibn Sino ko\'chasi 17',phone:'+998 66 238 55 66',tags:['Endokrinolog','Diabet','Laboratoriya'],lat:39.6530,lng:66.9640},
+    {name:'Samarqand Viloyat Koʼp Tarmoqli Tibbiyot Markazi',addr:'Samarqand, A. Temur koʼchasi 1',phone:'+998 66 233 12 34',tags:['Nevrolog','Kardiolog','Tez yordam'],lat:39.6542,lng:66.9597},
+    {name:'Samarqand Shahar Tibbiy Birlashmasi',addr:'Samarqand, Registon koʼchasi 25',phone:'+998 66 235 45 67',tags:['Umumiy','Nevrolog'],lat:39.6547,lng:66.9607},
+    {name:'MedLife Klinikasi',addr:'Samarqand, Gagarin koʼchasi 14',phone:'+998 66 231 78 90',tags:['Xususiy','Kardiolog','Endokrinolog'],lat:39.6510,lng:66.9550},
+    {name:'Salomatlik Markazi',addr:'Samarqand, Navoiy koʼchasi 8',phone:'+998 66 237 11 22',tags:['Xususiy','Nevrolog','Laboratoriya'],lat:39.6580,lng:66.9620},
+    {name:'Samarqand Tez Tibbiy Yordam',addr:'Samarqand, Bunyodkor koʼchasi 3',phone:'103',tags:['Tez yordam','24/7'],lat:39.6560,lng:66.9570},
+    {name:'EndoCare Markazi',addr:'Samarqand, Ibn Sino koʼchasi 17',phone:'+998 66 238 55 66',tags:['Endokrinolog','Diabet','Laboratoriya'],lat:39.6530,lng:66.9640},
   ],
   uz_cyr:[
     {name:'Самарқанд Вилоят Кўп Тармоқли Тиббиёт Маркази',addr:'Самарқанд, А. Темур кўчаси 1',phone:'+998 66 233 12 34',tags:['Невролог','Кардиолог','Тез ёрдам'],lat:39.6542,lng:66.9597},
@@ -1572,7 +1644,7 @@ const hospData={
     {name:'EndoCare Center',addr:'Samarkand, Ibn Sino st. 17',phone:'+998 66 238 55 66',tags:['Endocrinologist','Diabetes','Laboratory'],lat:39.6530,lng:66.9640},
   ],
 };
-const hospUI={uz:{dir:"Yo'nalish",load:"Xaritani yuklash"},uz_cyr:{dir:"Йўналиш",load:"Харитани юклаш"},ru:{dir:"Маршрут",load:"Загрузить карту"},en:{dir:"Directions",load:"Load Map"}};
+const hospUI={uz:{dir:"Yoʼnalish",load:"Xaritani yuklash"},uz_cyr:{dir:"Йўналиш",load:"Харитани юклаш"},ru:{dir:"Маршрут",load:"Загрузить карту"},en:{dir:"Directions",load:"Load Map"}};
 
 function renderHospitals(){
   const list=hospData[currentLang]||hospData.uz;
@@ -1601,7 +1673,7 @@ function loadHospitalMap(){
       pos=>{
         const lat=pos.coords.latitude,lng=pos.coords.longitude;
         mapEl.innerHTML=`<iframe width="100%" height="100%" frameborder="0" style="border:0;border-radius:16px;" src="https://www.google.com/maps/embed/v1/search?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=hospitals+clinics+medical+center&center=${lat},${lng}&zoom=13" allowfullscreen></iframe>`;
-        toast('📍 Joylashuvingiz asosida shifoxonalar ko\'rsatilmoqda','success');
+        toast('📍 Joylashuvingiz asosida shifoxonalar koʼrsatilmoqda','success');
       },
       ()=>{
         // Fallback to Samarkand
@@ -1636,7 +1708,7 @@ function pinPress(n){
         if(pinCode===localStorage.getItem('ng_pin')){
           document.getElementById('pinLock').style.display='none';pinCode='';
         }else{
-          document.getElementById('pinError').textContent=t('pin_wrong')||'Noto\'g\'ri PIN!';
+          document.getElementById('pinError').textContent=t('pin_wrong')||'Notoʼgʼri PIN!';
           document.getElementById('pinDots').style.animation='pinShake 0.4s ease';
           setTimeout(()=>{document.getElementById('pinDots').style.animation='';pinCode='';updatePinDots()},500);
         }
@@ -1647,7 +1719,7 @@ function pinPress(n){
         if(pinCode===pinTemp){
           localStorage.setItem('ng_pin',pinCode);
           document.getElementById('pinLock').style.display='none';
-          toast('🔐 PIN o\'rnatildi!','success');pinCode='';
+          toast('🔐 PIN oʼrnatildi!','success');pinCode='';
         }else{
           document.getElementById('pinError').textContent=t('pin_mismatch')||'PIN mos kelmadi!';
           pinCode='';updatePinDots();pinMode='set';
@@ -1672,15 +1744,15 @@ function removePinCode(){localStorage.removeItem('ng_pin');toast('🔓 PIN olib 
 
 /* ═══════════ SYMPTOM CHECKER ═══════════ */
 const symptomList=[
-  {id:'s_headache',icon:'🤕',uz:'Bosh og\'rig\'i',uz_cyr:'Бош оғриғи',ru:'Головная боль',en:'Headache'},
+  {id:'s_headache',icon:'🤕',uz:'Bosh ogʼrigʼi',uz_cyr:'Бош оғриғи',ru:'Головная боль',en:'Headache'},
   {id:'s_dizzy',icon:'😵',uz:'Bosh aylanishi',uz_cyr:'Бош айланиши',ru:'Головокружение',en:'Dizziness'},
-  {id:'s_numb',icon:'🖐️',uz:'Qo\'l/oyoq uvishishi',uz_cyr:'Қўл/оёқ увишиши',ru:'Онемение конечностей',en:'Numbness'},
+  {id:'s_numb',icon:'🖐️',uz:'Qoʼl/oyoq uvishishi',uz_cyr:'Қўл/оёқ увишиши',ru:'Онемение конечностей',en:'Numbness'},
   {id:'s_speech',icon:'🗣️',uz:'Nutq buzilishi',uz_cyr:'Нутқ бузилиши',ru:'Нарушение речи',en:'Speech difficulty'},
-  {id:'s_vision',icon:'👁️',uz:'Ko\'rish buzilishi',uz_cyr:'Кўриш бузилиши',ru:'Нарушение зрения',en:'Vision problems'},
-  {id:'s_chest',icon:'💔',uz:'Ko\'krak og\'rig\'i',uz_cyr:'Кўкрак оғриғи',ru:'Боль в груди',en:'Chest pain'},
+  {id:'s_vision',icon:'👁️',uz:'Koʼrish buzilishi',uz_cyr:'Кўриш бузилиши',ru:'Нарушение зрения',en:'Vision problems'},
+  {id:'s_chest',icon:'💔',uz:'Koʼkrak ogʼrigʼi',uz_cyr:'Кўкрак оғриғи',ru:'Боль в груди',en:'Chest pain'},
   {id:'s_breath',icon:'😮‍💨',uz:'Nafas qisilishi',uz_cyr:'Нафас қисилиши',ru:'Одышка',en:'Shortness of breath'},
   {id:'s_fatigue',icon:'😴',uz:'Charchash/holsizlik',uz_cyr:'Чарчаш/ҳолсизлик',ru:'Усталость/слабость',en:'Fatigue'},
-  {id:'s_nausea',icon:'🤢',uz:'Ko\'ngil aynishi',uz_cyr:'Кўнгил айниши',ru:'Тошнота',en:'Nausea'},
+  {id:'s_nausea',icon:'🤢',uz:'Koʼngil aynishi',uz_cyr:'Кўнгил айниши',ru:'Тошнота',en:'Nausea'},
   {id:'s_sweat',icon:'💦',uz:'Ortiqcha terlash',uz_cyr:'Ортиқча терлаш',ru:'Потливость',en:'Excessive sweating'},
   {id:'s_palpitation',icon:'💓',uz:'Yurak tez urishi',uz_cyr:'Юрак тез уриши',ru:'Учащённое сердцебиение',en:'Palpitations'},
   {id:'s_weakness',icon:'🦵',uz:'Oyoq kuchsizligi',uz_cyr:'Оёқ кучсизлиги',ru:'Слабость в ногах',en:'Leg weakness'},
@@ -1691,13 +1763,13 @@ const symptomList=[
 const diagnosisDB=[
   {name:{uz:'🚨 INSULT XAVFI — DARHOL 103!',uz_cyr:'🚨 ИНСУЛТ ХАВФИ — ДАРҲОЛ 103!',ru:'🚨 РИСК ИНСУЛЬТА — СРОЧНО 103!',en:'🚨 STROKE RISK — CALL 103 NOW!'},
    triggers:['s_speech','s_numb','s_face','s_confusion','s_vision'],minMatch:2,severity:'critical',
-   desc:{uz:'Bu belgilar insultga o\'xshaydi! DARHOL 103 ga qo\'ng\'iroq qiling! Har daqiqa muhim!',uz_cyr:'Бу белгилар инсултга ўхшайди! ДАРҲОЛ 103 га қўнғироқ қилинг!',ru:'Эти симптомы похожи на инсульт! НЕМЕДЛЕННО звоните 103!',en:'These symptoms resemble a stroke! Call 103 IMMEDIATELY!'}},
+   desc:{uz:'Bu belgilar insultga oʼxshaydi! DARHOL 103 ga qoʼngʼiroq qiling! Har daqiqa muhim!',uz_cyr:'Бу белгилар инсултга ўхшайди! ДАРҲОЛ 103 га қўнғироқ қилинг!',ru:'Эти симптомы похожи на инсульт! НЕМЕДЛЕННО звоните 103!',en:'These symptoms resemble a stroke! Call 103 IMMEDIATELY!'}},
   {name:{uz:'⚠️ Gipertenziya (yuqori qon bosimi)',uz_cyr:'⚠️ Гипертензия',ru:'⚠️ Гипертензия',en:'⚠️ Hypertension'},
    triggers:['s_headache','s_dizzy','s_nausea','s_palpitation','s_sweat'],minMatch:3,severity:'high',
-   desc:{uz:'Qon bosimingiz yuqori bo\'lishi mumkin. Qon bosimni o\'lchang va shifokorga murojaat qiling.',uz_cyr:'Қон босимингиз юқори бўлиши мумкин.',ru:'Возможно высокое давление. Измерьте давление.',en:'Your blood pressure may be high. Measure it and see a doctor.'}},
+   desc:{uz:'Qon bosimingiz yuqori boʼlishi mumkin. Qon bosimni oʼlchang va shifokorga murojaat qiling.',uz_cyr:'Қон босимингиз юқори бўлиши мумкин.',ru:'Возможно высокое давление. Измерьте давление.',en:'Your blood pressure may be high. Measure it and see a doctor.'}},
   {name:{uz:'💛 Yurak muammolari ehtimoli',uz_cyr:'💛 Юрак муаммолари',ru:'💛 Возможные проблемы с сердцем',en:'💛 Possible heart issues'},
    triggers:['s_chest','s_breath','s_palpitation','s_sweat','s_fatigue'],minMatch:2,severity:'high',
-   desc:{uz:'Ko\'krak og\'rig\'i va nafas qisilishi — kardiolog ko\'rigini talab qiladi.',uz_cyr:'Кўкрак оғриғи — кардиолог кўригини талаб қилади.',ru:'Боль в груди и одышка требуют осмотра кардиолога.',en:'Chest pain and breathlessness require cardiologist examination.'}},
+   desc:{uz:'Koʼkrak ogʼrigʼi va nafas qisilishi — kardiolog koʼrigini talab qiladi.',uz_cyr:'Кўкрак оғриғи — кардиолог кўригини талаб қилади.',ru:'Боль в груди и одышка требуют осмотра кардиолога.',en:'Chest pain and breathlessness require cardiologist examination.'}},
   {name:{uz:'😰 Stress/ortiqcha charchash',uz_cyr:'😰 Стресс/чарчаш',ru:'😰 Стресс/переутомление',en:'😰 Stress/Fatigue'},
    triggers:['s_headache','s_fatigue','s_nausea','s_sweat','s_dizzy'],minMatch:2,severity:'low',
    desc:{uz:'Stressni boshqaring: nafas mashqlari, yurish, yetarli uyqu. Agar davom etsa — shifokorga boring.',uz_cyr:'Стрессни бошқаринг: нафас машқлари, юриш.',ru:'Управляйте стрессом: дыхательные упражнения, прогулки, сон.',en:'Manage stress: breathing exercises, walking, sleep. If persistent, see a doctor.'}},
@@ -1760,7 +1832,7 @@ function handleDocUpload(event){
 function renderDocuments(){
   const el=document.getElementById('docList');
   if(!savedDocs.length){
-    el.innerHTML=`<div class="card" style="text-align:center;padding:60px;color:var(--text3);grid-column:1/-1;"><i class="fas fa-camera-retro" style="font-size:3rem;opacity:0.3;display:block;margin-bottom:16px;"></i>${t('doc_empty')||'Hujjatlar yo\'q'}<br><span style="font-size:0.8rem;">Yuqoridagi tugma bilan rasm yuklang</span></div>`;
+    el.innerHTML=`<div class="card" style="text-align:center;padding:60px;color:var(--text3);grid-column:1/-1;"><i class="fas fa-camera-retro" style="font-size:3rem;opacity:0.3;display:block;margin-bottom:16px;"></i>${t('doc_empty')||'Hujjatlar yoʼq'}<br><span style="font-size:0.8rem;">Yuqoridagi tugma bilan rasm yuklang</span></div>`;
     return;
   }
   el.innerHTML=savedDocs.map((d,i)=>`
@@ -1782,7 +1854,7 @@ function viewDoc(i){
   const w=window.open('','_blank');
   w.document.write(`<html><head><title>${d.title}</title><style>body{margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh}img{max-width:100%;max-height:100vh;object-fit:contain}</style></head><body><img src="${d.image}"></body></html>`);
 }
-function deleteDoc(i){if(confirm(t('confirm_del')||'O\'chirish?')){savedDocs.splice(i,1);localStorage.setItem('ng_docs',JSON.stringify(savedDocs));renderDocuments();toast('O\'chirildi','warn')}}
+function deleteDoc(i){if(confirm(t('confirm_del')||'Oʼchirish?')){savedDocs.splice(i,1);localStorage.setItem('ng_docs',JSON.stringify(savedDocs));renderDocuments();toast('Oʼchirildi','warn')}}
 
 /* ═══════════ TELEGRAM BOT INTEGRATION ═══════════ */
 async function sendMedReminderTG(){
@@ -1794,7 +1866,7 @@ async function sendMedReminderTG(){
   toast(res.ok?'📱 Telegram ga yuborildi!':'Demo rejim','info');
 }
 async function sendAnalysisTG(){
-  const last=state.history[0];if(!last){toast('Avval tahlil o\'tkazing!','err');return}
+  const last=state.history[0];if(!last){toast('Avval tahlil oʼtkazing!','err');return}
   const p=state.profile;
   const text='📊 <b>TAHLIL NATIJASI</b>\n\n🎯 Xavf: <b>'+last.score+'%</b> — '+last.level+'\n❤️ QB: '+last.systolic+'/'+last.diastolic+'\n💓 Yurak: '+(last.heartrate||'—')+' bpm\n🩸 Qand: '+last.glucose+' mmol/L\n📐 BMI: '+last.bmi+'\n\n👤 '+(p.name||'Bemor')+'\n📅 '+new Date(last.date).toLocaleString();
   const res=await sendTG(text);
@@ -1805,8 +1877,8 @@ async function sendAnalysisTG(){
 let painMarks=JSON.parse(localStorage.getItem('ng_pain')||'[]');
 let currentPainLevel=2; // 1=mild, 2=medium, 3=severe
 const painColors={1:'var(--green)',2:'var(--yellow)',3:'var(--accent)'};
-const painLabels={1:{uz:"Yengil",uz_cyr:"Енгил",ru:"Лёгкая",en:"Mild"},2:{uz:"O'rtacha",uz_cyr:"Ўртача",ru:"Средняя",en:"Moderate"},3:{uz:"Kuchli",uz_cyr:"Кучли",ru:"Сильная",en:"Severe"}};
-const partNames={head:{uz:"Bosh",uz_cyr:"Бош",ru:"Голова",en:"Head"},torso:{uz:"Tana",uz_cyr:"Тана",ru:"Туловище",en:"Torso"},left_arm:{uz:"Chap qo'l",uz_cyr:"Чап қўл",ru:"Левая рука",en:"Left arm"},right_arm:{uz:"O'ng qo'l",uz_cyr:"Ўнг қўл",ru:"Правая рука",en:"Right arm"},left_leg:{uz:"Chap oyoq",uz_cyr:"Чап оёқ",ru:"Левая нога",en:"Left leg"},right_leg:{uz:"O'ng oyoq",uz_cyr:"Ўнг оёқ",ru:"Правая нога",en:"Right leg"}};
+const painLabels={1:{uz:"Yengil",uz_cyr:"Енгил",ru:"Лёгкая",en:"Mild"},2:{uz:"Oʼrtacha",uz_cyr:"Ўртача",ru:"Средняя",en:"Moderate"},3:{uz:"Kuchli",uz_cyr:"Кучли",ru:"Сильная",en:"Severe"}};
+const partNames={head:{uz:"Bosh",uz_cyr:"Бош",ru:"Голова",en:"Head"},torso:{uz:"Tana",uz_cyr:"Тана",ru:"Туловище",en:"Torso"},left_arm:{uz:"Chap qoʼl",uz_cyr:"Чап қўл",ru:"Левая рука",en:"Left arm"},right_arm:{uz:"Oʼng qoʼl",uz_cyr:"Ўнг қўл",ru:"Правая рука",en:"Right arm"},left_leg:{uz:"Chap oyoq",uz_cyr:"Чап оёқ",ru:"Левая нога",en:"Left leg"},right_leg:{uz:"Oʼng oyoq",uz_cyr:"Ўнг оёқ",ru:"Правая нога",en:"Right leg"}};
 
 function setPainLevel(l){currentPainLevel=l;toast(['','🟢','🟡','🔴'][l]+' '+(painLabels[l][currentLang]||painLabels[l].uz),'info')}
 
@@ -1824,7 +1896,7 @@ function renderPainMarkers(){
 }
 function renderPainLog(){
   const el=document.getElementById('painLog');if(!el)return;
-  if(!painMarks.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Og\'riq belgilanmagan</div>';return}
+  if(!painMarks.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Ogʼriq belgilanmagan</div>';return}
   el.innerHTML=painMarks.slice().reverse().map((m,idx)=>{
     const i=painMarks.length-1-idx;
     const pn=partNames[m.part]?partNames[m.part][currentLang]||partNames[m.part].uz:m.part;
@@ -1880,7 +1952,7 @@ function renderCalEvents(){
   const el=document.getElementById('calEvents');if(!el)return;
   const monthStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}`;
   const monthEvents=calEvents.filter(e=>e.date.startsWith(monthStr)).sort((a,b)=>a.date.localeCompare(b.date));
-  if(!monthEvents.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Bu oyda voqealar yo\'q</div>';return}
+  if(!monthEvents.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:20px;font-size:0.83rem;">Bu oyda voqealar yoʼq</div>';return}
   el.innerHTML=monthEvents.map((e,i)=>{
     const idx=calEvents.indexOf(e);
     return`<div class="cal-event"><div style="display:flex;align-items:center;gap:10px;"><span class="cal-event-type">${typeIcons[e.type]||'📌'}</span><div><div style="font-weight:700;font-size:0.9rem;">${e.title}</div><div style="font-size:0.75rem;color:var(--text3);font-family:var(--font-mono);">${e.date}${e.note?' · '+e.note:''}</div></div></div><button onclick="deleteCalEvent(${idx})" style="background:none;border:none;color:var(--text3);cursor:pointer;"><i class="fas fa-trash"></i></button></div>`;
@@ -1895,7 +1967,7 @@ function saveCalEvent(){
   document.getElementById('calTitle').value='';document.getElementById('calNote').value='';
   renderCalendar();state.points+=3;save('points');updateSidebarProfile();toast('📅 Voqea saqlandi! +3 ball','success');
 }
-function deleteCalEvent(i){calEvents.splice(i,1);localStorage.setItem('ng_cal',JSON.stringify(calEvents));renderCalendar();toast('O\'chirildi','warn')}
+function deleteCalEvent(i){calEvents.splice(i,1);localStorage.setItem('ng_cal',JSON.stringify(calEvents));renderCalendar();toast('Oʼchirildi','warn')}
 
 /* ═══════════ PUSH NOTIFICATIONS ═══════════ */
 function initPushNotifications(){
@@ -1927,7 +1999,7 @@ function startMedReminders(){
 /* ═══════════ PDF REPORT (ENHANCED) ═══════════ */
 function generateWeeklyReport(){
   const recent=state.history.slice(0,7);
-  if(!recent.length){toast('Avval tahlil o\'tkazing!','err');return}
+  if(!recent.length){toast('Avval tahlil oʼtkazing!','err');return}
   const p=state.profile;const name=((p.name||'')+' '+(p.surname||'')).trim()||'Bemor';
   const avgScore=Math.round(recent.reduce((s,h)=>s+h.score,0)/recent.length);
   const avgSys=Math.round(recent.reduce((s,h)=>s+h.systolic,0)/recent.length);
@@ -1949,14 +2021,14 @@ td{padding:10px 14px;border-bottom:1px solid #f1f5f9;font-size:0.9rem}
 </style></head><body>
 <div class="header"><div><div class="logo">🧠 NeuroGuard AI Pro</div><div style="color:#666;font-size:0.85rem;">Haftalik Tibbiy Hisobot</div></div><div style="text-align:right;color:#666;font-size:0.85rem;">${name}<br>${new Date().toLocaleDateString('uz-UZ')}<br>${recent.length} ta tahlil</div></div>
 
-<h2>📊 O'rtacha Ko'rsatkichlar</h2>
+<h2>📊 Oʼrtacha Koʼrsatkichlar</h2>
 <div style="text-align:center;margin:16px 0;">
-  <div class="stat-box"><div class="stat-val" style="color:#ff3a5c">${avgScore}%</div><div class="stat-lbl">O'rtacha Xavf</div></div>
-  <div class="stat-box"><div class="stat-val" style="color:#4f8fff">${avgSys}/${avgDia}</div><div class="stat-lbl">O'rtacha QB</div></div>
-  <div class="stat-box"><div class="stat-val" style="color:#fbbf24">${avgGl}</div><div class="stat-lbl">O'rtacha Qand</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#ff3a5c">${avgScore}%</div><div class="stat-lbl">Oʼrtacha Xavf</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#4f8fff">${avgSys}/${avgDia}</div><div class="stat-lbl">Oʼrtacha QB</div></div>
+  <div class="stat-box"><div class="stat-val" style="color:#fbbf24">${avgGl}</div><div class="stat-lbl">Oʼrtacha Qand</div></div>
 </div>
 
-<div class="risk-badge ${avgScore<25?'low':avgScore<50?'mid':'high'}">${avgScore<25?'✅ Past Xavf':avgScore<50?'⚠️ O\'rtacha Xavf':'🚨 Yuqori Xavf'} — ${avgScore}%</div>
+<div class="risk-badge ${avgScore<25?'low':avgScore<50?'mid':'high'}">${avgScore<25?'✅ Past Xavf':avgScore<50?'⚠️ Oʼrtacha Xavf':'🚨 Yuqori Xavf'} — ${avgScore}%</div>
 
 <h2>📋 Barcha Tahlillar</h2>
 <table><thead><tr><th>Sana</th><th>QB</th><th>Yurak</th><th>Qand</th><th>BMI</th><th>Xavf</th></tr></thead><tbody>
@@ -1968,14 +2040,14 @@ ${state.medications.length?`<h2>💊 Dorilar</h2><table><thead><tr><th>Nomi</th>
 <h2>💡 Tavsiyalar</h2>
 <ul style="color:#475569;">
 ${avgScore>=50?'<li><b style="color:#dc2626">Shifokorga murojaat qiling!</b> Xavf darajangiz yuqori.</li>':''}
-${avgSys>130?'<li>Qon bosimni muntazam o\'lchang va tuzni kamaytiring</li>':''}
+${avgSys>130?'<li>Qon bosimni muntazam oʼlchang va tuzni kamaytiring</li>':''}
 ${parseFloat(avgGl)>6.1?'<li>Qand darajasini nazorat qiling — endokrinolog bilan maslahatlashing</li>':''}
 <li>Har kuni kamida 30 daqiqa yuring</li>
 <li>Kuniga 1.5-2 litr suv iching</li>
 <li>7-8 soat uxlang</li>
 </ul>
 
-<div class="footer">NeuroGuard AI Pro v4.0 — Haftalik Avtomatik Hisobot<br>Bu hujjat faqat ma'lumot beradi. Professional tibbiy diagnoz o'rnini bosa olmaydi.<br>Yaratilgan: ${new Date().toLocaleString('uz-UZ')}</div>
+<div class="footer">NeuroGuard AI Pro v4.0 — Haftalik Avtomatik Hisobot<br>Bu hujjat faqat maʼlumot beradi. Professional tibbiy diagnoz oʼrnini bosa olmaydi.<br>Yaratilgan: ${new Date().toLocaleString('uz-UZ')}</div>
 </body></html>`;
   
   const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);
@@ -2006,7 +2078,6 @@ function renderDashboardWidgets(){
     steps:()=>`<div class="dash-widget" draggable="true" data-widget="steps" style="grid-column:span 1;">
       <div style="font-size:0.78rem;color:var(--text3);margin-bottom:8px;display:flex;justify-content:space-between;"><span>🚶 Qadam</span><span class="drag-handle" style="cursor:grab;">⋮⋮</span></div>
       <div style="text-align:center;"><div style="font-family:var(--font-display);font-size:1.8rem;font-weight:900;color:var(--green);">${stepData.today.toLocaleString()}</div><div style="font-size:0.75rem;color:var(--text3);">/ ${stepData.goal.toLocaleString()}</div></div></div>`,
-`,
   };
   container.innerHTML=widgetOrder.map(id=>widgetRenderers[id]?widgetRenderers[id]():'').join('');
   // Init drag & drop
@@ -2030,47 +2101,47 @@ const L={};
 L.uz={
   // Nav & sidebar
   nav_sec_home:"Bosh Sahifa",nav_dashboard:"Dashboard",nav_assessment:"AI Tekshiruv",nav_sec_health:"Salomatlik",
-  nav_vitals:"Vital Ko'rsatkichlar",nav_steps:"Qadam Sanagich",nav_medications:"Dorilar",nav_notes:"Qaydnoma",
+  nav_vitals:"Vital Koʼrsatkichlar",nav_steps:"Qadam Sanagich",nav_medications:"Dorilar",nav_notes:"Qaydnoma",
   nav_sec_doctor:"Shifokor",nav_appointments:"Konsultatsiya",nav_history:"Tarix",nav_profile:"Profilim",
   // Dashboard
-  welcome:"Xush kelibsiz!",welcome_sub:"Sog'lig'ingiz ko'rsatkichlari",
+  welcome:"Xush kelibsiz!",welcome_sub:"Sogʼligʼingiz koʼrsatkichlari",
   bp_label:"Qon Bosimi",glucose_label:"Qand (mmol/L)",hr_label:"Yurak Urishi",bmi_label:"BMI",
   complete_check:"Tekshiruvni yakunlang",for_ai:"AI tahlili uchun",
-  bp_history:"Qon Bosimi Tarixi",latest_check:"So'ngi",today_meds:"Bugungi Dorilar",recent_notes:"So'ngi Qaydnomalar",
-  no_meds:"Dorilar yo'q",no_notes:"Qaydnomalar yo'q",all_btn:"Hammasi",
+  bp_history:"Qon Bosimi Tarixi",latest_check:"Soʼngi",today_meds:"Bugungi Dorilar",recent_notes:"Soʼngi Qaydnomalar",
+  no_meds:"Dorilar yoʼq",no_notes:"Qaydnomalar yoʼq",all_btn:"Hammasi",
   // Assessment
-  assessment_title:"AI Insult Xavfi Tahlili",assessment_desc:"Ma'lumotlarni kiriting — AI natija beradi",
-  voice_tip_title:"🎙️ Ovozli kiritish mavjud!",voice_tip_desc:"Mikrofon tugmasini bosib, ovoz bilan to'ldiring",
+  assessment_title:"AI Insult Xavfi Tahlili",assessment_desc:"Maʼlumotlarni kiriting — AI natija beradi",
+  voice_tip_title:"🎙️ Ovozli kiritish mavjud!",voice_tip_desc:"Mikrofon tugmasini bosib, ovoz bilan toʼldiring",
   lbl_systolic:"Sistolik QB",lbl_diastolic:"Diastolik",lbl_heartrate:"Yurak urishi",lbl_glucose:"Qand (mmol/L)",
-  lbl_height:"Bo'y (sm)",lbl_weight:"Vazn (kg)",lbl_age:"Yosh",lbl_cholesterol:"Xolesterin",
+  lbl_height:"Boʼy (sm)",lbl_weight:"Vazn (kg)",lbl_age:"Yosh",lbl_cholesterol:"Xolesterin",
   lbl_smoking:"Chekish",lbl_exercise:"Faollik",lbl_alcohol:"Alkogol",lbl_complaints:"Shikoyatlar",
-  opt_no:"Yo'q",opt_quit:"Tark etdim",opt_yes:"Ha",
-  opt_ex_none:"Yo'q",opt_ex_light:"1-2 kun",opt_ex_mod:"3-4 kun",opt_ex_active:"5+",
-  opt_al_none:"Yo'q",opt_al_rare:"Kamdan-kam",opt_al_often:"Tez-tez",opt_al_daily:"Har kuni",
-  c_headache:"Bosh og'rig'i",c_dizziness:"Bosh aylanishi",c_numbness:"Qo'l-oyoq uvishishi",
-  c_bloodThick:"Qon quyuqligi",c_familyVascular:"Oilada qon tomir kasalligi",c_familyHistory:"Oilada insult bo'lgan",
-  btn_analyze:"AI Tahlil Qilsin",ready_title:"Tahlil uchun tayyor",ready_desc:"Ma'lumotlarni to'ldiring va AI tugmasini bosing",
+  opt_no:"Yoʼq",opt_quit:"Tark etdim",opt_yes:"Ha",
+  opt_ex_none:"Yoʼq",opt_ex_light:"1-2 kun",opt_ex_mod:"3-4 kun",opt_ex_active:"5+",
+  opt_al_none:"Yoʼq",opt_al_rare:"Kamdan-kam",opt_al_often:"Tez-tez",opt_al_daily:"Har kuni",
+  c_headache:"Bosh ogʼrigʼi",c_dizziness:"Bosh aylanishi",c_numbness:"Qoʼl-oyoq uvishishi",
+  c_bloodThick:"Qon quyuqligi",c_familyVascular:"Oilada qon tomir kasalligi",c_familyHistory:"Oilada insult boʼlgan",
+  btn_analyze:"AI Tahlil Qilsin",ready_title:"Tahlil uchun tayyor",ready_desc:"Maʼlumotlarni toʼldiring va AI tugmasini bosing",
   analyzing:"AI tahlil qilmoqda...",
   // Results
-  risk_low:"Past Xavf",risk_mid:"O'rtacha Xavf",risk_high:"Yuqori Xavf",risk_critical:"Juda Yuqori!",
-  stroke_risk:"Insult Xavfi",risk_factors:"Xavf Omillari",disclaimer:"Bu faqat umumiy ma'lumot — professional diagnoz emas.",
+  risk_low:"Past Xavf",risk_mid:"Oʼrtacha Xavf",risk_high:"Yuqori Xavf",risk_critical:"Juda Yuqori!",
+  stroke_risk:"Insult Xavfi",risk_factors:"Xavf Omillari",disclaimer:"Bu faqat umumiy maʼlumot — professional diagnoz emas.",
   btn_save:"Saqlash",btn_doctor:"Shifokor",alert_doctor:"Shifokorga murojaat!",book_time:"Vaqt olish",
   // Vitals
-  vitals_title:"Vital Ko'rsatkichlar",vl_bp:"QB",vl_hr:"YURAK",vl_glucose:"QAND",vl_bmi:"BMI",
+  vitals_title:"Vital Koʼrsatkichlar",vl_bp:"QB",vl_hr:"YURAK",vl_glucose:"QAND",vl_bmi:"BMI",
   bp_dynamics:"QB Dinamikasi",risk_dynamics:"Xavf Dinamikasi",
   // Steps
   steps_title:"Qadam Sanagich",steps_desc:"Kundalik harakatingizni kuzating",steps_goal:"qadam",
-  steps_km:"km",steps_cal:"kkal",steps_min:"daq",steps_add:"Qo'shish",steps_reset:"Qayta",
-  steps_weekly:"Haftalik Qadam Tarixi",steps_goal_lbl:"Kunlik maqsad",steps_auto:"Qurilmangizda akselerometr bo'lsa, avtomatik hisoblanadi",
+  steps_km:"km",steps_cal:"kkal",steps_min:"daq",steps_add:"Qoʼshish",steps_reset:"Qayta",
+  steps_weekly:"Haftalik Qadam Tarixi",steps_goal_lbl:"Kunlik maqsad",steps_auto:"Qurilmangizda akselerometr boʼlsa, avtomatik hisoblanadi",
   // Medications
-  meds_title:"Dorilar",btn_add:"Qo'shish",no_meds_full:"Dorilar yo'q",
+  meds_title:"Dorilar",btn_add:"Qoʼshish",no_meds_full:"Dorilar yoʼq",
   med_name:"Nomi",med_dose:"Doza",med_time:"Vaqt",med_freq:"Chastota",med_note:"Izoh",
   btn_save_med:"Saqlash",btn_cancel:"Bekor",btn_take:"Qabul",taken:"✓",
   freq_1:"1 marta/kun",freq_2:"2 marta/kun",freq_3:"3 marta/kun",
   // Notes
   notes_title:"Qaydnomalar",note_title_lbl:"Sarlavha",note_text:"Matn",note_cat:"Kategoriya",
   cat_general:"Umumiy",cat_symptom:"Belgi",cat_medication:"Dori",cat_appointment:"Shifokor",
-  no_notes_full:"Qaydnomalar yo'q",
+  no_notes_full:"Qaydnomalar yoʼq",
   // Appointments
   appt_title:"Konsultatsiya",df_all:"Barchasi",df_nevrolog:"Nevrolog",df_kardiolog:"Kardiolog",
   book_btn:"Band Qilish",avail_times:"MAVJUD VAQTLAR",yil:"yil",
@@ -2078,17 +2149,17 @@ L.uz={
   book_complaint:"Shikoyat",book_submit:"Band Qilish",
   // History
   hist_title:"Tarix",hist_risk:"Xavf Tarixi",hist_clear:"Tozalash",hist_all:"Barcha Tekshiruvlar",
-  th_date:"Sana",th_bp:"QB",th_hr:"Yurak",th_glucose:"Qand",th_risk:"Xavf",th_level:"Daraja",hist_empty:"Yo'q",
+  th_date:"Sana",th_bp:"QB",th_hr:"Yurak",th_glucose:"Qand",th_risk:"Xavf",th_level:"Daraja",hist_empty:"Yoʼq",
   // Profile
-  prof_title:"Profilim",prof_info:"Shaxsiy Ma'lumotlar",prof_achievements:"Yutuqlar",prof_stats:"Statistika",
+  prof_title:"Profilim",prof_info:"Shaxsiy Maʼlumotlar",prof_achievements:"Yutuqlar",prof_stats:"Statistika",
   prof_name:"Ism",prof_surname:"Familiya",prof_age:"Yosh",prof_phone:"Telefon",
-  prof_nodata:"Ma'lumotlar to'ldirilmagan",prof_edit:"Profil",lbl_blood_type:"Qon Guruhi",
+  prof_nodata:"Maʼlumotlar toʼldirilmagan",prof_edit:"Profil",lbl_blood_type:"Qon Guruhi",
   stat_analyses:"Tahlillar",stat_meds:"Dorilar",stat_notes:"Qaydnomalar",stat_points:"Ball",
   // General
   points_lbl:"ball",btn_all:"Hammasi",dark_mode:"Kechki rejim",light_mode:"Kunduzgi rejim",
   bn_home:"Bosh",bn_ai:"AI",bn_meds:"Dori",bn_steps:"Qadam",bn_menu:"Menu",
   nav_aichat:"AI Shifokor",nav_encyclopedia:"Ensiklopediya",enc_desc:"Insult va qon-tomir kasalliklari haqida",nav_hospitals:"Shifoxonalar",hosp_desc:"Samarqanddagi shifoxonalar va klinikalar",
-  nav_bodymap:"Tana Xaritasi",body_desc:"Og'riq joyini bosib belgilang",body_log:"Og'riq Qaydlari",
+  nav_bodymap:"Tana Xaritasi",body_desc:"Ogʼriq joyini bosib belgilang",body_log:"Ogʼriq Qaydlari",
   nav_calendar:"Tibbiy Kalendar",cal_desc:"Barcha tibbiy voqealar bir joyda",
   nav_symptoms:"Simptom Tekshiruv",nav_documents:"Hujjat Skaner",
   sending:"Yuborilmoqda...",
@@ -2100,7 +2171,7 @@ m.forEach(([l,c])=>{r=r.split(l).join(c)});
 const sc={A:'А',B:'Б',D:'Д',E:'Е',F:'Ф',G:'Г',H:'Ҳ',I:'И',J:'Ж',K:'К',L:'Л',M:'М',N:'Н',O:'О',P:'П',Q:'Қ',R:'Р',S:'С',T:'Т',U:'У',V:'В',X:'Х',Y:'Й',Z:'З',a:'а',b:'б',d:'д',e:'е',f:'ф',g:'г',h:'ҳ',i:'и',j:'ж',k:'к',l:'л',m:'м',n:'н',o:'о',p:'п',q:'қ',r:'р',s:'с',t:'т',u:'у',v:'в',x:'х',y:'й',z:'з'};
 let o='';for(let i=0;i<r.length;i++)o+=sc[r[i]]||r[i];return o}
 L.uz_cyr={};Object.keys(L.uz).forEach(k=>{L.uz_cyr[k]=toCyr(L.uz[k])});
-// Fix some that don't transliterate well
+// Fix some that donʼt transliterate well
 L.uz_cyr.welcome="Хуш келибсиз!";L.uz_cyr.stroke_risk="Инсулт Хавфи";L.uz_cyr.btn_analyze="АИ Таҳлил Қилсин";
 L.uz_cyr.voice_tip_title="🎙️ Овозли киритиш мавжуд!";L.uz_cyr.voice_tip_desc="Микрофон тугмасини босиб, овоз билан тўлдиринг";
 L.uz_cyr.steps_auto="Қурилмангизда акселерометр бўлса, автоматик ҳисобланади";
@@ -2172,7 +2243,7 @@ L.en={
   welcome:"Welcome!",welcome_sub:"Your health indicators",
   bp_label:"Blood Pressure",glucose_label:"Glucose (mmol/L)",hr_label:"Heart Rate (bpm)",bmi_label:"BMI",
   complete_check:"Complete assessment",for_ai:"For AI analysis",
-  bp_history:"BP History",latest_check:"Latest",today_meds:"Today's Meds",recent_notes:"Recent Notes",
+  bp_history:"BP History",latest_check:"Latest",today_meds:"Todayʼs Meds",recent_notes:"Recent Notes",
   no_meds:"No medications",no_notes:"No notes",all_btn:"All",
   assessment_title:"AI Stroke Risk Analysis",assessment_desc:"Enter your data — AI gives results",
   voice_tip_title:"🎙️ Voice input available!",voice_tip_desc:"Tap the mic button next to any field",
@@ -2221,7 +2292,7 @@ L.en={
 };
 
 function t(k){return(L[currentLang]||L.uz)[k]||(L.uz)[k]||k}
-function setLang(lang){currentLang=lang;localStorage.setItem('ng_lang',lang);fullLangUpdate();const nm={uz:"🇺🇿 O'zbek",uz_cyr:"🇺🇿 Ўзбек",ru:"🇷🇺 Русский",en:"🇬🇧 English"};toast(nm[lang]||lang,'info')}
+function setLang(lang){currentLang=lang;localStorage.setItem('ng_lang',lang);fullLangUpdate();const nm={uz:"🇺🇿 Oʼzbek",uz_cyr:"🇺🇿 Ўзбек",ru:"🇷🇺 Русский",en:"🇬🇧 English"};toast(nm[lang]||lang,'info')}
 function fullLangUpdate(){
   // 1. Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');const v=t(k);if(v&&v!==k)el.textContent=v});
@@ -2427,15 +2498,134 @@ function obNext(){if(obStep===2){finishOB();return}document.getElementById('ob-'
 function finishOB(){const nm=document.getElementById('ob-name').value.trim(),age=document.getElementById('ob-age').value,lang=document.getElementById('ob-lang').value;if(nm){state.profile.name=nm;if(age)state.profile.age=age;save('profile');updateSidebarProfile()}setLang(lang);localStorage.setItem('ng_onboarded','1');document.getElementById('onboarding').style.display='none';toast(t('welcome')+(nm?' '+nm+'!':''),'success')}
 function skipOnboarding(){localStorage.setItem('ng_onboarded','1');document.getElementById('onboarding').style.display='none'}
 
+/* ═══════════ EXPORT / IMPORT ═══════════ */
+function exportAllData(){
+  const data={
+    version:'8.0',exported:new Date().toISOString(),
+    history:state.history,medications:state.medications,notes:state.notes,
+    profile:state.profile,points:state.points,
+    labResults:JSON.parse(localStorage.getItem('ng_lab')||'[]'),
+    painMarks:JSON.parse(localStorage.getItem('ng_pain')||'[]'),
+    calEvents:JSON.parse(localStorage.getItem('ng_cal')||'[]'),
+    documents:JSON.parse(localStorage.getItem('ng_docs')||'[]'),
+    steps:{today:stepData.today,goal:stepData.goal,history:stepData.history},
+    settings:{theme:localStorage.getItem('ng_theme'),lang:localStorage.getItem('ng_lang'),pin:localStorage.getItem('ng_pin')?'***':'none'}
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='NeuroGuard_Backup_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();URL.revokeObjectURL(url);
+  toast('📦 Maʼlumotlar eksport qilindi!','success');
+}
+function importAllData(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json';
+  inp.onchange=e=>{
+    const f=e.target.files[0];if(!f)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        const data=JSON.parse(ev.target.result);
+        if(!data.version){toast('Notoʼgʼri fayl!','err');return}
+        if(confirm('Barcha maʼlumotlar almashtiriladi. Davom etasizmi?')){
+          if(data.history){state.history=data.history;save('history');}
+          if(data.medications){state.medications=data.medications;save('medications');}
+          if(data.notes){state.notes=data.notes;save('notes');}
+          if(data.profile){state.profile=data.profile;save('profile');}
+          if(data.points!=null){state.points=data.points;save('points');}
+          if(data.labResults)localStorage.setItem('ng_lab',JSON.stringify(data.labResults));
+          if(data.painMarks)localStorage.setItem('ng_pain',JSON.stringify(data.painMarks));
+          if(data.calEvents)localStorage.setItem('ng_cal',JSON.stringify(data.calEvents));
+          if(data.documents)localStorage.setItem('ng_docs',JSON.stringify(data.documents));
+          if(data.steps){stepData.today=data.steps.today;stepData.goal=data.steps.goal;stepData.history=data.steps.history;saveSteps();}
+          updateSidebarProfile();renderDashboard();
+          toast('✅ Maʼlumotlar import qilindi! Sahifani yangilang.','success');
+        }
+      }catch(e){toast('Faylni oʼqishda xatolik!','err');}
+    };
+    reader.readAsText(f);
+  };
+  inp.click();
+}
+
+/* ═══════════ ANALYTICS DASHBOARD ═══════════ */
+function getAnalytics(){
+  const usage=JSON.parse(localStorage.getItem('ng_analytics')||'{}');
+  return usage;
+}
+function trackPageView(page){
+  const a=getAnalytics();
+  if(!a.pages)a.pages={};
+  a.pages[page]=(a.pages[page]||0)+1;
+  if(!a.totalViews)a.totalViews=0;a.totalViews++;
+  if(!a.firstUse)a.firstUse=new Date().toISOString();
+  a.lastUse=new Date().toISOString();
+  if(!a.sessions)a.sessions=0;
+  localStorage.setItem('ng_analytics',JSON.stringify(a));
+}
+function trackSession(){
+  const a=getAnalytics();a.sessions=(a.sessions||0)+1;
+  localStorage.setItem('ng_analytics',JSON.stringify(a));
+}
+
+/* ═══════════ ONBOARDING TOUR ═══════════ */
+let tourStep=0;
+const tourSteps=[
+  {target:'nav-dashboard',title:'🏠 Dashboard',desc:'Barcha koʼrsatkichlaringiz shu yerda'},
+  {target:'nav-assessment',title:'🧠 AI Tekshiruv',desc:'Qon bosimi, qand va boshqa maʼlumotlarni kiriting — AI xavf foizini hisoblaydi'},
+  {target:'nav-aichat',title:'🤖 AI Shifokor',desc:'Sunʼiy intellekt bilan tibbiy maslahat oling'},
+  {target:'nav-bodymap',title:'🩻 Tana Xaritasi',desc:'Ogʼriq joyini odam rasmida belgilang'},
+  {target:'nav-medications',title:'💊 Dorilar',desc:'Dori jadvalingizni boshqaring, timer bilan eslatma oling'},
+];
+function startTour(){
+  tourStep=0;showTourStep();
+}
+function showTourStep(){
+  // Remove old
+  document.getElementById('tourOverlay')?.remove();
+  if(tourStep>=tourSteps.length){localStorage.setItem('ng_toured','1');toast('🎉 Tour yakunlandi!','success');return}
+  const step=tourSteps[tourStep];
+  const target=document.getElementById(step.target);
+  if(target){
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+    const rect=target.getBoundingClientRect();
+    const overlay=document.createElement('div');overlay.id='tourOverlay';
+    overlay.style.cssText='position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,0.7);';
+    overlay.innerHTML=`<div style="position:absolute;top:${rect.bottom+12}px;left:${Math.max(12,rect.left)}px;max-width:300px;background:var(--card);border:1.5px solid var(--accent);border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.5);animation:mdIn 0.3s ease;z-index:9999;">
+      <div style="font-family:var(--font-display);font-weight:800;font-size:1rem;margin-bottom:6px;">${step.title}</div>
+      <div style="font-size:0.83rem;color:var(--text2);line-height:1.5;margin-bottom:14px;">${step.desc}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:0.72rem;color:var(--text3);">${tourStep+1}/${tourSteps.length}</span>
+        <div style="display:flex;gap:8px;">
+          <button onclick="document.getElementById('tourOverlay').remove()" class="btn btn-ghost" style="padding:6px 12px;font-size:0.78rem;">Oʼtkazish</button>
+          <button onclick="tourStep++;showTourStep()" class="btn btn-accent" style="padding:6px 14px;font-size:0.78rem;">${tourStep<tourSteps.length-1?'Keyingi →':'Tayyor ✓'}</button>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;top:${rect.top-4}px;left:${rect.left-4}px;width:${rect.width+8}px;height:${rect.height+8}px;border:2px solid var(--accent);border-radius:12px;box-shadow:0 0 0 4000px rgba(0,0,0,0.6);z-index:9999;pointer-events:none;"></div>`;
+    document.body.appendChild(overlay);
+  }else{tourStep++;showTourStep();}
+}
+
 window.addEventListener('load',()=>{
-  showPinLock(); // Check PIN first
-  applyTheme(localStorage.getItem('ng_theme')||'dark');
-  currentLang=localStorage.getItem('ng_lang')||'uz';
-  updateSidebarProfile();renderDashboard();showOnboarding();fullLangUpdate();renderLangSwitcher();
-  toast(t('welcome')+' NeuroGuard AI Pro v5.0','info');
-  initPushNotifications();
+  // Splash screen
+  setTimeout(()=>{
+    const splash=document.getElementById('splashScreen');
+    if(splash){splash.style.opacity='0';setTimeout(()=>splash.remove(),500);}
+    showPinLock();
+    applyTheme(localStorage.getItem('ng_theme')||'dark');
+    currentLang=localStorage.getItem('ng_lang')||'uz';
+    updateSidebarProfile();renderDashboard();showOnboarding();fullLangUpdate();renderLangSwitcher();
+    toast(t('welcome')+' NeuroGuard AI Pro v8.0','info');
+    initPushNotifications();trackSession();
+    // Show tour for first-time users
+    if(!localStorage.getItem('ng_toured')&&localStorage.getItem('ng_onboarded')){setTimeout(()=>startTour(),1500);}
+  },2200);
 });
 document.querySelectorAll('.modal-overlay').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('active')})});
+
+// Track page views
+const origShowPage=showPage;
+showPage=function(id){origShowPage(id);trackPageView(id);};
 </script>
 </body>
 </html>
